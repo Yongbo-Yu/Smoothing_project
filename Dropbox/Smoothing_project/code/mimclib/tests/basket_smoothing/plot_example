@@ -1,0 +1,8 @@
+#!/bin/bash
+
+
+#../plot_prog.py -db_tag "test_001" -o test_001.pdf $@
+#COMMON='-db_engine sqlite -db_name ../database_results/basket_25d.db'
+COMMON='-db_engine sqlite -db_name ../db/basket.db'
+echo "Plotting  Basket_smoothing result  "
+../plot_prog.py   -db_tag 'basket_6d' $COMMON  -o 6d_basket_corrected.pdf  $@

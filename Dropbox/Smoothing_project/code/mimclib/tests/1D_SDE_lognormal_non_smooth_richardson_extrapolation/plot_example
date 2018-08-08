@@ -1,0 +1,13 @@
+#!/bin/bash
+
+
+#../plot_prog.py -db_tag "test_001" -o test_001.pdf $@
+#COMMON='-db_engine sqlite -db_name ../database_results/1DBS_8_16steps_smooth_payoff2_10_5_richardson.db'
+COMMON='-db_engine sqlite -db_name ../db/1DBS_4_steps_non_smooth_richardson_without_middle_only_coarser.db'
+
+echo "Plotting  1D_BS smooth result  "
+../plot_prog.py   -db_tag '1DBS_4_steps_non_smooth_richardson_without_middle_only_coarser' $COMMON  -o 1DBS_4_steps_non_smooth_richardson_without_middle_only_coarser.pdf  $@
+
+
+
+

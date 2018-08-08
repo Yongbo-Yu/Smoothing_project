@@ -1,0 +1,13 @@
+#!/bin/bash
+
+
+#../plot_prog.py -db_tag "test_001" -o test_001.pdf $@
+#COMMON='-db_engine sqlite -db_name ../database_results/test_smooth_payoff2_100000_16steps_uptol3.db'
+COMMON='-db_engine sqlite -db_name ../db/binary_8_16steps.db'
+
+echo "Plotting  1D_BS smooth result  "
+../plot_prog.py   -db_tag 'binary_8_16_steps' $COMMON  -o binary_8_16steps.pdf  $@
+
+
+
+

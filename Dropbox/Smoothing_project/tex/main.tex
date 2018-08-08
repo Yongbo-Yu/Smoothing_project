@@ -1,0 +1,3166 @@
+\documentclass[11pt]{article}
+
+\usepackage{smoothing_paper}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%chiheb commands
+
+\newcommand{\ie}{\emph{i.e.}}
+\newcommand{\eg}{\emph{e.g.}}
+\newcommand{\cf}{\emph{cf.}}
+\newcommand{\prob}[1]{\mathrm{P}\left(#1\right)}
+\newcommand{\expt}[1]{\mathrm{E}\left[#1\right]}
+\newcommand{\expth}[1]{\hat{\mathrm{E}}\left[#1\right]}
+
+
+
+\newcommand{\rset}{\mathbb{R}}
+\newcommand{\nset}{\mathbb{N}}
+\newcommand{\zset}{\mathbb{Z}}
+
+
+
+\newcommand{\PERIOD}{.}
+\newcommand{\COMMA}{,}
+\newcommand{\BIGSPACE}{\,\,\,\,\,\,\,}
+
+
+
+\newcommand{\Ordo}[1]{{\mathcal{O}}\left(#1\right)}
+\newcommand{\ordo}[1]{{o}\left(#1\right)}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% DO WE RELLY NEED THE FOLLOWING??
+
+%%  new margin
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagestyle{plain}                                                      %%
+%%%%%%%%%% EXACT 1in MARGINS %%%%%%%                                   %%
+\setlength{\textwidth}{6.5in}     %%                                   %%
+\setlength{\oddsidemargin}{0in}   %%   
+\setlength{\evensidemargin}{0in}  %%        
+\setlength{\textheight}{8.5in}    %%       
+\setlength{\topmargin}{-0.2in}    %%   
+\setlength{\headheight}{0in}      %%    
+\setlength{\headsep}{0in}         %%                   
+\setlength{\footskip}{.5in}       %%                       
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%                                   %%
+\newcommand{\required}[1]{\section*{\hfil #1\hfil}}                    %%
+\renewcommand{\refname}{\hfil References Cited\hfil}                   %%
+
+\def\SMALLSKIP{\smallskip}
+\def\MEDSKIP{\medskip}
+\def\BIGSKIP{\bigskip}
+
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\makeatletter
+\def\BState{\State\hskip-\ALG@thistlm}
+\makeatother
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{ Smoothing  the  Payoff for  Efficient Computation of Option Pricing in
+  Time-Stepping Setting} 
+    \date{ }
+
+\begin{document}
+\maketitle
+
+\section{The goal and outline of the project}
+\textbf{The first goal of the project} was to approximate $\expt{f(X(t))}$, using multi-index stochastic collocation(MISC) method proposed in \cite{haji2016multi},  where 
+
+\begin{itemize}
+	\item The payoff $f:\rset^d \rightarrow \rset$ has either jumps or kinks. Possible choices of $f$ that we wanted to test are:
+	
+	\begin{itemize}
+		\item hockey-stick function, i.e., put or call payoff functions;
+		\item indicator functions (both relevant in finance (binary option,\dots) and in other applications of estimation of probabilities of certain events);
+		\item delta-functions for density estimation (and derivatives thereof for	estimation of derivatives of the density).
+	\end{itemize}
+	More specifically, $f$ should be the composition of one of the above with a smooth function. (For instance, the basket option payoff as a function of the log-prices of the underlying.)
+	\item The process $X$ is simulated via a time-stepping scheme. Possible choices that we wanted to test are
+		\begin{itemize}
+		\item The one/multi dimensional discretized Black-Scholes(BS) process where we compare
+		different ways to identify the location of the kink, such as:
+		\begin{itemize}
+			\item Exact location of the continuous problem
+			\item  Exact location of the discrete problem found by finding the root of a polynomial in y
+			\item Newton iteration
+		\end{itemize}
+
+		\item A relative simple interest rate model or stochastic volatility model, for instance CIR or Heston models: In fact,  the impact of the Brownian bridge will disappear in the limit, which may make the effect of the smoothing, 	but also of the errors in the kink location difficult to identify. For 	this reason, we suggest to study a more complicated 1-dimensional 	problem next. We suggest to use a CIR process. To avoid complications at the boundary, we suggest "nice" parameter choices, such that the discretized process is very unlikely to hit the boundary (Feller
+		condition).
+		\item The multi dimensional discretized Black-Scholes(BS) process: Here, we suggest to
+		return to the Black-Scholes model, but in multi-dimensional case. In this case,	linearizing the exponential, suggest that a good variable to use for smoothing might be the sum of the final values of the Brownian motion.
+		In general, though, one should probably eventually identify the	optimal direction(s) for smoothing via the duals algorithmic	differentiation.
+	\end{itemize}
+\end{itemize}
+
+
+
+\textbf{To-Do-1: The main motivation of the project Analiticity proof as stated by Raul. To check with Christian!}
+
+\textbf{The expected output} was 
+\begin{itemize}
+	\item An application paper including testing the examples above.
+	\item A theoretical paper including a numerical analysis of the schemes involved, such as Newton iteration, etc.
+\end{itemize}
+
+
+\textbf{The numerical outputs} were the following:
+\begin{enumerate}
+	\item \textbf{Example 1}: The basket option with the smoothing trick as in \cite{bayersmoothing} (see Section \ref{sec:The basket option with smoothing trick with a time stepping procedure}): in this example we wanted to check the performance of the MISC without time stepping scheme and also compare the results with reference \cite{bayersmoothing}: \textbf{Done}.
+	
+		\item \textbf{Example 2}: The one dimensional call option under discretized BS model (see Section \ref{sec:The discretized 1D Black-Scholes}): In this example, we compared different ways (exact/approximate) to determine the kink (See section \ref{sec:Determining the kink location}). In a second step, we tried to approximate the option price using MISC (with/without Richardson extrapolation). We observed some issues of convergence when using Richardson extrapolation, therefore, we added another case where we use a smooth payoff (with/without Richardson) and there we observed an advantage of using Richardson (see Section \ref{sec:Implementation details and  MISC results}). We do not have any clues why we have such problem when coupling MISC with Richardson for the non-smooth case.  I provide in Section \ref{sec:Analysis of the numerical procedure} some analysis that may explain why we do not see an improvement the way we are coupling MISC with Richardson extrapolation and then maybe we need to do it differently. (\textbf{Under checking})
+		\item 	 \textbf{Example 3}: The one dimensional binary option under discretized BS model (see Section \ref{sec:Results for the binary option example}): to help understand the issue observed for the previous example, we tested a simpler case which is given by the binary option. Unfortunately, we observed no improvement when using Richardson extrapolation. In Section \ref{sec:Analysis of the numerical procedure}, we try to give some explanation of this observed behavior. (\textbf{Under checking}).
+\end{enumerate}
+
+\textbf{To-Do-2: What are the desired main contributions of this work. }
+\section{Introduction and literature review}
+
+
+
+
+Many option pricing problems  require the computation of multivariate integrals. The dimension of these integrals
+is determined by the number of independent stochastic factors (e.g. the number of time steps in the time discretization or the number of assets under consideration).  The high dimension of these integrals can be treated with dimension-adaptive quadrature methods to have the desired convergence behavior.
+
+Unfortunately, in many cases, the  integrand contains either kinks and jumps. In fact, an option is normally considered worthless if the value falls below a predetermined strike price.  A kink  (discontinuity in the gradients) is present when the payoff function is  continuous, while a jump (discontinuity in the function)  exists when the payoff coreesponds to a binary or other digital options. The existence of kinks or jumps in the integrand  heavily degrades
+the performance of quadrature formulas.  In this work, we are interested in solving this problem  by using adaptive  sparse grids (SG) methods coupled with suitable transformations. The main idea is to find lines or areas of discontinuity and to employ suitable transformations of the integration domain. Then  by a pre-integration (smoothing) step with respect to the dimension containing the kink/jump,  we end up with integrating  only over the smooth parts of the integrand and the fast convergence of the sparse grid method can be regained.
+
+
+One can ignore the kinks and jumps, and apply directly a method for integration over $\rset^d$.  Despite the  significant progress in SG methods \cite{bungartz2004sparse} for high dimensional integration  of  smooth integrands, few works have been done to deal with  cases involving integrands with kinks or jumps.
+
+The performance of SG methods is degraded in the presence of kinks and jumps. In \cite{griebel2013smoothing,griebel2017note,griewank2017high}, an  analysis of   the performance of  Quasi Monte Carlo (QMC) and SG methods has been conducted, in the presence of kinks and jumps.  In \cite{griebel2013smoothing,griebel2017note}, the authors studied the terms of the ANOVA decomposition of functions with kinks defined on $d$-dimensional Euclidean space $\rset^d$, and showed   that under some assumptions all but the the highest order ANOVA term  of the $2^d$ ANOVA terms can be smooth for the case of an arithmetic Asian option with the Brownian bridge construction. Furthermore, \cite{griewank2017high} extended the work in \cite{griebel2013smoothing,griebel2017note} from kinks
+to jumps for  the case of an arithmetic average digital Asian option with the principal component analysis (PCA). The main findings in \cite{griebel2013smoothing,griebel2017note} was obtained  for an  integrand  of the form $f(\mathbf{x}) = \max(\phi(\mathbf{x}), 0)$ with $\phi$ being smooth. In fact, by assuming  i) the $d$-dimensional function $\phi$ has a positive partial derivative with respect to $x_j$ for some $j \in \{1,\dots,d\}$, ii) certain growth conditions at infinity are satisfied, the authors showed that the ANOVA terms of $f$ that do not depend on the variable $x_j$ are smooth.
+ 
+
+\textbf{To-Do 3: How do we compare to the previous works. What will be our contribution comparing to their work?} 
+
+This idea of smoothing by pre-integration was also tested in \cite{bayersmoothing} for basket option pricing and also in \cite{weng2017efficient}.
+
+
+\section{Problem formulation and setting}
+\subsection{General setting}\label{sec:General setting}
+In this setting, we are interetsed in the basic problem of approximating
+
+\begin{align}\label{eq:multivariate integral}
+I_d g :=\int_{\rset^d}g(\mathbf{x})	d \mathbf{x}= \int_{-\infty}^{\infty} \dots \int_{-\infty}^{\infty} g(x_1,\dots,x_d) \rho_d(\mathbf{x}) dx_1,\dots,dx_d \COMMA
+\end{align}
+
+
+with
+
+\begin{align}
+\rho_d(\mathbf{x}):=\prod_{j=1}^{d} \rho(x_j)\COMMA		
+\end{align}
+where $\rho$ is a continuous and strictly positive probability density function on $\rset$ and $g$ is a real-valued function integrable with respect to $\rho_d$.
+ 
+In this context, we work mainly with two possible structures of payoff function $g$. In fact, for the cases of call/put options, the payoff $g$ has a kink and  will be of the form 
+\begin{align}\label{eq:payoffs_with_kink}
+g(\mathbf{x})=\max(\phi(\mathbf{x}),0).
+\end{align}
+
+One can also encounter jumps in the payoff when working with binary digital options. In this case, $g$ is given by 
+
+
+\begin{align}\label{eq:payoffs_with_jump}
+	g(\mathbf{x})=\mathbf{1}_{(\phi(\mathbf{x}) \ge 0)}.
+\end{align}
+
+
+We introduce the notation $\mathbf{x}=(x_j,\mathbf{x}_{-j})$, where $\mathbf{x}_{-j}$ denotes the vector of length $d-1$ denoting all the variables other than $x_j$. Then, if we assume for some $j \in \{1,\dots,d\}$
+\begin{align}
+	\frac{\partial \phi}{\partial x_j}(\mathbf{x}) &>0,\: \forall \mathbf{x} \in \rset^d \: \: \textbf{(Monotonicity condition)}  \label{assump:Monotonicity condition}\\
+	\underset{x \rightarrow +\infty}{\lim} \phi(\mathbf{x})&=\underset{x \rightarrow +\infty}{\lim} \phi(x_j,\mathbf{x}_{-j})=+\infty, \: \text{or} \:\: \frac{\partial^2 \phi} {\partial x_j^2}(\mathbf{x}) \: \: \textbf{(Growth condition)}  \label{assump:Growth condition} \COMMA
+\end{align}
+
+then, using Fubini's theorem,  we can rewrite \eqref{eq:multivariate integral} as
+
+\begin{align}\label{eq:multivariate integral with smoothing}
+I_d g = \int_{\rset^{d-1}} \left(\int_{-\infty}^\infty g(x_j,\mathbf{x}_{-j}) \rho(x_j) dx_j  \right) \rho_{d-1}(\mathbf{x}_{-j}) d\mathbf{x}_{-j}\COMMA	
+\end{align}
+where we evaluate the inner integral for each $\mathbf{x}_{-j}$ and which results in a smooth integrand for the outer $(d-1)$-dimensional integral.
+
+
+We note that  conditions (\eqref{assump:Monotonicity condition} and \eqref{assump:Growth condition}) imply that for each $\mathbf{x}_{-j}$, the function $\phi(x_j,\mathbf{x}_{-j})$ either has a simple  root $x_j$ or is positive for all $x_j \in \rset$.
+
+\subsection{The context of option pricing using time stepping procedure}
+
+In the context of option pricing, we aim at approximating the option price, $E[f(\mathbf{X}(t))]$, using SG method,  where $f:\mathbb{R}^d  \rightarrow \mathbb{R}$ is the payoff function  and where  the process of the asset prices $\mathbf{X} \in \mathbb{R}^d$ solves 
+
+\begin{align}
+	\mathbf{X}(t)=\mathbf{X}(0)+ \int_{0}^{t} a(s,\mathbf{X}(s)) ds + \sum_{\ell=1}^{\ell_0} \int_{0}^{t} b^{\ell}(s,\mathbf{X}(s)) dW^{\ell}(s)
+\end{align}
+
+Our proposed method of smoothing the integrand can be seen in two ways, either as a pre-integration or as a conditional sampling step. In the following, we give some details of the  pre-integration step.
+\subsection{Smoothing via pre-integration step}
+For illustration purposes, let us focus on the one dimensional case, where under the risk-neutral measure the undelying asset follows the geometric Brownian motion (GBM)
+
+\begin{align}\label{eq:GBM_asset_price_dynamics}
+dX_t= r X_t dt+\sigma X_t dB_t \COMMA 
+\end{align}
+		where $r$ is the risk-free rate, $\sigma$ is the volatility and $B_t$ is the standard Brownian motion. The analytical solution to  \eqref{eq:GBM_asset_price_dynamics} is 
+\begin{align}\label{eq:GBM_asset_price_analytic_sol}
+	X_t=  X_0 \exp(( r-\sigma^2) t+\sigma B_t) \PERIOD
+\end{align}
+
+The Brownian motion $B_t$ can be constructed either sequentially using a standard random walk construction or hierarchically using Brownian bridge (BB) construction. for numerical purposes that we will explain later, we will use the BB construnction since it produces  dimensions with different importance for SG, contrary to random walk procedure for which all the dimension of the stochastic space have equal importance. 
+
+
+
+Let us denote $\{t_i\}_{i=0}^{N}$ the grid of time steps, then the BB construction \cite{glasserman2004monte} consists of the following: given a past value $B_{t_i}$ and a future value $B_{t_k}$, the value $B_{t_j}$ (with $t_i < t_j < t_k$) can be generated according to the formula:
+\begin{equation}
+B_{t_j}=(1-\rho) B_{t_i}+\rho B_{t_k}+ \sqrt{\rho (1-\rho)(k-i) \Delta t} z, \: z \sim \mathcal{N}(0,1) \COMMA
+\end{equation}
+where $\rho=\frac{j-i}{k-i}$.  In particular, if $N$ is a power of $2$, then given $B_0=0$, BB generates the Brownian motion at times $T, T/2,T/4,3T/4,\dots$ according
+\begin{align}\label{eq:BB construction}
+	B_T&=\sqrt{T}z_1\nonumber\\
+	B_{T/2}&= \frac{1}{2}(B_{0}+B_{T})+\sqrt{T/4}z_2= \frac{\sqrt{T}}{2} z_1+\frac{\sqrt{T}}{2} z_2\nonumber\\
+	B_{T/4}&=\frac{1}{2} (B_{0}+B_{T/2})+\sqrt{T/8}z_3= \frac{\sqrt{T}}{4} z_1+\frac{\sqrt{T}}{4} z_2+\sqrt{T/8}z_3\nonumber\\
+	\vdots \nonumber\\
+\end{align}
+where $\{z_j\}_{j=1}^{N}$ are independent standard normal variables.  In BB construction given by \eqref{eq:BB construction}, the most important values that determine the large scale structure of Brownian motion are the first components of $\mathbf{z} = (z_1,\dots,z_N)$.
+
+Let us denote by $\psi: (z_1,\dots,z_N) \rightarrow (B_1,\dots,B_N)$ the mapping of BB construction and by $\Phi: (B_1,\dots,B_N) \rightarrow X_T$, the mapping consisting of the time-stepping scheme. Then, we can express the option price as
+
+\begin{align}\label{eq: option price as integral}
+\expt{f(X(T))}&=		\expt{f\left(\Phi \circ \psi \right) (z_1,\dots,z_N)} \nonumber\\
+&=\int_{-\infty}^{\infty} \dots \int_{-\infty}^{\infty} g(z_1,\dots,z_N) \rho_N(\mathbf{z}) dz_1,\dots,dz_N \COMMA
+\end{align}
+where $g=f \circ \Phi \circ \psi$ and
+
+\begin{equation}\label{eq: multivariate gaussian distribution}
+\rho_N(\mathbf{z})=\frac{1}{(2 \pi)^{N/2}} e^{-\frac{1}{2} \mathbf{z}^T \mathbf{z}} \PERIOD
+\end{equation}
+Now, we can easily apply the procedure of pre-integration  of section \ref{sec:General setting}, where we can assume that the payoff function $f$ can be either the  maximum or indicator function and $\phi=\Phi \circ \psi$. The remaining ingredient is to determine with respect to which variable $z_j$ we will integrate.
+
+\textbf{To-Do-3:  We need to justify our choice as explained in Section \ref{sec:General setting}. In fact, I think we just need to check the assumptions of $\phi=\Phi \circ \psi$ wrt to $z_1$.}
+
+Claiming that pre-integrating with respect to $z_1$ is the optimal option then form \eqref{eq: option price as integral}
+
+\begin{align}\label{eq: pre_integration_step_wrt_y1}
+\expt{f(X(T))}&=\int_{-\infty}^{\infty} \dots \int_{-\infty}^{\infty} g(z_1,\dots,z_N) \rho_N(\mathbf{z}) dz_1,\dots,dz_N \nonumber\\ 
+&=\int_{\rset^{d-1}} \left(\int_{-\infty}^\infty g(z_1,\mathbf{z}_{-1}) \rho(z_1) dz_1  \right) \rho_{d-1}(\mathbf{z}_{-1}) d\mathbf{z}_{-1}\nonumber\\	
+&=\int_{\rset^{d-1}} h(\mathbf{z}_{-1}) \rho_{d-1}(\mathbf{z}_{-1}) d\mathbf{z}_{-1}\COMMA	
+\end{align}
+where $h(\mathbf{z}_{-1})=\int_{-\infty}^\infty g(z_1,\mathbf{z}_{-1}) \rho(z_1) dz_1=  E\left[ g\left(z_1, \ldots, z_N \right)  \mid z_1\right] $.
+
+
+Since $g$ can have a kink  or jump. Computing $h(\mathbf{z}_{-1})$ in the pre-integration step should be carried carefully to not deteriorate the smoothness of $H$. This can be done by applying a root finding procedure and then computing the uni-variate integral by summing the terms coming from integrating in each region where $f$ is smooth. In the next sections, we explain those points.
+
+
+
+\subsection{Description of the Domain Decomposition and Suitable Transformation}
+The payoff function is not smooth due to
+the nature of the option. In fact, the holder would not exercise
+the option if a purchase or sale of the underlying asset would lead to a loss. As a result, the discontinuity of the payoff function carries over to the integrand. In this case, The integrand shows a kink  or even a jump with respect to a  manifold. Since some
+(mixed) derivatives are not bounded at these manifolds, the smoothness requirements for the sparse grid method are clearly not fulfilled any more.
+
+The first step consists of identifying the areas 
+of discontinuity or non-differentiability. Then, we decompose the total integration domain $\Omega$ into sub-domains $\Omega_i,\: i=1,\dots,n$ such that the
+integrand is smooth in the interior of 
+$\Omega_i$ and such that all kinks and jumps are
+located along the boundary of these areas.  This procedure results in integrating several smooth functions, instead of one discontinuous function. The total integral is then given
+as the sum of the separate integrals, \ie
+\begin{align}
+	I f := \int_{\Omega} f(\mathbf{x}) d \mathbf{x}=\sum_{i=1}^{n}	\int_{\Omega_i} f(\mathbf{x}) d \mathbf{x}
+\end{align}
+
+In this way, the fast convergence of SG can
+be regained whereas the costs only increase by a constant (the number of terms in
+the sum), provided the cost required for the decomposition is sufficiently small such that it can be neglected.
+
+
+
+
+In general, such a decomposition is even more expensive than to integrate the function. Nevertheless, for some problem classes, the areas of discontinuity have a particular simple form, which allows to decompose the integration domain with
+costs that are much smaller than the benefit which results from the decomposition.  In this work, we consider those cases.
+
+In the literature, there two classes that have been tackled. In the first one, we have the information that the kink bounds are  part of the integration domain where the integrand is zero and can thus be identified by root finding as proposed in \cite{gerstner2007sparse}.
+
+In the second class, we have the information that the discontinuities are located on hyperplanes, which allows a decomposition first into polyhedrons and then into
+orthants as discussed in \cite{gerstner2008valuation}. In this work, we start by the first  class of problems.
+\subsection{Root Finding}
+Without loss of generality, we can assume that the integration domain  can
+be divided into two parts $\Omega_1$, and $\Omega_2$ such that the integrand $f$ is smooth and positive in $\Omega_1$
+whereas $f(\mathbf{x}) = 0$ in $\Omega_2$. Therefore,
+
+\begin{equation}
+I f := \int_{\Omega_1} f(\mathbf{x}) d \mathbf{x}
+\end{equation}
+
+This situation may arise when the integrand is non-differentiable or noncontinuous along the boundary between $\Omega_1$ and $\Omega_2$. For these problems, kinks and jumps can efficiently be identified by a one-dimensional root finding. Then, the kinks and jumps can
+be transformed to the boundary of integration domain such that they no longer deteriorate the performance of the numerical methods. In fact, we  compute the zeros of the integrand  with respect to  the last dimension. In this dimension, then, e.g., Newton's method or bisection can be used to identify the point which separates $\Omega_1$ and $\Omega_2$.
+
+
+
+
+
+
+
+\subsection{Discussion on Smoothing}\label{sec:smoothing}
+
+
+A crucial element of the smoothing property is that the ``location of
+irregularity'' $y^{\text{kink}} = y(\mathbf{z}_{-1})$ such that $f$ is not smooth at the point $\phi(y^{\text{kink}}, \mathbf{z}_{-1})$. Generally, there might be (for given $\mathbf{z}_{-1}$
+\begin{itemize}
+	\item no solution, i.e., the integrand in the definition of $h(\mathbf{z}_{-1})$ above
+	is smooth (\textit{best case});
+	\item a unique solution;
+	\item multiple solutions.
+\end{itemize}
+
+Generally, we need to assume that we are in the first or second
+case. Specifically, we need that
+\begin{equation*}
+	\mathbf{z}_{-1} \mapsto h(\mathbf{z}_{-1}) \text{ and } \mathbf{z}_{-1} \mapsto \hat{h}(\mathbf{z}_{-1})
+\end{equation*}
+are smooth, where $\hat{h}$ denotes the numerical approximation of $h$ based
+on a grid containing $y(\mathbf{z}_{-1})$. In particular, $y$ itself should be smooth
+in $\mathbf{z}_{-1}$. This would already be challenging in practice in the third
+case. Moreover, in the general situation we expect the number of solutions $y$
+to increase when the discretization of the SDE gets finer.
+
+\textbf{To-Do-4:  $h$ in our case corresponds to $P_1$ in \cite{griebel2013smoothing}, I think we can apply theorem 3.2 in \cite{griebel2013smoothing} to deduce the smoothness of $h$ and also $\hat{h}$.}
+	
+\textbf{To-Do-5: Using the implicit theorem given by Theorem 2.3 in \cite{griebel2013smoothing}, do not we expect to have the unicity of the solution of $y$ independently of the discretization if we fullfill assumptions (\ref{assump:Monotonicity condition},\ref{assump:Growth condition})?}
+
+In many situations, case $2$ (which is thought to include case 1) can be
+guaranteed by monotonicity (\red{I think we need to add also the growth condition, consequently, we need to check both assumptions \ref{assump:Monotonicity condition} and \ref{assump:Growth condition})}. For instance, in the case of one-dimensional SDEs
+with $z_1$ representing the terminal value of the underlying Brownian motion (and $\mathbf{z}_{-1}$ representing the Brownian bridge), this can often be seen from the SDE itself. Specifically, if each increment ``$dX$'' is increasing in $z_1$, no matter the value of $X$, then the solution $X_T$ must be increasing
+in $z_1$. This is easily seen to be true in examples such as the Black-Scholes model and the CIR process. (Strictly speaking, we have to distinguish between the continuous and discrete time solutions. In these examples, it does not matter.) On the other hand, it is also quite simple to construct counter examples, where monotonicity fails, for instance SDEs for which the ``volatility'' changes sign, such as a trigonometric function.\footnote{Actually, in every such case the simple remedy is to replace the volatility by its absolute value, which does not change the law of the solution. Hence, there does not seem to be a one-dimensional counter-example.}
+
+Even in multi-dimensional settings, such monotonicity conditions can hold in specific situations. For instance, in case of a basket option in a multivariate Black Scholes framework, we can choose a linear combination $z_1$ of the terminal values of the driving Bm, such that the basket is a monotone function of $z_1$. (The coefficients of the linear combination will depend on the correlations and the weights of the basket.) However, in that case this may actually not correspond to the optimal ``rotation'' in terms of optimizing the smoothing effect.
+
+\subsection{Errors in smoothing}
+\label{sec:errors-smoothing}
+
+For the analysis it is useful to assume that $\hat{h}$ is a smooth function of $z_{-1}$, but in reality this is not going to be true. Specifically, if the true location $y$ of the non-smoothness in the system were available, we could actually guarantee $\hat{h}$ to be smooth, for instance by choosing 
+\begin{equation*}
+	\hat{h}(\mathbf{z}_{-1}) = \sum_{k=-K}^{K} \eta_k f\left( \phi\left( \zeta_k(y(\mathbf{z}_{-1})),
+	\mathbf{z}_{-1} \right) \right),
+\end{equation*}
+for points $\zeta_k \in \R$ with $\zeta_0 = y$ and corresponding weights
+$\eta_k$.\footnote{Of course, the points $\zeta_k$ have to be chosen in a
+	systematic manner depending on $y$.} However, in reality we have to
+numerical approximate $y$ by $\bar{y}$ with error
+$\abs{y - \bar{y}} \le \delta$. Now, the actual integrand in $\mathbf{z}_{-1}$ becomes 
+\begin{equation*}
+	\bar{h}(\mathbf{z}_{-1}) \coloneqq \sum_{k=-K}^{K} \eta_k g\left( \Phi\left( \zeta_k(
+	\bar{y}(\mathbf{z}_{-1})), \mathbf{z}_{-1} \right) \right),
+\end{equation*}
+\red{which we cannot assume to be smooth anymore}. On the other hand, if
+$\zeta_k(y)$ is a continuous function of $y$ and \red{$y$ and $\bar{y}$ are continuous in $\mathbf{z}_{-1}$}, then \emph{eventually} we will have
+\begin{equation*}
+	\norm{\hat{h} - \bar{h}}_\infty \le \tol, \quad \norm{h - \bar{h}}_\infty
+	\le \tol, 
+\end{equation*}
+i.e., the smooth functions $h$ and $\hat{h}$ are close to the integrand $\bar{h}$. (Of course, this may depend on us choosing a good enough quadrature
+$\zeta$!) 
+\begin{remark}
+	If the adaptive collocation used for computing the integral of $\bar{h}$
+	depends on derivatives (or difference quotients) of its integrand $\bar{h}$,
+	then we may also need to make sure that derivatives of $\bar{h}$ are close
+	enough to derivatives of $\hat{h}$ or $h$. This may require higher order
+	solution methods for determining $y$.
+\end{remark}
+\begin{remark}
+	In some important cases, $f$ may be trivial (e.g., $\equiv 0$). In these
+	cases, we may be able to make sure that $\bar{y}$ never crosses the ``location of
+	non-smoothness''. Then even $\bar{h}$ is smooth.
+\end{remark}
+
+\begin{remark}
+	We expect that the global error of our procedure will be bounded by the weak error which is in our case of order $O(\Delta t)$. In this case, the overall complexity of our procedure will be of order $O(TOL^{-1})$. We note that this rate can be improved up to $O(TOL^{-\frac{1}{2}})$ if we use \textbf{Richardson extrapolation}. Another way that can improve the complexity could be based on \textbf{Cubature on Wiener Space} (This is left for a future work). The aimed complexity rate illustrates the contribution of our procedure which outperforms  Monte Carlo forward Euler (MC-FE) and multi-level MC-FE, having complexity rates of order $O(TOL^{-3})$  and $O(TOL^{-2} log(TOL)^2)$  respectively. 
+\end{remark}
+
+
+\section{Sparse Grids +Multi-Index Stochastic Collocation (MISC) (TO-DO)}
+I need to add details for sparse grid quadrature and dimension-adaptive procedure used in MISC in this section. 
+\subsection{Details on the construction}
+
+
+
+
+\newpage
+\section{Numerical examples}
+
+
+
+
+
+\subsection{The discretized 1D Black-Scholes}\label{sec:The discretized 1D Black-Scholes}
+
+The second example that we test is the binary and  call options under BS model where the process $X$ is the discretized 1D Black-Scholes model and the function $f$ is the indicator or maximum function and which has a kink. Precisely, we are interested in the  $1$-D lognormal example where the dynamics of the stock are given by
+
+\begin{align}\label{lognormal_dynamics}
+	dX_t=\sigma X_t dW_t.
+\end{align}
+
+
+Assume that $\{W_t, 0 \leq t \leq T\} $ is a standard one-dimensional Brownian motion. We are interested in simulating the values of $W_{t_1},\dots, W_{t_d}$ at $d$ discrete times, where $0 = t_0 < t_1 <\dots < t_d = T $ and $W_{t_0}= 0$. We also assume that $t_j-t_{j-1}=\dt=T/d,\: j = 1, 2, \dots, d$, and denote $W_i = W_{t_i}$ in the following. Let $\mathbf{W} = (W_1,\dots, W_d )^T$ , then $\mathbf{W} \sim \mathcal{N}(\mathbf{0},\Sigma)$,
+where $\mathcal{N}(\mathbf{0},\Sigma)$ is a multivariate normal distribution with mean vector $\mathbf{0}$ and covariance matrix $\Sigma$.
+
+ In the discrete case, we have
+
+\begin{align}\label{Brownian_bridge}
+	\Delta W_i&=(B_{t_{i+1}}-B_{t_i})+\Delta t \frac{Y}{\sqrt{T}} \nonumber\\
+	&= \Delta B_i + \Delta t \frac{Y}{\sqrt{T}},
+\end{align}
+
+implying that the numerical approximation of $X(T)$ satisfies
+\begin{align}
+	\bar{X}_T=\Phi(\Delta t, Y, \Delta B_0,\dots,\Delta B_{N-1}),
+\end{align}
+for some path function $\Phi$.
+
+
+
+In the simulation, we generate the stock prices using Brownian bridge (BB) in the following way: first generates the final value $W_d$ , then sample $W_{[d/2]}$ conditional on the values of $W_d$ and $W_0$, and proceed by progressively filling in intermediate values. Here, $[x]$ denotes the greatest integer less than or equal to $x$. In particular, if $d$ is a power of $2$, then
+BB generates the Brownian motion as
+\begin{align}\label{BB}
+	W_d&=\sqrt{T}Z_1\nonumber\\
+   W_{d/2}&= \frac{1}{2}(W_{0}+W_{d})+\sqrt{T/4}Z_2\nonumber\\
+    W_{d/4}&=\frac{1}{2} (W_{0}+W_{d/2})+\sqrt{T/8}Z_3\nonumber\\
+    \vdots \nonumber\\
+    W_{d-1}&= \frac{1}{2}(W_{d-2}+W_{d})+\sqrt{T/2d}Z_d,
+\end{align}
+where $Z_j$ are independent standard normal variables. Referring to \eqref{Brownian_bridge}, we note that $Y=Z_1$.
+
+
+
+As explained in Section \ref{sec:smoothing}, the first step of our approach is determining the location of irregularity (kink). In the following, we want to compare different ways for identifying the location of the kink for this model.
+\subsubsection{Determining the kink location}\label{sec:Determining the kink location}
+\subsubsection*{Exact location of the kink for the continuous problem}
+Let us denote $y_{\ast}$ an invertible function that satisfies 
+\begin{align}\label{eq: kink_point_problem}
+	X(T;y_{\ast}(x),B)=x.
+\end{align}
+
+We can easily prove that the expression of $y_{\ast}$ for model given by \eqref{lognormal_dynamics} is given by
+
+\begin{align}
+	y_{\ast}(x)=\left(\operatorname{log}(x/x_0)+T \sigma^2/2\right) \frac{1}{\sqrt{T} \sigma}, 
+\end{align}
+and since the kink for Black-Scholes model occurs at $x=K$, where $K
+$ is the strike price then  the exact location of the continuous problem is given by 
+\begin{align}\label{xact_location_continuous_problem}
+	y_{\ast}(K)=\left(\operatorname{log}(K/x_0)+T \sigma^2/2\right) \frac{1}{\sqrt{T} \sigma}.
+\end{align}
+
+
+\subsubsection*{Exact location of the kink for the discrete problem}
+The discrete problem of model \eqref{lognormal_dynamics} is solved by simulating 
+\begin{align}\label{Discrete_problem}
+	\Delta X_{t_i}&=\sigma X_{t_i} \Delta W_{i},\: 0 \le i \le N-1 \nonumber\\
+	X_{t_{i+1}}-X_{t_{i}}&=\sigma X_{t_i} \left(W_{t_{i+1}}-W_{t_i}\right),\: 0<i<N
+\end{align}
+where $X(T_0)=X_0$ and $X(t_N)=X(T)$. 
+
+Using Brownian bridge construction given by \eqref{Brownian_bridge}, we have
+\begin{align}
+	X_{t_1}&= X_{t_0} \left[ 1+\frac{\sigma}{\sqrt{T}} Y \Delta t+ \sigma \Delta B_0\right]=X_{t_0} \left[ 1+\sigma \Delta W_0 \right] \nonumber\\
+	X_{t_2}&= X_{t_1} \left[ 1+\frac{\sigma}{\sqrt{T}} Y \Delta t+ \sigma \Delta B_1\right]=X_{t_1} \left[ 1+\sigma \Delta W_1 \right] \nonumber\\
+	\vdots &= \vdots =\vdots \nonumber\\
+	X_{t_N}&= X_{t_{N-1}} \left[ 1+\frac{\sigma}{\sqrt{T}} Y \Delta t+ \sigma \Delta B_{N-1}\right]= X_{t_{N-1}}  \left[ 1+\sigma \Delta W_{N-1} \right],
+\end{align}
+
+implying that
+\begin{align}
+	\bar{X}(T)=X_0 \prod_{i=0}^{N-1} \left[ 1+\frac{\sigma}{\sqrt{T}} Y \Delta t+ \sigma \Delta B_{i}\right].
+\end{align}
+Therefore, in order to determine $y_{\ast}$, we need to solve
+\begin{align}
+	x=\bar{X}(T;y_{\ast},B)=X_0 \prod_{i=0}^{N-1} \left[ 1+\frac{\sigma}{\sqrt{T}} y_{\ast}(x) \Delta t+ \sigma \Delta B_{i}\right],
+\end{align}
+
+which implies that the location of the kink point for the approximate problem is equivalent to finding the roots of the polynomial $P(y_\ast(K))$, given by
+\begin{align}\label{polynomial_kink_location}
+	P(y_{\ast}(K))=\prod_{i=0}^{N-1} \left[ 1+\frac{\sigma}{\sqrt{T}} y_\ast(K) \Delta t+ \sigma \Delta B_{i}\right]-\frac{K}{X_0}.
+\end{align}
+
+The exact location of the kink can be obtained exactly by solving exactly $P(y_{\ast}(K))=0$.
+
+\subsubsection*{Approximate location of the discrete problem}
+
+Here, we try to  find the roots of polynomial $P(y_{\ast}(K))$, given by \eqref{polynomial_kink_location}, by using \textbf{Newton iteration method}. In this case, we need the expression $P'=\frac{d P}{d y_\ast}$. If we denote $f_i(y)=1+\frac{\sigma}{\sqrt{T}} y \Delta t+ \sigma \Delta B_{i}$, then we can easily show that
+\begin{align}\label{polynomial_kink_location_derivative}
+	P'(y)=\frac{\sigma \Delta t}{\sqrt{T}} \left( \prod_{i=0}^{N-1} f_i(y)\right) \left[ \sum_{i=0}^{N-1} \frac{1}{f_i(y)}\right]
+\end{align}
+
+ 
+
+
+
+%\subsubsection{Results}
+%The code of this section is found in the script discretized\_BS.py, which compares the different ways of determining the kink location for 1D BS model (The code is working just need to  upload the results). The next step for this model is to approximate the QoI using sparse grids given that we know the location of the kink point. 
+%
+%
+%
+%In the following, we provide the Newton error wrt number of time steps for different setting of call option. In all the experiments,we start with  initial guess $x_0=0$ for Newton iteration.
+%
+%
+%\begin{figure}[!h]
+% \begin{center}
+%\includegraphics[scale=0.5]{./figures/kink_location_1D_BS_out_the_money.eps}
+%\label{fig:1}
+%\end{center}
+%\end{figure}
+%
+%\begin{figure}[!h]
+%	\begin{center}
+%		\includegraphics[scale=0.5]{./figures/kink_location_1D_BS_in_the_money.eps}
+%		\label{fig:2}
+%	\end{center}
+%\end{figure}
+%
+%
+%\begin{figure}[!h]
+%	\begin{center}
+%		\includegraphics[scale=0.5]{./figures/kink_location_1D_BS_out_the_money.eps}
+%		\label{fig:3}
+%	\end{center}
+%\end{figure}
+%
+%
+%
+%
+%\newpage
+%
+%
+
+
+
+
+
+
+
+%\begin{figure}[!h]
+%	\centering
+%	\includegraphics[width=0.6\linewidth]{./figures/mixed_difference_order3_1D_BS_N_8.eps}
+%	
+%	\caption{The rate of convergence of  third order mixed differences of  $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)): for  $N=8$.}
+%	\label{fig:test6}
+%\end{figure}
+
+
+
+
+
+\subsection{Results for the binary option example}\label{sec:Results for the binary option example}
+
+In this case, the integrand $H(B)$ is given by
+
+\begin{align}\label{smoothed_integrand_binary_opt_2}
+	H(B)&= \int \mathbf{1}_{X(T;y,B)>K} \operatorname{exp}(-y^2/2) dy \nonumber\\
+	&= \sqrt{2 \pi} P(Y>y_{\ast}(K)) ,
+\end{align}
+ 
+where $y_{\ast}(x)$, is an invertible function that satisfies 
+\begin{align}
+	X(T;y_{\ast}(x),B)=x	
+\end{align}
+
+We get the kink point by running Newton iteration with a precision of $10^{-10}$.
+
+The paramters that we used in our numerical experiments are: $T=1$, $\sigma=0.4$ and $S_0=K=100$. The exact value of this case is $0.42074$.
+
+\subsubsection{Comparing relative errors}
+
+In the following, we compare the  relative errors for the binary option example under Black-Scholes model (see Tables (\ref{Relative error of the binary option price of the different tolerances for different number of time steps.}, \ref{Relative error of Call option price of the different tolerances for different number of time steps, using Richardson extrapolation (level $1$)})). We report the results for $2$ scenarios: i) Without using Richardson extrapolation, ii) Using level $1$ Richardson extrapoaltion.  You may see appendix \ref{appendix:Call prices for different methods_binary} for the values of binary option prices.
+
+Given the normalized bias computed by MC method (See Section \ref{sec:Weak error plots_binary}) (reported as bold values in the tables), we report in red in each table the smallest tolerance that MISC required to get below that relative bias (I do not put values for smaller tolerances, once the required bias is reached).
+
+From the tables (\ref{Relative error of the binary option price of the different tolerances for different number of time steps.}, \ref{Relative error of Call option price of the different tolerances for different number of time steps, using Richardson extrapolation (level $1$)})), we may observe that to get a relative error below $1\%$, we need around $16$ time steps for the case without Richardson extrapolation compared to only using $1$ time step in the coarse level for the case of level $1$ Richardson extraplation. 
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$ &   \\
+		\hline
+		MISC ($TOl=5.10^{-1}$)  & $  \red{0.0982}$ & $ \red{ 0.0468}$ & $\red{0.0219}$ & $\red{0.0102}$  \\
+		MC method ($M=10^{6}$)   & $\mathbf{0.0999}$  & $\mathbf{0.0470}$  & $\mathbf{0.0224}$ & $\mathbf{0.0099}$  \\	
+		\hline
+	\end{tabular}
+	\caption{Relative error of the binary option price of the different tolerances for different number of time steps, without Richardson extrapolation}
+	\label{Relative error of the binary option price of the different tolerances for different number of time steps.}
+\end{table}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{5}{c}r}
+		Method \textbackslash  Steps    &$1-2$        & $2-4$ & $4-8$ & $8-16$  \\
+		\hline
+		MISC ($TOl=5.10^{-1}$)  &$\red{0.0076}$ & $0.0045$ & $0.0031$ & $0.0017$  \\
+		MISC ($TOl=10^{-2}$)  &$-$ & $\red{0.0036}$ & $0.0031$ & $0.0014$  \\
+		MISC ($TOl=10^{-3}$) & $-$ & $-$ & $  \red{0.0021}$ & $\red{0.0005}$   \\
+		MC method ($M=10^{6}$)&$ \mathbf{0.0073}$    & $\mathbf{0.0038}$  & $\mathbf{0.0022}$  & $\mathbf{0.0006}$ \\
+		\hline
+	\end{tabular}
+	\caption{Relative error of the binary option price of the different tolerances for different number of time steps, using Richardson extrapolation (level $1$)}
+	\label{Relative error of binary option price of the different tolerances for different number of time steps, using Richardson extrapolation (level $1$)}
+\end{table}
+
+
+\newpage
+\subsubsection{Weak error plots} \label{sec:Weak error plots_binary}
+
+From figure \ref{fig:Weak_rate_binary_without_rich}, we see that we get a weak error of order $\Delta t$. From figure \ref{fig:fig:Weak_rate_binary_with_rich}, we observe no improvement in the rate when using level $1$ of Richardson extrapolation but it is clear that we get a significant improvement in the constant. The upper and lower bounds are $95\%$ confidence interval.
+
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/binary_weak_error/without_richardson/weak_convergence_order_binary_option_relative}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/binary_weak_error/without_richardson/weak_convergence_order_differences_binary_option_relative}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of the weak error for the binary option, without Richardson extraploation, using MC with $M=10^4$: a) $\abs{\expt{g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{g(X_{\Delta t})-g(X_{\Delta t/2})}}$ }
+	\label{fig:Weak_rate_binary_without_rich}
+\end{figure}
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/binary_weak_error/with_richardson/weak_convergence_order_binary_richardson_relative_M_5_10_6}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/binary_weak_error/with_richardson/weak_convergence_order_differences_binary_richardson_relative_M_5_10_6}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of the weak error for the binary option, with Richardson extraploation, using MC with $M=10^6$: a) $\abs{\expt{2 g(X_{\Delta t/2}) -g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{3 g(X_{\Delta t/2})-g(X_{\Delta t})-2 g(X_{\Delta t/4})}}$ }
+	\label{fig:fig:Weak_rate_binary_with_rich}
+\end{figure}
+
+
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/binary_weak_error/with_richardson/weak_convergence_order_binary_richardson_level2_relative_M_5_10_6}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/binary_weak_error/with_richardson/weak_convergence_order_differences_binary_richardson_level2_relative_M_5_10_6}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of the weak error for the binary option, with Richardson extraploation (level $2$), using MC with $M=5.10^6$: a) $\abs{\frac{1}{3}\expt{8 g(X_{\Delta t/4}) -6g(X_{\Delta t/2}) +g(X_{\Delta t})}-g(X)}$  b) $\abs{\frac{1}{3}\expt{-8 g(X_{\Delta t/8}) +14g(X_{\Delta t/4})-7 (X_{\Delta t/2}) +g(X_{\Delta t})}}$ }
+	\label{fig:fig:Weak_rate_binary_with_rich_level2}
+\end{figure}
+
+\newpage
+\subsection{Results for the Call option example}\label{sec:Results for the call option example}
+
+
+In this case, the integrand $H(B)$ is given by
+
+\begin{align}\label{smoothed_integrand_call_opt_2}
+	H(B)&= \int_{\Omega} \max \left(X(T;y,B)-K,0\right) \operatorname{exp}(-y^2/2) dy 
+\end{align}
+
+
+We get the kink point by running Newton iteration with a precision of $10^{-10}$. We  decompose the total integration domain $\Omega$  into sub-domains $\Omega_i,\: i=1,2$ such that the
+integrand is smooth in the interior of 
+$\Omega_i$ and such that the kink is located along the boundary of these areas. The total integral is then given
+as the sum of the separate integrals, \ie
+\begin{align}
+	H(B) :=  \int_{\Omega} \max \left(X(T;y,B)-K,0\right) \operatorname{exp}(-y^2/2) dy=\sum_{i=1}^{2}	\int_{\Omega_i} \max \left(X(T;y,B)-K,0\right) \operatorname{exp}(-y^2/2) dy,
+\end{align}
+
+
+where we use Gauss-laguerre quadrature with $10$ points to get each part.
+
+The paramters that we used in our numerical experiments are: $T=1$, $\sigma=0.4$ and $S_0=K=100$. The exact value of this case is $15.8519$.
+
+\subsubsection{Comparing relative errors}
+In the following, we compare the  relative errors for the call option example under Black-Scholes model(see Tables (\ref{Relative error of the call option price of the different tolerances for different number of time steps.}, \ref{Relative error of Call option price of the different tolerances for different number of time steps, using Richardson extrapolation (level $1$)}, \ref{Relative error of Call option price of the different tolerances for different number of time steps, using Richardson extrapolation (level $2$)})). We report the results for $3$ scenarios: i) Without using Richardson extrapolation, ii) Using level $1$ Richardson extrapoaltion, iii) Using level $2$ Richardson extrapoaltion.  You may see appendix \ref{appendix:Call prices for different methods} for the values of call option prices.
+
+Given the normalized bias computed by MC method (See Section \ref{sec:Weak error plots_call}) (reported as bold values in the tables), we report in red in each table the smallest tolerance that MISC required to get below that relative bias (I do not put values for smaller tolerances, once the required bias is reached). In case I do not reach those bias I put the best value that I get with MISC in red.
+
+From the tables (\ref{Relative error of the call option price of the different tolerances for different number of time steps.}, \ref{Relative error of Call option price of the different tolerances for different number of time steps, using Richardson extrapolation (level $1$)}, \ref{Relative error of Call option price of the different tolerances for different number of time steps, using Richardson extrapolation (level $2$)})), we may observe that to get a relative error below $0.5\%$, we need more than $16$ time steps for the case without Richardson extrapolation compared to only using $4$ time step in the coarse level for the case of level $1$ Richardson extraplation,  and  only using $1$ time step in the coarse level for the case of level $2$ Richardson extraplation.
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$ &   \\
+		\hline
+		MISC ($TOl=5.10^{-1}$)  & $ \red{0.0229}$ & $  0.0179$ & $\red{0.0111}$ & $ 0.0068$  \\
+		MISC ($TOl=10^{-3}$)  & $-$ & $ \red{ 0.0177}$ & $-$ & $\red{  0.0066}$  \\
+			MC method ($M=10^{5}$)&$ \mathbf{0.0231}$    & $\mathbf{0.0175}$  & $\mathbf{0.0111}$  & $\mathbf{0.0064}$ \\	
+		\hline
+	\end{tabular}
+	\caption{Relative error of the call option price of the different tolerances for different number of time steps, without Richardson extrapolation}
+	\label{Relative error of the call option price of the different tolerances for different number of time steps.}
+\end{table}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{5}{c}r}
+		Method \textbackslash  Steps    &$1-2$        & $2-4$ & $4-8$ & $8-16$  \\
+		\hline
+		MISC ($TOl=5.10^{-1}$)  &$\red{0.0372}$ & $ 0.0129$ & $0.0043$ & $ 0.0025$  \\
+		MISC ($TOl=10^{-3}$) & $-$ & $ \red{0.0126}$ & $\red{    0.0042}$ & $\red{0.0023}$   \\
+		MC method ($M=10^{5}$)&$ \mathbf{0.0374}$    & $\mathbf{0.0116}$  & $\mathbf{0.0027}$  & $\mathbf{0.0022}$ \\
+		\hline
+	\end{tabular}
+	\caption{Relative error of the call option price of the different tolerances for different number of time steps, using Richardson extrapolation (level $1$)}
+	\label{Relative error of Call option price of the different tolerances for different number of time steps, using Richardson extrapolation (level $1$)}
+\end{table}
+
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{5}{c}r}
+		Method \textbackslash  Steps    &$1-2-4$        & $2-4-8$ & $4-8-16$   \\
+		\hline
+		MISC ($TOl=5.10^{-1}$)  &$0.0047$ & $  0.0015$ & $0.0019
+		$   \\
+		MISC ($TOl=10^{-3}$) & $ \red{0.0043}$ & $ \red{0.0013}$ & $\red{  0.0017}$    \\
+		MC method ($M=10^{6}$)&$ \mathbf{0.0041}$    & $\mathbf{0.0013}$  & $\mathbf{0.0016}$  \\
+		\hline
+	\end{tabular}
+	\caption{Relative error of the call option price of the different tolerances for different number of time steps, using Richardson extrapolation (level $2$)}
+	\label{Relative error of Call option price of the different tolerances for different number of time steps, using Richardson extrapolation (level $2$)}
+\end{table}
+\newpage
+\subsubsection{Weak error plots} \label{sec:Weak error plots_call}
+\subsubsection*{$\beta=10$}
+From figure \ref{fig:Weak_rate_call_without_rich}, we see that we get a weak error of order $\Delta t$. From figure \ref{fig:fig:Weak_rate_call_with_rich}, we observe that we get a weak error of order $\Delta t^2$ (if eliminate the  last point having a wide confidence interval point). From figure \ref{fig:Weak_rate_call_with_rich_level2}, we observe that we get an almost constant weak error, with that constant being the smallest cpmpared to without and with level $1$ Ricardson extrapolation. The upper and lower bounds are $95\%$ confidence interval.
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/weak_error_rates_call/Beta_10/without_richardson/weak_convergence_order_call_option_relative_M_10_5}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/weak_error_rates_call/Beta_10/without_richardson/weak_convergence_order_differences_call_option_relative_M_10_5}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of the weak error for the call option, without Richardson extraploation, using MC with $M=10^5$: a) $\abs{\expt{g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{g(X_{\Delta t})-g(X_{\Delta t/2})}}$ }
+	\label{fig:Weak_rate_call_without_rich}
+\end{figure}
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/weak_error_rates_call/Beta_10/with_richardson/weak_convergence_order_call_richardson_relative_M_10_6}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/weak_error_rates_call/Beta_10/with_richardson/weak_convergence_order_differences_call_richardson_relative_M_10_6}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of the weak error for the  call option with Richardson extraploation, using MC with $M=10^6$: a) $\abs{\expt{2 g(X_{\Delta t/2}) -g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{3 g(X_{\Delta t/2})-g(X_{\Delta t})-2 g(X_{\Delta t/4})}}$ }
+	\label{fig:fig:Weak_rate_call_with_rich}
+\end{figure}
+
+
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/weak_error_rates_call/Beta_10/with_richardson/weak_convergence_order_Call_richardson_level2_relative_M_10_6}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/weak_error_rates_call/Beta_10/with_richardson/weak_convergence_order_differences_Call_richardson_level2_relative_M_10_6}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of the weak error for the  call option with Richardson extraploation (level 2), using MC with $M=10^6$: a) $\abs{\frac{1}{3}\expt{8 g(X_{\Delta t/4}) -6g(X_{\Delta t/2}) +g(X_{\Delta t})}-g(X)}$  b) $\abs{\frac{1}{3}\expt{-8 g(X_{\Delta t/8}) +14g(X_{\Delta t/4})-7 (X_{\Delta t/2}) +g(X_{\Delta t})}}$}
+	\label{fig:Weak_rate_call_with_rich_level2}
+\end{figure}
+
+
+
+\newpage
+\subsubsection*{$\beta=32$}
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/weak_error_rates_call/Beta_32/without_rich/weak_convergence_order_call_option_relative_M_10_5}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/weak_error_rates_call/Beta_32/without_rich/weak_convergence_order_differences_call_option_relative_M_10_5}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of the weak error for the call option, without Richardson extraploation, using MC with $M=10^5$: a) $\abs{\expt{g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{g(X_{\Delta t})-g(X_{\Delta t/2})}}$ }
+	\label{fig:Weak_rate_call_without_rich_beta_32}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/weak_error_rates_call/Beta_32/with_rich/weak_convergence_order_call_richardson_relative}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/weak_error_rates_call/Beta_32/with_rich/weak_convergence_order_differences_call_richardson_relative}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of the weak error for the  call option with Richardson extraploation (level 1), using MC with $M=5.10^6$: a) $\abs{\expt{2 g(X_{\Delta t/2}) -g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{3 g(X_{\Delta t/2})-g(X_{\Delta t})-2 g(X_{\Delta t/4})}}$}
+	\label{fig:Weak_rate_call_with_rich_level1_beta_32}
+\end{figure}
+
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/weak_error_rates_call/Beta_32/with_rich/weak_convergence_order_Call_richardson_level2_relative_M_5_10_6}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/weak_error_rates_call/Beta_32/with_rich/weak_convergence_order_differences_Call_richardson_level2_relative_M_5_10_6}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of the weak error for the  call option with Richardson extraploation (level 2), using MC with $M=5.10^6$: a) $\abs{\frac{1}{3}\expt{8 g(X_{\Delta t/4}) -6g(X_{\Delta t/2}) +g(X_{\Delta t})}-g(X)}$  b) $\abs{\frac{1}{3}\expt{-8 g(X_{\Delta t/8}) +14g(X_{\Delta t/4})-7 (X_{\Delta t/2}) +g(X_{\Delta t})}}$}
+	\label{fig:Weak_rate_call_with_rich_level2_beta_32}
+\end{figure}
+
+
+
+
+%\section{TO-DO}
+%
+%\begin{enumerate}
+%	\item Carrying out the Richardson extrapolation in the non-smooth
+%	case.
+%\end{enumerate}
+%\subsection{CIR process}
+%
+%The impact of the Brownian bridge will disappear in the limit, which may make the effect of the smoothing, but also of the errors in the kink location difficult to identify (This observation is not clear to me yet). For this reason, we study a more complicated 1-dimensional problem. In fact, we use a CIR process. To avoid complications at the boundary, we use nice parameter choices, such that the discretized process is very unlikely to hit the boundary (Feller condition).
+%
+%
+%
+%The CIR model specifies that the instantaneous interest rate follows the SDE given by
+%\begin{equation}\label{CIR_process}
+%dX_t=a(b-X_t)dt+\sigma \sqrt{X_t} dW_t,\: X(0)=X_0>0
+%\end{equation}
+%where and $a>0$, $b>0$ and $\sigma>0$, are the parameters. The parameter $a$ corresponds to the speed of adjustment, $b$ to the mean and $\sigma$ to volatility. 
+%
+%If the parameters obey the following condition (known as the Feller condition) then the process $X_t$  is strictly positive
+%\begin{equation}\label{Feller_condition}
+%2 a b \geq\sigma^2.
+%\end{equation}
+%
+%The SDE \eqref{CIR_process} is not explicitly solvable. In general there are two ways to do it, namely, exact simulation methods and approximation schemes. Exact simulation in general requires more time
+%than a simulation with approximation schemes (Up to a factor 10). Therefore, it is used to compute expectations that depend on the values of the process at just a few fixed times. However, for expectations that depends on all the path (such as integrals) discretization schemes should be preferred. 
+%
+%The main problem  when discretizing a CIR process using Euler scheme is that it can lead to negative values for which the square root is not defined. In fact, if we consider the following straightforward Euler scheme on the time interval $[0,T]$ for a CIR process $X(t)$:
+%\begin{equation}\label{Euler_CIR}
+%\bar{X}(t_{i+1})=\bar{X}(t_i)+a(b-\bar{X}(t_i)) \Delta t_i+\sigma \sqrt{\bar{X}(t_i)} \Delta W_i,
+%\end{equation}
+%
+%then it can lead to negative values since the Gaussian
+%increment is not bounded from below. Thus, this  scheme is not well defined.
+%
+%Many modified Euler schemes were proposed to overcome this issue. For instance, Deelstra and Delbaen \cite{deelstra1998convergence} have propose the full truncation scheme given by
+%\begin{equation}\label{Full_truncation_CIR}
+%\bar{X}(t_{i+1})=\bar{X}(t_i)+a(b-\bar{X}(t_i)) \Delta t_i+\sigma \sqrt{\bar{X}(t_i)^+} \Delta W_i.
+%\end{equation}
+%
+%Higham and Mao \cite{mao2007stochastic} proposed the following scheme
+% \begin{equation}\label{partial_reflection_CIR}
+% \bar{X}(t_{i+1})=\bar{X}(t_i)+a(b-\bar{X}(t_i)) \Delta t_i+\sigma \sqrt{\abs{\bar{X}(t_i)}} \Delta W_i.
+% \end{equation}
+% Lord et al \cite{lord2010comparison} proposed the following scheme
+% 
+% \begin{equation}\label{truncation_CIR}
+% \bar{X}(t_{i+1})=\bar{X}(t_i)+a(b-\bar{X}(t_i)^+) \Delta t_i+\sigma \sqrt{\bar{X}(t_i)^+} \Delta W_i.
+% \end{equation}
+% 
+% 
+%Diop proposed in \cite{berkaoui2008euler} proposed the reflection scheme, given by
+%\begin{equation}\label{Reflection_CIR}
+%\bar{X}(t_{i+1})=\mid\bar{X}(t_i)+a(b-\bar{X}(t_i)) \Delta t_i+\sigma \sqrt{\bar{X}(t_i)} \Delta W_i \mid.
+%\end{equation}
+%Also, implicit and higher order schemes were proposed by Alfonsi \cite{alfonsi2005discretization,alfonsi2008second,alfonsi2010high}.
+%
+%Those modified Euler schemes were studied  numerically in \cite{alfonsi2005discretization}. It is observed that when $\sigma$ is small enough, typically $\sigma^2 \le 2a$, these schemes have a weak error of order one and a strong error of order $1/2$. However, when $\sigma$ is getting large, say $\sigma^2\gg 4a$, the convergence of all these schemes is degraded. As observed
+%by Lord et al. \cite{lord2010comparison}, the schemes \eqref{Full_truncation_CIR} and \eqref{truncation_CIR} behave better than the schemes \eqref{partial_reflection_CIR} and \eqref{Reflection_CIR}. In fact, when $\sigma$ gets large, the CIR process spends more time close to zero and get stuck in the neighbourhood of zero when $\sigma$ is really large. When the scheme takes a negative value, the absolute value in  both schemes (\eqref{partial_reflection_CIR},\eqref{Reflection_CIR}) produces a noise that pushes the scheme away from zero. On the other hand, the positive part in truncation schemes cancels the noise when the scheme gets negative, which better reproduces the behaviour of the
+%CIR process. 
+%
+%In the following, we use the scheme given by \eqref{Full_truncation_CIR} to simulate the discrete CIR process.
+%\subsubsection{Location of the kink for the discrete problem: Using full truncation scheme}\label{sec:kink_location_full_truncation)_CIR}
+%
+%
+%The full truncation scheme simulating the CIR process is given by \eqref{Full_truncation_CIR}. Here we are interested in finding the location of the kink for hockey-stick function.
+%
+%
+%Using Brownian bridge construction given by \eqref{Brownian_bridge}, we have
+%\begin{align}\label{recursion_full_truncation_CIR}
+%X_{t_1}&= X_{t_0} \left[ 1- a \Delta t  \right]+ \sigma \sqrt{X_{t_0}^+} \left[   Y \frac{\Delta t}{\sqrt{T}} + \Delta B_0\right]+ ab \Delta t\nonumber\\
+%X_{t_2}&= X_{t_1} \left[ 1- a \Delta t  \right]+ \sigma \sqrt{X_{t_1}^+} \left[   Y \frac{\Delta t}{\sqrt{T}} + \Delta B_1\right]+ ab \Delta t \nonumber\\ 
+%\vdots &= \vdots =\vdots \nonumber\\
+%X_{t_N}&= X_{t_{N-1}} \left[ 1- a \Delta t  \right]+ \sigma \sqrt{X_{t_{N-1}}^+} \left[   Y \frac{\Delta t}{\sqrt{T}} + \Delta B_{N-1} \right]+ ab \Delta t ,
+%\end{align}
+%
+%
+%to simplify the notation we set $f_i(y):=X_{t_i}$. Then  the location of the kink point for the approximate problem is equivalent to finding the roots of the polynomial $P(y_\ast(K))$, given by
+%\begin{align}\label{polynomial_kink_location_CIR_full_truncation}
+%P(y_{\ast}(K))=f_N(y_\ast(K))-\frac{K}{X_0},
+%\end{align}
+%where $f_N(y)$ is computed using recursion \eqref{recursion_full_truncation_CIR}.
+%
+%To apply the \textbf{Newton iteration method}, we need the derivative $P'=\frac{d P}{d y_\ast}=f_N'$, which is deduced from recursion \eqref{recursion_full_truncation_CIR}, and given by the the following relation
+%\begin{align}
+%f_i'(y) &= f_{i-1}'(y)\left[1-a \Delta t \right]+ \sigma \sqrt{f_{i-1}(y)^+} \left[ \frac{\Delta t}{\sqrt{T}}+ \left[y \frac{\Delta t}{\sqrt{T}}+\Delta B_{i-1}\right] \frac{f_{i-1}'(y)}{2} \right],\: 1 \le i \le N \nonumber\\
+%f_0'&=0.
+%\end{align}
+%
+%
+%
+%
+%\subsubsection{Results}
+%The code of this section is found in the script discretized\_CIR.py, which compares the different ways of determining the kink location for 1D CIR model.
+%
+
+
+
+
+
+
+
+
+
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%References
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \newpage
+\bibliographystyle{plain}
+\bibliography{smoothing} 
+
+
+\appendix
+
+
+\section{ Prices for different methods for binary option }\label{appendix:Call prices for different methods_binary}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$ &   \\
+		\hline
+		MISC ($TOl=5.10^{-1}$)  & $\red{0.4620}$ & $  \red{0.4404}$ & $\red{0.4299}$ & $\red{0.4250}$  \\
+		\hline
+	\end{tabular}
+	\caption{ Binary option price of the different methods for different number of time steps, without Richardson extrapolation.}
+	\label{table: Binary option price of the different methods for different number of time steps}
+\end{table}
+
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps   &$1-2$         & $2-4$ & $4-8$ & $8-16$  \\
+		\hline
+		MISC ($TOl=5.10^{-1}$) & $\red{0.4239}$ & $0.4188$ & $  0.4194$ & $0.4200$   \\
+			MISC ($TOl=10^{-2}$) & $-$ & $\red{0.4192}$ & $  0.4194$ & $0.4201$   \\
+			MISC ($TOl=10^{-3}$) & $-$ & $-$ & $  \red{0.4198}$ & $\red{0.4205}$   \\
+		\hline
+	\end{tabular}
+	\caption{Binary  option price of the different methods for different number of time steps, with Richardson extrapolation (level $1$).}
+	\label{table: Binary option price of the different methods for different number of time steps, binary option, with richardson, level 1}
+\end{table}
+
+\newpage
+
+
+\section{ Call prices for different methods}\label{appendix:Call prices for different methods}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$ &   \\
+		\hline
+		MISC ($TOl=5.10^{-1}$)  & $\red{16.2145}$ & $16.1352$ & $\red{16.0275}$ & $\red{15.9594}$  \\
+			MISC ($TOl=10^{-3}$)  & $-$ & $ \red{16.1328 }$ & $-$ & $-$  \\
+		\hline
+	\end{tabular}
+	\caption{ Call option price of the different methods for different number of time steps, without Richardson extrapolation.}
+	\label{table: Call option price of the different methods for different number of time steps}
+\end{table}
+
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps   &$1-2$         & $2-4$ & $4-8$ & $8-16$  \\
+		\hline
+		MISC ($TOl=5.10^{-1}$) & $\red{16.4419}$ & $16.0558$ & $15.9205$ & $15.8915$   \\
+		MISC ($TOl=10^{-3}$) & $-$ & $\red{16.0510}$ & $ \red{15.9177}$ & $\red{15.8880}$   \\
+		\hline
+	\end{tabular}
+	\caption{Call  option price of the different methods for different number of time steps, with Richardson extrapolation (level $1$).}
+	\label{table: Call option price of the different methods for different number of time steps, binary option, with richardson, level 1}
+\end{table}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps   &$1-2-4$         & $2-4-8$ & $4-8-16$   \\
+		\hline
+		MISC ($TOl=5.10^{-1}$) & $15.9269$ & $15.8756$ & $15.8815$  \\
+		MISC ($TOl=10^{-3}$) & $\red{15.9205}$ & $\red{15.8732}$ & $ \red{  15.8789}$   \\
+		\hline
+	\end{tabular}
+	\caption{Call option price of the different methods for different number of time steps, with Richardson extrapolation (level $2$).}
+	\label{table: Call option price of the different methods for different number of time steps, binary option, with richardson, level 2}
+\end{table}
+\newpage
+
+\section{The basket option with the smoothing trick as in \cite{bayersmoothing}}\label{sec:The basket option with smoothing trick with a time stepping procedure}
+
+The first experiment that we consider is the pricing of  a European  basket call option in a Black-Scholes model. The basket is composed of $d$ assets ($d=3,8,25$) and we use the same trick of smoothing the integrand that was proposed in \cite{bayersmoothing}. In this case, the dimension of the parameter space $N=d-1$. The interpolation over the parameter space is based on the tensorized Lagrangian interpolation technique with Gaussian  points.
+
+
+%\newpage
+\subsubsection{Results using MISC}
+In table \ref{table: Complexity rates of the different experiemnts  for the basket option using BS model}, we summarize the observed  complexity rates for different tested settings for the basket example. From this table, we can check that even with the $25$ dimensional case, the complexity rate in terms of the elapsed time is at least order $1$, which is better than MC, which is $2$. Detailed plots for each case are given by figures (\ref{fig:misc_3D_Basket_1}, \ref{fig:misc_3D_Basket_2}) for $d=3$, figures (\ref{fig:misc_8D_Basket_1}, \ref{fig:misc_8D_Basket_2}) for $d=8$ and figures (\ref{fig:misc_25D_Basket_1}, \ref{fig:misc_25D_Basket_2}) for $d=25$. Mainly, from the plots, 
+we checked  that we achive the prescribed tolerance using MISC, the convergence rates of mixed differences which is a basic assumption for using MISC (we observe exponential decay of error rates wrt to the number of quadrature points) and finally the complexity rates.
+
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{3}{c}r}
+		\# assets  \textbackslash          & $3$ & $8$ & $25$   \\
+		\hline
+		rate   & $-1/3$ & $-9/20$ & $-16/25$  \\
+		\hline
+	\end{tabular}
+	\caption{Complexity rates of the different experiments  for the basket option using BS model}
+	\label{table: Complexity rates of the different experiemnts  for the basket option using BS model}
+\end{table}	
+\newpage
+\subsubsection*{Case of $3$-dimensional Basket}
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/3D_basket/error_estimate.pdf}
+		\caption{Error estimate}
+		\label{fig:misc_3D_Basket_sub1}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/3D_basket/average_running_time.pdf}
+		\caption{Average running time as a function of $TOL$}
+		\label{fig:misc_3D_Basket_sub2}
+	\end{subfigure}%
+	\caption{Convergence and complexity results for the $3$-dimensional basket option using BS model.}
+	\label{fig:misc_3D_Basket_1}
+\end{figure}
+
+
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/3D_basket/level_work.pdf}
+		\caption{Average Computational time per level.}
+		\label{fig:misc_3D_Basket_sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/3D_basket/levels_error_rate.pdf}
+		\caption{The convergence rate of mixed differences per level.}
+		\label{fig:misc_3D_Basket_sub4}
+	\end{subfigure}%
+	\caption{Convergence and work rates for discretization levels for the $3$-dimensional basket option using BS model.}
+	\label{fig:misc_3D_Basket_2}
+\end{figure}
+
+
+
+\newpage
+
+\subsubsection*{Case of $8$-dimensional Basket}
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/8D_basket/error_estimate.pdf}
+		\caption{Error estimate}
+		\label{fig:misc_8D_Basket_sub1}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/8D_basket/average_running_time.pdf}
+		\caption{Average running time as a function of $TOL$}
+		\label{fig:misc_8D_Basket_sub2}
+	\end{subfigure}%
+	\caption{Convergence and complexity results for  the $8$-dimensional basket option using BS model.}
+	\label{fig:misc_8D_Basket_1}
+\end{figure}
+
+
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/8D_basket/level_work.pdf}
+		\caption{Average Computational time per level.}
+		\label{fig:misc_8D_Basket_sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/8D_basket/levels_error_rate.pdf}
+		\caption{The convergence rate of mixed differences per level.}
+		\label{fig:misc_8D_Basket_sub4}
+	\end{subfigure}%
+	\caption{Convergence and work rates for discretization levels for the $8$-dimensional basket option using BS model.}
+	\label{fig:misc_8D_Basket_2}
+\end{figure}
+\newpage
+\subsubsection*{Case of $25$-dimensional Basket}
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/25D_basket/error_estimate.pdf}
+		\caption{Error estimate}
+		\label{fig:misc_25D_Basket_sub1}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/25D_basket/average_running_time.pdf}
+		\caption{Average running time as a function of $TOL$}
+		\label{fig:misc_25D_Basket_sub2}
+	\end{subfigure}%
+	\caption{Convergence and complexity results for  the $25$-dimensional basket option using BS model.}
+	\label{fig:misc_25D_Basket_1}
+\end{figure}
+
+
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/25D_basket/level_work.pdf}
+		\caption{Average Computational time per level.}
+		\label{fig:misc_25D_Basket_sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/25D_basket/levels_error_rate.pdf}
+		\caption{The convergence rate of mixed differences per level.}
+		\label{fig:misc_25D_Basket_sub4}
+	\end{subfigure}%
+	\caption{Convergence and work rates for discretization levels for the $25$-dimensional basket option using BS model.}
+	\label{fig:misc_25D_Basket_2}
+\end{figure}
+
+
+\newpage 
+\section{Results of the basket example}
+\subsubsection{Verifying bounds on work and error contributions}
+
+In this subsection, we discuss the validity of Assumptions $2$-$4$ in \cite{haji2016multi}, upon which the MISC convergence theorem is based. In this case, basket option case we do not use a deterministic solver since the we have a close for of the integrand and then  we analyze  only the properties of the collocation method applied to
+the problem.
+
+
+
+
+Below, we show in figures (\ref{fig:test_basket_1},\ref{fig:test_basket_2},\ref{fig:test_basket_3}) the rate of convergence of first and mixed differences for different orders and we check that the error is decaying exponentially wrt number of points used in the quadrature.
+
+	
+	\begin{figure}[h!]
+		\centering
+		\begin{subfigure}{.5\textwidth}
+			\centering
+			\includegraphics[width=1\linewidth]{./figures/first_difference_basket.eps}
+			\caption{}
+			\label{fig:sub1}
+		\end{subfigure}%
+		\begin{subfigure}{.5\textwidth}
+			\centering
+			\includegraphics[width=1\linewidth]{./figures/mixed_difference_order2_basket_1.eps}
+			\caption{}
+			\label{fig:sub2}
+		\end{subfigure}%
+		\caption{The rate of convergence of $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$): a) shows the rate of convergence of first order differences. b)  shows the rate of convergence of second order mixed differences.}
+			\label{fig:test_basket_1}
+	\end{figure}
+
+	\begin{figure}
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/mixed_difference_order2_basket_2.eps}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/mixed_difference_order2_basket_3.eps}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+
+	\caption{The rate of convergence of $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)): a) and b) show  the rate of convergence of second order mixed differences for different settings.}
+		\label{fig:test_basket_2}
+\end{figure}
+
+	\begin{figure}
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/mixed_difference_order3_basket_1.eps}
+	    \caption{}
+		\label{fig:sub5}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/mixed_difference_order3_basket_2.eps}
+		\caption{}
+		\label{fig:sub6}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$): a) and b) show  the rate of convergence of third order mixed differences for different settings.}
+	\label{fig:test_basket_3}
+\end{figure}
+
+
+
+ \newpage
+\section{Implementation details and  MISC results}\label{sec:Implementation details and  MISC results}
+The first step, when testing this example is to fix $\Delta t_{\text{min}}$ for the  time discretization parameter and do not introduce a hierarchy of levels in the deterministic dimension. Therefore, we will only construct a hierarchy of levels in the stochastic dimension associated with the Brownian increments. Then, the second step is to avoid this restriction of minimum  time discretization parameter (somehow like letting $\Delta t_{\text{min}} \rightarrow 0$)  and in that case, the problem will be close to do the integration in $\infty$-dimension, we need to see how the convergence rates will behave. The third step, is to use Richardson extrapolation which we expect bring the order of convergence for the Euler scheme from $ \ordo{\Delta t}$  to  $\ordo{\Delta t^2}$, and then we may expect that we will need fewer time steps to converge than the first case, and which means that fewer stochastic directions will be activated.   One technical difference here is that for $1$-dimensional, we will have two kink points instead of one but the procedure will be the same.  We note that we used Laguerre quadrature for integrating with respect to the dimension containing the kink. 
+
+Since we observed some problems for the results of the non-smooth payoff with Richardson extrapolation, we tried to add another case where we use a smoothed version of the call payoff to figure out the source of the problem. Using a smooth payoff allow us to separate the effect of infinite dimension and non-smoothness. As a possible choice, we use  the Black Scholes call option price formula, given by 
+\begin{equation}
+\mathrm C(\mathrm S,\mathrm t)= \mathrm N(\mathrm d_1)\mathrm S - \mathrm N(\mathrm d_2) \mathrm K \mathrm e^{-rt}
+\label{eq:2}
+\end{equation}
+
+\begin{equation}
+\mathrm d_1= \frac{1}{\sigma \sqrt{\mathrm t}} \left[\ln{\left(\frac{S}{K}\right)} + t\left(r + \frac{\sigma^2}{2} \right) \right]
+\end{equation}
+
+\begin{equation}
+\mathrm d_2= d_1- \sigma  \sqrt{t} 
+\end{equation}
+
+\begin{equation}
+N(x)=\frac{1}{\sqrt{2\pi}} \int_{-\infty}^{x} \mathrm e^{-\frac{1}{2}z^2} dz
+\label{eq:5}
+\end{equation}
+
+
+, which can be seen as a smoothed version of the true payoff (See figure \ref{fig:smooth_non_smooth}). The two differences with respect to the non-smooth case is that the dimension of the parameter space (stochastic space) now is increased by one  due to including the terminal value of the driving Brownian motion. Numerically, we observed weird results , in fact the quadrature performed worse than with the non-smooth case,  even for various values of volatilities. We still need to understand why this choice is not a good one. 
+
+
+Another possible choice that we worked with,  is by using the following smooth approximation of the max call payoff (See figure \ref{fig:smooth_payoff2})
+
+\begin{align}\label{eq:smooth_payoff2}
+	\operatorname{\max}_\epsilon(S-K,0) \approx 0.5 ( S-K+\sqrt{ (S-K)^{2}+\epsilon}),
+\end{align}
+
+where $\epsilon>0$.
+
+
+
+
+
+
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/smooth_non_smooth_payoff.png}
+		\caption{Black Scholes call option price for different values of $\sigma$}
+		\label{fig:smooth_non_smooth}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/smooth_payoff_2.png}
+		\caption{Smooth approximation of the max call payoff for different values of $\epsilon$.}
+		\label{fig:smooth_payoff2}
+	\end{subfigure}%
+\end{figure}
+
+
+
+%Numerically, we tried different values of $\epsilon$. For values of $\epsilon<10^5$, it is much expensive to run the quadrature compared to the non-smooth case( we need to understand why we have this behavior). 
+%In section \ref{sec:Results using MISC code_1D_BS}, we show some of the results with $8$ time steps and for $\epsilon=10^5$.
+%
+%\newpage
+%\subsubsection{A smooth payoff with Richardson extrapolation}
+%In this section, we present Richardson extrapolation algorithm that we use to compute the integrand before passing it to misc for the quadrature. We expect a slighter improvement of the rates  compared to cases without using Richardson extrapolation since $dt$ is fixed in the misc code (we assume that we do not have a deterministic direction, just stochastic ones). However, this improvement should be much better as $dt\rightarrow 0$ (higher number of time steps). In fact, since the convergence is fast with respect to the stochastic dimensions, the rate of convergence is deteriorated by the time-stepping procedure and then the advantage of using   Richardson extrapolation is to bring the order of convergence for the Euler scheme from $ \ordo{\Delta t}$  to  $\ordo{\Delta t^\alpha}$ ($\alpha>1$). This improvement implies that fewer stochastic directions will be activated and thus the improvement of the global rate of convergence.
+%
+%\begin{algorithm}
+%	\caption{Description of the Richardson algorithm }\label{euclid}
+%	\begin{algorithmic}[1]
+%%		\Procedure{MyProcedure}{}
+%		\State Initial set of quadrature points $y$, initial number of time steps $N$, $n:$ level of Richardson extrapolation, $\tilde{g}:$ the smooth payoff approximation
+%		\For{\texttt{$i=0$ to $n$}}
+%		\State $d_i0 \leftarrow \tilde{g}(\bar{X}_{N})$  ($\bar{X}_{N}$ is the stock price simulated with $N$ time steps and using $N$ quadrature points form $y$)
+%			\For{\texttt{$j=1$ to $i$}}
+%			\State $d_{i,j} \leftarrow d_{i,j-1}+(d_{i,j-1}-d_{i-1,j-1})/(4^j-1)$
+%			\EndFor
+%		\State $N \leftarrow 2 N	$
+%		\EndFor
+%		
+%		
+%		
+%%		\State $i \gets \textit{patlen}$
+%%		\BState \emph{top}:
+%%		\If {$i > \textit{stringlen}$} \Return false
+%%		\EndIf
+%%		\State $j \gets \textit{patlen}$
+%%		\BState \emph{loop}:
+%%		\If {$\textit{string}(i) = \textit{path}(j)$}
+%%		\State $j \gets j-1$.
+%%		\State $i \gets i-1$.
+%%		\State \textbf{goto} \emph{loop}.
+%%		\State \textbf{close};
+%%		\EndIf
+%%		\State $i \gets i+\max(\textit{delta}_1(\textit{string}(i)),\textit{delta}_2(j))$.
+%%		\State \textbf{goto} \emph{top}.
+%%		\EndProcedure
+%	\end{algorithmic}
+%\end{algorithm}
+%
+%
+%
+%
+
+
+%In the simulation, we  use consistent Brownian increments in simulating the paths of $\hat{X}^h$ and $\hat{X}^{2h}$, which results in a substantial reduction in variance. More specifically, each Brownian increment driving $\hat{X}^{2h}$ is the sum of two of the increments driving $\hat{X}^{h}$. This means that if we use $\sqrt{h} Z_1,\sqrt{h} Z_2,\dots $ as the Brownian increments for  $\hat{X}^{h}$ then we can use  $\sqrt{h} (Z_1+Z_2),\sqrt{h} (Z_3+Z_4),\dots $  as the Brownian increments for $\hat{X}^{2h}$.
+
+
+
+
+
+
+
+
+In table \ref{table: Complexity rates of the different methods for different number of time steps}, we summarize the results that we get in terms of complexity rates for different methods using different number of time steps. We clarify that the results for the Richardson extrapolation are given for just one level, where the associated steps in the table corresponds to those of level $1$.
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$  \\
+		\hline
+		Non-smooth payoff   & $-1/5$ & $-1/5$ & $-2/5$ & $-7/10$  \\
+		Non-smooth payoff with Richardson  extrapolation    & $-$ & $-$ & $-$ & $-$  \\
+		Smooth payoff(given by \eqref{eq:smooth_payoff2},$\epsilon=10^{-5}$)          & $-1/3$ &$-1/3$ &  $-3/5$ &  $-1$ \\
+		Smooth payoff with Richardson  extrapolation      & - & $-1/10$  & $-4/10$ & $-$  \\
+		\hline
+	\end{tabular}
+	\caption{Complexity rates of the different methods for different number of time steps}
+	\label{table: Complexity rates of the different methods for different number of time steps}
+\end{table}	
+
+Detailed plots for each case are given in appendix \ref{app: MISC Results 1D_BS}. Mainly, from the plots, 
+we checked  that we achive the prescribed tolerance using MISC, the convergence rates of mixed differences which is a basic assumption for using MISC (we observe exponential decay of error rates wrt to the number of quadrature points) and finally the complexity rates.
+
+\section{ MISC Results for the call option under discretized BS model}\label{app: MISC Results 1D_BS}
+
+\subsection{Case of $2$ time steps with non-smooth payoff}
+
+From the following plots, we confirm the exponential rate of convergence for the stochastic parameters, we achieve the prescribed tolerance and  we get a rate of complexity (in terms of average running time) approximately of order $-1/5$ for $2$ time steps.
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/1D_BS_2_steps_non_smooth/error_estimate.pdf}
+		\caption{Error estimate}
+		\label{fig:misc_1D_BS_non_smooth_2steps_sub1}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/1D_BS_2_steps_non_smooth/average_running_time.pdf}
+		\caption{Average running time as a function of $TOL$}
+		\label{fig:misc_1D_BS_non_smooth_2steps_sub2}
+	\end{subfigure}%
+	\caption{Convergence and complexity results for for the $1D$ BS model with the non-smooth call payoff.}
+	\label{fig:misc_1D_BS_nonsmooth_2steps_2}
+\end{figure}
+
+
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/1D_BS_2_steps_non_smooth/level_work.pdf}
+		\caption{Average Computational time per level}
+		\label{fig:misc_1D_BS_non_smooth_2steps_sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/1D_BS_2_steps_non_smooth/levels_error_rate.pdf}
+		\caption{ The convergence rate of first differences per level}
+		\label{fig:misc_1D_BS_non_smooth_2steps_sub4}
+	\end{subfigure}%
+	\caption{Convergence and work rates for discretization levels for the $1D$ BS model with the non-smooth call payoff.}
+	\label{fig:misc_1D_BS_2teps_2}
+\end{figure}
+
+
+
+\subsection{Case of $2$ time steps with smooth payoff (given by \eqref{eq:smooth_payoff2})}
+
+From the following plots, we confirm the exponential rate of convergence for the stochastic parameters, we achieve the prescribed tolerance and  we get a rate of complexity (in terms of average running time) approximately of order $-1/3$ for $2$ time steps.
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/1D_BS_2_steps_smooth_second_payoff_eps_10_5/error_estimate.pdf}
+		\caption{Error estimate}
+		\label{fig:misc_1D_BS_2_steps_smooth_second_payoff_eps_10_5_sub1}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/1D_BS_2_steps_smooth_second_payoff_eps_10_5/average_running_time.pdf}
+		\caption{Average running time as a function of $TOL$}
+		\label{fig:misc_1D_BS_2_steps_smooth_second_payoff_eps_10_5_sub2}
+	\end{subfigure}%
+	\caption{Convergence and complexity results for for the $1D$ BS model with the smooth call payoff given by \eqref{eq:smooth_payoff2}.}
+	\label{fig:misc_1D_BS_2_steps_smooth_second_payoff_eps_10_5_1}
+\end{figure}
+
+
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/1D_BS_2_steps_smooth_second_payoff_eps_10_5/level_work.pdf}
+		\caption{Average Computational time per level}
+		\label{fig:misc_1D_BS_2_steps_smooth_second_payoff_eps_10_5_sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/1D_BS_2_steps_smooth_second_payoff_eps_10_5/levels_error_rate.pdf}
+		\caption{ The convergence rate of first differences per level}
+		\label{fig:misc_1D_BS_2_steps_smooth_second_payoff_eps_10_5_sub4}
+	\end{subfigure}%
+	\caption{Convergence and work rates for discretization levels for the $1D$ BS model with the smooth call payoff given by \eqref{eq:smooth_payoff2}.}
+	\label{fig:misc_1D_BS_2_steps_smooth_second_payoff_eps_10_5_2}
+\end{figure}
+
+
+\newpage
+
+
+
+
+\subsection{Case of $4$ time steps with non-smooth payoff}
+
+From the following plots, we confirm the exponential rate of convergence for the stochastic parameters, we achieve the prescribed tolerance and  we get a rate of complexity (in terms of average running time) approximately of order $-1/5$ for $4$ time steps.
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/1D_BS_4_steps_non_smooth/error_estimate.pdf}
+		\caption{Error estimate}
+		\label{fig:misc_1D_BS_non_smooth_4steps_sub1}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/1D_BS_4_steps_non_smooth/average_running_time.pdf}
+		\caption{Average running time as a function of $TOL$}
+		\label{fig:misc_1D_BS_non_smooth_4steps_sub2}
+	\end{subfigure}%
+	\caption{Convergence and complexity results for for the $1D$ BS model with the non-smooth call payoff .}
+	\label{fig:misc_1D_BS_nonsmooth_4steps_2}
+\end{figure}
+
+
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/1D_BS_4_steps_non_smooth/level_work.pdf}
+		\caption{Average Computational time per level}
+		\label{fig:misc_1D_BS_non_smooth_4steps_sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/1D_BS_4_steps_non_smooth/levels_error_rate.pdf}
+		\caption{ The convergence rate of first differences per level}
+		\label{fig:misc_1D_BS_non_smooth_4steps_sub4}
+	\end{subfigure}%
+	\caption{Convergence and work rates for discretization levels for the $1D$ BS model with the non- smooth call payoff.}
+	\label{fig:misc_1D_BS_4teps_2}
+\end{figure}
+
+
+\newpage
+
+\subsection{Case of non smooth payoff  with Richardson extrapolation (level $0$: $2$ time steps, level $1$: $4$ time steps) (Ignoring the middle part of integration)}
+
+From the following plots, we confirm the exponential rate of convergence for the stochastic parameters, we achieve the prescribed tolerance and  we get a rate of complexity (in terms of average running time) approximately of order $-1/2$.
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/1D_BS_2_4_step_non_smooth_richardson_without_middle/error_estimate.pdf}
+		\caption{Error estimate}
+		\label{fig:misc_1D_BS_2_4_step_non_smooth_richardson_without_middle_sub1}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/1D_BS_2_4_step_non_smooth_richardson_without_middle/average_running_time.pdf}
+		\caption{Average running time as a function of $TOL$}
+		\label{fig:misc_1D_BS_2_4_step_non_smooth_richardson_without_middle_sub2}
+	\end{subfigure}%
+	\caption{Convergence and complexity results for for the $1D$ BS model with the non smooth call payoff with Richardson extrapolation (Ignoring the middle part of integration).}
+	\label{fig:misc_1D_BS_2_4_step_non_smooth_richardson_without_middle_1}
+\end{figure}
+
+
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/1D_BS_2_4_step_non_smooth_richardson_without_middle/level_work.pdf}
+		\caption{Average Computational time per level}
+		\label{fig:misc_1D_BS_2_4_step_non_smooth_richardson_without_middle_sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/1D_BS_2_4_step_non_smooth_richardson_without_middle/levels_error_rate.pdf}
+		\caption{ The convergence rate of first differences per level}
+		\label{fig:misc_1D_BS_2_4_step_non_smooth_richardson_without_middle_sub4}
+	\end{subfigure}%
+	\caption{Convergence and work rates for discretization levels for the $1D$ BS model with the non smooth call payoff with Richardson extrapolation (Ignoring the middle part of integration).}
+	\label{fig:misc_1D_BS_2_4_step_non_smooth_richardson_without_middle_2}
+\end{figure}
+\newpage
+
+
+\subsection{Case of $4$ time steps with smooth payoff (given by \eqref{eq:smooth_payoff2})}
+
+From the following plots, we confirm the exponential rate of convergence for the stochastic parameters, we achieve the prescribed tolerance and  we get a rate of complexity (in terms of average running time) approximately of order $-1/3$ for $4$ time steps.
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/1D_BS_4_steps_smooth_second_payoff_eps_10_5/error_estimate.pdf}
+		\caption{Error estimate}
+		\label{fig:misc_1D_BS_4_steps_smooth_second_payoff_eps_10_5_sub1}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/1D_BS_4_steps_smooth_second_payoff_eps_10_5/average_running_time.pdf}
+		\caption{Average running time as a function of $TOL$}
+		\label{fig:misc_1D_BS_4_steps_smooth_second_payoff_eps_10_5_sub2}
+	\end{subfigure}%
+	\caption{Convergence and complexity results for for the $1D$ BS model with the smooth call payoff given by \eqref{eq:smooth_payoff2}.}
+	\label{fig:misc_1D_BS_4_steps_smooth_second_payoff_eps_10_5_1}
+\end{figure}
+
+
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/1D_BS_4_steps_smooth_second_payoff_eps_10_5/level_work.pdf}
+		\caption{Average Computational time per level}
+		\label{fig:misc_1D_BS_4_steps_smooth_second_payoff_eps_10_5_sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/1D_BS_4_steps_smooth_second_payoff_eps_10_5/levels_error_rate.pdf}
+		\caption{ The convergence rate of first differences per level}
+		\label{fig:misc_1D_BS_4_steps_smooth_second_payoff_eps_10_5_sub4}
+	\end{subfigure}%
+	\caption{Convergence and work rates for discretization levels for the $1D$ BS model with the smooth call payoff given by \eqref{eq:smooth_payoff2}.}
+	\label{fig:misc_1D_BS_4_steps_smooth_second_payoff_eps_10_5_2}
+\end{figure}
+
+\newpage
+
+
+
+
+
+\subsection{Case of smooth payoff (given by \eqref{eq:smooth_payoff2}) with Richardson extrapolation (level $0$: $2$ time steps, level $1$: $4$ time steps)}
+From the following plots, we confirm the exponential rate of convergence for the stochastic parameters, we achieve the prescribed tolerance and  we get a rate of complexity (in terms of average running time) approximately of order $-1/10$.
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/1D_BS_2_4_steps_smooth_second_payoff_eps_10_5_richardson/error_estimate.pdf}
+		\caption{Error estimate}
+		\label{fig:misc_1D_BS_2_4_steps_smooth_second_payoff_eps_10_5_sub1}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/1D_BS_2_4_steps_smooth_second_payoff_eps_10_5_richardson/average_running_time.pdf}
+		\caption{Average running time as a function of $TOL$}
+		\label{fig:misc_1D_BS_2_4_steps_smooth_second_payoff_eps_10_5_sub2}
+	\end{subfigure}%
+	\caption{Convergence and complexity results for for the $1D$ BS model with the smooth call payoff given by \eqref{eq:smooth_payoff2} with Richardson extrapolation.}
+	\label{fig:misc_1D_BS_2_4_steps_smooth_second_payoff_eps_10_5_1}
+\end{figure}
+
+
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/1D_BS_4_8_steps_smooth_second_payoff_eps_10_5_richardson/level_work.pdf}
+		\caption{Average Computational time per level}
+		\label{fig:misc_1D_BS_2_4_steps_smooth_second_payoff_eps_10_sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/1D_BS_2_4_steps_smooth_second_payoff_eps_10_5_richardson/levels_error_rate.pdf}
+		\caption{ The convergence rate of first differences per level}
+		\label{fig:misc_1D_BS_2_4_steps_smooth_second_payoff_eps_10_5_sub4}
+	\end{subfigure}%
+	\caption{Convergence and work rates for discretization levels for the $1D$ BS model with the smooth call payoff given by \eqref{eq:smooth_payoff2} with Richardson extrapolation.}
+	\label{fig:misc_1D_BS_2_4_steps_smooth_second_payoff_eps_10_5_2}
+\end{figure}
+\newpage
+
+
+\subsection{Case of $8$ time steps with non-smooth payoff}
+
+From the following plots, we confirm the exponential rate of convergence for the stochastic parameters, we achieve the prescribed tolerance and  we get a rate of complexity (in terms of average running time) approximately of order $-2/5$ for $8$ time steps.
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/1D_BS_8_steps_non_smooth/error_estimate.pdf}
+		\caption{Error estimate}
+		\label{fig:misc_1D_BS_non_smooth_8steps_sub1}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/1D_BS_8_steps_non_smooth/average_running_time.pdf}
+		\caption{Average running time as a function of $TOL$}
+		\label{fig:misc_1D_BS_non_smooth_8steps_sub2}
+	\end{subfigure}%
+	\caption{Convergence and complexity results for for the $1D$ BS model with the non-smooth call payoff.}
+	\label{fig:misc_1D_BS_nonsmooth_8steps_2}
+\end{figure}
+
+
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/1D_BS_8_steps_non_smooth/level_work.pdf}
+		\caption{Average Computational time per level}
+		\label{fig:misc_1D_BS_non_smooth_8steps_sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/1D_BS_8_steps_non_smooth/levels_error_rate.pdf}
+		\caption{ The convergence rate of first differences per level}
+		\label{fig:misc_1D_BS_non_smooth_8steps_sub4}
+	\end{subfigure}%
+	\caption{Convergence and work rates for discretization levels for the $1D$ BS model with the non- smooth call payoff.}
+	\label{fig:misc_1D_BS_8teps_2}
+\end{figure}
+
+% \newpage
+%\subsubsection*{Case of $8$ time steps with smooth payoff (BS formula)}
+%
+%
+%
+%\begin{figure}[!h]
+%	\centering
+%	\begin{subfigure}{.5\textwidth}
+%		\centering
+%		\includegraphics[width=1\linewidth]{./figures/1D_BS_8_steps_smooth_BS_payoff/error_estimate.pdf}
+%		\caption{}
+%		\label{fig:misc_1D_BS_8_steps_smooth_BS_payoff_sub1}
+%	\end{subfigure}%
+%	\begin{subfigure}{.5\textwidth}
+%		\centering
+%		\includegraphics[width=1\linewidth]{./figures/1D_BS_8_steps_smooth_BS_payoff/average_running_time.pdf}
+%		\caption{}
+%		\label{fig:misc_1D_BS_8_steps_smooth_BS_payoff_sub2}
+%	\end{subfigure}%
+%	\caption{.}
+%	\label{fig:misc_1D_BS_8_steps_smooth_BS_payoff_1}
+%\end{figure}
+%
+%
+%
+%\begin{figure}[!h]
+%	\centering
+%	\begin{subfigure}{.5\textwidth}
+%		\centering
+%		\includegraphics[width=0.95\linewidth]{./figures/1D_BS_8_steps_smooth_BS_payoff/level_work.pdf}
+%		\caption{}
+%		\label{fig:misc_1D_BS_8_steps_smooth_BS_payoff_sub3}
+%	\end{subfigure}%
+%	\begin{subfigure}{.5\textwidth}
+%		\centering
+%		\includegraphics[width=0.95\linewidth]{./figures/1D_BS_8_steps_smooth_BS_payoff/levels_error_rate.pdf}
+%		\caption{}
+%		\label{fig:misc_1D_BS_8_steps_smooth_BS_payoff_sub4}
+%	\end{subfigure}%
+%	\caption{.}
+%	\label{fig:misc_1D_BS_8_steps_smooth_BS_payoff_2}
+%\end{figure}
+\newpage
+
+\subsection{Case of non smooth payoff  with Richardson extrapolation (level $0$: $4$ time steps, level $1$: $8$ time steps) (Ignoring the middle part of integration)}
+
+From the following plots, we confirm the exponential rate of convergence for the stochastic parameters, we achieve the prescribed tolerance and  we get a rate of complexity (in terms of average running time) approximately of order $-1/2$.
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/1D_BS_4_8_step_non_smooth_richardson_without_middle/error_estimate.pdf}
+		\caption{Error estimate}
+		\label{fig:misc_1D_BS_4_8_step_non_smooth_richardson_without_middle_sub1}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/1D_BS_4_8_step_non_smooth_richardson_without_middle/average_running_time.pdf}
+		\caption{Average running time as a function of $TOL$}
+		\label{fig:misc_1D_BS_4_8_step_non_smooth_richardson_without_middle_sub2}
+	\end{subfigure}%
+	\caption{Convergence and complexity results for for the $1D$ BS model with the non smooth call payoff with Richardson extrapolation (Ignoring the middle part of integration).}
+	\label{fig:misc_1D_BS_4_8_step_non_smooth_richardson_without_middle_1}
+\end{figure}
+
+
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/1D_BS_4_8_step_non_smooth_richardson_without_middle/level_work.pdf}
+		\caption{Average Computational time per level}
+		\label{fig:misc_1D_BS_4_8_step_non_smooth_richardson_without_middle_sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/1D_BS_4_8_step_non_smooth_richardson_without_middle/levels_error_rate.pdf}
+		\caption{ The convergence rate of first differences per level}
+		\label{fig:misc_1D_BS_4_8_step_non_smooth_richardson_without_middle_sub4}
+	\end{subfigure}%
+	\caption{Convergence and work rates for discretization levels for the $1D$ BS model with the non smooth call payoff with Richardson extrapolation (Ignoring the middle part of integration).}
+	\label{fig:misc_1D_BS_4_8_step_non_smooth_richardson_without_middle_2}
+\end{figure}
+\newpage
+
+
+\subsection{Case of $8$ time steps with smooth payoff (given by \eqref{eq:smooth_payoff2})}
+
+From the following plots, we confirm the exponential rate of convergence for the stochastic parameters, we achieve the prescribed tolerance and  we get a rate of complexity (in terms of average running time) approximately of order $-3/5$ for $8$ time steps.
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/1D_BS_8_steps_smooth_second_payoff_eps_10_5/error_estimate.pdf}
+		\caption{Error estimate}
+		\label{fig:misc_1D_BS_8_steps_smooth_second_payoff_eps_10_5_sub1}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/1D_BS_8_steps_smooth_second_payoff_eps_10_5/average_running_time.pdf}
+		\caption{Average running time as a function of $TOL$}
+		\label{fig:misc_1D_BS_8_steps_smooth_second_payoff_eps_10_5_sub2}
+	\end{subfigure}%
+	\caption{Convergence and complexity results for for the $1D$ BS model with the smooth call payoff given by \eqref{eq:smooth_payoff2}.}
+	\label{fig:misc_1D_BS_8_steps_smooth_second_payoff_eps_10_5_1}
+\end{figure}
+
+
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/1D_BS_8_steps_smooth_second_payoff_eps_10_5/level_work.pdf}
+		\caption{Average Computational time per level}
+		\label{fig:misc_1D_BS_8_steps_smooth_second_payoff_eps_10_5_sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/1D_BS_8_steps_smooth_second_payoff_eps_10_5/levels_error_rate.pdf}
+		\caption{ The convergence rate of first differences per level}
+		\label{fig:misc_1D_BS_8_steps_smooth_second_payoff_eps_10_5_sub4}
+	\end{subfigure}%
+	\caption{Convergence and work rates for discretization levels for the $1D$ BS model with the smooth call payoff given by \eqref{eq:smooth_payoff2}.}
+	\label{fig:misc_1D_BS_8_steps_smooth_second_payoff_eps_10_5_2}
+\end{figure}
+
+
+\newpage
+
+
+\subsection{Case of smooth payoff (given by \eqref{eq:smooth_payoff2}) with Richardson extrapolation (level $0$: $4$ time steps, level $1$: $8$ time steps)}
+From the following plots, we confirm the exponential rate of convergence for the stochastic parameters, we achieve the prescribed tolerance and  we get a rate of complexity (in terms of average running time) approximately of order $-4/10$.
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/1D_BS_4_8_steps_smooth_second_payoff_eps_10_5_richardson/error_estimate.pdf}
+		\caption{Error estimate}
+		\label{fig:misc_1D_BS_4_8_steps_smooth_second_payoff_eps_10_5_sub1}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/1D_BS_4_8_steps_smooth_second_payoff_eps_10_5_richardson/average_running_time.pdf}
+		\caption{Average running time as a function of $TOL$}
+		\label{fig:misc_1D_BS_4_8_steps_smooth_second_payoff_eps_10_5_sub2}
+	\end{subfigure}%
+	\caption{Convergence and complexity results for for the $1D$ BS model with the smooth call payoff given by \eqref{eq:smooth_payoff2} with Richardson extrapolation.}
+	\label{fig:misc_1D_BS_4_8_steps_smooth_second_payoff_eps_10_5_1}
+\end{figure}
+
+
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/1D_BS_4_8_steps_smooth_second_payoff_eps_10_5_richardson/level_work.pdf}
+		\caption{Average Computational time per level}
+		\label{fig:misc_1D_BS_4_8_steps_smooth_second_payoff_eps_10_sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/1D_BS_4_8_steps_smooth_second_payoff_eps_10_5_richardson/levels_error_rate.pdf}
+		\caption{ The convergence rate of first differences per level}
+		\label{fig:misc_1D_BS_4_8_steps_smooth_second_payoff_eps_10_5_sub4}
+	\end{subfigure}%
+	\caption{Convergence and work rates for discretization levels for the $1D$ BS model with the smooth call payoff given by \eqref{eq:smooth_payoff2} with Richardson extrapolation.}
+	\label{fig:misc_1D_BS_4_8_steps_smooth_second_payoff_eps_10_5_2}
+\end{figure}
+
+\newpage
+\subsection{Case of $16$ time steps with non-smooth payoff}
+
+From the following plots, we confirm the exponential rate of convergence for the stochastic parameters, we achieve the prescribed tolerance and  we get a rate of complexity (in terms of average running time) approximately of order $-7/10$ for $16$ time steps.
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/1D_BS_16_steps_non_smooth/error_estimate.pdf}
+		\caption{Error estimate}
+		\label{fig:misc_1D_BS_non_smooth_16steps_sub1}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/1D_BS_16_steps_non_smooth/average_running_time.pdf}
+		\caption{Average running time as a function of $TOL$}
+		\label{fig:misc_1D_BS_non_smooth_816steps_sub2}
+	\end{subfigure}%
+	\caption{Convergence and complexity results for for the $1D$ BS model with the non-smooth call payoff.}
+	\label{fig:misc_1D_BS_nonsmooth_16steps_2}
+\end{figure}
+
+
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/1D_BS_16_steps_non_smooth/level_work.pdf}
+		\caption{Average Computational time per level}
+		\label{fig:misc_1D_BS_non_smooth_16steps_sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/1D_BS_16_steps_non_smooth/levels_error_rate.pdf}
+		\caption{ The convergence rate of first differences per level}
+		\label{fig:misc_1D_BS_non_smooth_16steps_sub4}
+	\end{subfigure}%
+	\caption{Convergence and work rates for discretization levels for the $1D$ BS model with the non-smooth call payoff.}
+	\label{fig:misc_1D_BS_16teps_2}
+\end{figure}
+
+\newpage
+\subsection{Case of $16$ time steps with smooth payoff (given by \eqref{eq:smooth_payoff2})}
+
+From the following plots, we confirm the exponential rate of convergence for the stochastic parameters, we achieve the prescribed tolerance and  we get a rate of complexity (in terms of average running time) approximately of order $-1$ for $8$ time steps.
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/1D_BS_16_steps_smooth_second_payoff_eps_10_5/error_estimate.pdf}
+		\caption{Error estimate}
+		\label{fig:misc_1D_BS_16_steps_smooth_second_payoff_eps_10_5_sub1}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/1D_BS_16_steps_smooth_second_payoff_eps_10_5/average_running_time.pdf}
+		\caption{}
+		\label{fig:misc_1D_BS_16_steps_smooth_second_payoff_eps_10_5_sub2}
+	\end{subfigure}%
+	\caption{Convergence and complexity results for for the $1D$ BS model with the smooth call payoff given by \eqref{eq:smooth_payoff2}.}
+	\label{fig:misc_1D_BS_16_steps_smooth_second_payoff_eps_10_5_1}
+\end{figure}
+
+
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/1D_BS_16_steps_smooth_second_payoff_eps_10_5/level_work.pdf}
+		\caption{Average Computational time per level}
+		\label{fig:misc_1D_BS_16_steps_smooth_second_payoff_eps_10_5_sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/1D_BS_16_steps_smooth_second_payoff_eps_10_5/levels_error_rate.pdf}
+		\caption{ The convergence rate of first differences per level}
+		\label{fig:misc_1D_BS_16_steps_smooth_second_payoff_eps_10_5_sub4}
+	\end{subfigure}%
+	\caption{Convergence and work rates for discretization levels for the $1D$ BS model with the smooth call payoff given by \eqref{eq:smooth_payoff2}.}
+	\label{fig:misc_1D_BS_16_steps_smooth_second_payoff_eps_10_5_2}
+\end{figure}
+
+
+\newpage
+
+\subsection{Case of smooth payoff (given by \eqref{eq:smooth_payoff2}) with Richardson extrapolation (level $0$: $8$ time steps, level $1$: $16$ time steps)}
+From the following plots, we confirm the exponential rate of convergence for the stochastic parameters, we achieve the prescribed tolerance and  we get a rate of complexity (in terms of average running time) approximately of order $-9/25$.
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/1D_BS_8_16_steps_smooth_second_payoff_eps_10_5_richardson/error_estimate.pdf}
+		\caption{Error estimate}
+		\label{fig:misc_1D_BS_8_16_steps_smooth_second_payoff_eps_10_5_sub1}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/1D_BS_8_16_steps_smooth_second_payoff_eps_10_5_richardson/average_running_time.pdf}
+		\caption{Average running time as a function of $TOL$}
+		\label{fig:misc_1D_BS_8_16_steps_smooth_second_payoff_eps_10_5_sub2}
+	\end{subfigure}%
+	\caption{Convergence and complexity results for for the $1D$ BS model with the smooth call payoff given by \eqref{eq:smooth_payoff2} with Richardson extrapolation.}
+	\label{fig:misc_1D_BS_8_16_steps_smooth_second_payoff_eps_10_5_1}
+\end{figure}
+
+
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/1D_BS_8_16_steps_smooth_second_payoff_eps_10_5_richardson/level_work.pdf}
+		\caption{Average Computational time per level}
+		\label{fig:misc_1D_BS_8_16_steps_smooth_second_payoff_eps_10_sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/1D_BS_8_16_steps_smooth_second_payoff_eps_10_5_richardson/levels_error_rate.pdf}
+		\caption{ The convergence rate of first differences per level}
+		\label{fig:misc_1D_BS_8_16_steps_smooth_second_payoff_eps_10_5_sub4}
+	\end{subfigure}%
+	\caption{Convergence and work rates for discretization levels for the $1D$ BS model with the smooth call payoff given by \eqref{eq:smooth_payoff2} with Richardson extrapolation.}
+	\label{fig:misc_1D_BS_8_16_steps_smooth_second_payoff_eps_10_5_2}
+\end{figure}
+\newpage
+
+\section{Checking the bug of richardson extrapolation}
+In this section, I check then if we have some bug in the Richardson extrapolation implementation, I present the results for $N=4$ for 3 cases: non-smooth case without Richardson,non-smooth case with Richardson with just finer level, and non-smooth case with Richardson with just coarser level
+
+
+
+\subsubsection*{non-smooth case without Richardson}
+
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/1D_BS_4_steps_non_smooth/error_estimate.pdf}
+		\caption{Error estimate}
+		\label{fig:misc_1D_BS_non_smooth_4steps_sub1}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/1D_BS_4_steps_non_smooth/average_running_time.pdf}
+		\caption{Average running time as a function of $TOL$}
+		\label{fig:misc_1D_BS_non_smooth_4steps_sub2}
+	\end{subfigure}%
+	\caption{Convergence and complexity results for for the $1D$ BS model with the non-smooth call payoff .}
+	\label{fig:misc_1D_BS_nonsmooth_4steps_2}
+\end{figure}
+
+
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/1D_BS_4_steps_non_smooth/level_work.pdf}
+		\caption{Average Computational time per level}
+		\label{fig:misc_1D_BS_non_smooth_4steps_sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/1D_BS_4_steps_non_smooth/levels_error_rate.pdf}
+		\caption{ The convergence rate of first differences per level}
+		\label{fig:misc_1D_BS_non_smooth_4steps_sub4}
+	\end{subfigure}%
+	\caption{Convergence and work rates for discretization levels for the $1D$ BS model with the non- smooth call payoff.}
+	\label{fig:misc_1D_BS_4teps_2}
+\end{figure}
+
+
+\subsubsection*{non-smooth case with Richardson (just finer level)}
+
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/1D_BS_4_steps_non_smooth_richardson_finer/error_estimate.pdf}
+		\caption{Error estimate}
+		\label{fig:misc_1D_BS_non_smooth_4steps_sub1}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/1D_BS_4_steps_non_smooth_richardson_finer/average_running_time.pdf}
+		\caption{Average running time as a function of $TOL$}
+		\label{fig:misc_1D_BS_non_smooth_4steps_sub2}
+	\end{subfigure}%
+	\caption{Convergence and complexity results for for the $1D$ BS model with the non-smooth call payoff .}
+	\label{fig:misc_1D_BS_nonsmooth_4steps_2}
+\end{figure}
+
+
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/1D_BS_4_steps_non_smooth_richardson_finer/level_work.pdf}
+		\caption{Average Computational time per level}
+		\label{fig:misc_1D_BS_non_smooth_4steps_sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/1D_BS_4_steps_non_smooth_richardson_finer/levels_error_rate.pdf}
+		\caption{ The convergence rate of first differences per level}
+		\label{fig:misc_1D_BS_non_smooth_4steps_sub4}
+	\end{subfigure}%
+	\caption{Convergence and work rates for discretization levels for the $1D$ BS model with the non- smooth call payoff.}
+	\label{fig:misc_1D_BS_4teps_2}
+\end{figure}
+
+\subsubsection*{non-smooth case with Richardson (just coarser level)}
+
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/1D_BS_4_steps_non_smooth_richardson_coarser/error_estimate.pdf}
+		\caption{Error estimate}
+		\label{fig:misc_1D_BS_non_smooth_4steps_sub1}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/1D_BS_4_steps_non_smooth_richardson_coarser/average_running_time.pdf}
+		\caption{Average running time as a function of $TOL$}
+		\label{fig:misc_1D_BS_non_smooth_4steps_sub2}
+	\end{subfigure}%
+	\caption{Convergence and complexity results for for the $1D$ BS model with the non-smooth call payoff .}
+	\label{fig:misc_1D_BS_nonsmooth_4steps_2}
+\end{figure}
+
+
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/1D_BS_4_steps_non_smooth_richardson_coarser/level_work.pdf}
+		\caption{Average Computational time per level}
+		\label{fig:misc_1D_BS_non_smooth_4steps_sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/1D_BS_4_steps_non_smooth_richardson_coarser/levels_error_rate.pdf}
+		\caption{ The convergence rate of first differences per level}
+		\label{fig:misc_1D_BS_non_smooth_4steps_sub4}
+	\end{subfigure}%
+	\caption{Convergence and work rates for discretization levels for the $1D$ BS model with the non- smooth call payoff.}
+	\label{fig:misc_1D_BS_4teps_2}
+\end{figure}
+
+
+\section{Verifying bounds on work and error contributions for the Call option payoff}
+\subsubsection*{Without Richardson}
+
+Below, we show in figures (\eqref{fig:test4},\eqref{fig:test5},\eqref{fig:test6}) the rate of convergence of first and mixed differences for different orders and different number of time steps $N$. We check that the error is decaying exponentially wrt number of points used in the quadrature.
+
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/first_difference_1D_BS_N_8.eps}
+		\caption{}
+		\label{fig:sub41}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/first_difference_1D_BS_N_16.eps}
+		\caption{}
+		\label{fig:sub42}
+	\end{subfigure}%
+	\caption{The rate of convergence of first order differences of $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$): a) $N=8$ . b) $N=16$ .}
+	\label{fig:test4}
+\end{figure}
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/mixed_difference_order2_1D_BS_N_8.eps}
+		\caption{}
+		\label{fig:sub51}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/mixed_difference_order2_1D_BS_N_16.eps}
+		\caption{}
+		\label{fig:sub52}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of second order mixed differences of  $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)): a) $N=8$ and b) $N=16$.}
+	\label{fig:test5}
+\end{figure}
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.6\linewidth]{./figures/mixed_difference_order3_1D_BS_N_8.eps}
+	
+	\caption{The rate of convergence of  third order mixed differences of  $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)): for  $N=8$.}
+	\label{fig:test6}
+\end{figure}
+\newpage
+\subsubsection*{With Richardson}
+
+
+Below, we show in figures (\eqref{fig:test4_richardson},\eqref{fig:test5_richardson}) the rate of convergence of first and mixed differences for different orders and different number of time steps $N$. We check that the error is decaying exponentially wrt number of points used in the quadrature.
+
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/first_difference_1D_BS_richardson_4_8_no_middle.eps}
+		\caption{}
+		\label{fig:sub41_richardson}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/first_difference_1D_BS_richardson_8_16_no_middle.eps}
+		\caption{}
+		\label{fig:sub42_richardson}
+	\end{subfigure}%
+	\caption{The rate of convergence of first order differences of $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$): a) $N=8$ . b) $N=16$ .}
+	\label{fig:test4_richardson}
+\end{figure}
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/mixed_difference_order2_BS_richardson_4_8_no_midd_2le}
+		\caption{}
+		\label{fig:sub51_richardson}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/mixed_difference_order2_BS_richardson_8_16_no_middle}
+		\caption{}
+		\label{fig:sub52_richardson}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of second order mixed differences of  $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)): a) $N=8$ and b) $N=16$.}
+	\label{fig:test5_richardson}
+\end{figure}
+
+
+
+
+
+
+\section{MISC results for the binary option example}\label{app:MISC binary option}
+\subsection{Case of $4$ time steps}
+
+
+%\begin{figure}[!h]
+%	\centering
+%	\begin{subfigure}{.5\textwidth}
+%		\centering
+%		\includegraphics[width=1\linewidth]{./figures/binary_4_steps/first_difference_1D_BS_4steps_binary_opt.eps}
+%		\caption{}
+%		\label{fig:sub41_bin4}
+%	\end{subfigure}%
+%	\begin{subfigure}{.5\textwidth}
+%		\centering
+%		\includegraphics[width=1\linewidth]{./figures/binary_4_steps/mixed_difference_order2_1D_BS_4steps_binary_opt.eps}
+%		\caption{}
+%		\label{fig:sub42_bin4}
+%	\end{subfigure}%
+%	\caption{The rate of convergence of first and second order differences of $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$): a) first differences . b) second differences .}
+%	\label{fig:test_4_bin}
+%\end{figure}
+
+From the following plots, we confirm the exponential rate of convergence for the stochastic parameters, we achieve the prescribed tolerance and  we get a rate of complexity (in terms of average running time) approximately of order $-1/3$ for $4$ time steps.
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/binary_4_steps/error_estimate.pdf}
+		\caption{Error estimate}
+		\label{fig:misc_binary_4_steps_sub1}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/binary_4_steps/average_running_time.pdf}
+		\caption{Average running time as a function of $TOL$}
+		\label{fig:misc_binary_4_steps_sub2}
+	\end{subfigure}%
+	\caption{Convergence and complexity results for the $1D$ BS model with binary option payoff.}
+	\label{fig:misc_binary_4_steps_2}
+\end{figure}
+
+
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/binary_4_steps/level_work.pdf}
+		\caption{Average Computational time per level}
+		\label{fig:misc_binary_4_steps_sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/binary_4_steps/levels_error_rate.pdf}
+		\caption{ The convergence rate of first differences per level}
+		\label{fig:misc_binary_4_steps_sub4}
+	\end{subfigure}%
+	\caption{Convergence and work rates for discretization levels for the $1D$ BS model with binary option payoff.}
+	\label{fig:misc_binary_4_steps_2}
+\end{figure}
+
+
+\newpage
+
+\subsection{Case of non smooth payoff  with Richardson extrapolation (level $0$: $2$ time steps, level $1$: $4$ time steps) }
+
+
+
+
+
+%\begin{figure}[!h]
+%	\centering
+%	\begin{subfigure}{.5\textwidth}
+%		\centering
+%		\includegraphics[width=1\linewidth]{./figures/binary_2_4_steps/first_difference_1D_BS_richardson_2_4_no_middle}
+%		\caption{}
+%		\label{fig:sub41_bin2_4}
+%	\end{subfigure}%
+%	\begin{subfigure}{.5\textwidth}
+%		\centering
+%		\includegraphics[width=1\linewidth]{./figures/binary_2_4_steps/mixed_difference_order2_BS_richardson_2_4_no_middle}
+%		\caption{}
+%		\label{fig:sub42_bin2_4}
+%	\end{subfigure}%
+%	\caption{The rate of convergence of first and second order differences of $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$): a) first differences . b) second differences .}
+%	\label{fig:test_2_4_bin}
+%\end{figure}
+
+From the following plots, we confirm the exponential rate of convergence for the stochastic parameters, we achieve the prescribed tolerance and  we get a rate of complexity (in terms of average running time) approximately of order $-4/10$.
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/binary_2_4_steps/error_estimate.pdf}
+		\caption{Error estimate}
+		\label{fig:misc_binary_2_4_steps_sub1}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/binary_2_4_steps/average_running_time.pdf}
+		\caption{Average running time as a function of $TOL$}
+		\label{fig:misc_binary_2_4_steps_sub2}
+	\end{subfigure}%
+	\caption{Convergence and complexity results for the $1D$ BS model with binary option payoff with Richardson extrapolation.}
+	\label{fig:misc_binary_2_4_steps_1}
+\end{figure}
+
+
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/binary_2_4_steps/level_work.pdf}
+		\caption{Average Computational time per level}
+		\label{fig:misc_binary_2_4_steps_sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/binary_2_4_steps/levels_error_rate.pdf}
+		\caption{ The convergence rate of first differences per level}
+		\label{fig:misc_binary_2_4_steps_sub4}
+	\end{subfigure}%
+	\caption{Convergence and work rates for discretization levels for the $1D$ BS model with binary option payoff with Richardson extrapolation.}
+	\label{fig:misc_binary_2_4_steps_2}
+\end{figure}
+
+\newpage
+
+\subsection{Case of $8$ time steps}
+
+
+
+%\begin{figure}[!h]
+%	\centering
+%	\begin{subfigure}{.5\textwidth}
+%		\centering
+%		\includegraphics[width=1\linewidth]{./figures/binary_8_steps/first_difference_1D_BS_8steps_binary_opt.eps}
+%		\caption{}
+%		\label{fig:sub41_bin8}
+%	\end{subfigure}%
+%	\begin{subfigure}{.5\textwidth}
+%		\centering
+%		\includegraphics[width=1\linewidth]{./figures/binary_8_steps/mixed_difference_order2_1D_BS_8steps_binary_opt.eps}
+%		\caption{}
+%		\label{fig:sub42_bin8}
+%	\end{subfigure}%
+%	\caption{The rate of convergence of first and second order differences of $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$): a) first differences . b) second differences .}
+%	\label{fig:test_8_bin}
+%\end{figure}
+
+From the following plots, we confirm the exponential rate of convergence for the stochastic parameters, we achieve the prescribed tolerance and  we get a rate of complexity (in terms of average running time) approximately of order $-4/10$ for $8$ time steps.
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/binary_8_steps/error_estimate.pdf}
+		\caption{Error estimate}
+		\label{fig:misc_binary_8_steps_sub1}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/binary_8_steps/average_running_time.pdf}
+		\caption{Average running time as a function of $TOL$}
+		\label{fig:misc_binary_8_steps_sub2}
+	\end{subfigure}%
+	\caption{Convergence and complexity results for the $1D$ BS model with binary option payoff.}
+	\label{fig:misc_binary_8_steps_2}
+\end{figure}
+
+
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/binary_8_steps/level_work.pdf}
+		\caption{Average Computational time per level}
+		\label{fig:misc_binary_8_steps_sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/binary_8_steps/levels_error_rate.pdf}
+		\caption{ The convergence rate of first differences per level}
+		\label{fig:misc_binary_8_steps_sub4}
+	\end{subfigure}%
+	\caption{Convergence and work rates for discretization levels for the $1D$ BS model with binary option payoff.}
+	\label{fig:misc_binary_8_steps_2}
+\end{figure}
+
+
+\newpage
+
+\subsection{Case of non smooth payoff  with Richardson extrapolation (level $0$: $4$ time steps, level $1$: $8$ time steps) }
+
+
+
+
+%\begin{figure}[!h]
+%	\centering
+%	\begin{subfigure}{.5\textwidth}
+%		\centering
+%		\includegraphics[width=1\linewidth]{./figures/binary_4_8_steps/first_difference_1D_BS_richardson_4_8_no_middle}
+%		\caption{}
+%		\label{fig:sub41_bin4_8}
+%	\end{subfigure}%
+%	\begin{subfigure}{.5\textwidth}
+%		\centering
+%		\includegraphics[width=1\linewidth]{./figures/binary_4_8_steps/mixed_difference_order2_BS_richardson_4_8_no_middle}
+%		\caption{}
+%		\label{fig:sub42_bin4_8}
+%	\end{subfigure}%
+%	\caption{The rate of convergence of first and second order differences of $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$): a) first differences . b) second differences .}
+%	\label{fig:test_4_8_bin}
+%\end{figure}
+
+From the following plots, we confirm the exponential rate of convergence for the stochastic parameters, we achieve the prescribed tolerance and  we get a rate of complexity (in terms of average running time) approximately of order $-6/10$.
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/binary_4_8_steps/error_estimate.pdf}
+		\caption{Error estimate}
+		\label{fig:misc_binary_4_8_steps_sub1}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/binary_4_8_steps/average_running_time.pdf}
+		\caption{Average running time as a function of $TOL$}
+		\label{fig:misc_binary_4_8_steps_sub2}
+	\end{subfigure}%
+	\caption{Convergence and complexity results for the $1D$ BS model with binary option payoff with Richardson extrapolation.}
+	\label{fig:misc_binary_4_8_steps_1}
+\end{figure}
+
+
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/binary_4_8_steps/level_work.pdf}
+		\caption{Average Computational time per level}
+		\label{fig:misc_binary_4_8_steps_sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/binary_4_8_steps/levels_error_rate.pdf}
+		\caption{ The convergence rate of first differences per level}
+		\label{fig:misc_binary_4_8_steps_sub4}
+	\end{subfigure}%
+	\caption{Convergence and work rates for discretization levels for the $1D$ BS model with binary option payoff with Richardson extrapolation.}
+	\label{fig:misc_binary_4_8_steps_2}
+\end{figure}
+\newpage
+
+\subsection{Case of $16$ time steps}
+
+
+
+%\begin{figure}[!h]
+%	\centering
+%	\begin{subfigure}{.5\textwidth}
+%		\centering
+%		\includegraphics[width=1\linewidth]{./figures/binary_16_steps/first_difference_1D_BS_16steps_binary_opt.eps}
+%		\caption{}
+%		\label{fig:sub41_bin16}
+%	\end{subfigure}%
+%	\begin{subfigure}{.5\textwidth}
+%		\centering
+%		\includegraphics[width=1\linewidth]{./figures/binary_16_steps/mixed_difference_order2_1D_BS_16steps_binary_opt.eps}
+%		\caption{}
+%		\label{fig:sub42_bin16}
+%	\end{subfigure}%
+%	\caption{The rate of convergence of first and second order differences of $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$): a) first differences . b) second differences .}
+%	\label{fig:test_16_bin}
+%\end{figure}
+
+From the following plots, we confirm the exponential rate of convergence for the stochastic parameters, we achieve the prescribed tolerance and  we get a rate of complexity (in terms of average running time) approximately of order $-17/25$ for $16$ time steps.
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/binary_16_steps/error_estimate.pdf}
+		\caption{Error estimate}
+		\label{fig:misc_binary_16_steps_sub1}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/binary_16_steps/average_running_time.pdf}
+		\caption{Average running time as a function of $TOL$}
+		\label{fig:misc_binary_16_steps_sub2}
+	\end{subfigure}%
+	\caption{Convergence and complexity results for the $1D$ BS model with binary option payoff.}
+	\label{fig:misc_binary_16_steps_1}
+\end{figure}
+
+
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/binary_16_steps/level_work.pdf}
+		\caption{Average Computational time per level}
+		\label{fig:misc_binary_16_steps_sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/binary_16_steps/levels_error_rate.pdf}
+		\caption{ The convergence rate of first differences per level}
+		\label{fig:misc_binary_16_steps_sub4}
+	\end{subfigure}%
+	\caption{Convergence and work rates for discretization levels for the $1D$ BS model with binary option payoff.}
+	\label{fig:misc_binary_16_steps_2}
+\end{figure}
+
+
+\newpage
+
+
+
+\subsection{Case of non smooth payoff  with Richardson extrapolation (level $0$: $8$ time steps, level $1$: $16$ time steps) }
+
+
+
+
+%\begin{figure}[!h]
+%	\centering
+%	\begin{subfigure}{.5\textwidth}
+%		\centering
+%		\includegraphics[width=1\linewidth]{./figures/binary_8_16_steps/first_difference_1D_BS_richardson_8_16_no_middle}
+%		\caption{}
+%		\label{fig:sub41_bin8_16}
+%	\end{subfigure}%
+%	\begin{subfigure}{.5\textwidth}
+%		\centering
+%		\includegraphics[width=1\linewidth]{./figures/binary_8_16_steps/mixed_difference_order2_BS_richardson_8_16_no_middle}
+%		\caption{}
+%		\label{fig:sub42_bin8_16}
+%	\end{subfigure}%
+%	\caption{The rate of convergence of first and second order differences of $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$): a) first differences . b) second differences .}
+%	\label{fig:test_8_16_bin}
+%\end{figure}
+
+From the following plots, we confirm the exponential rate of convergence for the stochastic parameters, we achieve the prescribed tolerance and  we get a rate of complexity (in terms of average running time) approximately of order $-8/10$.
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/binary_8_16_steps/error_estimate.pdf}
+		\caption{Error estimate}
+		\label{fig:misc_binary_8_16_steps_sub1}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/binary_8_16_steps/average_running_time.pdf}
+		\caption{Average running time as a function of $TOL$}
+		\label{fig:misc_binary_8_16_steps_sub2}
+	\end{subfigure}%
+	\caption{Convergence and complexity results for the $1D$ BS model with binary option payoff with Richardson extrapolation.}
+	\label{fig:misc_binary_8_16_steps_1}
+\end{figure}
+
+
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/binary_8_16_steps/level_work.pdf}
+		\caption{Average Computational time per level}
+		\label{fig:misc_binary_8_16_steps_sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/binary_8_16_steps/levels_error_rate.pdf}
+		\caption{ The convergence rate of first differences per level}
+		\label{fig:misc_binary_8_16_steps_sub4}
+	\end{subfigure}%
+	\caption{Convergence and work rates for discretization levels for the $1D$ BS model with binary option payoff with Richardson extrapolation.}
+	\label{fig:misc_binary_8_16_steps_2}
+\end{figure}
+
+
+
+% \newpage
+%\subsubsection*{Case of $8$ time steps with smooth payoff (BS formula)}
+%
+%
+%
+%\begin{figure}[!h]
+%	\centering
+%	\begin{subfigure}{.5\textwidth}
+%		\centering
+%		\includegraphics[width=1\linewidth]{./figures/1D_BS_8_steps_smooth_BS_payoff/error_estimate.pdf}
+%		\caption{}
+%		\label{fig:misc_1D_BS_8_steps_smooth_BS_payoff_sub1}
+%	\end{subfigure}%
+%	\begin{subfigure}{.5\textwidth}
+%		\centering
+%		\includegraphics[width=1\linewidth]{./figures/1D_BS_8_steps_smooth_BS_payoff/average_running_time.pdf}
+%		\caption{}
+%		\label{fig:misc_1D_BS_8_steps_smooth_BS_payoff_sub2}
+%	\end{subfigure}%
+%	\caption{.}
+%	\label{fig:misc_1D_BS_8_steps_smooth_BS_payoff_1}
+%\end{figure}
+%
+%
+%
+%\begin{figure}[!h]
+%	\centering
+%	\begin{subfigure}{.5\textwidth}
+%		\centering
+%		\includegraphics[width=0.95\linewidth]{./figures/1D_BS_8_steps_smooth_BS_payoff/level_work.pdf}
+%		\caption{}
+%		\label{fig:misc_1D_BS_8_steps_smooth_BS_payoff_sub3}
+%	\end{subfigure}%
+%	\begin{subfigure}{.5\textwidth}
+%		\centering
+%		\includegraphics[width=0.95\linewidth]{./figures/1D_BS_8_steps_smooth_BS_payoff/levels_error_rate.pdf}
+%		\caption{}
+%		\label{fig:misc_1D_BS_8_steps_smooth_BS_payoff_sub4}
+%	\end{subfigure}%
+%	\caption{.}
+%	\label{fig:misc_1D_BS_8_steps_smooth_BS_payoff_2}
+%\end{figure}
+\newpage
+
+
+
+
+
+%\appendix
+
+%\section{Investigating mixed differences (second way) }\label{sec:mixed differences rbergomi_second_way_appendix}
+%
+%\subsubsection*{Case $H=0.43$}
+%\subsubsection*{$N=8$ }
+%\begin{figure}[h!]
+%	\centering
+%	\begin{subfigure}{.5\textwidth}
+%		\centering
+%		\includegraphics[width=1\linewidth]{./figures/mixed_differences/H_043/N_8/first_difference_rbergomi_8steps_H_043_K_1.eps}
+%		\caption{}
+%		\label{fig:sub3}
+%	\end{subfigure}%
+%	\begin{subfigure}{.5\textwidth}
+%		\centering
+%		\includegraphics[width=1\linewidth]{./figures/mixed_differences/H_043/N_8/first_difference_rbergomi_8steps_H_043_K_exp__4.eps}
+%		\caption{}
+%		\label{fig:sub4}
+%	\end{subfigure}
+%	
+%	\caption{The rate of convergence of  first order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)): a) $K=1$ b)  $K=\operatorname{exp}(-4).$}
+%	\label{fig:test2}
+%\end{figure}
+%
+%\begin{figure}[h!]
+%	\centering
+%	\begin{subfigure}{.5\textwidth}
+%		\centering
+%		\includegraphics[width=1\linewidth]{./figures/mixed_differences/H_043/N_8/mixed_difference_order2_rbergomi_8steps_H_043_K_1.eps}
+%		\caption{}
+%		\label{fig:sub3}
+%	\end{subfigure}%
+%	\begin{subfigure}{.5\textwidth}
+%		\centering
+%		\includegraphics[width=1\linewidth]{./figures/mixed_differences/H_043/N_8/mixed_difference_order2_rbergomi_8steps_H_043_K_exp__4.eps}
+%		\caption{}
+%		\label{fig:sub4}
+%	\end{subfigure}
+%	
+%	\caption{The rate of convergence of  second order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)): a) $K=1$ b)  $K=\operatorname{exp}(-4).$}
+%	\label{fig:test2}
+%\end{figure}
+%
+%\newpage
+%\subsubsection*{$N=16$ }
+%
+%
+%\begin{figure}[h!]
+%	\centering
+%	\begin{subfigure}{.5\textwidth}
+%		\centering
+%		\includegraphics[width=1\linewidth]{./figures/mixed_differences/H_043/N_16/first_difference_rbergomi_16steps_H_043_K_1.eps}
+%		\caption{}
+%		\label{fig:sub3}
+%	\end{subfigure}%
+%	\begin{subfigure}{.5\textwidth}
+%		\centering
+%		\includegraphics[width=1\linewidth]{./figures/mixed_differences/H_043/N_16/first_difference_rbergomi_16steps_H_043_K_exp__4.eps}
+%		\caption{}
+%		\label{fig:sub4}
+%	\end{subfigure}
+%	
+%	\caption{The rate of convergence of  first order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)): a) $K=1$ b)  $K=\operatorname{exp}(-4).$}
+%	\label{fig:test2}
+%\end{figure}
+%
+%\begin{figure}[h!]
+%	\centering
+%	\begin{subfigure}{.5\textwidth}
+%		\centering
+%		\includegraphics[width=1\linewidth]{./figures/mixed_differences/H_043/N_16/mixed_difference_order2_rbergomi_16steps_H_043_K_1.eps}
+%		\caption{}
+%		\label{fig:sub3}
+%	\end{subfigure}%
+%	\begin{subfigure}{.5\textwidth}
+%		\centering
+%		\includegraphics[width=1\linewidth]{./figures/mixed_differences/H_043/N_16/mixed_difference_order2_rbergomi_16steps_H_043_K_exp__4.eps}
+%		\caption{}
+%		\label{fig:sub4}
+%	\end{subfigure}
+%	
+%	\caption{The rate of convergence of  second order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)): a) $K=1$ b)  $K=\operatorname{exp}(-4).$}
+%	\label{fig:test2}
+%\end{figure}
+%
+%
+%
+%\newpage
+%\subsubsection*{Case $H=0.07$}
+%\subsubsection*{$N=8$ }
+%
+%\begin{figure}[h!]
+%	\centering
+%	\begin{subfigure}{.5\textwidth}
+%		\centering
+%		\includegraphics[width=1\linewidth]{./figures/mixed_differences/H_007/N_8/first_difference_rbergomi_8steps_H_007_K_1.eps}
+%		\caption{}
+%		\label{fig:sub3}
+%	\end{subfigure}%
+%	\begin{subfigure}{.5\textwidth}
+%		\centering
+%		\includegraphics[width=1\linewidth]{./figures/mixed_differences/H_007/N_8/first_difference_rbergomi_8steps_H_007_K_exp__4.eps}
+%		\caption{}
+%		\label{fig:sub4}
+%	\end{subfigure}
+%	
+%	\caption{The rate of convergence of  first order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)): a) $K=1$ b)  $K=\operatorname{exp}(-4).$}
+%	\label{fig:test2}
+%\end{figure}
+%
+%\begin{figure}[h!]
+%	\centering
+%	\begin{subfigure}{.5\textwidth}
+%		\centering
+%		\includegraphics[width=1\linewidth]{./figures/mixed_differences/H_007/N_8/mixed_difference_order2_rbergomi_8steps_H_007_K_1.eps}
+%		\caption{}
+%		\label{fig:sub3}
+%	\end{subfigure}%
+%	\begin{subfigure}{.5\textwidth}
+%		\centering
+%		\includegraphics[width=1\linewidth]{./figures/mixed_differences/H_007/N_8/mixed_difference_order2_rbergomi_8steps_H_007_K_exp__4.eps}
+%		\caption{}
+%		\label{fig:sub4}
+%	\end{subfigure}
+%	
+%	\caption{The rate of convergence of  second order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)): a) $K=1$ b)  $K=\operatorname{exp}(-4).$}
+%	\label{fig:test2}
+%\end{figure}
+%
+%
+%\newpage
+%\subsubsection*{$N=16$ }
+%\begin{figure}[h!]
+%	\centering
+%	\begin{subfigure}{.5\textwidth}
+%		\centering
+%		\includegraphics[width=1\linewidth]{./figures/mixed_differences/H_007/N_16/first_difference_rbergomi_16steps_H_007_K_1.eps}
+%		\caption{}
+%		\label{fig:sub3}
+%	\end{subfigure}%
+%	\begin{subfigure}{.5\textwidth}
+%		\centering
+%		\includegraphics[width=1\linewidth]{./figures/mixed_differences/H_007/N_16/first_difference_rbergomi_16steps_H_007_K_exp__4.eps}
+%		\caption{}
+%		\label{fig:sub4}
+%	\end{subfigure}
+%	
+%	\caption{The rate of convergence of  first order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)): a) $K=1$ b)  $K=\operatorname{exp}(-4).$}
+%	\label{fig:test2}
+%\end{figure}
+%
+%\begin{figure}[h!]
+%	\centering
+%	\begin{subfigure}{.5\textwidth}
+%		\centering
+%		\includegraphics[width=1\linewidth]{./figures/mixed_differences/H_007/N_16/mixed_difference_order2_rbergomi_16steps_H_007_K_1.eps}
+%		\caption{}
+%		\label{fig:sub3}
+%	\end{subfigure}%
+%	\begin{subfigure}{.5\textwidth}
+%		\centering
+%		\includegraphics[width=1\linewidth]{./figures/mixed_differences/H_007/N_16/mixed_difference_order2_rbergomi_16steps_H_007_K_exp__4.eps}
+%		\caption{}
+%		\label{fig:sub4}
+%	\end{subfigure}
+%	
+%	\caption{The rate of convergence of  second order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)): a) $K=1$ b)  $K=\operatorname{exp}(-4).$}
+%	\label{fig:test2}
+%\end{figure}
+
+
+
+\section{Problem Setting:}
+
+We aim at approximating $E[g(X(t))]$ given $g:\mathbb{R}^d  \rightarrow \mathbb{R}$, where $X \in \mathbb{R}^d$ solves 
+
+\begin{align}
+	X(t)=X(0)+ \int_{0}^{t} a(s,X(s)) ds + \sum_{\ell=1}^{\ell_0} \int_{0}^{t} b^{\ell}(s,X(s)) dW^{\ell}(s)
+\end{align}
+
+Let us decompose the Wiener process in the interval $[0, T]$ as
+\begin{align}
+	W(t)=W(T) \frac{t}{T}+B(t)
+\end{align}
+with $B(t)$  a Brownian bridge with zero end value. Then,
+for each $t \in [0, T]$ we have
+
+\begin{align}
+	X(t) &=X(0)+\int_{0}^{t} b(X(s)) dB(s)+\frac{W(t)}{t} \int_{0}^{t} b(X(s)) ds\nonumber\\
+	&=X(0)+\int_{0}^{t} b(X(s)) dB(s)+\frac{Y}{\sqrt{t}} \int_{0}^{t} b(X(s))ds,
+\end{align}
+Where $Y \sim \mathcal{N}(0,1)$ and $B$ and $Y$ are independent.
+
+As a consequence,
+\begin{align}
+	E[g(X(T))]&= E^B[E^Y[g(X(T))\mid B]]\nonumber\\
+	&=\frac{1}{\sqrt{2 \pi}} E^B[H(B)],
+\end{align}
+where $H(B)=\int g(X(T;y,B)) \operatorname{exp}(-y^2/2) dy$.
+
+We note that $H(B)$ has for many practical cases, a smooth dependence wrt to $X$ due to the smoothness of the pdf of $Y$.
+
+For illustration, we have  $W_t=\frac{t}{T} W_T+B_t$ and 
+
+\begin{align}\label{Brownian_bridge}
+	\Delta W_i&=(B_{t_{i+1}}-B_{t_i})+\Delta t \frac{Y}{\sqrt{T}} \nonumber\\
+	&= \Delta B_i + \Delta t \frac{Y}{\sqrt{T}},
+\end{align}
+
+implying that the numerical approximation of $X(T)$ satisfies
+\begin{align}
+	\bar{X}_T=\Phi(\Delta t, W_1(y), \Delta B_0,\dots,\Delta B_{N-1}),
+\end{align}
+for some path function $\Phi$.
+
+\section{Numerical Approaches}
+
+\subsection{First approach}
+\begin{itemize}
+	\item Use sparse grid $\mathcal{D}$ for $\Delta B_0, \dots, \Delta B_{N-1}$.
+	\item Given $(\mathbf{X}^0,\dots, \mathbf{X}^{N-1}):=\mathcal{X} \in \mathcal{D}$ with weights $(\boldsymbol{\omega}^0,\dots,\boldsymbol{\omega}^{N-1})$ , add grid points $(y_1(\mathcal{X}),\dots,y_K(\mathcal{X}))=\mathbf{y}$ with weights $(W_1,\dots, W_K)$ such that the mapping $y \rightarrow g(\Phi(\Delta t, y, X^0,\dots, X^{N-1}))$ is smooth outside the kink point. Mainly here we will use the \textbf{Newton iteration}  to determine the kink point.
+	\item Construct our estimator for $E[g(X(T))]$ by looping over step 1 and 2 such that we choose the optimal indices of sparse grids that achieves a global error of order $TOL$.
+	\begin{align*}
+		E[g(X(T))]=\sum_{n=0}^{N-1}\sum_{j} \sum_{i=1}^K W_i g(\Phi(\Delta t,\mathbf{y},\mathcal{X})) \omega_{j}^n 
+	\end{align*} 
+\end{itemize}
+\subsubsection{Some discussion on the complexity and errors}
+\begin{itemize}
+	\item We expect that the global error of our procedure will be bounded by the weak error which is in our case of order $O(\Delta t)$. In this case, the overall complexity of our procedure will be of order $O(TOL^{-1})$. We note that this rate can be improved up to $O(TOL^{-\frac{1}{2}})$ if we use \textbf{Richardson extrapolation}. Another way that can improve the complexity could be based on \textbf{Cubature on Wiener Space} (This is left for a future work). The aimed complexity rate illustrates the contribution of our procedure which outperforms  Monte Carlo forward Euler (MC-FE) and multi-level MC-FE, having complexity rates of order $O(TOL^{-3})$  and $O(TOL^{-2} log(TOL)^2)$  respectively. 
+	\item We need to check the impact of the error caused by the Newton iteration on the integration error. In the worst case, we expect that if the error in the Newton iteration is of order $O(\epsilon)$ than the integration error will be of order $\operatorname{log}(\epsilon)$. But we need to check that too.
+	\subsection{Second approach}
+	An alternative approach could be achieved by tensorizing all the quadrature rules (this is not clear to me how to do it yet). The advantage of this procedure is that the additional cost that we will pay by using fine quadrature in the dimension of $y$ will be rewarded by the ability of using coarser quadratures in the remaining dimensions.
+\end{itemize}
+
+
+
+\section{Plan of work and miscancellous observations}
+\label{sec:plan-work-misc}
+
+We recall the discussion between Raul and Christian on June 1st.
+
+Given we want to compute
+\begin{equation*}
+	E\left[ g\left( \Phi(Z_1, \ldots, Z_N \right) \right]
+\end{equation*}
+for some non-smooth function $g$ and a Gaussian vector $Z$. (Here, the
+discretization of the SDE is in the function $\Phi$.) We assume that
+$Z$ is already rotated such that $h(Z_{-1}) \coloneqq E\left[ g\left(
+\Phi(Z_1, \ldots, Z_N \right) \mid | \mid Z_1\right]$ is as smooth as
+possible, where $Z_{-1} \coloneqq (Z_2, \ldots, Z_N)$. 
+
+
+
+\section{Plan of implementation}
+
+\begin{itemize}
+	\item The first example should probably be the discretized Black-Scholes
+	model, as we discussed together. There, we could also compare
+	different ways to identify the location of the kink, such as:
+	\begin{itemize}
+		\item Exact location of the continuous problem
+		\item  Exact location of the discrete problem found by finding the root of a polynomial in y
+		\item Newton iteration
+	\end{itemize}
+	\item  As we also discussed, the impact of the Brownian bridge will disappear in the limit, which may make the effect of the smoothing, 	but also of the errors in the kink location difficult to identify. For 	this reason, we suggest to study a more complicated 1-dimensional 	problem next. We suggest to use a CIR process. To avoid complications at the boundary, we suggest "nice" parameter choices, such that the discretized process is very unlikely to hit the boundary (Feller
+	condition).
+	\item Extension to the multi-dimensional situation. Here, we suggest to
+	return to the Black-Scholes model, but in multi-d. In this case,
+	linearizing the exponential, suggest that a good variable to use for smoothing might be the sum of the final values of the Brownian motion.
+	In general, though, one should probably eventually identify the
+	optimal direction(s) for smoothing via the duals / algorithmic
+	differentiation.
+\end{itemize}
+
+\section{Smoothing via conditional sampling step}
+Let us decompose the Wiener process in the interval $[0, T]$ as
+\begin{align}
+	W(t)=W(T) \frac{t}{T}+B(t)
+\end{align}
+with $B(t)$  a Brownian bridge with zero end value. Then,
+for each $t \in [0, T]$ we have
+
+\begin{align}
+	X(t) &=X(0)+\int_{0}^{t} b(X(s)) dB(s)+\frac{W(t)}{t} \int_{0}^{t} b(X(s)) ds\nonumber\\
+	&=X(0)+\int_{0}^{t} b(X(s)) dB(s)+\frac{Y}{\sqrt{t}} \int_{0}^{t} b(X(s))ds,
+\end{align}
+Where $Y \sim \mathcal{N}(0,1)$ and $B$ and $Y$ are independent.
+
+As a consequence,
+\begin{align}\label{conditional_expectation_transformation}
+	E[g(X(T))]&= E^B[E^Y[g(X(T))\mid B]]\nonumber\\
+	&=\frac{1}{\sqrt{2 \pi}} E^B[H(B)],
+\end{align}
+where $H(B)=\int g(X(T;y,B)) \operatorname{exp}(-y^2/2) dy$.
+
+We note that $H(B)$ has for many practical cases, a smooth dependence wrt to $X$ due to the smoothness of the pdf of $Y$.
+
+\subsection{Smoothing the payoff in the continuous case}
+
+
+
+\subsubsection{$1^{\textbf{st}}$ case: $g(x)=\delta(x-K)$}
+It is easy to show that
+\begin{align}\label{smoothed_integrand_delta}
+	H(B)&= \int \delta(X(T;y,B)-K) \operatorname{exp}(-y^2/2) dy \nonumber\\
+	&= \operatorname{exp}(-y^2_{\ast}(K)/2) \frac{d y_{\ast}}{dx}(K),
+\end{align}
+where $y_{\ast}(x)$, is an invertible function that satisfies 
+\begin{align}
+	X(T;y_{\ast}(x),B)=x	
+\end{align}
+\subsubsection{$2^{\textbf{nd}}$ case: $g(x)=\mathbf{1}_{x>K}$}
+\begin{align}\label{smoothed_integrand_binary_opt}
+	H(B)&= \int \mathbf{1}_{X(T;y,B)>K} \operatorname{exp}(-y^2/2) dy \nonumber\\
+	&= \sqrt{2 \pi} P(Y>y_{\ast}(K)) \frac{d y_{\ast}}{dx}(K),
+\end{align}
+
+
+
+
+\section{Description of our approach and implementation details}
+\label{sec:plan-work-misc}
+
+Given we want to compute
+\begin{equation}\label{QoI}
+E\left[ g\left( \Phi(Z_1, \ldots, Z_N \right) \right]
+\end{equation}
+for some non-smooth function $g$ and a Gaussian vector $Z=(Z_1,\dots,Z_N)$. (Here, the
+discretization of the SDE is in the function $\Phi$.) We assume that
+$Z$ is already rotated such that $h(Z_{-1}) \coloneqq E\left[ g\left(
+\Phi(Z_1, \ldots, Z_N \right) \mid Z_{-1}\right]$ is as smooth as
+possible, where $Z_{-1} \coloneqq (Z_2, \ldots, Z_N)$. 
+
+\subsection{Choice of functional}
+\label{sec:choice-functional}
+
+We should restrict ourselves to a few possible choices $g$ such as:
+\begin{itemize}
+	\item hockey-stick function, i.e., put or call payoff functions;
+	\item indicator functions (both relevant in finance and in other applications
+	of estimation of probabilities of certain events);
+	\item delta-functions for density estimation (and derivatives thereof for
+	estimation of derivatives of the density).
+\end{itemize}
+More specifically, $g$ should be the composition of one of the above with a
+smooth function. (For instance, the basket option payoff as a function of the
+log-prices of the underlying.)
+
+
+
+
+\subsection{Steps of the numerical approach}
+\subsubsection{First approach}
+\begin{enumerate}
+	\item Determine the location of the kink point(s), $y^{\text{kink}}=y^{\text{kink}}(z_{-1})$ either exactly or approximately, $\bar{y}^{\text{kink}}$, using  \textbf{Newton iteration method}.
+	\item Use sparse grid $\mathcal{D}$ for $Z_{-1}=(Z_2, \dots, Z_{N})$.
+	\item Given $(\mathbf{X}^2,\dots, \mathbf{X}^{N}):=\mathcal{X} \in \mathcal{D}$ with weights $(\boldsymbol{\omega}^2,\dots,\boldsymbol{\omega}^{N})$ , add grid  $\boldsymbol{\zeta}=(\zeta_{-K}(y^{\text{kink}}(\mathcal{X})),\dots,\zeta_{K}(y^{\text{kink}}(\mathcal{X})))$ with weights $(\eta_{-K},\dots, \eta_{K})$ such that $\hat{h}$ $(\bar{h})$ is smooth.
+	\item Construct the adaptive collocation to compute the integral of $\hat{h}$ ($\bar{h}$) that approximates  $E[g(\phi(Z_1,\dots,Z_N))]$ by choosing the optimal indices of sparse grids that achieves a global error of order $TOL$.
+	%	\begin{align*}
+	%	E[g(X(T))]=\sum_{n=0}^{N-1}\sum_{j} \sum_{i=1}^K W_i %g(\Phi(\Delta t,\mathbf{y},\mathcal{X})) \omega_{j}^n 
+	%\end{align*} 
+\end{enumerate}
+\section{Richardson extrapolation}
+We  recall that the Euler (often) scheme has weak order $1$ so that
+
+\begin{align}\label{Euler_weak_error}
+	\abs{\expt{f(\hat{X}_T^h)}-\expt{f(X_T)} }  \leq C h
+\end{align}
+
+for some constant $C$, all sufficiently small $h$ and suitably smooth $f$. It was shown that \ref{Euler_weak_error} can be improved to
+
+
+\begin{align}\label{Euler_weak_error_strenghten}
+	\expt{f(\hat{X}_T^h)}= \expt{f(X_T)} + c h +\Ordo{h^2} \COMMA
+\end{align}
+
+
+where $c$ depends on $f$. 
+
+Applying \ref{Euler_weak_error_strenghten} with discretization step $2h$, we  obtain
+
+\begin{align}\label{Euler_weak_error_strenghten_2h}
+	\expt{f(\hat{X}_T^{2h})}= \expt{f(X_T)} + 2 c h +\Ordo{h^2} \COMMA
+\end{align}
+
+implying
+
+\begin{align}\label{Richardson_extrapol}
+	2 \expt{f(\hat{X}_T^{2h})}- \expt{f(\hat{X}_T^{h})} =\expt{f(X_T)} + \Ordo{h^2} \COMMA
+\end{align}
+
+\section{Binary option results}
+In table \ref{table: Complexity rates of the different methods for different number of time steps_binary}, we summarize the results that we get in terms of complexity rates for different methods using different number of time steps for the binary option case. We clarify that the results for the Richardson extrapolation are given for just one level, where the associated steps in the table corresponds to those of level $1$. Detailed plots for each case are given in appendix \ref{app:MISC binary option}. Mainly, from the plots,  we checked that we achive the prescribed tolerance using MISC, the convergence rates of mixed differences which is a basic assumption for using MISC (we observe exponential decay of error rates wrt to the number of quadrature points) and finally the complexity rates.
+
+
+
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps             & $4$ & $8$ & $16$  \\
+		\hline
+		without Richardson  extrapolation & $-1/3$ & $-4/10$ & $-17/25$  \\
+		with Richardson  extrapolation    & $-4/10$ & $-6/10$ & $-8/10$  \\
+		\hline
+	\end{tabular}
+	\caption{Complexity rates of the different methods for different number of time steps}
+	\label{table: Complexity rates of the different methods for different number of time steps_binary}
+\end{table}	
+
+We got no improvement using Richardson extrapolation. 
+
+\section{Analysis of the numerical procedure}\label{sec:Analysis of the numerical procedure}
+
+Actually, I am no more convinced, why we should get an improvement using Richardson extrapolation the way it is used, since the gain in accuracy is in simulating the paths but then we apply kind of non-linear operation (The newton iteration, with the same accuracy), which somehow may deteriorate that gain, because  the only operation to compute the integrand in the binary option is solving the kink point (no quadrature for the last dimension of Brownian increment). To have a better understanding, we need to analyze our procedure in terms of the time step size $\Delta t$ and see if we can explain the observed behavior. We will do this for the case of binary option for simplicity.
+\subsubsection*{Without Richardson extrapolation}
+We start with the case where we do not use Richardson extrapolation. We are mainly interested in the behavior of the integrand that will be fed to MISC. The first step is identifying the kink point, $y_{\ast}(B, \Delta t) $,  which is related to solving 
+
+\begin{align}\label{eq: kink_point_problem_in_strike}
+	X(T;y_{\ast},B)=K.
+\end{align}
+using Newton iteration. If we call the Newton iteration operator as $\bar{f}$, then we can write  
+
+\begin{align}\label{eq: kink_point_eq_solver}
+	y_{\ast}(B,\Delta t)=\bar{f}\left(\Phi(\Delta t, B, y_{\ast} ), \frac{\partial \Phi(\Delta t, B, y_{\ast}) }{\partial y_{\ast}} \right) \COMMA
+\end{align}
+where $\Phi$ is given by \ref{polynomial_kink_location} and $\frac{\partial \Phi(\Delta t, B, y_{\ast} ) }{\partial y_{\ast}}$ is given by \ref{polynomial_kink_location_derivative}.
+
+
+In the second step, we compute $H(y_{\ast}(B,\Delta t))$ as given by  \ref{smoothed_integrand_binary_opt_2}, so at the end, the integrand will be given by
+
+
+\begin{align}\label{eq: integrand_without_richardson}
+	H(B,\Delta t) &=H(y_{\ast}(B,\Delta t)) \nonumber\\
+	&=H\left(\bar{f}\left(\Phi(\Delta t, B, y_{\ast} ), \frac{\partial \Phi(\Delta t, B, y_{\ast}) }{\partial y_{\ast}} \right)\right)
+\end{align}
+
+\red{The question is how exactly $H(B,\Delta t)$ depends on $\Delta t$? }
+
+
+
+
+\subsubsection*{With Richardson extrapolation}
+
+In this case, in the first step, we will determine two kink points that we denote $y_{\ast}^c$, $y_{\ast}^f$, for coarser and finer grid respectively, and they are given by
+
+\begin{align}\label{eq: kink_point_eq_solver_richardson}
+	y_{\ast}^c(B^c,\Delta t)&=\bar{f}\left(\Phi(\Delta t, B^c, y_{\ast}^c ), \frac{\partial \Phi(\Delta t, B^c, y_{\ast}^c) }{\partial y_{\ast}^c} \right) \nonumber \\
+	y_{\ast}^f(B^f,\Delta t/2)&=\bar{f}\left(\Phi(\Delta t/2, B^f, y_{\ast}^f ), \frac{\partial \Phi(\Delta t/2, B^f, y_{\ast}^f) }{\partial y_{\ast}^f} \right)  \COMMA
+\end{align}
+
+Then the integrand fed to MISC will be given by 
+
+\begin{align}\label{eq: integrand_with_richardson}
+	H(B^f,\Delta t) &=2 H(y_{\ast}^f(B^f,\Delta t/2))-  H(y_{\ast}^c(B^c,\Delta t)) \PERIOD
+\end{align}
+
+
+We need to understand if using \ref{eq: integrand_with_richardson} guarantees that we have an improvement of the rate with respect to $\Delta t$. This is related to the understanding of  the previous question!!
+
+
+
+\end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

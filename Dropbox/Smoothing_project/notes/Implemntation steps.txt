@@ -1,0 +1,14 @@
+1- Implementing the code giving the location of the kink point for:
+a) 1D BS model
+b) 1D CIR model
+-> done
+2- Understanding and documenting the misc code in mimclib  that will be used for implementing the qudrature for our 
+problems
+-> done
+3- Test the misc code in the mimclib  for time independent case of the basket option as in your previous paper and compare the obtained results with those that you reproduced before.
+-> Done and checked by comparing it to reference values using (Premia software)
+**********************************************************************
+Still TO DO
+4- Test the misc code with 1D  SDE with lognormal case, where we do not have also to solve the root finding problem since we have the exact solution here we can do the integrals by hand along the first direction to simplify the approach.
+5- Test the misc code for 1D BS model but here we solve the root finding problem numerically and compare it to 4)
+c) Test the misc code for for 1D CIR model

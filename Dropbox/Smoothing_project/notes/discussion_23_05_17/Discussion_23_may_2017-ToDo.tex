@@ -1,0 +1,271 @@
+\documentclass[11pt]{article}
+
+\usepackage{smoothing_paper}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% DO WE RELLY NEED THE FOLLOWING??
+
+%%  new margin
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagestyle{plain}                                                      %%
+%%%%%%%%%% EXACT 1in MARGINS %%%%%%%                                   %%
+\setlength{\textwidth}{6.5in}     %%                                   %%
+\setlength{\oddsidemargin}{0in}   %%   
+\setlength{\evensidemargin}{0in}  %%        
+\setlength{\textheight}{8.5in}    %%       
+\setlength{\topmargin}{-0.2in}    %%   
+\setlength{\headheight}{0in}      %%    
+\setlength{\headsep}{0in}         %%                   
+\setlength{\footskip}{.5in}       %%                       
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%                                   %%
+\newcommand{\required}[1]{\section*{\hfil #1\hfil}}                    %%
+\renewcommand{\refname}{\hfil References Cited\hfil}                   %%
+
+\def\SMALLSKIP{\smallskip}
+\def\MEDSKIP{\medskip}
+\def\BIGSKIP{\bigskip}
+
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\title{ Smoothing  the  Payoff for  Efficient Computation of Option Pricing in
+  Time-Stepping Setting} 
+    \date{ }
+
+\begin{document}
+\maketitle
+
+\section{Problem Setting:}
+
+We aim at approximating $E[g(X(t))]$ given $g:\mathbb{R}^d  \rightarrow \mathbb{R}$, where $X \in \mathbb{R}^d$ solves 
+
+\begin{align}
+X(t)=X(0)+ \int_{0}^{t} a(s,X(s)) ds + \sum_{\ell=1}^{\ell_0} \int_{0}^{t} b^{\ell}(s,X(s)) dW^{\ell}(s)
+\end{align}
+
+Let us decompose the Wiener process in the interval $[0, T]$ as
+\begin{align}
+W(t)=W(T) \frac{t}{T}+B(t)
+\end{align}
+with $B(t)$  a Brownian bridge with zero end value. Then,
+for each $t \in [0, T]$ we have
+
+\begin{align}
+X(t) &=X(0)+\int_{0}^{t} b(X(s)) dB(s)+\frac{W(t)}{t} \int_{0}^{t} b(X(s)) ds\nonumber\\
+&=X(0)+\int_{0}^{t} b(X(s)) dB(s)+\frac{Y}{\sqrt{t}} \int_{0}^{t} b(X(s))ds,
+\end{align}
+Where $Y \sim \mathcal{N}(0,1)$ and $B$ and $Y$ are independent.
+
+As a consequence,
+\begin{align}
+E[g(X(T))]&= E^B[E^Y[g(X(T))\mid B]]\nonumber\\
+&=\frac{1}{\sqrt{2 \pi}} E^B[H(B)],
+\end{align}
+where $H(B)=\int g(X(T;y,B)) \operatorname{exp}(-y^2/2) dy$.
+
+We note that $H(B)$ has for many practical cases, a smooth dependence wrt to $X$ due to the smoothness of the pdf of $Y$.
+
+For illustration, we have  $W_t=\frac{t}{T} W_T+B_t$ and 
+
+\begin{align}\label{Brownian_bridge}
+\Delta W_i&=(B_{t_{i+1}}-B_{t_i})+\Delta t \frac{Y}{\sqrt{T}} \nonumber\\
+&= \Delta B_i + \Delta t \frac{Y}{\sqrt{T}},
+\end{align}
+
+implying that the numerical approximation of $X(T)$ satisfies
+\begin{align}
+\bar{X}_T=\Phi(\Delta t, W_1(y), \Delta B_0,\dots,\Delta B_{N-1}),
+\end{align}
+for some path function $\Phi$.
+\section{Numerical Approaches}
+
+\subsection{First approach}
+\begin{itemize}
+	\item Use sparse grid $\mathcal{D}$ for $\Delta B_0, \dots, \Delta B_{N-1}$.
+	\item Given $(\mathbf{X}^0,\dots, \mathbf{X}^{N-1}):=\mathcal{X} \in \mathcal{D}$ with weights $(\boldsymbol{\omega}^0,\dots,\boldsymbol{\omega}^{N-1})$ , add grid points $(y_1(\mathcal{X}),\dots,y_K(\mathcal{X}))=\mathbf{y}$ with weights $(W_1,\dots, W_K)$ such that the mapping $y \rightarrow g(\Phi(\Delta t, y, X^0,\dots, X^{N-1}))$ is smooth outside the kink point. Mainly here we will use the \textbf{Newton iteration}  to determine the kink point.
+	\item Construct our estimator for $E[g(X(T))]$ by looping over step 1 and 2 such that we choose the optimal indices of sparse grids that achieves a global error of order $TOL$.
+	\begin{align*}
+	E[g(X(T))]=\sum_{n=0}^{N-1}\sum_{j} \sum_{i=1}^K W_i g(\Phi(\Delta t,\mathbf{y},\mathcal{X})) \omega_{j}^n 
+	\end{align*} 
+\end{itemize}
+\subsubsection{Some discussion on the complexity and errors}
+\begin{itemize}
+	\item We expect that the global error of our procedure will be bounded by the weak error which is in our case of order $O(\Delta t)$. In this case, the overall complexity of our procedure will be of order $O(TOL^{-1})$. We note that this rate can be improved up to $O(TOL^{-\frac{1}{2}})$ if we use \textbf{Richardson extrapolation}. Another way that can improve the complexity could be based on \textbf{Cubature on Wiener Space} (This is left for a future work). The aimed complexity rate illustrates the contribution of our procedure which outperforms  Monte Carlo forward Euler (MC-FE) and multi-level MC-FE, having complexity rates of order $O(TOL^{-3})$  and $O(TOL^{-2} log(TOL)^2)$  respectively. 
+	\item We need to check the impact of the error caused by the Newton iteration on the integration error. In the worst case, we expect that if the error in the Newton iteration is of order $O(\epsilon)$ than the integration error will be of order $\operatorname{log}(\epsilon)$. But we need to check that too.
+\subsection{Second approach}
+An alternative approach could be achieved by tensorizing all the quadrature rules (this is not clear to me how to do it yet). The advantage of this procedure is that the additional cost that we will pay by using fine quadrature in the dimension of $y$ will be rewarded by the ability of using coarser quadratures in the remaining dimensions.
+\end{itemize}
+%\section{To-Do list:}
+%\begin{enumerate}
+%\item Implementing Euler scheme based on Brownian bridge construction.
+%\item Implementing the basic approach (first approach):
+%\begin{itemize}
+%	\item Construct $N_B$ samples (number of samples of the brownian bridge).
+%	\item Determining the kink point in the dimension of $Y$ using Newton iteration.
+%	\item  For each point in the $B$ dimension, integrate with respect to $Y$ by constructing $N_Y$ quadrature points on the both sides of the kink point. 
+%\end{itemize}
+%\color{red}{We expect that the computational cost of this procedure will be of order $\mathcal{O}(N_B N_Y)$}
+%\color{black}
+%\item The second approach consists of tensorizing simultaneously the $N_B$ samples and the quadrature points (Not clear to me yet). This approach will provide a balance between the number of $N_B$ samples and the number of quadrature points $N_Y$.
+%\end{enumerate} 
+
+
+
+
+\subsection{Choice of functional}
+\label{sec:choice-functional}
+
+We should restrict ourselves to a few possible choices $g$ such as:
+\begin{itemize}
+\item hockey-stick function, i.e., put or call payoff functions;
+\item indicator functions (both relevant in finance and in other applications
+  of estimation of probabilities of certain events);
+\item delta-functions for density estimation (and derivatives thereof for
+  estimation of derivatives of the density).
+\end{itemize}
+More specifically, $g$ should be the composition of one of the above with a
+smooth function. (For instance, the basket option payoff as a function of the
+log-prices of the underlying.)
+
+\section{Plan of work and miscancellous observations}
+\label{sec:plan-work-misc}
+
+We recall the discussion between Raul and Christian on June 1st.
+
+Given we want to compute
+\begin{equation*}
+  E\left[ g\left( \Phi(Z_1, \ldots, Z_N \right) \right]
+\end{equation*}
+for some non-smooth function $g$ and a Gaussian vector $Z$. (Here, the
+discretization of the SDE is in the function $\Phi$.) We assume that
+$Z$ is already rotated such that $h(Z_{-1}) \coloneqq E\left[ g\left(
+    \Phi(Z_1, \ldots, Z_N \right) \mid | \mid Z_1\right]$ is as smooth as
+possible, where $Z_{-1} \coloneqq (Z_2, \ldots, Z_N)$. 
+
+\subsection{Smoothing}
+\label{sec:smoothing}
+
+A crucial element of the smoothing property is that the ``location of
+irregularity'' $y = y(z_{-1})$ such that $g$ is not smooth at the point
+$\Phi(y, z_{-1})$. Generally, there might be (for given $z_{-1}$
+\begin{itemize}
+\item no solution, i.e., the integrand in the definition of $h(z_{-1})$ above
+  is smooth (\textit{best case});
+\item a unique solution;
+\item multiple solutions.
+\end{itemize}
+Generally, we need to assume that we are in the first or second
+case. Specifically, we need that
+\begin{equation*}
+   z_{-1} \mapsto h(z_{-1}) \text{ and } z_{-1} \mapsto \hat{h}(z_{-1})
+\end{equation*}
+are smooth, where $\hat{h}$ denotes the numerical approximation of $h$ based
+on a grid containing $y(z_{-1})$. In particular, $y$ itself should be smooth
+in $z_{-1}$. This would already be challenging in practice in the third
+case. Moreover, in the general situation we expect the number of solutions $y$
+to increase when the discretization of the SDE gets finer. 
+
+In many situations, case 2 (which is thought to include case 1) can be
+guaranteed by monotonicity. For instance, in the case of one-dimensional SDEs
+with $Z_1$ representing the terminal value of the underlying Brownian motion
+(and $Z_{-1}$ representing the Brownian bridge), this can often be seen from
+the SDE itself. Specifically, if each increment ``$dX$'' is increasing in
+$Z_1$, no matter the value of $X$, then the solution $X_T$ must be increasing
+in $Z_1$. This is easily seen to be true in examples such as the Black-Scholes
+model and the CIR process. (Strictly speaking, we have to distinguish between
+the continuous and discrete time solutions. In these examples, it does not
+matter.) On the other hand, it is also quite simple to construct counter
+examples, where monotonicity fails, for instance SDEs for which the
+``volatility'' changes sign, such as a trigonometric
+function.\footnote{Actually, in every such case the simple remedy is to
+  replace the volatility by its absolute value, which does not change the law
+  of the solution. Hence, there does not seem to be a one-dimensional
+  counter-example.}
+
+Even in multi-dimensional settings, such monotonicity conditions can hold in
+specific situations. For instance, in case of a basket option in a
+multivariate Black Scholes framework, we can choose a linear combination $Z_1$
+of the terminal values of the driving Bm, such that the basket is a monotone
+function of $Z_1$. (The coefficients of the linear combination will depend on
+the correlations and the weights of the basket.) However, in that case this
+may actually not correspond to the optimal ``rotation'' in terms of
+optimizing the smoothing effect.
+
+ 
+ 
+ \section{Numerical examples}
+ \subsection{The discretized Black-Scholes
+ 	model}
+ 
+ The first example is the discretized Black-Scholes model. Precisely, we are interested in the  $1$-D lognormal example where the dynamics of the stock are given by
+ 
+ \begin{align}\label{lognormal_dynamics}
+ 	dX_t=\sigma X_t dW_t.
+ \end{align}
+ 
+ In this case, we want to compare different ways for identifying the location of the kink. 
+ \subsubsection{Exact location of the kink for the continuous problem}
+ Let us denote $y_{\ast}$ an invertible function that satisfies 
+ \begin{align}
+ 	X(T;y_{\ast}(x),B)=x.
+ \end{align}
+ 
+ We can easily prove that the expression of $y_{\ast}$ for model given by \eqref{lognormal_dynamics} is given by
+ 
+ \begin{align}
+ 	y_{\ast}(x)=\left(\operatorname{log}(x/x_0)+T \sigma^2/2\right) \frac{1}{\sqrt{T} \sigma}, 
+ \end{align}
+ and since the kink for Black-Scholes model occurs at $x=K$, where $K
+ $ is the strike price then  the exact location of the continuous problem is given by 
+ \begin{align}\label{xact_location_continuous_problem}
+ 	y_{\ast}(K)=\left(\operatorname{log}(K/x_0)+T \sigma^2/2\right) \frac{1}{\sqrt{T} \sigma}.
+ \end{align}
+ 
+ 
+ \subsubsection{Exact location of the kink for the discrete problem}
+ The discrete problem of model \eqref{lognormal_dynamics} is solved by simulating 
+ \begin{align}\label{Discrete_problem}
+ 	\Delta X_{t_i}&=\sigma X_{t_i} \Delta W_{i},\: 0<i<N-1 \nonumber\\
+ 	X_{t_{i+1}}-X_{t_{i}}&=\sigma X_{t_i} \left(W_{t_{i+1}}-W_{t_i}\right),\: 0<i<N
+ \end{align}
+ where $X(T_0)=X_0$ and $X(t_N)=X(T)$. 
+ 
+ Using Brownian bridge construction given by \eqref{Brownian_bridge}, we have
+ \begin{align}
+ 	X_{t_1}&= X_{t_0} \left[ 1+\frac{\sigma}{\sqrt{T}} Y \Delta t+ \sigma \Delta B_0\right] \nonumber\\
+ 	X_{t_2}&= X_{t_1} \left[ 1+\frac{\sigma}{\sqrt{T}} Y \Delta t+ \sigma \Delta B_1\right] \nonumber\\
+ 	\vdots &= \vdots \nonumber\\
+ 	X_{t_N}&= X_{t_{N-1}} \left[ 1+\frac{\sigma}{\sqrt{T}} Y \Delta t+ \sigma \Delta B_{N-1}\right],
+ \end{align}
+ 
+ implying that
+ \begin{align}
+ 	\bar{X}(T)=X_0 \prod_{i=0}^{N-1} \left[ 1+\frac{\sigma}{\sqrt{T}} Y \Delta t+ \sigma \Delta B_{i}\right].
+ \end{align}
+ Therefore, in order to determine $y_{\ast}$, we need to solve
+ \begin{align}
+ 	x=\bar{X}(T;y_{\ast},B)=X_0 \prod_{i=0}^{N-1} \left[ 1+\frac{\sigma}{\sqrt{T}} y_{\ast}(x) \Delta t+ \sigma \Delta B_{i}\right],
+ \end{align}
+ 
+ which implies that the location of the kink point for the approximate problem is equivalent to finding the roots of the polynomial $P(y_\ast(K))$, given by
+ \begin{align}\label{polynomial_kink_location}
+ 	P(y_{\ast}(K))=\prod_{i=0}^{N-1} \left[ 1+\frac{\sigma}{\sqrt{T}} y_\ast(K) \Delta t+ \sigma \Delta B_{i}\right]-\frac{K}{X_0}.
+ \end{align}
+ 
+ The exact location of the kink can be obtained exactly by solving exactly $P(y_{\ast}(K))=0$.
+ 
+ \subsubsection{Approximate location of the discrete problem}
+ 
+ Here, we try to  find the roots of polynomial $P(y_{\ast}(K))$, given by \eqref{polynomial_kink_location}, by using \textbf{Newton iteration method}
+ 
+ In this case, we need the expression $P'=\frac{d P}{d y_\ast}$. If we denote $f_i(y)=1+\frac{\sigma}{\sqrt{T}} y \Delta t+ \sigma \Delta B_{i}$, then we can easily show that
+ \begin{align}\label{polynomial_kink_location_derivative}
+ 	P'(y)=\frac{\sigma \Delta t}{\sqrt{T}} \left( \prod_{i=0}^{N-1} f_i(y)\right) \left[ \sum_{i=0}^{N-1} \frac{1}{f_i(y)}\right]
+ \end{align}
+\end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

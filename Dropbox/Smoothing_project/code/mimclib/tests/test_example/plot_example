@@ -1,0 +1,8 @@
+#!/bin/bash
+
+
+#../plot_prog.py -db_tag "test_001" -o test_001.pdf $@
+COMMON='-db_engine sqlite -db_name ../db/mimc'
+
+echo "Plotting TL result  "
+../plot_prog.py   -db_tag 'test_001' $COMMON  -o mytest99.pdf  $@

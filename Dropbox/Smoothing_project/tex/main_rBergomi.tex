@@ -1,0 +1,2726 @@
+\documentclass[11pt]{article}
+
+\usepackage{smoothing_paper}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%chiheb commands
+
+\newcommand{\ie}{\emph{i.e.}}
+\newcommand{\eg}{\emph{e.g.}}
+\newcommand{\cf}{\emph{cf.}}
+\newcommand{\prob}[1]{\mathrm{P}\left(#1\right)}
+\newcommand{\expt}[1]{\mathrm{E}\left[#1\right]}
+\newcommand{\expth}[1]{\hat{\mathrm{E}}\left[#1\right]}
+
+
+
+\newcommand{\rset}{\mathbb{R}}
+\newcommand{\nset}{\mathbb{N}}
+\newcommand{\zset}{\mathbb{Z}}
+
+
+
+\newcommand{\PERIOD}{.}
+\newcommand{\COMMA}{,}
+\newcommand{\BIGSPACE}{\,\,\,\,\,\,\,}
+
+
+
+\newcommand{\Ordo}[1]{{\mathcal{O}}\left(#1\right)}
+\newcommand{\ordo}[1]{{o}\left(#1\right)}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% DO WE RELLY NEED THE FOLLOWING??
+
+%%  new margin
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagestyle{plain}                                                      %%
+%%%%%%%%%% EXACT 1in MARGINS %%%%%%%                                   %%
+\setlength{\textwidth}{6.5in}     %%                                   %%
+\setlength{\oddsidemargin}{0in}   %%   
+\setlength{\evensidemargin}{0in}  %%        
+\setlength{\textheight}{8.5in}    %%       
+\setlength{\topmargin}{-0.2in}    %%   
+\setlength{\headheight}{0in}      %%    
+\setlength{\headsep}{0in}         %%                   
+\setlength{\footskip}{.5in}       %%                       
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%                                   %%
+\newcommand{\required}[1]{\section*{\hfil #1\hfil}}                    %%
+\renewcommand{\refname}{\hfil References Cited\hfil}                   %%
+
+\def\SMALLSKIP{\smallskip}
+\def\MEDSKIP{\medskip}
+\def\BIGSKIP{\bigskip}
+
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\makeatletter
+\def\BState{\State\hskip-\ALG@thistlm}
+\makeatother
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{Efficient option pricing for Rough Bergomi model} 
+    \date{ }
+
+\begin{document}
+\maketitle
+
+
+\section{The goal and outline of the project}
+The main goal of the project is to design a fast option pricer, based on multi-index stochastic collocation (MISC), for options whose dynamics follow rBergomi model. We may later investigate QMC.
+
+\section{Review of literature}
+
+
+The last few years have seen renewed interest in stochastic volatility models driven by fractional Brownian motion (fBM) or other self-similar Gaussian processes (see  \cite{bayer2016pricing,gatheral2014volatility}). Recall that fractional Brownian motion $B^H$ is a centered self-similar Gaussian process with stationary increments, which depends on a parameter $H \in (0,1)$ called the Hurst index, and $B^H$ is persistent (i.e., more likely to keep a trend than to break it) when $H>1/2$ and antipersistent when $H<1/2$ (i.e., if $B^H$ was increasing in the past, $B^H$ is more likely to decrease in the future, and vice versa). 
+
+
+
+Gatheral, Jaisson, and Rosenbaum \cite{gatheral2014volatility} provide strong empirical justification for such models; in particular, they argue that log-volatility in practice behaves essentially as fBM with the Hurst exponent $H \approx 0.1$ at any reasonable time scale (see also  \cite{gatheral2014volatility_2}). In particular, Gatheral, Jaisson, and Rosenbaum \cite{gatheral2014volatility} advocate a model in which the volatility is the exponential of a fractional OU process with small mean-reversion parameter.
+
+Recently, Bayer, Friz, and Gatheral \cite{bayer2016pricing} analyze the rough Bergomi variance curve model, which is shown to fit SPX option prices significantly better than conventional Markovian stochastic volatility models, and with fewer parameters.
+
+
+\section{Background on Gaussian and fBM processes}
+A zero-mean real-valued Gaussian process $(Z_t)_{t\ge0}$ is a stochastic process such that on any finite subset $\{t_1,\dots t_n\} \subset \rset, (Z_{t_1},\dots, Z_{t_n})$ has a
+multivariate normal distribution with mean zero. The law of a Gaussian process is entirely determined by the covariance function $K(s, t)= \expt{Z_t Z_s}$ and $Z$ induces a Gaussian probability
+measure on $(E, \mathcal{B}(E))$, where $E$ denotes the Banach space $C_0[0,1]$ with the usual sup norm topology (see, e.g., section 3.1.1 of  \cite{carmona2007interest} for details).
+
+
+
+Fractional Brownian motion (fBM) is a natural generalization of standard Brownian motion which preserves the properties of stationary increments, self-similarity, and Gaussian finite-dimensional distributions, but it has a more complex dependence structure which exhibits long-range dependence when $H>1/2$. In this section, we recall the definition and summarize the basic properties of fBM.
+
+A zero-mean Gaussian process $B^H_t$ is called standard fractional Brownian motion (fBM) with Hurst parameter $H \in(0,1)$ if it has covariance function
+
+\begin{align}\label{eq:fbm_cov}
+R_H=\expt{B_t^H B_s^H}-\expt{B_t^H}\expt{B_s^H}=\frac{1}{2} \left(\abs{t}^{2H}+\abs{s}^{2H}-\abs{t-s}^{2H}\right).	
+\end{align}
+
+
+
+In order to specify the distribution of a Gaussian process, it is enough to specify its mean and its covariance function; therefore, for each $H$, the law of $B^H$ is uniquely determined by $R^H(s, t)$. However, this definition by itself does not guarantee the existence of fBM; to show that fBM exists, one needs to verify that the covariance function is nonnegative definite.
+
+We now recall some fundamental properties of fBM (see also Figure \ref{fig:fBM}):
+
+\begin{itemize}
+	\item fBM is continuous a.s. and H-self-similar (H-ss), i.e., for $a>0, (B_{at})_{t \ge 0}  \overset{(d)}{=} a^H (B_t)_{t \ge 0}$ where $ \overset{(d)}{=}$ means both processes have the same finite-dimensional distributions. For $H \neq 1/2$, $B^H$ does not have independent increments; for $H=1/2, B^H_t$ is the standard Brownian motion. 
+	\item From \eqref{eq:fbm_cov}, we see that 
+	\begin{equation*}
+	\expt{B_t^H-B_s^H)^2}=\abs{t-s}^{2H},
+	\end{equation*}
+so $B_t^H-B_s^H \sim \mathcal{N}(0,\abs{t-s}^{2H})$; thus $B^H$ has stationary increments.
+\item If we set $X_n=B^H_n-B^H_{n-1}$, then $X_n$ is a  discrete-time Gaussian process with covariance function
+
+\begin{align*}
+\rho_n&=\expt{X_{k+n X_n}}=\expt{\left(B_{k+n}^H -B^H_{k+n-1}\right)\left(B_{k}^H -B^H_{k-1}\right)}\\
+&\sim H (2H-1) n^{2H-2}\quad (n \rightarrow \infty),
+\end{align*}
+and thus (by convexity of the function $g(n) = n^{2H})$, we see that two increments the form $B_k-B_{k-1}$ and $B_{k+n}-B_{k+n-1}$ are positively correlated if $H  \in (1/2,1)$ and negatively correlated if $H \in (0,1/2)$. Thus $B^H$ is persistent (i.e., it is more likely to keep a trend than to break it) when $H>1/2$ and antipersistent when $H<1/2$ (i.e., if $B^H$ was increasing in the past, it is more likely to decrease in the future, and vice versa).
+
+\item If $H \in (1/2,1)$, we can show that $\sum_{n=1}^\infty \rho_n= \infty$, which means that the process exhibits long-range dependence, but if $H \in(0, 1/2)$, then  $\sum_{n=1}^\infty \rho_n< \infty$.
+
+\item Using that $\expt{(B^H_t- B^H_s)^2} = (t-s)^{2H}$, we can show that sample paths of $B^H$ are $\alpha$-H\:older continuous for all $\alpha \in (0,H)$.
+\item fBM is the only self-similar Gaussian process with stationary increments (see, e.g., \cite{marquardt2006fractional}), and for $H\neq 1/2$, $B^H_t$ is neither a Markov process nor a semimartingale (see, e.g., \cite{nualart2006malliavin}).
+\end{itemize}
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.45\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/fbm_H_0_9}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.45\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/fbm_H_0_3}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	\caption{Monte Carlo simulation of fBM for $H = 0.9$ (left) and $H = 0.3$ (right).}
+	\label{fig:fBM}
+\end{figure}
+
+
+
+
+\section{The rBergomi model}\label{sec:The rBergomi model}
+
+We use  the rBergomi model for the price process $S_t$ as defined in  \cite{bayer2016pricing}, which is defined by
+
+\begin{align}\label{eq:rBergomi_model1}
+	dS_t = \sqrt{v_t} S_t dZ_t,\\
+	v_t = \xi_0(t) \exp\left( \eta \tilde{W}_t - \frac{1}{2} \eta^2 t^{2H} \right),
+\end{align}
+where for $0 < H < 1$,  we have $\tilde{W}^H $ is a certain Volterra process,  defined by
+\begin{align}
+	\tilde{W}_t^H = \int_0^t K(t,s) dW_s^1, \quad K(t,s) = \sqrt{2H} (t-s)^{H - 1/2}.
+\end{align}
+
+
+$W_1, Z$ denote two \emph{correlated} standard Brownian motions with correlation $\rho$, so that
+\begin{align}
+	Z:=\rho	W^1+ \bar{\rho}W^2 \equiv \rho W^1+\sqrt{1-\rho^2} W^2
+\end{align}
+
+Therefore, Eq \ref{eq:rBergomi_model1} can be written as 
+
+\begin{align}\label{eq:rBergomi_model}
+	S_t&= S(0)  \operatorname{exp}\left( \int_{0}^{t} \sqrt{v(s)} dZ(s)- \frac{1}{2} \int_{0}^{t} v(s) ds   \right)     \nonumber\\
+	v(u)&=\xi_0(u) \operatorname{exp}\left( \eta \tilde{W}_u^H- \frac{\eta^2}{2} u^H \right) .
+\end{align}
+
+We refer to $v_u$ as the variance process, where $\xi_0(u) = \expt{v_u} \in \mathcal{F}_0$ a.s. the forward variance curve. $\tilde{W}^H $ is a centered, locally $(H-\epsilon)$- H\" \o lder continuous, Gaussian process with $\var{[\tilde{W}^H_t]} = t^{2H}$.
+
+
+In \cite{bayer2016pricing}, the  approach consists in sampling the Gaussian process $Z$ and $\tilde{W}^H$ on a discrete time grid using exact simulation and then approximating $S$ and $v$ using Euler  discretization.
+
+Assuming $S_0 = 1$, and using the conditioning argument on the $\sigma$-algebra generated by $W^1$ (argument first used by \cite{romano1997contingent} in the context of Markovian SV
+models), we can  show that the call price is given by
+
+\begin{align}\label{BS_formula_rbergomi}
+	C_{RB}\left( T, K \right) &= E\left[ \left(S_T - K \right)^+ \right]  \nonumber\\
+	&=\expt{\expt{(S_T-K)^+ \mid \sigma(W^1(t) ,t \le T)}}\nonumber \\
+	&=E\left[C_{BS}\left( S_0 = \operatorname{exp}\left(\rho \int_0^T \sqrt{v_t} dW_t^1 - \frac{1}{2}
+	\rho^2 \int_0^T v_t dt\right),\ K = K, \ T = 1, \ \sigma^2 = (1-\rho^2)
+	\int_0^T v_t dt \right) \right],
+\end{align}
+where $C_{BS}$ denotes the Black-Scholes price.
+
+In fact, if we use the orthogonal decomposition of $S_t$ into $S_{t}^1$ and $S_{t}^2$, where
+
+\begin{align}
+	S_t^1:=\mathcal{E}\{ \rho \int_{0}^{t}  \sqrt{v_s} dW_s^1\}, \: S_t^2:= \mathcal{E}\{ \sqrt{1-\rho^2} \int_{0}^{t}  \sqrt{v_s} dW_s^2  \}	,
+\end{align}
+
+where $\mathcal{E}()$ denotes the stochastic exponential, then, we obtain
+\begin{align}
+	\log S_t \mid \mathcal{F}_t^1 \sim \mathcal{N}\left( \log S_t^1-\frac{1}{2} (1-\rho^2) \int_{0}^{t} v_s ds , (1-\rho^2) \int_{0}^{t} v_s ds \right),
+\end{align} 
+
+where $\mathcal{F}_t^1= \sigma\{ W_s^1: s\le t\}$. Therefore, we obtain \eqref{BS_formula_rbergomi}.
+
+
+
+
+
+
+
+
+
+\section{Simulation of the rBergomi model}\label{sec:Simulation of the rBergomi model}
+
+The main challenge is the computation of $S=\int_{0}^{T} \sqrt{v_t} dW_t^1$ and $V=\int_{0}^{T} v_t dt$. As was mentioned in \cite{bayer2017regularity}, we may try to
+avoid any sampling related to $W^2$ by   a brute-force approach that  consists in simulating a scalar Brownian motion $W^1$, followed by computing  $\tilde{W}^H= \int K dW^1$  by It\^o/Riemann Stieltjes approximations of $(S,V)$. However, this is not advisable given the singularity of the Volterra kernel $K(s,t)$ at the diagonal $s = t$.
+ Therefore,  one needs to jointly simulate the two-dimensional Gaussian process $(W_t^1, \tilde{W}^H_t: 0 \le t \le T)$, resulting in $W^1_{t_1},\dots, W_{t_N}$ and $\tilde{W}^H_{t_1},\dots, \tilde{W}^H_{t_N}$ along a given grid $t_1 <\dots < t_N$. There are essentially three possible ways to achieve this:
+ \begin{enumerate}
+ 	\item Euler discretization of the integral defining $\tilde{W}^H$ together with classical simulation of increments of $W^1$. This is horribly inefficient because the integral is singular and adaptivity probably does not help, as the singularity moves with time. For this 	method, we need an $N$-dimensional random Gaussian input vector to produce one (approximate, inaccurate) sample of $W^1_{t_1},\dots, W^1_{t_N}, \tilde{W}^H_{t_1},\dots, \tilde{W}_{t_N}$.
+ 	
+ 	\item Given that $W^1_{t_1},\dots, W^1_{t_N}, \tilde{W}^H_{t_1},\dots, \tilde{W}_{t_N}$ together forms a ($2N$)-dimensional Gaussian random vector with computable covariance matrix. We can use Cholesky decomposition of the covariance matrix to produce exact samples of $W^1_{t_1},\dots, W^1_{t_N}, \tilde{W}^H_{t_1},\dots, \tilde{W}_{t_N}$, but unlike the first way, we need $2N$-dimensional Gaussian random vectors as
+ 	input. This method is exact but slow.
+ 	
+ 	\item  The hybrid scheme of \cite{bennedsen2017hybrid} uses a different approach, which is essentially based on  Euler discretization as the first way but crucially improved by moment
+ 	matching for the singular term in the left point rule. It is also
+ 	inexact in the sense that samples produced here do not exactly have the distribution of $W^1_{t_1},\dots, W^1_{t_N}, \tilde{W}^H_{t_1},\dots, \tilde{W}_{t_N}$,however they are much more accurate then samples produced from method $1)$, but much faster than method $2)$. As in method $2)$, in this case we need a $2N$-dimensional Gaussian random input vector to produce one
+ 	sample of $W^1_{t_1},\dots, W^1_{t_N}, \tilde{W}^H_{t_1},\dots, \tilde{W}_{t_N}$.
+ \end{enumerate}
+In this project, we adopt the last approach for the simulation of the rBergomi model.
+
+
+%
+%
+%In this sense, I (sloppily) claimed that the hybrid scheme require 2
+%Brownian motions. This is strictly speaking incorrect. You need,
+%however, a (2N)-dimensional Gaussian input vector in order to get one
+%N-dimensional sample W_{t_1}, ..., W_{t_N} of the driving Brownian
+%motion and one N-dimensional sample of the associated fractional
+%Brownian motion, which have (approximately) the correct joint
+%distribution.
+
+
+
+
+
+
+\section{Numerical tests}\label{sec:Numerical tests}
+
+\subsection{Integrand plotting wrt different random inputs } \label{sec:Integrand plotting wrt different random inputs}
+In this section, we plot the integrand, given by the term inside the expectation in \eqref{BS_formula_rbergomi}(including the Gaussian density), wrt different random inputs $(W_1,W_2)$ ($W_2$ stands for $W^\text{perp}$ in the code). This is important to check if we need a measure change and if needed for which variables. We show the results for $H=0.43$ and $H=0.07$ and for two scenarios of number of time steps $N \in \{2,4\}$. We also show the two dimensional plots (See figures (\ref{fig:Integrand_H_043_N_2_2D},\ref{fig:Integrand_H_007_N_2_2D},\ref{fig:Integrand_H_007_N_4_2D_W_1_2_3},\ref{fig:Integrand_H_007_N_4_2D_W_1_3_3_4},\ref{fig:Integrand_H_007_N_4_2D_W_1_4_2_3}). As it seems from the plots, we may just need change of measure wrt to $W_1$ coordinates and we do not need a measure chnage for $W_2$ coordinates. 
+
+
+
+\subsubsection{N=2, H=0.07}
+
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.45\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/1D_plots/N_2/H_007/Bergomi_integrand_K_1_H_007_W11_N_2}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.45\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/1D_plots/N_2/H_007/Bergomi_integrand_K_1_H_007_W12_N_2}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	\caption{Plotting the integrand $I$ (in \eqref{BS_formula_rbergomi}) as a function of $W_1$ coordinates for $H=0.07$ and $N=2$.}
+	\label{fig:Integrand_H_007_N_2_W_1}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.45\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/1D_plots/N_2/H_007/Bergomi_integrand_K_1_H_007_W21_N_2}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.45\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/1D_plots/N_2/H_007/Bergomi_integrand_K_1_H_007_W22_N_2}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	\caption{Plotting the integrand $I$ (in \eqref{BS_formula_rbergomi}) as a function of $W_2$ coordinates for $H=0.07$ and $N=2$.}
+	\label{fig:Integrand_H_007_N_2_W_2}
+\end{figure}
+
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/2D_plots/N_2/H_007/Bergomi_integrand_contours_K_1_H_007_W1_1_2_N_2}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/2D_plots/N_2/H_007/Bergomi_integrand_contours_K_1_H_007_W2_1_2_N_2}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	\caption{Two dimensional Plotting of the integrand $I$ (in \eqref{BS_formula_rbergomi})  for $H=0.07$ and $N=2$, a)  function of $W_1$ coordinates, b) function of $W_2$ coordinates}
+	\label{fig:Integrand_H_007_N_2_2D}
+\end{figure}
+
+
+
+
+
+
+\newpage
+\subsubsection{N=4, H=0.07}
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}[b]{0.45\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/1D_plots/N_4/H_007/Bergomi_integrand_K_1_H_007_W11_N_4}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.45\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/1D_plots/N_4/H_007/Bergomi_integrand_K_1_H_007_W12_N_4}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	\vskip\baselineskip
+	\begin{subfigure}[b]{0.45\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/1D_plots/N_4/H_007/Bergomi_integrand_K_1_H_007_W13_N_4}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.45\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/1D_plots/N_4/H_007/Bergomi_integrand_K_1_H_007_W14_N_4}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	\caption{Plotting the integrand $I$ (in \eqref{BS_formula_rbergomi}) as a function of $W_1$ coordinates for $H=0.07$ and $N=4$.}
+	\label{fig:Integrand_H_007_N_4_W_1_1}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}[b]{0.45\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/1D_plots/N_4/H_007/Bergomi_integrand_K_1_H_007_W21_N_4}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.45\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/1D_plots/N_4/H_007/Bergomi_integrand_K_1_H_007_W22_N_4}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\vskip\baselineskip
+	
+	\begin{subfigure}[b]{0.45\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/1D_plots/N_4/H_007/Bergomi_integrand_K_1_H_007_W23_N_4}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.45\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/1D_plots/N_4/H_007/Bergomi_integrand_K_1_H_007_W24_N_4}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	\caption{Plotting the integrand $I$ (in \eqref{BS_formula_rbergomi}) as a function of $W_2$ coordinates for $H=0.07$ and $N=4$.}
+	\label{fig:Integrand_H_007_N_4_W_2_1}
+\end{figure}
+
+
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.45\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/2D_plots/N_4/H_007/Bergomi_integrand_contours_K_1_H_007_W1_1_2_N_4}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.45\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/2D_plots/N_4/H_007/Bergomi_integrand_contours_K_1_H_007_W1_1_3_N_4}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	\caption{Two dimensional Plotting of the integrand $I$ (in \eqref{BS_formula_rbergomi})  for $H=0.07$ and $N=4$, a)  function of $W_1^1$ and $W_1^2$ , b) function of $W_1^1$ and $W_1^3$ }
+	\label{fig:Integrand_H_007_N_4_2D_W_1_2_3}
+\end{figure}
+
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.45\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/2D_plots/N_4/H_007/Bergomi_integrand_contours_K_1_H_007_W1_1_4_N_4}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.45\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/2D_plots/N_4/H_007/Bergomi_integrand_contours_K_1_H_007_W1_2_3_N_4}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	\caption{Two dimensional Plotting of the integrand $I$ (in \eqref{BS_formula_rbergomi})  for $H=0.07$ and $N=4$, a)  function of $W_1^1$ and $W_1^4$ , b) function of $W_1^2$ and $W_1^3$ }
+	\label{fig:Integrand_H_007_N_4_2D_W_1_4_2_3}
+\end{figure}
+
+
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.45\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/2D_plots/N_4/H_007/Bergomi_integrand_contours_K_1_H_007_W1_2_4_N_4}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.45\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/2D_plots/N_4/H_007/Bergomi_integrand_contours_K_1_H_007_W1_3_4_N_4}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	\caption{Two dimensional Plotting of the integrand $I$ (in \eqref{BS_formula_rbergomi})  for $H=0.07$ and $N=4$, a)  function of $W_1^2$ and $W_1^4$ , b) function of $W_1^3$ and $W_1^4$ }
+	\label{fig:Integrand_H_007_N_4_2D_W_1_3_3_4}
+\end{figure}
+
+
+\newpage
+\subsection{Comparing the mixed differences rates}
+In this section, we compare the mixed differences rates for the standard case against the case where we do a partial change of measure wrt $W_1$ coordinates (see Appendix \ref{appendix:Gaussian Hermite Quadrature with importance sampling}), for the case of $N=4$ time steps. From the plots, we may notice that we face a bad behavior for the second differences, for the case without change of measure, which may explain the poor performance observed for MISC.This bad behavior is resolved when doing the partial change of measure. We obtained better results when using a measure change based on spectral decomposition rather than Cholesky decomposition. therefore by doing the change of measure, we obtained a more robust MISC solver.
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.45\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_mixed_error_rates/without_change_measure/N_4/H_007/first_difference_rbergomi_4steps_H_007_K_1_totally_hierarch_with_rate_W1}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.45\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_mixed_error_rates/partial_change_measure/N_4/H_007/first_difference_rbergomi_4steps_H_007_K_1_totally_hierarch_with_rate_W1_change_measure_part_spec}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of  first order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)), for $W_1$, for $K=1$, $H=0.07$: a) Without measure change b) With measure change}
+	\label{fig:first_diff_comp_K_1_H_007_W_1}
+\end{figure}
+
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.45\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_mixed_error_rates/without_change_measure/N_4/H_007/mixed_difference_order2_rbergomi_4steps_H_007_K_1_totally_hierarch_with_rate_W1}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.45\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_mixed_error_rates/partial_change_measure/N_4/H_007/mixed_difference_order2_rbergomi_4steps_H_007_K_1_totally_hierarch_with_rate_W1_change_measure_part_spec}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of  second order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)), for $W_1$, for $K=1$, $H=0.07$: a) Without measure change b) With measure change}
+	\label{fig:second_diff_comp_K_1_H_007_W_1}
+\end{figure}
+
+
+
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.45\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_mixed_error_rates/without_change_measure/N_4/H_007/mixed_difference_order2_rbergomi_4steps_H_007_K_1_totally_hierarch_with_rate_W1_2}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.45\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_mixed_error_rates/partial_change_measure/N_4/H_007/mixed_difference_order2_rbergomi_4steps_H_007_K_1_totally_hierarch_with_rate_W1_2_change_measure_part_spec}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of  second order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)), for $W_1$, for $K=1$, $H=0.07$: a) Without measure change b) With measure change}
+	\label{fig:second_diff_comp_K_1_H_007_W_1_2}
+\end{figure}
+
+
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.45\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_mixed_error_rates/without_change_measure/N_4/H_007/first_difference_rbergomi_4steps_H_007_K_1_totally_hierarch_with_rate_W2}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.45\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_mixed_error_rates/partial_change_measure/N_4/H_007/first_difference_rbergomi_4steps_H_007_K_1_totally_hierarch_with_rate_W2_change_measure_part_spec}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of  first order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)), for $W_2$, for $K=1$, $H=0.07$: a) Without measure change b) With measure change}
+	\label{fig:first_diff_comp_K_1_H_007_W_2}
+\end{figure}
+
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.45\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_mixed_error_rates/without_change_measure/N_4/H_007/mixed_difference_order2_rbergomi_4steps_H_007_K_1_totally_hierarch_with_rate_W2}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.45\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_mixed_error_rates/partial_change_measure/N_4/H_007/mixed_difference_order2_rbergomi_4steps_H_007_K_1_totally_hierarch_with_rate_W2_change_measure_part_spec}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of  second order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)), for $W_2$, for $K=1$, $H=0.07$: a) Without measure change b) With measure change}
+	\label{fig:second_diff_comp_K_1_H_007_W_2}
+\end{figure}
+
+\newpage
+
+\subsection{Weak error plots} \label{sec:Weak error plots}
+In this section, I include the results of weak error rates for both cases: without and with change of meausure and  without and with Richardson extrapolation,  for $H \in \{0.43,0.07\}$. The reference solution was computed with $N=500$ time steps. We note that for the case where we do a partial chnage of measure, we limit the maximum number of changed coordinates  up to $4$, due to practical purposes related to the optimization procedure.
+ 
+\newpage
+\subsubsection{Without change of measure}
+\subsubsection*{Without Richardson extrapolation}
+From figures (\ref{fig:Weak_rate_H_043_without_rich} and \ref{fig:Weak_rate_H_007_without_rich}), we see that for both cases $H \in \{0.43,0.07\}$, we get a weak error of order $\Delta t$. The upper and lower bounds are $95\%$ confidence interval.
+
+
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/without_richardson/H_043/weak_convergence_order_Bergomi_H_043_K_1_M_10_5_CI_relative}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/without_richardson/H_043/weak_convergence_order_differences_Bergomi_H_043_K_1_M_10_5_CI_relative}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of the weak error for $H=0.43$ $K=1$, without Richardson extraploation, using MC with $M=10^5$: a) $\abs{\expt{g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{g(X_{\Delta t})-g(X_{\Delta t/2})}}$ }
+	\label{fig:Weak_rate_H_043_without_rich}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/without_richardson/H_007/weak_convergence_order_Bergomi_H_007_K_1_M_10_5_CI_relative}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/without_richardson/H_007/weak_convergence_order_differences_Bergomi_H_007_K_1_M_10_5_CI_relative}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of the weak error for $H=0.07$ $K=1$, without Richardson extraploation, using MC with $M=10^5$: a) $\abs{\expt{g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{g(X_{\Delta t})-g(X_{\Delta t/2})}}$ }
+	\label{fig:Weak_rate_H_007_without_rich}
+\end{figure}
+\newpage
+\subsubsection*{With Richardson extrapolation (level 1)}
+From figures (\ref{fig:Weak_rate_H_043_with_rich} and \ref{fig:Weak_rate_H_007_with_rich}), we see that for both cases $H \in \{0.43,0.07\}$, we get a weak error of order $\Delta t^2$ (We can see this from the first points, however I think the last points are influenced by the statistical error). The upper and lower bounds are $95\%$ confidence interval.
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/with_richardson/H_043/weak_convergence_order_Bergomi_H_043_K_1_M_10_6_CI_richardson_relative}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/with_richardson/H_043/weak_convergence_order_differences_Bergomi_H_043_K_1_M_10_6_CI_richardson_relative}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of the weak error for $H=0.43$ $K=1$, with Richardson extraploation, using MC with $M=10^6$: a) $\abs{\expt{2 g(X_{\Delta t/2}) -g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{3 g(X_{\Delta t/2})-g(X_{\Delta t})-2 g(X_{\Delta t/4})}}$ }
+	\label{fig:Weak_rate_H_043_with_rich}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/with_richardson/H_007/weak_convergence_order_Bergomi_H_007_K_1_M_10_6_CI_richardson_relative.eps}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/with_richardson/H_007/weak_convergence_order_differences_Bergomi_H_007_K_1_M_10_6_CI_richardson_relative}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of the weak error for $H=0.07$ $K=1$, with Richardson extraploation, using MC with $M=10^6$: a) $\abs{\expt{2 g(X_{\Delta t/2}) -g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{3 g(X_{\Delta t/2})-g(X_{\Delta t})-2 g(X_{\Delta t/4})}}$ }
+	\label{fig:Weak_rate_H_007_with_rich}
+\end{figure}
+
+
+
+
+\newpage
+\subsubsection*{With Richardson extrapolation (level 2)}
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/with_richardson/H_043/weak_convergence_order_Bergomi_H_043_K_1_richardson_level2_relative_M_10_6}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/with_richardson/H_043/weak_convergence_order_differences_Bergomi_H_043_K_1_richardson_level2_relative_M_10_6}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of the weak error for $H=0.43$ $K=1$, with Richardson extraploation, using MC with $M=10^6$: a) $\abs{\frac{1}{3}\expt{8 g(X_{\Delta t/4}) -6g(X_{\Delta t/2}) +g(X_{\Delta t})}-g(X)}$  b) $\abs{\frac{1}{3}\expt{-8 g(X_{\Delta t/8}) +14g(X_{\Delta t/4})-7 (X_{\Delta t/2}) +g(X_{\Delta t})}}$}
+	\label{fig:Weak_rate_H_043_with_rich_level2}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/with_richardson/H_007/weak_convergence_order_Bergomi_H_007_K_1_richardson_level2_relative_M_10_6}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/with_richardson/H_007/weak_convergence_order_differences_Bergomi_H_007_K_1_richardson_level2_relative_M_10_6}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of the weak error for $H=0.07$ $K=1$, with Richardson extraploation (level $2$), using MC with $M=10^6$: a) $\abs{\frac{1}{3}\expt{8 g(X_{\Delta t/4}) -6g(X_{\Delta t/2}) +g(X_{\Delta t})}-g(X)}$  b) $\abs{\frac{1}{3}\expt{-8 g(X_{\Delta t/8}) +14g(X_{\Delta t/4})-7 (X_{\Delta t/2}) +g(X_{\Delta t})}}$} 
+	\label{fig:Weak_rate_H_007_with_rich_level2}
+\end{figure}
+
+
+\newpage
+\subsubsection{With change of measure}
+
+\subsubsection*{Without Richardson extrapolation}
+From figures  \ref{fig:Weak_rate_H_007_without_rich}), we see that for $H=0.07$, we get a weak error of order $\Delta t$. The upper and lower bounds are $95\%$ confidence interval.
+\begin{figure}
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/with_change_measure/without_rich/H_007/weak_convergence_order_Bergomi_H_007_K_1_M_10_5_CI_relative_measure_change_spec}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/with_change_measure/without_rich/H_007/weak_convergence_order_differences_Bergomi_H_007_K_1_M_10_5_CI_relative_measure_change_spec}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of the weak error for $H=0.07$ $K=1$, without Richardson extraploation, using MC with $M=10^5$: a) $\abs{\expt{g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{g(X_{\Delta t})-g(X_{\Delta t/2})}}$ }
+	\label{fig:Weak_rate_H_007_without_rich_change_meausre}
+\end{figure}
+
+\newpage
+\subsection{Comparing relative errors using hierarchical representation }
+
+%For our numerical tests, we coupled the C++ implementation used in \cite{bayer2016pricing} with the MISC library, and for comparison purposes we compare our results to the same code but with MC method, for $M=10^6$ paths. 
+
+The used parameters are $H=\{0.43, 0.07\},\: \eta=1.9, \: \rho=-0.9,\: T=1, K=1$ and $\xi_0=0.235^2$. The results were reported for number of time steps $N \in \{2,4,8,16\}$.  Also, we use $S_0=1$, so the options will be prices in terms of the moneyness $K$, where $K$ is the strike price.  
+
+
+In the following, we compare the  relative errors for H $\in \{0.43,0.07\}$ (see appendices \ref{appendix:Case $H=0.43$, Call prices for different methods} and \ref{appendix:Case $H=0.07$, Call prices for different methods} for the values of Call option prices). We note that for each case the reference solution was computed for $N=500$ (number of time steps) using MC with $10^6$ samples. In each case  we report the results for 3 scenarios: i) Without using Richardson extrapolation, ii) Using level $1$ Richardson extrapoaltion and  iii) Using level $2$ Richardson extrapoaltion. Tables (\ref{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.43$}, \ref{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.43$ , using Richardson extrapolation}, \ref{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.43$ , using Richardson extrapolation_level2})  coresspond to $H=0.43$ and tables (\ref{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.07$}, \ref{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.07$ , using Richardson extrapolation}, \ref{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.07$ , using Richardson extrapolation_level2})  coresspond to $H=0.07$.
+
+Given the normalized bias computed by MC method (See Section \ref{sec:Weak error plots}) (reported as bold values in the tables), we report in red in each table the smallest tolerance that MISC required to get below that relative bias (I do not put values for smaller tolerances, once the required bias is reached).
+
+
+From the tables below, we have the following observations:
+
+\begin{itemize}
+	\item Using Richardson extrapoaltion, we got a significant improvement for the relative error with the use of minimal time steps. For instance, for $H=0.43$, we achieved around $8\%$ of  relative error, with $16$ time steps when not using Richardson extrapolation (see table \ref{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.43$}). However, When using level $1$ of Richardson extrapolation (see table \ref{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.43$ , using Richardson extrapolation}),  we achieved around $6\%$ of  relative error, with  only $2$ time steps in the coarse level, and we got around  $1\%$ of  relative error, with   $4$ time steps in the coarse level. A more significant improvement is seen with level $2$ of Richardson extrapolation, in fact, with just $1$ step in the coarse level, we got around $3\%$ percent of relative error.
+	\item For $H=0.07$, we achieved around $8\%$ of  relative error, with $16$ time steps when not using Richardson extrapolation (see table \ref{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.07$}). However, When using level $1$ of Richardson extrapolation (see table \ref{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.07$ , using Richardson extrapolation}),  we achieved around $5\%$ of  relative error, with  only $2$ time steps in the coarse level, and we got below  $1\%$ of  relative error, with   $4$ time steps in the coarse level. We observed a less significant improvement when using levle $2$ of Ricchardson extrapolation, compared to the case of $H=0.43$.
+	
+\end{itemize}
+
+
+
+
+
+
+
+%\begin{figure}[!h]
+%	\begin{center}
+%		\includegraphics[scale=0.5]{./figures/rBergomi_weak_error/weak_RT.pdf}
+%		\caption{The weak error of rBergomi model}
+%		\label{fig:rBergomi_weak_error}
+%	\end{center}
+%\end{figure}
+
+%We note that for some cases, the convergence becomes extremely slow (either the bias stagnates at one value or it keeps increasing or decreasing without reaching the prescribed tolerance) specially when we are close to at-the money option ($K$ close to 1), we do not put values for those cases. We also remark that we have better agreement between the results of MISC coupled with the C++ code and the MC method using the python code form \cite{mccrickerd2017turbocharging}, for small values of moneyness.
+
+%In Section \ref{sec:MISC plots}, we show the convergence plots given by MISC library for the cases of $H=\{0.43,0.07\}$ and $K=0.1$.
+
+
+%Table \ref{table: Complexity rates for different number of time steps_rbergomi} summarizes the obtained complexity rates for different number of time steps (for more details, see Section \ref{sec:MISC plots}. 
+%
+%\begin{table}[h!]
+%	\centering
+%	\begin{tabular}{l*{6}{c}r}
+%		Method \textbackslash  Steps             &  $4$ & $8$  & $16$   \\
+%		\hline
+%		without Richardson  extrapolation(hierarchical) $(H=0.43)$ & $-0.34$ & $-0.33$ & $-0.75$   \\
+%		without Richardson  extrapolation (non hierarchical) $(H=0.43)$ & $-0.17$ & $-0.6$ & $-1$   \\
+%		without Richardson  extrapolation (hierarchical) $(H=0.07)$ & $-0.64$ & $-0.84$ & $-2.5$   \\
+%		without Richardson  extrapolation (total hierarchical) $(H=0.07)$ & $-0.70$ & $-0.88$ & $-2.7$   \\
+%		without Richardson  extrapolation (non hierarchical) $(H=0.07)$ & $-0.67$ & $-1.6$ & $-2.9$   \\
+%		\hline
+%	\end{tabular}
+%	\caption{Complexity rates for different number of time steps for $K=1$ and $H=\{0.43,0.07\}$}
+%	\label{table: Complexity rates for different number of time steps_rbergomi}
+%\end{table}
+
+
+\newpage
+
+\subsubsection{Case $H=0.43$, Relative error for different methods}
+\label{sec:Case $H=0.43$, Relative error for different methods}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$ &   \\
+		\hline
+		MISC ($TOl=5.10^{-1}$)  & $0.6011$ & $0.3497$ & $0.1910$ & $0.0969$  \\
+		MISC ($TOl=2.10^{-1}$)  &  $0.6011$ & $0.3497$ &$0.1910$ & $\red{0.0801}$  \\
+		MISC ($TOl=10^{-1}$)  & $0.6011$ & $0.3497$ & $0.2233$ & $0.1236$  \\
+		MISC ($TOl=5.10^{-2}$)  & $0.6011$ & $0.3539$ & $0.1882$ & $0.1573$  \\
+		MISC ($TOl=10^{-2}$)  & $\red{0.5126}$ & $0.3258$ & $0.1770$ & $0.0829$   \\	
+		MISC ($TOl=5.10^{-3}$)  & $	0.4930$ & $0.3076$ & $0.1671$ & $-$   \\	
+	    MISC ($TOl=10^{-3}$)  & $		0.5126$ & $\red{0.2935}$ & $\red{0.1503}$ & $-$   \\
+	MISC ($TOl=10^{-4}$)  & $		0.5154$ & $0.2935$ & $-$ & $-$   \\
+			MC method ($M=10^{6}$)   & $\mathbf{0.5154}$  & $\mathbf{0.2935}$  & $\mathbf{0.1545}$ & $\mathbf{0.0801}$  \\	
+		\hline
+	\end{tabular}
+	\caption{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1$, $H=0.43$, without Richardson extrapolation}
+	\label{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.43$}
+\end{table}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{5}{c}r}
+		Method \textbackslash  Steps    &$1-2$        & $2-4$ & $4-8$ & $8-16$  \\
+		\hline
+		MISC ($TOl=5.10^{-1}$)  &$0.9059$ & $0.0997$ & $0.0323$ & $\red{0.0028}$  \\
+		MISC ($TOl=10^{-1}$)  &$0.9059$ &$0.0997$ & $0.1025$ & $0.0688$ \\
+		MISC ($TOl=5.10^{-2}$)  &$0.9059$ & $0.1671$ & $0.0857$ & $0.0646$   \\
+		MISC ($TOl=10^{-2}$)  & $0.7374$ &$0.0969$ & $0.0463$ & $0.0028$ \\		
+			MISC ($TOl=5.10^{-3}$)  & $0.7205$ &$0.0941$ & $0.0211$ & $-$ \\	
+				MISC ($TOl=10^{-3}$)  & $0.7191$ & $0.0758$ & $\red{0.0112}$ & $-$ \\	
+					MISC ($TOl=5.10^{-4}$)  &$\red{0.7129}$ & $\red{0.0609}$ & $-$ & $-$ \\
+		MC method ($M=10^{6}$)&$ \mathbf{0.7133}$    & $\mathbf{0.0698}$  & $\mathbf{0.0160}$  & $\mathbf{0.0035}$ \\
+		\hline
+	\end{tabular}
+	\caption{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1$, $H=0.43$, using Richardson extrapolation (level $1$)}
+	\label{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.43$ , using Richardson extrapolation}
+\end{table}
+
+
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{5}{c}r}
+		Method \textbackslash  Steps    &$1-2-4$        & $2-4-8$ & $4-8-16$   \\
+		\hline
+		MISC ($TOl=5.10^{-1}$)  &$ 0.1699$ & $\red{0.0098}$ & $ 0.0056$   \\
+			MISC ($TOl=2.10^{-1}$)  &$ 0.1699$ &$-$ & $\red{ 0.0014}$  \\
+		MISC ($TOl=10^{-1}$)  &$0.2037$ &$-$ & $-$  \\
+		MISC ($TOl=5.10^{-2}$)  &$\red{0.0295}$ & $-$ & $-$  \\
+		MC method ($M=10^{6}$)&$\mathbf{0.1440}$    & $ \mathbf{0.0180}  $  & $\mathbf{0.0023}$   \\
+		\hline
+	\end{tabular}
+	\caption{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1$, $H=0.43$, using Richardson extrapolation (level $2$)}
+	\label{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.43$ , using Richardson extrapolation_level2}
+\end{table}
+\newpage
+
+
+
+\subsubsection{Case $H=0.07$, Relative error for different methods}
+\label{sec:Case $H=0.07$, Relative error for different methods}
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$ &   \\
+		\hline
+			MISC ($TOl=5.10^{-1}$)  & $\red{0.3662}$ & $\red{0.1578}$ & $\red{0.1010}$ & $\red{0.0758}$  \\
+		MISC ($TOl=10^{-1}$)  & $0.3662$ &  $0.1578$ & $-$ & $-$  \\
+		MISC ($TOl=5.10^{-2}$)        & $0.3662$ &$-$ &  $-$ &  $-$ \\
+		MISC ($TOl=10^{-2}$)    & $-$ & $-$  & $-$ & $-$  \\	
+		MC method ($M=10^{6}$)   & $\mathbf{0.5354}$  & $\mathbf{0.2879}$  & $\mathbf{0.1515}$ & $\mathbf{0.0783}$  \\	
+		\hline
+	\end{tabular}
+	\caption{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1$, $H=0.07$, without Richardson extrapolation}
+	\label{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.07$}
+\end{table}
+
+
+
+
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{5}{c}r}
+		Method \textbackslash  Steps &$1-2$             & $2-4$ & $4-8$ & $8-16$ \\
+		\hline
+		MISC ($TOl=5.10^{-1}$)  &$\red{0.5682}$ & $\red{0.0505}$ & $0.1389$ & $0.1604$ \\
+		MISC ($TOl=16.10^{-2}$)  &$0.5682$ & $0.0505$ & $0.1389$ & $\red{0.0038}$  \\
+		MISC ($TOl=10^{-1}$)  &$0.5682$ &  $0.0505$ & $ 0.1692$ & $-$ \\
+		MISC ($TOl=5.10^{-2}$) &$0.5682$ &  $ 0.1465$ & $\red{0.0088}$ & $-$   \\
+		MISC ($TOl=10^{-2}$)&$-$ &  $0.0669$ & $0.0088$ & $-$ \\	
+			MC method ($M=10^{6}$)  &$\mathbf{0.8915}$  & $\mathbf{0.0537}$  & $\mathbf{0.0129}$  & $\mathbf{0.0043}$ \\
+		\hline	
+	
+	\end{tabular}
+	\caption{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1$, $H=0.07$, using Richardson extrapolation (level $1$)}
+	\label{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.07$ , using Richardson extrapolation}
+\end{table}
+
+
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{5}{c}r}
+		Method \textbackslash  Steps &$1-2-4$             & $2-4-8$ & $4-8-16$   \\
+		\hline
+		MISC ($TOl=5.10^{-1}$)  &$0.2563$ & $ 0.1692$ & $ 0.1679
+		$   \\
+		MISC ($TOl=10^{-1}$)  &$0.2563$ &  $0.1566$ & $\red{  0.0025}$  \\
+		MISC ($TOl=7.10^{-2}$) &$  0.3005$ &  $  \red{0.0227}$ & $-$    \\
+		MISC ($TOl=5.10^{-2}$) &$0.4874$ &  $  -$ & $-$    \\
+		MISC ($TOl=10^{-2}$)&$ \red{0.1742}$ &  $-$ & $-$  \\	
+		MC method ($M=10^{6}$)  &$\mathbf{0.2231}$  & $  \mathbf{0.0279}$  & $\mathbf{0.0035}$ \\
+		\hline	
+		
+	\end{tabular}
+	\caption{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1$, $H=0.07$, using Richardson extrapolation (level $2$)}
+	\label{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.07$ , using Richardson extrapolation_level2}
+\end{table}
+
+
+
+
+
+%\subsection{Quadrature error vs work for different } \label{sec:Complexity  error plots}
+
+
+
+%\begin{table}[h!]
+%	\centering
+%	\begin{tabular}{l*{6}{c}r}
+%		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$  \\
+%		\hline
+%		MISC ($TOl=10^{-1}$)  & $0.2156$ & $0.2002$ &  $0.2002$ &  $0.1910$  \\
+%		MISC ($TOl=10^{-2}$)  &  $0.2474$ &  $0.2378$ &  $0.2378$ & $-$  \\
+%		MISC ($TOl=10^{-3}$)        &  $0.2505$ & $0.2377$ &   $-$ &  $-$ \\
+%		MISC ($TOl=10^{-4}$)    &  $0.25$ &  $0.2378$  & $-$ & $-$  \\
+%		%		MC method ($M=10^{6}$)    &  $0.6326$ &  $0.6332$  &  $0.6330$ &  $0.6337$  \\
+%		MC method ($M=10^{6}$)   & $\underset{(4.72e-07)}{0.2499} $   & $\underset{(2.45e-07)}{0.2378} $  & $\underset{(1.80e-07)}{0.2310}$ & $\underset{(1.57e-07)}{0.2275} $  \\			
+%		\hline
+%	\end{tabular}
+%	\caption{ Call option price of the different methods for different number of time steps. Case $K=0.8$}
+%	\label{table: Call option price of the different methods for different number of time steps. Case $K=0.8$_H_007}
+%\end{table}
+%
+
+
+
+%
+%
+%\begin{table}[h!]
+%	\centering
+%	\begin{tabular}{l*{6}{c}r}
+%		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$  \\
+%		\hline
+%		MISC ($TOl=10^{-1}$)  & $0.0288$  & $0.0102$   & $0.0025$   &  $0.0005 $ \\
+%		MISC ($TOl=10^{-2}$)  & $0.0501$  & $0.0161$ &   $0.0025$  &   $0.0005$  \\
+%		MISC ($TOl=10^{-3}$)        &  $0.0515$ & $0.0335$  &  $-$  &   $-$ \\
+%		MISC ($TOl=10^{-4}$)    & $0.0525$   &  $-$   & $-$ & $-$  \\
+%		%		MC method ($M=10^{6}$)    &  $0.8646$  &   $0.8647$   &   $0.8643$  &   $0.8646$   \\
+%		MC method ($M=10^{6}$)   & $\underset{(2.68e-07)}{0.0518} $   & $\underset{(1.85e-07)}{0.0339} $  & $\underset{(1.44e-07)}{0.0237}$ & $\underset{(6.61e-08)}{0.0177} $  \\		
+%		\hline
+%	\end{tabular}
+%	\caption{ Call option price of the different methods for different number of time steps. Case $K=1.2$}
+%	\label{table: Call option price of the different methods for different number of time steps. Case $K=1.2$_H_007}
+%\end{table}
+
+
+
+%
+%\begin{figure}[!h]
+%	\centering
+%	\begin{subfigure}{.5\textwidth}
+%		\centering
+%		\includegraphics[width=0.95\linewidth]{./figures/payoff_plots_H_007/rBergomi_payoff_2steps_wrt_monyeness}
+%		\caption{}
+%		\label{fig:rBergomi_payoff_4steps_wrt_monyeness_sub1}
+%	\end{subfigure}%
+%	\begin{subfigure}{.5\textwidth}
+%		\centering
+%		\includegraphics[width=0.95\linewidth]{./figures/payoff_plots_H_007/rBergomi_payoff_4steps_wrt_monyeness}
+%		\caption{ }
+%		\label{fig:rBergomi_payoff_4steps_wrt_monyeness_sub2}
+%	\end{subfigure}%
+%	\caption{Black Scholes payoff for rBergomi model as a function of moneyness a) $2$  time steps, b) $4$  time steps.}
+%	\label{fig:rBergomi_payoff_4steps_wrt_monyeness_1}
+%\end{figure}
+%
+%\begin{figure}[!h]
+%	\centering
+%	\begin{subfigure}{.5\textwidth}
+%		\centering
+%		\includegraphics[width=0.95\linewidth]{./figures/payoff_plots_H_007/rBergomi_payoff_8steps_wrt_monyeness}
+%		\caption{}
+%		\label{fig:rBergomi_payoff_4steps_wrt_monyeness_sub3}
+%	\end{subfigure}%
+%	\begin{subfigure}{.5\textwidth}
+%		\centering
+%		\includegraphics[width=0.95\linewidth]{./figures/payoff_plots_H_007/rBergomi_payoff_16steps_wrt_monyeness}
+%		\caption{ }
+%		\label{fig:rBergomi_payoff_4steps_wrt_monyeness_sub4}
+%	\end{subfigure}%
+%	\caption{Black Scholes payoff for rBergomi model as a function of moneyness a) $8$  time steps, b) $16$  time steps.}
+%	\label{fig:rBergomi_payoff_4steps_wrt_monyeness_2}
+%\end{figure}
+%
+
+
+
+
+
+
+
+
+
+
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%References
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\bibliographystyle{plain}
+\bibliography{smoothing} 
+
+
+
+
+\appendix
+
+
+
+\newpage
+\section{Gaussian Hermite Quadrature with importance sampling}\label{appendix:Gaussian Hermite Quadrature with importance sampling}
+Let us call the integrand that we feed to MISC by $I(W_1,W_2)$, then 
+
+\begin{align}
+	C_{RB}\left( T, K \right)=  \int_{\rset_+^{2N}} I(\mathbf{W}_1,\mathbf{W}_2)  \rho(\mathbf{W}_1) \rho(\mathbf{W}_2) d \mathbf{W}_1  d\mathbf{W}_2 \COMMA
+\end{align}
+where $N$ is the number of time steps. We can rewrite the previous expression as
+\begin{align}\label{eq: importance sampling}
+	C_{RB}\left( T, K \right)=  \int_{\rset_+^{2N}} \frac{I(\mathbf{W}_1,\mathbf{W}_2)\rho(\mathbf{W}_1)}{h(\mathbf{W}_1;\hat{\mathbf{W}}_1,\Psi)} {h(\mathbf{W}_1;\hat{\mathbf{W}}_1,\Psi)} \rho(\mathbf{W}_2) d \mathbf{W}_1  d\mathbf{W}_2 \COMMA
+\end{align}
+where $h(\mathbf{W}_1;\hat{\mathbf{W}}_1,\Psi)$ is a multivariate normal density with first and second order moments given by
+\begin{align}\label{eq:Gaussian moments}
+	\hat{\mathbf{W}}_1&=\operatorname{arg} \underset{\mathbf{W}_1 \in \rset^{N} }{\max}	[ \log I(\mathbf{W}_1;\mathbf{W}_2)] \\
+	\Psi &=\left(- \frac{\partial^2[\log I(\mathbf{W}_1;\mathbf{W}_2)]}{\partial \mathbf{W}_1^{T} \mathbf{W}_1} \right)^{-1}_{\mathbf{W}_1=\hat{\mathbf{W}}_1}
+\end{align}
+
+Let us define $\tilde{\mathbf{W}}_1$ as uncorrelated varaibles and the Cholesky factorization of $\Psi$ is given by $\Psi=L L^{T}$, and $\bar{\mathbf{W}}_1=\sqrt{2} L \tilde{\mathbf{W}}_1+\hat{\mathbf{W}}_1$ then Eq \ref{eq: importance sampling} becomes 
+
+\begin{align}
+	C_{RB}\left( T, K \right)=&= 2^{N/2}. \abs{L} \int_{\rset_+^{2N}} \left( I(\bar{\mathbf{W}}_1,\mathbf{W}_2)  \exp(-\frac{1}{2}\bar{\mathbf{W}}_1^T \bar{\mathbf{W}}_1) \exp(\frac{1}{2}\tilde{\mathbf{W}}^T \tilde{\mathbf{W}}) \right)   \rho(\tilde{\mathbf{W}}_1) \rho(\mathbf{W}_2) d \tilde{\mathbf{W}}_1 d\mathbf{W}_2 
+\end{align}
+\newpage
+\section{additional results}
+\subsection{Integrand plotting wrt different random inputs N=2, H=0.43}
+
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/1D_plots/N_2/H_043/Bergomi_integrand_K_1_H_043_W11_N_2}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/1D_plots/N_2/H_043/Bergomi_integrand_K_1_H_043_W12_N_2}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	\caption{Plotting the integrand $I$ (in \eqref{BS_formula_rbergomi}) as a function of $W_1$ coordinates for $H=0.43$ and $N=2$.}
+	\label{fig:Integrand_H_043_N_2_W_1}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/1D_plots/N_2/H_043/Bergomi_integrand_K_1_H_043_W21_N_2}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/1D_plots/N_2/H_043/Bergomi_integrand_K_1_H_043_W22_N_2}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	\caption{Plotting the integrand $I$ (in \eqref{BS_formula_rbergomi}) as a function of $W_2$ coordinates for $H=0.43$ and $N=2$.}
+	\label{fig:Integrand_H_043_N_2_W_2}
+\end{figure}
+
+
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/2D_plots/N_2/H_043/Bergomi_integrand_contours_K_1_H_043_W1_1_2_N_2}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/2D_plots/N_2/H_043/Bergomi_integrand_contours_K_1_H_043_W2_1_2_N_2}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	\caption{Two dimensional Plotting of the integrand $I$ (in \eqref{BS_formula_rbergomi})  for $H=0.43$ and $N=2$, a)  function of $W_1$ coordinates, b) function of $W_2$ coordinates}
+	\label{fig:Integrand_H_043_N_2_2D}
+\end{figure}
+
+
+\newpage
+\subsection{Integrand plotting wrt different random inputs: N=4, H=0.43}
+
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}[b]{0.475\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/1D_plots/N_4/H_043/Bergomi_integrand_K_1_H_043_W11_N_4}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.475\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/1D_plots/N_4/H_043/Bergomi_integrand_K_1_H_043_W12_N_4}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	\vskip\baselineskip
+	\begin{subfigure}[b]{0.475\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/1D_plots/N_4/H_043/Bergomi_integrand_K_1_H_043_W13_N_4}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	\quad
+	\begin{subfigure}[b]{0.475\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/1D_plots/N_4/H_043/Bergomi_integrand_K_1_H_043_W14_N_4}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	\caption{Plotting the integrand $I$ (in \eqref{BS_formula_rbergomi}) as a function of $W_1$ coordinates for $H=0.43$ and $N=4$.}
+	\label{fig:Integrand_H_043_N_4_W_1_1}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}[b]{0.475\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/1D_plots/N_4/H_043/Bergomi_integrand_K_1_H_043_W21_N_4}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.475\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/1D_plots/N_4/H_043/Bergomi_integrand_K_1_H_043_W22_N_4}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	
+	\vskip\baselineskip
+	
+	\begin{subfigure}[b]{0.475\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/1D_plots/N_4/H_043/Bergomi_integrand_K_1_H_043_W23_N_4}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.475\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/1D_plots/N_4/H_043/Bergomi_integrand_K_1_H_043_W24_N_4}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	\caption{Plotting the integrand $I$ (in \eqref{BS_formula_rbergomi}) as a function of $W_2$ coordinates for $H=0.43$ and $N=4$.}
+	
+	\label{fig:Integrand_H_043_N_4_W_2_1}
+\end{figure}
+
+
+\newpage
+
+\subsection{Case $H=0.43$, Call prices for different methods}\label{appendix:Case $H=0.43$, Call prices for different methods}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$ &   \\
+		\hline
+		MISC ($TOl=5.10^{-1}$)  & $0.1140$ & $0.0961$ & $0.0848$ & $0.0781$  \\
+		MISC ($TOl=2.10^{-1}$)  & $0.1140$ & $0.0961$ & $0.0848$ & $\red{0.0769}$  \\
+		MISC ($TOl=10^{-1}$)  & $0.1140$ & $0.0961$ & $0.0871$ & $0.0800$  \\
+		MISC ($TOl=5.10^{-2}$)  & $0.1140$ & $0.0964$ & $0.0846$ & $0.0824$  \\
+		MISC ($TOl=10^{-2}$)  & $\red{0.1077}$ & $0.0944$ & $0.0838$ & $0.0771$  \\
+		MISC ($TOl=5.10^{-3}$)  & $0.1063$ & $0.0931$ & $0.0831$ & $-$  \\
+		MISC ($TOl=10^{-3}$)  & $0.1077$ & $\red{0.0921}$ & $\red{0.0819}$ & $-$  \\
+		MISC ($TOl=10^{-4}$)  & $0.1079$ & $0.0921$ & $-$ & $-$  \\
+		MC method ($M=10^{6}$)   & $\underset{(1.55e-04)}{0.1079}$ & $ \underset{(9.65e-05)}{0.0921}$  & $ \underset{(7.61e-05)}{0.0822}$ & $ \underset{(6.65e-05)}{0.0769}$ \\		
+		
+		\hline
+	\end{tabular}
+	\caption{ Call option price of the different methods for different number of time steps. Case $K=1$, $H=0.43$, without Richardson extrapolation.  The values between parentheses in the tables are the standard errors for MC method}
+	\label{table: Call option price of the different methods for different number of time steps. Case $K=1$, $H=0.43$}
+\end{table}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps           &$1-2$ & $2-4$ & $4-8$ & $8-16$\\
+		\hline
+		MISC ($TOl=5.10^{-1}$)& $0.1357$  & $0.0783$ & $0.0735$ & $\red{0.0714}$ \\
+		MISC ($TOl=10^{-1}$)  &$0.1357$  &$0.0783$ & $0.0785$ & $0.0761$  \\
+		MISC ($TOl=5.10^{-2}$)  & $0.1357$ & $0.0831$ & $0.0773$ & $0.0758$   \\
+		MISC ($TOl=10^{-2}$)  & $0.1237$ &$0.0781$ & $0.0745$ & $0.0714$  \\
+		MISC ($TOl=5.10^{-3}$)  & $0.1225$ &$0.0779$ & $0.0727$ & $-$  \\	
+		MISC ($TOl=10^{-3}$)  & $0.1224$ &$0.0766$ & $\red{0.0720}$ & $-$ \\
+		MISC ($TOl=5.10^{-4}$)  &$\red{0.1221}$ & $\red{0.0763}$ & $-$ & $-$ \\
+		\hline
+	\end{tabular}
+	\caption{ Call option price of the different methods for different number of time steps. Case $K=1$, $H=0.43$, using Richardson extrapolation (level $1$)}
+	\label{table: Call option price of the different methods for different number of time steps. Case $K=1$, using Richardson extrapolation}
+\end{table}
+
+
+
+
+
+
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps           &$1-2-4$ & $2-4-8$ & $4-8-16$\\
+		\hline
+		MISC ($TOl=5.10^{-1}$)& $0.0591$  & $\red{0.0719}$ & $0.0708$  \\
+		MISC ($TOl=2.10^{-1}$)  &$0.0591$ &$-$ & $\red{0.0711}$  \\
+		MISC ($TOl=10^{-1}$)  &$0.0567$  &$-$ & $-$   \\
+		MISC ($TOl=5.10^{-2}$)  & $\red{0.0733}$ & $-$ & $-$  \\
+		\hline
+	\end{tabular}
+	\caption{ Call option price of the different methods for different number of time steps. Case $K=1$, $H=0.43$, using Richardson extrapolation (level 2)}
+	\label{table: Call option price of the different methods for different number of time steps. Case $K=1$, using Richardson extrapolation_level2}
+\end{table}
+
+
+\newpage
+\subsection{Case $H=0.07$, Call prices for different methods}\label{appendix:Case $H=0.07$, Call prices for different methods}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$  \\
+		\hline
+		MISC ($TOl=5.10^{-1}$)  & $\red{0.1082}$ & $\red{0.0917}$ & $\red{0.0872}$ & $\red{0.0732}$  \\
+		MISC ($TOl=10^{-1}$)  & $0.1082$ &  $0.0917$ & $-$ & $-$  \\
+		MISC ($TOl=5.10^{-2}$)        & $0.1082$ &$-$ &  $-$ &  $-$ \\
+		MISC ($TOl=10^{-2}$)    & $-$ & $-$  & $-$ & $-$  \\
+		%				MC method ($M=10^{6}$)    & $0.0840$ & $0.0781$  & $0.0746$ & $0.0729$  \\
+		MC method ($M=10^{6}$)   & $\underset{(1.05e-03)}{0.1216} $  & $\underset{(1.86e-04)}{0.1020} $  & $\underset{ (1.35e-04)}{0.0912}$ & $\underset {(1.08e-04)}{0.0854} $  \\		
+		\hline
+	\end{tabular}
+	\caption{ Call option price of the different methods for different number of time steps. Case $K=1$, without Richardson extrapolation.  The values between parentheses in the tables are the standard errors for MC method}
+	\label{table: Call option price of the different methods for different number of time steps. Case $K=1$, $H_007$}
+\end{table}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps    &$1-2$         & $2-4$ & $4-8$ & $8-16$\\
+		\hline
+		MISC ($TOl=5.10^{-1}$)  &$\red{0.1242}$ & $\red{0.0752}$ & $0.0682$ & $0.0665$ \\
+		MISC ($TOl=16.10^{-2}$)  &$0.1242$ & $0.0752$ & $0.0682$ & $\red{0.0795}$  \\
+		MISC ($TOl=10^{-1}$)  &$0.1242$ & $0.0752$ & $0.0658$ & $-$  \\
+		MISC ($TOl=5.10^{-2}$)   &$0.1242$ & $0.0676$ & $\red{0.0799}$ & $-$   \\
+		MISC ($TOl=10^{-2}$)  &$-$ & $0.0845$ & $0.0799$ & $-$  \\	
+		\hline
+	\end{tabular}
+	\caption{ Call option price of the different methods for different number of time steps. Case $K=1$, $H=0.07$, using Richardson extrapolation (level $1$)}
+	\label{table: Call option price of the different methods for different number of time steps. Case $K=1$, $H=0.07$, using Richardson extrapolation}
+\end{table}
+
+
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps    &$1-2-4$         & $2-4-8$ & $4-8-16$ \\
+		\hline
+		MISC ($TOl=5.10^{-1}$)  &$0.0589$ & $0.0658$ & $0.0659$  \\
+		MISC ($TOl=10^{-1}$)  &$0.0589$ & $0.0668$ & $\red{0.079}$   \\
+		MISC ($TOl=7.10^{-2}$)   &$0.0554$ & $\red{0.0810}$ & $-$   \\
+		MISC ($TOl=5.10^{-2}$)   &$0.0406$ & $-$ & $-$   \\
+		MISC ($TOl=10^{-2}$)  &$\red{0.0654}$ & $-$ & $-$   \\	
+		\hline
+	\end{tabular}
+	\caption{ Call option price of the different methods for different number of time steps. Case $K=1$, $H=0.07$, using Richardson extrapolation (level $2$)}
+	\label{table: Call option price of the different methods for different number of time steps. Case $K=1$, $H=0.07$, using Richardson extrapolation_level2}
+\end{table}
+
+
+
+\newpage
+\subsection{Comparing call options prices }\label{sec:Comparing call options prices rbergomi}
+
+
+\subsubsection{Without Hierarchical representation}
+\subsubsection*{Case $H=0.43$}
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$ &   \\
+		\hline
+		MISC ($TOl=5.10^{-1}$)  & $0.1057$ & $0.0988$ & $0.0944$ & $0.0921$  \\
+		MISC ($TOl=10^{-1}$)  & $0.1057$ & $0.0988$ & $0.0836$ & $0.0594$  \\
+		MISC ($TOl=5.10^{-2}$)  & $0.1057$ & $0.0976$ & $0.0758$ & $0.0781$  \\
+		MISC ($TOl=10^{-2}$)  & $0.1113$ & $0.0940$ & $0.0820$ & $-$  \\
+		%		MISC ($TOl=10^{-3}$)        & $0.1081$ &$0.0918$ &  $0.0822$ &  $-$ \\
+		%		MISC ($TOl=10^{-4}$)    & $0.1080$ & $0.0921$  & $-$ & $-$  \\
+		%		%				MC method ($M=10^{6}$)    & $0.0840$ & $0.0781$  & $0.0746$ & $0.0729$  \\
+		MC method ($M=10^{6}$)   & $\underset{(1.55e-04)}{0.1079}$ & $ \underset{(9.65e-05)}{0.0921}$  & $ \underset{(7.61e-05)}{0.0822}$ & $ \underset{(6.65e-05)}{0.0769}$ \\		
+		
+		\hline
+	\end{tabular}
+	\caption{ Call option price of the different methods for different number of time steps. Case $K=1$}
+	\label{table: Call option price of the different methods for different number of time steps. Case $K=1$}
+\end{table}
+
+
+\subsubsection*{Case $H=0.07$}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$  \\
+		\hline
+		MISC ($TOl=5.10^{-1}$)  & $0.1065$ & $0.0900$ & $0.0809$ & $0.0762$  \\
+		MISC ($TOl=10^{-1}$)  &  $0.1065$ &   $0.0900$ & $0.0733$ & $0.0956$  \\
+		MISC ($TOl=5.10^{-2}$)        &  $0.1065$ &$0.0898$ &  $0.0881$ &  $-$ \\
+		MISC ($TOl=10^{-2}$)    & $0.1226$ & $0.1022$  & $0.0933$ & $-$  \\
+		%				MC method ($M=10^{6}$)    & $0.0840$ & $0.0781$  & $0.0746$ & $0.0729$  \\
+		MC method ($M=10^{6}$)   & $\underset{(1.05e-03)}{0.1216} $  & $\underset{(1.86e-04)}{0.1020} $  & $\underset{ (1.35e-04)}{0.0912}$ & $\underset {(1.08e-04)}{0.0854} $  \\		
+		\hline
+	\end{tabular}
+	\caption{ Call option price of the different methods for different number of time steps. Case $K=1$}
+	\label{table: Call option price of the different methods for different number of time steps. Case $K=1$_H_007}
+\end{table}
+
+
+
+\newpage
+\subsection{Investigating  differences wrt $H$ }\label{sec:mixed differences rbergomi_wrt_H}
+
+\subsubsection{Totally Hierarchical}
+In this section, we do both hierarchical transformation, based on brownian bridges, for both directions $W_1$ and $W_2$.
+
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/effect_H_differences/hierarchical/H_007/N_8/first_difference_rbergomi_8steps_H_007_K_1_hierarch_with_rate_W2.eps}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/effect_H_differences/total_hierarchical/first_difference_rbergomi_8steps_H_007_K_1_totally_hierarch_with_rate_W2}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of  first order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)) for $K=1$: a) Without hierarchical for $W_2$ b) With hierarchical for $W_2$}
+	\label{fig:test2}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/effect_H_differences/hierarchical/H_007/N_8/mixed_difference_order2_rbergomi_8steps_H_007_K_1_hierarch_with_rate_W2}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/effect_H_differences/total_hierarchical/mixed_difference_order2_rbergomi_8steps_H_007_K_1_totally_hierarch_with_rate_W2}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of  mixed order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)) for $K=1$: a) Without hierarchical for $W_2$ b) With hierarchical for $W_2$}
+	\label{fig:test2}
+\end{figure}
+
+
+
+\subsubsection{Hierarchical}
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/effect_H_differences/hierarchical/H_043/N_8/first_difference_rbergomi_8steps_H_043_K_1_hierarch_with_rate_W1.eps}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/effect_H_differences/hierarchical/H_007/N_8/first_difference_rbergomi_8steps_H_007_K_1_hierarch_with_rate_W1.eps}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of  first order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)) for $K=1$: a) $H=0.43$ b)  $H=0.07$}
+	\label{fig:test2}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/effect_H_differences/hierarchical/H_043/N_8/first_difference_rbergomi_8steps_H_043_K_1_hierarch_with_rate_W2.eps}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/effect_H_differences/hierarchical/H_007/N_8/first_difference_rbergomi_8steps_H_007_K_1_hierarch_with_rate_W2.eps}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of  first order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)) for $K=1$: a) $H=0.43$ b)  $H=0.07$}
+	\label{fig:test2}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/effect_H_differences/hierarchical/H_043/N_8/mixed_difference_order2_rbergomi_8steps_H_043_K_1_hierarch_with_rate_W1}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/effect_H_differences/hierarchical/H_007/N_8/mixed_difference_order2_rbergomi_8steps_H_007_K_1_hierarch_with_rate_W1}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of  mixed order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)) for $K=1$: a) $H=0.43$ b)  $H=0.07$}
+	\label{fig:test2}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/effect_H_differences/hierarchical/H_043/N_8/mixed_difference_order2_rbergomi_8steps_H_043_K_1_hierarch_with_rate_W2}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/effect_H_differences/hierarchical/H_007/N_8/mixed_difference_order2_rbergomi_8steps_H_007_K_1_hierarch_with_rate_W2}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of  mixed order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)) for $K=1$: a) $H=0.43$ b)  $H=0.07$}
+	\label{fig:test2}
+\end{figure}
+
+
+
+\newpage
+\subsubsection{Non  Hierarchical}
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/effect_H_differences/non_hierarchical/H_043/N_8/first_difference_rbergomi_8steps_H_043_K_1_non_hierarch_with_rate_W1.eps}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/effect_H_differences/non_hierarchical/H_007/N_8/first_difference_rbergomi_8steps_H_007_K_1_non_hierarch_with_rate_W1.eps}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of  first order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)) for $K=1$: a) $H=0.43$ b)  $H=0.07$}
+	\label{fig:test2}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/effect_H_differences/non_hierarchical/H_043/N_8/first_difference_rbergomi_8steps_H_043_K_1_non_hierarch_with_rate_W2.eps}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/effect_H_differences/non_hierarchical/H_007/N_8/first_difference_rbergomi_8steps_H_007_K_1_non_hierarch_with_rate_W2.eps}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of  first order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)) for $K=1$: a) $H=0.43$ b)  $H=0.07$}
+	\label{fig:test2}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/effect_H_differences/non_hierarchical/H_043/N_8/mixed_difference_order2_rbergomi_8steps_H_043_K_1_non_hierarch_with_rate_W1}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/effect_H_differences/non_hierarchical/H_007/N_8/mixed_difference_order2_rbergomi_8steps_H_007_K_1_non_hierarch_with_rate_W1}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of  mixed order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)) for $K=1$: a) $H=0.43$ b)  $H=0.07$}
+	\label{fig:test2}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/effect_H_differences/non_hierarchical/H_043/N_8/mixed_difference_order2_rbergomi_8steps_H_043_K_1_non_hierarch_with_rate_W2}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/effect_H_differences/non_hierarchical/H_007/N_8/mixed_difference_order2_rbergomi_8steps_H_007_K_1_non_hierarch_with_rate_W2}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of  mixed order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)) for $K=1$: a) $H=0.43$ b)  $H=0.07$}
+	\label{fig:test2}
+\end{figure}
+\newpage
+
+\subsection{Investigating mixed differences wrt $\rho$ }\label{sec:mixed differences rbergomi_wrt_rho}
+
+\subsubsection*{N=4, K=1 }
+\begin{figure}[h!]
+\centering
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1\linewidth]{./figures/effect_rho_differences/H_0_43_K_1/N_4/first_difference_rbergomi_4steps_H_043_K_1_rho__0_9_with_rate_W1.eps}
+\caption{}
+\label{fig:sub3}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1\linewidth]{./figures/effect_rho_differences/H_0_43_K_1/N_4/first_difference_rbergomi_4steps_H_043_K_1_rho_0_with_rate_W1.eps}
+\caption{}
+\label{fig:sub4}
+\end{subfigure}
+
+\caption{The rate of convergence of  first order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)) for $K=1$: a) $\rho=-0.9$ b)  $\rho=0.$}
+\label{fig:test2}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1\linewidth]{./figures/effect_rho_differences/H_0_43_K_1/N_4/mixed_difference_order2_rbergomi_4steps_H_043_K_1_rho__0__9_with_rate_W1}
+\caption{}
+\label{fig:sub3}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1\linewidth]{./figures/effect_rho_differences/H_0_43_K_1/N_4/mixed_difference_order2_rbergomi_4steps_H_043_K_1_rho_0_with_rate_W1}
+\caption{}
+\label{fig:sub4}
+\end{subfigure}
+
+\caption{The rate of convergence of  mixed order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)): a) $\rho=-0.9$ b)  $\rho=0.$}
+\label{fig:test2}
+\end{figure}
+
+\newpage
+\subsubsection*{N=8, K=1 }
+
+
+\begin{figure}[h!]
+\centering
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1\linewidth]{./figures/effect_rho_differences/H_0_43_K_1/N_8/first_difference_rbergomi_8steps_H_043_K_1_rho__0_9_with_rate_W1.eps}
+\caption{}
+\label{fig:sub3}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1\linewidth]{./figures/effect_rho_differences/H_0_43_K_1/N_8/first_difference_rbergomi_8steps_H_043_K_1_rho_0_with_rate_W1.eps}
+\caption{}
+\label{fig:sub4}
+\end{subfigure}
+
+\caption{The rate of convergence of  first order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)): a) $\rho=-0.9$ b)  $\rho=0.$}
+\label{fig:test2}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1\linewidth]{./figures/effect_rho_differences/H_0_43_K_1/N_8/mixed_difference_order2_rbergomi_8steps_H_043_K_1_rho__0_9_with_rate_W1}
+\caption{}
+\label{fig:sub3}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1\linewidth]{./figures/effect_rho_differences/H_0_43_K_1/N_8/mixed_difference_order2_rbergomi_8steps_H_043_K_1_rho_0_with_rate_W1}
+\caption{}
+\label{fig:sub4}
+\end{subfigure}
+
+\caption{The rate of convergence of  mixed order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)): a) $\rho=-0.9$ b)  $\rho=0.$}
+\label{fig:test2}
+\end{figure}
+
+
+\newpage
+\subsubsection*{N=4, K=0.8 }
+\begin{figure}[h!]
+\centering
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1\linewidth]{./figures/effect_rho_differences/H_0_43_K_0_8/N_4/first_difference_rbergomi_4steps_H_043_K_0_8_rho__0_9_with_rate_W1.eps}
+\caption{}
+\label{fig:sub3}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1\linewidth]{./figures/effect_rho_differences/H_0_43_K_0_8/N_4/first_difference_rbergomi_4steps_H_043_K_0_8_rho_0_with_rate_W1.eps}
+\caption{}
+\label{fig:sub4}
+\end{subfigure}
+
+\caption{The rate of convergence of  first order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)): a) $\rho=-0.9$ b)  $\rho=0.$}
+\label{fig:test2}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1\linewidth]{./figures/effect_rho_differences/H_0_43_K_0_8/N_4/mixed_difference_order2_rbergomi_4steps_H_043_K_0_8_rho__0_9_with_rate_W1}
+\caption{}
+\label{fig:sub3}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1\linewidth]{./figures/effect_rho_differences/H_0_43_K_0_8/N_4/mixed_difference_order2_rbergomi_4steps_H_043_K_0_8_rho_0_with_rate_W1}
+\caption{}
+\label{fig:sub4}
+\end{subfigure}
+
+\caption{The rate of convergence of  mixed order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)): a) $\rho=-0.9$ b)  $\rho=0.$}
+\label{fig:test2}
+\end{figure}
+
+\newpage
+\subsubsection*{N=8, K=0.8 }
+
+
+\begin{figure}[h!]
+\centering
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1\linewidth]{./figures/effect_rho_differences/H_0_43_K_0_8/N_8/first_difference_rbergomi_8steps_H_043_K_0_8_rho__0_9_with_rate_W1.eps}
+\caption{}
+\label{fig:sub3}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1\linewidth]{./figures/effect_rho_differences/H_0_43_K_0_8/N_8/first_difference_rbergomi_8steps_H_043_K_0_8_rho_0_with_rate_W1.eps}
+\caption{}
+\label{fig:sub4}
+\end{subfigure}
+
+\caption{The rate of convergence of  first order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)): a) $\rho=-0.9$ b)  $\rho=0.$}
+\label{fig:test2}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1\linewidth]{./figures/effect_rho_differences/H_0_43_K_0_8/N_8/mixed_difference_order2_rbergomi_8steps_H_043_K_0_8_rho__0_9_with_rate_W1}
+\caption{}
+\label{fig:sub3}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1\linewidth]{./figures/effect_rho_differences/H_0_43_K_0_8/N_8/mixed_difference_order2_rbergomi_8steps_H_043_K_0_8_rho_0_with_rate_W1}
+\caption{}
+\label{fig:sub4}
+\end{subfigure}
+
+\caption{The rate of convergence of  mixed order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)): a) $\rho=-0.9$ b)  $\rho=0.$}
+\label{fig:test2}
+\end{figure}
+
+
+\newpage
+\subsection{Investigating mixed differences wrt $\xi$ }\label{sec:mixed differences rbergomi_wrt_xi}
+
+\subsubsection*{N=4, K=1 }
+\begin{figure}[h!]
+\centering
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1\linewidth]{./figures/effect_rho_differences/H_0_43_K_1/N_4/first_difference_rbergomi_4steps_H_043_K_1_rho__0_9_with_rate_W1.eps}
+\caption{}
+\label{fig:sub3}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1\linewidth]{./figures/effect_xi_differences/H_0_43_K_1/N_4/first_difference_rbergomi_4steps_H_043_K_1_xi_10__5_with_rate_W1.eps}
+\caption{}
+\label{fig:sub4}
+\end{subfigure}
+
+\caption{The rate of convergence of  first order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)): a) $\xi=0.235^2$ b)  $\xi=10^{-5}$}
+\label{fig:test2}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1\linewidth]{./figures/effect_rho_differences/H_0_43_K_1/N_4/mixed_difference_order2_rbergomi_4steps_H_043_K_1_rho__0__9_with_rate_W1}
+\caption{}
+\label{fig:sub3}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1\linewidth]{./figures/effect_xi_differences/H_0_43_K_1/N_4/mixed_difference_order2_rbergomi_4steps_H_043_K_1_xi_10__5_with_rate_W1}
+\caption{}
+\label{fig:sub4}
+\end{subfigure}
+
+\caption{The rate of convergence of  mixed order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)): a) $\xi=0.235^2$ b)  $\xi=10^{-5}$}
+\label{fig:test2}
+\end{figure}
+
+\newpage
+\subsubsection*{N=8, K=1 }
+
+
+\begin{figure}[h!]
+\centering
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1\linewidth]{./figures/effect_rho_differences/H_0_43_K_1/N_8/first_difference_rbergomi_8steps_H_043_K_1_rho__0_9_with_rate_W1.eps}
+\caption{}
+\label{fig:sub3}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1\linewidth]{./figures/effect_xi_differences/H_0_43_K_1/N_8/first_difference_rbergomi_8steps_H_043_K_1_xi_10__5_with_rate_W1.eps}
+\caption{}
+\label{fig:sub4}
+\end{subfigure}
+
+\caption{The rate of convergence of  first order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)): a) $\xi=0.235^2$ b)  $\xi=10^{-5}$}
+\label{fig:test2}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1\linewidth]{./figures/effect_rho_differences/H_0_43_K_1/N_8/mixed_difference_order2_rbergomi_8steps_H_043_K_1_rho__0_9_with_rate_W1}
+\caption{}
+\label{fig:sub3}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1\linewidth]{./figures/effect_xi_differences/H_0_43_K_1/N_8/mixed_difference_order2_rbergomi_8steps_H_043_K_1_xi_10__5_with_rate_W1}
+\caption{}
+\label{fig:sub4}
+\end{subfigure}
+
+\caption{The rate of convergence of  mixed order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)): a) $\xi=0.235^2$ b)  $\xi=10^{-5}$}
+\label{fig:test2}
+\end{figure}
+
+
+\newpage
+\subsubsection*{N=4, K=0.8 }
+\begin{figure}[h!]
+\centering
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1\linewidth]{./figures/effect_rho_differences/H_0_43_K_0_8/N_4/first_difference_rbergomi_4steps_H_043_K_0_8_rho__0_9_with_rate_W1.eps}
+\caption{}
+\label{fig:sub3}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1\linewidth]{./figures/effect_xi_differences/H_0_43_K_0_8/N_4/first_difference_rbergomi_4steps_H_043_K_0_8_xi_10__5_with_rate_W1.eps}
+\caption{}
+\label{fig:sub4}
+\end{subfigure}
+
+\caption{The rate of convergence of  first order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)): a) $\xi=0.235^2$ b)  $\xi=10^{-5}$}
+\label{fig:test2}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1\linewidth]{./figures/effect_rho_differences/H_0_43_K_0_8/N_4/mixed_difference_order2_rbergomi_4steps_H_043_K_0_8_rho__0_9_with_rate_W1}
+\caption{}
+\label{fig:sub3}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1\linewidth]{./figures/effect_xi_differences/H_0_43_K_0_8/N_4/mixed_difference_order2_rbergomi_4steps_H_043_K_0_8_xi_10__5_with_rate_W1}
+\caption{}
+\label{fig:sub4}
+\end{subfigure}
+
+\caption{The rate of convergence of  mixed order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)): a) $\xi=0.235^2$ b)  $\xi=10^{-5}$}
+\label{fig:test2}
+\end{figure}
+
+\newpage
+\subsubsection*{N=8, K=0.8 }
+
+
+\begin{figure}[h!]
+\centering
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1\linewidth]{./figures/effect_rho_differences/H_0_43_K_0_8/N_8/first_difference_rbergomi_8steps_H_043_K_0_8_rho__0_9_with_rate_W1.eps}
+\caption{}
+\label{fig:sub3}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1\linewidth]{./figures/effect_xi_differences/H_0_43_K_0_8/N_8/first_difference_rbergomi_8steps_H_043_K_0_8_xi_10__5_with_rate_W1.eps}
+\caption{}
+\label{fig:sub4}
+\end{subfigure}
+
+\caption{The rate of convergence of  first order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)): a) $\xi=0.235^2$ b)  $\xi=10^{-5}$}
+\label{fig:test2}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1\linewidth]{./figures/effect_rho_differences/H_0_43_K_0_8/N_8/mixed_difference_order2_rbergomi_8steps_H_043_K_0_8_rho__0_9_with_rate_W1}
+\caption{}
+\label{fig:sub3}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1\linewidth]{./figures/effect_xi_differences/H_0_43_K_0_8/N_8/mixed_difference_order2_rbergomi_8steps_H_043_K_0_8_xi_10__5_with_rate_W1}
+\caption{}
+\label{fig:sub4}
+\end{subfigure}
+
+\caption{The rate of convergence of  mixed order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)): a) $\xi=0.235^2$ b)  $\xi=10^{-5}$}
+\label{fig:test2}
+\end{figure}
+
+
+
+
+\newpage
+\subsection{Investigating mixed differences wrt moneyness $K$ }\label{sec:mixed differences rbergomi_wrt_moneyness}
+
+\subsubsection*{Case $H=0.43$}
+\subsubsection*{$N=8$ }
+\begin{figure}[h!]
+\centering
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1\linewidth]{./figures/mixed_diff_second_way/H_043/N_8/first_difference_rbergomi_8steps_H_043_K_1.eps}
+\caption{}
+\label{fig:sub3}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1\linewidth]{./figures/mixed_diff_second_way/H_043/N_8/first_difference_rbergomi_8steps_H_043_K_exp__4.eps}
+\caption{}
+\label{fig:sub4}
+\end{subfigure}
+
+\caption{The rate of convergence of  first order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)): a) $K=1$ b)  $K=\operatorname{exp}(-4).$}
+\label{fig:test2}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1\linewidth]{./figures/mixed_diff_second_way/H_043/N_8/mixed_difference_order2_rbergomi_8steps_H_043_K_1.eps}
+\caption{}
+\label{fig:sub3}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1\linewidth]{./figures/mixed_diff_second_way/H_043/N_8/mixed_difference_order2_rbergomi_8steps_H_043_K_exp__4.eps}
+\caption{}
+\label{fig:sub4}
+\end{subfigure}
+
+\caption{The rate of convergence of  second order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)): a) $K=1$ b)  $K=\operatorname{exp}(-4).$}
+\label{fig:test2}
+\end{figure}
+
+\newpage
+\subsubsection*{$N=16$ }
+
+
+\begin{figure}[h!]
+\centering
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1\linewidth]{./figures/mixed_diff_second_way/H_043/N_16/first_difference_rbergomi_16steps_H_043_K_1.eps}
+\caption{}
+\label{fig:sub3}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1\linewidth]{./figures/mixed_diff_second_way/H_043/N_16/first_difference_rbergomi_16steps_H_043_K_exp__4.eps}
+\caption{}
+\label{fig:sub4}
+\end{subfigure}
+
+\caption{The rate of convergence of  first order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)): a) $K=1$ b)  $K=\operatorname{exp}(-4).$}
+\label{fig:test2}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1\linewidth]{./figures/mixed_diff_second_way/H_043/N_16/mixed_difference_order2_rbergomi_16steps_H_043_K_1.eps}
+\caption{}
+\label{fig:sub3}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1\linewidth]{./figures/mixed_diff_second_way/H_043/N_16/mixed_difference_order2_rbergomi_16steps_H_043_K_exp__4.eps}
+\caption{}
+\label{fig:sub4}
+\end{subfigure}
+
+\caption{The rate of convergence of  second order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)): a) $K=1$ b)  $K=\operatorname{exp}(-4).$}
+\label{fig:test2}
+\end{figure}
+
+
+
+\newpage
+\subsubsection*{Case $H=0.07$}
+\subsubsection*{$N=8$ }
+
+\begin{figure}[h!]
+\centering
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1\linewidth]{./figures/mixed_diff_second_way/H_007/N_8/first_difference_rbergomi_8steps_H_007_K_1.eps}
+\caption{}
+\label{fig:sub3}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1\linewidth]{./figures/mixed_diff_second_way/H_007/N_8/first_difference_rbergomi_8steps_H_007_K_exp__4.eps}
+\caption{}
+\label{fig:sub4}
+\end{subfigure}
+
+\caption{The rate of convergence of  first order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)): a) $K=1$ b)  $K=\operatorname{exp}(-4).$}
+\label{fig:test2}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1\linewidth]{./figures/mixed_diff_second_way/H_007/N_8/mixed_difference_order2_rbergomi_8steps_H_007_K_1.eps}
+\caption{}
+\label{fig:sub3}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1\linewidth]{./figures/mixed_diff_second_way/H_007/N_8/mixed_difference_order2_rbergomi_8steps_H_007_K_exp__4.eps}
+\caption{}
+\label{fig:sub4}
+\end{subfigure}
+
+\caption{The rate of convergence of  second order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)): a) $K=1$ b)  $K=\operatorname{exp}(-4).$}
+\label{fig:test2}
+\end{figure}
+
+
+\newpage
+\subsubsection*{$N=16$ }
+\begin{figure}[h!]
+\centering
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1\linewidth]{./figures/mixed_diff_second_way/H_007/N_16/first_difference_rbergomi_16steps_H_007_K_1.eps}
+\caption{}
+\label{fig:sub3}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1\linewidth]{./figures/mixed_diff_second_way/H_007/N_16/first_difference_rbergomi_16steps_H_007_K_exp__4.eps}
+\caption{}
+\label{fig:sub4}
+\end{subfigure}
+
+\caption{The rate of convergence of  first order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)): a) $K=1$ b)  $K=\operatorname{exp}(-4).$}
+\label{fig:test2}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1\linewidth]{./figures/mixed_diff_second_way/H_007/N_16/mixed_difference_order2_rbergomi_16steps_H_007_K_1.eps}
+\caption{}
+\label{fig:sub3}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=1\linewidth]{./figures/mixed_diff_second_way/H_007/N_16/mixed_difference_order2_rbergomi_16steps_H_007_K_exp__4.eps}
+\caption{}
+\label{fig:sub4}
+\end{subfigure}
+
+\caption{The rate of convergence of  second order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)): a) $K=1$ b)  $K=\operatorname{exp}(-4).$}
+\label{fig:test2}
+\end{figure}
+
+
+\newpage
+\subsection{Convergence plots using MISC ($H=0.43$)}\label{sec:Convergence plots using MISC_H_043}
+\newpage
+\subsubsection*{Case of $2$ time steps, $K=e^{-4}$}
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rbergomi_2_steps_K_e__4/error_estimate.pdf}
+		\caption{Error estimate}
+		\label{fig:misc_rbergomi_2_steps_sub1}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rbergomi_2_steps_K_e__4/average_running_time.pdf}
+		\caption{Average running time as a function of $TOL$}
+		\label{fig:misc_rbergomi_2_steps_sub2}
+	\end{subfigure}%
+	\caption{Convergence and complexity results for the call payoff with rBergomi model.}
+	\label{fig:misc_rbergomi_2_steps_1}
+\end{figure}
+
+
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/rbergomi_2_steps_K_e__4/level_work.pdf}
+		\caption{Average Computational time per level}
+		\label{fig:misc_rbergomi_2_steps_sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/rbergomi_2_steps_K_e__4/levels_error_rate.pdf}
+		\caption{ The convergence rate of mixed differences per level}
+		\label{fig:misc_rbergomi_2_steps_sub4}
+	\end{subfigure}%
+	\caption{Convergence and work rates for discretization levels  the call payoff with rBergomi model.}
+	\label{fig:misc_rbergomi_2_steps_2}
+\end{figure}
+\newpage
+\subsubsection*{Case of $2$ time steps, $K=1.2$}
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rbergomi_2_steps_K_1_2/error_estimate.pdf}
+		\caption{Error estimate}
+		\label{fig:misc_rbergomi_2_steps_K_1_2_sub1}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rbergomi_2_steps_K_1_2/average_running_time.pdf}
+		\caption{Average running time as a function of $TOL$}
+		\label{fig:misc_rbergomi_2_steps_K_1_1_sub2}
+	\end{subfigure}%
+	\caption{Convergence and complexity results for the call payoff with rBergomi model.}
+	\label{fig:misc_rbergomi_2_steps_K_1_2_1}
+\end{figure}
+
+
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/rbergomi_2_steps_K_1_2/level_work.pdf}
+		\caption{Average Computational time per level}
+		\label{fig:misc_rbergomi_2_steps_K_1_2_sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/rbergomi_2_steps_K_1_2/levels_error_rate.pdf}
+		\caption{  The convergence rate of mixed differences per level}
+		\label{fig:misc_rbergomi_2_steps_K_1_2_sub4}
+	\end{subfigure}%
+	\caption{Convergence and work rates for discretization levels  the call payoff with rBergomi model.}
+	\label{fig:misc_rbergomi_2_steps_K_1_2_2}
+\end{figure}
+
+
+\newpage
+\subsubsection*{Case of $4$ time steps, $K=e^{-4}$}
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rbergomi_4_steps_K_e__4/error_estimate.pdf}
+		\caption{Error estimate}
+		\label{fig:misc_rbergomi_4_steps_sub1}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rbergomi_4_steps_K_e__4/average_running_time.pdf}
+		\caption{Average running time as a function of $TOL$}
+		\label{fig:misc_rbergomi_4_steps_sub2}
+	\end{subfigure}%
+	\caption{Convergence and complexity results for the call payoff with rBergomi model.}
+	\label{fig:misc_rbergomi_4_steps_1}
+\end{figure}
+
+
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/rbergomi_4_steps_K_e__4/level_work.pdf}
+		\caption{Average Computational time per level}
+		\label{fig:misc_rbergomi_4_steps_sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/rbergomi_4_steps_K_e__4/levels_error_rate.pdf}
+		\caption{  The convergence rate of mixed differences per level}
+		\label{fig:misc_rbergomi_4_steps_sub4}
+	\end{subfigure}%
+	\caption{Convergence and work rates for discretization levels  the call payoff with rBergomi model.}
+	\label{fig:misc_rbergomi_4_steps_2}
+\end{figure}
+\newpage
+\subsubsection*{Case of $4$ time steps, $K=1.2$}
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rbergomi_4_steps_K_1_2/error_estimate.pdf}
+		\caption{Error estimate}
+		\label{fig:misc_rbergomi_4_steps_K_1_2_sub1}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rbergomi_4_steps_K_1_2/average_running_time.pdf}
+		\caption{Average running time as a function of $TOL$}
+		\label{fig:misc_rbergomi_4_steps_K_1_2_sub2}
+	\end{subfigure}%
+	\caption{Convergence and complexity results for the call payoff with rBergomi model.}
+	\label{fig:misc_rbergomi_4_steps_K_1_2_1}
+\end{figure}
+
+
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/rbergomi_4_steps_K_1_2/level_work.pdf}
+		\caption{Average Computational time per level}
+		\label{fig:misc_rbergomi_4_steps_K_2_sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/rbergomi_4_steps_K_1_2/levels_error_rate.pdf}
+		\caption{  The convergence rate of mixed differences per level}
+		\label{fig:misc_rbergomi_4_steps_K_1_2_sub4}
+	\end{subfigure}%
+	\caption{Convergence and work rates for discretization levels  the call payoff with rBergomi model.}
+	\label{fig:misc_rbergomi_4_steps_K_1_2_2}
+\end{figure}
+
+
+
+\newpage
+\subsubsection*{Case of $8$ time steps, $K=e^{-4}$}
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rbergomi_8_steps_K_e__4/error_estimate.pdf}
+		\caption{Error estimate}
+		\label{fig:misc_rbergomi_8_steps_sub1}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rbergomi_8_steps_K_e__4/average_running_time.pdf}
+		\caption{Average running time as a function of $TOL$}
+		\label{fig:misc_rbergomi_8_steps_sub2}
+	\end{subfigure}%
+	\caption{Convergence and complexity results for the call payoff with rBergomi model.}
+	\label{fig:misc_rbergomi_8_steps_1}
+\end{figure}
+
+
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/rbergomi_8_steps_K_e__4/level_work.pdf}
+		\caption{Average Computational time per level}
+		\label{fig:misc_rbergomi_8_steps_sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/rbergomi_8_steps_K_e__4/levels_error_rate.pdf}
+		\caption{  The convergence rate of mixed differences per level}
+		\label{fig:misc_rbergomi_8_steps_sub4}
+	\end{subfigure}%
+	\caption{Convergence and work rates for discretization levels  the call payoff with rBergomi model.}
+	\label{fig:misc_rbergomi_8_steps_2}
+\end{figure}
+
+
+
+\newpage
+\subsubsection*{Case of $8$ time steps, $K=1.2$}
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rbergomi_8_steps_K_1_2/error_estimate.pdf}
+		\caption{Error estimate}
+		\label{fig:misc_rbergomi_8_steps_K_1_2_sub1}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rbergomi_8_steps_K_1_2/average_running_time.pdf}
+		\caption{Average running time as a function of $TOL$}
+		\label{fig:misc_rbergomi_8_steps_K_1_2_sub2}
+	\end{subfigure}%
+	\caption{Convergence and complexity results for the call payoff with rBergomi model.}
+	\label{fig:misc_rbergomi_8_steps_K_1_2_1}
+\end{figure}
+
+
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/rbergomi_8_steps_K_1_2/level_work.pdf}
+		\caption{Average Computational time per level}
+		\label{fig:misc_rbergomi_8_steps_K_1_2_sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/rbergomi_8_steps_K_1_2/levels_error_rate.pdf}
+		\caption{  The convergence rate of mixed differences per level}
+		\label{fig:misc_rbergomi_8_steps_K_1_2_sub4}
+	\end{subfigure}%
+	\caption{Convergence and work rates for discretization levels  the call payoff with rBergomi model.}
+	\label{fig:misc_rbergomi_8_steps_K_1_2_2}
+\end{figure}
+
+
+\newpage
+\subsubsection*{Case of $16$ time steps, $K=e^{-4}$}
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rbergomi_16_steps_K_e__4/error_estimate.pdf}
+		\caption{Error estimate}
+		\label{fig:misc_rbergomi_16_steps_sub1}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rbergomi_16_steps_K_e__4/average_running_time.pdf}
+		\caption{Average running time as a function of $TOL$}
+		\label{fig:misc_rbergomi_16_steps_sub2}
+	\end{subfigure}%
+	\caption{Convergence and complexity results for the call payoff with rBergomi model.}
+	\label{fig:misc_rbergomi_16_steps_1}
+\end{figure}
+
+
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/rbergomi_16_steps_K_e__4/level_work.pdf}
+		\caption{Average Computational time per level}
+		\label{fig:misc_rbergomi_16_steps_sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/rbergomi_16_steps_K_e__4/levels_error_rate.pdf}
+		\caption{  The convergence rate of mixed differences per level}
+		\label{fig:misc_rbergomi_16_steps_sub4}
+	\end{subfigure}%
+	\caption{Convergence and work rates for discretization levels  the call payoff with rBergomi model.}
+	\label{fig:misc_rbergomi_16_steps_2}
+\end{figure}
+
+
+\newpage
+
+\subsubsection*{Case of $16$ time steps, $K=1.2$}
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rbergomi_16_steps_K_1_2/error_estimate.pdf}
+		\caption{Error estimate}
+		\label{fig:misc_rbergomi_16_steps_K_1_2_sub1}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rbergomi_16_steps_K_1_2/average_running_time.pdf}
+		\caption{Average running time as a function of $TOL$}
+		\label{fig:misc_rbergomi_16_steps_K_1_2_sub2}
+	\end{subfigure}%
+	\caption{Convergence and complexity results for the call payoff with rBergomi model.}
+	\label{fig:misc_rbergomi_16_steps_K_1_2_1}
+\end{figure}
+
+
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/rbergomi_16_steps_K_1_2/level_work.pdf}
+		\caption{Average Computational time per level}
+		\label{fig:misc_rbergomi_16_steps_K_1_2_sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/rbergomi_16_steps_K_1_2/levels_error_rate.pdf}
+		\caption{  The convergence rate of mixed differences per level}
+		\label{fig:misc_rbergomi_16_steps_K_1_2_sub4}
+	\end{subfigure}%
+	\caption{Convergence and work rates for discretization levels  the call payoff with rBergomi model.}
+	\label{fig:misc_rbergomi_16_steps_K_1_2_2}
+\end{figure}
+
+
+
+\newpage
+\subsection{MISC plots}\label{sec:MISC plots}
+\subsection{Non Hierarchical}
+
+\subsubsection*{H=0.43}
+\newpage
+\subsubsection*{Case of $8$ time steps}
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/bergomi_misc/non_hierarchical/H_043/N_8/error_estimate.pdf}
+		\caption{Error estimate}
+		\label{fig:misc_rbergomi_8_steps_sub1}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/bergomi_misc/non_hierarchical/H_043/N_8/average_running_time.pdf}
+		\caption{Average running time as a function of $TOL$}
+		\label{fig:misc_rbergomi_8_steps_sub2}
+	\end{subfigure}%
+	\caption{Convergence and complexity results for the call payoff with rBergomi model for $K=1$, $H=0.43$ and $N=8$.}
+	\label{fig:misc_rbergomi_8_steps_1}
+\end{figure}
+
+
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/bergomi_misc/non_hierarchical/H_043/N_8/level_work.pdf}
+		\caption{Average Computational time per level}
+		\label{fig:misc_rbergomi_8_steps_sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/bergomi_misc/non_hierarchical/H_043/N_8/levels_error_rate.pdf}
+		\caption{  The convergence rate of mixed differences per level}
+		\label{fig:misc_rbergomi_8_steps_sub4}
+	\end{subfigure}%
+	\caption{Convergence and work rates for discretization levels  the call payoff with rBergomi model for $K=1$, $H=0.43$ and $N=8$.}
+	\label{fig:misc_rbergomi_8_steps_2}
+\end{figure}
+
+
+\newpage
+\subsubsection*{Case of $16$ time steps}
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/bergomi_misc/non_hierarchical/H_043/N_16/error_estimate.pdf}
+		\caption{Error estimate}
+		\label{fig:misc_rbergomi_8_steps_sub1}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/bergomi_misc/non_hierarchical/H_043/N_16/average_running_time.pdf}
+		\caption{Average running time as a function of $TOL$}
+		\label{fig:misc_rbergomi_8_steps_sub2}
+	\end{subfigure}%
+	\caption{Convergence and complexity results for the call payoff with rBergomi model for $K=1$, $H=0.43$ and $N=16$.}
+	\label{fig:misc_rbergomi_8_steps_1}
+\end{figure}
+
+
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/bergomi_misc/non_hierarchical/H_043/N_16/level_work.pdf}
+		\caption{Average Computational time per level}
+		\label{fig:misc_rbergomi_8_steps_sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/bergomi_misc/non_hierarchical/H_043/N_16/levels_error_rate.pdf}
+		\caption{  The convergence rate of mixed differences per level}
+		\label{fig:misc_rbergomi_8_steps_sub4}
+	\end{subfigure}%
+	\caption{Convergence and work rates for discretization levels  the call payoff with rBergomi model for $K=1$, $H=0.43$ and $N=16$.}
+	\label{fig:misc_rbergomi_8_steps_2}
+\end{figure}
+
+\newpage
+\subsubsection*{H=0.07}
+\newpage
+\subsubsection*{Case of $8$ time steps}
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/bergomi_misc/non_hierarchical/H_007/N_8/error_estimate.pdf}
+		\caption{Error estimate}
+		\label{fig:misc_rbergomi_8_steps_sub1}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/bergomi_misc/non_hierarchical/H_007/N_8/average_running_time.pdf}
+		\caption{Average running time as a function of $TOL$}
+		\label{fig:misc_rbergomi_8_steps_sub2}
+	\end{subfigure}%
+	\caption{Convergence and complexity results for the call payoff with rBergomi model for $K=1$, $H=0.07$ and $N=8$.}
+	\label{fig:misc_rbergomi_8_steps_1}
+\end{figure}
+
+
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/bergomi_misc/non_hierarchical/H_007/N_8/level_work.pdf}
+		\caption{Average Computational time per level}
+		\label{fig:misc_rbergomi_8_steps_sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/bergomi_misc/non_hierarchical/H_007/N_8/levels_error_rate.pdf}
+		\caption{  The convergence rate of mixed differences per level}
+		\label{fig:misc_rbergomi_8_steps_sub4}
+	\end{subfigure}%
+	\caption{Convergence and work rates for discretization levels  the call payoff with rBergomi model for $K=1$, $H=0.07$ and $N=8$.}
+	\label{fig:misc_rbergomi_8_steps_2}
+\end{figure}
+
+
+
+\subsubsection*{Case of $16$ time steps}
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/bergomi_misc/non_hierarchical/H_007/N_16/error_estimate.pdf}
+		\caption{Error estimate}
+		\label{fig:misc_rbergomi_8_steps_sub1}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/bergomi_misc/non_hierarchical/H_007/N_16/average_running_time.pdf}
+		\caption{Average running time as a function of $TOL$}
+		\label{fig:misc_rbergomi_8_steps_sub2}
+	\end{subfigure}%
+	\caption{Convergence and complexity results for the call payoff with rBergomi model for $K=1$, $H=0.07$ and $N=16$.}
+	\label{fig:misc_rbergomi_8_steps_1}
+\end{figure}
+
+
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/bergomi_misc/non_hierarchical/H_007/N_16/level_work.pdf}
+		\caption{Average Computational time per level}
+		\label{fig:misc_rbergomi_8_steps_sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/bergomi_misc/non_hierarchical/H_007/N_16/levels_error_rate.pdf}
+		\caption{  The convergence rate of mixed differences per level}
+		\label{fig:misc_rbergomi_8_steps_sub4}
+	\end{subfigure}%
+	\caption{Convergence and work rates for discretization levels  the call payoff with rBergomi model for $K=1$, $H=0.07$ and $N=16$.}
+	\label{fig:misc_rbergomi_8_steps_2}
+\end{figure}
+\newpage
+\subsection{Hierarchical}
+\subsubsection*{H=0.43}
+\newpage
+\subsubsection*{Case of $8$ time steps}
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/bergomi_misc/H_043/N_8/error_estimate.pdf}
+		\caption{Error estimate}
+		\label{fig:misc_rbergomi_8_steps_sub1}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/bergomi_misc/H_043/N_8/average_running_time.pdf}
+		\caption{Average running time as a function of $TOL$}
+		\label{fig:misc_rbergomi_8_steps_sub2}
+	\end{subfigure}%
+	\caption{Convergence and complexity results for the call payoff with rBergomi model for $K=1$, $H=0.43$ and $N=8$.}
+	\label{fig:misc_rbergomi_8_steps_1}
+\end{figure}
+
+
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/bergomi_misc/H_043/N_8/level_work.pdf}
+		\caption{Average Computational time per level}
+		\label{fig:misc_rbergomi_8_steps_sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/bergomi_misc/H_043/N_8/levels_error_rate.pdf}
+		\caption{  The convergence rate of mixed differences per level}
+		\label{fig:misc_rbergomi_8_steps_sub4}
+	\end{subfigure}%
+	\caption{Convergence and work rates for discretization levels  the call payoff with rBergomi model for $K=1$, $H=0.43$ and $N=8$.}
+	\label{fig:misc_rbergomi_8_steps_2}
+\end{figure}
+
+
+
+\subsubsection*{Case of $16$ time steps}
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/bergomi_misc/H_043/N_16/error_estimate.pdf}
+		\caption{Error estimate}
+		\label{fig:misc_rbergomi_8_steps_sub1}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/bergomi_misc/H_043/N_16/average_running_time.pdf}
+		\caption{Average running time as a function of $TOL$}
+		\label{fig:misc_rbergomi_8_steps_sub2}
+	\end{subfigure}%
+	\caption{Convergence and complexity results for the call payoff with rBergomi model for $K=1$, $H=0.43$ and $N=16$.}
+	\label{fig:misc_rbergomi_8_steps_1}
+\end{figure}
+
+
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/bergomi_misc/H_043/N_16/level_work.pdf}
+		\caption{Average Computational time per level}
+		\label{fig:misc_rbergomi_8_steps_sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/bergomi_misc/H_043/N_16/levels_error_rate.pdf}
+		\caption{  The convergence rate of mixed differences per level}
+		\label{fig:misc_rbergomi_8_steps_sub4}
+	\end{subfigure}%
+	\caption{Convergence and work rates for discretization levels  the call payoff with rBergomi model for $K=1$, $H=0.43$ and $N=16$.}
+	\label{fig:misc_rbergomi_8_steps_2}
+\end{figure}
+
+\newpage
+\subsubsection*{H=0.07}
+\newpage
+\subsubsection*{Case of $8$ time steps}
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/bergomi_misc/H_007/N_8/error_estimate.pdf}
+		\caption{Error estimate}
+		\label{fig:misc_rbergomi_8_steps_sub1}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/bergomi_misc/H_007/N_8/average_running_time.pdf}
+		\caption{Average running time as a function of $TOL$}
+		\label{fig:misc_rbergomi_8_steps_sub2}
+	\end{subfigure}%
+	\caption{Convergence and complexity results for the call payoff with rBergomi model for $K=1$, $H=0.07$ and $N=8$.}
+	\label{fig:misc_rbergomi_8_steps_1}
+\end{figure}
+
+
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/bergomi_misc/H_007/N_8/level_work.pdf}
+		\caption{Average Computational time per level}
+		\label{fig:misc_rbergomi_8_steps_sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/bergomi_misc/H_007/N_8/levels_error_rate.pdf}
+		\caption{  The convergence rate of mixed differences per level}
+		\label{fig:misc_rbergomi_8_steps_sub4}
+	\end{subfigure}%
+	\caption{Convergence and work rates for discretization levels  the call payoff with rBergomi model for $K=1$, $H=0.07$ and $N=8$.}
+	\label{fig:misc_rbergomi_8_steps_2}
+\end{figure}
+
+
+
+\subsubsection*{Case of $16$ time steps}
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/bergomi_misc/H_007/N_16/error_estimate.pdf}
+		\caption{Error estimate}
+		\label{fig:misc_rbergomi_8_steps_sub1}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/bergomi_misc/H_007/N_16/average_running_time.pdf}
+		\caption{Average running time as a function of $TOL$}
+		\label{fig:misc_rbergomi_8_steps_sub2}
+	\end{subfigure}%
+	\caption{Convergence and complexity results for the call payoff with rBergomi model for $K=1$, $H=0.07$ and $N=16$.}
+	\label{fig:misc_rbergomi_8_steps_1}
+\end{figure}
+
+
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/bergomi_misc/H_007/N_16/level_work.pdf}
+		\caption{Average Computational time per level}
+		\label{fig:misc_rbergomi_8_steps_sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=0.95\linewidth]{./figures/bergomi_misc/H_007/N_16/levels_error_rate.pdf}
+		\caption{  The convergence rate of mixed differences per level}
+		\label{fig:misc_rbergomi_8_steps_sub4}
+	\end{subfigure}%
+	\caption{Convergence and work rates for discretization levels  the call payoff with rBergomi model for $K=1$, $H=0.07$ and $N=16$.}
+	\label{fig:misc_rbergomi_8_steps_2}
+\end{figure}
+
+
+
+
+
+%where $\sum_{t_1,t_2}= \sum_{t_1=1}^{N_1}  \sum_{t_1=1}^{N_2}$, being the number of quadrature points selected for each direction, $\mathbf{u}^\ast= (u_{t_1}^\ast,u_{t_2}^\ast)^T= \sqrt{2} L (u_{t_1},u_{t_2})^T+\hat{\mathbf{u}}$ and $w^\ast_{t_i}=w_{t_i} \exp[u_{t_i}^2]$ are  the new Gauss-Hermite nodes and weights, based on importance sampling, respectively, with $u_{t_k}$ being the classical
+%Gauss-Hermite nodes and $w_{t_k} , k = 1,2$, the corresponding weights.
+%
+\end{document}

@@ -1,0 +1,298 @@
+\documentclass[11pt]{article}
+
+\usepackage{smoothing_paper}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% DO WE RELLY NEED THE FOLLOWING??
+
+%%  new margin
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagestyle{plain}                                                      %%
+%%%%%%%%%% EXACT 1in MARGINS %%%%%%%                                   %%
+\setlength{\textwidth}{6.5in}     %%                                   %%
+\setlength{\oddsidemargin}{0in}   %%   
+\setlength{\evensidemargin}{0in}  %%        
+\setlength{\textheight}{8.5in}    %%       
+\setlength{\topmargin}{-0.2in}    %%   
+\setlength{\headheight}{0in}      %%    
+\setlength{\headsep}{0in}         %%                   
+\setlength{\footskip}{.5in}       %%                       
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%                                   %%
+\newcommand{\required}[1]{\section*{\hfil #1\hfil}}                    %%
+\renewcommand{\refname}{\hfil References Cited\hfil}                   %%
+
+\def\SMALLSKIP{\smallskip}
+\def\MEDSKIP{\medskip}
+\def\BIGSKIP{\bigskip}
+
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\title{ Smoothing  the  Payoff for  Efficient Computation of Option Pricing in
+  Time-Stepping Setting} 
+    \date{ }
+
+\begin{document}
+\maketitle
+
+\section{Problem Setting:}
+In this section, we recall the discussion on May 23.
+
+We aim at approximating $E[g(X(t))]$ given $g:\mathbb{R}^d  \rightarrow \mathbb{R}$, where $X \in \mathbb{R}^d$ solves 
+
+\begin{align}
+X(t)=X(0)+ \int_{0}^{t} a(s,X(s)) ds + \sum_{\ell=1}^{\ell_0} \int_{0}^{t} b^{\ell}(s,X(s)) dW^{\ell}(s)
+\end{align}
+
+Let us decompose the Wiener process in the interval $[0, T]$ as
+\begin{align}
+W(t)=W(T) \frac{t}{T}+B(t)
+\end{align}
+with $B(t)$  a Brownian bridge with zero end value. Then,
+for each $t \in [0, T]$ we have
+
+\begin{align}
+X(t) &=X(0)+\int_{0}^{t} b(X(s)) dB(s)+\frac{W(t)}{t} \int_{0}^{t} b(X(s)) ds\nonumber\\
+&=X(0)+\int_{0}^{t} b(X(s)) dB(s)+\frac{Y}{\sqrt{t}} \int_{0}^{t} b(X(s))ds,
+\end{align}
+Where $Y \sim \mathcal{N}(0,1)$ and $B$ and $Y$ are independent.
+
+As a consequence,
+\begin{align}\label{conditional_expectation_transformation}
+E[g(X(T))]&= E^B[E^Y[g(X(T))\mid B]]\nonumber\\
+&=\frac{1}{\sqrt{2 \pi}} E^B[H(B)],
+\end{align}
+where $H(B)=\int g(X(T;y,B)) \operatorname{exp}(-y^2/2) dy$.
+
+We note that $H(B)$ has for many practical cases, a smooth dependence wrt to $X$ due to the smoothness of the pdf of $Y$.
+
+\subsection{Smoothing the payoff in the continuous case}
+
+
+
+\subsubsection{$1^{\textbf{st}}$ case: $g(x)=\delta(x-K)$}
+It is easy to show that
+\begin{align}\label{smoothed_integrand_delta}
+H(B)&= \int \delta(X(T;y,B)-K) \operatorname{exp}(-y^2/2) dy \nonumber\\
+&= \operatorname{exp}(-y^2_{\ast}(K)/2) \frac{d y_{\ast}}{dx}(K),
+\end{align}
+where $y_{\ast}(x)$, is an invertible function that satisfies 
+\begin{align}
+X(T;y_{\ast}(x),B)=x	
+\end{align}
+\subsubsection{$2^{\textbf{nd}}$ case: $g(x)=(x-K)^{+}$}
+\begin{align}\label{smoothed_integrand_delta}
+	H(B)&= \int (X(T;y,B)-K)^+ \operatorname{exp}(-y^2/2) dy \nonumber\\
+	&= \int \mathbf{1}_{X(T;y,B)>K} \operatorname{exp}(-y^2/2) dy \nonumber\\
+	&= \sqrt{2 \pi} P(Y>y_{\ast}(K)) \frac{d y_{\ast}}{dx}(K),
+	\end{align}
+\subsection{Numerical Approaches}
+\subsubsection{First approach}
+\begin{itemize}
+	\item Use sparse grid $\mathcal{D}$ for $\Delta B_0, \dots, \Delta B_{N-1}$.
+	\item Given $(\mathbf{X}^0,\dots, \mathbf{X}^{N-1}):=\mathcal{X} \in \mathcal{D}$ with weights $(\boldsymbol{\omega}^0,\dots,\boldsymbol{\omega}^{N-1})$ , add grid points $(y_1(\mathcal{X}),\dots,y_K(\mathcal{X}))=\mathbf{y}$ with weights $(W_1,\dots, W_K)$ such that the mapping $y \rightarrow g(\Phi(\Delta t, y, X^0,\dots, X^{N-1}))$ is smooth outside the kink point. Mainly here we will use the \textbf{Newton iteration}  to determine the kink point.
+	\item Construct our estimator for $E[g(X(T))]$ by looping over step 1 and 2 such that we choose the optimal indices of sparse grids that achieves a global error of order $TOL$.
+	\begin{align*}
+	E[g(X(T))]=\sum_{n=0}^{N-1}\sum_{j} \sum_{i=1}^K W_i g(\Phi(\Delta t,\mathbf{y},\mathcal{X})) \omega_{j}^n 
+	\end{align*} 
+\end{itemize}
+\subsubsection{Some discussion on the complexity and errors}
+\begin{itemize}
+	\item We expect that the global error of our procedure will be bounded by the weak error which is in our case of order $O(\Delta t)$. In this case, the overall complexity of our procedure will be of order $O(TOL^{-1})$. We note that this rate can be improved up to $O(TOL^{-\frac{1}{2}})$ if we use \textbf{Richardson extrapolation}. Another way that can improve the complexity could be based on \textbf{Cubature on Wiener Space} (This is left for a future work). The aimed complexity rate illustrates the contribution of our procedure which outperforms  Monte Carlo forward Euler (MC-FE) and multi-level MC-FE, having complexity rates of order $O(TOL^{-3})$  and $O(TOL^{-2} log(TOL)^2)$  respectively. 
+	\item We need to check the impact of the error caused by the Newton iteration on the integration error. In the worst case, we expect that if the error in the Newton iteration is of order $O(\epsilon)$ than the integration error will be of order $\operatorname{log}(\epsilon)$. But we need to check that too.
+\subsubsection{Second approach}
+An alternative approach could be achieved by tensorizing all the quadrature rules (this is not clear to me how to do it yet). The advantage of this procedure is that the additional cost that we will pay by using fine quadrature in the dimension of $y$ will be rewarded by the ability of using coarser quadratures in the remaining dimensions.
+\end{itemize}
+%\section{To-Do list:}
+%\begin{enumerate}
+%\item Implementing Euler scheme based on Brownian bridge construction.
+%\item Implementing the basic approach (first approach):
+%\begin{itemize}
+%	\item Construct $N_B$ samples (number of samples of the brownian bridge).
+%	\item Determining the kink point in the dimension of $Y$ using Newton iteration.
+%	\item  For each point in the $B$ dimension, integrate with respect to $Y$ by constructing $N_Y$ quadrature points on the both sides of the kink point. 
+%\end{itemize}
+%\color{red}{We expect that the computational cost of this procedure will be of order $\mathcal{O}(N_B N_Y)$}
+%\color{black}
+%\item The second approach consists of tensorizing simultaneously the $N_B$ samples and the quadrature points (Not clear to me yet). This approach will provide a balance between the number of $N_B$ samples and the number of quadrature points $N_Y$.
+%\end{enumerate} 
+
+\subsection{Plan of implementation}
+
+\begin{itemize}
+	\item The first example should probably be the discretized Black-Scholes
+	model, as we discussed together. There, we could also compare
+	different ways to identify the location of the kink, such as:
+	\begin{itemize}
+		\item Exact location of the continuous problem
+		\item  Exact location of the discrete problem found by finding the root of a polynomial in y
+		\item Newton iteration
+	\end{itemize}
+	\item  As we also discussed, the impact of the Brownian bridge will disappear in the limit, which may make the effect of the smoothing, 	but also of the errors in the kink location difficult to identify. For 	this reason, we suggest to study a more complicated 1-dimensional 	problem next. We suggest to use a CIR process. To avoid complications at the boundary, we suggest "nice" parameter choices, such that the discretized process is very unlikely to hit the boundary (Feller
+	condition).
+	\item Extension to the multi-dimensional situation. Here, we suggest to
+	return to the Black-Scholes model, but in multi-d. In this case,
+	linearizing the exponential, suggest that a good variable to use for smoothing might be the sum of the final values of the Brownian motion.
+	In general, though, one should probably eventually identify the
+	optimal direction(s) for smoothing via the duals / algorithmic
+	differentiation.
+\end{itemize}
+
+
+
+\section{Plan of work and miscancellous observations}
+\label{sec:plan-work-misc}
+
+We recall the discussion between Raul and Christian on June 1st.
+
+Given we want to compute
+\begin{equation}\label{QoI}
+  E\left[ g\left( \Phi(Z_1, \ldots, Z_N \right) \right]
+\end{equation}
+for some non-smooth function $g$ and a Gaussian vector $Z$. (Here, the
+discretization of the SDE is in the function $\Phi$.) We assume that
+$Z$ is already rotated such that $h(Z_{-1}) \coloneqq E\left[ g\left(
+    \Phi(Z_1, \ldots, Z_N \right) \mid Z_{-1}\right]$ is as smooth as
+possible, where $Z_{-1} \coloneqq (Z_2, \ldots, Z_N)$. 
+
+\subsection{Choice of functional}
+\label{sec:choice-functional}
+
+We should restrict ourselves to a few possible choices $g$ such as:
+\begin{itemize}
+\item hockey-stick function, i.e., put or call payoff functions;
+\item indicator functions (both relevant in finance and in other applications
+  of estimation of probabilities of certain events);
+\item delta-functions for density estimation (and derivatives thereof for
+  estimation of derivatives of the density).
+\end{itemize}
+More specifically, $g$ should be the composition of one of the above with a
+smooth function. (For instance, the basket option payoff as a function of the
+log-prices of the underlying.)
+
+\
+
+\subsection{Smoothing}
+\label{sec:smoothing}
+
+A crucial element of the smoothing property is that the ``location of
+irregularity'' $y = y(z_{-1})$ such that $g$ is not smooth at the point
+$\Phi(y, z_{-1})$. Generally, there might be (for given $z_{-1}$
+\begin{itemize}
+\item no solution, i.e., the integrand in the definition of $h(z_{-1})$ above
+  is smooth (\textit{best case});
+\item a unique solution;
+\item multiple solutions.
+\end{itemize}
+Generally, we need to assume that we are in the first or second
+case. Specifically, we need that
+\begin{equation*}
+   z_{-1} \mapsto h(z_{-1}) \text{ and } z_{-1} \mapsto \hat{h}(z_{-1})
+\end{equation*}
+are smooth, where $\hat{h}$ denotes the numerical approximation of $h$ based
+on a grid containing $y(z_{-1})$. In particular, $y$ itself should be smooth
+in $z_{-1}$. This would already be challenging in practice in the third
+case. Moreover, in the general situation we expect the number of solutions $y$
+to increase when the discretization of the SDE gets finer. 
+
+In many situations, case 2 (which is thought to include case 1) can be
+guaranteed by monotonicity. For instance, in the case of one-dimensional SDEs
+with $Z_1$ representing the terminal value of the underlying Brownian motion
+(and $Z_{-1}$ representing the Brownian bridge), this can often be seen from
+the SDE itself. Specifically, if each increment ``$dX$'' is increasing in
+$Z_1$, no matter the value of $X$, then the solution $X_T$ must be increasing
+in $Z_1$. This is easily seen to be true in examples such as the Black-Scholes
+model and the CIR process. (Strictly speaking, we have to distinguish between
+the continuous and discrete time solutions. In these examples, it does not
+matter.) On the other hand, it is also quite simple to construct counter
+examples, where monotonicity fails, for instance SDEs for which the
+``volatility'' changes sign, such as a trigonometric
+function.\footnote{Actually, in every such case the simple remedy is to
+  replace the volatility by its absolute value, which does not change the law
+  of the solution. Hence, there does not seem to be a one-dimensional
+  counter-example.}
+
+Even in multi-dimensional settings, such monotonicity conditions can hold in
+specific situations. For instance, in case of a basket option in a
+multivariate Black Scholes framework, we can choose a linear combination $Z_1$
+of the terminal values of the driving Bm, such that the basket is a monotone
+function of $Z_1$. (The coefficients of the linear combination will depend on
+the correlations and the weights of the basket.) However, in that case this
+may actually not correspond to the optimal ``rotation'' in terms of
+optimizing the smoothing effect.
+
+\subsection{Errors in smoothing}
+\label{sec:errors-smoothing}
+
+For the analysis it is useful to assume that $\hat{h}$ is a smooth function of
+$z_{-1}$, but in reality this is not going to be true. Specifically, if the
+true location $y$ of the non-smoothness in the system were available, we could
+actually guarantee $\hat{h}$ to be smooth, for instance by choosing
+\begin{equation*}
+  \hat{h}(z_{-1}) = \sum_{k=-K}^{K} \eta_k g\left( \Phi\left( \zeta_k(y(z_{-1})),
+      z_{-1} \right) \right),
+\end{equation*}
+for points $\zeta_k \in \R$ with $\zeta_0 = y$ and corresponding weights
+$\eta_k$.\footnote{Of course, the points $\zeta_k$ have to be chosen in a
+  systematic manner depending on $y$.} However, in reality we have to
+numerical approximate $y$ by $\bar{y}$ with error
+$\abs{y - \bar{y}} \le \delta$. Now, the actual integrand in $z_{-1}$ becomes 
+\begin{equation*}
+  \bar{h}(z_{-1}) \coloneqq \sum_{k=-K}^{K} \eta_k g\left( \Phi\left( \zeta_k(
+      \bar{y}(z_{-1})), z_{-1} \right) \right),
+\end{equation*}
+which we cannot assume to be smooth anymore. On the other hand, if
+$\zeta_k(y)$ is a continuous function of $y$ and $y$ and $\bar{y}$ are continuous
+in $z_{-1}$, then \emph{eventually} we will have
+\begin{equation*}
+  \norm{\hat{h} - \bar{h}}_\infty \le \tol, \quad \norm{h - \bar{h}}_\infty
+  \le \tol, 
+\end{equation*}
+i.e., the smooth functions $h$ and $\hat{h}$ are close to the integrand
+$\bar{h}$. (Of course, this may depend on us choosing a good enough quadrature
+$\zeta$!) 
+\begin{remark}
+  If the adaptive collocation used for computing the integral of $\bar{h}$
+  depends on derivatives (or difference quotients) of its integrand $\bar{h}$,
+  then we may also need to make sure that derivatives of $\bar{h}$ are close
+  enough to derivatives of $\hat{h}$ or $h$. This may require higher order
+  solution methods for determining $y$.
+\end{remark}
+\begin{remark}
+  In some important cases, $g$ may be trivial (e.g., $\equiv 0$). In these
+  cases, we may be able to make sure that $\bar{y}$ never crosses the ``location of
+  non-smoothness''. Then even $\bar{h}$ is smooth.
+\end{remark}
+
+\subsection{Organization}
+\label{sec:organization}
+
+The project should lead to two papers: one application paper and one
+theoretical paper. The application paper would be finished first. We should
+consider the following examples:
+\begin{itemize}
+\item Uni- and multi-variate Black-Scholes;
+\item A relatively simple interest rate model or stochastic volatility model a
+  la CIR or Heston;
+\item rough Bergomi: Here, no smoothing is needed, but there is great
+  potential for the efficient numerical integration. This example is highly
+  relevant for practice.
+\end{itemize}
+
+The theoretical paper should concentrate on:
+\begin{itemize}
+\item Numerical analysis of the scheme, including all the components such as
+  the Newton iteration. This might require strict conditions, especially in
+  the multi-variate setting.
+\item Examples for computation of c.d.f.s and densities, possibly in the
+  context of rare events.
+\end{itemize}
+
+
+\end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
