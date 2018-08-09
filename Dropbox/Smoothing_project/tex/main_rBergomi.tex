@@ -77,76 +77,58 @@
 The main goal of the project is to design a fast option pricer, based on multi-index stochastic collocation (MISC), for options whose dynamics follow rBergomi model. We may later investigate QMC.
 
 \section{Review of literature}
-Rough stochastic volatility models in which the trajectories of volatility are less regular than those of the standard Brownian motion, have gained popularity among academics and practitioners. As shown in \cite{gatheral2014volatility,bayer2016pricing}, replacing standard Brownian motion by its (rough) fractional, counterpart in volatility models allows to capture and explain crucial phenomena observed both in volatility time-series and in the implied volatility of option prices. Since then, rough volatility models have become the go-to models capable of reproducing stylised facts of financial markets and
-of providing a unifying theory with implications branching across financial disciplines.
+Extending the Black-Scholes model, in which volatility is assumed to be constant, to the case where the volatility is stochastic has proved to be successful in explaining certain phenomena observed in option price data, in particular the implied volatility smile. The main drqwback of such stochastic volatility models, however, is that they are unable to capture the true steepness of the implied volatility smile close to maturity. 
+While choosing to add jumps to stock price models, for example modelling the stock price process as an exponential L\'evy process, does indeed produce steeper implied volatility smiles, the issue of the presence of jumps in stock price processes remains controversial\cite{bajgrowicz2015jumps,christensen2014fact}.
+
+As an alternative to diffusive stochastic volatility models, rough stochastic volatility has emerged as a new paradigm in quantitative finance,  motivated by the statistical analysis of realised volatility by Gatheral, Jaisson and Rosenbaum \cite{gatheral2014volatility} and the theoretical results on implied volatility by Fukasawa \cite{fukasawa2011asymptotic}. In these models, the trajectories of volatility are less regular than those of the standard Brownian motion. As shown in \cite{gatheral2014volatility,bayer2016pricing}, these models are a family of (continuous-path) stochastic volatility models where the driving noise of the volatility process has H\"older regularity lower than Brownian motion, typically achieved by modeling the fundamental noise innovations of the volatility process as a fractional Brownian motion with Hurst exponent (and hence H\"older regularity)$0<H<1/2$.   A major advantage of such rough volatility models is the fact that they allow to  explain crucial phenomena  observed in  financial markets both from a statistical \cite{gatheral2014volatility,bennedsen2016decoupling} and
+an option-pricing point of view \cite{bayer2016pricing}. In particular, with regards to the latter point of view, a widely observed empirical phenomenon in equity markets is the steepness of the smile on the short end" describing the fact that as time to maturity becomes small the empirical implied volatility skew follows a power law with negative exponent, and thus becomes arbitrarily large near zero. While standard stochastic volatility models with continuous paths struggle to capture this phenomenon,
+predicting instead a constant at-the-money implied volatility behaviour on he short end  \cite{gatheral2011volatility}, models in the fractional stochastic volatility family (and more specifically so-called rough volatility models) constitute a class, well-tailored to fit empirical implied volatilities for short dated options. Consequently, they have become the go-to models capable of reproducing stylised facts of financial markets.
+
+
+
+ A fractional Brownian motion is a centred Gaussian process, whose covariance structure depends on the Hurst parameter $H \in (0, 1)$. If $H \in(0,1/2)$, then the fractional Brownian motion has negatively correlated increments and "rough" sample paths, and if $H \in (1/2,1)$ then it has positively correlated increments and "smooth" sample paths, when compared with a standard Brownian motion, which is recovered by taking $H=1/2$. Gatheral, Jaisson, and Rosenbaum \cite{gatheral2014volatility} provide strong empirical justification for such models; in particular, they argue that log-volatility in practice behaves essentially as fBM with the Hurst exponent $H \approx 0.1$ at any reasonable time scale (see also  \cite{gatheral2014volatility_2}). This finding is corroborated by Bennedsen, Lunde and Pakkanen \cite{bennedsen2016decoupling}, who study over a thousand individual US equities and find that the Hurst parameter $H$ lies in $(0,1/2)$ for each equity.
+
+
+ 
+
+ 
+
+ The rough Bergomi model (hereafter rBergomi) is one of the recent rough volatility models, developed by Bayer, Friz and Gatheral \cite{bayer2016pricing},  that is consistent with the stylised fact of implied volatility surfaces being essentially time-invariant, and are able to capture the term structure of skew observed in equity markets. In \cite{bayer2016pricing}, the authors discuss issues related to changing from physical to pricing measure and using simulated prices to fit well the implied volatility surface in the case of the S\&P $500$ index with
+ few parameters-just three!. They argue that the fractional model generates strong skews or "smiles" in the implied volatility even for very short time to maturity so that this modeling provides an
+ alternative to using jumps to model such an effect. In \cite{bayer2016pricing} the model is so named because of its relationship with the Bergomi variance curve model \cite{bergomi2005smile}, and may be seen as a non-Markovian
+generalisation of the latter.
+
 
 From a practical perspective the natural question arises: What does the mantra of rough volatility mean for a trader with a view to hedging his positions? Due to the non-Markovian nature of the
-fractional driver, hedging under rough volatility poses a delicate challenge making even the very definition of hedging strategies difficult. In particular, partial differential equations can no longer be used, and simulation is the only available route.  Despite the availability of efficient Monte Carlo
-schemes \cite{bennedsen2017hybrid,horvath2017functional,mccrickerd2017turbocharging} , pricing and model calibration in rough volatility models remain time consuming. 
-
-We focus here on the option pricing problem in rough volatility models.
-
-
-
-
-
-The extension of the Black-Scholes model, in which volatility is assumed to be constant, to the case where the volatility is stochastic has proved to be successful in explaining certain phenomena observed in option price data, in particular the implied volatility smile. The main shortcoming of such stochastic
-volatility models, however, is that they are unable to capture the true steepness of the implied volatility smile close to maturity. While choosing to add jumps to stock price models, for example modelling the stock price process as an exponential L\'evy process, does indeed produce steeper implied volatility smiles, the question of the presence of jumps in stock price processes remains controversial \cite{bajgrowicz2015jumps,christensen2014fact}.
-
-As an alternative to exponential L\'evy and classical stochastic volatility models, one may choose a fractional Brownian motion, or a process with similar fine properties, to drive the volatility process, rather than a standard Brownian motion. Since volatility is neither directly observable nor tradable, the issue of arbitrage that is sometimes associated to fractional Brownian motion does not arise in this case. A fractional Brownian motion is a centred Gaussian process, whose covariance structure depends
-on the Hurst parameter $H \in (0, 1)$. If $H \in(0,1/2)$, then the fractional Brownian motion has negatively correlated increments and "rough" sample paths, and if $H \in (1/2,1)$ then it has positively correlated increments and "smooth" sample paths, when compared with a standard Brownian motion, which is recovered by taking $H=1/2$. There has been a resurgent interest in fractional Brownian motion and related processes within the mathematical finance community in recent years. In particular, Gatheral, Jaisson and Rosenbaum \cite{gatheral2014volatility} carry out an empirical study that suggests that the log volatility behaves at
-short time scales in a manner similar to a fractional Brownian motion, in terms of its covariance structure, with Hurst parameter $H \approx 0.1$. This finding is corroborated by Bennedsen, Lunde and Pakkanen \cite{bennedsen2016decoupling}, who study over a thousand individual US equities and find that the Hurst parameter $H$ lies in $(0,1/2)$ for each equity. In addition, such so-called "rough" volatility models are able to capture the observed
-steepness of small-time implied volatility smiles and the term structure of at-the-money skew much better than classical stochastic volatility models.
-
-
-Following \cite{gatheral2014volatility}, Bayer, Friz and Gatheral \cite{bayer2016pricing} propose the so-called rough Bergomi model, which they then use to price options on integrated volatility and on the underlying itself. The advantage of their model is that it captures the "rough" behaviour of log volatility, in accordance with \cite{bennedsen2016decoupling,gatheral2014volatility}, as well
-as fits observed implied volatility smiles better than traditional Markovian stochastic volatility models, most notably in the close-to-maturity case. At the moment, the only known method for pricing mere vanilla options, and computing the corresponding implied volatility smiles, in this setting is Monte Carlo simulation. Recent advances in simulation methods for the rough Bergomi model have been acheived in \cite{bennedsen2017hybrid,jacquier2018vix}, and also  more analytical results of option pricing and implied volatility under this model has been done in \cite{jacquier2017pathwise,bayer2017short,forde2017asymptotics}. For isntance, in \cite{jacquier2017pathwise}
-they  characterise the small-time behaviour of implied volatility using large deviations theory and  related results, concerning the small-time near-the-money skew, have
-been  obtained by Bayer, Friz, Gulisashvili, Horvath and Stemper \cite{bayer2017short}.
-
-The work of Gatheral, Jaisson and Rosenbaum \cite{gatheral2014volatility}  has brought a gradual shift in volatility modeling, leading  away from classical diffusive stochastic volatility models towards so-called rough volatility models \cite{gatheral2014volatility,bayer2016pricing}. It essentially describes a family of (continuous-path) stochastic volatility models where the driving noise of the volatility process has H\:older regularity lower than Brownian motion, typically achieved by modeling the fundamental noise innovations of the volatility process as a fractional Brownian motion with Hurst exponent (and hence H\:older regularity)$H<1/2$. A major advantage of such rough volatility models is the fact that they effectively capture several stylized facts of financial markets both from a statistical \cite{gatheral2014volatility,bennedsen2016decoupling} and
-an option-pricing point of view \cite{bayer2016pricing}. In particular, with regards to the latter point of view, a widely observed empirical phenomenon in equity markets is the steepness of the smile on the short end" describing the fact that as time to maturity becomes small the empirical implied volatility skew follows a power law with negative exponent, and thus becomes arbitrarily large near zero. While standard stochastic volatility models with continuous paths struggle to capture this phenomenon,
-predicting instead a constant at-the-money implied volatility behaviour on he short end  \cite{gatheral2011volatility}, models in the fractional stochastic volatility family (and more specifically so-called rough volatility models) constitute a class, well-tailored to fit empirical implied volatilities for short dated options.
-
+fractional driver, hedging under rough volatility poses a delicate challenge making even the very definition of hedging strategies difficult.
 
 
 Typically, the popularity of asset pricing models hinges on the availability of efficient numerical pricing methods. In the case of diffusions, these include Monte Carlo estimators, PDE discretization schemes, asymptotic expansions and transform
-methods. With fractional Brownian motion being the prime example of a process beyond the semimartingale framework, most currently prevalent option pricing methods -particularly the ones assuming semimartingality or Markovianity - may not easily carry over to the rough setting. In fact, the memory property (aka non-Markovianity) of fractional Brownian motion rules out PDE methods, heat kernel methods and all related methods involving a Feynman-Kac-type Ansatz. Previous work has thus focused on finding efficient Monte Carlo simulation
-schemes \cite{bayer2016pricing,bennedsen2017hybrid,bayer2017regularity} or - in the special case of the Rough Heston model - on an explicit formula for the characteristic function of the log-price
-(see \cite{el2016characteristic}), thus in this particular model making pricing amenable to Fourier based methods.
+methods. With fractional Brownian motion being the prime example of a process beyond the semimartingale framework, most currently prevalent option pricing methods -particularly the ones assuming semimartingality or Markovianity - may not easily carry over to the rough setting. In fact,  due to the lack of Markovianity or affine structure, conventional analytical pricing methods, such as PDEs or Fourier transform, do not apply. At the moment, the only known method for pricing mere vanilla options, and computing the corresponding implied volatility smiles, in this setting is Monte Carlo simulation. Recent advances in simulation methods for the rough Bergomi model have been achieved in \cite{bayer2016pricing,bayer2017regularity,mccrickerd2017turbocharging,bennedsen2017hybrid,jacquier2018vix}. For isntance, in \cite{mccrickerd2017turbocharging}, the authors employ a novel composition of variance reduction methods, immediately applicable to any conditionally log-normal
+ stochastic volatility model. They got a substatantial computation gain in the pricing method over the exisiting Monte carlo methods for this model. On the other hand,  more analytical results of option pricing and implied volatility under this model has been done in \cite{jacquier2017pathwise,bayer2017short,forde2017asymptotics}. For isntance, in \cite{jacquier2017pathwise},
+they  characterise the small-time behaviour of implied volatility using large deviations theory and  related results, concerning the small-time near-the-money skew, have been  obtained by Bayer, Friz, Gulisashvili, Horvath and Stemper \cite{bayer2017short}. Pricing and model calibration in rough volatility models remain time consuming. 
+
+
+In this paper, we suggest to design  a fast option pricer, based on multi-index stochastic collocation (MISC), for options whose dynamics follow rBergomi model. We may later investigate QMC.
 
 
 
-It is a well-documented fact on Equity markets (see for instance  Chapter 5 of \cite{gatheral2011volatility}) that standard (It\^o) stochastic models with continuous paths are not able to capture the observed steepness of the left wing of the smile when the maturity becomes small. To remedy this, several authors have
-suggested the addition of jumps, either in the form of an independent L\'evy process or within the more general
-framework of affine diffusions. Jumps (in the stock price dynamics) imply an explosive behaviour for the small maturity
-smile and are better able to capture the observed steepness of the small-maturity implied volatility smile. In particular, Tankov \cite{tankov2011pricing} showed that, for exponential L\'evy models with L´evy measure supported on the whole real line, the squared implied volatility smile explodes as $\sigma^2_\tau(k)\sim −k^2/(2\tau\log\tau)$, as the maturity tends to zero, where $k$ represents the log-moneyness. Such a small-maturity behaviour of the smile is not only captured by jump-based models, but rough volatility (non-Markovian) models, where the stochastic volatility
-component is driven by a fractional Brownian motion, are in fact also able to reflect this property of the data. In a series of papers several authors \cite{bayer2017short,forde2017asymptotics,jacquier2017pathwise}  have indeed proved that, when the Hurst index of the fractional Brownian motion lies within $(0,1/2)$, then the implied volatility explodes at a rate of $\tau^{H-1/2}$ as the maturity tends to zero.
+%Following \cite{gatheral2014volatility}, Bayer, Friz and Gatheral \cite{bayer2016pricing} propose the so-called rough Bergomi model, which they then use to price options on integrated volatility and on the underlying itself. The advantage of their model is that it captures the "rough" behaviour of log volatility, in accordance with \cite{bennedsen2016decoupling,gatheral2014volatility}, as well
+%as fits observed implied volatility smiles better than traditional Markovian stochastic volatility models, most notably in the close-to-maturity case.
 
+%It is a well-documented fact on Equity markets (see for instance  Chapter 5 of \cite{gatheral2011volatility}) that standard (It\^o) stochastic models with continuous paths are not able to capture the observed steepness of the left wing of the smile when the maturity becomes small. To remedy this, several authors have
+%suggested the addition of jumps, either in the form of an independent L\'evy process or within the more general
+%framework of affine diffusions. Jumps (in the stock price dynamics) imply an explosive behaviour for the small maturity
+%smile and are better able to capture the observed steepness of the small-maturity implied volatility smile. In particular, Tankov \cite{tankov2011pricing} showed that, for exponential L\'evy models with L´evy measure supported on the whole real line, the squared implied volatility smile explodes as $\sigma^2_\tau(k)\sim −k^2/(2\tau\log\tau)$, as the maturity tends to zero, where $k$ represents the log-moneyness. Such a small-maturity behaviour of the smile is not only captured by jump-based models, but rough volatility (non-Markovian) models, where the stochastic volatility
+%component is driven by a fractional Brownian motion, are in fact also able to reflect this property of the data.
+ 
+% Indeed both regimes have been identified from the empirical perspective. We refer to for instance \cite{gatheral2014volatility}
+% for observations of rough volatility, while in \cite{chronopoulou2012estimation}  of volatility with long-range correlation properties are reported. Long-range volatility
+% situations have been reported for currencies in \cite{walther2017true} and  for commodities
+% in \cite{charfeddine2014true}, while analysis of
+% electricity markets data typically gives $H<1/2$ as in \cite{rypdal2013modeling,bennedsen2015rough}. We believe that both the rough and the long range cases are important and can be observed depending on the specific market and regime.
 
-The last few years have seen renewed interest in stochastic volatility models driven by fractional Brownian motion (fBM) or other self-similar Gaussian processes (see  \cite{bayer2016pricing,gatheral2014volatility}). Recall that fractional Brownian motion $B^H$ is a centered self-similar Gaussian process with stationary increments, which depends on a parameter $H \in (0,1)$ called the Hurst index, and $B^H$ is persistent (i.e., more likely to keep a trend than to break it) when $H>1/2$ and antipersistent when $H<1/2$ (i.e., if $B^H$ was increasing in the past, $B^H$ is more likely to decrease in the future, and vice versa). 
-
-
-
-Gatheral, Jaisson, and Rosenbaum \cite{gatheral2014volatility} provide strong empirical justification for such models; in particular, they argue that log-volatility in practice behaves essentially as fBM with the Hurst exponent $H \approx 0.1$ at any reasonable time scale (see also  \cite{gatheral2014volatility_2}). In particular, Gatheral, Jaisson, and Rosenbaum \cite{gatheral2014volatility} advocate a model in which the volatility is the exponential of a fractional OU process with small mean-reversion parameter.
-
-Recently, Bayer, Friz, and Gatheral \cite{bayer2016pricing} analyze the rough Bergomi variance curve model, which is shown to fit SPX option prices significantly better than conventional Markovian stochastic volatility models, and with fewer parameters.
-
-
-
-A number of empirical studies suggest that the volatility process
-possesses long- and short-range dependence, that is, the correlation function of the volatility process has decay that is a fractional power of the time offset.
-
-
-The concept of Rough Fractional Stochastic Volatility (RFSV) is put forward in \cite{bayer2016pricing,gatheral2014volatility}.
-Here a model with log-volatility modeled by an fBm is motivated by analysis of market data, which they state provide strong support for a value for the Hurst exponent $H$ around $0.1$. As explained above, small values for $H$ correspond to very rough processes. The authors discuss issues related to changing from physical to pricing measure and using simulated prices to t well the implied volatility surface in the case of the S\&P $500$ index with
-few parameters. They argue that the fractional model generates strong skews or "smiles" in the implied volatility even for very short time to maturity so that this modeling provides an
-alternative to using jumps to model such an effect.
-
-
-
-
-
+% In a series of papers several authors \cite{bayer2017short,forde2017asymptotics,jacquier2017pathwise}  have indeed proved that, when the Hurst index of the fractional Brownian motion lies within $(0,1/2)$, then the implied volatility explodes at a rate of $\tau^{H-1/2}$ as the maturity tends to zero.
 \section{Background on Gaussian and fBM processes}
 A zero-mean real-valued Gaussian process $(Z_t)_{t\ge0}$ is a stochastic process such that on any finite subset $\{t_1,\dots t_n\} \subset \rset, (Z_{t_1},\dots, Z_{t_n})$ has a
 multivariate normal distribution with mean zero. The law of a Gaussian process is entirely determined by the covariance function $K(s, t)= \expt{Z_t Z_s}$ and $Z$ induces a Gaussian probability
@@ -222,13 +204,14 @@ We use  the rBergomi model(rough stochastic volatility model) for the price proc
 	dS_t = \sqrt{v_t(\tilde{W}^H)} S_t dZ_t,\\
 	v_t = \xi_0(t) \exp\left( \eta \tilde{W}_t^H - \frac{1}{2} \eta^2 t^{2H} \right),
 \end{align}
-where for $0 < H < 1$,  we have $\tilde{W}^H $ is a certain Volterra process,  defined by
+where for $0 < H < 1$ and  $\nu>0$.  We have $\tilde{W}^H $ is a certain Volterra process (Riemann-Liouville
+process),  defined by
 \begin{align}\label{eq:Volterra process}
 	\tilde{W}_t^H = \int_0^t K^H(t,s) dW_s^1, \quad t \ge 0
 \end{align}
 where the kernel $K^H : \rset_+ \times \rset_+ \rightarrow \rset_+$ reads
 \begin{align}
- \quad K^H(t,s) = \sqrt{2H} \abs{t-s}^{H - 1/2},\quad \forall \: 0 \le s \le t.
+ \quad K^H(t,s) = \sqrt{2H} (t-s)^{H - 1/2},\quad \forall \: 0 \le s \le t.
 \end{align}
 
 We note that the map $s \rightarrow K^H(s,t)$ belongs to $L^2$, so
@@ -236,24 +219,28 @@ that the stochastic integral \eqref{eq:Volterra process} is well defined.
 
 $W^1, Z$ denote two \emph{correlated} standard Brownian motions with correlation $\rho \in [-1,1]$, so that
 \begin{align}
-	Z:=\rho	W^1+ \bar{\rho}W^2 \equiv \rho W^1+\sqrt{1-\rho^2} W^2,
+	Z:=\rho	W^1+ \bar{\rho}W^\perp \equiv \rho W^1+\sqrt{1-\rho^2} W^\perp,
 \end{align}
-where $(W^1,W^2)$ are two independent standard Brownian motions,
+where $(W^1,W^\perp)$ are two independent standard Brownian motions,
 Therefore, Eq \ref{eq:rBergomi_model1} can be written as 
 
 \begin{align}\label{eq:rBergomi_model}
 	S_t&= S_0  \operatorname{exp}\left( \int_{0}^{t} \sqrt{v(s)} dZ(s)- \frac{1}{2} \int_{0}^{t} v(s) ds   \right),\quad S_0>0 \nonumber\\
-	v(u)&=\xi_0 \operatorname{exp}\left( \eta \tilde{W}_u^H- \frac{\eta^2}{2} u^H \right), \quad \xi_0>0
+	v(u)&=\xi_0(u) \operatorname{exp}\left( \eta \tilde{W}_u^H- \frac{\eta^2}{2} u^H \right), \quad \xi_0>0
 \end{align}
 
 
-The filtration $(\mathcal{F}_t)_{t\ge 0}$ can here be taken as the one generated by the two-dimensional Brownian motion $(W^1,W^2)$. The stock price process $S$ is clearly then a local
-$(\mathcal{F}_t)_{t\ge 0}$-martingale and a supermartingale, therefore integrable.
+The filtration $(\mathcal{F}_t)_{t\ge 0}$ can here be taken as the one generated by the two-dimensional Brownian motion $(W^1,W^\perp)$ under the risk neutral measure $\mathbb{Q}$, resulting in  a filtered probability space $(\Omega,\mathcal{F}; \mathcal{F}_t,\mathbb{Q})$. The stock price process $S$ is clearly then a local
+$(\mathcal{F}_t)_{t\ge 0}$-martingale and a supermartingale, therefore integrable.  We shall henceforth use the notation $\expt{.} = E^{\mathbb{Q}}\left[. \mid \mathcal{F}_0\right]$ unless we state otherwise.
 
 We refer to $v_u$ as the variance process, where $\xi_0(u) = \expt{v_u} \in \mathcal{F}_0$ a.s. the forward variance curve. $\tilde{W}^H $ is a centered, locally $(H-\epsilon)$- H\" \o lder continuous, Gaussian process with $\var{[\tilde{W}^H_t]} = t^{2H}$.
 
 
 In \cite{bayer2016pricing}, the  approach consists in sampling the Gaussian process $Z$ and $\tilde{W}^H$ on a discrete time grid using exact simulation and then approximating $S$ and $v$ using Euler  discretization.
+
+We refrain from formally naming the model parameters $(\nu,\rho,H)$, but those seeking an intuitive understanding of their influence over implied volatilities might like smile for $\nu$,skew for $\rho$, and explosion (of smile and skew) for $H-1/2$.
+
+\section{Option pricing under rBergomi model}\label{sec:Option pricing under rBergomi model}
 
 Assuming $S_0 = 1$, and using the conditioning argument on the $\sigma$-algebra generated by $W^1$ (argument first used by \cite{romano1997contingent} in the context of Markovian SV
 models), we can  show that the call price is given by
@@ -270,10 +257,10 @@ where $C_{BS}$ denotes the Black-Scholes price.
 In fact, if we use the orthogonal decomposition of $S_t$ into $S_{t}^1$ and $S_{t}^2$, where
 
 \begin{align}
-	S_t^1:=\mathcal{E}\{ \rho \int_{0}^{t}  \sqrt{v_s} dW_s^1\}, \: S_t^2:= \mathcal{E}\{ \sqrt{1-\rho^2} \int_{0}^{t}  \sqrt{v_s} dW_s^2  \}	,
+	S_t^1:=\mathcal{E}\{ \rho \int_{0}^{t}  \sqrt{v_s} dW_s^1\}, \: S_t^2:= \mathcal{E}\{ \sqrt{1-\rho^2} \int_{0}^{t}  \sqrt{v_s} dW_s^\perp  \}	,
 \end{align}
 
-where $\mathcal{E}()$ denotes the stochastic exponential, then, we obtain
+where $\mathcal{E}()$ denotes the stochastic exponential, then, we obtain by conditional log-normality
 \begin{align}
 	\log S_t \mid \mathcal{F}_t^1 \sim \mathcal{N}\left( \log S_t^1-\frac{1}{2} (1-\rho^2) \int_{0}^{t} v_s ds , (1-\rho^2) \int_{0}^{t} v_s ds \right),
 \end{align} 
@@ -297,17 +284,26 @@ avoid any sampling related to $W^2$ by   a brute-force approach that  consists i
  	\item Euler discretization of the integral defining $\tilde{W}^H$ together with classical simulation of increments of $W^1$. This is horribly inefficient because the integral is singular and adaptivity probably does not help, as the singularity moves with time. For this 	method, we need an $N$-dimensional random Gaussian input vector to produce one (approximate, inaccurate) sample of $W^1_{t_1},\dots, W^1_{t_N}, \tilde{W}^H_{t_1},\dots, \tilde{W}_{t_N}$.
  	
  	\item Given that $W^1_{t_1},\dots, W^1_{t_N}, \tilde{W}^H_{t_1},\dots, \tilde{W}_{t_N}$ together forms a ($2N$)-dimensional Gaussian random vector with computable covariance matrix. We can use Cholesky decomposition of the covariance matrix to produce exact samples of $W^1_{t_1},\dots, W^1_{t_N}, \tilde{W}^H_{t_1},\dots, \tilde{W}_{t_N}$, but unlike the first way, we need $2N$-dimensional Gaussian random vectors as
- 	input. This method is exact but slow (See Section $4$ in \cite{bayer2017short}).
+ 	input. This method is exact but slow (See Section $4$ in \cite{bayer2017short}). The simulation  requires $\Ordo{N^3}$. flops.
  	
  	\item  The hybrid scheme of \cite{bennedsen2017hybrid} uses a different approach, which is essentially based on  Euler discretization as the first way but crucially improved by moment
  	matching for the singular term in the left point rule. It is also
  	inexact in the sense that samples produced here do not exactly have the distribution of $W^1_{t_1},\dots, W^1_{t_N}, \tilde{W}^H_{t_1},\dots, \tilde{W}_{t_N}$,however they are much more accurate then samples produced from method $1)$, but much faster than method $2)$. As in method $2)$, in this case we need a $2N$-dimensional Gaussian random input vector to produce one
  	sample of $W^1_{t_1},\dots, W^1_{t_N}, \tilde{W}^H_{t_1},\dots, \tilde{W}_{t_N}$.
  \end{enumerate}
-In this project, we adopt the last approach for the simulation of the rBergomi model.
+In this project, we adopt the last approach for the simulation of the rBergomi model. We utilise the first order variant $(\kappa=1) $ of the hybrid scheme \cite{bennedsen2017hybrid}, which is based on the approximation
+
+\begin{equation}\label{eq:Hybrid_scheme}
+\tilde{W}^H_{\frac{i}{N}} \approx \bar{W}_{\frac{i}{N}}:= \sqrt{2H} \left(\int_{\frac{i-1}{N}}^{\frac{i}{N}} \left(\frac{i}{N} -s\right)^{H-\frac{1}{2}} dW_u^1+\sum_{k=2}^{i} \left(\frac{b_k}{N}\right)^{H-\frac{1}{2}} \left(W_{\frac{i-(k-1)}{N}}^1-W_{\frac{i-k}{N}}^1\right)\right)
+\end{equation}
+where $N$ is the number of time steps and 
+$$ b_k:=\left(\frac{k^{H+\frac{1}{2}}-(k-1)^{H+\frac{1}{2} }}{H+\frac{1}{2}}\right)^{\frac{1}{H-\frac{1}{2}}}$$
+
+Employing the fast Fourier transform to evaluate the sum in \eqref{eq:Hybrid_scheme}, which is a discrete convolution, a skeleton $\bar{W}_0^{H},\bar{W}_1^{H},\dots,\bar{W}_{\frac{[Nt]}{N}}^{H}$ can be generated in $\Ordo{N \log N}$ foating point operations.
 
 
-%
+The variates $\bar{W}_0^{H},\bar{W}_1^{H},\dots,\bar{W}_{\frac{[Nt]}{N}}^{H}$ can be generated by sampling $[nt]$ iid draws from a $\kappa+1$-dimensional Gaussian
+distribution and computing a discrete convolution. We call these pairs  of Gaussian random variables from now on as $(W^1,W^2)$.
 %
 %In this sense, I (sloppily) claimed that the hybrid scheme require 2
 %Brownian motions. This is strictly speaking incorrect. You need,
@@ -787,6 +783,29 @@ From figures  \ref{fig:Weak_rate_H_007_without_rich}), we see that for $H=0.07$,
 	\caption{The rate of convergence of the weak error for $H=0.07$ $K=1$, without Richardson extraploation, using MC with $M=10^5$: a) $\abs{\expt{g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{g(X_{\Delta t})-g(X_{\Delta t/2})}}$ }
 	\label{fig:Weak_rate_H_007_without_rich_change_meausre}
 \end{figure}
+
+\subsubsection*{With Richardson extrapolation (level 1)}
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/with_change_measure/with_rich/weak_convergence_order_Bergomi_H_007_K_1_M_10_5_CI_relative_measure_change_level_1_1}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/with_change_measure/with_rich/weak_convergence_order_differences_Bergomi_H_007_K_1_M_10_5_CI_relative_measure_change_level_1_1}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of the weak error for $H=0.07$ $K=1$, with Richardson extraploation, using MC with $M=10^6$: a) $\abs{\expt{2 g(X_{\Delta t/2}) -g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{3 g(X_{\Delta t/2})-g(X_{\Delta t})-2 g(X_{\Delta t/4})}}$ }
+	\label{fig:Weak_rate_H_007_with_rich_change_measure}
+\end{figure}
+
+
+
 
 \newpage
 \subsection{Comparing relative errors using hierarchical representation }
@@ -1457,7 +1476,7 @@ In this section, we do both hierarchical transformation, based on brownian bridg
 \end{figure}
 
 
-
+\newpage
 \subsubsection{Hierarchical}
 \begin{figure}[h!]
 	\centering
