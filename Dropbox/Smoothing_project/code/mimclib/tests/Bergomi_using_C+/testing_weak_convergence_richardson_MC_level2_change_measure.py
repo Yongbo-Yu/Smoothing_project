@@ -81,11 +81,11 @@ class Problem(object):
             self.Hfun_ff = nd.Hessian(self.fun_ff) 
             Hfun_mode_ff=np.linalg.inv(-self.Hfun_ff(self.z_bar_ff_1))
              # spectral
-            #e_vals_ff, e_vecs_ff = np.linalg.eig(Hfun_mode_ff)
-            #self.Lff=e_vecs_ff.dot(np.diag(np.sqrt(e_vals_ff)))
+            e_vals_ff, e_vecs_ff = np.linalg.eig(Hfun_mode_ff)
+            self.Lff=e_vecs_ff.dot(np.diag(np.sqrt(e_vals_ff)))
 
             #Cholesky
-            self.Lff=np.linalg.cholesky(Hfun_mode_ff)
+            #self.Lff=np.linalg.cholesky(Hfun_mode_ff)
             #print self.Lff
 
             #mini = minimize(self.fun2, self.z_bar, method='CG')
@@ -96,11 +96,11 @@ class Problem(object):
             self.Hfun_f = nd.Hessian(self.fun_f) 
             Hfun_mode_f=np.linalg.inv(-self.Hfun_f(self.z_bar_f_1))
              # spectral
-            #e_vals_f, e_vecs_f = np.linalg.eig(Hfun_mode_f)
-            #self.Lf=e_vecs_f.dot(np.diag(np.sqrt(e_vals_f)))
+            e_vals_f, e_vecs_f = np.linalg.eig(Hfun_mode_f)
+            self.Lf=e_vecs_f.dot(np.diag(np.sqrt(e_vals_f)))
 
             #Cholesky
-            self.Lf=np.linalg.cholesky(Hfun_mode_f)
+            #self.Lf=np.linalg.cholesky(Hfun_mode_f)
             #print self.Lf
 
 
@@ -111,11 +111,11 @@ class Problem(object):
             self.Hfun_c = nd.Hessian(self.fun_c) 
             Hfun_mode_c=np.linalg.inv(-self.Hfun_c(self.z_bar_c_1))
             # spectral
-            #e_vals_c, e_vecs_c = np.linalg.eig(Hfun_mode_c)
-            #self.Lc=e_vecs_c.dot(np.diag(np.sqrt(e_vals_c)))
+            e_vals_c, e_vecs_c = np.linalg.eig(Hfun_mode_c)
+            self.Lc=e_vecs_c.dot(np.diag(np.sqrt(e_vals_c)))
 
             #Cholesky
-            self.Lc=np.linalg.cholesky(Hfun_mode_c)
+            #self.Lc=np.linalg.cholesky(Hfun_mode_c)
             
 
             
@@ -840,7 +840,7 @@ def weak_convergence_differences():
         stand=np.zeros(4)
         Ub=np.zeros(4)
         Lb=np.zeros(4)
-        values=np.zeros((10**6,4)) 
+        values=np.zeros((10**5,4)) 
 
         num_cores = mp.cpu_count()
         
@@ -856,7 +856,7 @@ def weak_convergence_differences():
 
             #results = Parallel(n_jobs=num_cores)(delayed(processInput)(j) for j in inputs)
             p =  pp.ProcessPool(num_cores)  # Processing Pool with num_cores processors
-            values[:,i]= p.map(processInput, range(10**6))
+            values[:,i]= p.map(processInput, range(10**5))
       
                      
         
@@ -864,12 +864,44 @@ def weak_convergence_differences():
         print elapsed_time_qoi
         
         error=np.abs(np.mean(values,axis=0) - 1) 
-        stand=np.std(values, axis = 0)/  float(np.sqrt(10**6))
+        stand=np.std(values, axis = 0)/  float(np.sqrt(10**5))
         Ub=np.abs(np.mean(values,axis=0) - 1)+1.96*stand
         Lb=np.abs(np.mean(values,axis=0) - 1)-1.96*stand
         print(error)   
         print(stand)
         print Lb
+        print Ub
+         
+        differences= [values[:,i]-values[:,i+1] for i in range(0,3)]
+        error_diff=np.abs(np.mean(differences,axis=1))
+        print error_diff 
+        stand_diff=np.std(differences, axis = 1)/ float(np.sqrt(10**5))
+        print stand_diff
+        Ub_diff=np.abs(np.mean(differences,axis=1))+1.96*stand_diff
+        Lb_diff=np.abs(np.mean(differences,axis=1))-1.96*stand_diff
+        print Ub_diff
+        print Lb_diff
+
+       
+        z= np.polyfit(np.log(dt_arr), np.log(error), 1)
+        fit=np.exp(z[0]*np.log(dt_arr))
+        print z[0]
+
+        z_diff= np.polyfit(np.log(dt_arr[0:3]), np.log(error_diff), 1)
+        fit_diff=np.exp(z_diff[0]*np.log(dt_arr[0:3]))
+        print z_diff[0]
+
+
+        z3=np.zeros(4)
+        z3[0]=3.0
+        z3[1]=np.log(error[0])
+        fit3=np.exp(z3[0]*np.log(dt_arr)+z3[1])
+
+
+        z3diff=np.zeros(3)
+        z3diff[0]=3.0
+        z3diff[1]=np.log(error_diff[0])
+        fit3diff=np.exp(z3diff[0]*np.log(dt_arr[0:3])+z3diff[1])
 
         
 
@@ -894,7 +926,7 @@ def weak_convergence_differences():
         plt.ylabel(r'$\mid  g(X_{\Delta t})-  g(X) \mid $',fontsize=14) 
         plt.subplots_adjust(wspace=0.6, hspace=0.6, left=0.15, bottom=0.22, right=0.96, top=0.96)
         plt.legend(loc='upper left')
-        plt.savefig('./results/weak_convergence_order_Bergomi_H_007_K_1_richardson_level2_relative_change_measure_M_10_6.eps', format='eps', dpi=1000)  
+        plt.savefig('./results/weak_convergence_order_Bergomi_H_007_K_1_richardson_level2_relative_change_measure_M_10_5.eps', format='eps', dpi=1000)  
 
         fig = plt.figure()
         plt.plot(dt_arr[0:3], error_diff,linewidth=2.0,label='weak_error' ,marker='>', hold=True) 
@@ -911,7 +943,7 @@ def weak_convergence_differences():
         plt.ylabel(r'$\mid  g(X_{\Delta t})-  g(X_{\Delta t/2}) \mid $',fontsize=14) 
         plt.subplots_adjust(wspace=0.6, hspace=0.6, left=0.15, bottom=0.22, right=0.96, top=0.96)
         plt.legend(loc='upper left')
-        plt.savefig('./results/weak_convergence_order_differences_Bergomi_H_007_K_1_richardson_level2_relative_change_measure_M_10_6.eps', format='eps', dpi=1000)
+        plt.savefig('./results/weak_convergence_order_differences_Bergomi_H_007_K_1_richardson_level2_relative_change_measure_M_10_5.eps', format='eps', dpi=1000)
 
 
 
