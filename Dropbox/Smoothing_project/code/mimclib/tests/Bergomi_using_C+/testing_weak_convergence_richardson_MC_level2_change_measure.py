@@ -209,12 +209,12 @@ class Problem(object):
             Hfun_mode_f=np.linalg.inv(-self.Hfun_f(self.z_bar_f_1))
 
             #Cholesky
-            self.Lf=np.linalg.cholesky(Hfun_mode_f)
+            #self.Lf=np.linalg.cholesky(Hfun_mode_f)
             #print self.Lf
 
             # spectral
-            #e_vals_f, e_vecs_f = np.linalg.eig(Hfun_mode_f)
-            #self.Lf=e_vecs_f.dot(np.diag(np.sqrt(e_vals_f)))
+            e_vals_f, e_vecs_f = np.linalg.eig(Hfun_mode_f)
+            self.Lf=e_vecs_f.dot(np.diag(np.sqrt(e_vals_f)))
 
 
             mini_c= minimize(self.fun2_c_4, self.z_bar_c, method='Nelder-Mead', options={'xatol': 1e-5, 'disp': False})
@@ -224,10 +224,10 @@ class Problem(object):
             Hfun_mode_c=np.linalg.inv(-self.Hfun_c(self.z_bar_c_1))
 
             #Cholesky
-            self.Lc=np.linalg.cholesky(Hfun_mode_c)
+            #self.Lc=np.linalg.cholesky(Hfun_mode_c)
             # spectral
-            #e_vals_c, e_vecs_c = np.linalg.eig(Hfun_mode_c)
-            #self.Lc=e_vecs_c.dot(np.diag(np.sqrt(e_vals_c))) 
+            e_vals_c, e_vecs_c = np.linalg.eig(Hfun_mode_c)
+            self.Lc=e_vecs_c.dot(np.diag(np.sqrt(e_vals_c))) 
         
         
     
@@ -926,7 +926,7 @@ def weak_convergence_differences():
         plt.ylabel(r'$\mid  g(X_{\Delta t})-  g(X) \mid $',fontsize=14) 
         plt.subplots_adjust(wspace=0.6, hspace=0.6, left=0.15, bottom=0.22, right=0.96, top=0.96)
         plt.legend(loc='upper left')
-        plt.savefig('./results/weak_convergence_order_Bergomi_H_007_K_1_richardson_level2_relative_change_measure_M_10_5.eps', format='eps', dpi=1000)  
+        plt.savefig('./results/weak_convergence_order_Bergomi_H_007_K_1_richardson_level2_relative_change_measure_M_10_5_spec.eps', format='eps', dpi=1000)  
 
         fig = plt.figure()
         plt.plot(dt_arr[0:3], error_diff,linewidth=2.0,label='weak_error' ,marker='>', hold=True) 
@@ -943,7 +943,7 @@ def weak_convergence_differences():
         plt.ylabel(r'$\mid  g(X_{\Delta t})-  g(X_{\Delta t/2}) \mid $',fontsize=14) 
         plt.subplots_adjust(wspace=0.6, hspace=0.6, left=0.15, bottom=0.22, right=0.96, top=0.96)
         plt.legend(loc='upper left')
-        plt.savefig('./results/weak_convergence_order_differences_Bergomi_H_007_K_1_richardson_level2_relative_change_measure_M_10_5.eps', format='eps', dpi=1000)
+        plt.savefig('./results/weak_convergence_order_differences_Bergomi_H_007_K_1_richardson_level2_relative_change_measure_M_10_5_spec.eps', format='eps', dpi=1000)
 
 
 
