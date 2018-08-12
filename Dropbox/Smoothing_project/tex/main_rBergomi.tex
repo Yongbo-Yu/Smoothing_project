@@ -72,44 +72,40 @@
 \begin{document}
 \maketitle
 
+\section{Introduction}
+\subsection{The goal and outline of the project}
+The main goal of the project is to design a fast option pricer, based on multi-index stochastic collocation (MISC) as \cite{haji2016multi}, for options whose dynamics follow rBergomi model as in \cite{bayer2016pricing}. We may later investigate QMC.
 
-\section{The goal and outline of the project}
-The main goal of the project is to design a fast option pricer, based on multi-index stochastic collocation (MISC), for options whose dynamics follow rBergomi model. We may later investigate QMC.
-
-\section{Review of literature}
-Extending the Black-Scholes model, in which volatility is assumed to be constant, to the case where the volatility is stochastic has proved to be successful in explaining certain phenomena observed in option price data, in particular the implied volatility smile. The main drqwback of such stochastic volatility models, however, is that they are unable to capture the true steepness of the implied volatility smile close to maturity. 
+\subsection{Review of literature}
+Extending the Black-Scholes model, in which volatility is assumed to be constant, to the case where the volatility is stochastic has proved to be successful in explaining certain phenomena observed in option price data, in particular the implied volatility smile. The main drawback of such stochastic volatility models, however, is that they are unable to capture the true steepness of the implied volatility smile close to maturity. 
 While choosing to add jumps to stock price models, for example modelling the stock price process as an exponential L\'evy process, does indeed produce steeper implied volatility smiles, the issue of the presence of jumps in stock price processes remains controversial\cite{bajgrowicz2015jumps,christensen2014fact}.
 
 As an alternative to diffusive stochastic volatility models, rough stochastic volatility has emerged as a new paradigm in quantitative finance,  motivated by the statistical analysis of realised volatility by Gatheral, Jaisson and Rosenbaum \cite{gatheral2014volatility} and the theoretical results on implied volatility by Fukasawa \cite{fukasawa2011asymptotic}. In these models, the trajectories of volatility are less regular than those of the standard Brownian motion. As shown in \cite{gatheral2014volatility,bayer2016pricing}, these models are a family of (continuous-path) stochastic volatility models where the driving noise of the volatility process has H\"older regularity lower than Brownian motion, typically achieved by modeling the fundamental noise innovations of the volatility process as a fractional Brownian motion with Hurst exponent (and hence H\"older regularity)$0<H<1/2$.   A major advantage of such rough volatility models is the fact that they allow to  explain crucial phenomena  observed in  financial markets both from a statistical \cite{gatheral2014volatility,bennedsen2016decoupling} and
-an option-pricing point of view \cite{bayer2016pricing}. In particular, with regards to the latter point of view, a widely observed empirical phenomenon in equity markets is the steepness of the smile on the short end" describing the fact that as time to maturity becomes small the empirical implied volatility skew follows a power law with negative exponent, and thus becomes arbitrarily large near zero. While standard stochastic volatility models with continuous paths struggle to capture this phenomenon,
-predicting instead a constant at-the-money implied volatility behaviour on he short end  \cite{gatheral2011volatility}, models in the fractional stochastic volatility family (and more specifically so-called rough volatility models) constitute a class, well-tailored to fit empirical implied volatilities for short dated options. Consequently, they have become the go-to models capable of reproducing stylised facts of financial markets.
+an option-pricing point of view \cite{bayer2016pricing}. For instance, it was observed empirically  that in equity markets   that as time to maturity becomes small the empirical implied volatility skew follows a power law with negative exponent, and thus becomes arbitrarily large near zero.  While standard stochastic volatility models with continuous paths struggle to capture this phenomenon, predicting instead a constant at-the-money implied volatility behaviour on he short end  \cite{gatheral2011volatility}, 
+ fractional stochastic volatility models (and more specifically so-called rough volatility models) constitute  alternative  models  that  fit empirical implied volatilities for short dated options. Consequently, they have become the go-to models capable of reproducing stylised facts of financial markets.
 
 
 
- A fractional Brownian motion is a centred Gaussian process, whose covariance structure depends on the Hurst parameter $H \in (0, 1)$. If $H \in(0,1/2)$, then the fractional Brownian motion has negatively correlated increments and "rough" sample paths, and if $H \in (1/2,1)$ then it has positively correlated increments and "smooth" sample paths, when compared with a standard Brownian motion, which is recovered by taking $H=1/2$. Gatheral, Jaisson, and Rosenbaum \cite{gatheral2014volatility} provide strong empirical justification for such models; in particular, they argue that log-volatility in practice behaves essentially as fBM with the Hurst exponent $H \approx 0.1$ at any reasonable time scale (see also  \cite{gatheral2014volatility_2}). This finding is corroborated by Bennedsen, Lunde and Pakkanen \cite{bennedsen2016decoupling}, who study over a thousand individual US equities and find that the Hurst parameter $H$ lies in $(0,1/2)$ for each equity.
+ Rough volatility models are based on fractional Brownian motion (fBM), which  is a centred Gaussian process, whose covariance structure depends on the Hurst parameter $H \in (0, 1)$. If $H \in(0,1/2)$, then the fractional Brownian motion has negatively correlated increments and "rough" sample paths, and if $H \in (1/2,1)$ then it has positively correlated increments and "smooth" sample paths, when compared with a standard Brownian motion, which is recovered by taking $H=1/2$. Gatheral, Jaisson, and Rosenbaum \cite{gatheral2014volatility} justify  empirically  the benefits of such models; in particular, they argue that log-volatility in practice behaves essentially as fBM with the Hurst exponent $H \approx 0.1$ at any reasonable time scale (see also  \cite{gatheral2014volatility_2}). This finding is confirmed  by Bennedsen, Lunde and Pakkanen \cite{bennedsen2016decoupling}, who study over a thousand individual US equities and find that the Hurst parameter $H$ lies in $(0,1/2)$ for each equity.
 
 
- 
 
- 
 
- The rough Bergomi model (hereafter rBergomi) is one of the recent rough volatility models, developed by Bayer, Friz and Gatheral \cite{bayer2016pricing},  that is consistent with the stylised fact of implied volatility surfaces being essentially time-invariant, and are able to capture the term structure of skew observed in equity markets. In \cite{bayer2016pricing}, the authors discuss issues related to changing from physical to pricing measure and using simulated prices to fit well the implied volatility surface in the case of the S\&P $500$ index with
- few parameters-just three!. They argue that the fractional model generates strong skews or "smiles" in the implied volatility even for very short time to maturity so that this modeling provides an
+ The rough Bergomi (rBergomi) model is one of the recent rough volatility models, developed by Bayer, Friz and Gatheral \cite{bayer2016pricing},  that is consistent with the stylised fact of implied volatility surfaces being essentially time-invariant, and are able to capture the term structure of skew observed in equity markets. In \cite{bayer2016pricing}, the authors constructed the rBergomi model by  moving from  physical to pricing measure and simulated prices under that model to fit well the implied volatility surface in the case of the S\&P $500$ index with
+ few parameters-just three!. They claim that the fractional model generates strong skews or "smiles" in the implied volatility even for very short time to maturity so that this modeling provides an
  alternative to using jumps to model such an effect. In \cite{bayer2016pricing} the model is so named because of its relationship with the Bergomi variance curve model \cite{bergomi2005smile}, and may be seen as a non-Markovian
 generalisation of the latter.
 
 
-From a practical perspective the natural question arises: What does the mantra of rough volatility mean for a trader with a view to hedging his positions? Due to the non-Markovian nature of the
-fractional driver, hedging under rough volatility poses a delicate challenge making even the very definition of hedging strategies difficult.
+%From a practical perspective  a natural issue  appears: What does the mantra of rough volatility mean for a trader with a view to hedging his positions?
 
 
-Typically, the popularity of asset pricing models hinges on the availability of efficient numerical pricing methods. In the case of diffusions, these include Monte Carlo estimators, PDE discretization schemes, asymptotic expansions and transform
-methods. With fractional Brownian motion being the prime example of a process beyond the semimartingale framework, most currently prevalent option pricing methods -particularly the ones assuming semimartingality or Markovianity - may not easily carry over to the rough setting. In fact,  due to the lack of Markovianity or affine structure, conventional analytical pricing methods, such as PDEs or Fourier transform, do not apply. At the moment, the only known method for pricing mere vanilla options, and computing the corresponding implied volatility smiles, in this setting is Monte Carlo simulation. Recent advances in simulation methods for the rough Bergomi model have been achieved in \cite{bayer2016pricing,bayer2017regularity,mccrickerd2017turbocharging,bennedsen2017hybrid,jacquier2018vix}. For isntance, in \cite{mccrickerd2017turbocharging}, the authors employ a novel composition of variance reduction methods, immediately applicable to any conditionally log-normal
- stochastic volatility model. They got a substatantial computation gain in the pricing method over the exisiting Monte carlo methods for this model. On the other hand,  more analytical results of option pricing and implied volatility under this model has been done in \cite{jacquier2017pathwise,bayer2017short,forde2017asymptotics}. For isntance, in \cite{jacquier2017pathwise},
-they  characterise the small-time behaviour of implied volatility using large deviations theory and  related results, concerning the small-time near-the-money skew, have been  obtained by Bayer, Friz, Gulisashvili, Horvath and Stemper \cite{bayer2017short}. Pricing and model calibration in rough volatility models remain time consuming. 
+ Due to the non-Markovian nature of the fractional driver, pricing  and hedging under rough volatility constitute a significant challenge. In fact, the popularity of asset pricing models hinges on the availability of efficient numerical pricing methods. In the case of diffusions, these include Monte Carlo (MC) estimators, PDE discretization schemes, asymptotic expansions and transform
+methods. With fractional Brownian motion being the prime example of a process beyond the semi-martingale framework, most currently prevalent option pricing methods -particularly the ones assuming semimartingality or Markovianity - may not easily carry over to the rough setting. In fact,  due to the lack of Markovianity or affine structure, conventional analytical pricing methods  do not apply. At the moment, the only known method for pricing  options under such models is MC simulation. In particular, recent advances in simulation methods for the rough Bergomi model have been achieved in \cite{bayer2016pricing,bayer2017regularity,mccrickerd2017turbocharging,bennedsen2017hybrid,jacquier2018vix}. For isntance, in \cite{mccrickerd2017turbocharging}, the authors employ a novel composition of variance reduction methods, immediately applicable to any conditionally log-normal  stochastic volatility model. They got a substatantial computation gain in the pricing  over the exisiting MC methods. On the other hand,  more analytical results of option pricing and implied volatility under this model has been done in \cite{jacquier2017pathwise,bayer2017short,forde2017asymptotics}. For isntance, in \cite{jacquier2017pathwise},
+they  characterise the small-time behaviour of implied volatility using large deviations theory and  related results, concerning the small-time near-the-money skew, have been  obtained by Bayer, Friz, Gulisashvili, Horvath and Stemper \cite{bayer2017short}. However, we should point out that pricing and model calibration under rough volatility models still remains time consuming.
 
 
-In this paper, we suggest to design  a fast option pricer, based on multi-index stochastic collocation (MISC), for options whose dynamics follow rBergomi model. We may later investigate QMC.
+In this paper, we suggest to design  a fast option pricer, based on multi-index stochastic collocation (MISC) as in \cite{haji2016multi}, for options whose dynamics follow rBergomi model as in \cite{bayer2016pricing}. We may later investigate QMC.
 
 
 
@@ -132,11 +128,11 @@ In this paper, we suggest to design  a fast option pricer, based on multi-index 
 \section{Background on Gaussian and fBM processes}
 A zero-mean real-valued Gaussian process $(Z_t)_{t\ge0}$ is a stochastic process such that on any finite subset $\{t_1,\dots t_n\} \subset \rset, (Z_{t_1},\dots, Z_{t_n})$ has a
 multivariate normal distribution with mean zero. The law of a Gaussian process is entirely determined by the covariance function $K(s, t)= \expt{Z_t Z_s}$ and $Z$ induces a Gaussian probability
-measure on $(E, \mathcal{B}(E))$, where $E$ denotes the Banach space $C_0[0,1]$ with the usual sup norm topology (see, e.g., section 3.1.1 of  \cite{carmona2007interest} for details).
+measure on $(E, \mathcal{B}(E))$, where $E$ denotes the Banach space $C_0([0,1])$ with the usual sup norm topology (see, e.g., section 3.1.1 of  \cite{carmona2007interest} for details).
 
 
 
-Fractional Brownian motion (fBM) is a natural generalization of standard Brownian motion which preserves the properties of stationary increments, self-similarity, and Gaussian finite-dimensional distributions, but it has a more complex dependence structure which exhibits long-range dependence when $H>1/2$. In this section, we recall the definition and summarize the basic properties of fBM.
+Fractional Brownian motion (fBM) is a natural generalization of standard Brownian motion which preserves the properties of stationary increments, self-similarity, and Gaussian finite-dimensional distributions, but it has a more complex dependence structure. In this section, we recall the definition and summarize the basic properties of fBM.
 
 A zero-mean Gaussian process $B^H_t$ is called standard fractional Brownian motion (fBM) with Hurst parameter $H \in(0,1)$ if it has covariance function
 
@@ -146,7 +142,7 @@ R_H=\expt{B_t^H B_s^H}-\expt{B_t^H}\expt{B_s^H}=\frac{1}{2} \left(\abs{t}^{2H}+\
 
 
 
-In order to specify the distribution of a Gaussian process, it is enough to specify its mean and its covariance function; therefore, for each $H$, the law of $B^H$ is uniquely determined by $R^H(s, t)$. However, this definition by itself does not guarantee the existence of fBM; to show that fBM exists, one needs to verify that the covariance function is nonnegative definite.
+In order to specify the distribution of a Gaussian process, it is enough to specify its mean and its covariance function; therefore, for each $H$, the law of $B^H$ is uniquely determined by $R_H(s, t)$. However, this definition by itself does not guarantee the existence of fBM; to show that fBM exists, one needs to verify that the covariance function is nonnegative definite.
 
 We now recall some fundamental properties of fBM (see also Figure \ref{fig:fBM}):
 
@@ -154,16 +150,16 @@ We now recall some fundamental properties of fBM (see also Figure \ref{fig:fBM})
 	\item fBM is continuous a.s. and H-self-similar (H-ss), i.e., for $a>0, (B_{at})_{t \ge 0}  \overset{(d)}{=} a^H (B_t)_{t \ge 0}$ where $ \overset{(d)}{=}$ means both processes have the same finite-dimensional distributions. For $H \neq 1/2$, $B^H$ does not have independent increments; for $H=1/2, B^H_t$ is the standard Brownian motion. 
 	\item From \eqref{eq:fbm_cov}, we see that 
 	\begin{equation*}
-	\expt{B_t^H-B_s^H)^2}=\abs{t-s}^{2H},
+	\expt{(B_t^H-B_s^H)^2}=\abs{t-s}^{2H},
 	\end{equation*}
 so $B_t^H-B_s^H \sim \mathcal{N}(0,\abs{t-s}^{2H})$; thus $B^H$ has stationary increments.
 \item If we set $X_n=B^H_n-B^H_{n-1}$, then $X_n$ is a  discrete-time Gaussian process with covariance function
 
 \begin{align*}
-\rho_n&=\expt{X_{k+n X_n}}=\expt{\left(B_{k+n}^H -B^H_{k+n-1}\right)\left(B_{k}^H -B^H_{k-1}\right)}\\
+\rho_n&=\expt{X_{k+n} X_n}=\expt{\left(B_{k+n}^H -B^H_{k+n-1}\right)\left(B_{k}^H -B^H_{k-1}\right)}\\
 &\sim H (2H-1) n^{2H-2}\quad (n \rightarrow \infty),
 \end{align*}
-and thus (by convexity of the function $g(n) = n^{2H})$, we see that two increments the form $B_k-B_{k-1}$ and $B_{k+n}-B_{k+n-1}$ are positively correlated if $H  \in (1/2,1)$ and negatively correlated if $H \in (0,1/2)$. Thus $B^H$ is persistent (i.e., it is more likely to keep a trend than to break it) when $H>1/2$, the relatively stronger positive correlation for the consecutive increments of the associated fBm process with increasing $H$ values gives a relatively smoother process whose correlations decay relatively slowly.And antipersistent when $H<1/2$ (i.e., if $B^H$ was increasing in the past, it is more likely to decrease in the future, and vice versa). The enhanced negative correlation with smaller Hurst exponent gives a relatively rougher process.
+and thus (by convexity of the function $g(n) = n^{2H})$, we see that two increments the form $B_k-B_{k-1}$ and $B_{k+n}-B_{k+n-1}$ are positively correlated if $H  \in (1/2,1)$ and negatively correlated if $H \in (0,1/2)$. Thus $B^H$ is persistent (i.e., it is more likely to keep a trend than to break it) when $H>1/2$, the relatively stronger positive correlation for the consecutive increments of the associated fBm process with increasing $H$ values gives a relatively smoother process whose correlations decay relatively slowly.On the other hand, it is antipersistent when $H<1/2$ (i.e., if $B^H$ was increasing in the past, it is more likely to decrease in the future, and vice versa). The enhanced negative correlation with smaller Hurst exponent gives a relatively rougher process.
 
 \item If $H \in (1/2,1)$, we can show that $\sum_{n=1}^\infty \rho_n= \infty$, which means that the process exhibits long-range dependence, but if $H \in(0, 1/2)$, then  $\sum_{n=1}^\infty \rho_n< \infty$.
 
@@ -173,7 +169,7 @@ and thus (by convexity of the function $g(n) = n^{2H})$, we see that two increme
 
 
 
-More details regarding the fBm processes we refer, respectively, to \cite{biagini2008stochastic,coutin07introduction,mandelbrot1968fractional}.
+For more details regarding the fBm processes we refer to \cite{biagini2008stochastic,coutin07introduction,mandelbrot1968fractional}.
 
 \begin{figure}[h!]
 	\centering
@@ -195,16 +191,16 @@ More details regarding the fBm processes we refer, respectively, to \cite{biagin
 
 
 
+\section{Problem setting}
+\subsection{The rBergomi model}\label{sec:The rBergomi model}
 
-\section{The rBergomi model}\label{sec:The rBergomi model}
-
-We use  the rBergomi model(rough stochastic volatility model) for the price process $S_t$ as defined in  \cite{bayer2016pricing}, normalized to $r=0$ and, which is defined by
+We use  the rBergomi model for the price process $S_t$ as defined in  \cite{bayer2016pricing}, normalized to $r=0$, which is defined by
 
 \begin{align}\label{eq:rBergomi_model1}
 	dS_t = \sqrt{v_t(\tilde{W}^H)} S_t dZ_t,\\
 	v_t = \xi_0(t) \exp\left( \eta \tilde{W}_t^H - \frac{1}{2} \eta^2 t^{2H} \right),
 \end{align}
-where for $0 < H < 1$ and  $\nu>0$.  We have $\tilde{W}^H $ is a certain Volterra process (Riemann-Liouville
+where for $0 < H < 1$ and  $\eta>0$.  We have $\tilde{W}^H $ is a certain Volterra process (Riemann-Liouville
 process),  defined by
 \begin{align}\label{eq:Volterra process}
 	\tilde{W}_t^H = \int_0^t K^H(t,s) dW_s^1, \quad t \ge 0
@@ -236,11 +232,12 @@ $(\mathcal{F}_t)_{t\ge 0}$-martingale and a supermartingale, therefore integrabl
 We refer to $v_u$ as the variance process, where $\xi_0(u) = \expt{v_u} \in \mathcal{F}_0$ a.s. the forward variance curve. $\tilde{W}^H $ is a centered, locally $(H-\epsilon)$- H\" \o lder continuous, Gaussian process with $\var{[\tilde{W}^H_t]} = t^{2H}$.
 
 
-In \cite{bayer2016pricing}, the  approach consists in sampling the Gaussian process $Z$ and $\tilde{W}^H$ on a discrete time grid using exact simulation and then approximating $S$ and $v$ using Euler  discretization.
 
-We refrain from formally naming the model parameters $(\nu,\rho,H)$, but those seeking an intuitive understanding of their influence over implied volatilities might like smile for $\nu$,skew for $\rho$, and explosion (of smile and skew) for $H-1/2$.
 
-\section{Option pricing under rBergomi model}\label{sec:Option pricing under rBergomi model}
+We note that the model parameters $(\eta,\rho,H)$ may have an
+ intuitive interpretation of their influence over implied volatilities. In fact,   $\eta$ might seen as  smile, $\rho$ as skew, $H-1/2$ as the explosion(smile and skew).
+
+\subsection{Option pricing under rBergomi model}\label{sec:Option pricing under rBergomi model}
 
 Assuming $S_0 = 1$, and using the conditioning argument on the $\sigma$-algebra generated by $W^1$ (argument first used by \cite{romano1997contingent} in the context of Markovian SV
 models), we can  show that the call price is given by
@@ -269,13 +266,11 @@ where $\mathcal{F}_t^1= \sigma\{ W_s^1: s\le t\}$. Therefore, we obtain \eqref{B
 
 
 
+We insist that the smoothing trick, based on conditionning, performed in Eq \eqref{BS_formula_rbergomi} enable us to get a smooth term inside the expectation. Therefore, applying sparse quadrature techniques becomes an adequate option for computing the call price as we shall see later.
 
 
 
-
-
-
-\section{Simulation of the rBergomi model}\label{sec:Simulation of the rBergomi model}
+\subsection{Simulation of the rBergomi model}\label{sec:Simulation of the rBergomi model}
 
 The main challenge is the computation of $S=\int_{0}^{T} \sqrt{v_t} dW_t^1$ and $V=\int_{0}^{T} v_t dt$. As was mentioned in \cite{bayer2017regularity}, we may try to
 avoid any sampling related to $W^2$ by   a brute-force approach that  consists in simulating a scalar Brownian motion $W^1$, followed by computing  $\tilde{W}^H= \int K dW^1$  by It\^o/Riemann Stieltjes approximations of $(S,V)$. However, this is not advisable given the singularity of the Volterra kernel $K(s,t)$ at the diagonal $s = t$.
@@ -284,11 +279,11 @@ avoid any sampling related to $W^2$ by   a brute-force approach that  consists i
  	\item Euler discretization of the integral defining $\tilde{W}^H$ together with classical simulation of increments of $W^1$. This is horribly inefficient because the integral is singular and adaptivity probably does not help, as the singularity moves with time. For this 	method, we need an $N$-dimensional random Gaussian input vector to produce one (approximate, inaccurate) sample of $W^1_{t_1},\dots, W^1_{t_N}, \tilde{W}^H_{t_1},\dots, \tilde{W}_{t_N}$.
  	
  	\item Given that $W^1_{t_1},\dots, W^1_{t_N}, \tilde{W}^H_{t_1},\dots, \tilde{W}_{t_N}$ together forms a ($2N$)-dimensional Gaussian random vector with computable covariance matrix. We can use Cholesky decomposition of the covariance matrix to produce exact samples of $W^1_{t_1},\dots, W^1_{t_N}, \tilde{W}^H_{t_1},\dots, \tilde{W}_{t_N}$, but unlike the first way, we need $2N$-dimensional Gaussian random vectors as
- 	input. This method is exact but slow (See Section $4$ in \cite{bayer2017short}). The simulation  requires $\Ordo{N^3}$. flops.
+ 	input. This method is exact but slow (See  \cite{bayer2016pricing} and Section $4$ in \cite{bayer2017short} ). The simulation  requires $\Ordo{N^3}$. flops. 
  	
  	\item  The hybrid scheme of \cite{bennedsen2017hybrid} uses a different approach, which is essentially based on  Euler discretization as the first way but crucially improved by moment
  	matching for the singular term in the left point rule. It is also
- 	inexact in the sense that samples produced here do not exactly have the distribution of $W^1_{t_1},\dots, W^1_{t_N}, \tilde{W}^H_{t_1},\dots, \tilde{W}_{t_N}$,however they are much more accurate then samples produced from method $1)$, but much faster than method $2)$. As in method $2)$, in this case we need a $2N$-dimensional Gaussian random input vector to produce one
+ 	inexact in the sense that samples produced here do not exactly have the distribution of $W^1_{t_1},\dots, W^1_{t_N}, \tilde{W}^H_{t_1},\dots, \tilde{W}_{t_N}$, however they are much more accurate then samples produced from method $1)$, but much faster than method $2)$. As in method $2)$, in this case we need a $2N$-dimensional Gaussian random input vector to produce one
  	sample of $W^1_{t_1},\dots, W^1_{t_N}, \tilde{W}^H_{t_1},\dots, \tilde{W}_{t_N}$.
  \end{enumerate}
 In this project, we adopt the last approach for the simulation of the rBergomi model. We utilise the first order variant $(\kappa=1) $ of the hybrid scheme \cite{bennedsen2017hybrid}, which is based on the approximation
@@ -315,71 +310,270 @@ distribution and computing a discrete convolution. We call these pairs  of Gauss
 
 
 
+\section{Details our approach and error bounds}\label{sec:Details our approach and error bounds}
 
 
+
+Our approach of computing the expectation in \eqref{BS_formula_rbergomi} is based on multi-index stochastic collocation (MISC), suggested in \cite{haji2016multi}. We describe the general strategy for the multi-index construction in Section \ref{sec:Details of the MISC}. Recall that  there are two  $N$ dimensional Gaussian inputs for the used  hybrid  approach ($N$ is the number of time steps in  the time grid) , namely
+\begin{itemize}
+	\item $\{W^1\}_{i=1}^N$: The $N$ Gaussian random parameters that are defined in Section  \ref{sec:The rBergomi model}.
+	\item $\{W^2\}_{i=1}^N$: An artificial introduced $N$ Gaussian random parameters that are used for left-rule points in the hybrid scheme, explained in Section  \ref{sec:Simulation of the rBergomi model}.
+\end{itemize}
+
+We have a natural error decomposition for the total error of computing the the expectation in \eqref{BS_formula_rbergomi}, namely, $\mathcal{E}$
+
+\begin{equation}\label{eq:total_error}
+\mathcal{E} \le \mathcal{E}_Q(TOL_{\text{MISC}},N) + \mathcal{E}_B(N),
+\end{equation}
+where  $\mathcal{E}_Q$ is the quadrature error, function of MISC tolerance $TOL_{\text{MISC}}$ and $N$ (the number of time steps)  and  $\mathcal{E}_B$  is the bias, function of $N$ (the number of time steps) or $\Delta_t=\frac{T}{N}$ (size of the time grid).
+
+
+
+
+We note that sampling the Brownian motion can be constructed either sequentially using a standard random walk construction or hierarchically using Brownian bridge (BB) construction. To make an effective use of MISC, which is badly affected by isotropy, we use the BB construnction since it produces  dimensions with different importance for MISC (creates anisotropy), contrary to random walk procedure for which all the dimension of the stochastic space have equal importance (isotropic). We explain the BB construction in Section \ref{sec:Brwonian bridge construction}. This transformation plays a role of dimension reduction of the problem and as a consquence accelerating the MISC procedure by reducing the compotational cost.
+
+
+
+Another way to reduce the dimension of the problem is by using Richardson extrapolation, explained in Section \ref{sec:Richardson extrapolation}. In fact, Richardson extrapolation acts on both the bias (by reducing it) and MISC procedure by redcing the number of needed time steps ,$N$, neeeded to achive a certain tolerance, resulting in a lower dimensional problem.
+
+
+Motivated by some numerical observations regarding the behavior of the MISC solver with respect to the standard Gaussian hermite quadrature (See Section \ref{sec:Numerical tests}), We build a more robust MISC solver by incorporating a change of measure with respect to $W^1$ as described in Section \ref{sec:Gaussian Hermite Quadrature with importance sampling}.
+ 
+We also discuss the  error bounds in Section \ref{sec: Discussion about error bounds}
+
+\subsection{Details of the MISC}\label{sec:Details of the MISC}
+
+
+In the multi-variate case, we are left with a $2N$- dimensional Gaussian random inputs, which are chosen independently, resulting in  $2N$ numerical parameters, which we use as the basis of the multi-index construction, reflecting the fact that $W^1_i$ and $W^2_j$ can vary independently of each other regardless of $i \neq j$ or $i = j$. For the sake
+of concreteness, let $l \in \{1, \ldots, 2N\}$ and set
+\begin{equation}
+m_l \coloneqq
+\begin{cases}
+W^1_l, & 1 \le l \le N,\\
+W^2_{l-N}, & N+1 \le l \le 2N.
+\end{cases}
+\end{equation}
+For a multi-index $\ell = (l_i)_{i=1}^{2N} \in \mathbb{N}^{2N}$ we denote by
+$Q^N_\ell \coloneqq Q(m_{\ell})$ the result of a discretized
+integral, using $N$ time steps , with parameters $m_\ell \coloneqq (m_{l_i})_{i=1}^{2N}$. We further define the set of
+differences $\Delta Q_\ell$ as follows: for a single index $1 \le i \le 2N$,
+let
+\begin{equation}
+\Delta_i Q^N_\ell \coloneqq \left\{ 
+\aligned 
+Q^N(m_\ell) - Q^N(m_\ell') \text{ with } m_\ell' =
+m_{\ell - e_i}, & \text{ if } \ell_i>0 \\
+Q^N(m_\ell) & \text{ otherwise}
+\endaligned
+\right.
+\end{equation}
+where $e_i$ denotes the $i$th $2N$-dimensional unit vector. Then, $\Delta
+Q^N_\ell$ is defined as
+\begin{equation}
+\Delta Q^N_\ell \coloneqq \left( \prod_{i=1}^{2N} \Delta_i \right) Q^N_\ell.
+\end{equation}
+For instance, when $N = 1$, then 
+\begin{multline*}
+	\Delta Q^1_\ell = \Delta_2 \Delta_1 Q^1_{(l_1, l_2)} = \Delta_2\left( Q^1_{(l_1,
+		l_2)} - Q^1_{(l_1-1,l_2)} \right) = \Delta_2 Q^1_{(l_1,
+		l_2)} - \Delta_2 Q^1_{(l_1-1,l_2)} 
+	\\= Q^1_{(l_1, l_2)} - Q^1_{(l_1, l_2-1)} - Q^1_{(l_1-1, l_2)} + Q^1_{(l_1-1, l_2-1)}.
+\end{multline*}
+
+Note that $Q^N(m)$ converges to the biased option price (denoted by $Q^N(\infty)$ as
+$m \to \infty$. Hence, we have the telescoping property
+\begin{equation}
+Q^N(\infty) = \sum_{l_1=0}^\infty \cdots \sum_{l_{2N} = 0}^\infty \Delta
+Q^N_{(l_1, \ldots, l_{2N})} = \sum_{\ell \in \mathbb{N}^{2N}} \Delta Q^N_\ell,
+\end{equation}
+provided that $m_{l_1} \xrightarrow{l_1 \to \infty} \infty$, \ldots,
+$m_{l_{2N}} \xrightarrow{l_{2N} \to \infty} \infty$. The telescoping property
+is accompanied by a corresponding error factorization, i.e., the size of the
+increment $\Delta Q^N_\ell$ can be bounded by a product of error terms depending
+on $m_i$ and $m_{i+N}$.
+
+
+We denote the computational work at level $\ell = (l_1, \ldots, l_{2N})$  for adding an increment $\Delta Q^N_{\ell}$
+in the telescoping sum by  $W^N_\ell$, and   define the actual estimator for the quantity of interest
+$Q^N(\infty)$: given a set of multi-indices $\mathcal{I} \subset
+\mathbb{N}^{2N}$, let
+\begin{equation*}
+	Q^N(\mathcal{I}) \coloneqq \sum_{\ell \in \mathcal{I}} \Delta Q^N_\ell.
+\end{equation*}
+Then the error is given by
+\begin{equation*}
+	\abs{Q^N(\infty) - Q^N(\mathcal{I})} \le \sum_{\ell \in \mathbb{N}^{2N} \setminus
+		\mathcal{I}} \abs{\Delta Q^N_\ell},
+\end{equation*}
+
+
+The construction of $\mathcal{I}$ will be done by profit thresholding, i.e.,
+for a certain threshold value $T$, we add a multi-index $\ell$ to
+$\mathcal{I}$ provided that
+\begin{equation*}
+	\log\left( \frac{\abs{\Delta Q^N_\ell}}{W_\ell} \right) \le T.
+\end{equation*}
+(Actually, we take the error estimate instead of the true error.)
+
+
+
+
+
+\subsection{Gaussian Hermite Quadrature with importance sampling}\label{sec:Gaussian Hermite Quadrature with importance sampling}
+Let us call the integrand that we feed to MISC by $I(W^1,W^2)$, then 
+
+\begin{align}
+	C_{RB}\left( T, K \right)=  \int_{\rset_+^{2N}} I(\mathbf{W}^1,\mathbf{W}^2)  \rho(\mathbf{W}^1) \rho(\mathbf{W}^2) d \mathbf{W}^1  d\mathbf{W}^2 \COMMA
+\end{align}
+where $N$ is the number of time steps. We can rewrite the previous expression as
+\begin{align}\label{eq: importance sampling}
+	C_{RB}\left( T, K \right)=  \int_{\rset_+^{2N}} \frac{I(\mathbf{W}^1,\mathbf{W}^2)\rho(\mathbf{W}^1)}{h(\mathbf{W}^1;\hat{\mathbf{W}}^1,\Psi)} {h(\mathbf{W}^1;\hat{\mathbf{W}}^1,\Psi)} \rho(\mathbf{W}^2) d \mathbf{W}^1  d\mathbf{W}^2 \COMMA
+\end{align}
+where $h(\mathbf{W}^1;\hat{\mathbf{W}}^1,\Psi)$ is a multivariate normal density with first and second order moments given by
+
+\begin{align}\label{eq:Gaussian moments}
+	\hat{\mathbf{W}}^1&=\operatorname{arg} \underset{\mathbf{W}^1 \in \rset^{N} }{\max}	[ \log I(\mathbf{W}^1;\mathbf{W}^2)] \\
+	\Psi &=\left(- \frac{\partial^2[\log I(\mathbf{W}^1;\mathbf{W}^2)]}{\partial (\mathbf{W}^1)^{T} \mathbf{W}^1} \right)^{-1}_{\mathbf{W}^1=\hat{\mathbf{W}}^1}
+\end{align}
+
+Let us define $\tilde{\mathbf{W}}^1$ as uncorrelated varaibles and the Cholesky factorization of $\Psi$ is given by $\Psi=L L^{T}$, and $\bar{\mathbf{W}}^1=\sqrt{2} L \tilde{\mathbf{W}}^1+\hat{\mathbf{W}}^1$ then Eq \ref{eq: importance sampling} becomes 
+
+\begin{align}
+	C_{RB}\left( T, K \right)=2^{N/2}. \abs{L} \int_{\rset_+^{2N}} \left( I(\bar{\mathbf{W}}^1,\mathbf{W}^2)  \exp(-\frac{1}{2}(\bar{\mathbf{W}}^1)^T \bar{\mathbf{W}}^1) \exp(\frac{1}{2}\tilde{\mathbf{W}}^T \tilde{\mathbf{W}}) \right)   \rho(\tilde{\mathbf{W}}^1) \rho(\mathbf{W}^2) d \tilde{\mathbf{W}}^1 d\mathbf{W}^2 
+\end{align}
+
+
+
+%
+\subsection{Brwonian bridge construction}\label{sec:Brwonian bridge construction}
+
+
+
+
+In the simulation, we generate the stock prices using Brownian bridge (BB) in the following way: first generates the final value $W_d$ , then sample $W_{[d/2]}$ conditional on the values of $W_d$ and $W_0$, and proceed by progressively filling in intermediate values. Here, $[x]$ denotes the greatest integer less than or equal to $x$. In particular, if $d$ is a power of $2$, then
+BB generates the Brownian motion as
+\begin{align}\label{BB}
+	W_d&=\sqrt{T}Z_1\nonumber\\
+	W_{d/2}&= \frac{1}{2}(W_{0}+W_{d})+\sqrt{T/4}Z_2\nonumber\\
+	W_{d/4}&=\frac{1}{2} (W_{0}+W_{d/2})+\sqrt{T/8}Z_3\nonumber\\
+	\vdots \nonumber\\
+	W_{d-1}&= \frac{1}{2}(W_{d-2}+W_{d})+\sqrt{T/2d}Z_d,
+\end{align}
+where $Z_j$ are independent standard normal variables. 
+
+
+
+\subsection{Richardson extrapolation}\label{sec:Richardson extrapolation}
+
+
+We  recall that the Euler (often) scheme has weak order $1$ so that
+
+\begin{align}\label{Euler_weak_error}
+	\abs{\expt{f(\hat{X}_T^h)}-\expt{f(X_T)} }  \leq C h
+\end{align}
+
+for some constant $C$, all sufficiently small $h$ and suitably smooth $f$. It was shown that \ref{Euler_weak_error} can be improved to
+
+
+\begin{align}\label{Euler_weak_error_strenghten}
+	\expt{f(\hat{X}_T^h)}= \expt{f(X_T)} + c h +\Ordo{h^2} \COMMA
+\end{align}
+
+
+where $c$ depends on $f$. 
+
+Applying \ref{Euler_weak_error_strenghten} with discretization step $2h$, we  obtain
+
+\begin{align}\label{Euler_weak_error_strenghten_2h}
+	\expt{f(\hat{X}_T^{2h})}= \expt{f(X_T)} + 2 c h +\Ordo{h^2} \COMMA
+\end{align}
+
+implying
+
+\begin{align}\label{Richardson_extrapol}
+	2 \expt{f(\hat{X}_T^{2h})}- \expt{f(\hat{X}_T^{h})} =\expt{f(X_T)} + \Ordo{h^2} \COMMA
+\end{align}
+
+For higher levels extrapolations, we use the following: Let us denote by $h_J=h_0.2^{-J}$ the grid sizes (where $h_0$ is the coarsest grid size), by $K$ the level of the Richardson extrapolation, and by $I(J,K)$ the approximation of $\expt{f^(\hat{X}_T^{h_J})}$ by terms up to level $K$ (leading to a weak error of order $K$), then we have
+
+\begin{align}
+I(J,K)=\frac{2^K\left[I(J,K-1)-I(J-1,K-1)\right]}{2^K-1} +\Ordo{h^{K+1}},\quad J=1,2,\dots, K=1,2,\dots
+\end{align}
+
+
+
+
+\subsection{Discussion about error bounds}\label{sec: Discussion about error bounds}
+
+
+\textbf{TO-DO:} In this Section, we discuss each term in Eq \ref{eq:total_error} seperatly.
+\subsubsection{Discussion about the Bias error}
+\subsubsection{Discussion about the quadrature error}
 
 \section{Numerical tests}\label{sec:Numerical tests}
+In this Section, the default paramters values of the rBergomi model  (unless stated), defined in Section \ref{sec:The rBergomi model}, are: $S_0=1$, $\eta=1.9$, $\xi=0.235^2$, $\rho=-0.9$, $T=1$. 
+\subsection{Motivation for the need of measure change}
+In this Section, we motivate the need of measure change as a pre-processing step before applying the MISC solver.
+\subsubsection{Integrand plotting wrt different random inputs } \label{sec:Integrand plotting wrt different random inputs}
+In this section, we plot the integrand, given by the term inside the expectation in \eqref{BS_formula_rbergomi}(including the Gaussian density), wrt different random inputs $(W^1,W^2)$. This is important to check if we need a measure change and if needed for which variables. We show the results for  $H=0.07$ and for two scenarios of number of time steps $N \in \{2,4\}$ (similar plots are produced for $H=0.43$ in Appendices (\ref{Appendix:Integrand plotting wrt different random inputs N=2, H=0.43},\ref{Appendix:Integrand plotting wrt different random inputs: N=4, H=0.43}). We also show the two dimensional plots (See figures \ref{fig:Integrand_H_007_N_2_2D},\ref{fig:Integrand_H_007_N_4_2D_W_1_2_3},\ref{fig:Integrand_H_007_N_4_2D_W_1_3_3_4},\ref{fig:Integrand_H_007_N_4_2D_W_1_4_2_3}). As it seems from the plots, we  just need change of measure wrt to $W^1$ coordinates and we do not need a measure chnage for $W^2$ coordinates. 
 
-\subsection{Integrand plotting wrt different random inputs } \label{sec:Integrand plotting wrt different random inputs}
-In this section, we plot the integrand, given by the term inside the expectation in \eqref{BS_formula_rbergomi}(including the Gaussian density), wrt different random inputs $(W_1,W_2)$ ($W_2$ stands for $W^\text{perp}$ in the code). This is important to check if we need a measure change and if needed for which variables. We show the results for $H=0.43$ and $H=0.07$ and for two scenarios of number of time steps $N \in \{2,4\}$. We also show the two dimensional plots (See figures (\ref{fig:Integrand_H_043_N_2_2D},\ref{fig:Integrand_H_007_N_2_2D},\ref{fig:Integrand_H_007_N_4_2D_W_1_2_3},\ref{fig:Integrand_H_007_N_4_2D_W_1_3_3_4},\ref{fig:Integrand_H_007_N_4_2D_W_1_4_2_3}). As it seems from the plots, we may just need change of measure wrt to $W_1$ coordinates and we do not need a measure chnage for $W_2$ coordinates. 
 
 
-
-\subsubsection{N=2, H=0.07}
+\subsubsection*{N=2, H=0.07}
 
 
 \begin{figure}[h!]
 	\centering
-	\begin{subfigure}{.45\textwidth}
+	\begin{subfigure}{.4\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/1D_plots/N_2/H_007/Bergomi_integrand_K_1_H_007_W11_N_2}
 		\caption{}
 		\label{fig:sub3}
 	\end{subfigure}%
-	\begin{subfigure}{.45\textwidth}
+	\begin{subfigure}{.4\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/1D_plots/N_2/H_007/Bergomi_integrand_K_1_H_007_W12_N_2}
 		\caption{}
 		\label{fig:sub4}
 	\end{subfigure}
-	\caption{Plotting the integrand $I$ (in \eqref{BS_formula_rbergomi}) as a function of $W_1$ coordinates for $H=0.07$ and $N=2$.}
+	\caption{Plotting the integrand $I$ (in \eqref{BS_formula_rbergomi}) as a function of $W^1$ coordinates for $H=0.07$ and $N=2$.}
 	\label{fig:Integrand_H_007_N_2_W_1}
 \end{figure}
 
 \begin{figure}[h!]
 	\centering
-	\begin{subfigure}{.45\textwidth}
+	\begin{subfigure}{.4\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/1D_plots/N_2/H_007/Bergomi_integrand_K_1_H_007_W21_N_2}
 		\caption{}
 		\label{fig:sub3}
 	\end{subfigure}%
-	\begin{subfigure}{.45\textwidth}
+	\begin{subfigure}{.4\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/1D_plots/N_2/H_007/Bergomi_integrand_K_1_H_007_W22_N_2}
 		\caption{}
 		\label{fig:sub4}
 	\end{subfigure}
-	\caption{Plotting the integrand $I$ (in \eqref{BS_formula_rbergomi}) as a function of $W_2$ coordinates for $H=0.07$ and $N=2$.}
+	\caption{Plotting the integrand $I$ (in \eqref{BS_formula_rbergomi}) as a function of $W^2$ coordinates for $H=0.07$ and $N=2$.}
 	\label{fig:Integrand_H_007_N_2_W_2}
 \end{figure}
 
 
 \begin{figure}[h!]
 	\centering
-	\begin{subfigure}{.5\textwidth}
+	\begin{subfigure}{.4\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/2D_plots/N_2/H_007/Bergomi_integrand_contours_K_1_H_007_W1_1_2_N_2}
 		\caption{}
 		\label{fig:sub3}
 	\end{subfigure}%
-	\begin{subfigure}{.5\textwidth}
+	\begin{subfigure}{.4\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/2D_plots/N_2/H_007/Bergomi_integrand_contours_K_1_H_007_W2_1_2_N_2}
 		\caption{}
 		\label{fig:sub4}
 	\end{subfigure}
-	\caption{Two dimensional Plotting of the integrand $I$ (in \eqref{BS_formula_rbergomi})  for $H=0.07$ and $N=2$, a)  function of $W_1$ coordinates, b) function of $W_2$ coordinates}
+	\caption{Two dimensional Plotting of the integrand $I$ (in \eqref{BS_formula_rbergomi})  for $H=0.07$ and $N=2$, a)  function of $W_1$ coordinates, b) function of $W^2$ coordinates}
 	\label{fig:Integrand_H_007_N_2_2D}
 \end{figure}
 
@@ -389,32 +583,32 @@ In this section, we plot the integrand, given by the term inside the expectation
 
 
 \newpage
-\subsubsection{N=4, H=0.07}
+\subsubsection*{N=4, H=0.07}
 
 \begin{figure}[h!]
 	\centering
-	\begin{subfigure}[b]{0.45\textwidth}
+	\begin{subfigure}[b]{0.4\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/1D_plots/N_4/H_007/Bergomi_integrand_K_1_H_007_W11_N_4}
 		\caption{}
 		\label{fig:sub3}
 	\end{subfigure}
 	\hfill
-	\begin{subfigure}[b]{0.45\textwidth}
+	\begin{subfigure}[b]{0.4\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/1D_plots/N_4/H_007/Bergomi_integrand_K_1_H_007_W12_N_4}
 		\caption{}
 		\label{fig:sub4}
 	\end{subfigure}
 	\vskip\baselineskip
-	\begin{subfigure}[b]{0.45\textwidth}
+	\begin{subfigure}[b]{0.4\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/1D_plots/N_4/H_007/Bergomi_integrand_K_1_H_007_W13_N_4}
 		\caption{}
 		\label{fig:sub4}
 	\end{subfigure}
 	\hfill
-	\begin{subfigure}[b]{0.45\textwidth}
+	\begin{subfigure}[b]{0.4\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/1D_plots/N_4/H_007/Bergomi_integrand_K_1_H_007_W14_N_4}
 		\caption{}
@@ -426,14 +620,14 @@ In this section, we plot the integrand, given by the term inside the expectation
 
 \begin{figure}[h!]
 	\centering
-	\begin{subfigure}[b]{0.45\textwidth}
+	\begin{subfigure}[b]{0.4\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/1D_plots/N_4/H_007/Bergomi_integrand_K_1_H_007_W21_N_4}
 		\caption{}
 		\label{fig:sub3}
 	\end{subfigure}
 	\hfill
-	\begin{subfigure}[b]{0.45\textwidth}
+	\begin{subfigure}[b]{0.4\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/1D_plots/N_4/H_007/Bergomi_integrand_K_1_H_007_W22_N_4}
 		\caption{}
@@ -442,14 +636,14 @@ In this section, we plot the integrand, given by the term inside the expectation
 	
 	\vskip\baselineskip
 	
-	\begin{subfigure}[b]{0.45\textwidth}
+	\begin{subfigure}[b]{0.4\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/1D_plots/N_4/H_007/Bergomi_integrand_K_1_H_007_W23_N_4}
 		\caption{}
 		\label{fig:sub3}
 	\end{subfigure}
 	\hfill
-	\begin{subfigure}[b]{0.45\textwidth}
+	\begin{subfigure}[b]{0.4\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/1D_plots/N_4/H_007/Bergomi_integrand_K_1_H_007_W24_N_4}
 		\caption{}
@@ -463,13 +657,13 @@ In this section, we plot the integrand, given by the term inside the expectation
 
 \begin{figure}[h!]
 	\centering
-	\begin{subfigure}{.45\textwidth}
+	\begin{subfigure}{.4\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/2D_plots/N_4/H_007/Bergomi_integrand_contours_K_1_H_007_W1_1_2_N_4}
 		\caption{}
 		\label{fig:sub3}
 	\end{subfigure}%
-	\begin{subfigure}{.45\textwidth}
+	\begin{subfigure}{.4\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/2D_plots/N_4/H_007/Bergomi_integrand_contours_K_1_H_007_W1_1_3_N_4}
 		\caption{}
@@ -482,13 +676,13 @@ In this section, we plot the integrand, given by the term inside the expectation
 
 \begin{figure}[h!]
 	\centering
-	\begin{subfigure}{.45\textwidth}
+	\begin{subfigure}{.4\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/2D_plots/N_4/H_007/Bergomi_integrand_contours_K_1_H_007_W1_1_4_N_4}
 		\caption{}
 		\label{fig:sub3}
 	\end{subfigure}%
-	\begin{subfigure}{.45\textwidth}
+	\begin{subfigure}{.4\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/2D_plots/N_4/H_007/Bergomi_integrand_contours_K_1_H_007_W1_2_3_N_4}
 		\caption{}
@@ -502,13 +696,13 @@ In this section, we plot the integrand, given by the term inside the expectation
 
 \begin{figure}[h!]
 	\centering
-	\begin{subfigure}{.45\textwidth}
+	\begin{subfigure}{.4\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/2D_plots/N_4/H_007/Bergomi_integrand_contours_K_1_H_007_W1_2_4_N_4}
 		\caption{}
 		\label{fig:sub3}
 	\end{subfigure}%
-	\begin{subfigure}{.45\textwidth}
+	\begin{subfigure}{.4\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/2D_plots/N_4/H_007/Bergomi_integrand_contours_K_1_H_007_W1_3_4_N_4}
 		\caption{}
@@ -520,45 +714,45 @@ In this section, we plot the integrand, given by the term inside the expectation
 
 
 \newpage
-\subsection{Comparing the mixed differences rates}
-In this section, we compare the mixed differences rates for the standard case against the case where we do a partial change of measure wrt $W_1$ coordinates (see Appendix \ref{appendix:Gaussian Hermite Quadrature with importance sampling}), for the case of $N=4$ time steps. From the plots, we may notice that we face a bad behavior for the second differences, for the case without change of measure, which may explain the poor performance observed for MISC.This bad behavior is resolved when doing the partial change of measure. We obtained better results when using a measure change based on spectral decomposition rather than Cholesky decomposition. therefore by doing the change of measure, we obtained a more robust MISC solver.
+\subsubsection{Comparing the mixed differences rates}
+In this section, we compare the mixed differences (first and second differences) rates for the standard case against the case where we do a partial change of measure wrt $W_1$ coordinates (see Section \ref{sec:Gaussian Hermite Quadrature with importance sampling}), for the case of $H=0.07$ and  $N=4$ time steps. From figures (\ref{fig:first_diff_comp_K_1_H_007_W_1},\ref{fig:first_diff_comp_K_1_H_007_W_2},\ref{fig:second_diff_comp_K_1_H_007_W_1},\ref{fig:second_diff_comp_K_1_H_007_W_1_2},\ref{fig:second_diff_comp_K_1_H_007_W_2}), we may notice that we face a bad behavior for the second differences, for the case without change of measure, which may explain the poor performance observed for MISC. This bad behavior is resolved when doing the partial change of measure. We obtained better results when using a measure change based on spectral decomposition rather than Cholesky decomposition. therefore by doing the change of measure, we obtained a more robust MISC solver.
 
 \begin{figure}[h!]
 	\centering
-	\begin{subfigure}{.45\textwidth}
+	\begin{subfigure}{.4\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{./figures/rBergomi_mixed_error_rates/without_change_measure/N_4/H_007/first_difference_rbergomi_4steps_H_007_K_1_totally_hierarch_with_rate_W1}
 		\caption{}
 		\label{fig:sub3}
 	\end{subfigure}%
-	\begin{subfigure}{.45\textwidth}
+	\begin{subfigure}{.4\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{./figures/rBergomi_mixed_error_rates/partial_change_measure/N_4/H_007/first_difference_rbergomi_4steps_H_007_K_1_totally_hierarch_with_rate_W1_change_measure_part_spec}
 		\caption{}
 		\label{fig:sub4}
 	\end{subfigure}
 	
-	\caption{The rate of convergence of  first order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)), for $W_1$, for $K=1$, $H=0.07$: a) Without measure change b) With measure change}
+	\caption{The rate of convergence of  first order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)), for $W^1$, for $K=1$, $H=0.07$: a) Without measure change b) With measure change}
 	\label{fig:first_diff_comp_K_1_H_007_W_1}
 \end{figure}
 
 
 \begin{figure}[h!]
 	\centering
-	\begin{subfigure}{.45\textwidth}
+	\begin{subfigure}{.4\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{./figures/rBergomi_mixed_error_rates/without_change_measure/N_4/H_007/mixed_difference_order2_rbergomi_4steps_H_007_K_1_totally_hierarch_with_rate_W1}
 		\caption{}
 		\label{fig:sub3}
 	\end{subfigure}%
-	\begin{subfigure}{.45\textwidth}
+	\begin{subfigure}{.4\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{./figures/rBergomi_mixed_error_rates/partial_change_measure/N_4/H_007/mixed_difference_order2_rbergomi_4steps_H_007_K_1_totally_hierarch_with_rate_W1_change_measure_part_spec}
 		\caption{}
 		\label{fig:sub4}
 	\end{subfigure}
 	
-	\caption{The rate of convergence of  second order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)), for $W_1$, for $K=1$, $H=0.07$: a) Without measure change b) With measure change}
+	\caption{The rate of convergence of  second order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)), for $W^1$, for $K=1$, $H=0.07$: a) Without measure change b) With measure change}
 	\label{fig:second_diff_comp_K_1_H_007_W_1}
 \end{figure}
 
@@ -567,20 +761,20 @@ In this section, we compare the mixed differences rates for the standard case ag
 
 \begin{figure}[h!]
 	\centering
-	\begin{subfigure}{.45\textwidth}
+	\begin{subfigure}{.4\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{./figures/rBergomi_mixed_error_rates/without_change_measure/N_4/H_007/mixed_difference_order2_rbergomi_4steps_H_007_K_1_totally_hierarch_with_rate_W1_2}
 		\caption{}
 		\label{fig:sub3}
 	\end{subfigure}%
-	\begin{subfigure}{.45\textwidth}
+	\begin{subfigure}{.4\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{./figures/rBergomi_mixed_error_rates/partial_change_measure/N_4/H_007/mixed_difference_order2_rbergomi_4steps_H_007_K_1_totally_hierarch_with_rate_W1_2_change_measure_part_spec}
 		\caption{}
 		\label{fig:sub4}
 	\end{subfigure}
 	
-	\caption{The rate of convergence of  second order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)), for $W_1$, for $K=1$, $H=0.07$: a) Without measure change b) With measure change}
+	\caption{The rate of convergence of  second order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)), for $W^1$, for $K=1$, $H=0.07$: a) Without measure change b) With measure change}
 	\label{fig:second_diff_comp_K_1_H_007_W_1_2}
 \end{figure}
 
@@ -588,50 +782,51 @@ In this section, we compare the mixed differences rates for the standard case ag
 
 \begin{figure}[h!]
 	\centering
-	\begin{subfigure}{.45\textwidth}
+	\begin{subfigure}{.4\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{./figures/rBergomi_mixed_error_rates/without_change_measure/N_4/H_007/first_difference_rbergomi_4steps_H_007_K_1_totally_hierarch_with_rate_W2}
 		\caption{}
 		\label{fig:sub3}
 	\end{subfigure}%
-	\begin{subfigure}{.45\textwidth}
+	\begin{subfigure}{.4\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{./figures/rBergomi_mixed_error_rates/partial_change_measure/N_4/H_007/first_difference_rbergomi_4steps_H_007_K_1_totally_hierarch_with_rate_W2_change_measure_part_spec}
 		\caption{}
 		\label{fig:sub4}
 	\end{subfigure}
 	
-	\caption{The rate of convergence of  first order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)), for $W_2$, for $K=1$, $H=0.07$: a) Without measure change b) With measure change}
+	\caption{The rate of convergence of  first order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)), for $W^2$, for $K=1$, $H=0.07$: a) Without measure change b) With measure change}
 	\label{fig:first_diff_comp_K_1_H_007_W_2}
 \end{figure}
 
 
-\begin{figure}[h!]
+\begin{figure}[!h]
 	\centering
-	\begin{subfigure}{.45\textwidth}
+	\begin{subfigure}{.4\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{./figures/rBergomi_mixed_error_rates/without_change_measure/N_4/H_007/mixed_difference_order2_rbergomi_4steps_H_007_K_1_totally_hierarch_with_rate_W2}
 		\caption{}
 		\label{fig:sub3}
 	\end{subfigure}%
-	\begin{subfigure}{.45\textwidth}
+	\begin{subfigure}{.4\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{./figures/rBergomi_mixed_error_rates/partial_change_measure/N_4/H_007/mixed_difference_order2_rbergomi_4steps_H_007_K_1_totally_hierarch_with_rate_W2_change_measure_part_spec}
 		\caption{}
 		\label{fig:sub4}
 	\end{subfigure}
 	
-	\caption{The rate of convergence of  second order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)), for $W_2$, for $K=1$, $H=0.07$: a) Without measure change b) With measure change}
+	\caption{The rate of convergence of  second order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)), for $W^2$, for $K=1$, $H=0.07$: a) Without measure change b) With measure change}
 	\label{fig:second_diff_comp_K_1_H_007_W_2}
 \end{figure}
 
 \newpage
 
-\subsection{Weak error plots} \label{sec:Weak error plots}
-In this section, I include the results of weak error rates for both cases: without and with change of meausure and  without and with Richardson extrapolation,  for $H \in \{0.43,0.07\}$. The reference solution was computed with $N=500$ time steps. We note that for the case where we do a partial chnage of measure, we limit the maximum number of changed coordinates  up to $4$, due to practical purposes related to the optimization procedure.
- 
+\subsection{Numerical results for the case without change of measure}
 \newpage
-\subsubsection{Without change of measure}
+\subsubsection{Weak error plots} \label{sec:Weak error plots_no_change}
+In this section, I include the results of weak error rates for the case without change of measure for both cases without and with Richardson extrapolation (level $1$ and $2$),  for $H \in \{0.43,0.07\}$. The reference solution was computed with $N=500$ time steps. We note that the weak errors plotted here corresponds to relative errors.
+ 
+
 \subsubsection*{Without Richardson extrapolation}
 From figures (\ref{fig:Weak_rate_H_043_without_rich} and \ref{fig:Weak_rate_H_007_without_rich}), we see that for both cases $H \in \{0.43,0.07\}$, we get a weak error of order $\Delta t$. The upper and lower bounds are $95\%$ confidence interval.
 
@@ -660,13 +855,13 @@ From figures (\ref{fig:Weak_rate_H_043_without_rich} and \ref{fig:Weak_rate_H_00
 	\centering
 	\begin{subfigure}{.4\textwidth}
 		\centering
-		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/without_richardson/H_007/weak_convergence_order_Bergomi_H_007_K_1_M_10_5_CI_relative}
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/without_richardson/H_007/weak_convergence_order_Bergomi_H_007_K_1_M_10_6_CI_relative}
 		\caption{}
 		\label{fig:sub3}
 	\end{subfigure}%
 	\begin{subfigure}{.4\textwidth}
 		\centering
-		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/without_richardson/H_007/weak_convergence_order_differences_Bergomi_H_007_K_1_M_10_5_CI_relative}
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/without_richardson/H_007/weak_convergence_order_differences_Bergomi_H_007_K_1_M_10_6_CI_relative}
 		\caption{}
 		\label{fig:sub4}
 	\end{subfigure}
@@ -700,13 +895,13 @@ From figures (\ref{fig:Weak_rate_H_043_with_rich} and \ref{fig:Weak_rate_H_007_w
 	\centering
 	\begin{subfigure}{.4\textwidth}
 		\centering
-		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/with_richardson/H_007/weak_convergence_order_Bergomi_H_007_K_1_M_10_6_CI_richardson_relative.eps}
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/with_richardson/H_007/weak_convergence_order_Bergomi_H_007_K_1_richardson_relative_M_10_6}
 		\caption{}
 		\label{fig:sub3}
 	\end{subfigure}%
 	\begin{subfigure}{.4\textwidth}
 		\centering
-		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/with_richardson/H_007/weak_convergence_order_differences_Bergomi_H_007_K_1_M_10_6_CI_richardson_relative}
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/with_richardson/H_007/weak_convergence_order_differences_Bergomi_H_007_K_1_richardson_relative_M_10_6}
 		\caption{}
 		\label{fig:sub4}
 	\end{subfigure}
@@ -744,13 +939,13 @@ From figures (\ref{fig:Weak_rate_H_043_with_rich} and \ref{fig:Weak_rate_H_007_w
 	\centering
 	\begin{subfigure}{.4\textwidth}
 		\centering
-		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/with_richardson/H_007/weak_convergence_order_Bergomi_H_007_K_1_richardson_level2_relative_M_10_6}
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/with_richardson/H_007/weak_convergence_order_Bergomi_H_007_K_1_richardson_level2_relative_M_10_6_2}
 		\caption{}
 		\label{fig:sub3}
 	\end{subfigure}%
 	\begin{subfigure}{.4\textwidth}
 		\centering
-		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/with_richardson/H_007/weak_convergence_order_differences_Bergomi_H_007_K_1_richardson_level2_relative_M_10_6}
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/with_richardson/H_007/weak_convergence_order_differences_Bergomi_H_007_K_1_richardson_level2_relative_M_10_6_2}
 		\caption{}
 		\label{fig:sub4}
 	\end{subfigure}
@@ -760,64 +955,19 @@ From figures (\ref{fig:Weak_rate_H_043_with_rich} and \ref{fig:Weak_rate_H_007_w
 \end{figure}
 
 
-\newpage
-\subsubsection{With change of measure}
-
-\subsubsection*{Without Richardson extrapolation}
-From figures  \ref{fig:Weak_rate_H_007_without_rich}), we see that for $H=0.07$, we get a weak error of order $\Delta t$. The upper and lower bounds are $95\%$ confidence interval.
-\begin{figure}
-	\centering
-	\begin{subfigure}{.4\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/with_change_measure/without_rich/H_007/weak_convergence_order_Bergomi_H_007_K_1_M_10_5_CI_relative_measure_change_spec}
-		\caption{}
-		\label{fig:sub3}
-	\end{subfigure}%
-	\begin{subfigure}{.4\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/with_change_measure/without_rich/H_007/weak_convergence_order_differences_Bergomi_H_007_K_1_M_10_5_CI_relative_measure_change_spec}
-		\caption{}
-		\label{fig:sub4}
-	\end{subfigure}
-	
-	\caption{The rate of convergence of the weak error for $H=0.07$ $K=1$, without Richardson extraploation, using MC with $M=10^5$: a) $\abs{\expt{g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{g(X_{\Delta t})-g(X_{\Delta t/2})}}$ }
-	\label{fig:Weak_rate_H_007_without_rich_change_meausre}
-\end{figure}
-
-\subsubsection*{With Richardson extrapolation (level 1)}
-\begin{figure}[h!]
-	\centering
-	\begin{subfigure}{.4\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/with_change_measure/with_rich/weak_convergence_order_Bergomi_H_007_K_1_M_10_5_CI_relative_measure_change_level_1_1}
-		\caption{}
-		\label{fig:sub3}
-	\end{subfigure}%
-	\begin{subfigure}{.4\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/with_change_measure/with_rich/weak_convergence_order_differences_Bergomi_H_007_K_1_M_10_5_CI_relative_measure_change_level_1_1}
-		\caption{}
-		\label{fig:sub4}
-	\end{subfigure}
-	
-	\caption{The rate of convergence of the weak error for $H=0.07$ $K=1$, with Richardson extraploation, using MC with $M=10^6$: a) $\abs{\expt{2 g(X_{\Delta t/2}) -g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{3 g(X_{\Delta t/2})-g(X_{\Delta t})-2 g(X_{\Delta t/4})}}$ }
-	\label{fig:Weak_rate_H_007_with_rich_change_measure}
-\end{figure}
-
-
 
 
 \newpage
-\subsection{Comparing relative errors using hierarchical representation }
-
+\subsubsection{Comparing relative errors using hierarchical representation }
+\red{We note that these are preliminary results since we observed an over-estimated tolerance for MISC solver. We need to figure out a way to define the adequate procedure to use the right MISC tolerance.}
 %For our numerical tests, we coupled the C++ implementation used in \cite{bayer2016pricing} with the MISC library, and for comparison purposes we compare our results to the same code but with MC method, for $M=10^6$ paths. 
 
-The used parameters are $H=\{0.43, 0.07\},\: \eta=1.9, \: \rho=-0.9,\: T=1, K=1$ and $\xi_0=0.235^2$. The results were reported for number of time steps $N \in \{2,4,8,16\}$.  Also, we use $S_0=1$, so the options will be prices in terms of the moneyness $K$, where $K$ is the strike price.  
+ The results were reported for $H \in \{0.43,0.07\}$, and number of time steps $N \in \{2,4,8,16\}$.  Also, we use $S_0=1$, so the options will be prices in terms of the moneyness $K$, where $K$ is the strike price.  
 
 
 In the following, we compare the  relative errors for H $\in \{0.43,0.07\}$ (see appendices \ref{appendix:Case $H=0.43$, Call prices for different methods} and \ref{appendix:Case $H=0.07$, Call prices for different methods} for the values of Call option prices). We note that for each case the reference solution was computed for $N=500$ (number of time steps) using MC with $10^6$ samples. In each case  we report the results for 3 scenarios: i) Without using Richardson extrapolation, ii) Using level $1$ Richardson extrapoaltion and  iii) Using level $2$ Richardson extrapoaltion. Tables (\ref{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.43$}, \ref{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.43$ , using Richardson extrapolation}, \ref{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.43$ , using Richardson extrapolation_level2})  coresspond to $H=0.43$ and tables (\ref{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.07$}, \ref{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.07$ , using Richardson extrapolation}, \ref{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.07$ , using Richardson extrapolation_level2})  coresspond to $H=0.07$.
 
-Given the normalized bias computed by MC method (See Section \ref{sec:Weak error plots}) (reported as bold values in the tables), we report in red in each table the smallest tolerance that MISC required to get below that relative bias (I do not put values for smaller tolerances, once the required bias is reached).
+Given the normalized bias computed by MC method  (reported as bold values in the tables), we report in red in each table the smallest tolerance that MISC required to get below that relative bias (I do not put values for smaller tolerances, once the required bias is reached).
 
 
 From the tables below, we have the following observations:
@@ -866,9 +1016,9 @@ From the tables below, we have the following observations:
 %\end{table}
 
 
-\newpage
 
-\subsubsection{Case $H=0.43$, Relative error for different methods}
+
+\subsubsection*{Case $H=0.43$, Relative error for different methods}
 \label{sec:Case $H=0.43$, Relative error for different methods}
 
 \begin{table}[h!]
@@ -931,7 +1081,7 @@ From the tables below, we have the following observations:
 
 
 
-\subsubsection{Case $H=0.07$, Relative error for different methods}
+\subsubsection*{Case $H=0.07$, Relative error for different methods}
 \label{sec:Case $H=0.07$, Relative error for different methods}
 \begin{table}[h!]
 	\centering
@@ -1081,6 +1231,59 @@ From the tables below, we have the following observations:
 
 
 
+\newpage
+\subsection{Numerical results for the case with change of measure}
+\subsubsection{Weak error plots} \label{sec:Weak error plots_with_change}
+In this section, I include the results of weak error rates for the case with change of measure for both cases without and with Richardson extrapolation,  for $H =0.07$. The reference solution was computed with $N=500$ time steps. We note that we limit the maximum number of changed coordinates  up to $4$, due to practical purposes related to the optimization procedure.  We note that the weak errors plotted here corresponds to relative errors.
+
+
+\subsubsection*{Without Richardson extrapolation}
+From figure \ref{fig:Weak_rate_H_007_without_rich_change_meausre}), we see that for $H=0.07$, we get a weak error of order $\Delta t$. The upper and lower bounds are $95\%$ confidence interval.
+\begin{figure}
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/with_change_measure/without_rich/H_007/weak_convergence_order_Bergomi_H_007_K_1_M_10_5_CI_relative_measure_change_spec}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/with_change_measure/without_rich/H_007/weak_convergence_order_differences_Bergomi_H_007_K_1_M_10_5_CI_relative_measure_change_spec}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of the weak error for $H=0.07$ $K=1$, without Richardson extraploation, using MC with $M=10^5$: a) $\abs{\expt{g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{g(X_{\Delta t})-g(X_{\Delta t/2})}}$ }
+	\label{fig:Weak_rate_H_007_without_rich_change_meausre}
+\end{figure}
+\newpage
+\subsubsection*{With Richardson extrapolation (level 1)}
+From figure \ref{fig:Weak_rate_H_007_with_rich_change_measure} , we see that  for $H=0.07$, we get a weak error of order $\Delta t^2$. The upper and lower bounds are $95\%$ confidence interval.
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/with_change_measure/with_rich/weak_convergence_order_Bergomi_H_007_K_1_M_10_5_CI_relative_measure_change_level_1_spec}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/with_change_measure/with_rich/weak_convergence_order_differences_Bergomi_H_007_K_1_M_10_5_CI_relative_measure_change_level_1_spec}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of the weak error for $H=0.07$ $K=1$, with Richardson extraploation, using MC with $M=10^6$: a) $\abs{\expt{2 g(X_{\Delta t/2}) -g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{3 g(X_{\Delta t/2})-g(X_{\Delta t})-2 g(X_{\Delta t/4})}}$ }
+	\label{fig:Weak_rate_H_007_with_rich_change_measure}
+\end{figure}
+
+
+
+\newpage
+\subsubsection{Comparing relative errors }
+\red{ We need to figure out a way to define the adequate procedure to use the right MISC tolerance, since we observed an over-estimated tolerance for MISC solver when used for the case without change of measure.}
 
 
 
@@ -1093,7 +1296,7 @@ From the tables below, we have the following observations:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 \bibliographystyle{plain}
-\bibliography{smoothing} 
+\bibliography{smoothing_rBergomi} 
 
 
 
@@ -1103,30 +1306,8 @@ From the tables below, we have the following observations:
 
 
 \newpage
-\section{Gaussian Hermite Quadrature with importance sampling}\label{appendix:Gaussian Hermite Quadrature with importance sampling}
-Let us call the integrand that we feed to MISC by $I(W_1,W_2)$, then 
-
-\begin{align}
-	C_{RB}\left( T, K \right)=  \int_{\rset_+^{2N}} I(\mathbf{W}_1,\mathbf{W}_2)  \rho(\mathbf{W}_1) \rho(\mathbf{W}_2) d \mathbf{W}_1  d\mathbf{W}_2 \COMMA
-\end{align}
-where $N$ is the number of time steps. We can rewrite the previous expression as
-\begin{align}\label{eq: importance sampling}
-	C_{RB}\left( T, K \right)=  \int_{\rset_+^{2N}} \frac{I(\mathbf{W}_1,\mathbf{W}_2)\rho(\mathbf{W}_1)}{h(\mathbf{W}_1;\hat{\mathbf{W}}_1,\Psi)} {h(\mathbf{W}_1;\hat{\mathbf{W}}_1,\Psi)} \rho(\mathbf{W}_2) d \mathbf{W}_1  d\mathbf{W}_2 \COMMA
-\end{align}
-where $h(\mathbf{W}_1;\hat{\mathbf{W}}_1,\Psi)$ is a multivariate normal density with first and second order moments given by
-\begin{align}\label{eq:Gaussian moments}
-	\hat{\mathbf{W}}_1&=\operatorname{arg} \underset{\mathbf{W}_1 \in \rset^{N} }{\max}	[ \log I(\mathbf{W}_1;\mathbf{W}_2)] \\
-	\Psi &=\left(- \frac{\partial^2[\log I(\mathbf{W}_1;\mathbf{W}_2)]}{\partial \mathbf{W}_1^{T} \mathbf{W}_1} \right)^{-1}_{\mathbf{W}_1=\hat{\mathbf{W}}_1}
-\end{align}
-
-Let us define $\tilde{\mathbf{W}}_1$ as uncorrelated varaibles and the Cholesky factorization of $\Psi$ is given by $\Psi=L L^{T}$, and $\bar{\mathbf{W}}_1=\sqrt{2} L \tilde{\mathbf{W}}_1+\hat{\mathbf{W}}_1$ then Eq \ref{eq: importance sampling} becomes 
-
-\begin{align}
-	C_{RB}\left( T, K \right)=&= 2^{N/2}. \abs{L} \int_{\rset_+^{2N}} \left( I(\bar{\mathbf{W}}_1,\mathbf{W}_2)  \exp(-\frac{1}{2}\bar{\mathbf{W}}_1^T \bar{\mathbf{W}}_1) \exp(\frac{1}{2}\tilde{\mathbf{W}}^T \tilde{\mathbf{W}}) \right)   \rho(\tilde{\mathbf{W}}_1) \rho(\mathbf{W}_2) d \tilde{\mathbf{W}}_1 d\mathbf{W}_2 
-\end{align}
-\newpage
 \section{additional results}
-\subsection{Integrand plotting wrt different random inputs N=2, H=0.43}
+\subsection{Integrand plotting wrt different random inputs N=2, H=0.43}\label{Appendix:Integrand plotting wrt different random inputs N=2, H=0.43}
 
 
 \begin{figure}[h!]
@@ -1143,7 +1324,7 @@ Let us define $\tilde{\mathbf{W}}_1$ as uncorrelated varaibles and the Cholesky 
 		\caption{}
 		\label{fig:sub4}
 	\end{subfigure}
-	\caption{Plotting the integrand $I$ (in \eqref{BS_formula_rbergomi}) as a function of $W_1$ coordinates for $H=0.43$ and $N=2$.}
+	\caption{Plotting the integrand $I$ (in \eqref{BS_formula_rbergomi}) as a function of $W^1$ coordinates for $H=0.43$ and $N=2$.}
 	\label{fig:Integrand_H_043_N_2_W_1}
 \end{figure}
 
@@ -1161,7 +1342,7 @@ Let us define $\tilde{\mathbf{W}}_1$ as uncorrelated varaibles and the Cholesky 
 		\caption{}
 		\label{fig:sub4}
 	\end{subfigure}
-	\caption{Plotting the integrand $I$ (in \eqref{BS_formula_rbergomi}) as a function of $W_2$ coordinates for $H=0.43$ and $N=2$.}
+	\caption{Plotting the integrand $I$ (in \eqref{BS_formula_rbergomi}) as a function of $W^2$ coordinates for $H=0.43$ and $N=2$.}
 	\label{fig:Integrand_H_043_N_2_W_2}
 \end{figure}
 
@@ -1181,13 +1362,13 @@ Let us define $\tilde{\mathbf{W}}_1$ as uncorrelated varaibles and the Cholesky 
 		\caption{}
 		\label{fig:sub4}
 	\end{subfigure}
-	\caption{Two dimensional Plotting of the integrand $I$ (in \eqref{BS_formula_rbergomi})  for $H=0.43$ and $N=2$, a)  function of $W_1$ coordinates, b) function of $W_2$ coordinates}
+	\caption{Two dimensional Plotting of the integrand $I$ (in \eqref{BS_formula_rbergomi})  for $H=0.43$ and $N=2$, a)  function of $W^1$ coordinates, b) function of $W^2$ coordinates}
 	\label{fig:Integrand_H_043_N_2_2D}
 \end{figure}
 
 
 \newpage
-\subsection{Integrand plotting wrt different random inputs: N=4, H=0.43}
+\subsection{Integrand plotting wrt different random inputs: N=4, H=0.43}\label{Appendix:Integrand plotting wrt different random inputs: N=4, H=0.43}
 
 
 \begin{figure}[h!]
@@ -1219,7 +1400,7 @@ Let us define $\tilde{\mathbf{W}}_1$ as uncorrelated varaibles and the Cholesky 
 		\caption{}
 		\label{fig:sub4}
 	\end{subfigure}
-	\caption{Plotting the integrand $I$ (in \eqref{BS_formula_rbergomi}) as a function of $W_1$ coordinates for $H=0.43$ and $N=4$.}
+	\caption{Plotting the integrand $I$ (in \eqref{BS_formula_rbergomi}) as a function of $W^1$ coordinates for $H=0.43$ and $N=4$.}
 	\label{fig:Integrand_H_043_N_4_W_1_1}
 \end{figure}
 
@@ -1255,7 +1436,7 @@ Let us define $\tilde{\mathbf{W}}_1$ as uncorrelated varaibles and the Cholesky 
 		\caption{}
 		\label{fig:sub4}
 	\end{subfigure}
-	\caption{Plotting the integrand $I$ (in \eqref{BS_formula_rbergomi}) as a function of $W_2$ coordinates for $H=0.43$ and $N=4$.}
+	\caption{Plotting the integrand $I$ (in \eqref{BS_formula_rbergomi}) as a function of $W^2$ coordinates for $H=0.43$ and $N=4$.}
 	
 	\label{fig:Integrand_H_043_N_4_W_2_1}
 \end{figure}
@@ -1382,59 +1563,14 @@ Let us define $\tilde{\mathbf{W}}_1$ as uncorrelated varaibles and the Cholesky 
 
 
 
-\newpage
-\subsection{Comparing call options prices }\label{sec:Comparing call options prices rbergomi}
-
-
-\subsubsection{Without Hierarchical representation}
-\subsubsection*{Case $H=0.43$}
-\begin{table}[h!]
-	\centering
-	\begin{tabular}{l*{6}{c}r}
-		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$ &   \\
-		\hline
-		MISC ($TOl=5.10^{-1}$)  & $0.1057$ & $0.0988$ & $0.0944$ & $0.0921$  \\
-		MISC ($TOl=10^{-1}$)  & $0.1057$ & $0.0988$ & $0.0836$ & $0.0594$  \\
-		MISC ($TOl=5.10^{-2}$)  & $0.1057$ & $0.0976$ & $0.0758$ & $0.0781$  \\
-		MISC ($TOl=10^{-2}$)  & $0.1113$ & $0.0940$ & $0.0820$ & $-$  \\
-		%		MISC ($TOl=10^{-3}$)        & $0.1081$ &$0.0918$ &  $0.0822$ &  $-$ \\
-		%		MISC ($TOl=10^{-4}$)    & $0.1080$ & $0.0921$  & $-$ & $-$  \\
-		%		%				MC method ($M=10^{6}$)    & $0.0840$ & $0.0781$  & $0.0746$ & $0.0729$  \\
-		MC method ($M=10^{6}$)   & $\underset{(1.55e-04)}{0.1079}$ & $ \underset{(9.65e-05)}{0.0921}$  & $ \underset{(7.61e-05)}{0.0822}$ & $ \underset{(6.65e-05)}{0.0769}$ \\		
-		
-		\hline
-	\end{tabular}
-	\caption{ Call option price of the different methods for different number of time steps. Case $K=1$}
-	\label{table: Call option price of the different methods for different number of time steps. Case $K=1$}
-\end{table}
-
-
-\subsubsection*{Case $H=0.07$}
-
-\begin{table}[h!]
-	\centering
-	\begin{tabular}{l*{6}{c}r}
-		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$  \\
-		\hline
-		MISC ($TOl=5.10^{-1}$)  & $0.1065$ & $0.0900$ & $0.0809$ & $0.0762$  \\
-		MISC ($TOl=10^{-1}$)  &  $0.1065$ &   $0.0900$ & $0.0733$ & $0.0956$  \\
-		MISC ($TOl=5.10^{-2}$)        &  $0.1065$ &$0.0898$ &  $0.0881$ &  $-$ \\
-		MISC ($TOl=10^{-2}$)    & $0.1226$ & $0.1022$  & $0.0933$ & $-$  \\
-		%				MC method ($M=10^{6}$)    & $0.0840$ & $0.0781$  & $0.0746$ & $0.0729$  \\
-		MC method ($M=10^{6}$)   & $\underset{(1.05e-03)}{0.1216} $  & $\underset{(1.86e-04)}{0.1020} $  & $\underset{ (1.35e-04)}{0.0912}$ & $\underset {(1.08e-04)}{0.0854} $  \\		
-		\hline
-	\end{tabular}
-	\caption{ Call option price of the different methods for different number of time steps. Case $K=1$}
-	\label{table: Call option price of the different methods for different number of time steps. Case $K=1$_H_007}
-\end{table}
 
 
 
 \newpage
-\subsection{Investigating  differences wrt $H$ }\label{sec:mixed differences rbergomi_wrt_H}
-
+\subsection{Motivation of the hierarchical representation and investigating the effect with respect to $H$ }\label{sec:mixed differences rbergomi_wrt_H}
+In this section, we motivate the idea of using hierarchical representation (Brownian bridge construction) for buiding $W^1$ and $W^2$. 
 \subsubsection{Totally Hierarchical}
-In this section, we do both hierarchical transformation, based on brownian bridges, for both directions $W_1$ and $W_2$.
+In this section, we do both hierarchical transformation, based on brownian bridges, for both directions $W^1$ and $W^2$. We see clearly from figures (\ref{fig:first_diff_tot_hiera_W2},\ref{fig:second_diff_tot_hiera_W2}) the advantage of buiding  $W^2$ in a hierarchical fashion as $W^1$ 
 
 
 \begin{figure}[h!]
@@ -1453,7 +1589,7 @@ In this section, we do both hierarchical transformation, based on brownian bridg
 	\end{subfigure}
 	
 	\caption{The rate of convergence of  first order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)) for $K=1$: a) Without hierarchical for $W_2$ b) With hierarchical for $W_2$}
-	\label{fig:test2}
+	\label{fig:first_diff_tot_hiera_W2}
 \end{figure}
 
 \begin{figure}[h!]
@@ -1471,8 +1607,8 @@ In this section, we do both hierarchical transformation, based on brownian bridg
 		\label{fig:sub4}
 	\end{subfigure}
 	
-	\caption{The rate of convergence of  mixed order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)) for $K=1$: a) Without hierarchical for $W_2$ b) With hierarchical for $W_2$}
-	\label{fig:test2}
+	\caption{The rate of convergence of  second order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)) for $K=1$: a) Without hierarchical for $W_2$ b) With hierarchical for $W_2$}
+	\label{fig:second_diff_tot_hiera_W2}
 \end{figure}
 
 
@@ -2809,6 +2945,51 @@ In this section, we do both hierarchical transformation, based on brownian bridg
 \end{figure}
 
 
+\newpage
+\subsection{Comparing call options prices }\label{sec:Comparing call options prices rbergomi}
+
+
+\subsubsection{Without Hierarchical representation}
+\subsubsection*{Case $H=0.43$}
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$ &   \\
+		\hline
+		MISC ($TOl=5.10^{-1}$)  & $0.1057$ & $0.0988$ & $0.0944$ & $0.0921$  \\
+		MISC ($TOl=10^{-1}$)  & $0.1057$ & $0.0988$ & $0.0836$ & $0.0594$  \\
+		MISC ($TOl=5.10^{-2}$)  & $0.1057$ & $0.0976$ & $0.0758$ & $0.0781$  \\
+		MISC ($TOl=10^{-2}$)  & $0.1113$ & $0.0940$ & $0.0820$ & $-$  \\
+		%		MISC ($TOl=10^{-3}$)        & $0.1081$ &$0.0918$ &  $0.0822$ &  $-$ \\
+		%		MISC ($TOl=10^{-4}$)    & $0.1080$ & $0.0921$  & $-$ & $-$  \\
+		%		%				MC method ($M=10^{6}$)    & $0.0840$ & $0.0781$  & $0.0746$ & $0.0729$  \\
+		MC method ($M=10^{6}$)   & $\underset{(1.55e-04)}{0.1079}$ & $ \underset{(9.65e-05)}{0.0921}$  & $ \underset{(7.61e-05)}{0.0822}$ & $ \underset{(6.65e-05)}{0.0769}$ \\		
+		
+		\hline
+	\end{tabular}
+	\caption{ Call option price of the different methods for different number of time steps. Case $K=1$}
+	\label{table: Call option price of the different methods for different number of time steps. Case $K=1$}
+\end{table}
+
+
+\subsubsection*{Case $H=0.07$}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$  \\
+		\hline
+		MISC ($TOl=5.10^{-1}$)  & $0.1065$ & $0.0900$ & $0.0809$ & $0.0762$  \\
+		MISC ($TOl=10^{-1}$)  &  $0.1065$ &   $0.0900$ & $0.0733$ & $0.0956$  \\
+		MISC ($TOl=5.10^{-2}$)        &  $0.1065$ &$0.0898$ &  $0.0881$ &  $-$ \\
+		MISC ($TOl=10^{-2}$)    & $0.1226$ & $0.1022$  & $0.0933$ & $-$  \\
+		%				MC method ($M=10^{6}$)    & $0.0840$ & $0.0781$  & $0.0746$ & $0.0729$  \\
+		MC method ($M=10^{6}$)   & $\underset{(1.05e-03)}{0.1216} $  & $\underset{(1.86e-04)}{0.1020} $  & $\underset{ (1.35e-04)}{0.0912}$ & $\underset {(1.08e-04)}{0.0854} $  \\		
+		\hline
+	\end{tabular}
+	\caption{ Call option price of the different methods for different number of time steps. Case $K=1$}
+	\label{table: Call option price of the different methods for different number of time steps. Case $K=1$_H_007}
+\end{table}
 
 
 
