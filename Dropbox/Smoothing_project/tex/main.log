@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  11 AUG 2018 14:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  14 AUG 2018 11:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -816,6 +816,10 @@ Document Style - pseudocode environments for use with the `algorithmicx' style
 \c@question=\count160
 ) (./main.aux
 
+LaTeX Warning: Label `eq: multivariate gaussian distribution' multiply defined.
+
+
+
 LaTeX Warning: Label `fig:sub3' multiply defined.
 
 
@@ -1031,12 +1035,6 @@ LaTeX Warning: Label `fig:misc_binary_4_steps_2' multiply defined.
 
 LaTeX Warning: Label `fig:misc_binary_8_steps_2' multiply defined.
 
-
-LaTeX Warning: Label `Brownian_bridge' multiply defined.
-
-
-LaTeX Warning: Label `sec:plan-work-misc' multiply defined.
-
 )
 \openout1 = `main.aux'.
 
@@ -1158,22 +1156,154 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 80.
  [1
 
-{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
- [4] [5]
-[6] [7] [8]
-Overfull \hbox (1.32103pt too wide) in paragraph at lines 385--385
-[]\OT1/cmr/bx/n/14.4 Sparse Grids +Multi-Index Stochas-tic Col-lo-ca-tion (MISC
-) (TO-
- []
+{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 
-[9] [10] [11]
+LaTeX Warning: Reference `sec:Analysis of the numerical procedure' on page 2 un
+defined on input line 130.
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
+[2] [3] [4] [5] [6] [7] [8] [9] [10] [11] [12]
 
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\@ifnextchar' on input line 584.
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
+[13]
+<./figures/3D_basket/error_estimate.pdf, id=432, 462.52798pt x 346.89601pt>
+File: ./figures/3D_basket/error_estimate.pdf Graphic file (type pdf)
 
-[12]
+<use ./figures/3D_basket/error_estimate.pdf>
+Package pdftex.def Info: ./figures/3D_basket/error_estimate.pdf used on input l
+ine 612.
+(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
+
+<./figures/3D_basket/average_running_time.pdf, id=433, 462.52798pt x 346.89601p
+t>
+File: ./figures/3D_basket/average_running_time.pdf Graphic file (type pdf)
+ <use ./figures/3D_basket/average_running_time.pdf>
+Package pdftex.def Info: ./figures/3D_basket/average_running_time.pdf used on i
+nput line 618.
+(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
+
+<./figures/3D_basket/level_work.pdf, id=434, 462.52798pt x 346.89601pt>
+File: ./figures/3D_basket/level_work.pdf Graphic file (type pdf)
+
+<use ./figures/3D_basket/level_work.pdf>
+Package pdftex.def Info: ./figures/3D_basket/level_work.pdf used on input line 
+632.
+(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
+
+<./figures/3D_basket/levels_error_rate.pdf, id=435, 462.52798pt x 346.89601pt>
+File: ./figures/3D_basket/levels_error_rate.pdf Graphic file (type pdf)
+
+<use ./figures/3D_basket/levels_error_rate.pdf>
+Package pdftex.def Info: ./figures/3D_basket/levels_error_rate.pdf used on inpu
+t line 638.
+(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
+ [14 <./figures/3D_basket/error_estimate.pdf> <./figures/3D_basket/average_runn
+ing_time.pdf
+
+pdfTeX warning: /usr/texbin/pdflatex (file ./figures/3D_basket/average_running_
+time.pdf): PDF inclusion: multiple pdfs with page group included in a single pa
+ge
+> <./figures/3D_basket/level_work.pdf
+
+pdfTeX warning: /usr/texbin/pdflatex (file ./figures/3D_basket/level_work.pdf):
+ PDF inclusion: multiple pdfs with page group included in a single page
+> <./figures/3D_basket/levels_error_rate.pdf
+
+pdfTeX warning: /usr/texbin/pdflatex (file ./figures/3D_basket/levels_error_rat
+e.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+>] <./figures/8D_basket/error_estimate.pdf, id=605, 462.52798pt x 346.89601pt>
+File: ./figures/8D_basket/error_estimate.pdf Graphic file (type pdf)
+
+<use ./figures/8D_basket/error_estimate.pdf>
+Package pdftex.def Info: ./figures/8D_basket/error_estimate.pdf used on input l
+ine 655.
+(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
+
+<./figures/8D_basket/average_running_time.pdf, id=606, 462.52798pt x 346.89601p
+t>
+File: ./figures/8D_basket/average_running_time.pdf Graphic file (type pdf)
+ <use ./figures/8D_basket/average_running_time.pdf>
+Package pdftex.def Info: ./figures/8D_basket/average_running_time.pdf used on i
+nput line 661.
+(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
+
+<./figures/8D_basket/level_work.pdf, id=607, 462.52798pt x 346.89601pt>
+File: ./figures/8D_basket/level_work.pdf Graphic file (type pdf)
+
+<use ./figures/8D_basket/level_work.pdf>
+Package pdftex.def Info: ./figures/8D_basket/level_work.pdf used on input line 
+675.
+(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
+
+<./figures/8D_basket/levels_error_rate.pdf, id=608, 462.52798pt x 346.89601pt>
+File: ./figures/8D_basket/levels_error_rate.pdf Graphic file (type pdf)
+
+<use ./figures/8D_basket/levels_error_rate.pdf>
+Package pdftex.def Info: ./figures/8D_basket/levels_error_rate.pdf used on inpu
+t line 681.
+(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
+ [15 <./figures/8D_basket/error_estimate.pdf> <./figures/8D_basket/average_runn
+ing_time.pdf
+
+pdfTeX warning: /usr/texbin/pdflatex (file ./figures/8D_basket/average_running_
+time.pdf): PDF inclusion: multiple pdfs with page group included in a single pa
+ge
+> <./figures/8D_basket/level_work.pdf
+
+pdfTeX warning: /usr/texbin/pdflatex (file ./figures/8D_basket/level_work.pdf):
+ PDF inclusion: multiple pdfs with page group included in a single page
+> <./figures/8D_basket/levels_error_rate.pdf
+
+pdfTeX warning: /usr/texbin/pdflatex (file ./figures/8D_basket/levels_error_rat
+e.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+>]
+<./figures/25D_basket/error_estimate.pdf, id=804, 462.52798pt x 346.89601pt>
+File: ./figures/25D_basket/error_estimate.pdf Graphic file (type pdf)
+
+<use ./figures/25D_basket/error_estimate.pdf>
+Package pdftex.def Info: ./figures/25D_basket/error_estimate.pdf used on input 
+line 694.
+(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
+
+<./figures/25D_basket/average_running_time.pdf, id=805, 462.52798pt x 346.89601
+pt>
+File: ./figures/25D_basket/average_running_time.pdf Graphic file (type pdf)
+ <use ./figures/25D_basket/average_running_time.pdf>
+Package pdftex.def Info: ./figures/25D_basket/average_running_time.pdf used on 
+input line 700.
+(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
+
+<./figures/25D_basket/level_work.pdf, id=806, 462.52798pt x 346.89601pt>
+File: ./figures/25D_basket/level_work.pdf Graphic file (type pdf)
+
+<use ./figures/25D_basket/level_work.pdf>
+Package pdftex.def Info: ./figures/25D_basket/level_work.pdf used on input line
+ 714.
+(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
+
+<./figures/25D_basket/levels_error_rate.pdf, id=807, 462.52798pt x 346.89601pt>
+File: ./figures/25D_basket/levels_error_rate.pdf Graphic file (type pdf)
+<use ./figures/25D_basket/levels_error_rate.pdf>
+Package pdftex.def Info: ./figures/25D_basket/levels_error_rate.pdf used on inp
+ut line 720.
+(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
+ [16 <./figures/25D_basket/error_estimate.pdf> <./figures/25D_basket/average_ru
+nning_time.pdf
+
+pdfTeX warning: /usr/texbin/pdflatex (file ./figures/25D_basket/average_running
+_time.pdf): PDF inclusion: multiple pdfs with page group included in a single p
+age
+> <./figures/25D_basket/level_work.pdf
+
+pdfTeX warning: /usr/texbin/pdflatex (file ./figures/25D_basket/level_work.pdf)
+: PDF inclusion: multiple pdfs with page group included in a single page
+> <./figures/25D_basket/levels_error_rate.pdf
+
+pdfTeX warning: /usr/texbin/pdflatex (file ./figures/25D_basket/levels_error_ra
+te.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+
+>] [17] [18] [19]
 Package epstopdf Info: Source file: <./figures/binary_weak_error/without_richar
 dson/weak_convergence_order_binary_option_relative.eps>
 (epstopdf)                    date: 2018-05-04 17:17:48
@@ -1186,11 +1316,11 @@ dson/weak_convergence_order_binary_option_relative-eps-converted-to.pdf>
 r/without_richardson/weak_convergence_order_binary_option_relative-eps-converte
 d-to.pdf ./figures/binary_weak_error/without_richardson/weak_convergence_order_
 binary_option_relative.eps>
-(epstopdf)             \includegraphics on input line 621.
+(epstopdf)             \includegraphics on input line 941.
 Package epstopdf Info: Output file is already uptodate.
 
 <./figures/binary_weak_error/without_richardson/weak_convergence_order_binary_o
-ption_relative-eps-converted-to.pdf, id=466, 462.72874pt x 346.29375pt>
+ption_relative-eps-converted-to.pdf, id=1038, 462.72874pt x 346.29375pt>
 File: ./figures/binary_weak_error/without_richardson/weak_convergence_order_bin
 ary_option_relative-eps-converted-to.pdf Graphic file (type pdf)
 
@@ -1198,7 +1328,7 @@ ary_option_relative-eps-converted-to.pdf Graphic file (type pdf)
 ry_option_relative-eps-converted-to.pdf>
 Package pdftex.def Info: ./figures/binary_weak_error/without_richardson/weak_co
 nvergence_order_binary_option_relative-eps-converted-to.pdf used on input line 
-621.
+941.
 (pdftex.def)             Requested size: 187.89912pt x 140.61807pt.
 Package epstopdf Info: Source file: <./figures/binary_weak_error/without_richar
 dson/weak_convergence_order_differences_binary_option_relative.eps>
@@ -1213,12 +1343,12 @@ dson/weak_convergence_order_differences_binary_option_relative-eps-converted-to
 r/without_richardson/weak_convergence_order_differences_binary_option_relative-
 eps-converted-to.pdf ./figures/binary_weak_error/without_richardson/weak_conver
 gence_order_differences_binary_option_relative.eps>
-(epstopdf)             \includegraphics on input line 627.
+(epstopdf)             \includegraphics on input line 947.
 Package epstopdf Info: Output file is already uptodate.
 
 <./figures/binary_weak_error/without_richardson/weak_convergence_order_differen
-ces_binary_option_relative-eps-converted-to.pdf, id=467, 462.72874pt x 346.2937
-5pt>
+ces_binary_option_relative-eps-converted-to.pdf, id=1039, 462.72874pt x 346.293
+75pt>
 File: ./figures/binary_weak_error/without_richardson/weak_convergence_order_dif
 ferences_binary_option_relative-eps-converted-to.pdf Graphic file (type pdf)
 
@@ -1226,7 +1356,7 @@ ferences_binary_option_relative-eps-converted-to.pdf Graphic file (type pdf)
 erences_binary_option_relative-eps-converted-to.pdf>
 Package pdftex.def Info: ./figures/binary_weak_error/without_richardson/weak_co
 nvergence_order_differences_binary_option_relative-eps-converted-to.pdf used on
- input line 627.
+ input line 947.
 (pdftex.def)             Requested size: 187.89912pt x 140.61807pt.
 Package epstopdf Info: Source file: <./figures/binary_weak_error/with_richardso
 n/weak_convergence_order_binary_richardson_relative_M_5_10_6.eps>
@@ -1241,12 +1371,12 @@ df>
 r/with_richardson/weak_convergence_order_binary_richardson_relative_M_5_10_6-ep
 s-converted-to.pdf ./figures/binary_weak_error/with_richardson/weak_convergence
 _order_binary_richardson_relative_M_5_10_6.eps>
-(epstopdf)             \includegraphics on input line 639.
+(epstopdf)             \includegraphics on input line 959.
 Package epstopdf Info: Output file is already uptodate.
 
 <./figures/binary_weak_error/with_richardson/weak_convergence_order_binary_rich
-ardson_relative_M_5_10_6-eps-converted-to.pdf, id=468, 462.72874pt x 346.29375p
-t>
+ardson_relative_M_5_10_6-eps-converted-to.pdf, id=1040, 462.72874pt x 346.29375
+pt>
 File: ./figures/binary_weak_error/with_richardson/weak_convergence_order_binary
 _richardson_relative_M_5_10_6-eps-converted-to.pdf Graphic file (type pdf)
 
@@ -1254,7 +1384,7 @@ _richardson_relative_M_5_10_6-eps-converted-to.pdf Graphic file (type pdf)
 richardson_relative_M_5_10_6-eps-converted-to.pdf>
 Package pdftex.def Info: ./figures/binary_weak_error/with_richardson/weak_conve
 rgence_order_binary_richardson_relative_M_5_10_6-eps-converted-to.pdf used on i
-nput line 639.
+nput line 959.
 (pdftex.def)             Requested size: 187.89912pt x 140.61807pt.
 Package epstopdf Info: Source file: <./figures/binary_weak_error/with_richardso
 n/weak_convergence_order_differences_binary_richardson_relative_M_5_10_6.eps>
@@ -1269,12 +1399,12 @@ nverted-to.pdf>
 r/with_richardson/weak_convergence_order_differences_binary_richardson_relative
 _M_5_10_6-eps-converted-to.pdf ./figures/binary_weak_error/with_richardson/weak
 _convergence_order_differences_binary_richardson_relative_M_5_10_6.eps>
-(epstopdf)             \includegraphics on input line 645.
+(epstopdf)             \includegraphics on input line 965.
 Package epstopdf Info: Output file is already uptodate.
 
 <./figures/binary_weak_error/with_richardson/weak_convergence_order_differences
-_binary_richardson_relative_M_5_10_6-eps-converted-to.pdf, id=469, 462.72874pt 
-x 346.29375pt>
+_binary_richardson_relative_M_5_10_6-eps-converted-to.pdf, id=1041, 462.72874pt
+ x 346.29375pt>
 File: ./figures/binary_weak_error/with_richardson/weak_convergence_order_differ
 ences_binary_richardson_relative_M_5_10_6-eps-converted-to.pdf Graphic file (ty
 pe pdf)
@@ -1283,17 +1413,8 @@ pe pdf)
 nces_binary_richardson_relative_M_5_10_6-eps-converted-to.pdf>
 Package pdftex.def Info: ./figures/binary_weak_error/with_richardson/weak_conve
 rgence_order_differences_binary_richardson_relative_M_5_10_6-eps-converted-to.p
-df used on input line 645.
+df used on input line 965.
 (pdftex.def)             Requested size: 187.89912pt x 140.61807pt.
-
-Underfull \hbox (badness 2726) in paragraph at lines 650--650
-\OT1/cmr/m/n/10.95 son ex-traploa-t-ion, us-ing MC with $\OML/cmm/m/it/10.95 M 
-\OT1/cmr/m/n/10.95 = 10[]$: a) $[]$ b)
- []
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
 Package epstopdf Info: Source file: <./figures/binary_weak_error/with_richardso
 n/weak_convergence_order_binary_richardson_level2_relative_M_5_10_6.eps>
 (epstopdf)                    date: 2018-05-14 00:00:23
@@ -1307,12 +1428,12 @@ ed-to.pdf>
 r/with_richardson/weak_convergence_order_binary_richardson_level2_relative_M_5_
 10_6-eps-converted-to.pdf ./figures/binary_weak_error/with_richardson/weak_conv
 ergence_order_binary_richardson_level2_relative_M_5_10_6.eps>
-(epstopdf)             \includegraphics on input line 660.
+(epstopdf)             \includegraphics on input line 980.
 Package epstopdf Info: Output file is already uptodate.
 
 <./figures/binary_weak_error/with_richardson/weak_convergence_order_binary_rich
-ardson_level2_relative_M_5_10_6-eps-converted-to.pdf, id=470, 462.72874pt x 346
-.29375pt>
+ardson_level2_relative_M_5_10_6-eps-converted-to.pdf, id=1042, 462.72874pt x 34
+6.29375pt>
 File: ./figures/binary_weak_error/with_richardson/weak_convergence_order_binary
 _richardson_level2_relative_M_5_10_6-eps-converted-to.pdf Graphic file (type pd
 f)
@@ -1321,7 +1442,7 @@ f)
 richardson_level2_relative_M_5_10_6-eps-converted-to.pdf>
 Package pdftex.def Info: ./figures/binary_weak_error/with_richardson/weak_conve
 rgence_order_binary_richardson_level2_relative_M_5_10_6-eps-converted-to.pdf us
-ed on input line 660.
+ed on input line 980.
 (pdftex.def)             Requested size: 187.89912pt x 140.61807pt.
 Package epstopdf Info: Source file: <./figures/binary_weak_error/with_richardso
 n/weak_convergence_order_differences_binary_richardson_level2_relative_M_5_10_6
@@ -1338,12 +1459,12 @@ r/with_richardson/weak_convergence_order_differences_binary_richardson_level2_r
 elative_M_5_10_6-eps-converted-to.pdf ./figures/binary_weak_error/with_richards
 on/weak_convergence_order_differences_binary_richardson_level2_relative_M_5_10_
 6.eps>
-(epstopdf)             \includegraphics on input line 666.
+(epstopdf)             \includegraphics on input line 986.
 Package epstopdf Info: Output file is already uptodate.
 
 <./figures/binary_weak_error/with_richardson/weak_convergence_order_differences
-_binary_richardson_level2_relative_M_5_10_6-eps-converted-to.pdf, id=471, 462.7
-2874pt x 346.29375pt>
+_binary_richardson_level2_relative_M_5_10_6-eps-converted-to.pdf, id=1043, 462.
+72874pt x 346.29375pt>
 File: ./figures/binary_weak_error/with_richardson/weak_convergence_order_differ
 ences_binary_richardson_level2_relative_M_5_10_6-eps-converted-to.pdf Graphic f
 ile (type pdf)
@@ -1352,31 +1473,23 @@ ile (type pdf)
 nces_binary_richardson_level2_relative_M_5_10_6-eps-converted-to.pdf>
 Package pdftex.def Info: ./figures/binary_weak_error/with_richardson/weak_conve
 rgence_order_differences_binary_richardson_level2_relative_M_5_10_6-eps-convert
-ed-to.pdf used on input line 666.
+ed-to.pdf used on input line 986.
 (pdftex.def)             Requested size: 187.89912pt x 140.61807pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[13 <./figures/binary_weak_error/without_richardson/weak_convergence_order_bina
+[20 <./figures/binary_weak_error/without_richardson/weak_convergence_order_bina
 ry_option_relative-eps-converted-to.pdf> <./figures/binary_weak_error/without_r
 ichardson/weak_convergence_order_differences_binary_option_relative-eps-convert
-ed-to.pdf>]
-Overfull \hbox (9.09691pt too wide) in paragraph at lines 692--692
-[] 
- []
-
-[14 <./figures/binary_weak_error/with_richardson/weak_convergence_order_binary_
-richardson_relative_M_5_10_6-eps-converted-to.pdf> <./figures/binary_weak_error
-/with_richardson/weak_convergence_order_differences_binary_richardson_relative_
-M_5_10_6-eps-converted-to.pdf> <./figures/binary_weak_error/with_richardson/wea
-k_convergence_order_binary_richardson_level2_relative_M_5_10_6-eps-converted-to
-.pdf> <./figures/binary_weak_error/with_richardson/weak_convergence_order_diffe
-rences_binary_richardson_level2_relative_M_5_10_6-eps-converted-to.pdf>]
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[15]
+ed-to.pdf> <./figures/binary_weak_error/with_richardson/weak_convergence_order_
+binary_richardson_relative_M_5_10_6-eps-converted-to.pdf> <./figures/binary_wea
+k_error/with_richardson/weak_convergence_order_differences_binary_richardson_re
+lative_M_5_10_6-eps-converted-to.pdf>] [21 <./figures/binary_weak_error/with_ri
+chardson/weak_convergence_order_binary_richardson_level2_relative_M_5_10_6-eps-
+converted-to.pdf> <./figures/binary_weak_error/with_richardson/weak_convergence
+_order_differences_binary_richardson_level2_relative_M_5_10_6-eps-converted-to.
+pdf>] [22]
 Package epstopdf Info: Source file: <./figures/weak_error_rates_call/Beta_10/wi
 thout_richardson/weak_convergence_order_call_option_relative_M_10_5.eps>
 (epstopdf)                    date: 2018-05-06 15:40:39
@@ -1390,12 +1503,12 @@ ed-to.pdf>
 _call/Beta_10/without_richardson/weak_convergence_order_call_option_relative_M_
 10_5-eps-converted-to.pdf ./figures/weak_error_rates_call/Beta_10/without_richa
 rdson/weak_convergence_order_call_option_relative_M_10_5.eps>
-(epstopdf)             \includegraphics on input line 758.
+(epstopdf)             \includegraphics on input line 1081.
 Package epstopdf Info: Output file is already uptodate.
 
 <./figures/weak_error_rates_call/Beta_10/without_richardson/weak_convergence_or
-der_call_option_relative_M_10_5-eps-converted-to.pdf, id=725, 462.72874pt x 346
-.29375pt>
+der_call_option_relative_M_10_5-eps-converted-to.pdf, id=1291, 462.72874pt x 34
+6.29375pt>
 File: ./figures/weak_error_rates_call/Beta_10/without_richardson/weak_convergen
 ce_order_call_option_relative_M_10_5-eps-converted-to.pdf Graphic file (type pd
 f)
@@ -1404,7 +1517,7 @@ f)
 e_order_call_option_relative_M_10_5-eps-converted-to.pdf>
 Package pdftex.def Info: ./figures/weak_error_rates_call/Beta_10/without_richar
 dson/weak_convergence_order_call_option_relative_M_10_5-eps-converted-to.pdf us
-ed on input line 758.
+ed on input line 1081.
 (pdftex.def)             Requested size: 187.89912pt x 140.61807pt.
 Package epstopdf Info: Source file: <./figures/weak_error_rates_call/Beta_10/wi
 thout_richardson/weak_convergence_order_differences_call_option_relative_M_10_5
@@ -1421,12 +1534,12 @@ _call/Beta_10/without_richardson/weak_convergence_order_differences_call_option
 _relative_M_10_5-eps-converted-to.pdf ./figures/weak_error_rates_call/Beta_10/w
 ithout_richardson/weak_convergence_order_differences_call_option_relative_M_10_
 5.eps>
-(epstopdf)             \includegraphics on input line 764.
+(epstopdf)             \includegraphics on input line 1087.
 Package epstopdf Info: Output file is already uptodate.
 
 <./figures/weak_error_rates_call/Beta_10/without_richardson/weak_convergence_or
-der_differences_call_option_relative_M_10_5-eps-converted-to.pdf, id=726, 462.7
-2874pt x 346.29375pt>
+der_differences_call_option_relative_M_10_5-eps-converted-to.pdf, id=1292, 462.
+72874pt x 346.29375pt>
 File: ./figures/weak_error_rates_call/Beta_10/without_richardson/weak_convergen
 ce_order_differences_call_option_relative_M_10_5-eps-converted-to.pdf Graphic f
 ile (type pdf)
@@ -1435,7 +1548,7 @@ ile (type pdf)
 e_order_differences_call_option_relative_M_10_5-eps-converted-to.pdf>
 Package pdftex.def Info: ./figures/weak_error_rates_call/Beta_10/without_richar
 dson/weak_convergence_order_differences_call_option_relative_M_10_5-eps-convert
-ed-to.pdf used on input line 764.
+ed-to.pdf used on input line 1087.
 (pdftex.def)             Requested size: 187.89912pt x 140.61807pt.
 Package epstopdf Info: Source file: <./figures/weak_error_rates_call/Beta_10/wi
 th_richardson/weak_convergence_order_call_richardson_relative_M_10_6.eps>
@@ -1450,12 +1563,12 @@ ted-to.pdf>
 _call/Beta_10/with_richardson/weak_convergence_order_call_richardson_relative_M
 _10_6-eps-converted-to.pdf ./figures/weak_error_rates_call/Beta_10/with_richard
 son/weak_convergence_order_call_richardson_relative_M_10_6.eps>
-(epstopdf)             \includegraphics on input line 776.
+(epstopdf)             \includegraphics on input line 1099.
 Package epstopdf Info: Output file is already uptodate.
 
 <./figures/weak_error_rates_call/Beta_10/with_richardson/weak_convergence_order
-_call_richardson_relative_M_10_6-eps-converted-to.pdf, id=727, 462.72874pt x 34
-6.29375pt>
+_call_richardson_relative_M_10_6-eps-converted-to.pdf, id=1293, 462.72874pt x 3
+46.29375pt>
 File: ./figures/weak_error_rates_call/Beta_10/with_richardson/weak_convergence_
 order_call_richardson_relative_M_10_6-eps-converted-to.pdf Graphic file (type p
 df)
@@ -1464,7 +1577,7 @@ df)
 rder_call_richardson_relative_M_10_6-eps-converted-to.pdf>
 Package pdftex.def Info: ./figures/weak_error_rates_call/Beta_10/with_richardso
 n/weak_convergence_order_call_richardson_relative_M_10_6-eps-converted-to.pdf u
-sed on input line 776.
+sed on input line 1099.
 (pdftex.def)             Requested size: 187.89912pt x 140.61807pt.
 Package epstopdf Info: Source file: <./figures/weak_error_rates_call/Beta_10/wi
 th_richardson/weak_convergence_order_differences_call_richardson_relative_M_10_
@@ -1481,12 +1594,12 @@ _call/Beta_10/with_richardson/weak_convergence_order_differences_call_richardso
 n_relative_M_10_6-eps-converted-to.pdf ./figures/weak_error_rates_call/Beta_10/
 with_richardson/weak_convergence_order_differences_call_richardson_relative_M_1
 0_6.eps>
-(epstopdf)             \includegraphics on input line 782.
+(epstopdf)             \includegraphics on input line 1105.
 Package epstopdf Info: Output file is already uptodate.
 
 <./figures/weak_error_rates_call/Beta_10/with_richardson/weak_convergence_order
-_differences_call_richardson_relative_M_10_6-eps-converted-to.pdf, id=728, 462.
-72874pt x 346.29375pt>
+_differences_call_richardson_relative_M_10_6-eps-converted-to.pdf, id=1294, 462
+.72874pt x 346.29375pt>
 File: ./figures/weak_error_rates_call/Beta_10/with_richardson/weak_convergence_
 order_differences_call_richardson_relative_M_10_6-eps-converted-to.pdf Graphic 
 file (type pdf)
@@ -1495,16 +1608,13 @@ file (type pdf)
 rder_differences_call_richardson_relative_M_10_6-eps-converted-to.pdf>
 Package pdftex.def Info: ./figures/weak_error_rates_call/Beta_10/with_richardso
 n/weak_convergence_order_differences_call_richardson_relative_M_10_6-eps-conver
-ted-to.pdf used on input line 782.
+ted-to.pdf used on input line 1105.
 (pdftex.def)             Requested size: 187.89912pt x 140.61807pt.
 
-Underfull \hbox (badness 2726) in paragraph at lines 787--787
+Underfull \hbox (badness 2726) in paragraph at lines 1110--1110
 \OT1/cmr/m/n/10.95 son ex-traploa-t-ion, us-ing MC with $\OML/cmm/m/it/10.95 M 
 \OT1/cmr/m/n/10.95 = 10[]$: a) $[]$ b)
  []
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 Package epstopdf Info: Source file: <./figures/weak_error_rates_call/Beta_10/wi
 th_richardson/weak_convergence_order_Call_richardson_level2_relative_M_10_6.eps
@@ -1520,12 +1630,12 @@ th_richardson/weak_convergence_order_Call_richardson_level2_relative_M_10_6-eps
 _call/Beta_10/with_richardson/weak_convergence_order_Call_richardson_level2_rel
 ative_M_10_6-eps-converted-to.pdf ./figures/weak_error_rates_call/Beta_10/with_
 richardson/weak_convergence_order_Call_richardson_level2_relative_M_10_6.eps>
-(epstopdf)             \includegraphics on input line 797.
+(epstopdf)             \includegraphics on input line 1120.
 Package epstopdf Info: Output file is already uptodate.
 
 <./figures/weak_error_rates_call/Beta_10/with_richardson/weak_convergence_order
-_Call_richardson_level2_relative_M_10_6-eps-converted-to.pdf, id=729, 462.72874
-pt x 346.29375pt>
+_Call_richardson_level2_relative_M_10_6-eps-converted-to.pdf, id=1295, 462.7287
+4pt x 346.29375pt>
 File: ./figures/weak_error_rates_call/Beta_10/with_richardson/weak_convergence_
 order_Call_richardson_level2_relative_M_10_6-eps-converted-to.pdf Graphic file 
 (type pdf)
@@ -1534,7 +1644,7 @@ order_Call_richardson_level2_relative_M_10_6-eps-converted-to.pdf Graphic file
 rder_Call_richardson_level2_relative_M_10_6-eps-converted-to.pdf>
 Package pdftex.def Info: ./figures/weak_error_rates_call/Beta_10/with_richardso
 n/weak_convergence_order_Call_richardson_level2_relative_M_10_6-eps-converted-t
-o.pdf used on input line 797.
+o.pdf used on input line 1120.
 (pdftex.def)             Requested size: 187.89912pt x 140.61807pt.
 Package epstopdf Info: Source file: <./figures/weak_error_rates_call/Beta_10/wi
 th_richardson/weak_convergence_order_differences_Call_richardson_level2_relativ
@@ -1551,12 +1661,12 @@ _call/Beta_10/with_richardson/weak_convergence_order_differences_Call_richardso
 n_level2_relative_M_10_6-eps-converted-to.pdf ./figures/weak_error_rates_call/B
 eta_10/with_richardson/weak_convergence_order_differences_Call_richardson_level
 2_relative_M_10_6.eps>
-(epstopdf)             \includegraphics on input line 803.
+(epstopdf)             \includegraphics on input line 1126.
 Package epstopdf Info: Output file is already uptodate.
 
 <./figures/weak_error_rates_call/Beta_10/with_richardson/weak_convergence_order
-_differences_Call_richardson_level2_relative_M_10_6-eps-converted-to.pdf, id=73
-0, 462.72874pt x 346.29375pt>
+_differences_Call_richardson_level2_relative_M_10_6-eps-converted-to.pdf, id=12
+96, 462.72874pt x 346.29375pt>
 File: ./figures/weak_error_rates_call/Beta_10/with_richardson/weak_convergence_
 order_differences_Call_richardson_level2_relative_M_10_6-eps-converted-to.pdf G
 raphic file (type pdf)
@@ -1565,16 +1675,20 @@ raphic file (type pdf)
 rder_differences_Call_richardson_level2_relative_M_10_6-eps-converted-to.pdf>
 Package pdftex.def Info: ./figures/weak_error_rates_call/Beta_10/with_richardso
 n/weak_convergence_order_differences_Call_richardson_level2_relative_M_10_6-eps
--converted-to.pdf used on input line 803.
+-converted-to.pdf used on input line 1126.
 (pdftex.def)             Requested size: 187.89912pt x 140.61807pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[16 <./figures/weak_error_rates_call/Beta_10/without_richardson/weak_convergenc
+[23 <./figures/weak_error_rates_call/Beta_10/without_richardson/weak_convergenc
 e_order_call_option_relative_M_10_5-eps-converted-to.pdf> <./figures/weak_error
 _rates_call/Beta_10/without_richardson/weak_convergence_order_differences_call_
-option_relative_M_10_5-eps-converted-to.pdf>]
+option_relative_M_10_5-eps-converted-to.pdf> <./figures/weak_error_rates_call/B
+eta_10/with_richardson/weak_convergence_order_call_richardson_relative_M_10_6-e
+ps-converted-to.pdf> <./figures/weak_error_rates_call/Beta_10/with_richardson/w
+eak_convergence_order_differences_call_richardson_relative_M_10_6-eps-converted
+-to.pdf>]
 Package epstopdf Info: Source file: <./figures/weak_error_rates_call/Beta_32/wi
 thout_rich/weak_convergence_order_call_option_relative_M_10_5.eps>
 (epstopdf)                    date: 2018-05-15 14:45:29
@@ -1588,11 +1702,11 @@ pdf>
 _call/Beta_32/without_rich/weak_convergence_order_call_option_relative_M_10_5-e
 ps-converted-to.pdf ./figures/weak_error_rates_call/Beta_32/without_rich/weak_c
 onvergence_order_call_option_relative_M_10_5.eps>
-(epstopdf)             \includegraphics on input line 821.
+(epstopdf)             \includegraphics on input line 1144.
 Package epstopdf Info: Output file is already uptodate.
 
 <./figures/weak_error_rates_call/Beta_32/without_rich/weak_convergence_order_ca
-ll_option_relative_M_10_5-eps-converted-to.pdf, id=811, 578.16pt x 433.62pt>
+ll_option_relative_M_10_5-eps-converted-to.pdf, id=1452, 578.16pt x 433.62pt>
 File: ./figures/weak_error_rates_call/Beta_32/without_rich/weak_convergence_ord
 er_call_option_relative_M_10_5-eps-converted-to.pdf Graphic file (type pdf)
 
@@ -1600,7 +1714,7 @@ er_call_option_relative_M_10_5-eps-converted-to.pdf Graphic file (type pdf)
 r_call_option_relative_M_10_5-eps-converted-to.pdf>
 Package pdftex.def Info: ./figures/weak_error_rates_call/Beta_32/without_rich/w
 eak_convergence_order_call_option_relative_M_10_5-eps-converted-to.pdf used on 
-input line 821.
+input line 1144.
 (pdftex.def)             Requested size: 187.89912pt x 140.92482pt.
 Package epstopdf Info: Source file: <./figures/weak_error_rates_call/Beta_32/wi
 thout_rich/weak_convergence_order_differences_call_option_relative_M_10_5.eps>
@@ -1615,12 +1729,12 @@ onverted-to.pdf>
 _call/Beta_32/without_rich/weak_convergence_order_differences_call_option_relat
 ive_M_10_5-eps-converted-to.pdf ./figures/weak_error_rates_call/Beta_32/without
 _rich/weak_convergence_order_differences_call_option_relative_M_10_5.eps>
-(epstopdf)             \includegraphics on input line 827.
+(epstopdf)             \includegraphics on input line 1150.
 Package epstopdf Info: Output file is already uptodate.
 
 <./figures/weak_error_rates_call/Beta_32/without_rich/weak_convergence_order_di
-fferences_call_option_relative_M_10_5-eps-converted-to.pdf, id=812, 578.16pt x 
-433.62pt>
+fferences_call_option_relative_M_10_5-eps-converted-to.pdf, id=1453, 578.16pt x
+ 433.62pt>
 File: ./figures/weak_error_rates_call/Beta_32/without_rich/weak_convergence_ord
 er_differences_call_option_relative_M_10_5-eps-converted-to.pdf Graphic file (t
 ype pdf)
@@ -1629,12 +1743,8 @@ ype pdf)
 r_differences_call_option_relative_M_10_5-eps-converted-to.pdf>
 Package pdftex.def Info: ./figures/weak_error_rates_call/Beta_32/without_rich/w
 eak_convergence_order_differences_call_option_relative_M_10_5-eps-converted-to.
-pdf used on input line 827.
+pdf used on input line 1150.
 (pdftex.def)             Requested size: 187.89912pt x 140.92482pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
 Package epstopdf Info: Source file: <./figures/weak_error_rates_call/Beta_32/wi
 th_rich/weak_convergence_order_call_richardson_relative.eps>
 (epstopdf)                    date: 2018-05-14 19:25:26
@@ -1647,11 +1757,11 @@ th_rich/weak_convergence_order_call_richardson_relative-eps-converted-to.pdf>
 _call/Beta_32/with_rich/weak_convergence_order_call_richardson_relative-eps-con
 verted-to.pdf ./figures/weak_error_rates_call/Beta_32/with_rich/weak_convergenc
 e_order_call_richardson_relative.eps>
-(epstopdf)             \includegraphics on input line 840.
+(epstopdf)             \includegraphics on input line 1163.
 Package epstopdf Info: Output file is already uptodate.
 
 <./figures/weak_error_rates_call/Beta_32/with_rich/weak_convergence_order_call_
-richardson_relative-eps-converted-to.pdf, id=813, 462.72874pt x 346.29375pt>
+richardson_relative-eps-converted-to.pdf, id=1454, 462.72874pt x 346.29375pt>
 File: ./figures/weak_error_rates_call/Beta_32/with_rich/weak_convergence_order_
 call_richardson_relative-eps-converted-to.pdf Graphic file (type pdf)
 
@@ -1659,7 +1769,7 @@ call_richardson_relative-eps-converted-to.pdf Graphic file (type pdf)
 all_richardson_relative-eps-converted-to.pdf>
 Package pdftex.def Info: ./figures/weak_error_rates_call/Beta_32/with_rich/weak
 _convergence_order_call_richardson_relative-eps-converted-to.pdf used on input 
-line 840.
+line 1163.
 (pdftex.def)             Requested size: 187.89912pt x 140.61807pt.
 Package epstopdf Info: Source file: <./figures/weak_error_rates_call/Beta_32/wi
 th_rich/weak_convergence_order_differences_call_richardson_relative.eps>
@@ -1674,12 +1784,12 @@ ed-to.pdf>
 _call/Beta_32/with_rich/weak_convergence_order_differences_call_richardson_rela
 tive-eps-converted-to.pdf ./figures/weak_error_rates_call/Beta_32/with_rich/wea
 k_convergence_order_differences_call_richardson_relative.eps>
-(epstopdf)             \includegraphics on input line 846.
+(epstopdf)             \includegraphics on input line 1169.
 Package epstopdf Info: Output file is already uptodate.
 
 <./figures/weak_error_rates_call/Beta_32/with_rich/weak_convergence_order_diffe
-rences_call_richardson_relative-eps-converted-to.pdf, id=814, 462.72874pt x 346
-.29375pt>
+rences_call_richardson_relative-eps-converted-to.pdf, id=1455, 462.72874pt x 34
+6.29375pt>
 File: ./figures/weak_error_rates_call/Beta_32/with_rich/weak_convergence_order_
 differences_call_richardson_relative-eps-converted-to.pdf Graphic file (type pd
 f)
@@ -1688,7 +1798,7 @@ f)
 ifferences_call_richardson_relative-eps-converted-to.pdf>
 Package pdftex.def Info: ./figures/weak_error_rates_call/Beta_32/with_rich/weak
 _convergence_order_differences_call_richardson_relative-eps-converted-to.pdf us
-ed on input line 846.
+ed on input line 1169.
 (pdftex.def)             Requested size: 187.89912pt x 140.61807pt.
 
 
@@ -1707,12 +1817,12 @@ verted-to.pdf>
 _call/Beta_32/with_rich/weak_convergence_order_Call_richardson_level2_relative_
 M_5_10_6-eps-converted-to.pdf ./figures/weak_error_rates_call/Beta_32/with_rich
 /weak_convergence_order_Call_richardson_level2_relative_M_5_10_6.eps>
-(epstopdf)             \includegraphics on input line 860.
+(epstopdf)             \includegraphics on input line 1183.
 Package epstopdf Info: Output file is already uptodate.
 
 <./figures/weak_error_rates_call/Beta_32/with_rich/weak_convergence_order_Call_
-richardson_level2_relative_M_5_10_6-eps-converted-to.pdf, id=815, 462.72874pt x
- 346.29375pt>
+richardson_level2_relative_M_5_10_6-eps-converted-to.pdf, id=1456, 462.72874pt 
+x 346.29375pt>
 File: ./figures/weak_error_rates_call/Beta_32/with_rich/weak_convergence_order_
 Call_richardson_level2_relative_M_5_10_6-eps-converted-to.pdf Graphic file (typ
 e pdf)
@@ -1721,7 +1831,7 @@ e pdf)
 all_richardson_level2_relative_M_5_10_6-eps-converted-to.pdf>
 Package pdftex.def Info: ./figures/weak_error_rates_call/Beta_32/with_rich/weak
 _convergence_order_Call_richardson_level2_relative_M_5_10_6-eps-converted-to.pd
-f used on input line 860.
+f used on input line 1183.
 (pdftex.def)             Requested size: 187.89912pt x 140.61807pt.
 Package epstopdf Info: Source file: <./figures/weak_error_rates_call/Beta_32/wi
 th_rich/weak_convergence_order_differences_Call_richardson_level2_relative_M_5_
@@ -1738,12 +1848,12 @@ _call/Beta_32/with_rich/weak_convergence_order_differences_Call_richardson_leve
 l2_relative_M_5_10_6-eps-converted-to.pdf ./figures/weak_error_rates_call/Beta_
 32/with_rich/weak_convergence_order_differences_Call_richardson_level2_relative
 _M_5_10_6.eps>
-(epstopdf)             \includegraphics on input line 866.
+(epstopdf)             \includegraphics on input line 1189.
 Package epstopdf Info: Output file is already uptodate.
 
 <./figures/weak_error_rates_call/Beta_32/with_rich/weak_convergence_order_diffe
-rences_Call_richardson_level2_relative_M_5_10_6-eps-converted-to.pdf, id=816, 4
-62.72874pt x 346.29375pt>
+rences_Call_richardson_level2_relative_M_5_10_6-eps-converted-to.pdf, id=1457, 
+462.72874pt x 346.29375pt>
 File: ./figures/weak_error_rates_call/Beta_32/with_rich/weak_convergence_order_
 differences_Call_richardson_level2_relative_M_5_10_6-eps-converted-to.pdf Graph
 ic file (type pdf)
@@ -1752,20 +1862,20 @@ ic file (type pdf)
 ifferences_Call_richardson_level2_relative_M_5_10_6-eps-converted-to.pdf>
 Package pdftex.def Info: ./figures/weak_error_rates_call/Beta_32/with_rich/weak
 _convergence_order_differences_Call_richardson_level2_relative_M_5_10_6-eps-con
-verted-to.pdf used on input line 866.
+verted-to.pdf used on input line 1189.
 (pdftex.def)             Requested size: 187.89912pt x 140.61807pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[17 <./figures/weak_error_rates_call/Beta_10/with_richardson/weak_convergence_o
-rder_call_richardson_relative_M_10_6-eps-converted-to.pdf> <./figures/weak_erro
-r_rates_call/Beta_10/with_richardson/weak_convergence_order_differences_call_ri
-chardson_relative_M_10_6-eps-converted-to.pdf> <./figures/weak_error_rates_call
-/Beta_10/with_richardson/weak_convergence_order_Call_richardson_level2_relative
-_M_10_6-eps-converted-to.pdf> <./figures/weak_error_rates_call/Beta_10/with_ric
-hardson/weak_convergence_order_differences_Call_richardson_level2_relative_M_10
-_6-eps-converted-to.pdf>] (./main.bbl
+[24 <./figures/weak_error_rates_call/Beta_10/with_richardson/weak_convergence_o
+rder_Call_richardson_level2_relative_M_10_6-eps-converted-to.pdf> <./figures/we
+ak_error_rates_call/Beta_10/with_richardson/weak_convergence_order_differences_
+Call_richardson_level2_relative_M_10_6-eps-converted-to.pdf> <./figures/weak_er
+ror_rates_call/Beta_32/without_rich/weak_convergence_order_call_option_relative
+_M_10_5-eps-converted-to.pdf> <./figures/weak_error_rates_call/Beta_32/without_
+rich/weak_convergence_order_differences_call_option_relative_M_10_5-eps-convert
+ed-to.pdf>] (./main.bbl
 Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ñ in font cmr10!
 Missing character: There is no ù in font cmr10!
@@ -1773,13 +1883,13 @@ Missing character: There is no  in font cmr10!
 Missing character: There is no ù in font cmr10!
 Missing character: There is no ï in font cmr10!
 Missing character: There is no ï in font cmr10!
- [18 <./figures/weak_error_rates_call/Beta_32/without_rich/weak_convergence_ord
-er_call_option_relative_M_10_5-eps-converted-to.pdf> <./figures/weak_error_rate
-s_call/Beta_32/without_rich/weak_convergence_order_differences_call_option_rela
-tive_M_10_5-eps-converted-to.pdf> <./figures/weak_error_rates_call/Beta_32/with
-_rich/weak_convergence_order_call_richardson_relative-eps-converted-to.pdf> <./
-figures/weak_error_rates_call/Beta_32/with_rich/weak_convergence_order_differen
-ces_call_richardson_relative-eps-converted-to.pdf>]
+ [25 <./figures/weak_error_rates_call/Beta_32/with_rich/weak_convergence_order_
+call_richardson_relative-eps-converted-to.pdf> <./figures/weak_error_rates_call
+/Beta_32/with_rich/weak_convergence_order_differences_call_richardson_relative-
+eps-converted-to.pdf> <./figures/weak_error_rates_call/Beta_32/with_rich/weak_c
+onvergence_order_Call_richardson_level2_relative_M_5_10_6-eps-converted-to.pdf>
+ <./figures/weak_error_rates_call/Beta_32/with_rich/weak_convergence_order_diff
+erences_Call_richardson_level2_relative_M_5_10_6-eps-converted-to.pdf>]
 Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ä in font cmr10!
 Missing character: There is no ú in font cmr10!
@@ -1793,2563 +1903,155 @@ Missing character: There is no ï in font cmr10!
 Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ä in font cmr10!
 Missing character: There is no ù in font cmr10!
-)
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[19 <./figures/weak_error_rates_call/Beta_32/with_rich/weak_convergence_order_C
-all_richardson_level2_relative_M_5_10_6-eps-converted-to.pdf> <./figures/weak_e
-rror_rates_call/Beta_32/with_rich/weak_convergence_order_differences_Call_richa
-rdson_level2_relative_M_5_10_6-eps-converted-to.pdf>] [20]
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@ifnextchar' on input line 1067.
-
-
-Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 1073.
-
-[21]
-<./figures/3D_basket/error_estimate.pdf, id=1249, 462.52798pt x 346.89601pt>
-File: ./figures/3D_basket/error_estimate.pdf Graphic file (type pdf)
-
-<use ./figures/3D_basket/error_estimate.pdf>
-Package pdftex.def Info: ./figures/3D_basket/error_estimate.pdf used on input l
-ine 1095.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-<./figures/3D_basket/average_running_time.pdf, id=1250, 462.52798pt x 346.89601
-pt>
-File: ./figures/3D_basket/average_running_time.pdf Graphic file (type pdf)
- <use ./figures/3D_basket/average_running_time.pdf>
-Package pdftex.def Info: ./figures/3D_basket/average_running_time.pdf used on i
-nput line 1101.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-<./figures/3D_basket/level_work.pdf, id=1251, 462.52798pt x 346.89601pt>
-File: ./figures/3D_basket/level_work.pdf Graphic file (type pdf)
-
-<use ./figures/3D_basket/level_work.pdf>
-Package pdftex.def Info: ./figures/3D_basket/level_work.pdf used on input line 
-1115.
-(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
-
-<./figures/3D_basket/levels_error_rate.pdf, id=1252, 462.52798pt x 346.89601pt>
-File: ./figures/3D_basket/levels_error_rate.pdf Graphic file (type pdf)
-<use ./figures/3D_basket/levels_error_rate.pdf>
-Package pdftex.def Info: ./figures/3D_basket/levels_error_rate.pdf used on inpu
-t line 1121.
-(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
- [22 <./figures/3D_basket/error_estimate.pdf> <./figures/3D_basket/average_runn
-ing_time.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/3D_basket/average_running_
-time.pdf): PDF inclusion: multiple pdfs with page group included in a single pa
-ge
-> <./figures/3D_basket/level_work.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/3D_basket/level_work.pdf):
- PDF inclusion: multiple pdfs with page group included in a single page
-> <./figures/3D_basket/levels_error_rate.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/3D_basket/levels_error_rat
-e.pdf): PDF inclusion: multiple pdfs with page group included in a single page
->]
-<./figures/8D_basket/error_estimate.pdf, id=1422, 462.52798pt x 346.89601pt>
-File: ./figures/8D_basket/error_estimate.pdf Graphic file (type pdf)
-
-<use ./figures/8D_basket/error_estimate.pdf>
-Package pdftex.def Info: ./figures/8D_basket/error_estimate.pdf used on input l
-ine 1138.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-<./figures/8D_basket/average_running_time.pdf, id=1423, 462.52798pt x 346.89601
-pt>
-File: ./figures/8D_basket/average_running_time.pdf Graphic file (type pdf)
- <use ./figures/8D_basket/average_running_time.pdf>
-Package pdftex.def Info: ./figures/8D_basket/average_running_time.pdf used on i
-nput line 1144.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-<./figures/8D_basket/level_work.pdf, id=1424, 462.52798pt x 346.89601pt>
-File: ./figures/8D_basket/level_work.pdf Graphic file (type pdf)
-
-<use ./figures/8D_basket/level_work.pdf>
-Package pdftex.def Info: ./figures/8D_basket/level_work.pdf used on input line 
-1158.
-(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
-
-<./figures/8D_basket/levels_error_rate.pdf, id=1425, 462.52798pt x 346.89601pt>
-File: ./figures/8D_basket/levels_error_rate.pdf Graphic file (type pdf)
-<use ./figures/8D_basket/levels_error_rate.pdf>
-Package pdftex.def Info: ./figures/8D_basket/levels_error_rate.pdf used on inpu
-t line 1164.
-(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
- [23 <./figures/8D_basket/error_estimate.pdf> <./figures/8D_basket/average_runn
-ing_time.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/8D_basket/average_running_
-time.pdf): PDF inclusion: multiple pdfs with page group included in a single pa
-ge
-> <./figures/8D_basket/level_work.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/8D_basket/level_work.pdf):
- PDF inclusion: multiple pdfs with page group included in a single page
-> <./figures/8D_basket/levels_error_rate.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/8D_basket/levels_error_rat
-e.pdf): PDF inclusion: multiple pdfs with page group included in a single page
->]
-<./figures/25D_basket/error_estimate.pdf, id=1621, 462.52798pt x 346.89601pt>
-File: ./figures/25D_basket/error_estimate.pdf Graphic file (type pdf)
-
-<use ./figures/25D_basket/error_estimate.pdf>
-Package pdftex.def Info: ./figures/25D_basket/error_estimate.pdf used on input 
-line 1177.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-<./figures/25D_basket/average_running_time.pdf, id=1622, 462.52798pt x 346.8960
-1pt>
-File: ./figures/25D_basket/average_running_time.pdf Graphic file (type pdf)
- <use ./figures/25D_basket/average_running_time.pdf>
-Package pdftex.def Info: ./figures/25D_basket/average_running_time.pdf used on 
-input line 1183.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-<./figures/25D_basket/level_work.pdf, id=1623, 462.52798pt x 346.89601pt>
-File: ./figures/25D_basket/level_work.pdf Graphic file (type pdf)
-
-<use ./figures/25D_basket/level_work.pdf>
-Package pdftex.def Info: ./figures/25D_basket/level_work.pdf used on input line
- 1197.
-(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
-
-<./figures/25D_basket/levels_error_rate.pdf, id=1624, 462.52798pt x 346.89601pt
->
-File: ./figures/25D_basket/levels_error_rate.pdf Graphic file (type pdf)
- <use ./figures/25D_basket/levels_error_rate.pdf>
-Package pdftex.def Info: ./figures/25D_basket/levels_error_rate.pdf used on inp
-ut line 1203.
-(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
- [24 <./figures/25D_basket/error_estimate.pdf> <./figures/25D_basket/average_ru
-nning_time.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/25D_basket/average_running
-_time.pdf): PDF inclusion: multiple pdfs with page group included in a single p
-age
-> <./figures/25D_basket/level_work.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/25D_basket/level_work.pdf)
-: PDF inclusion: multiple pdfs with page group included in a single page
-> <./figures/25D_basket/levels_error_rate.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/25D_basket/levels_error_ra
-te.pdf): PDF inclusion: multiple pdfs with page group included in a single page
-
->]
-
-Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 1214.
-
-Package epstopdf Info: Source file: <./figures/first_difference_basket.eps>
-(epstopdf)                    date: 2017-07-15 17:31:51
-(epstopdf)                    size: 45820 bytes
-(epstopdf)             Output file: <./figures/first_difference_basket-eps-conv
-erted-to.pdf>
-(epstopdf)                    date: 2017-07-15 17:51:57
-(epstopdf)                    size: 19856 bytes
-(epstopdf)             Command: <repstopdf --outfile=./figures/first_difference
-_basket-eps-converted-to.pdf ./figures/first_difference_basket.eps>
-(epstopdf)             \includegraphics on input line 1229.
-Package epstopdf Info: Output file is already uptodate.
-
-<./figures/first_difference_basket-eps-converted-to.pdf, id=1812, 578.16pt x 43
-3.62pt>
-File: ./figures/first_difference_basket-eps-converted-to.pdf Graphic file (type
- pdf)
- <use ./figures/first_difference_basket-eps-converted-to.pdf>
-Package pdftex.def Info: ./figures/first_difference_basket-eps-converted-to.pdf
- used on input line 1229.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-Package epstopdf Info: Source file: <./figures/mixed_difference_order2_basket_1
-.eps>
-(epstopdf)                    date: 2017-07-15 17:34:03
-(epstopdf)                    size: 50080 bytes
-(epstopdf)             Output file: <./figures/mixed_difference_order2_basket_1
--eps-converted-to.pdf>
-(epstopdf)                    date: 2017-07-15 17:51:58
-(epstopdf)                    size: 19039 bytes
-(epstopdf)             Command: <repstopdf --outfile=./figures/mixed_difference
-_order2_basket_1-eps-converted-to.pdf ./figures/mixed_difference_order2_basket_
-1.eps>
-(epstopdf)             \includegraphics on input line 1235.
-Package epstopdf Info: Output file is already uptodate.
-
-<./figures/mixed_difference_order2_basket_1-eps-converted-to.pdf, id=1813, 578.
-16pt x 433.62pt>
-File: ./figures/mixed_difference_order2_basket_1-eps-converted-to.pdf Graphic f
-ile (type pdf)
-
-<use ./figures/mixed_difference_order2_basket_1-eps-converted-to.pdf>
-Package pdftex.def Info: ./figures/mixed_difference_order2_basket_1-eps-convert
-ed-to.pdf used on input line 1235.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-Package epstopdf Info: Source file: <./figures/mixed_difference_order2_basket_2
-.eps>
-(epstopdf)                    date: 2017-07-15 17:35:56
-(epstopdf)                    size: 50104 bytes
-(epstopdf)             Output file: <./figures/mixed_difference_order2_basket_2
--eps-converted-to.pdf>
-(epstopdf)                    date: 2017-07-15 17:51:58
-(epstopdf)                    size: 19042 bytes
-(epstopdf)             Command: <repstopdf --outfile=./figures/mixed_difference
-_order2_basket_2-eps-converted-to.pdf ./figures/mixed_difference_order2_basket_
-2.eps>
-(epstopdf)             \includegraphics on input line 1247.
-Package epstopdf Info: Output file is already uptodate.
-
-<./figures/mixed_difference_order2_basket_2-eps-converted-to.pdf, id=1814, 578.
-16pt x 433.62pt>
-File: ./figures/mixed_difference_order2_basket_2-eps-converted-to.pdf Graphic f
-ile (type pdf)
-
-<use ./figures/mixed_difference_order2_basket_2-eps-converted-to.pdf>
-Package pdftex.def Info: ./figures/mixed_difference_order2_basket_2-eps-convert
-ed-to.pdf used on input line 1247.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-Package epstopdf Info: Source file: <./figures/mixed_difference_order2_basket_3
-.eps>
-(epstopdf)                    date: 2017-07-15 17:39:14
-(epstopdf)                    size: 47858 bytes
-(epstopdf)             Output file: <./figures/mixed_difference_order2_basket_3
--eps-converted-to.pdf>
-(epstopdf)                    date: 2017-07-15 17:52:33
-(epstopdf)                    size: 18906 bytes
-(epstopdf)             Command: <repstopdf --outfile=./figures/mixed_difference
-_order2_basket_3-eps-converted-to.pdf ./figures/mixed_difference_order2_basket_
-3.eps>
-(epstopdf)             \includegraphics on input line 1253.
-Package epstopdf Info: Output file is already uptodate.
-
-<./figures/mixed_difference_order2_basket_3-eps-converted-to.pdf, id=1815, 578.
-16pt x 433.62pt>
-File: ./figures/mixed_difference_order2_basket_3-eps-converted-to.pdf Graphic f
-ile (type pdf)
-
-<use ./figures/mixed_difference_order2_basket_3-eps-converted-to.pdf>
-Package pdftex.def Info: ./figures/mixed_difference_order2_basket_3-eps-convert
-ed-to.pdf used on input line 1253.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-Package epstopdf Info: Source file: <./figures/mixed_difference_order3_basket_1
-.eps>
-(epstopdf)                    date: 2017-07-15 17:44:16
-(epstopdf)                    size: 40920 bytes
-(epstopdf)             Output file: <./figures/mixed_difference_order3_basket_1
--eps-converted-to.pdf>
-(epstopdf)                    date: 2017-07-15 17:52:33
-(epstopdf)                    size: 17617 bytes
-(epstopdf)             Command: <repstopdf --outfile=./figures/mixed_difference
-_order3_basket_1-eps-converted-to.pdf ./figures/mixed_difference_order3_basket_
-1.eps>
-(epstopdf)             \includegraphics on input line 1266.
-Package epstopdf Info: Output file is already uptodate.
-
-<./figures/mixed_difference_order3_basket_1-eps-converted-to.pdf, id=1816, 578.
-16pt x 433.62pt>
-File: ./figures/mixed_difference_order3_basket_1-eps-converted-to.pdf Graphic f
-ile (type pdf)
-
-<use ./figures/mixed_difference_order3_basket_1-eps-converted-to.pdf>
-Package pdftex.def Info: ./figures/mixed_difference_order3_basket_1-eps-convert
-ed-to.pdf used on input line 1266.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-Package epstopdf Info: Source file: <./figures/mixed_difference_order3_basket_2
-.eps>
-(epstopdf)                    date: 2017-07-15 17:47:52
-(epstopdf)                    size: 46529 bytes
-(epstopdf)             Output file: <./figures/mixed_difference_order3_basket_2
--eps-converted-to.pdf>
-(epstopdf)                    date: 2017-07-15 17:52:34
-(epstopdf)                    size: 17183 bytes
-(epstopdf)             Command: <repstopdf --outfile=./figures/mixed_difference
-_order3_basket_2-eps-converted-to.pdf ./figures/mixed_difference_order3_basket_
-2.eps>
-(epstopdf)             \includegraphics on input line 1272.
-Package epstopdf Info: Output file is already uptodate.
-
-<./figures/mixed_difference_order3_basket_2-eps-converted-to.pdf, id=1817, 578.
-16pt x 433.62pt>
-File: ./figures/mixed_difference_order3_basket_2-eps-converted-to.pdf Graphic f
-ile (type pdf)
-
-<use ./figures/mixed_difference_order3_basket_2-eps-converted-to.pdf>
-Package pdftex.def Info: ./figures/mixed_difference_order3_basket_2-eps-convert
-ed-to.pdf used on input line 1272.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
- [25 <./figures/first_difference_basket-eps-converted-to.pdf> <./figures/mixed_
-difference_order2_basket_1-eps-converted-to.pdf>] [26 <./figures/mixed_differen
-ce_order2_basket_2-eps-converted-to.pdf> <./figures/mixed_difference_order2_bas
-ket_3-eps-converted-to.pdf> <./figures/mixed_difference_order3_basket_1-eps-con
-verted-to.pdf> <./figures/mixed_difference_order3_basket_2-eps-converted-to.pdf
->]
-<./figures/smooth_non_smooth_payoff.png, id=2043, 578.16pt x 433.62pt>
-File: ./figures/smooth_non_smooth_payoff.png Graphic file (type png)
-
-<use ./figures/smooth_non_smooth_payoff.png>
-Package pdftex.def Info: ./figures/smooth_non_smooth_payoff.png used on input l
-ine 1328.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-<./figures/smooth_payoff_2.png, id=2045, 578.16pt x 433.62pt>
-File: ./figures/smooth_payoff_2.png Graphic file (type png)
-
-<use ./figures/smooth_payoff_2.png>
-Package pdftex.def Info: ./figures/smooth_payoff_2.png used on input line 1334.
-
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[27]
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1417.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1417.
-
-
-<./figures/1D_BS_2_steps_non_smooth/error_estimate.pdf, id=2059, 462.52798pt x 
-346.89601pt>
-File: ./figures/1D_BS_2_steps_non_smooth/error_estimate.pdf Graphic file (type 
-pdf)
- <use ./figures/1D_BS_2_steps_non_smooth/error_estimate.pdf>
-Package pdftex.def Info: ./figures/1D_BS_2_steps_non_smooth/error_estimate.pdf 
-used on input line 1424.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-<./figures/1D_BS_2_steps_non_smooth/average_running_time.pdf, id=2060, 462.5279
-8pt x 346.89601pt>
-File: ./figures/1D_BS_2_steps_non_smooth/average_running_time.pdf Graphic file 
-(type pdf)
-
-<use ./figures/1D_BS_2_steps_non_smooth/average_running_time.pdf>
-Package pdftex.def Info: ./figures/1D_BS_2_steps_non_smooth/average_running_tim
-e.pdf used on input line 1430.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-<./figures/1D_BS_2_steps_non_smooth/level_work.pdf, id=2061, 462.52798pt x 346.
-89601pt>
-File: ./figures/1D_BS_2_steps_non_smooth/level_work.pdf Graphic file (type pdf)
-
- <use ./figures/1D_BS_2_steps_non_smooth/level_work.pdf>
-Package pdftex.def Info: ./figures/1D_BS_2_steps_non_smooth/level_work.pdf used
- on input line 1444.
-(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
-
-<./figures/1D_BS_2_steps_non_smooth/levels_error_rate.pdf, id=2062, 462.52798pt
- x 346.89601pt>
-File: ./figures/1D_BS_2_steps_non_smooth/levels_error_rate.pdf Graphic file (ty
-pe pdf)
- <use ./figures/1D_BS_2_steps_non_smooth/levels_error_rate.pdf>
-Package pdftex.def Info: ./figures/1D_BS_2_steps_non_smooth/levels_error_rate.p
-df used on input line 1450.
-(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1460.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1460.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\hbox' on input line 1460.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 1460.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 1460.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\unskip' on input line 1460.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@@italiccorr' on input line 1460.
-
-
-<./figures/1D_BS_2_steps_smooth_second_payoff_eps_10_5/error_estimate.pdf, id=2
-064, 462.52798pt x 346.89601pt>
-File: ./figures/1D_BS_2_steps_smooth_second_payoff_eps_10_5/error_estimate.pdf 
-Graphic file (type pdf)
-
-<use ./figures/1D_BS_2_steps_smooth_second_payoff_eps_10_5/error_estimate.pdf>
-Package pdftex.def Info: ./figures/1D_BS_2_steps_smooth_second_payoff_eps_10_5/
-error_estimate.pdf used on input line 1468.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-<./figures/1D_BS_2_steps_smooth_second_payoff_eps_10_5/average_running_time.pdf
-, id=2065, 462.52798pt x 346.89601pt>
-File: ./figures/1D_BS_2_steps_smooth_second_payoff_eps_10_5/average_running_tim
-e.pdf Graphic file (type pdf)
-
-<use ./figures/1D_BS_2_steps_smooth_second_payoff_eps_10_5/average_running_time
-.pdf>
-Package pdftex.def Info: ./figures/1D_BS_2_steps_smooth_second_payoff_eps_10_5/
-average_running_time.pdf used on input line 1474.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
- [28 <./figures/smooth_non_smooth_payoff.png> <./figures/smooth_payoff_2.png>]
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-<./figures/1D_BS_2_steps_smooth_second_payoff_eps_10_5/level_work.pdf, id=2077,
- 462.52798pt x 346.89601pt>
-File: ./figures/1D_BS_2_steps_smooth_second_payoff_eps_10_5/level_work.pdf Grap
-hic file (type pdf)
-
-<use ./figures/1D_BS_2_steps_smooth_second_payoff_eps_10_5/level_work.pdf>
-Package pdftex.def Info: ./figures/1D_BS_2_steps_smooth_second_payoff_eps_10_5/
-level_work.pdf used on input line 1488.
-(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
-
-<./figures/1D_BS_2_steps_smooth_second_payoff_eps_10_5/levels_error_rate.pdf, i
-d=2078, 462.52798pt x 346.89601pt>
-File: ./figures/1D_BS_2_steps_smooth_second_payoff_eps_10_5/levels_error_rate.p
-df Graphic file (type pdf)
-
-<use ./figures/1D_BS_2_steps_smooth_second_payoff_eps_10_5/levels_error_rate.pd
-f>
-Package pdftex.def Info: ./figures/1D_BS_2_steps_smooth_second_payoff_eps_10_5/
-levels_error_rate.pdf used on input line 1494.
-(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[29 <./figures/1D_BS_2_steps_non_smooth/error_estimate.pdf> <./figures/1D_BS_2_
-steps_non_smooth/average_running_time.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/1D_BS_2_steps_non_smooth/a
-verage_running_time.pdf): PDF inclusion: multiple pdfs with page group included
- in a single page
-> <./figures/1D_BS_2_steps_non_smooth/level_work.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/1D_BS_2_steps_non_smooth/l
-evel_work.pdf): PDF inclusion: multiple pdfs with page group included in a sing
-le page
-> <./figures/1D_BS_2_steps_non_smooth/levels_error_rate.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/1D_BS_2_steps_non_smooth/l
-evels_error_rate.pdf): PDF inclusion: multiple pdfs with page group included in
- a single page
->]
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1508.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1508.
-
-
-<./figures/1D_BS_4_steps_non_smooth/error_estimate.pdf, id=2200, 462.52798pt x 
-346.89601pt>
-File: ./figures/1D_BS_4_steps_non_smooth/error_estimate.pdf Graphic file (type 
-pdf)
- <use ./figures/1D_BS_4_steps_non_smooth/error_estimate.pdf>
-Package pdftex.def Info: ./figures/1D_BS_4_steps_non_smooth/error_estimate.pdf 
-used on input line 1515.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-<./figures/1D_BS_4_steps_non_smooth/average_running_time.pdf, id=2201, 462.5279
-8pt x 346.89601pt>
-File: ./figures/1D_BS_4_steps_non_smooth/average_running_time.pdf Graphic file 
-(type pdf)
-
-<use ./figures/1D_BS_4_steps_non_smooth/average_running_time.pdf>
-Package pdftex.def Info: ./figures/1D_BS_4_steps_non_smooth/average_running_tim
-e.pdf used on input line 1521.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-<./figures/1D_BS_4_steps_non_smooth/level_work.pdf, id=2202, 462.52798pt x 346.
-89601pt>
-File: ./figures/1D_BS_4_steps_non_smooth/level_work.pdf Graphic file (type pdf)
-
- <use ./figures/1D_BS_4_steps_non_smooth/level_work.pdf>
-Package pdftex.def Info: ./figures/1D_BS_4_steps_non_smooth/level_work.pdf used
- on input line 1535.
-(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
-
-<./figures/1D_BS_4_steps_non_smooth/levels_error_rate.pdf, id=2203, 462.52798pt
- x 346.89601pt>
-File: ./figures/1D_BS_4_steps_non_smooth/levels_error_rate.pdf Graphic file (ty
-pe pdf)
- <use ./figures/1D_BS_4_steps_non_smooth/levels_error_rate.pdf>
-Package pdftex.def Info: ./figures/1D_BS_4_steps_non_smooth/levels_error_rate.p
-df used on input line 1541.
-(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[30 <./figures/1D_BS_2_steps_smooth_second_payoff_eps_10_5/error_estimate.pdf> 
-<./figures/1D_BS_2_steps_smooth_second_payoff_eps_10_5/average_running_time.pdf
-
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/1D_BS_2_steps_smooth_secon
-d_payoff_eps_10_5/average_running_time.pdf): PDF inclusion: multiple pdfs with 
-page group included in a single page
-> <./figures/1D_BS_2_steps_smooth_second_payoff_eps_10_5/level_work.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/1D_BS_2_steps_smooth_secon
-d_payoff_eps_10_5/level_work.pdf): PDF inclusion: multiple pdfs with page group
- included in a single page
-> <./figures/1D_BS_2_steps_smooth_second_payoff_eps_10_5/levels_error_rate.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/1D_BS_2_steps_smooth_secon
-d_payoff_eps_10_5/levels_error_rate.pdf): PDF inclusion: multiple pdfs with pag
-e group included in a single page
->]
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1552.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1552.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1552.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1552.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1552.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1552.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1552.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1552.
-
-
-<./figures/1D_BS_2_4_step_non_smooth_richardson_without_middle/error_estimate.p
-df, id=2364, 462.52798pt x 346.89601pt>
-File: ./figures/1D_BS_2_4_step_non_smooth_richardson_without_middle/error_estim
-ate.pdf Graphic file (type pdf)
-
-<use ./figures/1D_BS_2_4_step_non_smooth_richardson_without_middle/error_estima
-te.pdf>
-Package pdftex.def Info: ./figures/1D_BS_2_4_step_non_smooth_richardson_without
-_middle/error_estimate.pdf used on input line 1560.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-<./figures/1D_BS_2_4_step_non_smooth_richardson_without_middle/average_running_
-time.pdf, id=2365, 462.52798pt x 346.89601pt>
-File: ./figures/1D_BS_2_4_step_non_smooth_richardson_without_middle/average_run
-ning_time.pdf Graphic file (type pdf)
-
-<use ./figures/1D_BS_2_4_step_non_smooth_richardson_without_middle/average_runn
-ing_time.pdf>
-Package pdftex.def Info: ./figures/1D_BS_2_4_step_non_smooth_richardson_without
-_middle/average_running_time.pdf used on input line 1566.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-<./figures/1D_BS_2_4_step_non_smooth_richardson_without_middle/level_work.pdf, 
-id=2366, 462.52798pt x 346.89601pt>
-File: ./figures/1D_BS_2_4_step_non_smooth_richardson_without_middle/level_work.
-pdf Graphic file (type pdf)
-
-<use ./figures/1D_BS_2_4_step_non_smooth_richardson_without_middle/level_work.p
-df>
-Package pdftex.def Info: ./figures/1D_BS_2_4_step_non_smooth_richardson_without
-_middle/level_work.pdf used on input line 1580.
-(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
-
-<./figures/1D_BS_2_4_step_non_smooth_richardson_without_middle/levels_error_rat
-e.pdf, id=2367, 462.52798pt x 346.89601pt>
-File: ./figures/1D_BS_2_4_step_non_smooth_richardson_without_middle/levels_erro
-r_rate.pdf Graphic file (type pdf)
-
-<use ./figures/1D_BS_2_4_step_non_smooth_richardson_without_middle/levels_error
-_rate.pdf>
-Package pdftex.def Info: ./figures/1D_BS_2_4_step_non_smooth_richardson_without
-_middle/levels_error_rate.pdf used on input line 1586.
-(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[31 <./figures/1D_BS_4_steps_non_smooth/error_estimate.pdf> <./figures/1D_BS_4_
-steps_non_smooth/average_running_time.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/1D_BS_4_steps_non_smooth/a
-verage_running_time.pdf): PDF inclusion: multiple pdfs with page group included
- in a single page
-> <./figures/1D_BS_4_steps_non_smooth/level_work.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/1D_BS_4_steps_non_smooth/l
-evel_work.pdf): PDF inclusion: multiple pdfs with page group included in a sing
-le page
-> <./figures/1D_BS_4_steps_non_smooth/levels_error_rate.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/1D_BS_4_steps_non_smooth/l
-evels_error_rate.pdf): PDF inclusion: multiple pdfs with page group included in
- a single page
->]
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1596.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1596.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\hbox' on input line 1596.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 1596.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 1596.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\unskip' on input line 1596.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@@italiccorr' on input line 1596.
-
-
-<./figures/1D_BS_4_steps_smooth_second_payoff_eps_10_5/error_estimate.pdf, id=2
-530, 462.52798pt x 346.89601pt>
-File: ./figures/1D_BS_4_steps_smooth_second_payoff_eps_10_5/error_estimate.pdf 
-Graphic file (type pdf)
-
-<use ./figures/1D_BS_4_steps_smooth_second_payoff_eps_10_5/error_estimate.pdf>
-Package pdftex.def Info: ./figures/1D_BS_4_steps_smooth_second_payoff_eps_10_5/
-error_estimate.pdf used on input line 1604.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-<./figures/1D_BS_4_steps_smooth_second_payoff_eps_10_5/average_running_time.pdf
-, id=2531, 462.52798pt x 346.89601pt>
-File: ./figures/1D_BS_4_steps_smooth_second_payoff_eps_10_5/average_running_tim
-e.pdf Graphic file (type pdf)
-
-<use ./figures/1D_BS_4_steps_smooth_second_payoff_eps_10_5/average_running_time
-.pdf>
-Package pdftex.def Info: ./figures/1D_BS_4_steps_smooth_second_payoff_eps_10_5/
-average_running_time.pdf used on input line 1610.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-<./figures/1D_BS_4_steps_smooth_second_payoff_eps_10_5/level_work.pdf, id=2534,
- 462.52798pt x 346.89601pt>
-File: ./figures/1D_BS_4_steps_smooth_second_payoff_eps_10_5/level_work.pdf Grap
-hic file (type pdf)
-
-<use ./figures/1D_BS_4_steps_smooth_second_payoff_eps_10_5/level_work.pdf>
-Package pdftex.def Info: ./figures/1D_BS_4_steps_smooth_second_payoff_eps_10_5/
-level_work.pdf used on input line 1624.
-(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
-
-<./figures/1D_BS_4_steps_smooth_second_payoff_eps_10_5/levels_error_rate.pdf, i
-d=2535, 462.52798pt x 346.89601pt>
-File: ./figures/1D_BS_4_steps_smooth_second_payoff_eps_10_5/levels_error_rate.p
-df Graphic file (type pdf)
-
-<use ./figures/1D_BS_4_steps_smooth_second_payoff_eps_10_5/levels_error_rate.pd
-f>
-Package pdftex.def Info: ./figures/1D_BS_4_steps_smooth_second_payoff_eps_10_5/
-levels_error_rate.pdf used on input line 1630.
-(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[32 <./figures/1D_BS_2_4_step_non_smooth_richardson_without_middle/error_estima
-te.pdf> <./figures/1D_BS_2_4_step_non_smooth_richardson_without_middle/average_
-running_time.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/1D_BS_2_4_step_non_smooth_
-richardson_without_middle/average_running_time.pdf): PDF inclusion: multiple pd
-fs with page group included in a single page
-> <./figures/1D_BS_2_4_step_non_smooth_richardson_without_middle/level_work.pdf
-
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/1D_BS_2_4_step_non_smooth_
-richardson_without_middle/level_work.pdf): PDF inclusion: multiple pdfs with pa
-ge group included in a single page
-> <./figures/1D_BS_2_4_step_non_smooth_richardson_without_middle/levels_error_r
-ate.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/1D_BS_2_4_step_non_smooth_
-richardson_without_middle/levels_error_rate.pdf): PDF inclusion: multiple pdfs 
-with page group included in a single page
->]
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\hbox' on input line 1644.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 1644.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 1644.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\unskip' on input line 1644.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@@italiccorr' on input line 1644.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1644.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1644.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1644.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1644.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1644.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1644.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1644.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1644.
-
-
-<./figures/1D_BS_2_4_steps_smooth_second_payoff_eps_10_5_richardson/error_estim
-ate.pdf, id=2710, 462.52798pt x 346.89601pt>
-File: ./figures/1D_BS_2_4_steps_smooth_second_payoff_eps_10_5_richardson/error_
-estimate.pdf Graphic file (type pdf)
-
-<use ./figures/1D_BS_2_4_steps_smooth_second_payoff_eps_10_5_richardson/error_e
-stimate.pdf>
-Package pdftex.def Info: ./figures/1D_BS_2_4_steps_smooth_second_payoff_eps_10_
-5_richardson/error_estimate.pdf used on input line 1651.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-<./figures/1D_BS_2_4_steps_smooth_second_payoff_eps_10_5_richardson/average_run
-ning_time.pdf, id=2711, 462.52798pt x 346.89601pt>
-File: ./figures/1D_BS_2_4_steps_smooth_second_payoff_eps_10_5_richardson/averag
-e_running_time.pdf Graphic file (type pdf)
-
-<use ./figures/1D_BS_2_4_steps_smooth_second_payoff_eps_10_5_richardson/average
-_running_time.pdf>
-Package pdftex.def Info: ./figures/1D_BS_2_4_steps_smooth_second_payoff_eps_10_
-5_richardson/average_running_time.pdf used on input line 1657.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-<./figures/1D_BS_4_8_steps_smooth_second_payoff_eps_10_5_richardson/level_work.
-pdf, id=2714, 462.52798pt x 346.89601pt>
-File: ./figures/1D_BS_4_8_steps_smooth_second_payoff_eps_10_5_richardson/level_
-work.pdf Graphic file (type pdf)
-
-<use ./figures/1D_BS_4_8_steps_smooth_second_payoff_eps_10_5_richardson/level_w
-ork.pdf>
-Package pdftex.def Info: ./figures/1D_BS_4_8_steps_smooth_second_payoff_eps_10_
-5_richardson/level_work.pdf used on input line 1671.
-(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
-
-<./figures/1D_BS_2_4_steps_smooth_second_payoff_eps_10_5_richardson/levels_erro
-r_rate.pdf, id=2715, 462.52798pt x 346.89601pt>
-File: ./figures/1D_BS_2_4_steps_smooth_second_payoff_eps_10_5_richardson/levels
-_error_rate.pdf Graphic file (type pdf)
-
-<use ./figures/1D_BS_2_4_steps_smooth_second_payoff_eps_10_5_richardson/levels_
-error_rate.pdf>
-Package pdftex.def Info: ./figures/1D_BS_2_4_steps_smooth_second_payoff_eps_10_
-5_richardson/levels_error_rate.pdf used on input line 1677.
-(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[33 <./figures/1D_BS_4_steps_smooth_second_payoff_eps_10_5/error_estimate.pdf> 
-<./figures/1D_BS_4_steps_smooth_second_payoff_eps_10_5/average_running_time.pdf
-
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/1D_BS_4_steps_smooth_secon
-d_payoff_eps_10_5/average_running_time.pdf): PDF inclusion: multiple pdfs with 
-page group included in a single page
-> <./figures/1D_BS_4_steps_smooth_second_payoff_eps_10_5/level_work.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/1D_BS_4_steps_smooth_secon
-d_payoff_eps_10_5/level_work.pdf): PDF inclusion: multiple pdfs with page group
- included in a single page
-> <./figures/1D_BS_4_steps_smooth_second_payoff_eps_10_5/levels_error_rate.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/1D_BS_4_steps_smooth_secon
-d_payoff_eps_10_5/levels_error_rate.pdf): PDF inclusion: multiple pdfs with pag
-e group included in a single page
->]
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1687.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1687.
-
-
-<./figures/1D_BS_8_steps_non_smooth/error_estimate.pdf, id=2878, 462.52798pt x 
-346.89601pt>
-File: ./figures/1D_BS_8_steps_non_smooth/error_estimate.pdf Graphic file (type 
-pdf)
- <use ./figures/1D_BS_8_steps_non_smooth/error_estimate.pdf>
-Package pdftex.def Info: ./figures/1D_BS_8_steps_non_smooth/error_estimate.pdf 
-used on input line 1694.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-<./figures/1D_BS_8_steps_non_smooth/average_running_time.pdf, id=2879, 462.5279
-8pt x 346.89601pt>
-File: ./figures/1D_BS_8_steps_non_smooth/average_running_time.pdf Graphic file 
-(type pdf)
-
-<use ./figures/1D_BS_8_steps_non_smooth/average_running_time.pdf>
-Package pdftex.def Info: ./figures/1D_BS_8_steps_non_smooth/average_running_tim
-e.pdf used on input line 1700.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-<./figures/1D_BS_8_steps_non_smooth/level_work.pdf, id=2880, 462.52798pt x 346.
-89601pt>
-File: ./figures/1D_BS_8_steps_non_smooth/level_work.pdf Graphic file (type pdf)
-
- <use ./figures/1D_BS_8_steps_non_smooth/level_work.pdf>
-Package pdftex.def Info: ./figures/1D_BS_8_steps_non_smooth/level_work.pdf used
- on input line 1714.
-(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
-
-<./figures/1D_BS_8_steps_non_smooth/levels_error_rate.pdf, id=2881, 462.52798pt
- x 346.89601pt>
-File: ./figures/1D_BS_8_steps_non_smooth/levels_error_rate.pdf Graphic file (ty
-pe pdf)
- <use ./figures/1D_BS_8_steps_non_smooth/levels_error_rate.pdf>
-Package pdftex.def Info: ./figures/1D_BS_8_steps_non_smooth/levels_error_rate.p
-df used on input line 1720.
-(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[34 <./figures/1D_BS_2_4_steps_smooth_second_payoff_eps_10_5_richardson/error_e
-stimate.pdf> <./figures/1D_BS_2_4_steps_smooth_second_payoff_eps_10_5_richardso
-n/average_running_time.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/1D_BS_2_4_steps_smooth_sec
-ond_payoff_eps_10_5_richardson/average_running_time.pdf): PDF inclusion: multip
-le pdfs with page group included in a single page
-> <./figures/1D_BS_4_8_steps_smooth_second_payoff_eps_10_5_richardson/level_wor
-k.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/1D_BS_4_8_steps_smooth_sec
-ond_payoff_eps_10_5_richardson/level_work.pdf): PDF inclusion: multiple pdfs wi
-th page group included in a single page
-> <./figures/1D_BS_2_4_steps_smooth_second_payoff_eps_10_5_richardson/levels_er
-ror_rate.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/1D_BS_2_4_steps_smooth_sec
-ond_payoff_eps_10_5_richardson/levels_error_rate.pdf): PDF inclusion: multiple 
-pdfs with page group included in a single page
->]
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1772.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1772.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1772.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1772.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1772.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1772.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1772.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1772.
-
-
-<./figures/1D_BS_4_8_step_non_smooth_richardson_without_middle/error_estimate.p
-df, id=3066, 462.52798pt x 346.89601pt>
-File: ./figures/1D_BS_4_8_step_non_smooth_richardson_without_middle/error_estim
-ate.pdf Graphic file (type pdf)
-
-<use ./figures/1D_BS_4_8_step_non_smooth_richardson_without_middle/error_estima
-te.pdf>
-Package pdftex.def Info: ./figures/1D_BS_4_8_step_non_smooth_richardson_without
-_middle/error_estimate.pdf used on input line 1780.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-<./figures/1D_BS_4_8_step_non_smooth_richardson_without_middle/average_running_
-time.pdf, id=3067, 462.52798pt x 346.89601pt>
-File: ./figures/1D_BS_4_8_step_non_smooth_richardson_without_middle/average_run
-ning_time.pdf Graphic file (type pdf)
-
-<use ./figures/1D_BS_4_8_step_non_smooth_richardson_without_middle/average_runn
-ing_time.pdf>
-Package pdftex.def Info: ./figures/1D_BS_4_8_step_non_smooth_richardson_without
-_middle/average_running_time.pdf used on input line 1786.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-<./figures/1D_BS_4_8_step_non_smooth_richardson_without_middle/level_work.pdf, 
-id=3068, 462.52798pt x 346.89601pt>
-File: ./figures/1D_BS_4_8_step_non_smooth_richardson_without_middle/level_work.
-pdf Graphic file (type pdf)
-
-<use ./figures/1D_BS_4_8_step_non_smooth_richardson_without_middle/level_work.p
-df>
-Package pdftex.def Info: ./figures/1D_BS_4_8_step_non_smooth_richardson_without
-_middle/level_work.pdf used on input line 1800.
-(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
-
-<./figures/1D_BS_4_8_step_non_smooth_richardson_without_middle/levels_error_rat
-e.pdf, id=3069, 462.52798pt x 346.89601pt>
-File: ./figures/1D_BS_4_8_step_non_smooth_richardson_without_middle/levels_erro
-r_rate.pdf Graphic file (type pdf)
-
-<use ./figures/1D_BS_4_8_step_non_smooth_richardson_without_middle/levels_error
-_rate.pdf>
-Package pdftex.def Info: ./figures/1D_BS_4_8_step_non_smooth_richardson_without
-_middle/levels_error_rate.pdf used on input line 1806.
-(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[35 <./figures/1D_BS_8_steps_non_smooth/error_estimate.pdf> <./figures/1D_BS_8_
-steps_non_smooth/average_running_time.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/1D_BS_8_steps_non_smooth/a
-verage_running_time.pdf): PDF inclusion: multiple pdfs with page group included
- in a single page
-> <./figures/1D_BS_8_steps_non_smooth/level_work.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/1D_BS_8_steps_non_smooth/l
-evel_work.pdf): PDF inclusion: multiple pdfs with page group included in a sing
-le page
-> <./figures/1D_BS_8_steps_non_smooth/levels_error_rate.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/1D_BS_8_steps_non_smooth/l
-evels_error_rate.pdf): PDF inclusion: multiple pdfs with page group included in
- a single page
->]
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1816.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1816.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\hbox' on input line 1816.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 1816.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 1816.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\unskip' on input line 1816.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@@italiccorr' on input line 1816.
-
-
-<./figures/1D_BS_8_steps_smooth_second_payoff_eps_10_5/error_estimate.pdf, id=3
-267, 462.52798pt x 346.89601pt>
-File: ./figures/1D_BS_8_steps_smooth_second_payoff_eps_10_5/error_estimate.pdf 
-Graphic file (type pdf)
-
-<use ./figures/1D_BS_8_steps_smooth_second_payoff_eps_10_5/error_estimate.pdf>
-Package pdftex.def Info: ./figures/1D_BS_8_steps_smooth_second_payoff_eps_10_5/
-error_estimate.pdf used on input line 1824.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-<./figures/1D_BS_8_steps_smooth_second_payoff_eps_10_5/average_running_time.pdf
-, id=3268, 462.52798pt x 346.89601pt>
-File: ./figures/1D_BS_8_steps_smooth_second_payoff_eps_10_5/average_running_tim
-e.pdf Graphic file (type pdf)
-
-<use ./figures/1D_BS_8_steps_smooth_second_payoff_eps_10_5/average_running_time
-.pdf>
-Package pdftex.def Info: ./figures/1D_BS_8_steps_smooth_second_payoff_eps_10_5/
-average_running_time.pdf used on input line 1830.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-<./figures/1D_BS_8_steps_smooth_second_payoff_eps_10_5/level_work.pdf, id=3271,
- 462.52798pt x 346.89601pt>
-File: ./figures/1D_BS_8_steps_smooth_second_payoff_eps_10_5/level_work.pdf Grap
-hic file (type pdf)
-
-<use ./figures/1D_BS_8_steps_smooth_second_payoff_eps_10_5/level_work.pdf>
-Package pdftex.def Info: ./figures/1D_BS_8_steps_smooth_second_payoff_eps_10_5/
-level_work.pdf used on input line 1844.
-(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
-
-<./figures/1D_BS_8_steps_smooth_second_payoff_eps_10_5/levels_error_rate.pdf, i
-d=3272, 462.52798pt x 346.89601pt>
-File: ./figures/1D_BS_8_steps_smooth_second_payoff_eps_10_5/levels_error_rate.p
-df Graphic file (type pdf)
-
-<use ./figures/1D_BS_8_steps_smooth_second_payoff_eps_10_5/levels_error_rate.pd
-f>
-Package pdftex.def Info: ./figures/1D_BS_8_steps_smooth_second_payoff_eps_10_5/
-levels_error_rate.pdf used on input line 1850.
-(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[36 <./figures/1D_BS_4_8_step_non_smooth_richardson_without_middle/error_estima
-te.pdf> <./figures/1D_BS_4_8_step_non_smooth_richardson_without_middle/average_
-running_time.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/1D_BS_4_8_step_non_smooth_
-richardson_without_middle/average_running_time.pdf): PDF inclusion: multiple pd
-fs with page group included in a single page
-> <./figures/1D_BS_4_8_step_non_smooth_richardson_without_middle/level_work.pdf
-
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/1D_BS_4_8_step_non_smooth_
-richardson_without_middle/level_work.pdf): PDF inclusion: multiple pdfs with pa
-ge group included in a single page
-> <./figures/1D_BS_4_8_step_non_smooth_richardson_without_middle/levels_error_r
-ate.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/1D_BS_4_8_step_non_smooth_
-richardson_without_middle/levels_error_rate.pdf): PDF inclusion: multiple pdfs 
-with page group included in a single page
->]
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\hbox' on input line 1862.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 1862.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 1862.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\unskip' on input line 1862.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@@italiccorr' on input line 1862.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1862.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1862.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1862.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1862.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1862.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1862.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1862.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1862.
-
-
-<./figures/1D_BS_4_8_steps_smooth_second_payoff_eps_10_5_richardson/error_estim
-ate.pdf, id=3471, 462.52798pt x 346.89601pt>
-File: ./figures/1D_BS_4_8_steps_smooth_second_payoff_eps_10_5_richardson/error_
-estimate.pdf Graphic file (type pdf)
-
-<use ./figures/1D_BS_4_8_steps_smooth_second_payoff_eps_10_5_richardson/error_e
-stimate.pdf>
-Package pdftex.def Info: ./figures/1D_BS_4_8_steps_smooth_second_payoff_eps_10_
-5_richardson/error_estimate.pdf used on input line 1869.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-<./figures/1D_BS_4_8_steps_smooth_second_payoff_eps_10_5_richardson/average_run
-ning_time.pdf, id=3472, 462.52798pt x 346.89601pt>
-File: ./figures/1D_BS_4_8_steps_smooth_second_payoff_eps_10_5_richardson/averag
-e_running_time.pdf Graphic file (type pdf)
-
-<use ./figures/1D_BS_4_8_steps_smooth_second_payoff_eps_10_5_richardson/average
-_running_time.pdf>
-Package pdftex.def Info: ./figures/1D_BS_4_8_steps_smooth_second_payoff_eps_10_
-5_richardson/average_running_time.pdf used on input line 1875.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-File: ./figures/1D_BS_4_8_steps_smooth_second_payoff_eps_10_5_richardson/level_
-work.pdf Graphic file (type pdf)
-
-<use ./figures/1D_BS_4_8_steps_smooth_second_payoff_eps_10_5_richardson/level_w
-ork.pdf>
-Package pdftex.def Info: ./figures/1D_BS_4_8_steps_smooth_second_payoff_eps_10_
-5_richardson/level_work.pdf used on input line 1889.
-(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
-
-<./figures/1D_BS_4_8_steps_smooth_second_payoff_eps_10_5_richardson/levels_erro
-r_rate.pdf, id=3475, 462.52798pt x 346.89601pt>
-File: ./figures/1D_BS_4_8_steps_smooth_second_payoff_eps_10_5_richardson/levels
-_error_rate.pdf Graphic file (type pdf)
-
-<use ./figures/1D_BS_4_8_steps_smooth_second_payoff_eps_10_5_richardson/levels_
-error_rate.pdf>
-Package pdftex.def Info: ./figures/1D_BS_4_8_steps_smooth_second_payoff_eps_10_
-5_richardson/levels_error_rate.pdf used on input line 1895.
-(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[37 <./figures/1D_BS_8_steps_smooth_second_payoff_eps_10_5/error_estimate.pdf> 
-<./figures/1D_BS_8_steps_smooth_second_payoff_eps_10_5/average_running_time.pdf
-
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/1D_BS_8_steps_smooth_secon
-d_payoff_eps_10_5/average_running_time.pdf): PDF inclusion: multiple pdfs with 
-page group included in a single page
-> <./figures/1D_BS_8_steps_smooth_second_payoff_eps_10_5/level_work.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/1D_BS_8_steps_smooth_secon
-d_payoff_eps_10_5/level_work.pdf): PDF inclusion: multiple pdfs with page group
- included in a single page
-> <./figures/1D_BS_8_steps_smooth_second_payoff_eps_10_5/levels_error_rate.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/1D_BS_8_steps_smooth_secon
-d_payoff_eps_10_5/levels_error_rate.pdf): PDF inclusion: multiple pdfs with pag
-e group included in a single page
->]
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1904.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1904.
-
-
-<./figures/1D_BS_16_steps_non_smooth/error_estimate.pdf, id=3687, 462.52798pt x
- 346.89601pt>
-File: ./figures/1D_BS_16_steps_non_smooth/error_estimate.pdf Graphic file (type
- pdf)
- <use ./figures/1D_BS_16_steps_non_smooth/error_estimate.pdf>
-Package pdftex.def Info: ./figures/1D_BS_16_steps_non_smooth/error_estimate.pdf
- used on input line 1911.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-<./figures/1D_BS_16_steps_non_smooth/average_running_time.pdf, id=3688, 462.527
-98pt x 346.89601pt>
-File: ./figures/1D_BS_16_steps_non_smooth/average_running_time.pdf Graphic file
- (type pdf)
-
-<use ./figures/1D_BS_16_steps_non_smooth/average_running_time.pdf>
-Package pdftex.def Info: ./figures/1D_BS_16_steps_non_smooth/average_running_ti
-me.pdf used on input line 1917.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-<./figures/1D_BS_16_steps_non_smooth/level_work.pdf, id=3689, 462.52798pt x 346
-.89601pt>
-File: ./figures/1D_BS_16_steps_non_smooth/level_work.pdf Graphic file (type pdf
-)
- <use ./figures/1D_BS_16_steps_non_smooth/level_work.pdf>
-Package pdftex.def Info: ./figures/1D_BS_16_steps_non_smooth/level_work.pdf use
-d on input line 1931.
-(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
-
-<./figures/1D_BS_16_steps_non_smooth/levels_error_rate.pdf, id=3690, 462.52798p
-t x 346.89601pt>
-File: ./figures/1D_BS_16_steps_non_smooth/levels_error_rate.pdf Graphic file (t
-ype pdf)
-
-<use ./figures/1D_BS_16_steps_non_smooth/levels_error_rate.pdf>
-Package pdftex.def Info: ./figures/1D_BS_16_steps_non_smooth/levels_error_rate.
-pdf used on input line 1937.
-(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[38 <./figures/1D_BS_4_8_steps_smooth_second_payoff_eps_10_5_richardson/error_e
-stimate.pdf> <./figures/1D_BS_4_8_steps_smooth_second_payoff_eps_10_5_richardso
-n/average_running_time.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/1D_BS_4_8_steps_smooth_sec
-ond_payoff_eps_10_5_richardson/average_running_time.pdf): PDF inclusion: multip
-le pdfs with page group included in a single page
-> <./figures/1D_BS_4_8_steps_smooth_second_payoff_eps_10_5_richardson/levels_er
-ror_rate.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/1D_BS_4_8_steps_smooth_sec
-ond_payoff_eps_10_5_richardson/levels_error_rate.pdf): PDF inclusion: multiple 
-pdfs with page group included in a single page
->]
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1946.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1946.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\hbox' on input line 1946.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 1946.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 1946.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\unskip' on input line 1946.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@@italiccorr' on input line 1946.
-
-
-<./figures/1D_BS_16_steps_smooth_second_payoff_eps_10_5/error_estimate.pdf, id=
-3841, 462.52798pt x 346.89601pt>
-File: ./figures/1D_BS_16_steps_smooth_second_payoff_eps_10_5/error_estimate.pdf
- Graphic file (type pdf)
-
-<use ./figures/1D_BS_16_steps_smooth_second_payoff_eps_10_5/error_estimate.pdf>
-Package pdftex.def Info: ./figures/1D_BS_16_steps_smooth_second_payoff_eps_10_5
-/error_estimate.pdf used on input line 1954.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-<./figures/1D_BS_16_steps_smooth_second_payoff_eps_10_5/average_running_time.pd
-f, id=3842, 462.52798pt x 346.89601pt>
-File: ./figures/1D_BS_16_steps_smooth_second_payoff_eps_10_5/average_running_ti
-me.pdf Graphic file (type pdf)
-
-<use ./figures/1D_BS_16_steps_smooth_second_payoff_eps_10_5/average_running_tim
-e.pdf>
-Package pdftex.def Info: ./figures/1D_BS_16_steps_smooth_second_payoff_eps_10_5
-/average_running_time.pdf used on input line 1960.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-<./figures/1D_BS_16_steps_smooth_second_payoff_eps_10_5/level_work.pdf, id=3845
-, 462.52798pt x 346.89601pt>
-File: ./figures/1D_BS_16_steps_smooth_second_payoff_eps_10_5/level_work.pdf Gra
-phic file (type pdf)
-
-<use ./figures/1D_BS_16_steps_smooth_second_payoff_eps_10_5/level_work.pdf>
-Package pdftex.def Info: ./figures/1D_BS_16_steps_smooth_second_payoff_eps_10_5
-/level_work.pdf used on input line 1974.
-(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
-
-<./figures/1D_BS_16_steps_smooth_second_payoff_eps_10_5/levels_error_rate.pdf, 
-id=3846, 462.52798pt x 346.89601pt>
-File: ./figures/1D_BS_16_steps_smooth_second_payoff_eps_10_5/levels_error_rate.
-pdf Graphic file (type pdf)
-
-<use ./figures/1D_BS_16_steps_smooth_second_payoff_eps_10_5/levels_error_rate.p
-df>
-Package pdftex.def Info: ./figures/1D_BS_16_steps_smooth_second_payoff_eps_10_5
-/levels_error_rate.pdf used on input line 1980.
-(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[39 <./figures/1D_BS_16_steps_non_smooth/error_estimate.pdf> <./figures/1D_BS_1
-6_steps_non_smooth/average_running_time.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/1D_BS_16_steps_non_smooth/
-average_running_time.pdf): PDF inclusion: multiple pdfs with page group include
-d in a single page
-> <./figures/1D_BS_16_steps_non_smooth/level_work.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/1D_BS_16_steps_non_smooth/
-level_work.pdf): PDF inclusion: multiple pdfs with page group included in a sin
-gle page
-> <./figures/1D_BS_16_steps_non_smooth/levels_error_rate.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/1D_BS_16_steps_non_smooth/
-levels_error_rate.pdf): PDF inclusion: multiple pdfs with page group included i
-n a single page
->]
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\hbox' on input line 1991.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 1991.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 1991.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\unskip' on input line 1991.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@@italiccorr' on input line 1991.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1991.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1991.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1991.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1991.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1991.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1991.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1991.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1991.
-
-
-<./figures/1D_BS_8_16_steps_smooth_second_payoff_eps_10_5_richardson/error_esti
-mate.pdf, id=4045, 462.52798pt x 346.89601pt>
-File: ./figures/1D_BS_8_16_steps_smooth_second_payoff_eps_10_5_richardson/error
-_estimate.pdf Graphic file (type pdf)
-
-<use ./figures/1D_BS_8_16_steps_smooth_second_payoff_eps_10_5_richardson/error_
-estimate.pdf>
-Package pdftex.def Info: ./figures/1D_BS_8_16_steps_smooth_second_payoff_eps_10
-_5_richardson/error_estimate.pdf used on input line 1998.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-<./figures/1D_BS_8_16_steps_smooth_second_payoff_eps_10_5_richardson/average_ru
-nning_time.pdf, id=4046, 462.52798pt x 346.89601pt>
-File: ./figures/1D_BS_8_16_steps_smooth_second_payoff_eps_10_5_richardson/avera
-ge_running_time.pdf Graphic file (type pdf)
-
-<use ./figures/1D_BS_8_16_steps_smooth_second_payoff_eps_10_5_richardson/averag
-e_running_time.pdf>
-Package pdftex.def Info: ./figures/1D_BS_8_16_steps_smooth_second_payoff_eps_10
-_5_richardson/average_running_time.pdf used on input line 2004.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-<./figures/1D_BS_8_16_steps_smooth_second_payoff_eps_10_5_richardson/level_work
-.pdf, id=4049, 462.52798pt x 346.89601pt>
-File: ./figures/1D_BS_8_16_steps_smooth_second_payoff_eps_10_5_richardson/level
-_work.pdf Graphic file (type pdf)
-
-<use ./figures/1D_BS_8_16_steps_smooth_second_payoff_eps_10_5_richardson/level_
-work.pdf>
-Package pdftex.def Info: ./figures/1D_BS_8_16_steps_smooth_second_payoff_eps_10
-_5_richardson/level_work.pdf used on input line 2018.
-(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
-
-<./figures/1D_BS_8_16_steps_smooth_second_payoff_eps_10_5_richardson/levels_err
-or_rate.pdf, id=4050, 462.52798pt x 346.89601pt>
-File: ./figures/1D_BS_8_16_steps_smooth_second_payoff_eps_10_5_richardson/level
-s_error_rate.pdf Graphic file (type pdf)
-
-<use ./figures/1D_BS_8_16_steps_smooth_second_payoff_eps_10_5_richardson/levels
-_error_rate.pdf>
-Package pdftex.def Info: ./figures/1D_BS_8_16_steps_smooth_second_payoff_eps_10
-_5_richardson/levels_error_rate.pdf used on input line 2024.
-(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[40 <./figures/1D_BS_16_steps_smooth_second_payoff_eps_10_5/error_estimate.pdf>
- <./figures/1D_BS_16_steps_smooth_second_payoff_eps_10_5/average_running_time.p
-df
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/1D_BS_16_steps_smooth_seco
-nd_payoff_eps_10_5/average_running_time.pdf): PDF inclusion: multiple pdfs with
- page group included in a single page
-> <./figures/1D_BS_16_steps_smooth_second_payoff_eps_10_5/level_work.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/1D_BS_16_steps_smooth_seco
-nd_payoff_eps_10_5/level_work.pdf): PDF inclusion: multiple pdfs with page grou
-p included in a single page
-> <./figures/1D_BS_16_steps_smooth_second_payoff_eps_10_5/levels_error_rate.pdf
-
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/1D_BS_16_steps_smooth_seco
-nd_payoff_eps_10_5/levels_error_rate.pdf): PDF inclusion: multiple pdfs with pa
-ge group included in a single page
->]
-File: ./figures/1D_BS_4_steps_non_smooth/error_estimate.pdf Graphic file (type 
-pdf)
- <use ./figures/1D_BS_4_steps_non_smooth/error_estimate.pdf>
-Package pdftex.def Info: ./figures/1D_BS_4_steps_non_smooth/error_estimate.pdf 
-used on input line 2045.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-File: ./figures/1D_BS_4_steps_non_smooth/average_running_time.pdf Graphic file 
-(type pdf)
-
-<use ./figures/1D_BS_4_steps_non_smooth/average_running_time.pdf>
-Package pdftex.def Info: ./figures/1D_BS_4_steps_non_smooth/average_running_tim
-e.pdf used on input line 2051.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-File: ./figures/1D_BS_4_steps_non_smooth/level_work.pdf Graphic file (type pdf)
-
-<use ./figures/1D_BS_4_steps_non_smooth/level_work.pdf>
-Package pdftex.def Info: ./figures/1D_BS_4_steps_non_smooth/level_work.pdf used
- on input line 2065.
-(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
-File: ./figures/1D_BS_4_steps_non_smooth/levels_error_rate.pdf Graphic file (ty
-pe pdf)
-
-<use ./figures/1D_BS_4_steps_non_smooth/levels_error_rate.pdf>
-Package pdftex.def Info: ./figures/1D_BS_4_steps_non_smooth/levels_error_rate.p
-df used on input line 2071.
-(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-<./figures/1D_BS_4_steps_non_smooth_richardson_finer/error_estimate.pdf, id=424
-9, 462.52798pt x 346.89601pt>
-File: ./figures/1D_BS_4_steps_non_smooth_richardson_finer/error_estimate.pdf Gr
-aphic file (type pdf)
-
-<use ./figures/1D_BS_4_steps_non_smooth_richardson_finer/error_estimate.pdf>
-Package pdftex.def Info: ./figures/1D_BS_4_steps_non_smooth_richardson_finer/er
-ror_estimate.pdf used on input line 2087.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-<./figures/1D_BS_4_steps_non_smooth_richardson_finer/average_running_time.pdf, 
-id=4250, 462.52798pt x 346.89601pt>
-File: ./figures/1D_BS_4_steps_non_smooth_richardson_finer/average_running_time.
-pdf Graphic file (type pdf)
-
-<use ./figures/1D_BS_4_steps_non_smooth_richardson_finer/average_running_time.p
-df>
-Package pdftex.def Info: ./figures/1D_BS_4_steps_non_smooth_richardson_finer/av
-erage_running_time.pdf used on input line 2093.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-<./figures/1D_BS_4_steps_non_smooth_richardson_finer/level_work.pdf, id=4251, 4
-62.52798pt x 346.89601pt>
-File: ./figures/1D_BS_4_steps_non_smooth_richardson_finer/level_work.pdf Graphi
-c file (type pdf)
-
-<use ./figures/1D_BS_4_steps_non_smooth_richardson_finer/level_work.pdf>
-Package pdftex.def Info: ./figures/1D_BS_4_steps_non_smooth_richardson_finer/le
-vel_work.pdf used on input line 2107.
-(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
-
-<./figures/1D_BS_4_steps_non_smooth_richardson_finer/levels_error_rate.pdf, id=
-4252, 462.52798pt x 346.89601pt>
-File: ./figures/1D_BS_4_steps_non_smooth_richardson_finer/levels_error_rate.pdf
- Graphic file (type pdf)
-
-<use ./figures/1D_BS_4_steps_non_smooth_richardson_finer/levels_error_rate.pdf>
-Package pdftex.def Info: ./figures/1D_BS_4_steps_non_smooth_richardson_finer/le
-vels_error_rate.pdf used on input line 2113.
-(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-<./figures/1D_BS_4_steps_non_smooth_richardson_coarser/error_estimate.pdf, id=4
-253, 462.52798pt x 346.89601pt>
-File: ./figures/1D_BS_4_steps_non_smooth_richardson_coarser/error_estimate.pdf 
-Graphic file (type pdf)
-
-<use ./figures/1D_BS_4_steps_non_smooth_richardson_coarser/error_estimate.pdf>
-Package pdftex.def Info: ./figures/1D_BS_4_steps_non_smooth_richardson_coarser/
-error_estimate.pdf used on input line 2128.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-<./figures/1D_BS_4_steps_non_smooth_richardson_coarser/average_running_time.pdf
-, id=4254, 462.52798pt x 346.89601pt>
-File: ./figures/1D_BS_4_steps_non_smooth_richardson_coarser/average_running_tim
-e.pdf Graphic file (type pdf)
-
-<use ./figures/1D_BS_4_steps_non_smooth_richardson_coarser/average_running_time
-.pdf>
-Package pdftex.def Info: ./figures/1D_BS_4_steps_non_smooth_richardson_coarser/
-average_running_time.pdf used on input line 2134.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
- [41 <./figures/1D_BS_8_16_steps_smooth_second_payoff_eps_10_5_richardson/error
-_estimate.pdf> <./figures/1D_BS_8_16_steps_smooth_second_payoff_eps_10_5_richar
-dson/average_running_time.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/1D_BS_8_16_steps_smooth_se
-cond_payoff_eps_10_5_richardson/average_running_time.pdf): PDF inclusion: multi
-ple pdfs with page group included in a single page
-> <./figures/1D_BS_8_16_steps_smooth_second_payoff_eps_10_5_richardson/level_wo
-rk.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/1D_BS_8_16_steps_smooth_se
-cond_payoff_eps_10_5_richardson/level_work.pdf): PDF inclusion: multiple pdfs w
-ith page group included in a single page
-> <./figures/1D_BS_8_16_steps_smooth_second_payoff_eps_10_5_richardson/levels_e
-rror_rate.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/1D_BS_8_16_steps_smooth_se
-cond_payoff_eps_10_5_richardson/levels_error_rate.pdf): PDF inclusion: multiple
- pdfs with page group included in a single page
->]
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-<./figures/1D_BS_4_steps_non_smooth_richardson_coarser/level_work.pdf, id=4439,
- 462.52798pt x 346.89601pt>
-File: ./figures/1D_BS_4_steps_non_smooth_richardson_coarser/level_work.pdf Grap
-hic file (type pdf)
-
-<use ./figures/1D_BS_4_steps_non_smooth_richardson_coarser/level_work.pdf>
-Package pdftex.def Info: ./figures/1D_BS_4_steps_non_smooth_richardson_coarser/
-level_work.pdf used on input line 2148.
-(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
-
-<./figures/1D_BS_4_steps_non_smooth_richardson_coarser/levels_error_rate.pdf, i
-d=4440, 462.52798pt x 346.89601pt>
-File: ./figures/1D_BS_4_steps_non_smooth_richardson_coarser/levels_error_rate.p
-df Graphic file (type pdf)
-
-<use ./figures/1D_BS_4_steps_non_smooth_richardson_coarser/levels_error_rate.pd
-f>
-Package pdftex.def Info: ./figures/1D_BS_4_steps_non_smooth_richardson_coarser/
-levels_error_rate.pdf used on input line 2154.
-(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-Overfull \vbox (19.74345pt too high) has occurred while \output is active []
-
-
-[42]
-Package epstopdf Info: Source file: <./figures/first_difference_1D_BS_N_8.eps>
-(epstopdf)                    date: 2017-07-26 11:27:03
-(epstopdf)                    size: 43309 bytes
-(epstopdf)             Output file: <./figures/first_difference_1D_BS_N_8-eps-c
-onverted-to.pdf>
-(epstopdf)                    date: 2017-07-26 12:36:59
-(epstopdf)                    size: 19234 bytes
-(epstopdf)             Command: <repstopdf --outfile=./figures/first_difference
-_1D_BS_N_8-eps-converted-to.pdf ./figures/first_difference_1D_BS_N_8.eps>
-(epstopdf)             \includegraphics on input line 2173.
-Package epstopdf Info: Output file is already uptodate.
-
-<./figures/first_difference_1D_BS_N_8-eps-converted-to.pdf, id=4457, 578.16pt x
- 433.62pt>
-File: ./figures/first_difference_1D_BS_N_8-eps-converted-to.pdf Graphic file (t
-ype pdf)
- <use ./figures/first_difference_1D_BS_N_8-eps-converted-to.pdf>
-Package pdftex.def Info: ./figures/first_difference_1D_BS_N_8-eps-converted-to.
-pdf used on input line 2173.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-Package epstopdf Info: Source file: <./figures/first_difference_1D_BS_N_16.eps>
-
-(epstopdf)                    date: 2017-07-26 11:31:57
-(epstopdf)                    size: 56573 bytes
-(epstopdf)             Output file: <./figures/first_difference_1D_BS_N_16-eps-
-converted-to.pdf>
-(epstopdf)                    date: 2017-07-26 12:37:00
-(epstopdf)                    size: 19953 bytes
-(epstopdf)             Command: <repstopdf --outfile=./figures/first_difference
-_1D_BS_N_16-eps-converted-to.pdf ./figures/first_difference_1D_BS_N_16.eps>
-(epstopdf)             \includegraphics on input line 2179.
-Package epstopdf Info: Output file is already uptodate.
-
-<./figures/first_difference_1D_BS_N_16-eps-converted-to.pdf, id=4458, 578.16pt 
-x 433.62pt>
-File: ./figures/first_difference_1D_BS_N_16-eps-converted-to.pdf Graphic file (
-type pdf)
- <use ./figures/first_difference_1D_BS_N_16-eps-converted-to.pdf>
-Package pdftex.def Info: ./figures/first_difference_1D_BS_N_16-eps-converted-to
-.pdf used on input line 2179.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-Package epstopdf Info: Source file: <./figures/mixed_difference_order2_1D_BS_N_
-8.eps>
-(epstopdf)                    date: 2017-07-26 12:11:47
-(epstopdf)                    size: 45996 bytes
-(epstopdf)             Output file: <./figures/mixed_difference_order2_1D_BS_N_
-8-eps-converted-to.pdf>
-(epstopdf)                    date: 2017-07-26 12:37:00
-(epstopdf)                    size: 18079 bytes
-(epstopdf)             Command: <repstopdf --outfile=./figures/mixed_difference
-_order2_1D_BS_N_8-eps-converted-to.pdf ./figures/mixed_difference_order2_1D_BS_
-N_8.eps>
-(epstopdf)             \includegraphics on input line 2191.
-Package epstopdf Info: Output file is already uptodate.
-
-<./figures/mixed_difference_order2_1D_BS_N_8-eps-converted-to.pdf, id=4459, 578
-.16pt x 433.62pt>
-File: ./figures/mixed_difference_order2_1D_BS_N_8-eps-converted-to.pdf Graphic 
-file (type pdf)
-
-<use ./figures/mixed_difference_order2_1D_BS_N_8-eps-converted-to.pdf>
-Package pdftex.def Info: ./figures/mixed_difference_order2_1D_BS_N_8-eps-conver
-ted-to.pdf used on input line 2191.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-Package epstopdf Info: Source file: <./figures/mixed_difference_order2_1D_BS_N_
-16.eps>
-(epstopdf)                    date: 2017-07-26 12:42:25
-(epstopdf)                    size: 47279 bytes
-(epstopdf)             Output file: <./figures/mixed_difference_order2_1D_BS_N_
-16-eps-converted-to.pdf>
-(epstopdf)                    date: 2017-07-26 12:46:39
-(epstopdf)                    size: 17853 bytes
-(epstopdf)             Command: <repstopdf --outfile=./figures/mixed_difference
-_order2_1D_BS_N_16-eps-converted-to.pdf ./figures/mixed_difference_order2_1D_BS
-_N_16.eps>
-(epstopdf)             \includegraphics on input line 2197.
-Package epstopdf Info: Output file is already uptodate.
-
-<./figures/mixed_difference_order2_1D_BS_N_16-eps-converted-to.pdf, id=4460, 57
-8.16pt x 433.62pt>
-File: ./figures/mixed_difference_order2_1D_BS_N_16-eps-converted-to.pdf Graphic
- file (type pdf)
-
-<use ./figures/mixed_difference_order2_1D_BS_N_16-eps-converted-to.pdf>
-Package pdftex.def Info: ./figures/mixed_difference_order2_1D_BS_N_16-eps-conve
-rted-to.pdf used on input line 2197.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-Package epstopdf Info: Source file: <./figures/mixed_difference_order3_1D_BS_N_
-8.eps>
-(epstopdf)                    date: 2017-07-26 15:10:25
-(epstopdf)                    size: 42399 bytes
-(epstopdf)             Output file: <./figures/mixed_difference_order3_1D_BS_N_
-8-eps-converted-to.pdf>
-(epstopdf)                    date: 2017-07-26 15:11:57
-(epstopdf)                    size: 16205 bytes
-(epstopdf)             Command: <repstopdf --outfile=./figures/mixed_difference
-_order3_1D_BS_N_8-eps-converted-to.pdf ./figures/mixed_difference_order3_1D_BS_
-N_8.eps>
-(epstopdf)             \includegraphics on input line 2208.
-Package epstopdf Info: Output file is already uptodate.
-
-<./figures/mixed_difference_order3_1D_BS_N_8-eps-converted-to.pdf, id=4461, 578
-.16pt x 433.62pt>
-File: ./figures/mixed_difference_order3_1D_BS_N_8-eps-converted-to.pdf Graphic 
-file (type pdf)
-
-<use ./figures/mixed_difference_order3_1D_BS_N_8-eps-converted-to.pdf>
-Package pdftex.def Info: ./figures/mixed_difference_order3_1D_BS_N_8-eps-conver
-ted-to.pdf used on input line 2208.
-(pdftex.def)             Requested size: 281.85585pt x 211.39055pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[43 <./figures/1D_BS_4_steps_non_smooth_richardson_finer/error_estimate.pdf> <.
-/figures/1D_BS_4_steps_non_smooth_richardson_finer/average_running_time.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/1D_BS_4_steps_non_smooth_r
-ichardson_finer/average_running_time.pdf): PDF inclusion: multiple pdfs with pa
-ge group included in a single page
-> <./figures/1D_BS_4_steps_non_smooth_richardson_finer/level_work.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/1D_BS_4_steps_non_smooth_r
-ichardson_finer/level_work.pdf): PDF inclusion: multiple pdfs with page group i
-ncluded in a single page
-> <./figures/1D_BS_4_steps_non_smooth_richardson_finer/levels_error_rate.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/1D_BS_4_steps_non_smooth_r
-ichardson_finer/levels_error_rate.pdf): PDF inclusion: multiple pdfs with page 
-group included in a single page
->]
-Package epstopdf Info: Source file: <./figures/first_difference_1D_BS_richardso
-n_4_8_no_middle.eps>
-(epstopdf)                    date: 2017-10-28 21:17:01
-(epstopdf)                    size: 51197 bytes
-(epstopdf)             Output file: <./figures/first_difference_1D_BS_richardso
-n_4_8_no_middle-eps-converted-to.pdf>
-(epstopdf)                    date: 2017-10-29 13:32:59
-(epstopdf)                    size: 22974 bytes
-(epstopdf)             Command: <repstopdf --outfile=./figures/first_difference
-_1D_BS_richardson_4_8_no_middle-eps-converted-to.pdf ./figures/first_difference
-_1D_BS_richardson_4_8_no_middle.eps>
-(epstopdf)             \includegraphics on input line 2224.
-Package epstopdf Info: Output file is already uptodate.
-
-<./figures/first_difference_1D_BS_richardson_4_8_no_middle-eps-converted-to.pdf
-, id=4625, 578.16pt x 433.62pt>
-File: ./figures/first_difference_1D_BS_richardson_4_8_no_middle-eps-converted-t
-o.pdf Graphic file (type pdf)
-
-<use ./figures/first_difference_1D_BS_richardson_4_8_no_middle-eps-converted-to
-.pdf>
-Package pdftex.def Info: ./figures/first_difference_1D_BS_richardson_4_8_no_mid
-dle-eps-converted-to.pdf used on input line 2224.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-Package epstopdf Info: Source file: <./figures/first_difference_1D_BS_richardso
-n_8_16_no_middle.eps>
-(epstopdf)                    date: 2017-10-28 11:27:54
-(epstopdf)                    size: 53325 bytes
-(epstopdf)             Output file: <./figures/first_difference_1D_BS_richardso
-n_8_16_no_middle-eps-converted-to.pdf>
-(epstopdf)                    date: 2017-10-29 13:34:32
-(epstopdf)                    size: 23455 bytes
-(epstopdf)             Command: <repstopdf --outfile=./figures/first_difference
-_1D_BS_richardson_8_16_no_middle-eps-converted-to.pdf ./figures/first_differenc
-e_1D_BS_richardson_8_16_no_middle.eps>
-(epstopdf)             \includegraphics on input line 2230.
-Package epstopdf Info: Output file is already uptodate.
-
-<./figures/first_difference_1D_BS_richardson_8_16_no_middle-eps-converted-to.pd
-f, id=4626, 578.16pt x 433.62pt>
-File: ./figures/first_difference_1D_BS_richardson_8_16_no_middle-eps-converted-
-to.pdf Graphic file (type pdf)
-
-<use ./figures/first_difference_1D_BS_richardson_8_16_no_middle-eps-converted-t
-o.pdf>
-Package pdftex.def Info: ./figures/first_difference_1D_BS_richardson_8_16_no_mi
-ddle-eps-converted-to.pdf used on input line 2230.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-Package epstopdf Info: Source file: <./figures/mixed_difference_order2_BS_richa
-rdson_4_8_no_midd_2le.eps>
-(epstopdf)                    date: 2017-10-28 17:31:20
-(epstopdf)                    size: 45611 bytes
-(epstopdf)             Output file: <./figures/mixed_difference_order2_BS_richa
-rdson_4_8_no_midd_2le-eps-converted-to.pdf>
-(epstopdf)                    date: 2017-10-29 13:35:50
-(epstopdf)                    size: 22418 bytes
-(epstopdf)             Command: <repstopdf --outfile=./figures/mixed_difference
-_order2_BS_richardson_4_8_no_midd_2le-eps-converted-to.pdf ./figures/mixed_diff
-erence_order2_BS_richardson_4_8_no_midd_2le.eps>
-(epstopdf)             \includegraphics on input line 2242.
-Package epstopdf Info: Output file is already uptodate.
-
-<./figures/mixed_difference_order2_BS_richardson_4_8_no_midd_2le-eps-converted-
-to.pdf, id=4627, 578.16pt x 433.62pt>
-File: ./figures/mixed_difference_order2_BS_richardson_4_8_no_midd_2le-eps-conve
-rted-to.pdf Graphic file (type pdf)
-
-<use ./figures/mixed_difference_order2_BS_richardson_4_8_no_midd_2le-eps-conver
-ted-to.pdf>
-Package pdftex.def Info: ./figures/mixed_difference_order2_BS_richardson_4_8_no
-_midd_2le-eps-converted-to.pdf used on input line 2242.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-Package epstopdf Info: Source file: <./figures/mixed_difference_order2_BS_richa
-rdson_8_16_no_middle.eps>
-(epstopdf)                    date: 2017-10-28 11:41:43
-(epstopdf)                    size: 55095 bytes
-(epstopdf)             Output file: <./figures/mixed_difference_order2_BS_richa
-rdson_8_16_no_middle-eps-converted-to.pdf>
-(epstopdf)                    date: 2017-10-29 13:34:04
-(epstopdf)                    size: 22954 bytes
-(epstopdf)             Command: <repstopdf --outfile=./figures/mixed_difference
-_order2_BS_richardson_8_16_no_middle-eps-converted-to.pdf ./figures/mixed_diffe
-rence_order2_BS_richardson_8_16_no_middle.eps>
-(epstopdf)             \includegraphics on input line 2248.
-Package epstopdf Info: Output file is already uptodate.
-
-<./figures/mixed_difference_order2_BS_richardson_8_16_no_middle-eps-converted-t
-o.pdf, id=4628, 578.16pt x 433.62pt>
-File: ./figures/mixed_difference_order2_BS_richardson_8_16_no_middle-eps-conver
-ted-to.pdf Graphic file (type pdf)
-
-<use ./figures/mixed_difference_order2_BS_richardson_8_16_no_middle-eps-convert
-ed-to.pdf>
-Package pdftex.def Info: ./figures/mixed_difference_order2_BS_richardson_8_16_n
-o_middle-eps-converted-to.pdf used on input line 2248.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 2263.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 2263.
-
-
-<./figures/binary_4_steps/error_estimate.pdf, id=4629, 462.52798pt x 346.89601p
-t>
-File: ./figures/binary_4_steps/error_estimate.pdf Graphic file (type pdf)
- <use ./figures/binary_4_steps/error_estimate.pdf>
-Package pdftex.def Info: ./figures/binary_4_steps/error_estimate.pdf used on in
-put line 2289.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-<./figures/binary_4_steps/average_running_time.pdf, id=4630, 462.52798pt x 346.
-89601pt>
-File: ./figures/binary_4_steps/average_running_time.pdf Graphic file (type pdf)
-
- <use ./figures/binary_4_steps/average_running_time.pdf>
-Package pdftex.def Info: ./figures/binary_4_steps/average_running_time.pdf used
- on input line 2295.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
- [44 <./figures/1D_BS_4_steps_non_smooth_richardson_coarser/error_estimate.pdf>
- <./figures/1D_BS_4_steps_non_smooth_richardson_coarser/average_running_time.pd
-f
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/1D_BS_4_steps_non_smooth_r
-ichardson_coarser/average_running_time.pdf): PDF inclusion: multiple pdfs with 
-page group included in a single page
-> <./figures/1D_BS_4_steps_non_smooth_richardson_coarser/level_work.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/1D_BS_4_steps_non_smooth_r
-ichardson_coarser/level_work.pdf): PDF inclusion: multiple pdfs with page group
- included in a single page
-> <./figures/1D_BS_4_steps_non_smooth_richardson_coarser/levels_error_rate.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/1D_BS_4_steps_non_smooth_r
-ichardson_coarser/levels_error_rate.pdf): PDF inclusion: multiple pdfs with pag
-e group included in a single page
->]
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<./figures/binary_4_steps/level_work.pdf, id=4793, 462.52798pt x 346.89601pt>
-File: ./figures/binary_4_steps/level_work.pdf Graphic file (type pdf)
-
-<use ./figures/binary_4_steps/level_work.pdf>
-Package pdftex.def Info: ./figures/binary_4_steps/level_work.pdf used on input 
-line 2309.
-(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
-
-<./figures/binary_4_steps/levels_error_rate.pdf, id=4794, 462.52798pt x 346.896
-01pt>
-File: ./figures/binary_4_steps/levels_error_rate.pdf Graphic file (type pdf)
- <use ./figures/binary_4_steps/levels_error_rate.pdf>
-Package pdftex.def Info: ./figures/binary_4_steps/levels_error_rate.pdf used on
- input line 2315.
-(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[45 <./figures/first_difference_1D_BS_N_8-eps-converted-to.pdf> <./figures/firs
-t_difference_1D_BS_N_16-eps-converted-to.pdf> <./figures/mixed_difference_order
-2_1D_BS_N_8-eps-converted-to.pdf> <./figures/mixed_difference_order2_1D_BS_N_16
--eps-converted-to.pdf>]
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 2326.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 2326.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 2326.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 2326.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 2326.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 2326.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 2326.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 2326.
-
-
-<./figures/binary_2_4_steps/error_estimate.pdf, id=4941, 462.52798pt x 346.8960
-1pt>
-File: ./figures/binary_2_4_steps/error_estimate.pdf Graphic file (type pdf)
- <use ./figures/binary_2_4_steps/error_estimate.pdf>
-Package pdftex.def Info: ./figures/binary_2_4_steps/error_estimate.pdf used on 
-input line 2356.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-<./figures/binary_2_4_steps/average_running_time.pdf, id=4942, 462.52798pt x 34
-6.89601pt>
-File: ./figures/binary_2_4_steps/average_running_time.pdf Graphic file (type pd
-f)
- <use ./figures/binary_2_4_steps/average_running_time.pdf>
-Package pdftex.def Info: ./figures/binary_2_4_steps/average_running_time.pdf us
-ed on input line 2362.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-<./figures/binary_2_4_steps/level_work.pdf, id=4943, 462.52798pt x 346.89601pt>
-File: ./figures/binary_2_4_steps/level_work.pdf Graphic file (type pdf)
-<use ./figures/binary_2_4_steps/level_work.pdf>
-Package pdftex.def Info: ./figures/binary_2_4_steps/level_work.pdf used on inpu
-t line 2376.
-(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
-
-<./figures/binary_2_4_steps/levels_error_rate.pdf, id=4944, 462.52798pt x 346.8
-9601pt>
-File: ./figures/binary_2_4_steps/levels_error_rate.pdf Graphic file (type pdf)
- <use ./figures/binary_2_4_steps/levels_error_rate.pdf>
-Package pdftex.def Info: ./figures/binary_2_4_steps/levels_error_rate.pdf used 
-on input line 2382.
-(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[46 <./figures/mixed_difference_order3_1D_BS_N_8-eps-converted-to.pdf> <./figur
-es/first_difference_1D_BS_richardson_4_8_no_middle-eps-converted-to.pdf> <./fig
-ures/first_difference_1D_BS_richardson_8_16_no_middle-eps-converted-to.pdf>]
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 2392.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 2392.
-
-
-<./figures/binary_8_steps/error_estimate.pdf, id=5065, 462.52798pt x 346.89601p
-t>
-File: ./figures/binary_8_steps/error_estimate.pdf Graphic file (type pdf)
- <use ./figures/binary_8_steps/error_estimate.pdf>
-Package pdftex.def Info: ./figures/binary_8_steps/error_estimate.pdf used on in
-put line 2419.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-<./figures/binary_8_steps/average_running_time.pdf, id=5066, 462.52798pt x 346.
-89601pt>
-File: ./figures/binary_8_steps/average_running_time.pdf Graphic file (type pdf)
-
- <use ./figures/binary_8_steps/average_running_time.pdf>
-Package pdftex.def Info: ./figures/binary_8_steps/average_running_time.pdf used
- on input line 2425.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<./figures/binary_8_steps/level_work.pdf, id=5067, 462.52798pt x 346.89601pt>
-File: ./figures/binary_8_steps/level_work.pdf Graphic file (type pdf)
-
-<use ./figures/binary_8_steps/level_work.pdf>
-Package pdftex.def Info: ./figures/binary_8_steps/level_work.pdf used on input 
-line 2439.
-(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
-
-<./figures/binary_8_steps/levels_error_rate.pdf, id=5068, 462.52798pt x 346.896
-01pt>
-File: ./figures/binary_8_steps/levels_error_rate.pdf Graphic file (type pdf)
- <use ./figures/binary_8_steps/levels_error_rate.pdf>
-Package pdftex.def Info: ./figures/binary_8_steps/levels_error_rate.pdf used on
- input line 2445.
-(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[47 <./figures/mixed_difference_order2_BS_richardson_4_8_no_midd_2le-eps-conver
-ted-to.pdf> <./figures/mixed_difference_order2_BS_richardson_8_16_no_middle-eps
--converted-to.pdf> <./figures/binary_4_steps/error_estimate.pdf> <./figures/bin
-ary_4_steps/average_running_time.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/binary_4_steps/average_run
-ning_time.pdf): PDF inclusion: multiple pdfs with page group included in a sing
-le page
->]
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 2456.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 2456.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 2456.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 2456.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 2456.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 2456.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 2456.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 2456.
-
-
-<./figures/binary_4_8_steps/error_estimate.pdf, id=5236, 462.52798pt x 346.8960
-1pt>
-File: ./figures/binary_4_8_steps/error_estimate.pdf Graphic file (type pdf)
- <use ./figures/binary_4_8_steps/error_estimate.pdf>
-Package pdftex.def Info: ./figures/binary_4_8_steps/error_estimate.pdf used on 
-input line 2485.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-<./figures/binary_4_8_steps/average_running_time.pdf, id=5237, 462.52798pt x 34
-6.89601pt>
-File: ./figures/binary_4_8_steps/average_running_time.pdf Graphic file (type pd
-f)
- <use ./figures/binary_4_8_steps/average_running_time.pdf>
-Package pdftex.def Info: ./figures/binary_4_8_steps/average_running_time.pdf us
-ed on input line 2491.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-<./figures/binary_4_8_steps/level_work.pdf, id=5238, 462.52798pt x 346.89601pt>
-File: ./figures/binary_4_8_steps/level_work.pdf Graphic file (type pdf)
-<use ./figures/binary_4_8_steps/level_work.pdf>
-Package pdftex.def Info: ./figures/binary_4_8_steps/level_work.pdf used on inpu
-t line 2505.
-(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
-
-<./figures/binary_4_8_steps/levels_error_rate.pdf, id=5239, 462.52798pt x 346.8
-9601pt>
-File: ./figures/binary_4_8_steps/levels_error_rate.pdf Graphic file (type pdf)
- <use ./figures/binary_4_8_steps/levels_error_rate.pdf>
-Package pdftex.def Info: ./figures/binary_4_8_steps/levels_error_rate.pdf used 
-on input line 2511.
-(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[48 <./figures/binary_4_steps/level_work.pdf> <./figures/binary_4_steps/levels_
-error_rate.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/binary_4_steps/levels_erro
-r_rate.pdf): PDF inclusion: multiple pdfs with page group included in a single 
-page
-> <./figures/binary_2_4_steps/error_estimate.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/binary_2_4_steps/error_est
-imate.pdf): PDF inclusion: multiple pdfs with page group included in a single p
-age
-> <./figures/binary_2_4_steps/average_running_time.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/binary_2_4_steps/average_r
-unning_time.pdf): PDF inclusion: multiple pdfs with page group included in a si
-ngle page
->]
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 2520.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 2520.
-
-
-<./figures/binary_16_steps/error_estimate.pdf, id=5400, 462.52798pt x 346.89601
-pt>
-File: ./figures/binary_16_steps/error_estimate.pdf Graphic file (type pdf)
- <use ./figures/binary_16_steps/error_estimate.pdf>
-Package pdftex.def Info: ./figures/binary_16_steps/error_estimate.pdf used on i
-nput line 2547.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-<./figures/binary_16_steps/average_running_time.pdf, id=5401, 462.52798pt x 346
-.89601pt>
-File: ./figures/binary_16_steps/average_running_time.pdf Graphic file (type pdf
-)
- <use ./figures/binary_16_steps/average_running_time.pdf>
-Package pdftex.def Info: ./figures/binary_16_steps/average_running_time.pdf use
-d on input line 2553.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-<./figures/binary_16_steps/level_work.pdf, id=5402, 462.52798pt x 346.89601pt>
-File: ./figures/binary_16_steps/level_work.pdf Graphic file (type pdf)
-
-<use ./figures/binary_16_steps/level_work.pdf>
-Package pdftex.def Info: ./figures/binary_16_steps/level_work.pdf used on input
- line 2567.
-(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
-
-<./figures/binary_16_steps/levels_error_rate.pdf, id=5403, 462.52798pt x 346.89
-601pt>
-File: ./figures/binary_16_steps/levels_error_rate.pdf Graphic file (type pdf)
- <use ./figures/binary_16_steps/levels_error_rate.pdf>
-Package pdftex.def Info: ./figures/binary_16_steps/levels_error_rate.pdf used o
-n input line 2573.
-(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[49 <./figures/binary_2_4_steps/level_work.pdf> <./figures/binary_2_4_steps/lev
-els_error_rate.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/binary_2_4_steps/levels_er
-ror_rate.pdf): PDF inclusion: multiple pdfs with page group included in a singl
-e page
-> <./figures/binary_8_steps/error_estimate.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/binary_8_steps/error_estim
-ate.pdf): PDF inclusion: multiple pdfs with page group included in a single pag
-e
-> <./figures/binary_8_steps/average_running_time.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/binary_8_steps/average_run
-ning_time.pdf): PDF inclusion: multiple pdfs with page group included in a sing
-le page
->]
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 2586.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 2586.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 2586.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 2586.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 2586.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 2586.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 2586.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 2586.
-
-
-<./figures/binary_8_16_steps/error_estimate.pdf, id=5576, 462.52798pt x 346.896
-01pt>
-File: ./figures/binary_8_16_steps/error_estimate.pdf Graphic file (type pdf)
- <use ./figures/binary_8_16_steps/error_estimate.pdf>
-Package pdftex.def Info: ./figures/binary_8_16_steps/error_estimate.pdf used on
- input line 2615.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-<./figures/binary_8_16_steps/average_running_time.pdf, id=5577, 462.52798pt x 3
-46.89601pt>
-File: ./figures/binary_8_16_steps/average_running_time.pdf Graphic file (type p
-df)
- <use ./figures/binary_8_16_steps/average_running_time.pdf>
-Package pdftex.def Info: ./figures/binary_8_16_steps/average_running_time.pdf u
-sed on input line 2621.
-(pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-<./figures/binary_8_16_steps/level_work.pdf, id=5578, 462.52798pt x 346.89601pt
->
-File: ./figures/binary_8_16_steps/level_work.pdf Graphic file (type pdf)
- <use ./figures/binary_8_16_steps/level_work.pdf>
-Package pdftex.def Info: ./figures/binary_8_16_steps/level_work.pdf used on inp
-ut line 2635.
-(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
-
-<./figures/binary_8_16_steps/levels_error_rate.pdf, id=5579, 462.52798pt x 346.
-89601pt>
-File: ./figures/binary_8_16_steps/levels_error_rate.pdf Graphic file (type pdf)
-
- <use ./figures/binary_8_16_steps/levels_error_rate.pdf>
-Package pdftex.def Info: ./figures/binary_8_16_steps/levels_error_rate.pdf used
- on input line 2641.
-(pdftex.def)             Requested size: 223.13289pt x 167.34981pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[50 <./figures/binary_8_steps/level_work.pdf> <./figures/binary_8_steps/levels_
-error_rate.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/binary_8_steps/levels_erro
-r_rate.pdf): PDF inclusion: multiple pdfs with page group included in a single 
-page
-> <./figures/binary_4_8_steps/error_estimate.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/binary_4_8_steps/error_est
-imate.pdf): PDF inclusion: multiple pdfs with page group included in a single p
-age
-> <./figures/binary_4_8_steps/average_running_time.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/binary_4_8_steps/average_r
-unning_time.pdf): PDF inclusion: multiple pdfs with page group included in a si
-ngle page
->] [51 <./figures/binary_4_8_steps/level_work.pdf> <./figures/binary_4_8_steps/
-levels_error_rate.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/binary_4_8_steps/levels_er
-ror_rate.pdf): PDF inclusion: multiple pdfs with page group included in a singl
-e page
-> <./figures/binary_16_steps/error_estimate.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/binary_16_steps/error_esti
-mate.pdf): PDF inclusion: multiple pdfs with page group included in a single pa
-ge
-> <./figures/binary_16_steps/average_running_time.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/binary_16_steps/average_ru
-nning_time.pdf): PDF inclusion: multiple pdfs with page group included in a sin
-gle page
->] [52 <./figures/binary_16_steps/level_work.pdf> <./figures/binary_16_steps/le
-vels_error_rate.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/binary_16_steps/levels_err
-or_rate.pdf): PDF inclusion: multiple pdfs with page group included in a single
- page
-> <./figures/binary_8_16_steps/error_estimate.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/binary_8_16_steps/error_es
-timate.pdf): PDF inclusion: multiple pdfs with page group included in a single 
-page
-> <./figures/binary_8_16_steps/average_running_time.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/binary_8_16_steps/average_
-running_time.pdf): PDF inclusion: multiple pdfs with page group included in a s
-ingle page
->]
-Overfull \hbox (35.16345pt too wide) in paragraph at lines 2920--2921
-[]\OT1/cmr/m/n/10.95 Given $(\OT1/cmr/bx/n/10.95 X[]\OML/cmm/m/it/10.95 ; [] ; 
-\OT1/cmr/bx/n/10.95 X[]\OT1/cmr/m/n/10.95 ) := \OMS/cmsy/m/n/10.95 X 2 D$ \OT1/
-cmr/m/n/10.95 with weights $([][]\OML/cmm/m/it/10.95 ; [] ; [][]\OT1/cmr/m/n/10
-.95 )$ , add grid points $(\OML/cmm/m/it/10.95 y[]\OT1/cmr/m/n/10.95 (\OMS/cmsy
-/m/n/10.95 X\OT1/cmr/m/n/10.95 )\OML/cmm/m/it/10.95 ; [] ; y[]\OT1/cmr/m/n/10.9
-5 (\OMS/cmsy/m/n/10.95 X\OT1/cmr/m/n/10.95 )) =
- []
-
-[53 <./figures/binary_8_16_steps/level_work.pdf> <./figures/binary_8_16_steps/l
-evels_error_rate.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/binary_8_16_steps/levels_e
-rror_rate.pdf): PDF inclusion: multiple pdfs with page group included in a sing
-le page
->]
-Overfull \hbox (8.02452pt too wide) in paragraph at lines 2944--2950
-\OT1/cmr/m/n/10.95 the func-tion $^^H$.) We as-sume that $\OML/cmm/m/it/10.95 Z
-$ \OT1/cmr/m/n/10.95 is al-ready ro-tated such that $\OML/cmm/m/it/10.95 h\OT1/
-cmr/m/n/10.95 (\OML/cmm/m/it/10.95 Z[]\OT1/cmr/m/n/10.95 ) [][]= \OML/cmm/m/it/
-10.95 E []$
- []
-
-[54]
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 3001.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 3001.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 3001.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 3001.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\delta' on input line 3001.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 3001.
-
-[55]
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 3011.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 3011.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 3011.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 3011.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 3011.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 3011.
-
-[56]
-Overfull \hbox (61.64166pt too wide) in paragraph at lines 3056--3057
-[]\OT1/cmr/m/n/10.95 Given $(\OT1/cmr/bx/n/10.95 X[]\OML/cmm/m/it/10.95 ; [] ; 
-\OT1/cmr/bx/n/10.95 X[]\OT1/cmr/m/n/10.95 ) := \OMS/cmsy/m/n/10.95 X 2 D$ \OT1/
-cmr/m/n/10.95 with weights $([][]\OML/cmm/m/it/10.95 ; [] ; [][]\OT1/cmr/m/n/10
-.95 )$ , add grid $[] = (\OML/cmm/m/it/10.95 ^^P[]\OT1/cmr/m/n/10.95 (\OML/cmm/
-m/it/10.95 y[]\OT1/cmr/m/n/10.95 (\OMS/cmsy/m/n/10.95 X\OT1/cmr/m/n/10.95 ))\OM
-L/cmm/m/it/10.95 ; [] ; ^^P[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 y[]\OT1/cm
-r/m/n/10.95 (\OMS/cmsy/m/n/10.95 X\OT1/cmr/m/n/10.95 )))$
- []
-
-
-Overfull \hbox (56.19179pt too wide) in paragraph at lines 3057--3061
-[]\OT1/cmr/m/n/10.95 Construct the adap-tive col-lo-ca-tion to com-pute the in-
-te-gral of $[]$ ($[]$) that ap-prox-i-mates $\OML/cmm/m/it/10.95 E\OT1/cmr/m/n/
-10.95 [\OML/cmm/m/it/10.95 g\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 ^^^\OT1/cmr
-/m/n/10.95 (\OML/cmm/m/it/10.95 Z[]; [] ; Z[]\OT1/cmr/m/n/10.95 ))]$
- []
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[57] [58] [59]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 3162.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 3162.
+) [26] [27]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 3308.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 3308.
  (./main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 3162.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 3162.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 3308.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 3308.
 
-Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 555E6BFDCD05C87C1677E80289495132;20487.
+
+
+Package rerunfilecheck Warning: File `main.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `main.out':
+(rerunfilecheck)             Before: 6DE2C6A783979756061E4639D0E53DA0;17663
+(rerunfilecheck)             After:  4905E28BA5CD2C93A16914F0C9A6E9CB;5641.
+
+LaTeX Warning: There were undefined references.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 3162.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 3308.
  ) 
 Here is how much of TeX's memory you used:
- 26532 strings out of 493014
- 491883 string characters out of 6133351
- 558781 words of memory out of 5000000
- 29240 multiletter control sequences out of 15000+600000
+ 25952 strings out of 493014
+ 460638 string characters out of 6133351
+ 557460 words of memory out of 5000000
+ 28826 multiletter control sequences out of 15000+600000
  20088 words of font info for 79 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 66i,11n,96p,3237b,606s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
-></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
-</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></
-usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></u
-sr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></us
-r/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr
-/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/l
-ocal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/loc
-al/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local
-/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local
-/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/t
-exlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/tex
-live/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texli
-ve/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/
-2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/201
-6/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2016/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2016/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2016/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2016/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2016/texmf-d
-ist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (59 pages, 2036147 bytes).
+ 66i,12n,96p,3237b,606s stack positions out of 5000i,500n,10000p,200000b,80000s
+pdfTeX warning (dest): name{subsubsection.I.1.2} has been referenced but does
+ not exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsubsection.I.1.1} has been referenced but does n
+ot exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.I.1} has been referenced but does not ex
+ist, replaced by a fixed one
+
+pdfTeX warning (dest): name{appendix.I} has been referenced but does not exist,
+ replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.H.6} has been referenced but does not ex
+ist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.H.5} has been referenced but does not ex
+ist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.H.4} has been referenced but does not ex
+ist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.H.3} has been referenced but does not ex
+ist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.H.2} has been referenced but does not ex
+ist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.H.1} has been referenced but does not ex
+ist, replaced by a fixed one
+
+pdfTeX warning (dest): name{appendix.H} has been referenced but does not exist,
+ replaced by a fixed one
+
+pdfTeX warning (dest): name{appendix.G} has been referenced but does not exist,
+ replaced by a fixed one
+
+pdfTeX warning (dest): name{appendix.F} has been referenced but does not exist,
+ replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.E.13} has been referenced but does not e
+xist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.E.12} has been referenced but does not e
+xist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.E.11} has been referenced but does not e
+xist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.E.10} has been referenced but does not e
+xist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.E.9} has been referenced but does not ex
+ist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.E.8} has been referenced but does not ex
+ist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.E.7} has been referenced but does not ex
+ist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.E.6} has been referenced but does not ex
+ist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.E.5} has been referenced but does not ex
+ist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.E.4} has been referenced but does not ex
+ist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.E.3} has been referenced but does not ex
+ist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.E.2} has been referenced but does not ex
+ist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.E.1} has been referenced but does not ex
+ist, replaced by a fixed one
+
+pdfTeX warning (dest): name{appendix.E} has been referenced but does not exist,
+ replaced by a fixed one
+
+pdfTeX warning (dest): name{appendix.D} has been referenced but does not exist,
+ replaced by a fixed one
+
+pdfTeX warning (dest): name{subsubsection.C.0.1} has been referenced but does n
+ot exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{appendix.C} has been referenced but does not exist,
+ replaced by a fixed one
+
+</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><
+/usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></
+usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></us
+r/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr
+/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/
+local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/l
+ocal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/loc
+al/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local
+/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/t
+exlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local/t
+exlive/2016/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib6.pfb></usr/loc
+al/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib8.pfb></usr
+/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/l
+ocal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/loc
+al/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local
+/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/te
+xlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texli
+ve/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/
+2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2
+016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/201
+6/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2016/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2016/t
+exmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on main.pdf (27 pages, 821350 bytes).
 PDF statistics:
- 6419 PDF objects out of 7423 (max. 8388607)
- 2716 compressed objects within 28 object streams
- 309 named destinations out of 1000 (max. 500000)
- 1215 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1903 PDF objects out of 2073 (max. 8388607)
+ 927 compressed objects within 10 object streams
+ 182 named destinations out of 1000 (max. 500000)
+ 627 words of extra memory for PDF output out of 10000 (max. 10000000)
 
