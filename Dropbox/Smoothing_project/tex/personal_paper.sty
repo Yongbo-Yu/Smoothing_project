@@ -1,0 +1,116 @@
+\ProvidesPackage{personal_paper}
+
+\usepackage[leqno]{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{calc} % simple arithmetics in latex
+\usepackage{txfonts}
+\usepackage{enumitem}
+\usepackage{ifpdf} % define \ifpdf
+\usepackage{ifthen}
+\usepackage{braket}
+\usepackage{xcolor}
+\usepackage[all]{xy}
+\ifpdf
+  \usepackage[pdftex]{hyperref}
+  \hypersetup{plainpages=false,unicode=true,pdffitwindow=true}
+\else
+  \usepackage[dvips]{hyperref}
+\fi
+
+% theoremstyles
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{algorithm}[theorem]{Algorithm} % or seperate counting for
+                                % algorithms ?
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{question}{Question}
+
+% mathematical commands
+
+% symbols for important sets
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\dom}{\mathcal{D}}
+\newcommand{\Rplus}{[0,\infty[}
+\newcommand{\Ocal}{\mathcal{O}}
+
+% abbreviations for often used latex commands
+\newcommand{\f}[2]{\frac{#1}{#2}}
+\newcommand{\pa}{\partial}
+\newcommand{\half}{\f{1}{2}}
+\newcommand{\pderiv}[1]{\f{\pa}{\pa #1}}
+
+% often used variables
+\newcommand{\dx}{\Delta x}
+\newcommand{\dt}{\Delta t}
+
+% often used variables with overline
+\newcommand{\barX}{\overline{X}}
+\newcommand{\bartau}{\overline{\tau}}
+\newcommand{\bartheta}{\overline{\theta}}
+\newcommand{\barp}{\overline{p}}
+\newcommand{\barrho}{\overline{\rho}}
+\newcommand{\baru}{\overline{u}}
+\newcommand{\barx}{\overline{x}}
+\newcommand{\barlambda}{\overline{\lambda}}
+\newcommand{\barH}{\overline{H}}
+\newcommand{\barkappa}{\overline{\kappa}}
+\newcommand{\barXi}{\overline{\Xi}}
+\newcommand{\barsigma}{\overline{\sigma}}
+
+% often used variables with tilde
+\newcommand{\tV}{\widetilde{V}}
+\newcommand{\tp}{\widetilde{p}}
+\newcommand{\tm}{\widetilde{m}}
+\newcommand{\tS}{\widetilde{S}}
+
+% new composed latex constructs
+\newcommand{\abs}[1]{\left\lvert#1\right\rvert} % absolute value
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert} % norm
+\newcommand{\indic}[1]{\mathbf{1}_{#1}} % indicator function
+\newcommand{\ip}[2]{\left\langle #1\,,#2\right\rangle} % inner product (< , >)
+\newcommand{\rip}[2]{\left( #1\,,#2 \right)} % ip with round brackets ( ( , ) )
+\newcommand{\floor}[1]{\left\lfloor#1\right\rfloor} % floor command
+\newcommand{\ceil}[1]{\left\lceil#1\right\rceil} % ceiling command
+\newcommand{\angbrack}[1]{\left\langle #1 \right\rangle} % angle brackets
+
+% often used bold characters
+\newcommand{\fB}{\mathbf{B}}
+\newcommand{\fW}{\mathbf{W}}
+\newcommand{\fxi}{\mathbf{\xi}}
+\newcommand{\fomega}{\boldsymbol{\omega}}
+
+% often used sets
+\newcommand{\Cbv}{C^{\text{1-var}}}
+\newcommand{\Heis}{\mathbb{H}}
+\newcommand{\h}{\mathfrak{h}}
+
+% new mathematical operators
+
+\DeclareMathOperator{\const}{const}
+\DeclareMathOperator{\tol}{TOL}
+\DeclareMathOperator{\dist}{dist}
+\DeclareMathOperator*{\argmin}{arg\, min}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\cor}{cor}
+\DeclareMathOperator{\var}{var}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\diag}{diag}
+
+% A left hand side super- or subscript; usage: \Prefix^{h}{W} or
+% \Prefix_{h}{W}
+\newcommand{\Prefix}[3]{\vphantom{#3}#1#2#3}
