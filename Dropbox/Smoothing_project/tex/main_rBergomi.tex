@@ -343,8 +343,36 @@ We also discuss the  error bounds in Section \ref{sec: Discussion about error bo
 
 \subsection{Details of the MISC}\label{sec:Details of the MISC}
 
+We focus on solving the problem of  approximating the expected value of $\expt{f(y)}$ on a tensorization of quadrature formulae over the stochastic domain, $\Gamma$. Assuming that $f(y)$ is a continuous function (analytic) over $\Gamma$. A quadrature approach is very adequate.
 
-In the multi-variate case, we are left with a $2N$- dimensional Gaussian random inputs, which are chosen independently, resulting in  $2N$ numerical parameters, which we use as the basis of the multi-index construction, reflecting the fact that $W^1_i$ and $W^2_j$ can vary independently of each other regardless of $i \neq j$ or $i = j$. For the sake
+Let us define $\beta \le 1$ be an integer positive value referred to as a "stochastic discretization level", and $m: \nset \rightarrow \nset$ be a strictly increasing function with $m(0)=0$ and $m(1)=1$, that we call a "level-to-nodes function". At level $\beta$, we consider a set of $m(\beta)$ distinct quadrature points in $(-\infty; \infty)$, $\mathcal{H}^{m(\beta)}=\{y^1_\beta,y^2_\beta,\dots,y_\beta^{m(\beta)}\} \subset [-\infty,\infty]$, and a set of quadrature weights, $\mathcal{W}^{m(\beta)}=\{\omega^1_\beta,\omega^2_\beta,\dots,\omega_\beta^{m(\beta)}\}$. We also let $C^0((-\infty,\infty))$ be the set of real-valued continuous functions over $(-\infty, \infty)$. We then define the quadrature operator as
+
+
+\begin{equation}
+Q(m(\beta)):C^0((-\infty,\infty)) \rightarrow \rset, \quad Q(m(\beta))[f]= \sum_{j=1}^{m(\beta)} f(y^j_\beta) \omega_\beta^j.
+\end{equation}
+
+
+
+
+
+
+In the multi-variate case $\Gamma$ is defined as a countable tensor
+product of intervals. Therefore,  we define, for any definitely supported multi-index $\boldsymbol{\beta} \in \mathcal{L}_+$
+
+$$Q^{m(\boldsymbol{\beta})}: \Gamma \rightarrow \rset,\quad  Q^{m(\boldsymbol{\beta})}= \bigotimes_{n \ge 1} Q^{m(\beta_n)} $$
+
+where the $n$-th quadrature operator is understood to act only on the $n$-th variable of $f$. Practically, we obtain the value of $Q^{m(\boldsymbol{\beta})}[f]$  by considering the tensor grid $\mathcal{T}^{m(\boldsymbol{\beta})}= \times_{n \ge 1} \mathcal{H}^{m(\beta_n)}$ with cardinality $\#\mathcal{T}^{m(\boldsymbol{\beta})}=\prod_{n \ge 1} m (\beta_n)$ and computing
+
+$$ Q^{\mathcal{T}^{m(\boldsymbol{\beta})}}[f]= \sum_{j=1}^{\#\mathcal{T}^{m(\boldsymbol{\beta})}} f(\hat{y}_j) \bar{\omega}_j$$
+where $\hat{y}_j \in \mathcal{T}^{m(\boldsymbol{\beta})}$ amd $\bar{\omega}_j$ are (infinite) products of weights of the univariate quadrature rules. We Note that it is essential in this construction that $m(1)=1$ so that the cardinality of $\mathcal{T}^{m(\boldsymbol{\beta})}$ is finite for any $\boldsymbol{\beta} \in \mathcal{L}_+$ and $ \omega_{\beta_n}^1=1$ whenever $n = 1$, so that all weights, $\bar{\omega}_j$, are bounded.
+
+We mention that the quadrature points are chosen to optimize the convergence properties of the quadrature error.  
+
+A direct approximation $\expt{f} \approx Q^{m(\boldsymbol{\beta})}[f]$ is not an appropriate option  due to the well-known "curse of dimensionality" effect. We use multi-index stochastic collocation (MISC) as it was suggested  in \cite{haji2016multi}. MISC as a hierarchical adaptive quadrature strategy that uses  stochastic discretizations  and classic sparsification approach to obtain an effective approximation scheme for $\expt{f}$. 
+
+
+In our setting, we are left with a $2N$- dimensional Gaussian random inputs, which are chosen independently, resulting in  $2N$ numerical parameters, which we use as the basis of the multi-index construction, reflecting the fact that $W^1_i$ and $W^2_j$ can vary independently of each other regardless of $i \neq j$ or $i = j$. For the sake
 of concreteness, let $l \in \{1, \ldots, 2N\}$ and set
 \begin{equation}
 m_l \coloneqq
@@ -354,9 +382,9 @@ W^2_{l-N}, & N+1 \le l \le 2N.
 \end{cases}
 \end{equation}
 For a multi-index $\ell = (l_i)_{i=1}^{2N} \in \mathbb{N}^{2N}$ we denote by
-$Q^N_\ell \coloneqq Q(m_{\ell})$ the result of a discretized
+$Q^N_\ell \coloneqq Q^N(m_{\ell})$ the result of a discretized
 integral, using $N$ time steps , with parameters $m_\ell \coloneqq (m_{l_i})_{i=1}^{2N}$. We further define the set of
-differences $\Delta Q_\ell$ as follows: for a single index $1 \le i \le 2N$,
+differences $\Delta Q^N_\ell$ as follows: for a single index $1 \le i \le 2N$,
 let
 \begin{equation}
 \Delta_i Q^N_\ell \coloneqq \left\{ 
@@ -411,7 +439,7 @@ The construction of $\mathcal{I}$ will be done by profit thresholding, i.e.,
 for a certain threshold value $T$, we add a multi-index $\ell$ to
 $\mathcal{I}$ provided that
 \begin{equation*}
-	\log\left( \frac{\abs{\Delta Q^N_\ell}}{W_\ell} \right) \le T.
+	\log\left( \frac{\abs{\Delta Q^N_\ell}}{W^N_\ell} \right) \le T.
 \end{equation*}
 (Actually, we take the error estimate instead of the true error.)
 
@@ -447,19 +475,31 @@ Let us define $\tilde{\mathbf{W}}^1$ as uncorrelated varaibles and the Cholesky 
 %
 \subsection{Brownian bridge construction}\label{sec:Brwonian bridge construction}
 
-
-
-
-In the simulation, we generate the stock prices using Brownian bridge (BB) in the following way: first generates the final value $W_d$ , then sample $W_{[d/2]}$ conditional on the values of $W_d$ and $W_0$, and proceed by progressively filling in intermediate values. Here, $[x]$ denotes the greatest integer less than or equal to $x$. In particular, if $d$ is a power of $2$, then
-BB generates the Brownian motion as
-\begin{align}\label{BB}
-	W_d&=\sqrt{T}Z_1\nonumber\\
-	W_{d/2}&= \frac{1}{2}(W_{0}+W_{d})+\sqrt{T/4}Z_2\nonumber\\
-	W_{d/4}&=\frac{1}{2} (W_{0}+W_{d/2})+\sqrt{T/8}Z_3\nonumber\\
+Let us denote $\{t_i\}_{i=0}^{N}$ the grid of time steps, then the BB construction \cite{glasserman2004monte} consists of the following: given a past value $B_{t_i}$ and a future value $B_{t_k}$, the value $B_{t_j}$ (with $t_i < t_j < t_k$) can be generated according to the formula:
+\begin{equation}
+B_{t_j}=(1-\rho) B_{t_i}+\rho B_{t_k}+ \sqrt{\rho (1-\rho)(k-i) \Delta t} z, \: z \sim \mathcal{N}(0,1) \COMMA
+\end{equation}
+where $\rho=\frac{j-i}{k-i}$.  In particular, if $N$ is a power of $2$, then given $B_0=0$, BB generates the Brownian motion at times $T, T/2,T/4,3T/4,\dots$ according
+\begin{align}\label{eq:BB construction}
+	B_T&=\sqrt{T}z_1\nonumber\\
+	B_{T/2}&= \frac{1}{2}(B_{0}+B_{T})+\sqrt{T/4}z_2= \frac{\sqrt{T}}{2} z_1+\frac{\sqrt{T}}{2} z_2\nonumber\\
+	B_{T/4}&=\frac{1}{2} (B_{0}+B_{T/2})+\sqrt{T/8}z_3= \frac{\sqrt{T}}{4} z_1+\frac{\sqrt{T}}{4} z_2+\sqrt{T/8}z_3\nonumber\\
 	\vdots \nonumber\\
-	W_{d-1}&= \frac{1}{2}(W_{d-2}+W_{d})+\sqrt{T/2d}Z_d,
 \end{align}
-where $Z_j$ are independent standard normal variables. 
+where $\{z_j\}_{j=1}^{N}$ are independent standard normal variables.  In BB construction given by \eqref{eq:BB construction}, the most important values that determine the large scale structure of Brownian motion are the first components of $\mathbf{z} = (z_1,\dots,z_N)$.
+
+
+
+%In the simulation, we generate the stock prices using Brownian bridge (BB) in the following way: first generates the final value $W_d$ , then sample $W_{[d/2]}$ conditional on the values of $W_d$ and $W_0$, and proceed by progressively filling in intermediate values. Here, $[x]$ denotes the greatest integer less than or equal to $x$. In particular, if $d$ is a power of $2$, then
+%BB generates the Brownian motion as
+%\begin{align}\label{BB}
+%	W_d&=\sqrt{T}Z_1\nonumber\\
+%	W_{d/2}&= \frac{1}{2}(W_{0}+W_{d})+\sqrt{T/4}Z_2\nonumber\\
+%	W_{d/4}&=\frac{1}{2} (W_{0}+W_{d/2})+\sqrt{T/8}Z_3\nonumber\\
+%	\vdots \nonumber\\
+%	W_{d-1}&= \frac{1}{2}(W_{d-2}+W_{d})+\sqrt{T/2d}Z_d,
+%\end{align}
+%where $Z_j$ are independent standard normal variables. 
 
 
 
