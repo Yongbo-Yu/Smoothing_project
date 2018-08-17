@@ -460,8 +460,8 @@ where $N$ is the number of time steps. We can rewrite the previous expression as
 where $h(\mathbf{W}^1;\hat{\mathbf{W}}^1,\Psi)$ is a multivariate normal density with first and second order moments given by
 
 \begin{align}\label{eq:Gaussian moments}
-	\hat{\mathbf{W}}^1&=\operatorname{arg} \underset{\mathbf{W}^1 \in \rset^{N} }{\max}	[ \log I(\mathbf{W}^1;\mathbf{W}^2)] \\
-	\Psi &=\left(- \frac{\partial^2[\log I(\mathbf{W}^1;\mathbf{W}^2)]}{\partial (\mathbf{W}^1)^{T} \mathbf{W}^1} \right)^{-1}_{\mathbf{W}^1=\hat{\mathbf{W}}^1}
+	\hat{\mathbf{W}}^1&=\operatorname{arg} \underset{\mathbf{W}^1 \in \rset^{N} }{\max}	[ \log I(\mathbf{W}^1;\mathbf{W}^2=\mathbf{0})] \\
+	\Psi &=\left(- \frac{\partial^2[\log I(\mathbf{W}^1;\mathbf{W}^2=\mathbf{0})]}{\partial (\mathbf{W}^1)^{T} \mathbf{W}^1} \right)^{-1}_{\mathbf{W}^1=\hat{\mathbf{W}}^1}
 \end{align}
 
 Let us define $\tilde{\mathbf{W}}^1$ as uncorrelated varaibles and the Cholesky factorization of $\Psi$ is given by $\Psi=L L^{T}$, and $\bar{\mathbf{W}}^1=\sqrt{2} L \tilde{\mathbf{W}}^1+\hat{\mathbf{W}}^1$ then Eq \ref{eq: importance sampling} becomes 
@@ -1299,7 +1299,9 @@ From figure \ref{fig:Weak_rate_H_007_without_rich_change_meausre}), we see that 
 \end{figure}
 \newpage
 \subsubsection*{With Richardson extrapolation (level 1)}
-From figure \ref{fig:Weak_rate_H_007_with_rich_change_measure} , we see that  for $H=0.07$, we get a weak error of order $\Delta t^2$. The upper and lower bounds are $95\%$ confidence interval.
+From figure \ref{fig:Weak_rate_H_007_with_rich_change_measure} , we see that  for $H=0.07$, we get a weak error of order $\Delta t^2$. The upper and lower bounds are $95\%$ confidence interval. However, comparing to figure \ref{fig:Weak_rate_H_007_with_rich}, I think we have issue since we got worser weak error values after the change of measure. We need to double check this stage.
+
+
 \begin{figure}[h!]
 	\centering
 	\begin{subfigure}{.4\textwidth}
