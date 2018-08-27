@@ -1,3 +1,4 @@
+# In this file, we plot the weak convergence rate for Richardson extrapolation (level2) after doing the partial change of measure
 import numpy as np
 import time
 import scipy.stats as ss

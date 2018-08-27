@@ -1,3 +1,5 @@
+# In this file, we plot the weak convergence rate for MC without Richardson extrapolation after doing the partial change of measure
+
 import numpy as np
 import time
 import scipy.stats as ss
@@ -267,6 +269,9 @@ class Problem(object):
 
     
         QoI=(self.z.ComputePayoffRT_single(W1,W1perp))*(np.exp(-0.5*bar_y.dot(bar_y)))*cst
+
+
+        
 
         return QoI
 

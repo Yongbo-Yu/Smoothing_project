@@ -55,28 +55,9 @@ class Problem_measure_change(object):
         self.d=int(np.log2(self.N)) #power 2 number steps
 
         
-    #    for i in range(0,self.N):
-     #       self.y1perp[i] = np.random.normal(loc=0.0, scale=1.0)
-        
-
-       
-
-      
-        
-
-    def BeginRuns(self,ind, N):
-        self.elapsed_time=0.0
-        self.nelem = np.array(self.params.h0inv * self.params.beta**(np.array(ind)), dtype=np.uint32)
-        if self.nested:
-            self.nelem -= 1
-        assert(len(self.nelem) == self.GetDim())
-        return self.nelem
 
 
-    def EndRuns(self):
-        elapsed_time=self.elapsed_time;
-        self.elapsed_time=0.0;
-        return elapsed_time;
+    
 
     # this computes the value of the objective function (given by  objfun) at quad points
     def SolveFor(self, Y):
@@ -95,7 +76,7 @@ class Problem_measure_change(object):
         # y12=np.zeros_like(y11)
         # y=np.array([y12,y12,y11,y12])  # 2 steps
 
-        y=np.array([y12,y12,y12,y12,y12,y12,y12,y11,y12,y12,y12,y12,y12,y12,y12,y12])   # 4 steps
+        y=np.array([y12,y12,y12,y12,y12,y12,y12,y11,y12,y12,y12,y12,y12,y12,y12,y12])   # 8 steps
         #hierarchical
         yperp_1=y[self.N+1:2*self.N]
         yperp1=y[self.N]

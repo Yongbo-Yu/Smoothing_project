@@ -24,7 +24,7 @@ dim = args.qoi_dim
 
 #case of 1 D problem
 if dim == 0:
-  base = "mimc_run_richardson_level2.py -mimc_TOL {TOL} -mimc_min_dim {the_dim} -qoi_dim {the_dim} -ksp_rtol 1e-25 -ksp_type gmres -mimc_M0 1 \
+  base = "mimc_run_richardson.py -mimc_TOL {TOL} -mimc_min_dim {the_dim} -qoi_dim {the_dim} -ksp_rtol 1e-25 -ksp_type gmres -mimc_M0 1 \
   -mimc_beta {beta} -mimc_gamma {gamma} -mimc_h0inv {h0inv} \
   -mimc_bayes_fit_lvls 3 -mimc_moments 1 -mimc_bayesian False".format(bayesian="{bayesian}", TOL="{TOL}", the_dim=dim, seed="{seed}",
              h0inv="2",  gamma="1",  beta="2")
@@ -37,7 +37,7 @@ base += " ".join(unknowns)
 
 if not args.db:
     cmd_single = "python " + base + " -mimc_verbose 10 -db True -db_tag 1DBS_4steps_smooth_payoff2_10_5 " #verbose >0 detailed printing results
-    print(cmd_single.format(TOL=0.1))
+    print(cmd_single.format(TOL=0.01))
 else:
     #cmd_multi = "python " + base + " -mimc_verbose 0 -db True -db_tag test_001 "
     #print cmd_multi.format(tag=args.db_tag.format(dim), TOL=1e-10)

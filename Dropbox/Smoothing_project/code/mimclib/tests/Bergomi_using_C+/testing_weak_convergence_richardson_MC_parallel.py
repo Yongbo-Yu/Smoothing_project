@@ -1,3 +1,5 @@
+# In this file, we plot the weak convergence rate for MC with Richardson extrapolation(level 1) without doing the partial change of measure
+
 import numpy as np
 import time
 
