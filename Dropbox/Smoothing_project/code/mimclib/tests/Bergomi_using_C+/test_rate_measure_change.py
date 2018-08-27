@@ -1,23 +1,29 @@
 #!/usr/bin/env python
 
-import math
+# In this file, we plot the first and second differences for the  rBergomi integrand  without Richardson extrapolation without
+# doing the partial change of measure
+
+
+
+#modules used
+
+#plotting modules
 import matplotlib
 import matplotlib.pyplot as plt
 from matplotlib.pyplot import figure, show
 from matplotlib.ticker import MaxNLocator
 
 
-import warnings
-import os.path
+
 import numpy as np
-import time
-import sys
 
 
-import scipy.stats as ss
+#Rbergomi modules
 import fftw3
 import RBergomi
 from RBergomi import *
+
+#module used to compute the hessian
 import numdifftools as nd
 
 
@@ -29,7 +35,7 @@ class Problem(object):
 # attributes
     random_gen=None;
     elapsed_time=0.0;
-    N=8 # Number of time steps N, discretization resolution
+    N=4 # Number of time steps N, discretization resolution
   
     # for the values of below paramters, we need to see the paper as well check with Christian 
     x=0.235**2;   # this will provide the set of xi parameter values 
@@ -81,24 +87,7 @@ class Problem(object):
         e_vals, e_vecs = np.linalg.eig(Hfun_mode)
         self.L=e_vecs.dot(np.diag(np.sqrt(e_vals)))
 
-       
-
-      
-        
-
-    def BeginRuns(self,ind, N):
-        self.elapsed_time=0.0
-        self.nelem = np.array(self.params.h0inv * self.params.beta**(np.array(ind)), dtype=np.uint32)
-        if self.nested:
-            self.nelem -= 1
-        assert(len(self.nelem) == self.GetDim())
-        return self.nelem
-
-
-    def EndRuns(self):
-        elapsed_time=self.elapsed_time;
-        self.elapsed_time=0.0;
-        return elapsed_time;
+    
 
     # this computes the value of the objective function (given by  objfun) at quad points
     def SolveFor(self, Y):
@@ -406,16 +395,16 @@ def mixed_difference_order2_rate_plotting(d):
     marker=['>', 'v', '^', 'o', '*','+','-',':']
     ax = figure().gca()
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))
-    for k in range(0,8,1):  
+    for k in range(0,4,1):  
         if k==d:
             print('Hello')
             continue
         else:    
             mylist=[]
             mylist_weight=[]
-            bias=np.zeros(5)
-            points=np.zeros(5)
-            indices=np.zeros(5,dtype=int)
+            bias=np.zeros(6)
+            points=np.zeros(6)
+            indices=np.zeros(6,dtype=int)
             fixed_points=fnKnots(0)[0]
             fixed_weight=fnKnots(0)[1]
             # mylist[:prb.N]=[fixed_points for i in range(0,prb.N)]
@@ -423,7 +412,7 @@ def mixed_difference_order2_rate_plotting(d):
             mylist[:2*prb.N]=[fixed_points for i in range(0,2*prb.N)]# second way
             mylist_weight[:2*prb.N]=[fixed_weight for i in range(0,2*prb.N)] #second way
             j=0
-            for pts in range(2,7):
+            for pts in range(2,8):
                 fine_ind_points=fnKnots(pts)[0]
                 fine_ind_weights=fnKnots(pts)[1]
                 coarse_ind_points=fnKnots(pts-1)[0]
@@ -506,17 +495,17 @@ def mixed_difference_order2_rate_plotting(d):
         
         plt.plot(indices, bias,linewidth=2.0,label=r'$\bar{\beta}=$ %s' % np.array_str(QoI_beta),linestyle = '--', marker=marker[d/4]) 
         #plt.plot(indices, bias,linewidth=2.0,linestyle = '--', marker=marker[d/4]) 
-        plt.plot(indices, fit,linewidth=2.0,label=r'rate= %s' % format(z[0]  , '.2f'), linestyle = '--', marker='o') 
+        plt.plot(indices, fit*100,linewidth=2.0,label=r'rate= %s' % format(z[0]  , '.2f'), linestyle = '--', marker='o') 
          
         plt.yscale('log')
         #plt.xscale('log')
         plt.xlabel('k',fontsize=14)
         plt.ylabel(r'$\mid \Delta E_{\mathbf{1}+k \bar{\beta}} \mid $',fontsize=14)  
     plt.legend(loc='lower left')
-    plt.savefig('./results/mixed_difference_order2_rbergomi_8steps_H_007_K_1_totally_hierarch_with_rate_W1_6_change_measure_part_spec.eps', format='eps', dpi=1000)       
+    plt.savefig('./results/mixed_difference_order2_rbergomi_4steps_H_007_K_1_totally_hierarch_with_rate_W1_change_measure_part_spec.eps', format='eps', dpi=1000)       
     
     
 
 
 #first_difference_rate_plotting()
-mixed_difference_order2_rate_plotting(5)
+mixed_difference_order2_rate_plotting(0)

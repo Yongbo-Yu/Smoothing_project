@@ -906,7 +906,7 @@ From figures (\ref{fig:Weak_rate_H_043_without_rich} and \ref{fig:Weak_rate_H_00
 		\label{fig:sub4}
 	\end{subfigure}
 	
-	\caption{The rate of convergence of the weak error for $H=0.07$ $K=1$, without Richardson extraploation, using MC with $M=10^5$: a) $\abs{\expt{g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{g(X_{\Delta t})-g(X_{\Delta t/2})}}$ }
+	\caption{The rate of convergence of the weak error for $H=0.07$ $K=1$, without Richardson extraploation, using MC with $M=10^6$: a) $\abs{\expt{g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{g(X_{\Delta t})-g(X_{\Delta t/2})}}$ }
 	\label{fig:Weak_rate_H_007_without_rich}
 \end{figure}
 \newpage
@@ -1278,7 +1278,8 @@ In this section, I include the results of weak error rates for the case with cha
 
 
 \subsubsection*{Without Richardson extrapolation}
-From figure \ref{fig:Weak_rate_H_007_without_rich_change_meausre}), we see that for $H=0.07$, we get a weak error of order $\Delta t$. The upper and lower bounds are $95\%$ confidence interval.
+From figure \ref{fig:Weak_rate_H_007_without_rich_change_meausre}), we see that for $H=0.07$, we get a weak error of order $\Delta t$. The upper and lower bounds are $95\%$ confidence interval. In table \ref{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.07$_change_measure}, we show the values of relative weak error. it is clear that compared to the values observed in table \ref{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.07$}, we almost observe the same behavior, which may tell us that the change of measure procedure maybe not needed to improve results since we are adding complexity without observing gains in terms of the weak error.
+ 
 \begin{figure}
 	\centering
 	\begin{subfigure}{.4\textwidth}
@@ -1297,10 +1298,26 @@ From figure \ref{fig:Weak_rate_H_007_without_rich_change_meausre}), we see that 
 	\caption{The rate of convergence of the weak error for $H=0.07$ $K=1$, without Richardson extraploation, using MC with $M=10^5$: a) $\abs{\expt{g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{g(X_{\Delta t})-g(X_{\Delta t/2})}}$ }
 	\label{fig:Weak_rate_H_007_without_rich_change_meausre}
 \end{figure}
+
+
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$ &   \\
+		\hline
+		
+		MC method ($M=10^{6}$)   & $\mathbf{0.5462}$  & $\mathbf{0.2686}$  & $\mathbf{0.1243}$ & $\mathbf{0.0411}$  \\	
+		\hline
+	\end{tabular}
+	\caption{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1$, $H=0.07$, without Richardson extrapolation}
+	\label{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.07$_change_measure}
+\end{table}
+
+
 \newpage
 \subsubsection*{With Richardson extrapolation (level 1)}
-From figure \ref{fig:Weak_rate_H_007_with_rich_change_measure} , we see that  for $H=0.07$, we get a weak error of order $\Delta t^2$. The upper and lower bounds are $95\%$ confidence interval. However, comparing to figure \ref{fig:Weak_rate_H_007_with_rich}, I think we have issue since we got worser weak error values after the change of measure. We need to double check this stage.
-
+From figure \ref{fig:Weak_rate_H_007_with_rich_change_measure} , we see that  for $H=0.07$, we get a weak error of order $\Delta t^2$. The upper and lower bounds are $95\%$ confidence interval. In table \ref{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.07$ , using Richardson extrapolation_change_measure}, we show the corresponding results. Comparing to the results without change of measure (see figure \ref{fig:Weak_rate_H_007_with_rich} and table \ref{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.07$ , using Richardson extrapolation}),  we got worser weak error values after the change of measure. We provide a potential explanation of the possible cause of this in Section \ref{sec:Plotting the Richardson integrand for the change of measure}.
 
 \begin{figure}[h!]
 	\centering
@@ -1323,30 +1340,6 @@ From figure \ref{fig:Weak_rate_H_007_with_rich_change_measure} , we see that  fo
 
 
 
-\newpage
-\subsubsection{Comparing relative errors }
-\red{ We need to figure out a way to define the adequate procedure to use the right MISC tolerance, since we observed an over-estimated tolerance for MISC solver when used for the case without change of measure.}
-
-
-\subsubsection*{Case $H=0.07$, Relative error for different methods}
-\label{sec:Case $H=0.07$, Relative error for different methods_change_measure}
-\begin{table}[h!]
-	\centering
-	\begin{tabular}{l*{6}{c}r}
-		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$ &   \\
-		\hline
-		
-		MC method ($M=10^{6}$)   & $\mathbf{0.5462}$  & $\mathbf{0.2686}$  & $\mathbf{0.1243}$ & $\mathbf{0.0411}$  \\	
-		\hline
-	\end{tabular}
-	\caption{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1$, $H=0.07$, without Richardson extrapolation}
-	\label{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.07$_change_measure}
-\end{table}
-
-
-
-
-
 \begin{table}[h!]
 	\centering
 	\begin{tabular}{l*{5}{c}r}
@@ -1361,9 +1354,19 @@ From figure \ref{fig:Weak_rate_H_007_with_rich_change_measure} , we see that  fo
 \end{table}
 
 
+\red{ We still need to figure out a way to define the adequate procedure to use the right MISC tolerance, since we observed an over-estimated tolerance for MISC solver when used for the case without change of measure.}
 
 
-\subsubsection{Plotting the Richardson integrand for the change of measure}
+
+
+
+
+
+
+
+
+
+\subsubsection{Plotting the Richardson integrand for the change of measure}\label{sec:Plotting the Richardson integrand for the change of measure}
 
 
 

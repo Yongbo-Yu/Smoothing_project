@@ -1,20 +1,24 @@
 #!/usr/bin/env python
 
-import math
+
+# In this file, we plot the first and second differences for the  rBergomi integrand  without Richardson extrapolation without
+# doing the partial change of measure
+
+
+#modules used
+
+#plotting modules
 import matplotlib
 import matplotlib.pyplot as plt
 from matplotlib.pyplot import figure, show
 from matplotlib.ticker import MaxNLocator
 
 
-import warnings
-import os.path
 import numpy as np
-import time
-import sys
 
 
-import scipy.stats as ss
+
+#Rbergomi modules
 import fftw3
 import RBergomi
 from RBergomi import *
@@ -34,7 +38,7 @@ class Problem(object):
     x=0.235**2;   # this will provide the set of xi parameter values 
     #x=10**(-5)
     HIn=Vector(1)    # this will provide the set of H parameter values
-    HIn[0]=0.43
+    HIn[0]=0.07
     e=Vector(1)    # This will provide the set of eta paramter values
     e[0]=1.9
     r=Vector(1)   # this will provide the set of rho paramter values
@@ -60,24 +64,6 @@ class Problem(object):
         self.d=int(np.log2(self.N)) #power 2 number steps
      
 
-       
-
-      
-        
-
-    def BeginRuns(self,ind, N):
-        self.elapsed_time=0.0
-        self.nelem = np.array(self.params.h0inv * self.params.beta**(np.array(ind)), dtype=np.uint32)
-        if self.nested:
-            self.nelem -= 1
-        assert(len(self.nelem) == self.GetDim())
-        return self.nelem
-
-
-    def EndRuns(self):
-        elapsed_time=self.elapsed_time;
-        self.elapsed_time=0.0;
-        return elapsed_time;
 
     # this computes the value of the objective function (given by  objfun) at quad points
     def SolveFor(self, Y):
@@ -89,29 +75,22 @@ class Problem(object):
      # objfun: 
     def objfun(self,y):
            
-        #von hierarchical
-        #y1perp=y[self.N:2*self.N]
-
         #hierarchical
         yperp_1=y[self.N+1:2*self.N]
         yperp1=y[self.N]
         bbperp=self.brownian_increments(yperp1,yperp_1)
         W1perp= [(bbperp[i+1]-bbperp[i]) *np.sqrt(self.N) for i in range(0,len(bbperp)-1)]
 
-    
-
-         #non hierarchical
-        #W1=y[0:self.N]
-        #hierarchical way
+        #hierarchical 
         y_1=y[1:self.N]
         y1=y[0]
         bb=self.brownian_increments(y1,y_1)
         W1= [(bb[i+1]-bb[i]) *np.sqrt(self.N) for i in range(0,len(bb)-1)]
-        
-        #QoI=self.z.ComputePayoffRT_single(y1,self.y1perp); # this is the computed payoff
-        QoI=self.z.ComputePayoffRT_single(W1,W1perp); 
 
-    
+        QoI=self.z.ComputePayoffRT_single(W1,W1perp); # this is the computed payoff (when using usual hermite with gaussian density)
+
+        #QoI=self.z.ComputePayoffRT_single(W1,W1perp)*((2*np.pi)**(-self.N))*(np.exp(-0.5*y.dot(y)))*(np.exp(y.dot(y))); # this is the computed payoff 
+        #(when using  hermite with e^{-x^2} density)
         return QoI
 
     
@@ -141,6 +120,7 @@ class Problem(object):
     
 
     
+
 
 def knots_gaussian(n, mi, sigma):
     # [x,w]=KNOTS_GAUSSIAN(n,mi,sigma)
@@ -258,10 +238,14 @@ def cartesian(arrays, out=None):
         for j in xrange(1, arrays[0].size):
             out[j*m:(j+1)*m,1:] = out[0:m,1:]
     return out               
+
 #     # fnknots  gives two arrays first one for quadrature points and the second one for weights
 fnKnots= lambda beta: knots_gaussian(lev2knots_doubling(1+beta),   0, 1.0)  
 
 
+#fnKnots= lambda beta: np.polynomial.hermite.hermgauss(2**beta+1)
+
+# this function computes and plots the first differences
 
 def first_difference_rate_plotting():       
     # # feed parameters to the problem
@@ -272,14 +256,14 @@ def first_difference_rate_plotting():
     for d1 in range(0,4,1):
         print(d1)
         mylist=[]
-        bias=np.zeros(5)
-        points=np.zeros(5)
-        indices=np.zeros(5,dtype=int)
+        bias=np.zeros(6)
+        points=np.zeros(6)
+        indices=np.zeros(6,dtype=int)
         fixed_points=fnKnots(0)[0]
         #mylist[:prb.N]=[fixed_points for i in range(0,prb.N)]
         mylist[:2*prb.N]=[fixed_points for i in range(0,2*prb.N)] #second way
         j=0
-        for pts in range(2,7):
+        for pts in range(2,8):
             fine_ind_points=fnKnots(pts)[0]
             fine_ind_weights=fnKnots(pts)[1]
             mylist[d1]=fine_ind_points
@@ -315,7 +299,7 @@ def first_difference_rate_plotting():
         
         plt.plot(indices, bias,linewidth=2.0,label=r'$\bar{\beta}=$ %s' % np.array_str(QoI_beta),linestyle = '--', marker=marker[d1/4],hold=True) 
         #plt.plot(indices, bias,linewidth=2.0,linestyle = '--', marker=marker[d1/4],hold=True) 
-        plt.plot(indices, fit,linewidth=2.0,label=r'rate= %s' % format(z[0]  , '.2f'), linestyle = '--', marker='o') 
+        plt.plot(indices, fit*100,linewidth=2.0,label=r'rate= %s' % format(z[0]  , '.2f'), linestyle = '--', marker='o') 
         #plt.plot(points, 0.001/points,'r',linewidth=2.0,label='order 1') 
         #plt.plot(points, 0.001/(points**2),'g',linewidth=2.0, label='order 2')  
         plt.yscale('log')
@@ -324,7 +308,7 @@ def first_difference_rate_plotting():
         plt.ylabel(r'$\mid \Delta E_{\mathbf{1}+k \bar{\beta}} \mid $',fontsize=14)  
      
     plt.legend(loc='lower left')
-    plt.savefig('./results/first_difference_rbergomi_4steps_H_043_K_1_totally_hierarch_with_rate_W1.eps', format='eps', dpi=1000)
+    plt.savefig('./results/first_difference_rbergomi_4steps_H_007_K_1_totally_hierarch_with_rate_W1_hermite_2.eps', format='eps', dpi=1000)
 
 
 
@@ -341,9 +325,9 @@ def mixed_difference_order2_rate_plotting(d):
         else:    
             mylist=[]
             mylist_weight=[]
-            bias=np.zeros(5)
-            points=np.zeros(5)
-            indices=np.zeros(5,dtype=int)
+            bias=np.zeros(6)
+            points=np.zeros(6)
+            indices=np.zeros(6,dtype=int)
             fixed_points=fnKnots(0)[0]
             fixed_weight=fnKnots(0)[1]
             # mylist[:prb.N]=[fixed_points for i in range(0,prb.N)]
@@ -351,7 +335,7 @@ def mixed_difference_order2_rate_plotting(d):
             mylist[:2*prb.N]=[fixed_points for i in range(0,2*prb.N)]# second way
             mylist_weight[:2*prb.N]=[fixed_weight for i in range(0,2*prb.N)] #second way
             j=0
-            for pts in range(2,7):
+            for pts in range(2,8):
                 fine_ind_points=fnKnots(pts)[0]
                 fine_ind_weights=fnKnots(pts)[1]
                 coarse_ind_points=fnKnots(pts-1)[0]
@@ -367,6 +351,9 @@ def mixed_difference_order2_rate_plotting(d):
                 weights_ff=np.asarray([np.prod(fine_weights[i]) for i in range (0,len(fine_weights))])
                 fine_values=[prb.SolveFor(fine_points[i]) for i in range(0,(lev2knots_doubling(1+pts)*lev2knots_doubling(1+pts)))]
                 QoI_fine_fine=weights_ff.dot(fine_values)
+                print np.max(fine_values)
+                print weights_ff
+                
                 print('ff=',QoI_fine_fine)
                 
                 
@@ -434,19 +421,19 @@ def mixed_difference_order2_rate_plotting(d):
         
         plt.plot(indices, bias,linewidth=2.0,label=r'$\bar{\beta}=$ %s' % np.array_str(QoI_beta),linestyle = '--', marker=marker[d/4]) 
         #plt.plot(indices, bias,linewidth=2.0,linestyle = '--', marker=marker[d/4]) 
-        plt.plot(indices, fit,linewidth=2.0,label=r'rate= %s' % format(z[0]  , '.2f'), linestyle = '--', marker='o') 
+        plt.plot(indices, fit*100,linewidth=2.0,label=r'rate= %s' % format(z[0]  , '.2f'), linestyle = '--', marker='o') 
          
         plt.yscale('log')
         #plt.xscale('log')
         plt.xlabel('k',fontsize=14)
         plt.ylabel(r'$\mid \Delta E_{\mathbf{1}+k \bar{\beta}} \mid $',fontsize=14)  
     plt.legend(loc='lower left')
-    plt.savefig('./results/mixed_difference_order2_rbergomi_4steps_H_043_K_1_totally_hierarch_with_rate_W1.eps', format='eps', dpi=1000)       
+    plt.savefig('./results/mixed_difference_order2_rbergomi_4steps_H_007_K_1_totally_hierarch_with_rate_W1_hermite_2.eps', format='eps', dpi=1000)       
     
     
 
 
-first_difference_rate_plotting()
+#first_difference_rate_plotting()
 mixed_difference_order2_rate_plotting(0)
 # def mixed_difference_order3_rate_plotting(d,d2):       
 #     # # feed parameters to the problem

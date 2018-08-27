@@ -125,71 +125,6 @@ class Problem(object):
         return bb
 
 
-    
-
-    def Quit(self):
-        pass
-
-    def __exit__(self, type, value, traceback):
-        pass
-
-    def __enter__(self):
-        return self
-
-    @staticmethod
-    def Init():
-        import sys #This module provides access to some variables used or maintained by the interpreter and to functions that interact strongly with the interpreter
-        count = len(sys.argv)  #sys.argv is a list in Python, which contains the command-line arguments passed to the script. With the len(sys.argv) function you can count the number of arguments. 
-        #arr = (ct.c_char_p * len(sys.argv))()
-        arr = sys.argv
-
-
-# def weak_convergence_rate_plotting():    
-#     #num_cores = multiprocessing.cpu_count()
-#         exact= 0.0712073 #exact value of K=1, H=0.43 
-#         marker=['>', 'v', '^', 'o', '*','+','-',':']
-#         ax = figure().gca()
-#         ax.xaxis.set_major_locator(MaxNLocator(integer=True))
-#         # # feed parameters to the problem
-#         Nsteps_arr=np.array([2,4,8,16,32,64])
-#         dt_arr=1.0/(Nsteps_arr)
-#         error=np.zeros(6)
-#         stand=np.zeros(6)
-
-#         for i in range(0,6):
-#             values=np.zeros(10000)
-#             for j in prange(10000):
-
-#                 #andom.seed( j)
-                
-#                 prb = Problem(Nsteps_arr[i]) 
-#                 values[j]=prb.objfun(Nsteps_arr[i]) 
-#             error[i]=np.abs(np.mean(values) - exact) 
-#             print error[i] 
-#             stand[i]=np.std(values, axis = 0)/(10000)
-
-#         print(error)   
-#         print(stand)
-        
-
-#         z= np.polyfit(np.log(dt_arr), np.log(error), 1)
-#         fit=np.exp(z[0]*np.log(dt_arr))
-#         print z[0]
-        
-#         plt.plot(dt_arr, error,linewidth=2.0,label='weak_error' ,linestyle = '--',marker='>', hold=True) 
-#         plt.yscale('log')
-#         plt.xscale('log')
-#         plt.xlabel(r'$\Delta t$',fontsize=14)
-
-#         plt.plot(dt_arr, fit,linewidth=2.0,label=r'rate= %s' % format(z[0]  , '.2f'), linestyle = '--', marker='o')
-        
-#         plt.ylabel(r'$\mid  g(X_{\Delta t})-  g(X) \mid $',fontsize=14) 
-#         plt.subplots_adjust(wspace=0.6, hspace=0.6, left=0.15, bottom=0.22, right=0.96, top=0.96)
-#         plt.legend(loc='upper left')
-#         plt.savefig('./results/weak_convergence_order_Bergomi_H_007_K_1.eps', format='eps', dpi=1000)     
-    
-
-
 
 def weak_convergence_differences():    
         #exact= 0.0712073 #exact value of K=1, H=0.43 
@@ -232,7 +167,7 @@ def weak_convergence_differences():
        
 
         error=np.abs(np.mean(values,axis=0) - 1) 
-        stand=np.std(values, axis = 0)/  float(np.sqrt(10**5))
+        stand=np.std(values, axis = 0)/  float(np.sqrt(10**6))
         Ub=np.abs(np.mean(values,axis=0) - 1)+1.96*stand
         Lb=np.abs(np.mean(values,axis=0) - 1)-1.96*stand
         print(error)   

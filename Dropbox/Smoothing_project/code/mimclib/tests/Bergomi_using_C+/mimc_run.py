@@ -26,8 +26,8 @@ class MyRun:
     def initRun(self, run):
         self.prev_val = 0
 
-        #self.prb = Problem(run.params) 
-        self.prb = Problem_measure_change_2(run.params) 
+        self.prb = Problem(run.params) 
+        #self.prb = Problem_measure_change_2(run.params) 
        
         self.extrapolate_s_dims =2*self.prb.N #SET TO SAME AS INPUT DIMENSION
         
@@ -35,8 +35,8 @@ class MyRun:
         
     ## PROBLEM SPECIFIC
         # fnknots  gives two arrays first one for quadrature points and the second one for weights
-        fnKnots= lambda beta: misc.knots_gaussian(misc.lev2knots_doubling(1+beta),  0, 1) # the standard deviation is coming from 
-        #the distribution of the brownian bridges increments
+        #fnKnots= lambda beta: misc.knots_gaussian(misc.lev2knots_doubling(1+beta),  0, 1) # the standard gaussian
+        fnKnots= lambda beta: np.polynomial.hermite.hermgauss(2**(beta)+1) #when using  hermite with e^{-x^2} density)
         
     ##
         # Construct MiscSampler class with the following parameters    
@@ -145,18 +145,18 @@ class MyRun:
 
 
 if __name__ == "__main__":
-    #from Problem import Problem
-    from Problem_measure_change_2 import Problem_measure_change_2
+    from Problem import Problem
+    #from Problem_measure_change_2 import Problem_measure_change_2
 
 
-    #Problem.Init()
-    Problem_measure_change_2.Init()
+    Problem.Init()
+    #Problem_measure_change_2.Init()
     import mimclib.test
     run = MyRun()
     mimclib.test.RunStandardTest(fnSampleLvl=run.mySampleQoI,
                                  fnAddExtraArgs=run.addExtraArguments,
                                  fnInit=run.initRun)# initialize the run
-    #Problem.Final()
-    Problem_measure_change_2.Final()
+    Problem.Final()
+    #Problem_measure_change_2.Final()
 
 
