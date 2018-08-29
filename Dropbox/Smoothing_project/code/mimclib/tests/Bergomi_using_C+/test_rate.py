@@ -15,6 +15,7 @@ from matplotlib.ticker import MaxNLocator
 
 
 import numpy as np
+from numpy import unravel_index
 
 
 
@@ -308,7 +309,7 @@ def first_difference_rate_plotting():
         plt.ylabel(r'$\mid \Delta E_{\mathbf{1}+k \bar{\beta}} \mid $',fontsize=14)  
      
     plt.legend(loc='lower left')
-    plt.savefig('./results/first_difference_rbergomi_4steps_H_007_K_1_totally_hierarch_with_rate_W1_hermite_2.eps', format='eps', dpi=1000)
+    plt.savefig('./results/first_difference_rbergomi_4steps_H_007_K_1_totally_hierarch_with_rate_W1.eps', format='eps', dpi=1000)
 
 
 
@@ -352,8 +353,10 @@ def mixed_difference_order2_rate_plotting(d):
                 fine_values=[prb.SolveFor(fine_points[i]) for i in range(0,(lev2knots_doubling(1+pts)*lev2knots_doubling(1+pts)))]
                 QoI_fine_fine=weights_ff.dot(fine_values)
                 print np.max(fine_values)
-                print weights_ff
-                
+                q=unravel_index(np.asarray(fine_values).argmax(),np.asarray(fine_values).shape)
+                # 
+                print q[0]
+                print weights_ff[q[0]]
                 print('ff=',QoI_fine_fine)
                 
                 
@@ -428,7 +431,7 @@ def mixed_difference_order2_rate_plotting(d):
         plt.xlabel('k',fontsize=14)
         plt.ylabel(r'$\mid \Delta E_{\mathbf{1}+k \bar{\beta}} \mid $',fontsize=14)  
     plt.legend(loc='lower left')
-    plt.savefig('./results/mixed_difference_order2_rbergomi_4steps_H_007_K_1_totally_hierarch_with_rate_W1_hermite_2.eps', format='eps', dpi=1000)       
+    plt.savefig('./results/mixed_difference_order2_rbergomi_4steps_H_007_K_1_totally_hierarch_with_rate_W1.eps', format='eps', dpi=1000)       
     
     
 
