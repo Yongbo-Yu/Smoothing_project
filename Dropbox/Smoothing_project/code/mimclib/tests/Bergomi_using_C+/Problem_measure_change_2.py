@@ -12,7 +12,7 @@ class Problem_measure_change_2(object):
 # attributes
     random_gen=None;
     elapsed_time=0.0;
-    N=8 # Number of time steps N, discretization resolution
+    N=1 # Number of time steps N, discretization resolution
     # for the values of below paramters, we need to see the paper as well check with Christian 
     x=0.235**2;   # this will provide the set of xi parameter values 
     #x=0.00001;

@@ -26,8 +26,8 @@ class MyRun:
 
     def initRun(self, run):
         self.prev_val = 0
-        #self.prb = Problem_richardson_extrapolation_level2(run.params) 
-        self.prb = Problem_richardson_extrapolation_level2_change_measure(run.params) 
+        self.prb = Problem_richardson_extrapolation_level2(run.params) 
+        #self.prb = Problem_richardson_extrapolation_level2_change_measure(run.params) 
         #self.extrapolate_s_dims = self.prb.N -1
         self.extrapolate_s_dims = 8*self.prb.N #SET TO SAME AS INPUT DIMENSION
         
@@ -155,15 +155,15 @@ class MyRun:
 
 
 if __name__ == "__main__":
-    from Problem_richardson_extrapolation_level2_change_measure import Problem_richardson_extrapolation_level2_change_measure
-   # from Problem_richardson_extrapolation_level2 import Problem_richardson_extrapolation_level2
+    #from Problem_richardson_extrapolation_level2_change_measure import Problem_richardson_extrapolation_level2_change_measure
+    from Problem_richardson_extrapolation_level2 import Problem_richardson_extrapolation_level2
 
-    Problem_richardson_extrapolation_level2_change_measure.Init()
-    #Problem_richardson_extrapolation_level2.Init()
+    # Problem_richardson_extrapolation_level2_change_measure.Init()
+    Problem_richardson_extrapolation_level2.Init()
     import mimclib.test
     run = MyRun()
     mimclib.test.RunStandardTest(fnSampleLvl=run.mySampleQoI,
                                  fnAddExtraArgs=run.addExtraArguments,
                                  fnInit=run.initRun)# initialize the run
-    #Problem_richardson_extrapolation_level2.Final()
-    Problem_richardson_extrapolation_level2_change_measure.Final()
+    Problem_richardson_extrapolation_level2.Final()
+    #Problem_richardson_extrapolation_level2_change_measure.Final()

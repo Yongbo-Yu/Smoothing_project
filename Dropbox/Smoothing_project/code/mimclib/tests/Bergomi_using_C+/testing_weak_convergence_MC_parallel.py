@@ -133,20 +133,20 @@ def weak_convergence_differences():
         ax = figure().gca()
         ax.xaxis.set_major_locator(MaxNLocator(integer=True))
         # # feed parameters to the problem
-        Nsteps_arr=np.array([2,4,8,16,32,64,128,256])
+        Nsteps_arr=np.array([2,4,8,16,32,64,128])
         dt_arr=1.0/(Nsteps_arr)
         error_diff=np.zeros(7)
         stand_diff=np.zeros(7)
-        error=np.zeros(8)
-        stand=np.zeros(8)
-        elapsed_time_qoi=np.zeros(8)
-        Ub=np.zeros(8)
-        Lb=np.zeros(8)
-        Ub_diff=np.zeros(7)
-        Lb_diff=np.zeros(7)
-        values=np.zeros(((10**6),8)) 
+        error=np.zeros(6)
+        stand=np.zeros(6)
+        elapsed_time_qoi=np.zeros(7)
+        Ub=np.zeros(7)
+        Lb=np.zeros(7)
+        Ub_diff=np.zeros(6)
+        Lb_diff=np.zeros(6)
+        values=np.zeros(((10**6),7)) 
         num_cores = mp.cpu_count()
-        for i in range(0,8):
+        for i in range(0,7):
             print i
             
             start_time=time.time()
@@ -162,15 +162,18 @@ def weak_convergence_differences():
             values[:,i]= p.map(processInput, range(((10**6))))    
 
 
-            elapsed_time_qoi[i]=time.time()-start_time;    
+            elapsed_time_qoi[i]=time.time()-start_time
+            print  elapsed_time_qoi[i]
            
 
 
               
 
        
-
+        start_time_2=time.time()
         error=np.abs(np.mean(values,axis=0) - 1) 
+        elapsed_time_qoi=time.time()-start_time_2+elapsed_time_qoi
+
         stand=np.std(values, axis = 0)/  float(np.sqrt((10**6)))
         Ub=np.abs(np.mean(values,axis=0) - 1)+1.96*stand
         Lb=np.abs(np.mean(values,axis=0) - 1)-1.96*stand
@@ -181,7 +184,7 @@ def weak_convergence_differences():
         print Lb
         print Ub
          
-        differences= [values[:,i]-values[:,i+1] for i in range(0,7)]
+        differences= [values[:,i]-values[:,i+1] for i in range(0,6)]
         error_diff=np.abs(np.mean(differences,axis=1))
         print error_diff 
         stand_diff=np.std(differences, axis = 1)/ float(np.sqrt((10**6)))
@@ -196,9 +199,23 @@ def weak_convergence_differences():
         fit=np.exp(z[0]*np.log(dt_arr))
         print z[0]
 
-        z_diff= np.polyfit(np.log(dt_arr[0:7]), np.log(error_diff), 1)
-        fit_diff=np.exp(z_diff[0]*np.log(dt_arr[0:7]))
+        z_diff= np.polyfit(np.log(dt_arr[0:6]), np.log(error_diff), 1)
+        fit_diff=np.exp(z_diff[0]*np.log(dt_arr[0:6]))
         print z_diff[0]
+
+
+
+        
+        z3=np.zeros(7)
+        z3[0]=1.0
+        z3[1]=np.log(error[0])
+        fit3=np.exp(z3[0]*np.log(dt_arr)+z3[1])
+
+
+        z3diff=np.zeros(6)
+        z3diff[0]=1.0
+        z3diff[1]=np.log(error_diff[0])
+        fit3diff=np.exp(z3diff[0]*np.log(dt_arr[0:6])+z3diff[1])
         
         fig = plt.figure()
 
@@ -210,26 +227,28 @@ def weak_convergence_differences():
         plt.xlabel(r'$\Delta t$',fontsize=14)
 
         plt.plot(dt_arr, fit*10,linewidth=2.0,label=r'rate= %s' % format(z[0]  , '.2f'), linestyle = '--')
+        plt.plot(dt_arr, fit3*10,linewidth=2.0,label=r'rate= %s' % format(z3[0]  , '.2f'), linestyle = '--')
         
         
         plt.ylabel(r'$\mid  g(X_{\Delta t})-  g(X) \mid $',fontsize=14) 
         plt.subplots_adjust(wspace=0.6, hspace=0.6, left=0.15, bottom=0.22, right=0.96, top=0.96)
         plt.legend(loc='upper left')
-        plt.savefig('./results/weak_convergence_order_Bergomi_H_007_K_1_M_4_10_6_CI_relative.eps', format='eps', dpi=1000)  
+        plt.savefig('./results/weak_convergence_order_Bergomi_H_007_K_1_M_10_6_CI_relative.eps', format='eps', dpi=1000)  
 
         fig = plt.figure()
-        plt.plot(dt_arr[0:7], error_diff,linewidth=2.0,label='weak_error' , marker='>', hold=True) 
-        plt.plot(dt_arr[0:7], Lb_diff,linewidth=2.0,label='Lb' ,linestyle = ':', hold=True) 
-        plt.plot(dt_arr[0:7], Ub_diff,linewidth=2.0,label='Ub' ,linestyle = ':', hold=True) 
+        plt.plot(dt_arr[0:6], error_diff,linewidth=2.0,label='weak_error' , marker='>', hold=True) 
+        plt.plot(dt_arr[0:6], Lb_diff,linewidth=2.0,label='Lb' ,linestyle = ':', hold=True) 
+        plt.plot(dt_arr[0:6], Ub_diff,linewidth=2.0,label='Ub' ,linestyle = ':', hold=True) 
         plt.yscale('log')
         plt.xscale('log')
         plt.xlabel(r'$\Delta t$',fontsize=14)
 
-        plt.plot(dt_arr[0:7], fit_diff*10,linewidth=2.0,label=r'rate= %s' % format(z_diff[0]  , '.2f'), linestyle = '--')
+        plt.plot(dt_arr[0:6], fit_diff*10,linewidth=2.0,label=r'rate= %s' % format(z_diff[0]  , '.2f'), linestyle = '--')
+        plt.plot(dt_arr[0:6], fit3diff*10,linewidth=2.0,label=r'rate= %s' % format(z3diff[0]  , '.2f'), linestyle = '--')
         plt.ylabel(r'$\mid  g(X_{\Delta t})-  g(X_{\Delta t/2}) \mid $',fontsize=14) 
         plt.subplots_adjust(wspace=0.6, hspace=0.6, left=0.15, bottom=0.22, right=0.96, top=0.96)
         plt.legend(loc='upper left')
-        plt.savefig('./results/weak_convergence_order_differences_Bergomi_H_007_K_1_M_4_10_6_CI_relative.eps', format='eps', dpi=1000)  
+        plt.savefig('./results/weak_convergence_order_differences_Bergomi_H_007_K_1_M_10_6_CI_relative.eps', format='eps', dpi=1000)  
 
 #weak_convergence_rate_plotting()
 weak_convergence_differences()

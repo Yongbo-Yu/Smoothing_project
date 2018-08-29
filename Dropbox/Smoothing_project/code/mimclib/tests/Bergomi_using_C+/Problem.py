@@ -12,7 +12,7 @@ class Problem(object):
 # attributes
     random_gen=None;
     elapsed_time=0.0;
-    N=4 # Number of time steps N, discretization resolution
+    N=16 # Number of time steps N, discretization resolution
   
     # for the values of below paramters, we need to see the paper as well check with Christian 
     x=0.235**2;   # this will provide the set of xi parameter values 
@@ -91,7 +91,7 @@ class Problem(object):
         
 
      
-        QoI=self.z.ComputePayoffRT_single(W1,W1perp)*(np.exp(0.5*y.dot(y))) *(2*np.pi)**(-self.N); # this is the computed payoff (when using usual hermite with gaussian density)
+        QoI=self.z.ComputePayoffRT_single(W1,W1perp) # this is the computed payoff (when using usual hermite with gaussian density)
 
         #QoI=self.z.ComputePayoffRT_single(W1,W1perp)*((2*np.pi)**(-self.N))*(np.exp(0.5*y.dot(y))); #this is the computed payoff 
         #(when using  hermite with e^{-x^2} density)

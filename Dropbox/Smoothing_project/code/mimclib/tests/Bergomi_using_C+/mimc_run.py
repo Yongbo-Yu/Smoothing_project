@@ -35,8 +35,8 @@ class MyRun:
         
     ## PROBLEM SPECIFIC
         # fnknots  gives two arrays first one for quadrature points and the second one for weights
-        #fnKnots= lambda beta: misc.knots_gaussian(misc.lev2knots_doubling(1+beta),  0, 1) # the standard gaussian
-        fnKnots= lambda beta: np.polynomial.hermite.hermgauss(2**(beta)+1) #when using  hermite with e^{-x^2} density)
+        fnKnots= lambda beta: misc.knots_gaussian(misc.lev2knots_doubling(1+beta),  0, 1) # the standard gaussian
+        #fnKnots= lambda beta: np.polynomial.hermite.hermgauss(2**(beta)+1) #when using  hermite with e^{-x^2} density)
         
     ##
         # Construct MiscSampler class with the following parameters    

@@ -26,8 +26,8 @@ class MyRun:
 
     def initRun(self, run):
         self.prev_val = 0
-        #self.prb = Problem_richardson_extrapolation(run.params) 
-        self.prb = Problem_richardson_extrapolation_change_measure_corrected(run.params)
+        self.prb = Problem_richardson_extrapolation(run.params) 
+        #self.prb = Problem_richardson_extrapolation_change_measure_corrected(run.params)
         #self.extrapolate_s_dims = self.prb.N -1
         self.extrapolate_s_dims = 4*self.prb.N #SET TO SAME AS INPUT DIMENSION
         
@@ -155,14 +155,14 @@ class MyRun:
 
 
 if __name__ == "__main__":
-    #from Problem_richardson_extrapolation import Problem_richardson_extrapolation
-    from   Problem_richardson_extrapolation_change_measure_corrected import   Problem_richardson_extrapolation_change_measure_corrected
+    from Problem_richardson_extrapolation import Problem_richardson_extrapolation
+    #from   Problem_richardson_extrapolation_change_measure_corrected import   Problem_richardson_extrapolation_change_measure_corrected
   
 
-    Problem_richardson_extrapolation_change_measure_corrected.Init()
+    Problem_richardson_extrapolation.Init()
     import mimclib.test
     run = MyRun()
     mimclib.test.RunStandardTest(fnSampleLvl=run.mySampleQoI,
                                  fnAddExtraArgs=run.addExtraArguments,
                                  fnInit=run.initRun)# initialize the run
-    Problem_richardson_extrapolation_change_measure_corrected.Final()
+    Problem_richardson_extrapolation.Final()

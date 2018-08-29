@@ -552,7 +552,571 @@ I(J,K)=\frac{2^K\left[I(J,K-1)-I(J-1,K-1)\right]}{2^K-1} +\Ordo{h^{K+1}},\quad J
 
 \section{Numerical tests}\label{sec:Numerical tests}
 In this Section, the default paramters values of the rBergomi model  (unless stated), defined in Section \ref{sec:The rBergomi model}, are: $S_0=1$, $\eta=1.9$, $\xi=0.235^2$, $\rho=-0.9$, $T=1$. 
-\subsection{Motivation for the need of measure change}
+
+\subsection{Summary of the numerical results}
+
+We started the numerical results with the case where we use the Hermite quadrature without change of measure (See Section \ref{sec:Numerical results for the case without change of measure}). We first estimate the weak error (Bias) for $3$ scenarios involving Richardson extrapolation (leve $1$ and $2$) (see Section \ref{sec:Weak error plots_no_change}) for the plots and Section \ref{sec:Comparing relative errors} for the observed values along with the tolerances needed by MISC to achieve those biases (We still need a robust way to link the MISC tolerance with the quadrature error).  We observed that Richardson extrapolation along with hierarchical representation bring an important improvement for MISC in terms of dimension reduction and weak error, which make this method highly competitive to MC (see results in tables in Section \ref{sec:Comparing relative errors} ). Therefore the only step there is to have a robust way to link MISC tolerance with the quadrature error. We also observed some bad behavior of the mixed differences that may provide a potential resaons of some instability observed when running MISC. We try to investigate that in Section \ref{sec:First and mixed differences rates}. Therefore I guess the two main steps that we are left now for this part are:
+\begin{itemize}
+	\item Understand the reasons of the bad behavior observed for mixed differences.
+	\item Design a robust way to link the MISC tolerance with the quadrature error
+\end{itemize}
+
+In a second part, we tried to investigate if a change of measure could a good option to accelerate MISC and have a more robost MISC solver(avoiding the bad bahaviors observed in the mixed difference). We motivate in Section \ref{sec:Motivation for the need of measure change} the reasons why a change  of measure could be a good option as a pre-processing step before applying MISC. In section \ref{sec:Numerical results for the case with change of measure}, we report the results of weak rates observed with and without Richardson extraploation.  Compared to those observed without change of measure, we observed almost same results without Richardson extrapolation and worser results when using Richardson extrapolation. The investigation of the latter behavior was carried in Section \ref{sec:Plotting the Richardson integrand for the change of measure} and we may explain this by the fact that applying the change of measure to the extrapolated formula is not very appropriate since we have a more complex function (bi-modal functions or higher as we go deeper for the levels of Richardson extrapolation). As a result, we think it is better to focus on the case without applying a change of measure.
+
+
+
+\subsection{Numerical results for the case without change of measure}
+\label{sec:Numerical results for the case without change of measure}
+\subsubsection{Weak error plots} \label{sec:Weak error plots_no_change}
+In this section, I include the results of weak error rates for the case without change of measure for both cases without and with Richardson extrapolation (level $1$ and $2$),  for $H \in \{0.43,0.07\}$. The reference solution was computed with $N=500$ time steps (which is equal to  $0.0712073$ for $H=0.43$ and  $0.0792047$ for $H=0.07$). We note that the weak errors plotted here corresponds to relative errors.
+
+
+\subsubsection*{Without Richardson extrapolation}
+From figures (\ref{fig:Weak_rate_H_043_without_rich} and \ref{fig:Weak_rate_H_007_without_rich}), we see that for both cases $H \in \{0.43,0.07\}$, we get a weak error of order $\Delta t$. The upper and lower bounds are $95\%$ confidence interval.
+
+
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/without_richardson/H_043/weak_convergence_order_Bergomi_H_043_K_1_M_10_5_CI_relative}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/without_richardson/H_043/weak_convergence_order_differences_Bergomi_H_043_K_1_M_10_5_CI_relative}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of the weak error for $H=0.43$ $K=1$, without Richardson extraploation, using MC with $M=10^5$: a) $\abs{\expt{g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{g(X_{\Delta t})-g(X_{\Delta t/2})}}$ }
+	\label{fig:Weak_rate_H_043_without_rich}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/without_richardson/H_007/weak_convergence_order_Bergomi_H_007_K_1_M_10_6_CI_relative}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/without_richardson/H_007/weak_convergence_order_differences_Bergomi_H_007_K_1_M_10_6_CI_relative}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of the weak error for $H=0.07$ $K=1$, without Richardson extraploation, using MC with $M=10^6$: a) $\abs{\expt{g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{g(X_{\Delta t})-g(X_{\Delta t/2})}}$ }
+	\label{fig:Weak_rate_H_007_without_rich}
+\end{figure}
+\newpage
+\subsubsection*{With Richardson extrapolation (level 1)}
+From figures (\ref{fig:Weak_rate_H_043_with_rich} and \ref{fig:Weak_rate_H_007_with_rich}), we see that for both cases $H \in \{0.43,0.07\}$, we get a weak error of order higher than  $\Delta t^2$ (We expect to have order of $\Delta t^2$ in the asymptotic regime). The upper and lower bounds are $95\%$ confidence interval.
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/with_richardson/H_043/weak_convergence_order_Bergomi_H_043_K_1_M_10_6_CI_richardson_relative}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/with_richardson/H_043/weak_convergence_order_differences_Bergomi_H_043_K_1_M_10_6_CI_richardson_relative}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of the weak error for $H=0.43$ $K=1$, with Richardson extraploation, using MC with $M=10^6$: a) $\abs{\expt{2 g(X_{\Delta t/2}) -g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{3 g(X_{\Delta t/2})-g(X_{\Delta t})-2 g(X_{\Delta t/4})}}$ }
+	\label{fig:Weak_rate_H_043_with_rich}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/with_richardson/H_007/weak_convergence_order_Bergomi_H_007_K_1_richardson_relative_M_10_6}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/with_richardson/H_007/weak_convergence_order_differences_Bergomi_H_007_K_1_richardson_relative_M_10_6}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of the weak error for $H=0.07$ $K=1$, with Richardson extraploation, using MC with $M=10^6$: a) $\abs{\expt{2 g(X_{\Delta t/2}) -g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{3 g(X_{\Delta t/2})-g(X_{\Delta t})-2 g(X_{\Delta t/4})}}$ }
+	\label{fig:Weak_rate_H_007_with_rich}
+\end{figure}
+
+
+
+
+\newpage
+\subsubsection*{With Richardson extrapolation (level 2)}
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/with_richardson/H_043/weak_convergence_order_Bergomi_H_043_K_1_richardson_level2_relative_M_10_6}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/with_richardson/H_043/weak_convergence_order_differences_Bergomi_H_043_K_1_richardson_level2_relative_M_10_6}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of the weak error for $H=0.43$ $K=1$, with Richardson extraploation, using MC with $M=10^6$: a) $\abs{\frac{1}{3}\expt{8 g(X_{\Delta t/4}) -6g(X_{\Delta t/2}) +g(X_{\Delta t})}-g(X)}$  b) $\abs{\frac{1}{3}\expt{-8 g(X_{\Delta t/8}) +14g(X_{\Delta t/4})-7 (X_{\Delta t/2}) +g(X_{\Delta t})}}$}
+	\label{fig:Weak_rate_H_043_with_rich_level2}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/with_richardson/H_007/weak_convergence_order_Bergomi_H_007_K_1_richardson_level2_relative_M_10_6_2}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/with_richardson/H_007/weak_convergence_order_differences_Bergomi_H_007_K_1_richardson_level2_relative_M_10_6_2}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of the weak error for $H=0.07$ $K=1$, with Richardson extraploation (level $2$), using MC with $M=10^6$: a) $\abs{\frac{1}{3}\expt{8 g(X_{\Delta t/4}) -6g(X_{\Delta t/2}) +g(X_{\Delta t})}-g(X)}$  b) $\abs{\frac{1}{3}\expt{-8 g(X_{\Delta t/8}) +14g(X_{\Delta t/4})-7 (X_{\Delta t/2}) +g(X_{\Delta t})}}$} 
+	\label{fig:Weak_rate_H_007_with_rich_level2}
+\end{figure}
+
+
+
+
+\newpage
+\subsubsection{Comparing relative errors}\label{sec:Comparing relative errors}
+\red{We note that these are preliminary results since we observed an over-estimated tolerance for MISC solver. We need to figure out a way to define the adequate procedure to use the right MISC tolerance.}
+%For our numerical tests, we coupled the C++ implementation used in \cite{bayer2016pricing} with the MISC library, and for comparison purposes we compare our results to the same code but with MC method, for $M=10^6$ paths. 
+
+The results were reported for $H \in \{0.43,0.07\}$, and number of time steps $N \in \{2,4,8,16\}$.  Also, we use $S_0=1$, so the options will be prices in terms of the moneyness $K$, where $K$ is the strike price.  
+
+
+In the following, we compare the  relative errors for H $\in \{0.43,0.07\}$ (see appendices \ref{appendix:Case $H=0.43$, Call prices for different methods} and \ref{appendix:Case $H=0.07$, Call prices for different methods} for the values of Call option prices). We note that for each case the reference solution was computed for $N=500$ (number of time steps) using MC with $10^6$ samples (which is equal to  $0.0712073$ for $H=0.43$ and  $0.0792047$ for $H=0.07$). In each case  we report the results for 3 scenarios: i) Without using Richardson extrapolation, ii) Using level $1$ Richardson extrapoaltion and  iii) Using level $2$ Richardson extrapoaltion. Tables (\ref{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.43$}, \ref{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.43$ , using Richardson extrapolation}, \ref{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.43$ , using Richardson extrapolation_level2})  coresspond to $H=0.43$ and tables (\ref{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.07$}, \ref{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.07$ , using Richardson extrapolation}, \ref{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.07$ , using Richardson extrapolation_level2})  correspond to $H=0.07$.
+
+Given the normalized bias computed by MC method  (reported as bold values in the tables), we report in red in each table the smallest tolerance that MISC required to get below that relative bias (I do not put values for smaller tolerances, once the required bias is reached).
+
+
+From the tables below, we have the following observations:
+
+\begin{itemize}
+	\item Using Richardson extrapoaltion, we got a significant improvement for the relative error with the use of minimal time steps. For instance, for $H=0.43$, we achieved around $8\%$ of  relative error, with $16$ time steps when not using Richardson extrapolation (see table \ref{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.43$}). However, When using level $1$ of Richardson extrapolation (see table \ref{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.43$ , using Richardson extrapolation}),  we achieved around $6\%$ of  relative error, with  only $2$ time steps in the coarse level, and we got around  $1\%$ of  relative error, with   $4$ time steps in the coarse level. A more significant improvement is seen with level $2$ of Richardson extrapolation, in fact, with just $1$ step in the coarse level, we got around $3\%$ percent of relative error.
+	\item For $H=0.07$, we achieved around $9\%$ of  relative error, with $16$ time steps when not using Richardson extrapolation (see table \ref{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.07$}). However, When using level $1$ of Richardson extrapolation (see table \ref{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.07$ , using Richardson extrapolation}),  we achieved around $7\%$ of  relative error, with  only $2$ time steps in the coarse level, and we got below  $1\%$ of  relative error, with   $4$ time steps in the coarse level. We observed a less significant improvement when using levle $2$ of Richardson extrapolation, compared to the case of $H=0.43$.
+	
+\end{itemize}
+
+
+
+
+
+We also report in tables (\ref{Comparsion of the computational time of  MC and MISC, used to compute Call option price of rBergomi model for different number of time steps. Case $K=1, H=0.07$},\ref{Comparsion of the computational time of  MC and MISC, coupled with Richardson extrapolation (level $1$), used to compute Call option price of rBergomi model for different number of time steps. Case $K=1, H=0.07$},\ref{Comparsion of the computational time of  MC and MISC, coupled with Richardson extrapolation (level $2$), used to compute Call option price of rBergomi model for different number of time steps. Case $K=1, H=0.07$}),  the comprision of CPU time needed for MC and MISC,for $H=0.07$, for different cases. We mention that we just put the computational time of MISC method for the cases where we acheieve the required bias (marked in red in relative error tables).  From those tables, we see that MISC when coupled with Richardson extrapolation, is very competitive compared to MC, in the low dimension regime.
+
+
+%\begin{figure}[!h]
+%	\begin{center}
+%		\includegraphics[scale=0.5]{./figures/rBergomi_weak_error/weak_RT.pdf}
+%		\caption{The weak error of rBergomi model}
+%		\label{fig:rBergomi_weak_error}
+%	\end{center}
+%\end{figure}
+
+%We note that for some cases, the convergence becomes extremely slow (either the bias stagnates at one value or it keeps increasing or decreasing without reaching the prescribed tolerance) specially when we are close to at-the money option ($K$ close to 1), we do not put values for those cases. We also remark that we have better agreement between the results of MISC coupled with the C++ code and the MC method using the python code form \cite{mccrickerd2017turbocharging}, for small values of moneyness.
+
+%In Section \ref{sec:MISC plots}, we show the convergence plots given by MISC library for the cases of $H=\{0.43,0.07\}$ and $K=0.1$.
+
+
+%Table \ref{table: Complexity rates for different number of time steps_rbergomi} summarizes the obtained complexity rates for different number of time steps (for more details, see Section \ref{sec:MISC plots}. 
+%
+%\begin{table}[h!]
+%	\centering
+%	\begin{tabular}{l*{6}{c}r}
+%		Method \textbackslash  Steps             &  $4$ & $8$  & $16$   \\
+%		\hline
+%		without Richardson  extrapolation(hierarchical) $(H=0.43)$ & $-0.34$ & $-0.33$ & $-0.75$   \\
+%		without Richardson  extrapolation (non hierarchical) $(H=0.43)$ & $-0.17$ & $-0.6$ & $-1$   \\
+%		without Richardson  extrapolation (hierarchical) $(H=0.07)$ & $-0.64$ & $-0.84$ & $-2.5$   \\
+%		without Richardson  extrapolation (total hierarchical) $(H=0.07)$ & $-0.70$ & $-0.88$ & $-2.7$   \\
+%		without Richardson  extrapolation (non hierarchical) $(H=0.07)$ & $-0.67$ & $-1.6$ & $-2.9$   \\
+%		\hline
+%	\end{tabular}
+%	\caption{Complexity rates for different number of time steps for $K=1$ and $H=\{0.43,0.07\}$}
+%	\label{table: Complexity rates for different number of time steps_rbergomi}
+%\end{table}
+
+
+
+
+\subsubsection*{Case $H=0.43$, Relative error for different methods}
+\label{sec:Case $H=0.43$, Relative error for different methods}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$ &   \\
+		\hline
+		MISC ($TOl=5.10^{-1}$)  & $0.6011$ & $0.3497$ & $0.1910$ & $0.0969$  \\
+		MISC ($TOl=2.10^{-1}$)  &  $0.6011$ & $0.3497$ &$0.1910$ & $\red{0.0801}$  \\
+		MISC ($TOl=10^{-1}$)  & $0.6011$ & $0.3497$ & $0.2233$ & $0.1236$  \\
+		MISC ($TOl=5.10^{-2}$)  & $0.6011$ & $0.3539$ & $0.1882$ & $0.1573$  \\
+		MISC ($TOl=10^{-2}$)  & $\red{0.5126}$ & $0.3258$ & $0.1770$ & $0.0829$   \\	
+		MISC ($TOl=5.10^{-3}$)  & $	0.4930$ & $0.3076$ & $0.1671$ & $-$   \\	
+		MISC ($TOl=10^{-3}$)  & $		0.5126$ & $\red{0.2935}$ & $\red{0.1503}$ & $-$   \\
+		MISC ($TOl=10^{-4}$)  & $		0.5154$ & $0.2935$ & $-$ & $-$   \\
+		MC method ($M=10^{6}$)   & $\mathbf{0.5154}$  & $\mathbf{0.2935}$  & $\mathbf{0.1545}$ & $\mathbf{0.0801}$  \\	
+		\hline
+	\end{tabular}
+	\caption{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1$, $H=0.43$, without Richardson extrapolation}
+	\label{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.43$}
+\end{table}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{5}{c}r}
+		Method \textbackslash  Steps    &$1-2$        & $2-4$ & $4-8$ & $8-16$  \\
+		\hline
+		MISC ($TOl=5.10^{-1}$)  &$0.9059$ & $0.0997$ & $0.0323$ & $\red{0.0028}$  \\
+		MISC ($TOl=10^{-1}$)  &$0.9059$ &$0.0997$ & $0.1025$ & $0.0688$ \\
+		MISC ($TOl=5.10^{-2}$)  &$0.9059$ & $0.1671$ & $0.0857$ & $0.0646$   \\
+		MISC ($TOl=10^{-2}$)  & $0.7374$ &$0.0969$ & $0.0463$ & $0.0028$ \\		
+		MISC ($TOl=5.10^{-3}$)  & $0.7205$ &$0.0941$ & $0.0211$ & $-$ \\	
+		MISC ($TOl=10^{-3}$)  & $0.7191$ & $0.0758$ & $\red{0.0112}$ & $-$ \\	
+		MISC ($TOl=5.10^{-4}$)  &$\red{0.7129}$ & $\red{0.0609}$ & $-$ & $-$ \\
+		MC method ($M=10^{6}$)&$ \mathbf{0.7133}$    & $\mathbf{0.0698}$  & $\mathbf{0.0160}$  & $\mathbf{0.0035}$ \\
+		\hline
+	\end{tabular}
+	\caption{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1$, $H=0.43$, using Richardson extrapolation (level $1$)}
+	\label{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.43$ , using Richardson extrapolation}
+\end{table}
+
+
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{5}{c}r}
+		Method \textbackslash  Steps    &$1-2-4$        & $2-4-8$ & $4-8-16$   \\
+		\hline
+		MISC ($TOl=5.10^{-1}$)  &$ 0.1699$ & $\red{0.0098}$ & $ 0.0056$   \\
+		MISC ($TOl=2.10^{-1}$)  &$ 0.1699$ &$-$ & $\red{ 0.0014}$  \\
+		MISC ($TOl=10^{-1}$)  &$0.2037$ &$-$ & $-$  \\
+		MISC ($TOl=5.10^{-2}$)  &$\red{0.0295}$ & $-$ & $-$  \\
+		MC method ($M=10^{6}$)&$\mathbf{0.1440}$    & $ \mathbf{0.0180}  $  & $\mathbf{0.0023}$   \\
+		\hline
+	\end{tabular}
+	\caption{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1$, $H=0.43$, using Richardson extrapolation (level $2$)}
+	\label{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.43$ , using Richardson extrapolation_level2}
+\end{table}
+\newpage
+
+
+
+\subsubsection*{Case $H=0.07$, Relative error for different methods}
+\label{sec:Case $H=0.07$, Relative error for different methods}
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$ &   \\
+		\hline
+		MISC ($TOl=5.10^{-1}$)  & $\red{0.3662}$ & $\red{0.1578}$ & $\red{0.1010}$ & $\red{0.0758}$  \\
+		MISC ($TOl=10^{-1}$)  & $0.3662$ &  $0.1578$ & $-$ & $-$  \\
+		MISC ($TOl=5.10^{-2}$)        & $0.3662$ &$-$ &  $-$ &  $-$ \\
+		MISC ($TOl=10^{-2}$)    & $-$ & $-$  & $-$ & $-$  \\	
+		MC method ($M=10^{6}$)   & $\underset{(0.0427)}{\mathbf{0.5386}}$  & $\underset{ (  0.0251)}{\mathbf{0.3173}}$  & $\underset{(  0.0114)}{\mathbf{0.1434}}$ & $\underset{(0.0072)}{\mathbf{0.0903}}$  \\	
+		\hline
+	\end{tabular}
+	\caption{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1$, $H=0.07$, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
+	\label{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.07$}
+\end{table}
+
+
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$ &   \\
+		\hline
+		MISC  & $0.08$ & $0.13$ & $0.20$ & $0.41$  \\	
+		MC method ($M=10^6$)   & $30$  & $32$  & $37$ & $52$  \\	
+		\hline
+	\end{tabular}
+	\caption{Comparsion of the computational time of  MC and MISC, used to compute Call option price of rBergomi model for different number of time steps. Case $K=1, H=0.07$}
+	\label{Comparsion of the computational time of  MC and MISC, used to compute Call option price of rBergomi model for different number of time steps. Case $K=1, H=0.07$}
+\end{table}
+
+
+
+
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{5}{c}r}
+		Method \textbackslash  Steps &$1-2$             & $2-4$ & $4-8$ & $8-16$ \\
+		\hline
+		MISC ($TOl=5.10^{-1}$)  &$\red{0.5682}$ & $\red{0.0505}$ & $0.1389$ & $0.1604$ \\
+		MISC ($TOl=16.10^{-2}$)  &$0.5682$ & $0.0505$ & $0.1389$ & $\red{0.0038}$  \\
+		MISC ($TOl=10^{-1}$)  &$0.5682$ &  $0.0505$ & $ 0.1692$ & $-$ \\
+		MISC ($TOl=5.10^{-2}$) &$0.5682$ &  $ 0.1465$ & $\red{0.0088}$ & $-$   \\
+		MISC ($TOl=10^{-2}$)&$-$ &  $0.0669$ & $0.0088$ & $-$ \\	
+		MC method ($M=10^{6}$)  &$\underset{( 0.0760)}{\mathbf{0.9594}}$  & $\underset{( 0.0054)}{\mathbf{0.0686}}$  & $\underset{(   0.0012)}{\mathbf{0.0149}}$  & $\underset{(  0.0004)}{\mathbf{0.0048}}$ \\
+		\hline	
+		
+	\end{tabular}
+	\caption{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1$, $H=0.07$, using Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors.}
+	\label{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.07$ , using Richardson extrapolation}
+\end{table}
+
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{5}{c}r}
+		Method \textbackslash  Steps &$1-2$             & $2-4$ & $4-8$ & $8-16$ \\
+		\hline
+		MISC + Richardson (level 1)  &$0.1$ & $0.14$ & $34$ & $92$ \\	
+		MC method + Richardson (level 1) ($M=10^{6}$)  &$43$ & $46$  & $54$  & $71$ \\
+		\hline	
+		
+	\end{tabular}
+	\caption{Comparsion of the computational time of  MC and MISC, coupled with Richardson extrapolation (level $1$), used to compute Call option price of rBergomi model for different number of time steps. Case $K=1, H=0.07$}
+	\label{Comparsion of the computational time of  MC and MISC, coupled with Richardson extrapolation (level $1$), used to compute Call option price of rBergomi model for different number of time steps. Case $K=1, H=0.07$}
+\end{table}
+
+
+
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{5}{c}r}
+		Method \textbackslash  Steps &$1-2-4$             & $2-4-8$ & $4-8-16$   \\
+		\hline
+%		MISC ($TOl=5.10^{-1}$)  &$0.2563$ & $ 0.1692$ & $ 0.1679
+%		$   \\
+		MISC ($TOl=10^{-1}$)  &$0.2563$ &  $0.1566$ & $\red{  0.0025}$  \\
+		MISC ($TOl=7.10^{-2}$) &$  0.3005$ &  $  \red{0.0227}$ & $-$    \\
+		MISC ($TOl=5.10^{-2}$) &$0.4874$ &  $  -$ & $-$    \\
+		MISC ($TOl=10^{-2}$)&$ \red{0.1742}$ &  $-$ & $-$  \\	
+		MC method ($M=10^{6}$)  &$\mathbf{0.2231}$  & $  \mathbf{0.0279}$  & $\mathbf{0.0035}$ \\
+		\hline	
+		
+	\end{tabular}
+	\caption{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1$, $H=0.07$, using Richardson extrapolation (level $2$)}
+	\label{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.07$ , using Richardson extrapolation_level2}
+\end{table}
+
+
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{5}{c}r}
+		Method \textbackslash  Steps &$1-2-4$             & $2-4-8$ & $4-8-16$   \\
+		\hline
+		MISC +Richardson (level 2) &$19$ & $ 33$ & $-$   \\
+	
+		MC method+Richardson (level 2) ($M=10^{6}$)  &$66$  & $74 $  & $95$ \\
+		\hline	
+		
+	\end{tabular}
+	\caption{Comparsion of the computational time of  MC and MISC, coupled with Richardson extrapolation (level $2$), used to compute Call option price of rBergomi model for different number of time steps. Case $K=1, H=0.07$}
+	\label{Comparsion of the computational time of  MC and MISC, coupled with Richardson extrapolation (level $2$), used to compute Call option price of rBergomi model for different number of time steps. Case $K=1, H=0.07$}
+\end{table}
+
+%\subsection{Quadrature error vs work for different } \label{sec:Complexity  error plots}
+
+
+
+%\begin{table}[h!]
+%	\centering
+%	\begin{tabular}{l*{6}{c}r}
+%		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$  \\
+%		\hline
+%		MISC ($TOl=10^{-1}$)  & $0.2156$ & $0.2002$ &  $0.2002$ &  $0.1910$  \\
+%		MISC ($TOl=10^{-2}$)  &  $0.2474$ &  $0.2378$ &  $0.2378$ & $-$  \\
+%		MISC ($TOl=10^{-3}$)        &  $0.2505$ & $0.2377$ &   $-$ &  $-$ \\
+%		MISC ($TOl=10^{-4}$)    &  $0.25$ &  $0.2378$  & $-$ & $-$  \\
+%		%		MC method ($M=10^{6}$)    &  $0.6326$ &  $0.6332$  &  $0.6330$ &  $0.6337$  \\
+%		MC method ($M=10^{6}$)   & $\underset{(4.72e-07)}{0.2499} $   & $\underset{(2.45e-07)}{0.2378} $  & $\underset{(1.80e-07)}{0.2310}$ & $\underset{(1.57e-07)}{0.2275} $  \\			
+%		\hline
+%	\end{tabular}
+%	\caption{ Call option price of the different methods for different number of time steps. Case $K=0.8$}
+%	\label{table: Call option price of the different methods for different number of time steps. Case $K=0.8$_H_007}
+%\end{table}
+%
+
+
+
+%
+%
+%\begin{table}[h!]
+%	\centering
+%	\begin{tabular}{l*{6}{c}r}
+%		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$  \\
+%		\hline
+%		MISC ($TOl=10^{-1}$)  & $0.0288$  & $0.0102$   & $0.0025$   &  $0.0005 $ \\
+%		MISC ($TOl=10^{-2}$)  & $0.0501$  & $0.0161$ &   $0.0025$  &   $0.0005$  \\
+%		MISC ($TOl=10^{-3}$)        &  $0.0515$ & $0.0335$  &  $-$  &   $-$ \\
+%		MISC ($TOl=10^{-4}$)    & $0.0525$   &  $-$   & $-$ & $-$  \\
+%		%		MC method ($M=10^{6}$)    &  $0.8646$  &   $0.8647$   &   $0.8643$  &   $0.8646$   \\
+%		MC method ($M=10^{6}$)   & $\underset{(2.68e-07)}{0.0518} $   & $\underset{(1.85e-07)}{0.0339} $  & $\underset{(1.44e-07)}{0.0237}$ & $\underset{(6.61e-08)}{0.0177} $  \\		
+%		\hline
+%	\end{tabular}
+%	\caption{ Call option price of the different methods for different number of time steps. Case $K=1.2$}
+%	\label{table: Call option price of the different methods for different number of time steps. Case $K=1.2$_H_007}
+%\end{table}
+
+
+
+%
+%\begin{figure}[!h]
+%	\centering
+%	\begin{subfigure}{.5\textwidth}
+%		\centering
+%		\includegraphics[width=0.95\linewidth]{./figures/payoff_plots_H_007/rBergomi_payoff_2steps_wrt_monyeness}
+%		\caption{}
+%		\label{fig:rBergomi_payoff_4steps_wrt_monyeness_sub1}
+%	\end{subfigure}%
+%	\begin{subfigure}{.5\textwidth}
+%		\centering
+%		\includegraphics[width=0.95\linewidth]{./figures/payoff_plots_H_007/rBergomi_payoff_4steps_wrt_monyeness}
+%		\caption{ }
+%		\label{fig:rBergomi_payoff_4steps_wrt_monyeness_sub2}
+%	\end{subfigure}%
+%	\caption{Black Scholes payoff for rBergomi model as a function of moneyness a) $2$  time steps, b) $4$  time steps.}
+%	\label{fig:rBergomi_payoff_4steps_wrt_monyeness_1}
+%\end{figure}
+%
+%\begin{figure}[!h]
+%	\centering
+%	\begin{subfigure}{.5\textwidth}
+%		\centering
+%		\includegraphics[width=0.95\linewidth]{./figures/payoff_plots_H_007/rBergomi_payoff_8steps_wrt_monyeness}
+%		\caption{}
+%		\label{fig:rBergomi_payoff_4steps_wrt_monyeness_sub3}
+%	\end{subfigure}%
+%	\begin{subfigure}{.5\textwidth}
+%		\centering
+%		\includegraphics[width=0.95\linewidth]{./figures/payoff_plots_H_007/rBergomi_payoff_16steps_wrt_monyeness}
+%		\caption{ }
+%		\label{fig:rBergomi_payoff_4steps_wrt_monyeness_sub4}
+%	\end{subfigure}%
+%	\caption{Black Scholes payoff for rBergomi model as a function of moneyness a) $8$  time steps, b) $16$  time steps.}
+%	\label{fig:rBergomi_payoff_4steps_wrt_monyeness_2}
+%\end{figure}
+%
+
+\newpage
+\subsubsection{First and mixed differences rates}\label{sec:First and mixed differences rates}
+
+
+In this section, we plot the first and second order differences for the case without change of measure. These plots are important because they provide an indication about the efficiency and speed of MISC. We show the plots for the case of $H=0.07$ and  $N=4$ time steps (we observed similar behaviors for other scenarios of number of time steps). From figures (\ref{fig:first_diff_comp_K_1_H_007_wihtout_change_measure},\ref{fig:second_diff_comp_K_1_H_007_wihtout_change_measure}), we have the following observations:
+\begin{itemize}
+	\item i) As was expected, the slowest directions are those corresponding to $W^1$, compared to those of   $W^2$.
+	\item ii)  We face a bad behavior for the second differences, for the case without change of measure, which may explain the some instability observed for MISC. 
+\end{itemize}
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_mixed_error_rates/without_change_measure/N_4/H_007/first_difference_rbergomi_4steps_H_007_K_1_totally_hierarch_with_rate_W1}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_mixed_error_rates/without_change_measure/N_4/H_007/first_difference_rbergomi_4steps_H_007_K_1_totally_hierarch_with_rate_W2}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+
+
+
+	\caption{The rate of convergence of  first order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$), for $K=1$, $H=0.07$: a) for $W^1$ b) for $W^2$}
+		\label{fig:first_diff_comp_K_1_H_007_wihtout_change_measure}
+\end{figure}
+
+	
+	\begin{figure}[h!]
+		\centering
+		\begin{subfigure}{.4\textwidth}
+			\centering
+			\includegraphics[width=1\linewidth]{./figures/rBergomi_mixed_error_rates/without_change_measure/N_4/H_007/mixed_difference_order2_rbergomi_4steps_H_007_K_1_totally_hierarch_with_rate_W1}
+			\caption{}
+			\label{fig:sub3}
+		\end{subfigure}%
+		\begin{subfigure}{.4\textwidth}
+			\centering
+			\includegraphics[width=1\linewidth]{./figures/rBergomi_mixed_error_rates/without_change_measure/N_4/H_007/mixed_difference_order2_rbergomi_4steps_H_007_K_1_totally_hierarch_with_rate_W2}
+			\caption{}
+			\label{fig:sub4}
+		\end{subfigure}
+		
+		\caption{The rate of convergence of  second order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$), for $K=1$, $H=0.07$: a) for $W^1$ b) for $W^2$}
+		\label{fig:second_diff_comp_K_1_H_007_wihtout_change_measure}
+	\end{figure}
+	
+	
+
+We tried to investigate the reason of the bad behavior observed for the mixed differences. From our experiments, we observed that whenever the mixed differences is diverging the maximum value of the integrand evaluated at quadrature points seems to blow up. We plot in figures (\ref{fig:Two dimensional Plotting of the integrand $I$_W12_view},\ref{fig:Two dimensional Plotting of the integrand $I$_W11_view})  the function evaluated with quadrature points without the gaussian weights. The integrand behavior without weights seems to blow up maybe with faster rate than how the weights of the Hermite quadrature is decaying. We need to understand the interplay between  the weights and the function values, so we may solve the issue of the divergence of mixed difference.
+
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/2D_plots/N_4/H_007/integrand_without_density/Bergomi_integrand_contours_K_1_H_007_W1_1_2_N_4_without_weights_0}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/2D_plots/N_4/H_007/integrand_without_density/Bergomi_integrand_contours_K_1_H_007_W1_1_2_N_4_without_weights_2_0}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	
+	
+	\caption{Two dimensional Plotting of the integrand $I$ (in \eqref{BS_formula_rbergomi}) without the Gaussian weight  for $H=0.07$ and $N=4$, function of $W_1$ coordinates $(W_1^1,W^2_1)$}
+	\label{fig:Two dimensional Plotting of the integrand $I$_W12_view}
+\end{figure}
+
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/2D_plots/N_4/H_007/integrand_without_density/Bergomi_integrand_contours_K_1_H_007_W1_1_2_N_4_without_weights_80}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/2D_plots/N_4/H_007/integrand_without_density/Bergomi_integrand_contours_K_1_H_007_W1_1_2_N_4_without_weights_2_80}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{Two dimensional Plotting of the integrand $I$ (in \eqref{BS_formula_rbergomi}) without the Gaussian weight  for $H=0.07$ and $N=4$, function of $W_1$ coordinates $(W_1^1,W^2_1)$}
+	\label{fig:Two dimensional Plotting of the integrand $I$_W11_view}
+\end{figure}
+
+\newpage
+\subsection{Motivation for the need of measure change}\label{sec:Motivation for the need of measure change}
 In this Section, we motivate the need of measure change as a pre-processing step before applying the MISC solver.
 \subsubsection{Integrand plotting wrt different random inputs } \label{sec:Integrand plotting wrt different random inputs}
 In this section, we plot the integrand, given by the term inside the expectation in \eqref{BS_formula_rbergomi}(including the Gaussian density), wrt different random inputs $(W^1,W^2)$. This is important to check if we need a measure change and if needed for which variables. We show the results for  $H=0.07$ and for two scenarios of number of time steps $N \in \{2,4\}$ (similar plots are produced for $H=0.43$ in Appendices (\ref{Appendix:Integrand plotting wrt different random inputs N=2, H=0.43},\ref{Appendix:Integrand plotting wrt different random inputs: N=4, H=0.43}). We also show the two dimensional plots (See figures \ref{fig:Integrand_H_007_N_2_2D},\ref{fig:Integrand_H_007_N_4_2D_W_1_2_3},\ref{fig:Integrand_H_007_N_4_2D_W_1_3_3_4},\ref{fig:Integrand_H_007_N_4_2D_W_1_4_2_3}). As it seems from the plots, we  just need change of measure wrt to $W^1$ coordinates and we do not need a measure chnage for $W^2$ coordinates. 
@@ -755,7 +1319,7 @@ In this section, we plot the integrand, given by the term inside the expectation
 
 \newpage
 \subsubsection{Comparing the mixed differences rates}
-In this section, we compare the mixed differences (first and second differences) rates for the standard case against the case where we do a partial change of measure wrt $W_1$ coordinates (see Section \ref{sec:Gaussian Hermite Quadrature with importance sampling}), for the case of $H=0.07$ and  $N=4$ time steps. From figures (\ref{fig:first_diff_comp_K_1_H_007_W_1},\ref{fig:first_diff_comp_K_1_H_007_W_2},\ref{fig:second_diff_comp_K_1_H_007_W_1},\ref{fig:second_diff_comp_K_1_H_007_W_1_2},\ref{fig:second_diff_comp_K_1_H_007_W_2}), we may notice that we face a bad behavior for the second differences, for the case without change of measure, which may explain the poor performance observed for MISC. This bad behavior is resolved when doing the partial change of measure. We obtained better results when using a measure change based on spectral decomposition rather than Cholesky decomposition. therefore by doing the change of measure, we obtained a more robust MISC solver.
+In this section, we compare the mixed differences (first and second differences) rates for the standard case against the case where we do a partial change of measure wrt $W_1$ coordinates (see Section \ref{sec:Gaussian Hermite Quadrature with importance sampling}), for the case of $H=0.07$ and  $N=4$ time steps. From figures (\ref{fig:first_diff_comp_K_1_H_007_W_1},\ref{fig:first_diff_comp_K_1_H_007_W_2},\ref{fig:second_diff_comp_K_1_H_007_W_1},\ref{fig:second_diff_comp_K_1_H_007_W_2}), we may notice that we face a bad behavior for the second differences, for the case without change of measure, which may explain the poor performance observed for MISC. This bad behavior is resolved when doing the partial change of measure. We obtained better results when using a measure change based on spectral decomposition rather than Cholesky decomposition. therefore by doing the change of measure, we obtained a more robust MISC solver.
 
 \begin{figure}[h!]
 	\centering
@@ -799,24 +1363,24 @@ In this section, we compare the mixed differences (first and second differences)
 
 
 
-\begin{figure}[h!]
-	\centering
-	\begin{subfigure}{.4\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{./figures/rBergomi_mixed_error_rates/without_change_measure/N_4/H_007/mixed_difference_order2_rbergomi_4steps_H_007_K_1_totally_hierarch_with_rate_W1_2}
-		\caption{}
-		\label{fig:sub3}
-	\end{subfigure}%
-	\begin{subfigure}{.4\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{./figures/rBergomi_mixed_error_rates/partial_change_measure/N_4/H_007/mixed_difference_order2_rbergomi_4steps_H_007_K_1_totally_hierarch_with_rate_W1_2_change_measure_part_spec}
-		\caption{}
-		\label{fig:sub4}
-	\end{subfigure}
-	
-	\caption{The rate of convergence of  second order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)), for $W^1$, for $K=1$, $H=0.07$: a) Without measure change b) With measure change}
-	\label{fig:second_diff_comp_K_1_H_007_W_1_2}
-\end{figure}
+%\begin{figure}[h!]
+%	\centering
+%	\begin{subfigure}{.4\textwidth}
+%		\centering
+%		\includegraphics[width=1\linewidth]{./figures/rBergomi_mixed_error_rates/without_change_measure/N_4/H_007/mixed_difference_order2_rbergomi_4steps_H_007_K_1_totally_hierarch_with_rate_W1_2}
+%		\caption{}
+%		\label{fig:sub3}
+%	\end{subfigure}%
+%	\begin{subfigure}{.4\textwidth}
+%		\centering
+%		\includegraphics[width=1\linewidth]{./figures/rBergomi_mixed_error_rates/partial_change_measure/N_4/H_007/mixed_difference_order2_rbergomi_4steps_H_007_K_1_totally_hierarch_with_rate_W1_2_change_measure_part_spec}
+%		\caption{}
+%		\label{fig:sub4}
+%	\end{subfigure}
+%	
+%	\caption{The rate of convergence of  second order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$)), for $W^1$, for $K=1$, $H=0.07$: a) Without measure change b) With measure change}
+%	\label{fig:second_diff_comp_K_1_H_007_W_1_2}
+%\end{figure}
 
 
 
@@ -861,418 +1425,9 @@ In this section, we compare the mixed differences (first and second differences)
 
 \newpage
 
-\subsection{Numerical results for the case without change of measure}
+
+\subsection{Numerical results for the case with change of measure}\label{sec:Numerical results for the case with change of measure}
 \newpage
-\subsubsection{Weak error plots} \label{sec:Weak error plots_no_change}
-In this section, I include the results of weak error rates for the case without change of measure for both cases without and with Richardson extrapolation (level $1$ and $2$),  for $H \in \{0.43,0.07\}$. The reference solution was computed with $N=500$ time steps. We note that the weak errors plotted here corresponds to relative errors.
- 
-
-\subsubsection*{Without Richardson extrapolation}
-From figures (\ref{fig:Weak_rate_H_043_without_rich} and \ref{fig:Weak_rate_H_007_without_rich}), we see that for both cases $H \in \{0.43,0.07\}$, we get a weak error of order $\Delta t$. The upper and lower bounds are $95\%$ confidence interval.
-
-
-
-\begin{figure}[h!]
-	\centering
-	\begin{subfigure}{.4\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/without_richardson/H_043/weak_convergence_order_Bergomi_H_043_K_1_M_10_5_CI_relative}
-		\caption{}
-		\label{fig:sub3}
-	\end{subfigure}%
-	\begin{subfigure}{.4\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/without_richardson/H_043/weak_convergence_order_differences_Bergomi_H_043_K_1_M_10_5_CI_relative}
-		\caption{}
-		\label{fig:sub4}
-	\end{subfigure}
-	
-	\caption{The rate of convergence of the weak error for $H=0.43$ $K=1$, without Richardson extraploation, using MC with $M=10^5$: a) $\abs{\expt{g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{g(X_{\Delta t})-g(X_{\Delta t/2})}}$ }
-	\label{fig:Weak_rate_H_043_without_rich}
-\end{figure}
-
-\begin{figure}[h!]
-	\centering
-	\begin{subfigure}{.4\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/without_richardson/H_007/weak_convergence_order_Bergomi_H_007_K_1_M_10_6_CI_relative}
-		\caption{}
-		\label{fig:sub3}
-	\end{subfigure}%
-	\begin{subfigure}{.4\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/without_richardson/H_007/weak_convergence_order_differences_Bergomi_H_007_K_1_M_10_6_CI_relative}
-		\caption{}
-		\label{fig:sub4}
-	\end{subfigure}
-	
-	\caption{The rate of convergence of the weak error for $H=0.07$ $K=1$, without Richardson extraploation, using MC with $M=10^6$: a) $\abs{\expt{g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{g(X_{\Delta t})-g(X_{\Delta t/2})}}$ }
-	\label{fig:Weak_rate_H_007_without_rich}
-\end{figure}
-\newpage
-\subsubsection*{With Richardson extrapolation (level 1)}
-From figures (\ref{fig:Weak_rate_H_043_with_rich} and \ref{fig:Weak_rate_H_007_with_rich}), we see that for both cases $H \in \{0.43,0.07\}$, we get a weak error of order $\Delta t^2$ (We can see this from the first points, however I think the last points are influenced by the statistical error). The upper and lower bounds are $95\%$ confidence interval.
-\begin{figure}[h!]
-	\centering
-	\begin{subfigure}{.4\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/with_richardson/H_043/weak_convergence_order_Bergomi_H_043_K_1_M_10_6_CI_richardson_relative}
-		\caption{}
-		\label{fig:sub3}
-	\end{subfigure}%
-	\begin{subfigure}{.4\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/with_richardson/H_043/weak_convergence_order_differences_Bergomi_H_043_K_1_M_10_6_CI_richardson_relative}
-		\caption{}
-		\label{fig:sub4}
-	\end{subfigure}
-	
-	\caption{The rate of convergence of the weak error for $H=0.43$ $K=1$, with Richardson extraploation, using MC with $M=10^6$: a) $\abs{\expt{2 g(X_{\Delta t/2}) -g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{3 g(X_{\Delta t/2})-g(X_{\Delta t})-2 g(X_{\Delta t/4})}}$ }
-	\label{fig:Weak_rate_H_043_with_rich}
-\end{figure}
-
-\begin{figure}[h!]
-	\centering
-	\begin{subfigure}{.4\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/with_richardson/H_007/weak_convergence_order_Bergomi_H_007_K_1_richardson_relative_M_10_6}
-		\caption{}
-		\label{fig:sub3}
-	\end{subfigure}%
-	\begin{subfigure}{.4\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/with_richardson/H_007/weak_convergence_order_differences_Bergomi_H_007_K_1_richardson_relative_M_10_6}
-		\caption{}
-		\label{fig:sub4}
-	\end{subfigure}
-	
-	\caption{The rate of convergence of the weak error for $H=0.07$ $K=1$, with Richardson extraploation, using MC with $M=10^6$: a) $\abs{\expt{2 g(X_{\Delta t/2}) -g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{3 g(X_{\Delta t/2})-g(X_{\Delta t})-2 g(X_{\Delta t/4})}}$ }
-	\label{fig:Weak_rate_H_007_with_rich}
-\end{figure}
-
-
-
-
-\newpage
-\subsubsection*{With Richardson extrapolation (level 2)}
-
-\begin{figure}[h!]
-	\centering
-	\begin{subfigure}{.4\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/with_richardson/H_043/weak_convergence_order_Bergomi_H_043_K_1_richardson_level2_relative_M_10_6}
-		\caption{}
-		\label{fig:sub3}
-	\end{subfigure}%
-	\begin{subfigure}{.4\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/with_richardson/H_043/weak_convergence_order_differences_Bergomi_H_043_K_1_richardson_level2_relative_M_10_6}
-		\caption{}
-		\label{fig:sub4}
-	\end{subfigure}
-	
-	\caption{The rate of convergence of the weak error for $H=0.43$ $K=1$, with Richardson extraploation, using MC with $M=10^6$: a) $\abs{\frac{1}{3}\expt{8 g(X_{\Delta t/4}) -6g(X_{\Delta t/2}) +g(X_{\Delta t})}-g(X)}$  b) $\abs{\frac{1}{3}\expt{-8 g(X_{\Delta t/8}) +14g(X_{\Delta t/4})-7 (X_{\Delta t/2}) +g(X_{\Delta t})}}$}
-	\label{fig:Weak_rate_H_043_with_rich_level2}
-\end{figure}
-
-\begin{figure}[h!]
-	\centering
-	\begin{subfigure}{.4\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/with_richardson/H_007/weak_convergence_order_Bergomi_H_007_K_1_richardson_level2_relative_M_10_6_2}
-		\caption{}
-		\label{fig:sub3}
-	\end{subfigure}%
-	\begin{subfigure}{.4\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/with_richardson/H_007/weak_convergence_order_differences_Bergomi_H_007_K_1_richardson_level2_relative_M_10_6_2}
-		\caption{}
-		\label{fig:sub4}
-	\end{subfigure}
-	
-	\caption{The rate of convergence of the weak error for $H=0.07$ $K=1$, with Richardson extraploation (level $2$), using MC with $M=10^6$: a) $\abs{\frac{1}{3}\expt{8 g(X_{\Delta t/4}) -6g(X_{\Delta t/2}) +g(X_{\Delta t})}-g(X)}$  b) $\abs{\frac{1}{3}\expt{-8 g(X_{\Delta t/8}) +14g(X_{\Delta t/4})-7 (X_{\Delta t/2}) +g(X_{\Delta t})}}$} 
-	\label{fig:Weak_rate_H_007_with_rich_level2}
-\end{figure}
-
-
-
-
-\newpage
-\subsubsection{Comparing relative errors using hierarchical representation }
-\red{We note that these are preliminary results since we observed an over-estimated tolerance for MISC solver. We need to figure out a way to define the adequate procedure to use the right MISC tolerance.}
-%For our numerical tests, we coupled the C++ implementation used in \cite{bayer2016pricing} with the MISC library, and for comparison purposes we compare our results to the same code but with MC method, for $M=10^6$ paths. 
-
- The results were reported for $H \in \{0.43,0.07\}$, and number of time steps $N \in \{2,4,8,16\}$.  Also, we use $S_0=1$, so the options will be prices in terms of the moneyness $K$, where $K$ is the strike price.  
-
-
-In the following, we compare the  relative errors for H $\in \{0.43,0.07\}$ (see appendices \ref{appendix:Case $H=0.43$, Call prices for different methods} and \ref{appendix:Case $H=0.07$, Call prices for different methods} for the values of Call option prices). We note that for each case the reference solution was computed for $N=500$ (number of time steps) using MC with $10^6$ samples. In each case  we report the results for 3 scenarios: i) Without using Richardson extrapolation, ii) Using level $1$ Richardson extrapoaltion and  iii) Using level $2$ Richardson extrapoaltion. Tables (\ref{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.43$}, \ref{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.43$ , using Richardson extrapolation}, \ref{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.43$ , using Richardson extrapolation_level2})  coresspond to $H=0.43$ and tables (\ref{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.07$}, \ref{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.07$ , using Richardson extrapolation}, \ref{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.07$ , using Richardson extrapolation_level2})  coresspond to $H=0.07$.
-
-Given the normalized bias computed by MC method  (reported as bold values in the tables), we report in red in each table the smallest tolerance that MISC required to get below that relative bias (I do not put values for smaller tolerances, once the required bias is reached).
-
-
-From the tables below, we have the following observations:
-
-\begin{itemize}
-	\item Using Richardson extrapoaltion, we got a significant improvement for the relative error with the use of minimal time steps. For instance, for $H=0.43$, we achieved around $8\%$ of  relative error, with $16$ time steps when not using Richardson extrapolation (see table \ref{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.43$}). However, When using level $1$ of Richardson extrapolation (see table \ref{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.43$ , using Richardson extrapolation}),  we achieved around $6\%$ of  relative error, with  only $2$ time steps in the coarse level, and we got around  $1\%$ of  relative error, with   $4$ time steps in the coarse level. A more significant improvement is seen with level $2$ of Richardson extrapolation, in fact, with just $1$ step in the coarse level, we got around $3\%$ percent of relative error.
-	\item For $H=0.07$, we achieved around $8\%$ of  relative error, with $16$ time steps when not using Richardson extrapolation (see table \ref{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.07$}). However, When using level $1$ of Richardson extrapolation (see table \ref{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.07$ , using Richardson extrapolation}),  we achieved around $5\%$ of  relative error, with  only $2$ time steps in the coarse level, and we got below  $1\%$ of  relative error, with   $4$ time steps in the coarse level. We observed a less significant improvement when using levle $2$ of Ricchardson extrapolation, compared to the case of $H=0.43$.
-	
-\end{itemize}
-
-
-
-
-
-
-
-%\begin{figure}[!h]
-%	\begin{center}
-%		\includegraphics[scale=0.5]{./figures/rBergomi_weak_error/weak_RT.pdf}
-%		\caption{The weak error of rBergomi model}
-%		\label{fig:rBergomi_weak_error}
-%	\end{center}
-%\end{figure}
-
-%We note that for some cases, the convergence becomes extremely slow (either the bias stagnates at one value or it keeps increasing or decreasing without reaching the prescribed tolerance) specially when we are close to at-the money option ($K$ close to 1), we do not put values for those cases. We also remark that we have better agreement between the results of MISC coupled with the C++ code and the MC method using the python code form \cite{mccrickerd2017turbocharging}, for small values of moneyness.
-
-%In Section \ref{sec:MISC plots}, we show the convergence plots given by MISC library for the cases of $H=\{0.43,0.07\}$ and $K=0.1$.
-
-
-%Table \ref{table: Complexity rates for different number of time steps_rbergomi} summarizes the obtained complexity rates for different number of time steps (for more details, see Section \ref{sec:MISC plots}. 
-%
-%\begin{table}[h!]
-%	\centering
-%	\begin{tabular}{l*{6}{c}r}
-%		Method \textbackslash  Steps             &  $4$ & $8$  & $16$   \\
-%		\hline
-%		without Richardson  extrapolation(hierarchical) $(H=0.43)$ & $-0.34$ & $-0.33$ & $-0.75$   \\
-%		without Richardson  extrapolation (non hierarchical) $(H=0.43)$ & $-0.17$ & $-0.6$ & $-1$   \\
-%		without Richardson  extrapolation (hierarchical) $(H=0.07)$ & $-0.64$ & $-0.84$ & $-2.5$   \\
-%		without Richardson  extrapolation (total hierarchical) $(H=0.07)$ & $-0.70$ & $-0.88$ & $-2.7$   \\
-%		without Richardson  extrapolation (non hierarchical) $(H=0.07)$ & $-0.67$ & $-1.6$ & $-2.9$   \\
-%		\hline
-%	\end{tabular}
-%	\caption{Complexity rates for different number of time steps for $K=1$ and $H=\{0.43,0.07\}$}
-%	\label{table: Complexity rates for different number of time steps_rbergomi}
-%\end{table}
-
-
-
-
-\subsubsection*{Case $H=0.43$, Relative error for different methods}
-\label{sec:Case $H=0.43$, Relative error for different methods}
-
-\begin{table}[h!]
-	\centering
-	\begin{tabular}{l*{6}{c}r}
-		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$ &   \\
-		\hline
-		MISC ($TOl=5.10^{-1}$)  & $0.6011$ & $0.3497$ & $0.1910$ & $0.0969$  \\
-		MISC ($TOl=2.10^{-1}$)  &  $0.6011$ & $0.3497$ &$0.1910$ & $\red{0.0801}$  \\
-		MISC ($TOl=10^{-1}$)  & $0.6011$ & $0.3497$ & $0.2233$ & $0.1236$  \\
-		MISC ($TOl=5.10^{-2}$)  & $0.6011$ & $0.3539$ & $0.1882$ & $0.1573$  \\
-		MISC ($TOl=10^{-2}$)  & $\red{0.5126}$ & $0.3258$ & $0.1770$ & $0.0829$   \\	
-		MISC ($TOl=5.10^{-3}$)  & $	0.4930$ & $0.3076$ & $0.1671$ & $-$   \\	
-	    MISC ($TOl=10^{-3}$)  & $		0.5126$ & $\red{0.2935}$ & $\red{0.1503}$ & $-$   \\
-	MISC ($TOl=10^{-4}$)  & $		0.5154$ & $0.2935$ & $-$ & $-$   \\
-			MC method ($M=10^{6}$)   & $\mathbf{0.5154}$  & $\mathbf{0.2935}$  & $\mathbf{0.1545}$ & $\mathbf{0.0801}$  \\	
-		\hline
-	\end{tabular}
-	\caption{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1$, $H=0.43$, without Richardson extrapolation}
-	\label{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.43$}
-\end{table}
-
-\begin{table}[h!]
-	\centering
-	\begin{tabular}{l*{5}{c}r}
-		Method \textbackslash  Steps    &$1-2$        & $2-4$ & $4-8$ & $8-16$  \\
-		\hline
-		MISC ($TOl=5.10^{-1}$)  &$0.9059$ & $0.0997$ & $0.0323$ & $\red{0.0028}$  \\
-		MISC ($TOl=10^{-1}$)  &$0.9059$ &$0.0997$ & $0.1025$ & $0.0688$ \\
-		MISC ($TOl=5.10^{-2}$)  &$0.9059$ & $0.1671$ & $0.0857$ & $0.0646$   \\
-		MISC ($TOl=10^{-2}$)  & $0.7374$ &$0.0969$ & $0.0463$ & $0.0028$ \\		
-			MISC ($TOl=5.10^{-3}$)  & $0.7205$ &$0.0941$ & $0.0211$ & $-$ \\	
-				MISC ($TOl=10^{-3}$)  & $0.7191$ & $0.0758$ & $\red{0.0112}$ & $-$ \\	
-					MISC ($TOl=5.10^{-4}$)  &$\red{0.7129}$ & $\red{0.0609}$ & $-$ & $-$ \\
-		MC method ($M=10^{6}$)&$ \mathbf{0.7133}$    & $\mathbf{0.0698}$  & $\mathbf{0.0160}$  & $\mathbf{0.0035}$ \\
-		\hline
-	\end{tabular}
-	\caption{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1$, $H=0.43$, using Richardson extrapolation (level $1$)}
-	\label{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.43$ , using Richardson extrapolation}
-\end{table}
-
-
-
-\begin{table}[h!]
-	\centering
-	\begin{tabular}{l*{5}{c}r}
-		Method \textbackslash  Steps    &$1-2-4$        & $2-4-8$ & $4-8-16$   \\
-		\hline
-		MISC ($TOl=5.10^{-1}$)  &$ 0.1699$ & $\red{0.0098}$ & $ 0.0056$   \\
-			MISC ($TOl=2.10^{-1}$)  &$ 0.1699$ &$-$ & $\red{ 0.0014}$  \\
-		MISC ($TOl=10^{-1}$)  &$0.2037$ &$-$ & $-$  \\
-		MISC ($TOl=5.10^{-2}$)  &$\red{0.0295}$ & $-$ & $-$  \\
-		MC method ($M=10^{6}$)&$\mathbf{0.1440}$    & $ \mathbf{0.0180}  $  & $\mathbf{0.0023}$   \\
-		\hline
-	\end{tabular}
-	\caption{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1$, $H=0.43$, using Richardson extrapolation (level $2$)}
-	\label{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.43$ , using Richardson extrapolation_level2}
-\end{table}
-\newpage
-
-
-
-\subsubsection*{Case $H=0.07$, Relative error for different methods}
-\label{sec:Case $H=0.07$, Relative error for different methods}
-\begin{table}[h!]
-	\centering
-	\begin{tabular}{l*{6}{c}r}
-		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$ &   \\
-		\hline
-			MISC ($TOl=5.10^{-1}$)  & $\red{0.3662}$ & $\red{0.1578}$ & $\red{0.1010}$ & $\red{0.0758}$  \\
-		MISC ($TOl=10^{-1}$)  & $0.3662$ &  $0.1578$ & $-$ & $-$  \\
-		MISC ($TOl=5.10^{-2}$)        & $0.3662$ &$-$ &  $-$ &  $-$ \\
-		MISC ($TOl=10^{-2}$)    & $-$ & $-$  & $-$ & $-$  \\	
-		MC method ($M=10^{6}$)   & $\mathbf{0.5354}$  & $\mathbf{0.2879}$  & $\mathbf{0.1515}$ & $\mathbf{0.0783}$  \\	
-		\hline
-	\end{tabular}
-	\caption{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1$, $H=0.07$, without Richardson extrapolation}
-	\label{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.07$}
-\end{table}
-
-
-
-
-
-\begin{table}[h!]
-	\centering
-	\begin{tabular}{l*{5}{c}r}
-		Method \textbackslash  Steps &$1-2$             & $2-4$ & $4-8$ & $8-16$ \\
-		\hline
-		MISC ($TOl=5.10^{-1}$)  &$\red{0.5682}$ & $\red{0.0505}$ & $0.1389$ & $0.1604$ \\
-		MISC ($TOl=16.10^{-2}$)  &$0.5682$ & $0.0505$ & $0.1389$ & $\red{0.0038}$  \\
-		MISC ($TOl=10^{-1}$)  &$0.5682$ &  $0.0505$ & $ 0.1692$ & $-$ \\
-		MISC ($TOl=5.10^{-2}$) &$0.5682$ &  $ 0.1465$ & $\red{0.0088}$ & $-$   \\
-		MISC ($TOl=10^{-2}$)&$-$ &  $0.0669$ & $0.0088$ & $-$ \\	
-			MC method ($M=10^{6}$)  &$\mathbf{0.8915}$  & $\mathbf{0.0537}$  & $\mathbf{0.0129}$  & $\mathbf{0.0043}$ \\
-		\hline	
-	
-	\end{tabular}
-	\caption{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1$, $H=0.07$, using Richardson extrapolation (level $1$)}
-	\label{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.07$ , using Richardson extrapolation}
-\end{table}
-
-
-
-\begin{table}[h!]
-	\centering
-	\begin{tabular}{l*{5}{c}r}
-		Method \textbackslash  Steps &$1-2-4$             & $2-4-8$ & $4-8-16$   \\
-		\hline
-		MISC ($TOl=5.10^{-1}$)  &$0.2563$ & $ 0.1692$ & $ 0.1679
-		$   \\
-		MISC ($TOl=10^{-1}$)  &$0.2563$ &  $0.1566$ & $\red{  0.0025}$  \\
-		MISC ($TOl=7.10^{-2}$) &$  0.3005$ &  $  \red{0.0227}$ & $-$    \\
-		MISC ($TOl=5.10^{-2}$) &$0.4874$ &  $  -$ & $-$    \\
-		MISC ($TOl=10^{-2}$)&$ \red{0.1742}$ &  $-$ & $-$  \\	
-		MC method ($M=10^{6}$)  &$\mathbf{0.2231}$  & $  \mathbf{0.0279}$  & $\mathbf{0.0035}$ \\
-		\hline	
-		
-	\end{tabular}
-	\caption{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1$, $H=0.07$, using Richardson extrapolation (level $2$)}
-	\label{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.07$ , using Richardson extrapolation_level2}
-\end{table}
-
-
-
-
-
-%\subsection{Quadrature error vs work for different } \label{sec:Complexity  error plots}
-
-
-
-%\begin{table}[h!]
-%	\centering
-%	\begin{tabular}{l*{6}{c}r}
-%		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$  \\
-%		\hline
-%		MISC ($TOl=10^{-1}$)  & $0.2156$ & $0.2002$ &  $0.2002$ &  $0.1910$  \\
-%		MISC ($TOl=10^{-2}$)  &  $0.2474$ &  $0.2378$ &  $0.2378$ & $-$  \\
-%		MISC ($TOl=10^{-3}$)        &  $0.2505$ & $0.2377$ &   $-$ &  $-$ \\
-%		MISC ($TOl=10^{-4}$)    &  $0.25$ &  $0.2378$  & $-$ & $-$  \\
-%		%		MC method ($M=10^{6}$)    &  $0.6326$ &  $0.6332$  &  $0.6330$ &  $0.6337$  \\
-%		MC method ($M=10^{6}$)   & $\underset{(4.72e-07)}{0.2499} $   & $\underset{(2.45e-07)}{0.2378} $  & $\underset{(1.80e-07)}{0.2310}$ & $\underset{(1.57e-07)}{0.2275} $  \\			
-%		\hline
-%	\end{tabular}
-%	\caption{ Call option price of the different methods for different number of time steps. Case $K=0.8$}
-%	\label{table: Call option price of the different methods for different number of time steps. Case $K=0.8$_H_007}
-%\end{table}
-%
-
-
-
-%
-%
-%\begin{table}[h!]
-%	\centering
-%	\begin{tabular}{l*{6}{c}r}
-%		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$  \\
-%		\hline
-%		MISC ($TOl=10^{-1}$)  & $0.0288$  & $0.0102$   & $0.0025$   &  $0.0005 $ \\
-%		MISC ($TOl=10^{-2}$)  & $0.0501$  & $0.0161$ &   $0.0025$  &   $0.0005$  \\
-%		MISC ($TOl=10^{-3}$)        &  $0.0515$ & $0.0335$  &  $-$  &   $-$ \\
-%		MISC ($TOl=10^{-4}$)    & $0.0525$   &  $-$   & $-$ & $-$  \\
-%		%		MC method ($M=10^{6}$)    &  $0.8646$  &   $0.8647$   &   $0.8643$  &   $0.8646$   \\
-%		MC method ($M=10^{6}$)   & $\underset{(2.68e-07)}{0.0518} $   & $\underset{(1.85e-07)}{0.0339} $  & $\underset{(1.44e-07)}{0.0237}$ & $\underset{(6.61e-08)}{0.0177} $  \\		
-%		\hline
-%	\end{tabular}
-%	\caption{ Call option price of the different methods for different number of time steps. Case $K=1.2$}
-%	\label{table: Call option price of the different methods for different number of time steps. Case $K=1.2$_H_007}
-%\end{table}
-
-
-
-%
-%\begin{figure}[!h]
-%	\centering
-%	\begin{subfigure}{.5\textwidth}
-%		\centering
-%		\includegraphics[width=0.95\linewidth]{./figures/payoff_plots_H_007/rBergomi_payoff_2steps_wrt_monyeness}
-%		\caption{}
-%		\label{fig:rBergomi_payoff_4steps_wrt_monyeness_sub1}
-%	\end{subfigure}%
-%	\begin{subfigure}{.5\textwidth}
-%		\centering
-%		\includegraphics[width=0.95\linewidth]{./figures/payoff_plots_H_007/rBergomi_payoff_4steps_wrt_monyeness}
-%		\caption{ }
-%		\label{fig:rBergomi_payoff_4steps_wrt_monyeness_sub2}
-%	\end{subfigure}%
-%	\caption{Black Scholes payoff for rBergomi model as a function of moneyness a) $2$  time steps, b) $4$  time steps.}
-%	\label{fig:rBergomi_payoff_4steps_wrt_monyeness_1}
-%\end{figure}
-%
-%\begin{figure}[!h]
-%	\centering
-%	\begin{subfigure}{.5\textwidth}
-%		\centering
-%		\includegraphics[width=0.95\linewidth]{./figures/payoff_plots_H_007/rBergomi_payoff_8steps_wrt_monyeness}
-%		\caption{}
-%		\label{fig:rBergomi_payoff_4steps_wrt_monyeness_sub3}
-%	\end{subfigure}%
-%	\begin{subfigure}{.5\textwidth}
-%		\centering
-%		\includegraphics[width=0.95\linewidth]{./figures/payoff_plots_H_007/rBergomi_payoff_16steps_wrt_monyeness}
-%		\caption{ }
-%		\label{fig:rBergomi_payoff_4steps_wrt_monyeness_sub4}
-%	\end{subfigure}%
-%	\caption{Black Scholes payoff for rBergomi model as a function of moneyness a) $8$  time steps, b) $16$  time steps.}
-%	\label{fig:rBergomi_payoff_4steps_wrt_monyeness_2}
-%\end{figure}
-%
-
-
-
-\newpage
-\subsection{Numerical results for the case with change of measure}
 \subsubsection{Weak error plots} \label{sec:Weak error plots_with_change}
 In this section, I include the results of weak error rates for the case with change of measure for both cases without and with Richardson extrapolation,  for $H =0.07$. The reference solution was computed with $N=500$ time steps. We note that we limit the maximum number of changed coordinates  up to $4$, due to practical purposes related to the optimization procedure.  We note that the weak errors plotted here corresponds to relative errors.
 
@@ -1354,20 +1509,10 @@ From figure \ref{fig:Weak_rate_H_007_with_rich_change_measure} , we see that  fo
 \end{table}
 
 
-\red{ We still need to figure out a way to define the adequate procedure to use the right MISC tolerance, since we observed an over-estimated tolerance for MISC solver when used for the case without change of measure.}
-
-
-
-
-
-
-
-
-
 
 
 \subsubsection{Plotting the Richardson integrand for the change of measure}\label{sec:Plotting the Richardson integrand for the change of measure}
-
+In this section, We try to investigate the reason of having worse weak rates than the case without change of measure. We plot the Richardson integrand used for the change of measure, for $H=0.07$ and for  two cases of time steps in the coarse level of Richardson extrapolation ($N \in \{1,2\}$) . We conclude from those plots  that  the extrapolated formula is not very appropriate since we have a more complex function (bi-modal functions or higher as we go deeper for the levels of Richardson extrapolation). As a results, we think it is better to focus on the case without applying a change of measure.
 
 
 \subsubsection*{N=1, H=0.07}

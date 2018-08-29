@@ -161,6 +161,7 @@ def weak_convergence_differences():
         stand_diff=np.zeros(3)
         error=np.zeros(4)
         stand=np.zeros(4)
+        elapsed_time_qoi=np.zeros(4)
         Ub=np.zeros(4)
         Lb=np.zeros(4)
         Ub_diff=np.zeros(3)
@@ -172,6 +173,7 @@ def weak_convergence_differences():
        
         for i in range(0,4):
             print i
+            start_time=time.time()
             
             
             def processInput(j):
@@ -186,12 +188,15 @@ def weak_convergence_differences():
             
             values[:,i]= p.map(processInput, range((10**6)))
 
-        elapsed_time_qoi=time.time()-start_time;
-        print elapsed_time_qoi  
+            elapsed_time_qoi[i]=time.time()-start_time
+            print  elapsed_time_qoi[i]
         
 
         
+        start_time_2=time.time()
         error=np.abs(np.mean(values,axis=0) - 1) 
+        elapsed_time_qoi=time.time()-start_time_2+elapsed_time_qoi
+
         stand=np.std(values, axis = 0)/  float(np.sqrt((10**6)))
         Ub=np.abs(np.mean(values,axis=0) - 1)+1.96*stand
         Lb=np.abs(np.mean(values,axis=0) - 1)-1.96*stand
