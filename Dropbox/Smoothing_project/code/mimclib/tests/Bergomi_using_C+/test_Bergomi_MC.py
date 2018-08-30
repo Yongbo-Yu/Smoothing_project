@@ -4,7 +4,7 @@ from RBergomi import *
 import numpy as np
 import time
 
-x=0.235**2;
+x=0.0235**2;
 HIn=Vector(1)
 HIn[0]= 0.07
 e=Vector(1)
@@ -15,7 +15,7 @@ t=Vector(1)
 t[0]=1.0
 k=Vector(1)
 k[0]=1
-NIn=256
+NIn=32
 MIn=1
 
 start=time.time()
