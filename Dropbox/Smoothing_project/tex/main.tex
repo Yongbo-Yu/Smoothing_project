@@ -904,13 +904,29 @@ From the tables (\ref{Relative error of the binary option price of the different
 	\begin{tabular}{l*{6}{c}r}
 		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$ &   \\
 		\hline
-		MISC ($TOl=5.10^{-1}$)  & $  \red{0.0982}$ & $ \red{ 0.0468}$ & $\red{0.0219}$ & $\red{0.0102}$  \\
-		MC method ($M=10^{6}$)   & $\mathbf{0.0999}$  & $\mathbf{0.0470}$  & $\mathbf{0.0224}$ & $\mathbf{0.0099}$  \\	
+		MISC ($TOl=5.10^{-1}$)  & $  \red{0.0978}$ & $ \red{  0.0467}$ & $\red{0.0218}$ & $\red{0.0101}$  \\
+		MC method ($M=10^{6}$)   & $\mathbf{0.0980}$  & $\mathbf{0.0470}$  & $\mathbf{0.0224}$ & $\mathbf{0.0127}$  \\	
 		\hline
 	\end{tabular}
 	\caption{Relative error of the binary option price of the different tolerances for different number of time steps, without Richardson extrapolation}
 	\label{Relative error of the binary option price of the different tolerances for different number of time steps.}
 \end{table}
+
+
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$ &   \\
+		\hline
+		MISC   & $ 0.3$ & $0.8$ & $2.3$ & $9$  \\
+		MC method ($M=10^{6}$)   & $15$  & $19$  & $26$ & $38$  \\	
+		\hline
+	\end{tabular}
+	\caption{Comparsion of the computational time of  MC and MISC, used to compute the binary option price of the different tolerances for different number of time steps, without Richardson extrapolation}
+	\label{Comparsion of the computational time of  MC and MISC, used to compute the binary option price of the different tolerances for different number of time steps, without Richardson extrapolation.}
+\end{table}
+
 
 \begin{table}[h!]
 	\centering
@@ -920,11 +936,26 @@ From the tables (\ref{Relative error of the binary option price of the different
 		MISC ($TOl=5.10^{-1}$)  &$\red{0.0076}$ & $0.0045$ & $0.0031$ & $0.0017$  \\
 		MISC ($TOl=10^{-2}$)  &$-$ & $\red{0.0036}$ & $0.0031$ & $0.0014$  \\
 		MISC ($TOl=10^{-3}$) & $-$ & $-$ & $  \red{0.0021}$ & $\red{0.0005}$   \\
-		MC method ($M=10^{6}$)&$ \mathbf{0.0073}$    & $\mathbf{0.0038}$  & $\mathbf{0.0022}$  & $\mathbf{0.0006}$ \\
+		MC method ($M=10^{6}$)&$ \mathbf{0.0071}$    & $\mathbf{0.0039}$  & $\mathbf{0.0020}$  & $\mathbf{0.0006}$ \\
 		\hline
 	\end{tabular}
 	\caption{Relative error of the binary option price of the different tolerances for different number of time steps, using Richardson extrapolation (level $1$)}
 	\label{Relative error of binary option price of the different tolerances for different number of time steps, using Richardson extrapolation (level $1$)}
+\end{table}
+
+
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{5}{c}r}
+		Method \textbackslash  Steps    &$1-2$        & $2-4$ & $4-8$ & $8-16$  \\
+		\hline
+		MISC  &$-$ & $-$ & $-$ & $-$  \\
+		MC method ($M=10^{6}$)&$-$    & $-$  & $-$  & $-$ \\
+		\hline
+	\end{tabular}
+	\caption{Comparsion of the computational time of  MC and MISC, coupled with Richardson extrapolation (level $1$), used to compute the binary option price of the different tolerances for different number of time steps.}
+	\label{Comparsion of the computational time of  MC and MISC, coupled with Richardson extrapolation (level $1$), used to compute the binary option price of the different tolerances for different number of time steps}
 \end{table}
 
 
@@ -938,13 +969,13 @@ From figure \ref{fig:Weak_rate_binary_without_rich}, we see that we get a weak e
 	\centering
 	\begin{subfigure}{.4\textwidth}
 		\centering
-		\includegraphics[width=1\linewidth]{./figures/binary_weak_error/without_richardson/weak_convergence_order_binary_option_relative}
+		\includegraphics[width=1\linewidth]{./figures/binary_weak_error/without_richardson/weak_convergence_order_binary_option_relative_M_10_4}
 		\caption{}
 		\label{fig:sub3}
 	\end{subfigure}%
 	\begin{subfigure}{.4\textwidth}
 		\centering
-		\includegraphics[width=1\linewidth]{./figures/binary_weak_error/without_richardson/weak_convergence_order_differences_binary_option_relative}
+		\includegraphics[width=1\linewidth]{./figures/binary_weak_error/without_richardson/weak_convergence_order_differences_binary_option_relative_M_10_4}
 		\caption{}
 		\label{fig:sub4}
 	\end{subfigure}
@@ -1319,7 +1350,7 @@ In this Section, we provide the weak rate plots, for the call option for two cas
 	\begin{tabular}{l*{6}{c}r}
 		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$ &   \\
 		\hline
-		MISC ($TOl=5.10^{-1}$)  & $\red{0.4620}$ & $  \red{0.4404}$ & $\red{0.4299}$ & $\red{0.4250}$  \\
+		MISC ($TOl=5.10^{-1}$)  & $\red{0.4619}$ & $  \red{0.4404}$ & $\red{0.4299}$ & $\red{0.4250}$  \\
 		\hline
 	\end{tabular}
 	\caption{ Binary option price of the different methods for different number of time steps, without Richardson extrapolation.}

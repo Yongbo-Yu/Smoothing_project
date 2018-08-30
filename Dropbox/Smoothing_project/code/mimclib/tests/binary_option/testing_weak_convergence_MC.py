@@ -10,6 +10,9 @@ from matplotlib.ticker import MaxNLocator
 
 
 
+import pathos.multiprocessing as mp
+import pathos.pools as pp
+
 class Problem(object):
 
 # attributes
@@ -131,7 +134,7 @@ class Problem(object):
 
 
 def weak_convergence_differences():    
-        exact=  0.4207
+        exact=  0.420740290561
         marker=['>', 'v', '^', 'o', '*','+','-',':']
         ax = figure().gca()
         ax.xaxis.set_major_locator(MaxNLocator(integer=True))
@@ -142,22 +145,42 @@ def weak_convergence_differences():
         stand_diff=np.zeros(3)
         error=np.zeros(4)
         stand=np.zeros(4)
+        elapsed_time_qoi=np.zeros(4)
         Ub=np.zeros(4)
         Lb=np.zeros(4)
         Ub_diff=np.zeros(3)
         Lb_diff=np.zeros(3)
         values=np.zeros((10**4,4)) 
+        num_cores = mp.cpu_count()
         for i in range(0,4):
+            
             print i
-            for j in range(10**4):
-                prb = Problem(1,Nsteps_arr[i]) 
-                values[j,i]=prb.objfun(Nsteps_arr[i])/float(exact)
+            start_time=time.time()
+
+            def processInput(j):
+                
+                prb = Problem(1,Nsteps_arr[i])
+
+                return prb.objfun(Nsteps_arr[i])/float(exact)
+
+            # results = Parallel(n_jobs=num_cores)(delayed(processInput)(j) for j in inputs)
+            p =  pp.ProcessPool(num_cores)  # Processing Pool with four processors
+            
+            values[:,i]= p.map(processInput, range(((10**4))))  
+
+            elapsed_time_qoi[i]=time.time()-start_time
+            print  elapsed_time_qoi[i]
         
 
+        start_time_2=time.time()
         error=np.abs(np.mean(values,axis=0) - 1) 
+        elapsed_time_qoi=time.time()-start_time_2+elapsed_time_qoi
+
         stand=np.std(values, axis = 0)/  float(np.sqrt(10**4))
         Ub=np.abs(np.mean(values,axis=0) - 1)+1.96*stand
         Lb=np.abs(np.mean(values,axis=0) - 1)-1.96*stand
+
+        print (elapsed_time_qoi)
         print(error)   
         print(stand)
         print Lb
@@ -199,35 +222,34 @@ def weak_convergence_differences():
         fig = plt.figure()
 
         plt.plot(dt_arr, error,linewidth=2.0,label='weak_error' ,linestyle = '--',marker='>', hold=True) 
-        plt.plot(dt_arr, Lb,linewidth=2.0,label='Lb' ,linestyle = '--', hold=True) 
-        plt.plot(dt_arr, Ub,linewidth=2.0,label='Ub' ,linestyle = '--', hold=True) 
+        plt.plot(dt_arr, Lb,linewidth=2.0,label='Lb' ,linestyle = ':', hold=True) 
+        plt.plot(dt_arr, Ub,linewidth=2.0,label='Ub' ,linestyle = ':', hold=True) 
         plt.yscale('log')
         plt.xscale('log')
         plt.xlabel(r'$\Delta t$',fontsize=14)
 
-        plt.plot(dt_arr, fit,linewidth=2.0,label=r'rate= %s' % format(z[0]  , '.2f'), linestyle = '--', marker='o')
-        plt.plot(dt_arr, fit3,linewidth=2.0,label=r'rate= %s' % format(z3[0]  , '.2f'), linestyle = '--', marker='o')
-        
+        plt.plot(dt_arr, fit*10,linewidth=2.0,label=r'rate= %s' % format(z[0]  , '.2f'), linestyle = '--')
+        plt.plot(dt_arr, fit3*10,linewidth=2.0,label=r'rate= %s' % format(z3[0]  , '.2f'), linestyle = '--') 
         
         plt.ylabel(r'$\mid  g(X_{\Delta t})-  g(X) \mid $',fontsize=14) 
         plt.subplots_adjust(wspace=0.6, hspace=0.6, left=0.15, bottom=0.22, right=0.96, top=0.96)
         plt.legend(loc='upper left')
-        plt.savefig('./results/weak_convergence_order_binary_option_relative.eps', format='eps', dpi=1000)  
+        plt.savefig('./results/weak_convergence_order_binary_option_relative_M_10_4.eps', format='eps', dpi=1000)  
 
         fig = plt.figure()
         plt.plot(dt_arr[0:3], error_diff,linewidth=2.0,label='weak_error' ,linestyle = '--',marker='>', hold=True) 
-        plt.plot(dt_arr[0:3], Lb_diff,linewidth=2.0,label='Lb' ,linestyle = '--', hold=True) 
-        plt.plot(dt_arr[0:3], Ub_diff,linewidth=2.0,label='Ub' ,linestyle = '--', hold=True) 
+        plt.plot(dt_arr[0:3], Lb_diff,linewidth=2.0,label='Lb' ,linestyle = ':', hold=True) 
+        plt.plot(dt_arr[0:3], Ub_diff,linewidth=2.0,label='Ub' ,linestyle = ':', hold=True) 
         plt.yscale('log')
         plt.xscale('log')
         plt.xlabel(r'$\Delta t$',fontsize=14)
 
-        plt.plot(dt_arr[0:3], fit_diff,linewidth=2.0,label=r'rate= %s' % format(z_diff[0]  , '.2f'), linestyle = '--', marker='o')
-        plt.plot(dt_arr[0:3], fit3diff,linewidth=2.0,label=r'rate= %s' % format(z3diff[0]  , '.2f'), linestyle = '--', marker='o')
+        plt.plot(dt_arr[0:3], fit_diff*10,linewidth=2.0,label=r'rate= %s' % format(z_diff[0]  , '.2f'), linestyle = '--')
+        plt.plot(dt_arr[0:3], fit3diff*10,linewidth=2.0,label=r'rate= %s' % format(z3diff[0]  , '.2f'), linestyle = '--')
         plt.ylabel(r'$\mid  g(X_{\Delta t})-  g(X_{\Delta t/2}) \mid $',fontsize=14) 
         plt.subplots_adjust(wspace=0.6, hspace=0.6, left=0.15, bottom=0.22, right=0.96, top=0.96)
         plt.legend(loc='upper left')
-        plt.savefig('./results/weak_convergence_order_differences_binary_option_relative.eps', format='eps', dpi=1000)  
+        plt.savefig('./results/weak_convergence_order_differences_binary_option_relative_M_10_4.eps', format='eps', dpi=1000)  
 
 
 weak_convergence_differences()   
