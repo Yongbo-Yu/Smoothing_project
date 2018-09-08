@@ -14,12 +14,13 @@ class Problem_richardson_extrapolation(object):
 # attributes
     random_gen=None;
     elapsed_time=0.0;
-    N= 8# Number of time steps N, discretization resolution
+    N= 2# Number of time steps N, discretization resolution
   
     # for the values of below paramters, we need to see the paper as well check with Christian 
     x=0.235**2;   # this will provide the set of xi parameter values 
     HIn=Vector(1)    # this will provide the set of H parameter values
     HIn[0]=0.07
+    #HIn[0]=0.43
     e=Vector(1)    # This will provide the set of eta paramter values
     e[0]=1.9
     r=Vector(1)   # this will provide the set of rho paramter values
@@ -27,7 +28,8 @@ class Problem_richardson_extrapolation(object):
     T=Vector(1)     # this will provide the set of T(time to maturity) parameter value
     T[0]=1.0
     k=Vector(1)     # this will provide the set of K (strike ) paramter value
-    k[0]=1.0
+    #k[0]=1.0
+    k[0]=0.8
     
     MIn=1            # number of samples M (I think we do not need this paramter here by default in our case it should be =1)
 

@@ -32,14 +32,17 @@ class Problem(object):
   
     # for the values of below paramters, we need to see the paper as well check with Christian 
     x=0.235**2;   # this will provide the set of xi parameter values 
-    #x=0.00001;
+    #x=0.1;
     HIn=Vector(1)    # this will provide the set of H parameter values
+    #HIn[0]=0.43
     HIn[0]=0.07
+    #HIn[0]=0.02
     e=Vector(1)    # This will provide the set of eta paramter values
     e[0]=1.9
+    #e[0]=0.4
     r=Vector(1)   # this will provide the set of rho paramter values
     r[0]=-0.9
-    #r[0]=0
+    #r[0]=-0.7
     T=Vector(1)     # this will provide the set of T(time to maturity) parameter value
     T[0]=1.0
     k=Vector(1)     # this will provide the set of K (strike ) paramter value
@@ -148,8 +151,12 @@ class Problem(object):
 
 def weak_convergence_differences():    
         start_time=time.time()
-        #exact= 0.0712073 #exact value of K=1, H=0.43 
-        exact= 0.0792047  #exact value of K=1, H=0.07
+        #exact= 0.0712073 #exact value of K=1, H=0.43_xi_0.235^2_eta_1_9_r__09
+        exact= 0.0792047  #exact value of K=1, H=0.07_xi_0.235^2_eta_1_9_r__09
+        #exact= 0.224905759853  #exact value of K=0.8, H=0.07_xi_0.235^2_eta_1_9_r__09
+        #exact=0.124762643828  #exact value of K=1, H=0.02_xi_01_eta_0_4_r__07
+        #exact= 0.00993973310944  #exact value of K=1.2, H=0.07_xi_0.235^2_eta_1_9_r__09
+
         marker=['>', 'v', '^', 'o', '*','+','-',':']
         ax = figure().gca()
         ax.xaxis.set_major_locator(MaxNLocator(integer=True))
@@ -166,7 +173,7 @@ def weak_convergence_differences():
         Lb=np.zeros(4)
         Ub_diff=np.zeros(3)
         Lb_diff=np.zeros(3)
-        values=np.zeros(((10**6),4)) 
+        values=np.zeros((1*(10**4),4)) 
      
         num_cores = mp.cpu_count()
         print num_cores
@@ -186,7 +193,7 @@ def weak_convergence_differences():
             # results = Parallel(n_jobs=num_cores)(delayed(processInput)(j) for j in inputs)
             p =  pp.ProcessPool(num_cores)  # Processing Pool with four processors
             
-            values[:,i]= p.map(processInput, range((10**6)))
+            values[:,i]= p.map(processInput, range((1*(10**4))))
 
             elapsed_time_qoi[i]=time.time()-start_time
             print  elapsed_time_qoi[i]
@@ -197,9 +204,11 @@ def weak_convergence_differences():
         error=np.abs(np.mean(values,axis=0) - 1) 
         elapsed_time_qoi=time.time()-start_time_2+elapsed_time_qoi
 
-        stand=np.std(values, axis = 0)/  float(np.sqrt((10**6)))
+        stand=np.std(values, axis = 0)/  float(np.sqrt((1*(10**4))))
         Ub=np.abs(np.mean(values,axis=0) - 1)+1.96*stand
         Lb=np.abs(np.mean(values,axis=0) - 1)-1.96*stand
+
+        print elapsed_time_qoi
         print(error)   
         print(stand)
         print Lb
@@ -209,7 +218,7 @@ def weak_convergence_differences():
         differences= [values[:,i]-values[:,i+1] for i in range(0,3)]
         error_diff=np.abs(np.mean(differences,axis=1))
         print error_diff 
-        stand_diff=np.std(differences, axis = 1)/ float(np.sqrt((10**6)))
+        stand_diff=np.std(differences, axis = 1)/ float(np.sqrt((1*(10**4))))
         print stand_diff
         Ub_diff=np.abs(np.mean(differences,axis=1))+1.96*stand_diff
         Lb_diff=np.abs(np.mean(differences,axis=1))-1.96*stand_diff
@@ -252,7 +261,7 @@ def weak_convergence_differences():
         plt.ylabel(r'$\mid  g(X_{\Delta t})-  g(X) \mid $',fontsize=14) 
         plt.subplots_adjust(wspace=0.6, hspace=0.6, left=0.15, bottom=0.22, right=0.96, top=0.96)
         plt.legend(loc='upper left')
-        plt.savefig('./results/weak_convergence_order_Bergomi_H_007_K_1_richardson_relative.eps', format='eps', dpi=1000)  
+        plt.savefig('./results/weak_convergence_order_Bergomi_H_007_K_1_M_1_10_4_richardson_relative.eps', format='eps', dpi=1000)  
 
         fig = plt.figure()
         plt.plot(dt_arr[0:3], error_diff,linewidth=2.0,label='weak_error' ,marker='>', hold=True) 
@@ -267,7 +276,7 @@ def weak_convergence_differences():
         plt.ylabel(r'$\mid  g(X_{\Delta t})-  g(X_{\Delta t/2}) \mid $',fontsize=14) 
         plt.subplots_adjust(wspace=0.6, hspace=0.6, left=0.15, bottom=0.22, right=0.96, top=0.96)
         plt.legend(loc='upper left')
-        plt.savefig('./results/weak_convergence_order_differences_Bergomi_H_007_K_1_richardson_relative.eps', format='eps', dpi=1000)  
+        plt.savefig('./results/weak_convergence_order_differences_Bergomi_H_007_K_1_M_1_10_4_richardson_relative.eps', format='eps', dpi=1000)  
 
 #weak_convergence_rate_plotting()
 weak_convergence_differences()

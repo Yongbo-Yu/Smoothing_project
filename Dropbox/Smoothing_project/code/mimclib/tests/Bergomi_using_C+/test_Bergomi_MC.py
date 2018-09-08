@@ -4,18 +4,22 @@ from RBergomi import *
 import numpy as np
 import time
 
-x=0.0235**2;
+x=0.235**2;
+#x=0.1;
 HIn=Vector(1)
 HIn[0]= 0.07
+#HIn[0]=0.02
 e=Vector(1)
 e[0]=1.9
+#e[0]=0.4
 r=Vector(1)
 r[0]=-0.9
+#r[0]=-0.7
 t=Vector(1)
 t[0]=1.0
 k=Vector(1)
-k[0]=1
-NIn=32
+k[0]=1.2
+NIn=500
 MIn=1
 
 start=time.time()

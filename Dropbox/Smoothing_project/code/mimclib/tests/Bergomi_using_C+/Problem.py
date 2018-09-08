@@ -12,22 +12,26 @@ class Problem(object):
 # attributes
     random_gen=None;
     elapsed_time=0.0;
-    N=16 # Number of time steps N, discretization resolution
+    N=8 # Number of time steps N, discretization resolution
   
     # for the values of below paramters, we need to see the paper as well check with Christian 
     x=0.235**2;   # this will provide the set of xi parameter values 
-    #x=0.00001;
+    #x=0.1;
     HIn=Vector(1)    # this will provide the set of H parameter values
     HIn[0]=0.07
+    #HIn[0]=0.02
+    #HIn[0]=0.43
     e=Vector(1)    # This will provide the set of eta paramter values
     e[0]=1.9
+    #e[0]=0.4
     r=Vector(1)   # this will provide the set of rho paramter values
     r[0]=-0.9
-    #r[0]=0
+    #r[0]=-0.7
     T=Vector(1)     # this will provide the set of T(time to maturity) parameter value
     T[0]=1.0
     k=Vector(1)     # this will provide the set of K (strike ) paramter value
     k[0]=1
+    #k[0]=0.8
    # y1perp = Vector(N)
     MIn=1        # number of samples M (I think we do not need this paramter here by default in our case it should be =1)
 

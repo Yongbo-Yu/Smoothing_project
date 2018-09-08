@@ -566,15 +566,32 @@ In a second part, we tried to investigate if a change of measure could be a good
 As a result, we think it is better to focus on the case without applying a change of measure.
 
 
-
+\newpage
 \subsection{Numerical results for the case without change of measure}
 \label{sec:Numerical results for the case without change of measure}
 \subsubsection{Weak error plots} \label{sec:Weak error plots_no_change}
-In this section, I include the results of weak error rates for the case without change of measure for both cases without and with Richardson extrapolation (level $1$ and $2$),  for $H \in \{0.43,0.07\}$. The reference solution was computed with $N=500$ time steps (which is equal to  $0.0712073$ for $H=0.43$ and  $0.0792047$ for $H=0.07$). We note that the weak errors plotted here corresponds to relative errors.
+In this section, I include the results of weak error rates for the case without change of measure for both cases without and with Richardson extrapolation (level $1$ and $2$),  for $H \in \{0.43,0.07,0.02\}$ and for $K \in \{1,0.8,1.2\}$ (for $H=0.02$, I changed the other parameters such that $\xi=0.1, \rho=-0.7,\eta=0.4$). The reference solution was computed with $N=500$ time steps (reported in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}). We note that the weak errors plotted here corresponds to relative errors. We show in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.} the different paramter constellations that we consider to report our results for MC and MISC.
 
 
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{2}{c}r}
+		Paramters            & Reference solution    \\
+	Set $1$:	$H=0.43, K=1, \rho=-0.9, \eta=1.9,\xi=0.235^2$   & $\underset{}{0.0712073}$  \\	
+			Set $2$:	$H=0.07, K=1, \rho=-0.9, \eta=1.9,\xi=0.235^2$   & $\underset{}{0.0792047}$  \\	
+			Set $3$: $H=0.07, K=0.8, \rho=-0.9, \eta=1.9,\xi=0.235^2$   & $\underset{(1.0e-04)}{0.2249058}$  \\
+		Set $4$: 	$H=0.07, K=1.2, \rho=-0.9, \eta=1.9,\xi=0.235^2$   & $\underset{(2.3e-05)}{0.0099397}$  \\
+				Set $5$:	$H=0.02, K=1, \rho=-0.7, \eta=0.4,\xi=0.1$   & $\underset{(1.3e-04)}{0.1247563}$  \\
+		\hline
+	\end{tabular}
+	\caption{Reference solution, using MC with $500$ time steps and $M=10^6$, of Call option price under rBergomi model, for different parameter constellation.}
+	\label{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}
+\end{table}
+
+\newpage
 \subsubsection*{Without Richardson extrapolation}
-From figures (\ref{fig:Weak_rate_H_043_without_rich} and \ref{fig:Weak_rate_H_007_without_rich}), we see that for both cases $H \in \{0.43,0.07\}$, we get a weak error of order $\Delta t$. The upper and lower bounds are $95\%$ confidence interval.
+From figures (\ref{fig:Weak_rate_H_043_without_rich},\ref{fig:Weak_rate_H_007_without_rich},\ref{fig:Weak_rate_H_007_without_rich_K_08}), we see that for all cases, we get a weak error of order $\Delta t$, with almost the same constant. The upper and lower bounds are $95\%$ confidence interval.
 
 
 
@@ -582,18 +599,18 @@ From figures (\ref{fig:Weak_rate_H_043_without_rich} and \ref{fig:Weak_rate_H_00
 	\centering
 	\begin{subfigure}{.4\textwidth}
 		\centering
-		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/without_richardson/H_043/weak_convergence_order_Bergomi_H_043_K_1_M_10_5_CI_relative}
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/without_richardson/H_043/weak_convergence_order_Bergomi_H_043_K_1_M_10_6_CI_relative}
 		\caption{}
 		\label{fig:sub3}
 	\end{subfigure}%
 	\begin{subfigure}{.4\textwidth}
 		\centering
-		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/without_richardson/H_043/weak_convergence_order_differences_Bergomi_H_043_K_1_M_10_5_CI_relative}
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/without_richardson/H_043/weak_convergence_order_differences_Bergomi_H_043_K_1_M_10_6_CI_relative}
 		\caption{}
 		\label{fig:sub4}
 	\end{subfigure}
 	
-	\caption{The rate of convergence of the weak error for $H=0.43$ $K=1$, without Richardson extraploation, using MC with $M=10^5$: a) $\abs{\expt{g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{g(X_{\Delta t})-g(X_{\Delta t/2})}}$ }
+	\caption{The rate of convergence of the weak error for set $1$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, without Richardson extraploation, using MC with $M=10^5$: a) $\abs{\expt{g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{g(X_{\Delta t})-g(X_{\Delta t/2})}}$ }
 	\label{fig:Weak_rate_H_043_without_rich}
 \end{figure}
 
@@ -612,28 +629,96 @@ From figures (\ref{fig:Weak_rate_H_043_without_rich} and \ref{fig:Weak_rate_H_00
 		\label{fig:sub4}
 	\end{subfigure}
 	
-	\caption{The rate of convergence of the weak error for $H=0.07$ $K=1$, without Richardson extraploation, using MC with $M=10^6$: a) $\abs{\expt{g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{g(X_{\Delta t})-g(X_{\Delta t/2})}}$ }
+	\caption{The rate of convergence of the weak error for set $2$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, without Richardson extraploation, using MC with $M=10^6$: a) $\abs{\expt{g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{g(X_{\Delta t})-g(X_{\Delta t/2})}}$ }
 	\label{fig:Weak_rate_H_007_without_rich}
 \end{figure}
-\newpage
-\subsubsection*{With Richardson extrapolation (level 1)}
-From figures (\ref{fig:Weak_rate_H_043_with_rich} and \ref{fig:Weak_rate_H_007_with_rich}), we see that for both cases $H \in \{0.43,0.07\}$, we get a weak error of order higher than  $\Delta t^2$ (We expect to have order of $\Delta t^2$ in the asymptotic regime). The upper and lower bounds are $95\%$ confidence interval.
+
+
+
 \begin{figure}[h!]
 	\centering
 	\begin{subfigure}{.4\textwidth}
 		\centering
-		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/with_richardson/H_043/weak_convergence_order_Bergomi_H_043_K_1_M_10_6_CI_richardson_relative}
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/without_richardson/H_007/weak_convergence_order_Bergomi_H_007_K_08_M_10_6_CI_relative}
 		\caption{}
 		\label{fig:sub3}
 	\end{subfigure}%
 	\begin{subfigure}{.4\textwidth}
 		\centering
-		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/with_richardson/H_043/weak_convergence_order_differences_Bergomi_H_043_K_1_M_10_6_CI_richardson_relative}
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/without_richardson/H_007/weak_convergence_order_differences_Bergomi_H_007_K_08_M_10_6_CI_relative}
 		\caption{}
 		\label{fig:sub4}
 	\end{subfigure}
 	
-	\caption{The rate of convergence of the weak error for $H=0.43$ $K=1$, with Richardson extraploation, using MC with $M=10^6$: a) $\abs{\expt{2 g(X_{\Delta t/2}) -g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{3 g(X_{\Delta t/2})-g(X_{\Delta t})-2 g(X_{\Delta t/4})}}$ }
+	\caption{The rate of convergence of the weak error for set $3$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, without Richardson extraploation, using MC with $M=10^6$: a) $\abs{\expt{g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{g(X_{\Delta t})-g(X_{\Delta t/2})}}$ }
+	\label{fig:Weak_rate_H_007_without_rich_K_08}
+\end{figure}
+
+
+
+
+
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/without_richardson/H_007/weak_convergence_order_Bergomi_H_007_K_12_M_10_6_CI_relative}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/without_richardson/H_007/weak_convergence_order_differences_Bergomi_H_007_K_12_M_10_6_CI_relative}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of the weak error for set $4$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, without Richardson extraploation, using MC with $M=10^6$: a) $\abs{\expt{g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{g(X_{\Delta t})-g(X_{\Delta t/2})}}$ }
+	\label{fig:Weak_rate_H_007_without_rich_K_12}
+\end{figure}
+
+
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/without_richardson/H_002/weak_convergence_order_Bergomi_H_002_K_1_M_3_10_6_CI_relative}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/without_richardson/H_002/weak_convergence_order_differences_Bergomi_H_002_K_1_M_3_10_6_CI_relative}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of the weak error for set $5$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, without Richardson extraploation, using MC with $M=3.10^6$: a) $\abs{\expt{g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{g(X_{\Delta t})-g(X_{\Delta t/2})}}$ }
+	\label{fig:Weak_rate_H_002_without_rich_K_1}
+\end{figure}
+
+
+\newpage
+\subsubsection*{With Richardson extrapolation (level 1)}
+From figures (\ref{fig:Weak_rate_H_043_with_rich}, \ref{fig:Weak_rate_H_007_with_rich},\ref{fig:Weak_rate_H_007_with_rich_K08}), we see that for all cases, we get a weak error of order higher than  $\Delta t^2$ (We expect to have order of $\Delta t^2$ in the asymptotic regime). The upper and lower bounds are $95\%$ confidence interval.
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/with_richardson/H_043/weak_convergence_order_Bergomi_H_043_K_1_M_10_6_richardson_relative}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/with_richardson/H_043/weak_convergence_order_differences_Bergomi_H_043_K_1_M_10_6_richardson_relative}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of the weak error for set $1$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, with Richardson extraploation, using MC with $M=10^6$: a) $\abs{\expt{2 g(X_{\Delta t/2}) -g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{3 g(X_{\Delta t/2})-g(X_{\Delta t})-2 g(X_{\Delta t/4})}}$ }
 	\label{fig:Weak_rate_H_043_with_rich}
 \end{figure}
 
@@ -652,11 +737,50 @@ From figures (\ref{fig:Weak_rate_H_043_with_rich} and \ref{fig:Weak_rate_H_007_w
 		\label{fig:sub4}
 	\end{subfigure}
 	
-	\caption{The rate of convergence of the weak error for $H=0.07$ $K=1$, with Richardson extraploation, using MC with $M=10^6$: a) $\abs{\expt{2 g(X_{\Delta t/2}) -g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{3 g(X_{\Delta t/2})-g(X_{\Delta t})-2 g(X_{\Delta t/4})}}$ }
+	\caption{The rate of convergence of the weak error for set $2$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, with Richardson extraploation, using MC with $M=10^6$: a) $\abs{\expt{2 g(X_{\Delta t/2}) -g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{3 g(X_{\Delta t/2})-g(X_{\Delta t})-2 g(X_{\Delta t/4})}}$ }
 	\label{fig:Weak_rate_H_007_with_rich}
 \end{figure}
 
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/with_richardson/H_007/weak_convergence_order_Bergomi_H_007_K_08_M_10_6_richardson_relative}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/with_richardson/H_007/weak_convergence_order_differences_Bergomi_H_007_K_08_M_10_6_richardson_relative}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of the weak error for set $3$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, with Richardson extraploation, using MC with $M=10^6$: a) $\abs{\expt{2 g(X_{\Delta t/2}) -g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{3 g(X_{\Delta t/2})-g(X_{\Delta t})-2 g(X_{\Delta t/4})}}$ }
+	\label{fig:Weak_rate_H_007_with_rich_K08}
+\end{figure}
 
+
+
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/with_richardson/H_007/weak_convergence_order_Bergomi_H_007_K_12_M_2_10_6_richardson_relative}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_rates/with_richardson/H_007/weak_convergence_order_differences_Bergomi_H_007_K_12_M_2_10_6_richardson_relative}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of the weak error for set $4$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, with Richardson extraploation, using MC with $M=10^6$: a) $\abs{\expt{2 g(X_{\Delta t/2}) -g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{3 g(X_{\Delta t/2})-g(X_{\Delta t})-2 g(X_{\Delta t/4})}}$ }
+	\label{fig:Weak_rate_H_007_with_rich_K12}
+\end{figure}
 
 
 \newpage
@@ -767,96 +891,115 @@ We also report in tables (\ref{Comparsion of the computational time of  MC and M
 
 
 
-\subsubsection*{Case $H=0.43$, Relative error for different methods}
-\label{sec:Case $H=0.43$, Relative error for different methods}
+
+
+\subsubsection*{Case of set $2$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}}
+\label{sec:Case of set $2$ parameters}
+
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$  \\
+		\hline
+			MISC ($TOl=5.10^{-1}$)  & $0.1082$ & $0.0917$ & $0.0800$ & $0.0732$  \\
+		MISC ($TOl=10^{-1}$)  & $0.1082$ & $0.0917$ & $0.0786$ & $0.080$  \\
+			MISC ($TOl=5.10^{-2}$)  & $0.1082$ & $0.0921$ & $0.0914$ & $0.0817$  \\
+		MISC ($TOl=10^{-2}$)  & $0.1187$ &  $0.1014$ & $0.0909$ & $-$  \\
+		MISC ($TOl=10^{-3}$)        & $0.1216$ &$0.1024$ &  $0.0910$ &  $-$ \\
+			MISC ($TOl=10^{-4}$)        & $0.1218$ &$-$ &  $-$ &  $-$ \\
+	\hline
+		MC method ($M=10^{6}$)   & $0.1246 $  & $0.1000 $  & $0.0904$ & $0.0850 $ \\		
+		\hline
+	\end{tabular}
+	\caption{ Call option price of the different methods for different number of time steps. Case of set $2$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, without Richardson extrapolation.}
+	\label{table: Call option price of the different methods for different number of time steps. Case set 2}
+\end{table}
+
+
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$  \\
+		\hline
+		MC Bias ($M=10^6$)   & $\underset{( 0.0454)}{\mathbf{0.5727}}$  & $\underset{ (  0.0208)}{\mathbf{0.2629}}$  & $\underset{(   0.0112)}{\mathbf{0.1411}}$ & $\underset{( 0.0058)}{\mathbf{0.0731}}$  \\	
+		
+			MC Statistical error ($M=10^6$)  & $\underset{( 4.4e-04)}{\mathbf{5.5e-03}}$  & $\underset{(  1.6e-04)}{\mathbf{2.02e-03}}$  & $\underset{(  1.2e-04)}{\mathbf{1.54e-03}}$ & $\underset{(  1.1e-04)}{\mathbf{1.33e-03}}$ \\	
+				MC Statistical error ($M=10^4$)  & $\underset{( 1.6e-03)}{\mathbf{2.0e-02}}$  & $\underset{(  1.5e-03)}{\mathbf{1.9e-02}}$  & $\underset{(  1.1e-03)}{\mathbf{1.4e-02}}$ & $\underset{(  1.0e-03)}{\mathbf{1.3e-02}}$ \\
+		\hline
+	\end{tabular}
+	\caption{Bias and Statistical errors of MC ($M=10^6$)  for computing Call option price  for different number of time steps. Case set $2$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
+	\label{Bias and Statistical errors of MC ($M=10^6$)  for computing Call option price  for different number of time steps. Case set $2$ parameters, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
+\end{table}
+
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$  \\
+		\hline
+		MISC ($TOl=5.10^{-1}$)  & $\underset{(0.0164)}{\mathbf{0.2071}}$ & $\underset{(0.0083)}{\mathbf{0.1048}}$ & $\underset{(0.0104)}{\mathbf{0.1313}}$ & $\underset{(0.0118)}{\mathbf{0.1490}}$  \\
+		MISC ($TOl=10^{-1}$)  & $\underset{(0.0164)}{\mathbf{0.2071}}$ & $\underset{(0.0083)}{\mathbf{0.1048}}$ & $\underset{(0.0118)}{\mathbf{0.1490}}$ & $\underset{(0.005)}{\mathbf{0.0631}}$  \\
+			MISC ($TOl=5.10^{-2}$)  &$\underset{(0.0164)}{\mathbf{0.2071}}$ & $\underset{(0.0079)}{\mathbf{0.0997}}$ & $\underset{(0.001)}{\mathbf{0.0126}}$ & $\underset{(0.0033)}{\mathbf{0.0417}}$  \\
+	MISC ($TOl=10^{-2}$)  & $\underset{(0.0059)}{\mathbf{0.0745}}$ & $\underset{(0.0014)}{\mathbf{0.0177}}$ & $\underset{(0.0005)}{\mathbf{0.0063}}$ & $\underset{-}{\mathbf{-}}$  \\
+		MISC ($TOl=10^{-3}$)        & $\underset{(0.003)}{\mathbf{0.0379}}$  &$\underset{(0.0024)}{\mathbf{0.0303}}$  &  $\underset{(0.0006)}{\mathbf{0.0076}}$ &  $-$ \\
+	MISC ($TOl=10^{-4}$)        & $\underset{(0.0028)}{\mathbf{0.0354}} $ &$-$ &  $-$ &  $-$ \\	
+		
+		\hline
+	\end{tabular}
+	\caption{Quadrature error of MISC to compute Call option price of the different tolerances for different number of time steps. Case  set $2$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
+	\label{Quadrature error of MISC to compute Call option price of the different tolerances for different number of time steps. Case  set $2$ parameters, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
+\end{table}
+
+
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$  \\
+		\hline
+		MISC ($TOl=5.10^{-1}$)  & $\mathbf{0.7798}$ & $\mathbf{0.3677}$ & $\mathbf{ 0.2724}$ & $\mathbf{ 0.2221}$  \\
+		MISC ($TOl=10^{-1}$)  & $\mathbf{ 0.7798
+		}$ & $\mathbf{ 0.3677
+	}$ & $\mathbf{ 0.2901
+}$ & $\mathbf{0.1362}$  \\
+		MISC ($TOl=5.10^{-2}$)  &$\mathbf{0.7798
+		}$ & $\mathbf{   0.3626
+	}$ & $\mathbf{  0.1537}$ & $\mathbf{ 0.1148}$  \\
+		MISC ($TOl=10^{-2}$)  & $\mathbf{ 0.6472}$ & $\mathbf{0.2806
+		}$ & $\mathbf{ 0.1474}$ & $\mathbf{-}$  \\
+	MISC ($TOl=10^{-3}$)        & $\mathbf{0.6106}$  &$\mathbf{0.2932}$  &  $\mathbf{0.1487}$ &  $-$ \\
+		MISC ($TOl=10^{-4}$)        & $\mathbf{0.6081}$  &$-$  &  $-$ &  $-$ \\
+	\hline
+		MC  ($M=10^6$)   & $\mathbf{0.5782}$  & $ \mathbf{  0.2649
+		}$  & $\mathbf{0.1456}$ & $\mathbf{0.0744}$  \\	
+			
+			MC  ($M=10^4$)   & $\mathbf{0.5927}$  & $ \mathbf{  0.2819
+		}$  & $\mathbf{0.1551}$ & $\mathbf{0.0861}$  \\	
+		\hline
+	\end{tabular}
+	\caption{Total error of MISC and MC to compute Call option price of the different tolerances for different number of time steps. Case  set $2$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
+	\label{Total error of MISC and MC to compute Call option price of the different tolerances for different number of time steps. Case $K=1$, $H=0.07$, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
+\end{table}
+
+
 
 \begin{table}[h!]
 	\centering
 	\begin{tabular}{l*{6}{c}r}
 		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$ &   \\
 		\hline
-%		MISC ($TOl=5.10^{-1}$)  & $0.6011$ & $0.3497$ & $0.1910$ & $0.0969$  \\
-		MISC ($TOl=2.10^{-1}$)  &  $0.6011$ & $0.3497$ &$0.1910$ & $\red{0.0801}$  \\
-		MISC ($TOl=10^{-1}$)  & $0.6011$ & $0.3497$ & $0.2233$ & $-$  \\
-%		MISC ($TOl=5.10^{-2}$)  & $0.6011$ & $0.3539$ & $0.1882$ & $0.1573$  \\
-		MISC ($TOl=10^{-2}$)  & $\red{0.5126}$ & $0.3258$ & $0.1770$ & $-$   \\	
-%		MISC ($TOl=5.10^{-3}$)  & $	0.4930$ & $0.3076$ & $0.1671$ & $-$   \\	
-		MISC ($TOl=10^{-3}$)  & $	-$ & $\red{0.2935}$ & $\red{0.1503}$ & $-$   \\
-%		MISC ($TOl=10^{-4}$)  & $		0.5154$ & $0.2935$ & $-$ & $-$   \\
-		MC method ($M=10^{6}$)   & $\mathbf{0.5154}$  & $\mathbf{0.2935}$  & $\mathbf{0.1545}$ & $\mathbf{0.0801}$  \\	
-		\hline
-	\end{tabular}
-	\caption{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1$, $H=0.43$, without Richardson extrapolation}
-	\label{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.43$}
-\end{table}
-
-\begin{table}[h!]
-	\centering
-	\begin{tabular}{l*{5}{c}r}
-		Method \textbackslash  Steps    &$1-2$        & $2-4$ & $4-8$ & $8-16$  \\
-		\hline
-		MISC ($TOl=5.10^{-1}$)  &$0.9059$ & $0.0997$ & $0.0323$ & $\red{0.0028}$  \\
-		MISC ($TOl=10^{-1}$)  &$0.9059$ &$0.0997$ & $0.1025$ & $-$ \\
-%		MISC ($TOl=5.10^{-2}$)  &$0.9059$ & $0.1671$ & $0.0857$ & $0.0646$   \\
-		MISC ($TOl=10^{-2}$)  & $0.7374$ &$0.0969$ & $0.0463$ & $-$ \\		
-%		MISC ($TOl=5.10^{-3}$)  & $0.7205$ &$0.0941$ & $0.0211$ & $-$ \\	
-		MISC ($TOl=10^{-3}$)  & $0.7191$ & $0.0758$ & $\red{0.0112}$ & $-$ \\	
-		MISC ($TOl=5.10^{-4}$)  &$\red{0.7129}$ & $\red{0.0609}$ & $-$ & $-$ \\
-		MC method ($M=10^{6}$)&$ \mathbf{0.7133}$    & $\mathbf{0.0698}$  & $\mathbf{0.0160}$  & $\mathbf{0.0035}$ \\
-		\hline
-	\end{tabular}
-	\caption{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1$, $H=0.43$, using Richardson extrapolation (level $1$)}
-	\label{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.43$ , using Richardson extrapolation}
-\end{table}
-
-
-
-\begin{table}[h!]
-	\centering
-	\begin{tabular}{l*{5}{c}r}
-		Method \textbackslash  Steps    &$1-2-4$        & $2-4-8$ & $4-8-16$   \\
-		\hline
-		MISC ($TOl=5.10^{-1}$)  &$ 0.1699$ & $\red{0.0098}$ & $ 0.0056$   \\
-		MISC ($TOl=2.10^{-1}$)  &$ 0.1699$ &$-$ & $\red{ 0.0014}$  \\
-		MISC ($TOl=10^{-1}$)  &$0.2037$ &$-$ & $-$  \\
-		MISC ($TOl=5.10^{-2}$)  &$\red{0.0295}$ & $-$ & $-$  \\
-		MC method ($M=10^{6}$)&$\mathbf{0.1440}$    & $ \mathbf{0.0180}  $  & $\mathbf{0.0023}$   \\
-		\hline
-	\end{tabular}
-	\caption{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1$, $H=0.43$, using Richardson extrapolation (level $2$)}
-	\label{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.43$ , using Richardson extrapolation_level2}
-\end{table}
-\newpage
-
-
-
-\subsubsection*{Case $H=0.07$, Relative error for different methods}
-\label{sec:Case $H=0.07$, Relative error for different methods}
-\begin{table}[h!]
-	\centering
-	\begin{tabular}{l*{6}{c}r}
-		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$ & $32$ & $64$  \\
-		\hline
-		MISC ($TOl=5.10^{-1}$)  & $\red{0.3662}$ & $\red{0.1578}$ & $\red{0.1010}$ & $\red{0.0758}$ & $-$ & $-$ \\
-%		MISC ($TOl=10^{-1}$)  & $0.3662$ &  $0.1578$ & $-$ & $-$  \\
-%%		MISC ($TOl=5.10^{-2}$)        & $0.3662$ &$-$ &  $-$ &  $-$ \\
-%		MISC ($TOl=10^{-2}$)    & $-$ & $-$  & $-$ & $-$  \\	
-		MC method ($M=10^{6}$)   & $\underset{( 0.0454)}{\mathbf{0.5727}}$  & $\underset{ (  0.0208)}{\mathbf{0.2629}}$  & $\underset{(   0.0112)}{\mathbf{0.1411}}$ & $\underset{( 0.0058)}{\mathbf{0.0731}}$ & $\underset{(   0.0034)}{\mathbf{0.0431}}$ & $\underset{(   0.0021)}{\mathbf{0.0260}}$ \\	
-		\hline
-	\end{tabular}
-	\caption{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1$, $H=0.07$, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
-	\label{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.07$}
-\end{table}
-
-
-
-\begin{table}[h!]
-	\centering
-	\begin{tabular}{l*{6}{c}r}
-		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$ &   \\
-		\hline
-		MISC  & $0.08$ & $0.13$ & $0.20$ & $0.41$  \\	
-		MC method ($M=10^6$)   & $30$  & $32$  & $37$ & $52$  \\	
+			MISC ($TOl=5.10^{-1}$)  & $0.08$ & $0.13$ & $0.2$ & $0.5$  \\
+		MISC ($TOl=10^{-1}$)  & $0.08$ & $0.13$ & $1$ & $220$  \\
+		MISC ($TOl=5.10^{-2}$)  & $0.08$ & $0.3$ & $10$ & $5600$  \\
+		MISC ($TOl=10^{-2}$)  & $0.45$ & $6$ & $800$ & $-$  \\
+		MISC ($TOl=10^{-3}$)  & $7$ & $350$ & $5370$ & $-$  \\		
+			MISC ($TOl=10^{-4}$)  & $63$ & $-$ & $-$ & $-$  \\	
+%		MC method ($M=10^4$)   & $0.4$  & $0.4$  & $0.5$ & $0.7$  \\
+\hline
+		MC method ($M=10^6$)   & $30$  & $32$  & $37$ & $52$  \\
+		MC method ($M=10^4$)   & $0.5$  & $0.6$  & $0.6$ & $0.7$  \\	
 		\hline
 	\end{tabular}
 	\caption{Comparsion of the computational time of  MC and MISC, used to compute Call option price of rBergomi model for different number of time steps. Case $K=1, H=0.07$}
@@ -866,78 +1009,122 @@ We also report in tables (\ref{Comparsion of the computational time of  MC and M
 
 
 
-
 \begin{table}[h!]
 	\centering
-	\begin{tabular}{l*{5}{c}r}
-		Method \textbackslash  Steps &$1-2$             & $2-4$ & $4-8$ & $8-16$ \\
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps    &$1-2$         & $2-4$ & $4-8$ & $8-16$\\
 		\hline
-		MISC ($TOl=5.10^{-1}$)  &$\red{0.5682}$ & $\red{0.0505}$ & $0.1389$ & $0.1604$ \\
-		MISC ($TOl=16.10^{-2}$)  &$-$ & $-$ & $0.1389$ & $\red{0.0038}$  \\
-		MISC ($TOl=10^{-1}$)  &$-$ &  $-$ & $ 0.1692$ & $-$ \\
-		MISC ($TOl=5.10^{-2}$) &$-$ &  $ -$ & $\red{0.0088}$ & $-$   \\
-		MISC ($TOl=10^{-2}$)&$-$ &  $-$ & $-$ & $-$ \\	
-		MC method ($M=10^{6}$)  &$\underset{( 0.0760)}{\mathbf{0.9594}}$  & $\underset{( 0.0054)}{\mathbf{0.0686}}$  & $\underset{(   0.0012)}{\mathbf{0.0149}}$  & $\underset{(  0.0004)}{\mathbf{0.0048}}$ \\
-		\hline	
-		
-	\end{tabular}
-	\caption{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1$, $H=0.07$, using Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors.}
-	\label{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.07$ , using Richardson extrapolation}
-\end{table}
-
-
-\begin{table}[h!]
-	\centering
-	\begin{tabular}{l*{5}{c}r}
-		Method \textbackslash  Steps &$1-2$             & $2-4$ & $4-8$ & $8-16$ \\
+		MISC ($TOl=5.10^{-1}$)  &$0.1242$ & $0.0752$ & $0.0682$ & $0.0665$ \\
+		MISC ($TOl=10^{-1}$)  &$0.1242$ & $0.0752$ & $0.0658$ & $0.07635$  \\
+		MISC ($TOl=5.10^{-2}$)   &$0.1242$ & $0.0676$ & $0.0800$ & $-$   \\
+		MISC ($TOl=10^{-2}$)  &$0.1459$ & $0.0845$ & $0.0803$ & $-$  \\	
+		MISC ($TOl=10^{-3}$)  &$0.1505$ & $0.0827$ & $-$ & $-$ \\
+		MISC ($TOl=10^{-4}$)  &$0.1500$ & $-$ & $-$ & $-$ \\
 		\hline
-		MISC + Richardson (level 1)  &$0.1$ & $0.14$ & $34$ & $92$ \\	
-		MC method + Richardson (level 1) ($M=10^{6}$)  &$43$ & $46$  & $54$  & $71$ \\
-		\hline	
-		
-	\end{tabular}
-	\caption{Comparsion of the computational time of  MC and MISC, coupled with Richardson extrapolation (level $1$), used to compute Call option price of rBergomi model for different number of time steps. Case $K=1, H=0.07$}
-	\label{Comparsion of the computational time of  MC and MISC, coupled with Richardson extrapolation (level $1$), used to compute Call option price of rBergomi model for different number of time steps. Case $K=1, H=0.07$}
-\end{table}
-
-
-
-
-\begin{table}[h!]
-	\centering
-	\begin{tabular}{l*{5}{c}r}
-		Method \textbackslash  Steps &$1-2-4$             & $2-4-8$ & $4-8-16$   \\
+			MC method ($M=10^{6}$)   & $0.1552 $  & $0.0846 $  & $0.0804$ & $0.0796 $ \\		
 		\hline
-%		MISC ($TOl=5.10^{-1}$)  &$0.2563$ & $ 0.1692$ & $ 0.1679
-%		$   \\
-		MISC ($TOl=10^{-1}$)  &$0.2563$ &  $0.1566$ & $\red{  0.0025}$  \\
-		MISC ($TOl=7.10^{-2}$) &$  0.3005$ &  $  \red{0.0227}$ & $-$    \\
-		MISC ($TOl=5.10^{-2}$) &$0.4874$ &  $  -$ & $-$    \\
-		MISC ($TOl=10^{-2}$)&$ \red{0.1742}$ &  $-$ & $-$  \\	
-		MC method ($M=10^{6}$)  &$\mathbf{0.2231}$  & $  \mathbf{0.0279}$  & $\mathbf{0.0035}$ \\
-		\hline	
-		
 	\end{tabular}
-	\caption{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1$, $H=0.07$, using Richardson extrapolation (level $2$)}
-	\label{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.07$ , using Richardson extrapolation_level2}
+	\caption{Call option price of the different methods for different number of time steps. Case set $2$ parameters of table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, using Richardson extrapolation (level $1$)}
+	\label{table:  Call option price of the different methods for different number of time steps. Case set $2$ parameter, using Richardson extrapolation (level $1$)}
 \end{table}
 
 
 
 \begin{table}[h!]
 	\centering
-	\begin{tabular}{l*{5}{c}r}
-		Method \textbackslash  Steps &$1-2-4$             & $2-4-8$ & $4-8-16$   \\
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $1-2$ & $2-4$ & $4-8$ & $8-16$  \\
 		\hline
-		MISC +Richardson (level 2) &$19$ & $ 33$ & $-$   \\
+		MC Bias ($M=10^6$)  &$\underset{( 0.0760)}{\mathbf{0.9594}}$  & $\underset{( 0.0054)}{\mathbf{0.0686}}$  & $\underset{(   0.0012)}{\mathbf{0.0149}}$  & $\underset{(  0.0004)}{\mathbf{0.0048}}$ \\	
+		
+		MC Statistical error ($M=10^6$)   & $\underset{( 1e-03)}{\mathbf{1.3e-02}}$  & $\underset{(   3.2e-04)}{\mathbf{4.1e-03}}$  & $\underset{(  1.7e-04)}{\mathbf{2.1e-03}}$ & $\underset{(  1.3e-04)}{\mathbf{1.6e-03}}$ \\	
+		
+		
+		
+			MC Statistical error ($M=10^4$)  & $\underset{( 5.5e-03)}{\mathbf{6.9e-02}}$  & $\underset{(   1.5e-03)}{\mathbf{1.9e-02}}$  & $\underset{(  1.4e-03)}{\mathbf{1.8e-02}}$ & $\underset{(  1.2e-03)}{\mathbf{1.5e-02}}$ \\	
+		\hline
+	\end{tabular}
+	\caption{Bias and Statistical errors of MC   for computing Call option price  for different number of time steps. Case set $2$ parameters in tabel \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors.}
+	\label{Bias and Statistical errors of MC ($M=10^6$)  for computing Call option price  for different number of time steps. Case set $2$ parameters, with Richardson extrapolation (level1). The numbers between parentheses are the corresponding absolute errors.}
+\end{table}
+
+
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $1-2$ & $2-4$ & $4-8$ & $8-16$  \\
+		\hline
+			MISC ($TOl=5.10^{-1}$)  & $\underset{0.0310}{\mathbf{0.3914}}$ & $\underset{0.0094}{\mathbf{0.1187}}$ & $\underset{0.0122}{\mathbf{0.1540}}$ & $\underset{0.0131}{\mathbf{0.1654}}$ \\
+		MISC ($TOl=10^{-1}$)  & $\underset{0.0310}{\mathbf{0.3914}}$ & $\underset{0.0094}{\mathbf{0.1187}}$ & $\underset{0.0146}{\mathbf{0.1843}}$ & $\underset{0.0033}{\mathbf{0.0410}}$  \\
+				MISC ($TOl=5.10^{-2}$)  & $\underset{0.0310}{\mathbf{0.3914}}$ & $\underset{0.0170}{\mathbf{0.2146}}$ & $\underset{0.0004}{\mathbf{0.0050}}$ & $\underset{-}{\mathbf{-}}$  \\
+		MISC ($TOl=10^{-2}$)  & $\underset{ 0.0093}{\mathbf{0.1174}}$ & $\underset{0.0001}{\mathbf{0.0013}}$ & $\underset{0.0001}{\mathbf{0.0013}}$ & $\underset{-}{\mathbf{ -}}$  \\
+		MISC ($TOl=10^{-3}$)  & $\underset{  0.0047}{\mathbf{ 0.0593
+		}}$ & $\underset{ 0.0019}{\mathbf{ 0.0240}}$ & $\underset{-}{\mathbf{-}}$ & $\underset{-}{\mathbf{-}}$  \\
 	
-		MC method+Richardson (level 2) ($M=10^{6}$)  &$66$  & $74 $  & $95$ \\
-		\hline	
+		MISC ($TOl=10^{-4}$)  & $\underset{  0.0052}{\mathbf{ 0.0657
+	}}$ & $\underset{-}{\mathbf{-}}$ & $\underset{-}{\mathbf{-}}$ & $\underset{-}{\mathbf{-}}$  \\
+		%%		MISC ($TOl=5.10^{-2}$)        & $0.3662$ &$-$ &  $-$ &  $-$ \\
+		%		MISC ($TOl=10^{-2}$)    & $-$ & $-$  & $-$ & $-$  \\	
 		
+		\hline
 	\end{tabular}
-	\caption{Comparsion of the computational time of  MC and MISC, coupled with Richardson extrapolation (level $2$), used to compute Call option price of rBergomi model for different number of time steps. Case $K=1, H=0.07$}
-	\label{Comparsion of the computational time of  MC and MISC, coupled with Richardson extrapolation (level $2$), used to compute Call option price of rBergomi model for different number of time steps. Case $K=1, H=0.07$}
+	\caption{Quadrature error of MISC to compute Call option price of the different tolerances for different number of time steps. Case set $2$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, with Richardson extrapolation(level $1$). The numbers between parentheses are the corresponding absolute errors.}
+	\label{Quadrature error of MISC to compute Call option price of the different tolerances for different number of time steps. Case set $2$ parameters, with Richardson extrapolation(level $1$). The numbers between parentheses are the corresponding absolute errors.}
 \end{table}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $1-2$ & $2-4$ & $4-8$ & $8-16$  \\
+		\hline
+		MISC ($TOl=5.10^{-1}$)  & $\mathbf{1.3508}$ & $\mathbf{  0.1873}$ & $\mathbf{
+				0.1689}$ & $\mathbf{ 0.1702}$ \\
+		MISC ($TOl=10^{-1}$)  & $\mathbf{1.3508}$ & $\mathbf{0.1873}$ & $\mathbf{0.1992}$ & $\mathbf{0.0458}$  \\
+		MISC ($TOl=5.10^{-2}$)  & $\mathbf{1.3508}$ & $\mathbf{0.2146}$ & $\mathbf{0.0199}$ & $\mathbf{-}$  \\
+		MISC ($TOl=10^{-2}$)  & $\mathbf{ 1.0768
+		}$ & $\mathbf{0.0699}$ & $\mathbf{0.0162}$ & $\mathbf{-}$  \\
+	MISC ($TOl=10^{-3}$)  & $\mathbf{ 1.0187}$ & $\mathbf{-}$ & $\mathbf{-}$ & $\mathbf{-}$  \\
+		MISC ($TOl=10^{-4}$)  & $\mathbf{ 1.0251}$ & $\mathbf{-}$ & $\mathbf{-}$ & $\mathbf{-}$  \\
+		%%		MISC ($TOl=5.10^{-2}$)        & $0.3662$ &$-$ &  $-$ &  $-$ \\
+		%		MISC ($TOl=10^{-2}$)    & $-$ & $-$  & $-$ & $-$  \\	
+		\hline
+			MC ($M=10^6$) &$\mathbf{0.9724}$  & $\mathbf{0.1096}$  & $\mathbf{0.0559}$  & $\mathbf{0.0208}$ \\	
+			MC ($M=10^4$) &$\mathbf{1.0284}$  & $\mathbf{0.0876}$  & $\mathbf{0.0329}$  & $\mathbf{0.0198}$ \\
+		\hline
+	\end{tabular}
+	\caption{Total  error of MISC and MC to compute Call option price of the different tolerances for different number of time steps. Case set $2$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, with Richardson extrapolation(level $1$). The numbers between parentheses are the corresponding absolute errors.}
+	\label{Total  error of MISC and MC to compute Call option price of the different tolerances for different number of time steps. Case set $2$ parameters, with Richardson extrapolation(level $1$). The numbers between parentheses are the corresponding absolute errors.}
+\end{table}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $1-2$ & $2-4$ & $4-8$ & $8-16$ &   \\
+		\hline
+			MISC ($TOl=5.10^{-1}$)  & $0.1$ & $0.13$ & $0.2$ & $0.5$  \\
+		MISC ($TOl=10^{-1}$)  & $0.1$ & $0.13$ & $1.3$ & $1198$  \\
+			MISC ($TOl=5.10^{-2}$)  & $0.1$ & $0.5$ & $34$ & $-$  \\
+		MISC ($TOl=10^{-2}$)  & $2$ & $9$ & $3450$ & $-$  \\
+			MISC ($TOl=10^{-3}$)  & $16$ & $2460$ & $-$ & $-$  \\
+				MISC ($TOl=10^{-4}$)  & $180$ & $-$ & $-$ & $-$  \\
+		\hline	
+		MC method + Richardson (level 1) ($M=10^{6}$)  &$43$ & $46$  & $54$  & $71$ \\	
+			MC ($M=10^6$) method + Richardson (level 1) ($M=10^{6}$)  &$0.6$ & $0.7$  & $0.8$  & $0.8$ \\	
+		\hline
+	\end{tabular}
+	\caption{Comparsion of the computational time of  MC and MISC, using Richardson extrapolation (level $1$), used to compute Call option price of rBergomi model for different number of time steps. Case set $2$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}}
+	\label{Comparsion of the computational time of  MC and MISC, using Richardson extrapolation (level $1$), used to compute Call option price of rBergomi model for different number of time steps. Case set $2$ parameters}
+\end{table}
+
+
+
+
+
+
+
+
+
 
 %\subsection{Quadrature error vs work for different } \label{sec:Complexity  error plots}
 
@@ -1642,108 +1829,51 @@ In this section, We try to investigate the reason of having worse weak rates tha
 
 
 
-
-\appendix
-
 \newpage
-\section{additional results for Call prices under rBergomi for different}
-\subsection{Case $H=0.43$, Call prices for different methods}\label{appendix:Case $H=0.43$, Call prices for different methods}
+\appendix
+\section{Comparing relative errors: additional results}\label{Appendix:Comparing relative errors: additional results}
+
+\subsection{Case of set $1$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}}\label{appendix:Case of set 1 parameters}
+
 
 \begin{table}[h!]
 	\centering
 	\begin{tabular}{l*{6}{c}r}
 		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$ &   \\
 		\hline
-%		MISC ($TOl=5.10^{-1}$)  & $0.1140$ & $0.0961$ & $0.0848$ & $0.0781$  \\
-		MISC ($TOl=2.10^{-1}$)  & $0.1140$ & $0.0961$ & $0.0848$ & $\red{0.0769}$  \\
-		MISC ($TOl=10^{-1}$)  & $0.1140$ & $0.0961$ & $0.0871$ & $-$  \\
-%		MISC ($TOl=5.10^{-2}$)  & $0.1140$ & $0.0964$ & $0.0846$ & $0.0824$  \\
-		MISC ($TOl=10^{-2}$)  & $\red{0.1077}$ & $0.0944$ & $0.0838$ & $-$  \\
-%		MISC ($TOl=5.10^{-3}$)  & $0.1063$ & $0.0931$ & $0.0831$ & $-$  \\
-		MISC ($TOl=10^{-3}$)  & $-$ & $\red{0.0921}$ & $\red{0.0819}$ & $-$  \\
-%		MISC ($TOl=10^{-4}$)  & $0.1079$ & $0.0921$ & $-$ & $-$  \\
-		MC method ($M=10^{6}$)   & $\underset{(1.55e-04)}{0.1079}$ & $ \underset{(9.65e-05)}{0.0921}$  & $ \underset{(7.61e-05)}{0.0822}$ & $ \underset{(6.65e-05)}{0.0769}$ \\		
+				MISC ($TOl=5.10^{-1}$)  & $0.1140$ & $0.0961$ & $0.0848$ & $0.0781$  \\
+		%MISC ($TOl=2.10^{-1}$)  & $0.1140$ & $0.0961$ & $0.0848$ & $\red{0.0769}$  \\
+		MISC ($TOl=10^{-1}$)  & $0.1140$ & $0.0961$ & $0.0871$ & $0.0802$  \\
+				MISC ($TOl=5.10^{-2}$)  & $0.1140$ & $0.0963$ & $0.0843$ & $0.0824$  \\
+		MISC ($TOl=10^{-2}$)  & $0.1077$ & $0.0944$ & $0.0838$ & $0.0772$  \\
+		%		MISC ($TOl=5.10^{-3}$)  & $0.1063$ & $0.0931$ & $0.0831$ & $-$  \\
+		MISC ($TOl=10^{-3}$)  & $0.1077$ & $0.0921$ & $0.0819$ & $0.0762$  \\
+			MISC ($TOl=10^{-4}$)  & $0.1077$ & $0.0921$ & $0.0822$ & $-$  \\
+		\hline
+		MC method ($M=10^{6}$)   & $  0.1056$ & $ 0.0929
+		$  & $   0.0816
+		$ & $ 0.0767$ \\		
 		
 		\hline
 	\end{tabular}
-	\caption{ Call option price of the different methods for different number of time steps. Case $K=1$, $H=0.43$, without Richardson extrapolation.  The values between parentheses in the tables are the standard errors for MC method}
-	\label{table: Call option price of the different methods for different number of time steps. Case $K=1$, $H=0.43$}
+	\caption{ Call option price of the different methods for different number of time steps. Case of set $1$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, without Richardson extrapolation.}
+\label{table: Call option price of the different methods for different number of time steps. Case set 1}
 \end{table}
 
-\begin{table}[h!]
-	\centering
-	\begin{tabular}{l*{6}{c}r}
-		Method \textbackslash  Steps           &$1-2$ & $2-4$ & $4-8$ & $8-16$\\
-		\hline
-		MISC ($TOl=5.10^{-1}$)& $0.1357$  & $0.0783$ & $0.0735$ & $\red{0.0714}$ \\
-		MISC ($TOl=10^{-1}$)  &$0.1357$  &$0.0783$ & $0.0785$ & $-$  \\
-%		MISC ($TOl=5.10^{-2}$)  & $0.1357$ & $0.0831$ & $0.0773$ & $0.0758$   \\
-		MISC ($TOl=10^{-2}$)  & $0.1237$ &$0.0781$ & $0.0745$ & $-$  \\
-%		MISC ($TOl=5.10^{-3}$)  & $0.1225$ &$0.0779$ & $0.0727$ & $-$  \\	
-		MISC ($TOl=10^{-3}$)  & $0.1224$ &$0.0766$ & $\red{0.0720}$ & $-$ \\
-		MISC ($TOl=5.10^{-4}$)  &$\red{0.1221}$ & $\red{0.0763}$ & $-$ & $-$ \\
-		\hline
-	\end{tabular}
-	\caption{ Call option price of the different methods for different number of time steps. Case $K=1$, $H=0.43$, using Richardson extrapolation (level $1$)}
-	\label{table: Call option price of the different methods for different number of time steps. Case $K=1$, using Richardson extrapolation}
-\end{table}
-
-
-
-
-
-
-
-\begin{table}[h!]
-	\centering
-	\begin{tabular}{l*{6}{c}r}
-		Method \textbackslash  Steps           &$1-2-4$ & $2-4-8$ & $4-8-16$\\
-		\hline
-		MISC ($TOl=5.10^{-1}$)& $0.0591$  & $\red{0.0719}$ & $0.0708$  \\
-		MISC ($TOl=2.10^{-1}$)  &$0.0591$ &$-$ & $\red{0.0711}$  \\
-		MISC ($TOl=10^{-1}$)  &$0.0567$  &$-$ & $-$   \\
-		MISC ($TOl=5.10^{-2}$)  & $\red{0.0733}$ & $-$ & $-$  \\
-		\hline
-	\end{tabular}
-	\caption{ Call option price of the different methods for different number of time steps. Case $K=1$, $H=0.43$, using Richardson extrapolation (level 2)}
-	\label{table: Call option price of the different methods for different number of time steps. Case $K=1$, using Richardson extrapolation_level2}
-\end{table}
-
-
-\newpage
-\subsection{Case $H=0.07$, Call prices for different methods}\label{appendix:Case $H=0.07$, Call prices for different methods}
 
 \begin{table}[h!]
 	\centering
 	\begin{tabular}{l*{6}{c}r}
 		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$  \\
 		\hline
-		MISC ($TOl=5.10^{-1}$)  & $\red{0.1082}$ & $\red{0.0917}$ & $\red{0.0872}$ & $\red{0.0732}$  \\
-%		MISC ($TOl=10^{-1}$)  & $0.1082$ &  $0.0917$ & $-$ & $-$  \\
-%		MISC ($TOl=5.10^{-2}$)        & $0.1082$ &$-$ &  $-$ &  $-$ \\
-%		MISC ($TOl=10^{-2}$)    & $-$ & $-$  & $-$ & $-$  \\
-%		%				MC method ($M=10^{6}$)    & $0.0840$ & $0.0781$  & $0.0746$ & $0.0729$  \\
-	MC method ($M=10^{6}$)   & $\underset{(1.05e-03)}{0.1246} $  & $\underset{(1.86e-04)}{0.1000} $  & $\underset{ (1.35e-04)}{0.0904}$ & $\underset {(1.08e-04)}{ 0.0850} $ \\		
+		MC Bias ($M=10^6$)   & 	$ \underset{( 0.0344)}{\mathbf{0.4825}}$  & $\underset{( 0.0217)}{\mathbf{0.3042}}$  & $\underset{(0.0104)}{\mathbf{0.1466}}$ & $\underset{( 0.0055)}{\mathbf{0.0777}}$\\ 
+		
+		MC Statistical error ($M=10^6$)  &  $\underset{(  1.4e-04)} {\mathbf{1.9e-03}}$  & $\underset{(9.9e-05)} {\mathbf{1.4e-03}}$  & $\underset{(7.8e-05)} {\mathbf{ 1.1e-03}}$ & $\underset{( 6.7e-05)} {\mathbf{9.4e-04}}$	\\
+	MC Statistical error ($M=10^4$)  &  $\underset{(  1.4e-03)} {\mathbf{1.9e-02}}$  & $\underset{(9.9e-04)} {\mathbf{1.4e-02}}$  & $\underset{(7.8e-04)} {\mathbf{ 1.1e-02}}$ & $\underset{( 6.4e-04)} {\mathbf{9.0e-03}}$	\\
 		\hline
 	\end{tabular}
-	\caption{ Call option price of the different methods for different number of time steps. Case $K=1$, without Richardson extrapolation.  The values between parentheses in the tables are the standard errors for MC method}
-	\label{table: Call option price of the different methods for different number of time steps. Case $K=1$, $H_007$}
-\end{table}
-
-\begin{table}[h!]
-	\centering
-	\begin{tabular}{l*{6}{c}r}
-		Method \textbackslash  Steps    &$1-2$         & $2-4$ & $4-8$ & $8-16$\\
-		\hline
-		MISC ($TOl=5.10^{-1}$)  &$\red{0.1242}$ & $\red{0.0752}$ & $0.0682$ & $0.0665$ \\
-		MISC ($TOl=16.10^{-2}$)  &$-$ & $-$ & $0.0682$ & $\red{0.0795}$  \\
-		MISC ($TOl=10^{-1}$)  &$-$ & $-$ & $0.0658$ & $-$  \\
-		MISC ($TOl=5.10^{-2}$)   &$-$ & $-$ & $\red{0.0799}$ & $-$   \\
-		MISC ($TOl=10^{-2}$)  &$-$ & $-$ & $-$ & $-$  \\	
-		\hline
-	\end{tabular}
-	\caption{ Call option price of the different methods for different number of time steps. Case $K=1$, $H=0.07$, using Richardson extrapolation (level $1$)}
-	\label{table: Call option price of the different methods for different number of time steps. Case $K=1$, $H=0.07$, using Richardson extrapolation}
+	\caption{Bias and Statistical errors of MC ($M=10^6$)  for computing Call option price  for different number of time steps. Case set 1, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
+	\label{Bias and Statistical errors of MC ($M=10^6$)  for computing Call option price  for different number of time steps. Case set 1, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
 \end{table}
 
 
@@ -1751,17 +1881,678 @@ In this section, We try to investigate the reason of having worse weak rates tha
 \begin{table}[h!]
 	\centering
 	\begin{tabular}{l*{6}{c}r}
-		Method \textbackslash  Steps    &$1-2-4$         & $2-4-8$ & $4-8-16$ \\
+		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$  \\
 		\hline
-%		MISC ($TOl=5.10^{-1}$)  &$0.0589$ & $0.0658$ & $0.0659$  \\
-		MISC ($TOl=10^{-1}$)  &$0.0589$ & $0.0668$ & $\red{0.079}$   \\
-		MISC ($TOl=7.10^{-2}$)   &$0.0554$ & $\red{0.0810}$ & $-$   \\
-		MISC ($TOl=5.10^{-2}$)   &$0.0406$ & $-$ & $-$   \\
-		MISC ($TOl=10^{-2}$)  &$\red{0.0654}$ & $-$ & $-$   \\	
+		MISC ($TOl=5.10^{-1}$)  & $\underset{0.0084}{\mathbf{  0.1180}}$ & $\underset{0.0032
+		}{\mathbf{0.0449
+		}}$ & $\underset{0.0032}{\mathbf{0.0449}}$ & $\underset{0.0014}{\mathbf{0.0197}}$  \\
+		MISC ($TOl=10^{-1}$)  & $\underset{0.0084}{\mathbf{  0.1180}}$ & $\underset{0.0032
+		}{\mathbf{0.0449
+		}}$ & $\underset{0.0055}{\mathbf{0.0772}}$ & $\underset{0.0035
+	}{\mathbf{0.0492}}$  \\
+		MISC ($TOl=5.10^{-2}$)  &$\underset{0.0084}{\mathbf{  0.1180}}$ & $\underset{0.0034}{\mathbf{0.0477}}$ & $\underset{0.0027}{\mathbf{0.0379
+		}}$ & $\underset{0.0057}{\mathbf{0.0800}}$  \\
+		MISC ($TOl=10^{-2}$)  & $\underset{ 0.0021
+		}{\mathbf{0.0295}}$ & $\underset{0.0015}{\mathbf{0.0211}}$ & $\underset{0.0022
+	}{\mathbf{0.0309
+	}}$ & $\underset{0.0005}{\mathbf{0.0070}}$  \\
+		MISC ($TOl=10^{-3}$)  & $\underset{ 0.0021
+		}{\mathbf{0.0295}}$ & $\underset{0.0008}{\mathbf{ 0.0112}}$ & $\underset{0.0003
+		}{\mathbf{0.0042
+		}}$ & $\underset{0.0005}{\mathbf{ 0.0070}}$  \\
+		MISC ($TOl=10^{-4}$)  & $\underset{ 0.0021
+	}{\mathbf{0.0295}}$ & $\underset{0.0008}{\mathbf{ 0.0112}}$ & $\underset{(0.0006)
+	}{\mathbf{0.0084
+	}}$ & $\underset{-}{\mathbf{-}}$  \\
 		\hline
 	\end{tabular}
-	\caption{ Call option price of the different methods for different number of time steps. Case $K=1$, $H=0.07$, using Richardson extrapolation (level $2$)}
-	\label{table: Call option price of the different methods for different number of time steps. Case $K=1$, $H=0.07$, using Richardson extrapolation_level2}
+	\caption{Quadrature error of MISC to compute Call option price of the different tolerances for different number of time steps. Case  set $1$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
+	\label{Quadrature error of MISC to compute Call option price of the different tolerances for different number of time steps. Case  set $1$ parameters, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
+\end{table}
+
+
+
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$  \\
+		\hline
+		MISC ($TOl=5.10^{-1}$)  & $\mathbf{0.6005}$ & $\mathbf{0.3491}$ & $\mathbf{ 0.1915}$ & $\mathbf{ 0.0974}$  \\
+		MISC ($TOl=10^{-1}$)  & $\mathbf{ 0.6005}$ & $\mathbf{ 0.3491}$ & $\mathbf{  0.2238}$ & $\mathbf{
+			0.1269}$  \\
+		MISC ($TOl=5.10^{-2}$)  &$\mathbf{0.6005}$ & $\mathbf{  0.3519}$ & $\mathbf{ 0.1845}$ & $\mathbf{  0.1577}$  \\
+		MISC ($TOl=10^{-2}$)  & $\mathbf{0.5120}$ & $\mathbf{0.3253}$ & $\mathbf{ 0.1775}$ & $\mathbf{  0.0847}$  \\
+			MISC ($TOl=10^{-3}$)  & $\mathbf{0.5120}$ & $\mathbf{0.3154}$ & $\mathbf{0.1508}$ & $\mathbf{0.0847}$  \\
+			MISC ($TOl=10^{-4}$)  & $\mathbf{0.5120}$ & $\mathbf{0.3154}$ & $\mathbf{0.1550}$ & $\mathbf{-}$  \\
+		\hline
+		MC  ($M=10^6$)   & $\mathbf{
+			0.4844}$  & $\mathbf{    0.3056
+		}$  & $\mathbf{0.1477
+	}$ & $\mathbf{0.0786
+}$  \\		
+
+	MC  ($M=10^4$)   & $\mathbf{
+	0.5015}$  & $\mathbf{    0.3182
+}$  & $\mathbf{0.1576
+}$ & $\mathbf{0.0867
+}$  \\
+		\hline
+	\end{tabular}
+	\caption{Total error of MISC and MC to compute Call option price of the different tolerances for different number of time steps. Case Case set $1$ parametrs of table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, without Richardson extrapolation..}
+	\label{Total error of MISC and MC to compute Call option price of the different tolerances for different number of time steps. Case set 1, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
+\end{table}
+
+
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$ &   \\
+		\hline
+		MISC ($TOl=5.10^{-1}$)  & $0.1$ & $0.1$ & $0.2$ & $0.4$  \\
+		MISC ($TOl=10^{-1}$)  & $0.1$ & $0.1$ & $0.6$ & $6$  \\
+		MISC ($TOl=5.10^{-2}$)  & $0.1$ & $0.3$ & $2$ & $14$  \\
+		MISC ($TOl=10^{-2}$)  & $0.2$ & $1$ & $9$ & $215$  \\
+		MISC ($TOl=10^{-3}$)  & $2$ & $11$ & $243$ & $4650$  \\
+			MISC ($TOl=10^{-4}$)  & $6$ & $96$ & $5760$ & $-$  \\
+		\hline
+		MC method ($M=10^6$)   & $29$  & $32$  & $37$ & $51$  \\
+			MC method ($M=10^4$)   & $0.4$  & $0.4$  & $0.5$ & $0.6$  \\	
+		\hline
+	\end{tabular}
+	\caption{Comparsion of the computational time of  MC and MISC, used to compute Call option price of rBergomi model for different number of time steps. Case set $1$ parametrs of table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.} }
+	\label{Comparsion of the computational time of  MC and MISC, used to compute Call option price of rBergomi model for different number of time steps. Case set1}
+\end{table}
+
+
+
+
+%\begin{table}[h!]
+%	\centering
+%	\begin{tabular}{l*{6}{c}r}
+%		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$ &   \\
+%		\hline
+%		%		MISC ($TOl=5.10^{-1}$)  & $0.6011$ & $0.3497$ & $0.1910$ & $0.0969$  \\
+%		MISC ($TOl=2.10^{-1}$)  &  $0.6011$ & $0.3497$ &$0.1910$ & $\red{0.0801}$  \\
+%		MISC ($TOl=10^{-1}$)  & $0.6011$ & $0.3497$ & $0.2233$ & $-$  \\
+%		%		MISC ($TOl=5.10^{-2}$)  & $0.6011$ & $0.3539$ & $0.1882$ & $0.1573$  \\
+%		MISC ($TOl=10^{-2}$)  & $\red{0.5126}$ & $0.3258$ & $0.1770$ & $-$   \\	
+%		%		MISC ($TOl=5.10^{-3}$)  & $	0.4930$ & $0.3076$ & $0.1671$ & $-$   \\	
+%		MISC ($TOl=10^{-3}$)  & $	-$ & $\red{0.2935}$ & $\red{0.1503}$ & $-$   \\
+%		%		MISC ($TOl=10^{-4}$)  & $		0.5154$ & $0.2935$ & $-$ & $-$   \\
+%		MC method ($M=10^{6}$)   & $\mathbf{0.5154}$  & $\mathbf{0.2935}$  & $\mathbf{0.1545}$ & $\mathbf{0.0801}$  \\	
+%		\hline
+%	\end{tabular}
+%	\caption{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1$, $H=0.43$, without Richardson extrapolation}
+%	\label{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.43$}
+%\end{table}
+
+
+
+
+
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{l*{6}{c}r}
+Method \textbackslash  Steps    &$1-2$         & $2-4$ & $4-8$ & $8-16$\\
+\hline
+		MISC ($TOl=5.10^{-1}$)& $0.1357$  & $0.0783$ & $0.0735$ & $0.0714$ \\
+	MISC ($TOl=10^{-1}$)  &$0.1357$  &$0.0783$ & $0.0785$ & $0.0761$  \\
+			MISC ($TOl=5.10^{-2}$)  & $0.1357$ & $0.0831$ & $0.0773$ & $0.0758$   \\
+	MISC ($TOl=10^{-2}$)  & $0.1237$ &$0.0781$ & $0.0745$ & $0.0714$  \\
+	%		MISC ($TOl=5.10^{-3}$)  & $0.1225$ &$0.0779$ & $0.0727$ & $-$  \\	
+	MISC ($TOl=10^{-3}$)  & $0.1224$ &$0.0766$ & $0.0720$ & $0.0705$ \\
+	MISC ($TOl=10^{-4}$)  &$0.1224$ & $0.0763$ & $0.0724$ & $-$ \\
+\hline
+		MC method ($M=10^6$)  &$	0.1237$ & $0.0752$ & $0.0721$ & $  0.0713$ \\
+\hline
+\end{tabular}
+\caption{Call option price of the different methods for different number of time steps. Case set $1$ parameters of table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, using Richardson extrapolation (level $1$)}
+\label{table:  Call option price of the different methods for different number of time steps. Case set $1$ parameter, using Richardson extrapolation (level $1$)}
+\end{table}
+
+
+
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{l*{6}{c}r}
+Method \textbackslash  Steps            & $1-2$ & $2-4$ & $4-8$ & $8-16$  \\
+\hline
+MC ($M=10^6$)  Bias   &$\underset{( 0.0525)}{\mathbf{0.7378}}$  & $\underset{(    0.0040)}{\mathbf{0.0561}}$  & $\underset{(0.0009 )}{\mathbf{0.0127}}$  & $\underset{(0.0001)}{\mathbf{0.0021}}$ \\	
+
+MC Statistical error ($M=10^6$)   & $\underset{( 2.3e-04)}{\mathbf{3.3e-03}}$  & $\underset{(  1.1e-04)}{\mathbf{1.6e-03}}$  & $\underset{(7.1e-05)}{\mathbf{1.0e-03}}$ & $\underset{(   6.4e-05 )}{\mathbf{9.0e-04}}$ \\	
+MC Statistical error  ($M=10^4$)  & $\underset{( 1.8e-03)}{\mathbf{2.5e-02}}$  & $\underset{(  8.5e-04)}{\mathbf{1.2e-02}}$  & $\underset{(7.1e-04)}{\mathbf{1.0e-02}}$ & $\underset{(   6.5e-04 )}{\mathbf{9.1e-03}}$ \\
+\hline
+\end{tabular}
+\caption{Bias and Statistical errors of MC ($M=10^6$)  for computing Call option price  for different number of time steps. Case set $1$ parameters in tabel \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors.}
+\label{Bias and Statistical errors of MC ($M=10^6$)  for computing Call option price  for different number of time steps. Case set $1$ parameters, with Richardson extrapolation (level1). The numbers between parentheses are the corresponding absolute errors.}
+\end{table}
+
+
+
+\begin{table}[!h]
+\centering
+\begin{tabular}{l*{6}{c}r}
+Method \textbackslash  Steps            & $1-2$ & $2-4$ & $4-8$ & $8-16$  \\
+\hline
+MISC ($TOl=5.10^{-1}$)  & $\underset{(  0.0120)}{\mathbf{   0.1685}}$ & $\underset{(0.0031)}{\mathbf{0.0435}}$ & $\underset{(0.0014
+	)}{\mathbf{ 0.0197}}$ & $\underset{(0.0001)}{\mathbf{0.0014}}$ \\
+MISC ($TOl=10^{-1}$)  & $\underset{(  0.0120)}{\mathbf{   0.1685}}$ & $\underset{(0.0031)}{\mathbf{0.0435}}$ & $\underset{(0.0064)}{\mathbf{0.0899}}$ & $\underset{(0.0048)}{\mathbf{0.0674}}$  \\
+MISC ($TOl=5.10^{-2}$)  & $\underset{(  0.0120)}{\mathbf{   0.1685}}$ & $\underset{(0.0079)}{\mathbf{0.1109}}$ & $\underset{(0.0052)}{\mathbf{0.0730}}$ & $\underset{(0.0045)}{\mathbf{0.0632}}$  \\
+MISC ($TOl=10^{-2}$)  & $\underset{(7e-07)}{\mathbf{1e-05}}$ &    $\underset{(0.0029)}{\mathbf{0.0407}}$ & $\underset{(0.0024  )}{\mathbf{0.0337}}$ & $\underset{(0.0001)}{\mathbf{0.0014}}$  \\
+MISC ($TOl=10^{-3}$)  & $\underset{(0.0013)}{\mathbf{
+		0.0183}}$ &    $\underset{(0.0014
+	)}{\mathbf{0.0197}}$ & $\underset{(0.0001)}{\mathbf{ 0.0014
+}}$ & $\underset{(0.0008)}{\mathbf{0.0112}}$  \\
+
+MISC ($TOl=10^{-4}$)  & $\underset{(0.0013)}{\mathbf{
+		0.0183}}$ &    $\underset{(0.0011
+	
+	)}{\mathbf{0.0154}}$ & $\underset{(0.001)}{\mathbf{   0.0014
+}}$ & $\underset{(-)}{\mathbf{-}}$  \\
+\hline
+\end{tabular}
+\caption{Quadrature error of MISC to compute Call option price of the different tolerances for different number of time steps. Case set $1$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, with Richardson extrapolation(level $1$). The numbers between parentheses are the corresponding absolute errors.}
+\label{Quadrature error of MISC to compute Call option price of the different tolerances for different number of time steps. Case set $1$ parameters, with Richardson extrapolation(level $1$). The numbers between parentheses are the corresponding absolute errors.}
+\end{table}
+
+\begin{table}[!h]
+\centering
+\begin{tabular}{l*{6}{c}r}
+Method \textbackslash  Steps            & $1-2$ & $2-4$ & $4-8$ & $8-16$  \\
+\hline
+MISC ($TOl=5.10^{-1}$)  & $\mathbf{0.9063
+}$ & $\mathbf{ 0.0996}$ & $\mathbf{0.0324
+}$ & $\mathbf{ 0.0035}$ \\
+MISC ($TOl=10^{-1}$)  & $\mathbf{0.9063
+}$ & $\mathbf{ 0.0996}$ & $\mathbf{  0.1026}$ & $\mathbf{ 0.0695
+}$  \\
+MISC ($TOl=5.10^{-2}$)  & $\mathbf{0.9063
+}$ & $\mathbf{    0.1670}$ & $\mathbf{ 0.0857}$ & $\mathbf{0.0653
+}$  \\
+MISC ($TOl=10^{-2}$)  & $\mathbf{0.7378}$ & $\mathbf{  0.0968}$ & $\mathbf{   0.0464}$ & $\mathbf{ 0.0035}$  \\	
+MISC ($TOl=10^{-3}$)  & $\mathbf{0.7561}$ & $\mathbf{0.0758}$ & $\mathbf{0.0141}$ & $\mathbf{-}$  \\
+MISC ($TOl=10^{-4}$)  & $\mathbf{0.7561}$ & $\mathbf{0.0715}$ & $\mathbf{0.0141}$ & $\mathbf{-}$  \\
+\hline
+MC ($M=10^6$)  & $\mathbf{0.7411}$  & $\mathbf{ 0.0577}$  & $\mathbf{  0.0137}$ &$\mathbf{  0.0030}$   \\	
+MC ($M=10^4$)  & $\mathbf{0.7628}$  & $\mathbf{ 0.0681}$  & $\mathbf{  0.0227}$ &$\mathbf{  0.0112}$   \\
+\hline
+\end{tabular}
+\caption{Total  error of MISC and MC to compute Call option price of the different tolerances for different number of time steps. Case set $1$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, with Richardson extrapolation(level $1$).}
+\label{Total  error of MISC and MC to compute Call option price of the different tolerances for different number of time steps. Case set $1$ parameters, with Richardson extrapolation(level $1$). The numbers between parentheses are the corresponding absolute errors.}
+\end{table}
+
+\begin{table}[!h]
+\centering
+\begin{tabular}{l*{6}{c}r}
+Method \textbackslash  Steps            & $1-2$ & $2-4$ & $4-8$ & $8-16$ &   \\
+\hline
+MISC ($TOl=5.10^{-1}$)  & $0.1$ & $0.1$ & $0.2$ & $0.5$  \\
+MISC ($TOl=10^{-1}$)  & $0.1$ & $0.1$ & $0.6$ & $8$  \\
+MISC ($TOl=5.10^{-2}$)  & $0.1$ & $0.4$ & $2$ & $38$  \\
+MISC ($TOl=10^{-2}$)  & $1$ & $2$ & $18$ & $490$  \\
+MISC ($TOl=10^{-3}$)  & $4$ & $12$ & $664$ & $54065$  \\	
+MISC ($TOl=10^{-4}$)  & $7$ & $191$ & $7650$ & $-$  \\
+\hline
+MC method + Richardson (level 1) ($M=10^{6}$)  &$43$ & $46$  & $53$  & $72$ \\	
+MC method + Richardson (level 1) ($M=10^{4}$)  &$0.6$ & $0.6$  & $0.7$  & $0.8$ \\	
+\hline
+\end{tabular}
+\caption{Comparsion of the computational time of  MC and MISC, using Richardson extrapolation (level $1$), used to compute Call option price of rBergomi model for different number of time steps. Case set $1$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}}
+\label{Comparsion of the computational time of  MC and MISC, using Richardson extrapolation (level $1$), used to compute Call option price of rBergomi model for different number of time steps. Case set $1$ parameters}
+\end{table}
+
+
+
+%\begin{table}[h!]
+%	\centering
+%	\begin{tabular}{l*{5}{c}r}
+%		Method \textbackslash  Steps    &$1-2$        & $2-4$ & $4-8$ & $8-16$  \\
+%		\hline
+%		MISC ($TOl=5.10^{-1}$)  &$0.9059$ & $0.0997$ & $0.0323$ & $\red{0.0028}$  \\
+%		MISC ($TOl=10^{-1}$)  &$0.9059$ &$0.0997$ & $0.1025$ & $-$ \\
+%		%		MISC ($TOl=5.10^{-2}$)  &$0.9059$ & $0.1671$ & $0.0857$ & $0.0646$   \\
+%		MISC ($TOl=10^{-2}$)  & $0.7374$ &$0.0969$ & $0.0463$ & $-$ \\		
+%		%		MISC ($TOl=5.10^{-3}$)  & $0.7205$ &$0.0941$ & $0.0211$ & $-$ \\	
+%		MISC ($TOl=10^{-3}$)  & $0.7191$ & $0.0758$ & $\red{0.0112}$ & $-$ \\	
+%		MISC ($TOl=5.10^{-4}$)  &$\red{0.7129}$ & $\red{0.0609}$ & $-$ & $-$ \\
+%		MC method ($M=10^{6}$)&$ \mathbf{0.7133}$    & $\mathbf{0.0698}$  & $\mathbf{0.0160}$  & $\mathbf{0.0035}$ \\
+%		\hline
+%	\end{tabular}
+%	\caption{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1$, $H=0.43$, using Richardson extrapolation (level $1$)}
+%	\label{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.43$ , using Richardson extrapolation}
+%\end{table}
+
+
+
+%\begin{table}[h!]
+%	\centering
+%	\begin{tabular}{l*{5}{c}r}
+%		Method \textbackslash  Steps    &$1-2-4$        & $2-4-8$ & $4-8-16$   \\
+%		\hline
+%		MISC ($TOl=5.10^{-1}$)  &$ 0.1699$ & $\red{0.0098}$ & $ 0.0056$   \\
+%		MISC ($TOl=2.10^{-1}$)  &$ 0.1699$ &$-$ & $\red{ 0.0014}$  \\
+%		MISC ($TOl=10^{-1}$)  &$0.2037$ &$-$ & $-$  \\
+%		MISC ($TOl=5.10^{-2}$)  &$\red{0.0295}$ & $-$ & $-$  \\
+%		MC method ($M=10^{6}$)&$\mathbf{0.1440}$    & $ \mathbf{0.0180}  $  & $\mathbf{0.0023}$   \\
+%		\hline
+%	\end{tabular}
+%	\caption{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1$, $H=0.43$, using Richardson extrapolation (level $2$)}
+%	\label{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.43$ , using Richardson extrapolation_level2}
+%\end{table}
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%\begin{table}[h!]
+%	\centering
+%	\begin{tabular}{l*{6}{c}r}
+%		Method \textbackslash  Steps           &$1-2-4$ & $2-4-8$ & $4-8-16$\\
+%		\hline
+%		MISC ($TOl=5.10^{-1}$)& $0.0591$  & $\red{0.0719}$ & $0.0708$  \\
+%		MISC ($TOl=2.10^{-1}$)  &$0.0591$ &$-$ & $\red{0.0711}$  \\
+%		MISC ($TOl=10^{-1}$)  &$0.0567$  &$-$ & $-$   \\
+%		MISC ($TOl=5.10^{-2}$)  & $\red{0.0733}$ & $-$ & $-$  \\
+%		\hline
+%	\end{tabular}
+%	\caption{ Call option price of the different methods for different number of time steps. Case $K=1$, $H=0.43$, using Richardson extrapolation (level 2)}
+%	\label{table: Call option price of the different methods for different number of time steps. Case $K=1$, using Richardson extrapolation_level2}
+%\end{table}
+
+
+%\newpage
+%\subsection{Case of set $2$ parameters in table  \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}}\label{appendix:Case of set 2 parameters}
+%
+%
+%
+%
+%\begin{table}[h!]
+%	\centering
+%	\begin{tabular}{l*{6}{c}r}
+%		Method \textbackslash  Steps    &$1-2-4$         & $2-4-8$ & $4-8-16$ \\
+%		\hline
+%%		MISC ($TOl=5.10^{-1}$)  &$0.0589$ & $0.0658$ & $0.0659$  \\
+%		MISC ($TOl=10^{-1}$)  &$0.0589$ & $0.0668$ & $\red{0.079}$   \\
+%		MISC ($TOl=7.10^{-2}$)   &$0.0554$ & $\red{0.0810}$ & $-$   \\
+%		MISC ($TOl=5.10^{-2}$)   &$0.0406$ & $-$ & $-$   \\
+%		MISC ($TOl=10^{-2}$)  &$\red{0.0654}$ & $-$ & $-$   \\	
+%		\hline
+%	\end{tabular}
+%	\caption{ Call option price of the different methods for different number of time steps. Case $K=1$, $H=0.07$, using Richardson extrapolation (level $2$)}
+%	\label{table: Call option price of the different methods for different number of time steps. Case $K=1$, $H=0.07$, using Richardson extrapolation_level2}
+%\end{table}
+%
+%
+%\begin{table}[h!]
+%	\centering
+%	\begin{tabular}{l*{5}{c}r}
+%		Method \textbackslash  Steps &$1-2-4$             & $2-4-8$ & $4-8-16$   \\
+%		\hline
+%		%		MISC ($TOl=5.10^{-1}$)  &$0.2563$ & $ 0.1692$ & $ 0.1679
+%		%		$   \\
+%		MISC ($TOl=10^{-1}$)  &$0.2563$ &  $0.1566$ & $\red{  0.0025}$  \\
+%		MISC ($TOl=7.10^{-2}$) &$  0.3005$ &  $  \red{0.0227}$ & $-$    \\
+%		MISC ($TOl=5.10^{-2}$) &$0.4874$ &  $  -$ & $-$    \\
+%		MISC ($TOl=10^{-2}$)&$ \red{0.1742}$ &  $-$ & $-$  \\	
+%		MC method ($M=10^{6}$)  &$\mathbf{0.2231}$  & $  \mathbf{0.0279}$  & $\mathbf{0.0035}$ \\
+%		\hline	
+%		
+%	\end{tabular}
+%	\caption{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1$, $H=0.07$, using Richardson extrapolation (level $2$)}
+%	\label{Relative error of Call option price of the different tolerances for different number of time steps. Case $K=1, H=0.07$ , using Richardson extrapolation_level2}
+%\end{table}
+%
+%
+%
+%\begin{table}[h!]
+%	\centering
+%	\begin{tabular}{l*{5}{c}r}
+%		Method \textbackslash  Steps &$1-2-4$             & $2-4-8$ & $4-8-16$   \\
+%		\hline
+%		MISC +Richardson (level 2) &$19$ & $ 33$ & $-$   \\
+%		
+%		MC method+Richardson (level 2) ($M=10^{6}$)  &$66$  & $74 $  & $95$ \\
+%		\hline	
+%		
+%	\end{tabular}
+%	\caption{Comparsion of the computational time of  MC and MISC, coupled with Richardson extrapolation (level $2$), used to compute Call option price of rBergomi model for different number of time steps. Case $K=1, H=0.07$}
+%	\label{Comparsion of the computational time of  MC and MISC, coupled with Richardson extrapolation (level $2$), used to compute Call option price of rBergomi model for different number of time steps. Case $K=1, H=0.07$}
+%\end{table}
+
+\newpage
+\subsection{Case of set $3$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}}\label{appendix:Case of set 3 parameters}
+\begin{table}[h!]
+	\centering
+\begin{tabular}{l*{6}{c}r}
+	Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$ &   \\
+	\hline
+	MISC ($TOl=5.10^{-1}$)  & $0.2393$ & $0.2228$ & $0.2152$ & $0.2093$  \\
+	MISC ($TOl=10^{-1}$)  & $0.2393$ & $0.2228$ & $0.2205$ & $0.2228$  \\
+	MISC ($TOl=5.10^{-2}$)  & $0.2393$ & $0.2205$ & $0.2273$ & $0.2225$  \\
+	MISC ($TOl=10^{-2}$)  & $0.2453$ & $0.2369$ & $0.2325$ & $-$  \\
+	MISC ($TOl=10^{-3}$)  & $0.2505$ & $0.2373$ & $-$ & $-$  \\
+	MISC ($TOl=10^{-4}$)  & $0.2501$ & $-$ & $-$ & $-$  \\
+	\hline
+	MC method ($M=10^{6}$)   & $ 0.2529$ & $  0.2405$  & $ 0.2319
+	$ & $   0.2280$ \\		
+	
+	\hline
+\end{tabular}
+\caption{ Call option price of the different methods for different number of time steps. Case of set $3$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, without Richardson extrapolation.}
+\label{table: Call option price of the different methods for different number of time steps. Case set 3}
+\end{table}
+
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{l*{6}{c}r}
+	Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$  \\
+	\hline
+	MC Bias ($M=10^6$)   & 	$ \underset{(  0.0280)}{\mathbf{0.1244}}$  & $\underset{(  0.0156
+		)}{\mathbf{0.0695}}$  & $\underset{(0.0070
+		)}{\mathbf{0.0313}}$ & $\underset{( 0.0031
+		)}{\mathbf{0.0139}}$\\ 
+	
+	MC Statistical error ($M=10^6$)  &  $\underset{(2.9e-04)} {\mathbf{1.3e-03}}$  & $\underset{( 5.2e-04)} {\mathbf{2.3e-03}}$  & $\underset{(  1.8e-04)} {\mathbf{ 7.9e-04}}$ & $\underset{(1.6e-04)} {\mathbf{7.0e-04}}$	\\
+		MC Statistical error ($M=10^4$)  &  $\underset{(2.5e-03)} {\mathbf{1.1e-02}}$  & $\underset{( 1.7e-03)} {\mathbf{7.7e-03}}$  & $\underset{(  1.7e-03)} {\mathbf{ 7.5e-03}}$ & $\underset{(1.5e-03)} {\mathbf{6.8e-03}}$	\\
+	\hline
+\end{tabular}
+\caption{Bias and Statistical errors of MC ($M=10^6$)  for computing Call option price  for different number of time steps. Case set 3, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
+\label{Bias and Statistical errors of MC ($M=10^6$)  for computing Call option price  for different number of time steps. Case set 3, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
+\end{table}
+
+
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{l*{6}{c}r}
+	Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$  \\
+	\hline
+	MISC ($TOl=5.10^{-1}$)  & $\underset{( 0.0136)}{\mathbf{ 0.0605}}$ & $\underset{(0.0177)}{\mathbf{0.0787}}$ & $\underset{( 0.0167
+		)}{\mathbf{   0.0743
+	}}$ & $\underset{(0.0187)}{\mathbf{ 0.0831}}$  \\
+	MISC ($TOl=10^{-1}$)  & $\underset{( 0.0136)}{\mathbf{ 0.0605}}$ & $\underset{(0.0177)}{\mathbf{0.0787}}$ & $\underset{(0.0114)}{\mathbf{ 0.0507}}$ & $\underset{(  0.0052)}{\mathbf{0.0231}}$  \\
+	MISC ($TOl=5.10^{-2}$)  &$\underset{( 0.0136)}{\mathbf{ 0.0605}}$ & $\underset{( 0.0200
+		)}{\mathbf{
+			0.0889}}$ & $\underset{(  0.0046)}{\mathbf{
+			0.0205
+		}}$ & $\underset{(0.0055)}{\mathbf{  0.0245}}$  \\
+	MISC ($TOl=10^{-2}$)  & $\underset{(0.0076)}{\mathbf{ 0.0338}}$ & $\underset{(0.0036)}{\mathbf{   0.0160}}$ & $\underset{(0.0006)}{\mathbf{0.0027}}$ & $\underset{-}{\mathbf{-}}$  \\
+		MISC ($TOl=10^{-3}$)  & $\underset{(  0.0024
+			)}{\mathbf{ 0.0107}}$ & $\underset{(  0.0032)}{\mathbf{
+				0.0142
+		}}$ & $\underset{-}{\mathbf{-}}$ & $\underset{-}{\mathbf{-}}$  \\
+				MISC ($TOl=10^{-4}$)  & $\underset{(   0.0028
+			)}{\mathbf{   0.0124
+		}}$ & $\underset{-}{\mathbf{-}}$ & $\underset{-}{\mathbf{-}}$ & $\underset{-}{\mathbf{-}}$  \\
+	\hline
+\end{tabular}
+\caption{Quadrature error of MISC to compute Call option price of the different tolerances for different number of time steps. Case  set $3$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
+\label{Quadrature error of MISC to compute Call option price of the different tolerances for different number of time steps. Case  set $3$ parameters, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
+\end{table}
+
+
+
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{l*{6}{c}r}
+	Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$  \\
+	\hline
+	MISC ($TOl=5.10^{-1}$)  & $\mathbf{0.1849}$ & $\mathbf{0.1482}$ & $\mathbf{ 0.1056}$ & $\mathbf{ 0.0970}$  \\
+	MISC ($TOl=10^{-1}$)  & $\mathbf{0.1849}$ & $\mathbf{0.1482}$ & $\mathbf{ 0.0820}$ & $\mathbf{0.0370}$  \\
+	MISC ($TOl=5.10^{-2}$)  &$\mathbf{0.1849}$ & $\mathbf{0.1584}$ & $\mathbf{0.0518}$ & $\mathbf{0.0384}$  \\
+	MISC ($TOl=10^{-2}$)  & $\mathbf{0.1582}$ & $\mathbf{0.0855}$ & $\mathbf{0.0340}$ & $\mathbf{-}$  \\
+		MISC ($TOl=10^{-3}$)  & $\mathbf{0.1351}$ & $\mathbf{0.0837}$ & $\mathbf{-}$ & $\mathbf{-}$  \\
+			MISC ($TOl=10^{-4}$)  & $\mathbf{0.1368}$ & $\mathbf{-}$ & $\mathbf{-}$ & $\mathbf{-}$  \\
+\hline
+	MC  ($M=10^6$)   & $\mathbf{  0.1257}$  & $\mathbf{0.0718}$  & $\mathbf{ 0.0321}$ & $\mathbf{   0.0146}$  \\	
+		MC  ($M=10^4$)   & $\mathbf{  0.1354}$  & $\mathbf{0.0772}$  & $\mathbf{ 0.0388}$ & $\mathbf{   0.0207}$  \\		
+	\hline
+\end{tabular}
+\caption{Total error of MISC and MC to compute Call option price of the different tolerances for different number of time steps. Case Case set $3$ parametrs of table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, without Richardson extrapolation.}
+\label{Total error of MISC and MC to compute Call option price of the different tolerances for different number of time steps. Case set 3, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
+\end{table}
+
+
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{l*{6}{c}r}
+	Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$ &   \\
+	\hline
+	MISC ($TOl=5.10^{-1}$)  & $0.1$ & $0.1$ & $0.2$ & $2$  \\
+	MISC ($TOl=10^{-1}$)  & $0.1$ & $0.1$ & $4$ & $640$  \\
+	MISC ($TOl=5.10^{-2}$)  & $0.1$ & $0.4$ & $11$ & $1256$  \\
+	MISC ($TOl=10^{-2}$)  & $1$ & $9$ & $1400$ & $-$  \\
+		MISC ($TOl=10^{-3}$)  & $20$ & $1760$ & $-$ & $-$  \\
+			MISC ($TOl=10^{-4}$)  & $78$ & $-$ & $-$ & $-$  \\
+	\hline
+	MC method ($M=10^6$)   & $29$  & $32$  & $37$ & $115$  \\	
+		MC method ($M=10^4$)   & $0.5$  & $0.5$  & $0.5$ & $0.6$  \\
+	\hline
+\end{tabular}
+\caption{Comparsion of the computational time of  MC and MISC, used to compute Call option price of rBergomi model for different number of time steps. Case set $3$ parametrs of table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.} }
+\label{Comparsion of the computational time of  MC and MISC, used to compute Call option price of rBergomi model for different number of time steps. Case set3}
+\end{table}
+
+
+
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{l*{6}{c}r}
+Method \textbackslash  Steps    &$1-2$         & $2-4$ & $4-8$ & $8-16$\\
+\hline
+MISC ($TOl=5.10^{-1}$)& $0.2587$  & $0.2062$ & $0.2075$ & $0.2077$ \\
+MISC ($TOl=10^{-1}$)  &$0.2587$  &$0.2047$ & $0.2147$ & $0.2163$  \\
+MISC ($TOl=5.10^{-2}$)  & $0.2587$ & $0.2267$ & $0.2186$ & $-$   \\
+MISC ($TOl=10^{-2}$)  & $0.2789$ &$0.2306$ & $0.2260$ & $-$  \\
+MISC ($TOl=10^{-3}$)  & $0.2811$ &$0.2255$ & $-$ & $-$  \\
+MISC ($TOl=10^{-4}$)  & $0.2808$ &$-$ & $-$ & $-$  \\
+\hline
+MC method ($M=10^6$)  &$   0.2780$ & $0.2289$ & $ 0.2255$ & $0.2252$ \\
+\hline
+\end{tabular}
+\caption{Call option price of the different methods for different number of time steps. Case set $3$ parameters of table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, using Richardson extrapolation (level $1$)}
+\label{table:  Call option price of the different methods for different number of time steps. Case set $3$ parameter, using Richardson extrapolation (level $1$)}
+\end{table}
+
+
+
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{l*{6}{c}r}
+Method \textbackslash  Steps            & $1-2$ & $2-4$ & $4-8$ & $8-16$  \\
+\hline
+MC Bias   &$\underset{(    0.0531)}{\mathbf{0.2362}}$  & $\underset{( 0.0040)}{\mathbf{0.0179}}$  & $\underset{(  0.0006)}{\mathbf{0.0027}}$  & $\underset{(0.0003 )}{\mathbf{0.0013}}$ \\	
+
+MC Statistical error   & $\underset{( 5.8e-04)}{\mathbf{2.6e-03}}$  &  $\underset{( 5.8e-04)}{\mathbf{2.6e-03}}$ & $\underset{( 2.2e-04)}{\mathbf{1.0e-03}}$ & $\underset{(1.8e-04 )}{\mathbf{ 8.2e-04}}$ \\	
+\hline
+\end{tabular}
+\caption{Bias and Statistical errors of MC ($M=10^6$)  for computing Call option price  for different number of time steps. Case set $3$ parameters in tabel \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors.}
+\label{Bias and Statistical errors of MC ($M=10^6$)  for computing Call option price  for different number of time steps. Case set $3$ parameters, with Richardson extrapolation (level1). The numbers between parentheses are the corresponding absolute errors.}
+\end{table}
+
+
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{l*{6}{c}r}
+Method \textbackslash  Steps            & $1-2$ & $2-4$ & $4-8$ & $8-16$  \\
+\hline
+MISC ($TOl=5.10^{-1}$)  & $\underset{(  0.0193)}{\mathbf{ 0.0858}}$ & $\underset{(0.0227)}{\mathbf{   0.1009}}$ & $\underset{(0.0180)}{\mathbf{  0.0800}}$ & $\underset{(  0.0175
+	)}{\mathbf{ 0.0778
+}}$ \\
+MISC ($TOl=10^{-1}$)  & $\underset{(  0.0193)}{\mathbf{ 0.0858}}$& $\underset{(0.0242
+	)}{\mathbf{    0.1076}}$ & $\underset{(0.0108)}{\mathbf{
+		0.0480}}$ & $\underset{( 0.0089)}{\mathbf{0.0396}}$  \\
+MISC ($TOl=5.10^{-2}$)  & $\underset{(  0.0193)}{\mathbf{ 0.0858}}$ & $\underset{(
+	0.0022)}{\mathbf{ 0.0098}}$ & $\underset{( 0.0069)}{\mathbf{
+		0.0307}}$ & $\underset{-}{\mathbf{-}}$  \\
+MISC ($TOl=10^{-2}$)  & $\underset{ (0.0009)}{\mathbf{0.0040}}$ & $\underset{(0.0017)}{\mathbf{0.0076}}$ & $\underset{(0.0005)}{\mathbf{0.0022}}$ & $\underset{-}{\mathbf{-}}$  \\
+MISC ($TOl=10^{-3}$)  & $\underset{ (0.0031)}{\mathbf{0.0138}}$ &      $\underset{ ( 0.0034)}{\mathbf{ 0.0151}}$
+&&\\
+MISC ($TOl=10^{-4}$)  & $\underset{ (0.0028)}{\mathbf{0.0124}}$ &&&\\
+\hline
+\end{tabular}
+\caption{Quadrature error of MISC to compute Call option price of the different tolerances for different number of time steps. Case set $3$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, with Richardson extrapolation(level $1$). The numbers between parentheses are the corresponding absolute errors.}
+\label{Quadrature error of MISC to compute Call option price of the different tolerances for different number of time steps. Case set $3$ parameters, with Richardson extrapolation(level $1$). The numbers between parentheses are the corresponding absolute errors.}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{l*{6}{c}r}
+Method \textbackslash  Steps            & $1-2$ & $2-4$ & $4-8$ & $8-16$  \\
+\hline
+MISC ($TOl=5.10^{-1}$)  & $\mathbf{0.3220}$ & $\mathbf{0.1188}$ & $\mathbf{0.0827}$ & $\mathbf{0.0791}$ \\
+MISC ($TOl=10^{-1}$)  & $\mathbf{0.3220}$  & $\mathbf{0.1255}$ & $\mathbf{0.0507}$ & $\mathbf{0.0409}$  \\
+MISC ($TOl=5.10^{-2}$)  & $\mathbf{0.3220}$  & $\mathbf{0.0277}$ & $\mathbf{0.0334}$ & $\mathbf{-}$  \\
+
+MISC ($TOl=10^{-2}$)  & $\mathbf{0.2402}$ & $\mathbf{0.0255}$ & $\mathbf{0.0049}$ & $\mathbf{-}$  \\	
+
+ MISC ($TOl=10^{-3}$)  &$\mathbf{0.2500}$  & $\mathbf{0.0330}$  & $\mathbf{-}$  & $\mathbf{-}$ \\	
+ 
+ MISC ($TOl=10^{-3}$)  &$\mathbf{0.2486}$  & $\mathbf{-}$  & $\mathbf{-}$  & $\mathbf{-}$ \\	
+
+\hline
+MC &$\mathbf{0.2388}$  & $\mathbf{0.0205}$  & $\mathbf{0.0037}$  & $\mathbf{0.0021}$ \\	
+
+\hline
+\end{tabular}
+\caption{Total  error of MISC and MC to compute Call option price of the different tolerances for different number of time steps. Case set $3$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, with Richardson extrapolation(level $1$). The numbers between parentheses are the corresponding absolute errors.}
+\label{Total  error of MISC and MC to compute Call option price of the different tolerances for different number of time steps. Case set $3$ parameters, with Richardson extrapolation(level $1$). The numbers between parentheses are the corresponding absolute errors.}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{l*{6}{c}r}
+Method \textbackslash  Steps            & $1-2$ & $2-4$ & $4-8$ & $8-16$ &   \\
+\hline
+MISC ($TOl=5.10^{-1}$)  & $0.1$ & $0.1$ & $0.2$ & $7$  \\
+MISC ($TOl=10^{-1}$)  & $0.1$ & $0.2$ & $5$ & $1375$  \\
+MISC ($TOl=5.10^{-2}$)  & $0.1$ & $2$ & $19$ & $-$  \\
+MISC ($TOl=10^{-2}$)  & $3$ & $24$ & $1900$ & $-$  \\	
+MISC ($TOl=10^{-3}$)  & $30$ & $9510$ & $-$ & $-$  \\	
+MISC ($TOl=10^{-4}$)  & $234$ & $-$ & $-$ & $-$  \\	
+\hline
+MC method + Richardson (level 1) ($M=10^{6}$)  &$44$ & $46$  & $54$  & $341$ \\	
+\hline
+\end{tabular}
+\caption{Comparsion of the computational time of  MC and MISC, using Richardson extrapolation (level $1$), used to compute Call option price of rBergomi model for different number of time steps. Case set $3$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}}
+\label{Comparsion of the computational time of  MC and MISC, using Richardson extrapolation (level $1$), used to compute Call option price of rBergomi model for different number of time steps. Case set $3$ parameters}
+\end{table}
+
+\newpage
+\subsection{Case of set $4$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}}\label{appendix:Case of set 4 parameters}
+
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{l*{6}{c}r}
+Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$ &   \\
+\hline
+MISC ($TOl=5.10^{-1}$)  & $0.0298$ & $0.0107$ & $0.0033$ & $0.0008$  \\
+MISC ($TOl=10^{-1}$)  & $0.0298$ & $0.0107$ & $0.0033$ & $0.0008$   \\
+MISC ($TOl=5.10^{-2}$)  &$0.0298$ & $0.0107$ & $0.0033$ & $0.0008$  \\
+MISC ($TOl=10^{-2}$)  & $0.0524$ & $0.0157$ & $0.0033$ & $0.0008$  \\
+\hline
+MC method ($M=10^{6}$)   & $    0.0527$ & $0.0034$  & $ 0.0240$ & $  0.0177$ \\		
+
+\hline
+\end{tabular}
+\caption{ Call option price of the different methods for different number of time steps. Case of set $4$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, without Richardson extrapolation.}
+\label{table: Call option price of the different methods for different number of time steps. Case set 4}
+\end{table}
+
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{l*{6}{c}r}
+Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$  \\
+\hline
+MC Bias ($M=10^6$)   & 	$ \underset{(0.0427)}{\mathbf{4.2973}}$  & $\underset{(  0.0234)}{\mathbf{2.3592}}$  & $\underset{(    0.0140)}{\mathbf{1.4125}}$ & $\underset{(
+	0.0077)}{\mathbf{0.777}}$\\ 
+
+MC Statistical error ($M=10^6$)  &  $\underset{(2.4e-04)} {\mathbf{2.4e-02}}$  & $\underset{(1.8e-04)} {\mathbf{1.8e-02}}$  & $\underset{(9.4e-05)} {\mathbf{9.5e-03}}$ & $\underset{(6.0e-05)} {\mathbf{6.0e-03}}$	\\
+
+\hline
+\end{tabular}
+\caption{Bias and Statistical errors of MC ($M=10^6$)  for computing Call option price  for different number of time steps. Case set 4, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
+\label{Bias and Statistical errors of MC ($M=10^6$)  for computing Call option price  for different number of time steps. Case set 4, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
+\end{table}
+
+
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{l*{6}{c}r}
+Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$  \\
+\hline
+MISC ($TOl=5.10^{-1}$)  & $\underset{ (0.0229) }{\mathbf{  2.3039}}$ & $\underset{( 0.0227)}{\mathbf{  2.2838}}$ & $\underset{(  0.0207)}{\mathbf{ 2.0826}}$ & $\underset{(   0.0169)}{\mathbf{ 1.7002}}$   \\
+MISC ($TOl=10^{-1}$)  & $\underset{ (0.0229) }{\mathbf{  2.3039}}$ & $\underset{( 0.0227)}{\mathbf{  2.2838}}$ & $\underset{(  0.0207)}{\mathbf{ 2.0826}}$ & $\underset{(   0.0169)}{\mathbf{ 1.7002}}$  \\
+MISC ($TOl=5.10^{-2}$)  &$\underset{ (0.0229) }{\mathbf{  2.3039}}$ & $\underset{( 0.0227)}{\mathbf{  2.2838}}$ & $\underset{(  0.0207)}{\mathbf{ 2.0826}}$ & $\underset{(   0.0169)}{\mathbf{ 1.7002}}$   \\
+MISC ($TOl=10^{-2}$)  & $\underset{(0.0003)}{\mathbf{
+		0.0302}}$ & $\underset{( 0.0177)}{\mathbf{1.7807
+	}}$ & $\underset{(  0.0207)}{\mathbf{ 2.0826}}$ & $\underset{(   0.0169)}{\mathbf{ 1.7002}}$  \\
+
+\hline
+\end{tabular}
+\caption{Quadrature error of MISC to compute Call option price of the different tolerances for different number of time steps. Case  set $4$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
+\label{Quadrature error of MISC to compute Call option price of the different tolerances for different number of time steps. Case  set $4$ parameters, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
+\end{table}
+
+
+
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{l*{6}{c}r}
+Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$  \\
+\hline
+MISC ($TOl=5.10^{-1}$)  & $\mathbf{6.6012}$ & $\mathbf{ 4.6430}$ & $\mathbf{3.4951}$ & $\mathbf{ 2.4772}$  \\
+MISC ($TOl=10^{-1}$)  & $\mathbf{6.6012}$ & $\mathbf{ 4.6430}$& $\mathbf{3.4951}$ & $\mathbf{ 2.4772}$ \\
+MISC ($TOl=5.10^{-2}$)  &$\mathbf{6.6012}$& $\mathbf{ 4.6430}$& $\mathbf{3.4951}$ & $\mathbf{ 2.4772}$ \\
+MISC ($TOl=10^{-2}$)  & $\mathbf{ 4.3275}$ & $\mathbf{4.1399}$ & $\mathbf{3.4951}$ & $\mathbf{ 2.4772}$  \\
+\hline
+MC  ($M=10^6$)   & $\mathbf{ 4.3213}$  & $\mathbf{2.3772
+}$  & $\mathbf{
+1.4220
+}$ & $\mathbf{  0.7830
+}$  \\		
+\hline
+\end{tabular}
+\caption{Total error of MISC and MC to compute Call option price of the different tolerances for different number of time steps. Case Case set $4$ parametrs of table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
+\label{Total error of MISC and MC to compute Call option price of the different tolerances for different number of time steps. Case set 4, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
+\end{table}
+
+
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{l*{6}{c}r}
+Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$ &   \\
+\hline
+MISC ($TOl=5.10^{-1}$)  & $0.1$ & $0.1$ & $0.2$ & $0.4$  \\
+MISC ($TOl=10^{-1}$)  & $0.1$ & $0.1$ & $0.2$ & $0.4$\\
+MISC ($TOl=5.10^{-2}$)  & $0.1$ & $0.1$ & $0.2$ & $0.4$ \\
+MISC ($TOl=10^{-2}$)  & $0.8$ & $0.3$ & $0.2$ & $0.4$  \\
+MC method ($M=10^6$)   & $29$  & $32$  & $37$ & $51$  \\	
+\hline
+\end{tabular}
+\caption{Comparsion of the computational time of  MC and MISC, used to compute Call option price of rBergomi model for different number of time steps. Case set $4$ parametrs of table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.} }
+\label{Comparsion of the computational time of  MC and MISC, used to compute Call option price of rBergomi model for different number of time steps. Case set4}
 \end{table}
 
 
@@ -1769,6 +2560,287 @@ In this section, We try to investigate the reason of having worse weak rates tha
 
 
 
+
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{l*{6}{c}r}
+Method \textbackslash  Steps    &$1-2$         & $2-4$ & $4-8$ & $8-16$\\
+\hline
+MISC ($TOl=5.10^{-1}$)& $0.0262$  & $0.0084$ & $-0.0004$ & $-0.0016$ \\
+MISC ($TOl=10^{-1}$)  &$0.0262$  & $0.0084$ & $-0.0004$ & $-0.0016$  \\
+MISC ($TOl=5.10^{-2}$)  &$0.0262$  & $0.0084$ & $-0.0004$ & $-0.0016$  \\
+MISC ($TOl=10^{-2}$)  & $0.0668$  & $-0.0069$ & $-0.0004$ & $-0.0016$  \\
+\hline
+MC method ($M=10^6$)  &$0.0733$ & $0.0146$ & $0.0132$ & $0.0117$ \\
+\hline
+\end{tabular}
+\caption{Call option price of the different methods for different number of time steps. Case set $4$ parameters of table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, using Richardson extrapolation (level $1$)}
+\label{table:  Call option price of the different methods for different number of time steps. Case set $4$ parameter, using Richardson extrapolation (level $1$)}
+\end{table}
+
+
+
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{l*{6}{c}r}
+Method \textbackslash  Steps            & $1-2$ & $2-4$ & $4-8$ & $8-16$  \\
+\hline
+MC Bias   &$\underset{(0.0634 )}{\mathbf{6.3745}}$  & $\underset{(0.047)}{\mathbf{0.4716}}$  & $\underset{( 0.0033 )}{\mathbf{0.3291}}$  & $\underset{( 0.0018)}{\mathbf{0.1775}}$ \\	
+
+MC Statistical error   & $\underset{(  4.1e-04)}{\mathbf{4.1e-02}}$  & $\underset{(1.7e-04 )}{\mathbf{1.7e-02}}$  & $\underset{(7.8e-05)}{\mathbf{7.8e-03}}$ & $\underset{(5.1e-05 )}{\mathbf{5.1e-03}}$ \\	
+\hline
+\end{tabular}
+\caption{Bias and Statistical errors of MC ($M=10^6$)  for computing Call option price  for different number of time steps. Case set $4$ parameters in tabel \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors.}
+\label{Bias and Statistical errors of MC ($M=10^6$)  for computing Call option price  for different number of time steps. Case set $4$ parameters, with Richardson extrapolation (level1). The numbers between parentheses are the corresponding absolute errors.}
+\end{table}
+
+
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{l*{6}{c}r}
+Method \textbackslash  Steps            & $1-2$ & $2-4$ & $4-8$ & $8-16$  \\
+\hline
+MISC ($TOl=5.10^{-1}$)  & $\underset{}{\mathbf{}}$ & $\underset{}{\mathbf{}}$ & $\underset{}{\mathbf{}}$ & $\underset{}{\mathbf{}}$ \\
+MISC ($TOl=10^{-1}$)  & $\underset{}{\mathbf{}}$ & $\underset{}{\mathbf{}}$ & $\underset{}{\mathbf{}}$ & $\underset{}{\mathbf{}}$  \\
+MISC ($TOl=5.10^{-2}$)  & $\underset{}{\mathbf{}}$ & $\underset{}{\mathbf{}}$ & $\underset{}{\mathbf{}}$ & $\underset{-}{\mathbf{-}}$  \\
+MISC ($TOl=10^{-2}$)  & $\underset{ }{\mathbf{}}$ & $\underset{}{\mathbf{}}$ & $\underset{}{\mathbf{}}$ & $\underset{-}{\mathbf{-}}$  \\
+
+\hline
+\end{tabular}
+\caption{Quadrature error of MISC to compute Call option price of the different tolerances for different number of time steps. Case set $4$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, with Richardson extrapolation(level $1$). The numbers between parentheses are the corresponding absolute errors.}
+\label{Quadrature error of MISC to compute Call option price of the different tolerances for different number of time steps. Case set $4$ parameters, with Richardson extrapolation(level $1$). The numbers between parentheses are the corresponding absolute errors.}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{l*{6}{c}r}
+Method \textbackslash  Steps            & $1-2$ & $2-4$ & $4-8$ & $8-16$  \\
+\hline
+MISC ($TOl=5.10^{-1}$)  & $\mathbf{}$ & $\mathbf{}$ & $\mathbf{}$ & $\mathbf{}$ \\
+MISC ($TOl=10^{-1}$)  & $\mathbf{}$ & $\mathbf{}$ & $\mathbf{}$ & $\mathbf{}$  \\
+MISC ($TOl=5.10^{-2}$)  & $\mathbf{}$ & $\mathbf{}$ & $\mathbf{}$ & $\mathbf{-}$  \\
+MISC ($TOl=10^{-2}$)  & $\mathbf{}$ & $\mathbf{}$ & $\mathbf{}$ & $\mathbf{-}$  \\	
+\hline
+MC  ($M=10^6$)   & $\mathbf{6.415}$  & $\mathbf{0.4886}$  & $\mathbf{0.3369
+}$ & $\mathbf{ 0.1827
+}$  \\		
+\hline
+\end{tabular}
+\caption{Total  error of MISC and MC to compute Call option price of the different tolerances for different number of time steps. Case set $4$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, with Richardson extrapolation(level $1$). The numbers between parentheses are the corresponding absolute errors.}
+\label{Total  error of MISC and MC to compute Call option price of the different tolerances for different number of time steps. Case set $4$ parameters, with Richardson extrapolation(level $1$). The numbers between parentheses are the corresponding absolute errors.}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{l*{6}{c}r}
+Method \textbackslash  Steps            & $1-2$ & $2-4$ & $4-8$ & $8-16$ &   \\
+\hline
+MISC ($TOl=5.10^{-1}$)  & $0.1$ & $0.1$ & $0.2$ & $0.5$  \\
+MISC ($TOl=10^{-1}$)  & $0.1$ & $0.1$ & $0.2$ & $0.5$   \\
+MISC ($TOl=5.10^{-2}$)  &$0.1$ & $0.1$ & $0.2$ & $0.5$   \\
+MISC ($TOl=10^{-2}$)  & $0.2$ & $0.8$ & $0.2$ & $0.5$   \\	
+\hline
+MC method + Richardson (level 1) ($M=10^{6}$)  &$85$ & $91$  & $105$  & $141$ \\	
+\hline
+\end{tabular}
+\caption{Comparsion of the computational time of  MC and MISC, using Richardson extrapolation (level $1$), used to compute Call option price of rBergomi model for different number of time steps. Case set $4$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}}
+\label{Comparsion of the computational time of  MC and MISC, using Richardson extrapolation (level $1$), used to compute Call option price of rBergomi model for different number of time steps. Case set $4$ parameters}
+\end{table}
+
+
+\newpage
+\subsection{Case of set $5$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}}\label{appendix:Case of set 5 parameters}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$ &   \\
+		\hline
+		MISC ($TOl=5.10^{-1}$)  & $0.1258$ & $0.1239$ & $0.1231$ & $0.1227$  \\
+		MISC ($TOl=10^{-1}$)  & $0.1258$ & $0.1239$ & $0.1231$ & $0.1229$  \\
+		MISC ($TOl=5.10^{-2}$)  & $0.1258$ & $0.1239$ & $0.1231$ & $0.1241$  \\
+		MISC ($TOl=10^{-2}$)  & $0.1258$ & $0.1246$ & $0.1248$ & $0.1250$  \\
+		\hline
+		MC method ($M=10^{6}$)   & $    0.1269$ & $0.1257$  & $0.1253$ & $0.1249$ \\		
+		
+		\hline
+		\end{tabular}
+		\caption{ Call option price of the different methods for different number of time steps. Case of set $5$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, without Richardson extrapolation.}
+		\label{table: Call option price of the different methods for different number of time steps. Case set 5}
+		\end{table}
+		
+		
+		\begin{table}[h!]
+		\centering
+		\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$  \\
+		\hline
+		MC Bias ($M=10^6$)   & 	$ \underset{(    0.0022)}{\mathbf{0.0174}}$  & $\underset{(0.001)}{\mathbf{0.0078}}$  & $\underset{(0.0005)}{\mathbf{0.0042}}$ & $\underset{(0.0001)}{\mathbf{0.0008}}$\\ 
+		
+		MC Statistical error ($M=10^6$)  &  $\underset{(   7.9e-05)} {\mathbf{6.3e-04}}$  & $\underset{(7.7e-05)} {\mathbf{6.2e-04}}$  & $\underset{(7.6e-05)} {\mathbf{6.1e-04 }}$ & $\underset{(7.5e-05)} {\mathbf{6.0e-04}}$	\\
+		
+		\hline
+		\end{tabular}
+		\caption{Bias and Statistical errors of MC ($M=10^6$)  for computing Call option price  for different number of time steps. Case set 5, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
+		\label{Bias and Statistical errors of MC ($M=10^6$)  for computing Call option price  for different number of time steps. Case set 5, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
+		\end{table}
+		
+		
+		
+		\begin{table}[h!]
+		\centering
+		\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$  \\
+		\hline
+		MISC ($TOl=5.10^{-1}$)  & $\underset{(   0.0011)}{\mathbf{  0.0088}}$ & $\underset{(
+			0.0018)}{\mathbf{ 0.0144}}$ & $\underset{( 0.0022)}{\mathbf{0.0176}}$ & $\underset{(  0.0022)}{\mathbf{ 0.0176}}$  \\
+		MISC ($TOl=10^{-1}$)  & $\underset{(   0.0011)}{\mathbf{  0.0088}}$ & $\underset{(
+			0.0018)}{\mathbf{ 0.0144}}$& $\underset{( 0.0022)}{\mathbf{0.0176}}$  & $\underset{(  0.0020)}{\mathbf{ 0.0160}}$   \\
+		MISC ($TOl=5.10^{-2}$)  &$\underset{(   0.0011)}{\mathbf{  0.0088}}$ & $\underset{(
+			0.0018)}{\mathbf{ 0.0144}}$ & $\underset{( 0.0022)}{\mathbf{0.0176}}$  & $\underset{(0.0008)}{\mathbf{0.0064}}$  \\
+		MISC ($TOl=10^{-2}$)  & $\underset{(   0.0011)}{\mathbf{  0.0088}}$ & $\underset{(0.0011
+			)}{\mathbf{ 0.0088
+		}}$ & $\underset{(0.0005)}{\mathbf{ 0.0040
+	}}$ & $\underset{0.0001}{\mathbf{0.0008}}$  \\
+		
+		\hline
+		\end{tabular}
+		\caption{Quadrature error of MISC to compute Call option price of the different tolerances for different number of time steps. Case  set $5$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
+		\label{Quadrature error of MISC to compute Call option price of the different tolerances for different number of time steps. Case  set $5$ parameters, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
+		\end{table}
+		
+		
+		
+		
+		\begin{table}[h!]
+		\centering
+		\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$  \\
+		\hline
+		MISC ($TOl=5.10^{-1}$)  & $\mathbf{0.0262}$ & $\mathbf{0.0222}$ & $\mathbf{ 0.0218}$ & $\mathbf{ 0.0184}$  \\
+		MISC ($TOl=10^{-1}$)  &  $\mathbf{0.0262}$ & $\mathbf{0.0222}$& $\mathbf{ 0.0218}$ & $\mathbf{ 0.0168}$   \\
+		MISC ($TOl=5.10^{-2}$)  & $\mathbf{0.0262}$ & $\mathbf{0.0222}$ & $\mathbf{ 0.0218}$ & $\mathbf{ 0.0072}$  \\
+		MISC ($TOl=10^{-2}$)  &  $\mathbf{0.0262}$ & $\mathbf{0.0166}$& $\mathbf{ 0.0082}$ & $\mathbf{ 0.0016}$  \\
+	\hline
+		MC  ($M=10^6$)   & $\mathbf{0.0180}$  & $\mathbf{ 0.0084}$  & $\mathbf{0.0048}$ & $\mathbf{ 0.0014}$  \\		
+		\hline
+		\end{tabular}
+		\caption{Total error of MISC and MC to compute Call option price of the different tolerances for different number of time steps. Case Case set $5$ parametrs of table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
+		\label{Total error of MISC and MC to compute Call option price of the different tolerances for different number of time steps. Case set 5, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
+		\end{table}
+		
+		
+		
+		\begin{table}[h!]
+		\centering
+		\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$ &   \\
+		\hline
+		MISC ($TOl=5.10^{-1}$)  & $0.1$ & $0.1$ & $0.2$ & $0.4$  \\
+		MISC ($TOl=10^{-1}$)  & $0.1$ & $0.1$ & $0.2$ & $0.9$ \\
+		MISC ($TOl=5.10^{-2}$)  & $0.1$ & $0.1$ & $0.2$ & $26$  \\
+		MISC ($TOl=10^{-2}$)  & $0.1$ & $0.6$ & $9$ & $105$ \\
+		MC method ($M=10^6$)   & $88$  & $96$  & $112$ & $156$  \\	
+		\hline
+		\end{tabular}
+		\caption{Comparsion of the computational time of  MC and MISC, used to compute Call option price of rBergomi model for different number of time steps. Case set $5$ parametrs of table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.} }
+		\label{Comparsion of the computational time of  MC and MISC, used to compute Call option price of rBergomi model for different number of time steps. Case set5}
+		\end{table}
+
+
+
+
+
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{l*{6}{c}r}
+Method \textbackslash  Steps    &$1-2$         & $2-4$ & $4-8$ & $8-16$\\
+\hline
+MISC ($TOl=5.10^{-1}$)& $$  & $$ & $-$ & $-$ \\
+MISC ($TOl=10^{-1}$)  &$-$  &$-$ & $-$ & $-$  \\
+MISC ($TOl=5.10^{-2}$)  & $-$ & $-$ & $-$ & $-$   \\
+MISC ($TOl=10^{-2}$)  & $-$ &$-$ & $-$ & $-$  \\
+
+MC method ($M=10^6$)  &$-$ & $-$ & $-$ & $-$ \\
+\hline
+\end{tabular}
+\caption{Call option price of the different methods for different number of time steps. Case set $5$ parameters of table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, using Richardson extrapolation (level $1$)}
+\label{table:  Call option price of the different methods for different number of time steps. Case set $5$ parameter, using Richardson extrapolation (level $1$)}
+\end{table}
+
+
+
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{l*{6}{c}r}
+Method \textbackslash  Steps            & $1-2$ & $2-4$ & $4-8$ & $8-16$  \\
+\hline
+MC Bias   &$\underset{( )}{\mathbf{}}$  & $\underset{()}{\mathbf{}}$  & $\underset{(  )}{\mathbf{}}$  & $\underset{( )}{\mathbf{}}$ \\	
+
+MC Statistical error   & $\underset{( )}{\mathbf{}}$  & $\underset{( )}{\mathbf{}}$  & $\underset{()}{\mathbf{}}$ & $\underset{( )}{\mathbf{}}$ \\	
+\hline
+\end{tabular}
+\caption{Bias and Statistical errors of MC ($M=10^6$)  for computing Call option price  for different number of time steps. Case set $5$ parameters in tabel \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors.}
+\label{Bias and Statistical errors of MC ($M=10^6$)  for computing Call option price  for different number of time steps. Case set $5$ parameters, with Richardson extrapolation (level1). The numbers between parentheses are the corresponding absolute errors.}
+\end{table}
+
+
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{l*{6}{c}r}
+Method \textbackslash  Steps            & $1-2$ & $2-4$ & $4-8$ & $8-16$  \\
+\hline
+MISC ($TOl=5.10^{-1}$)  & $\underset{}{\mathbf{}}$ & $\underset{}{\mathbf{}}$ & $\underset{}{\mathbf{}}$ & $\underset{}{\mathbf{}}$ \\
+MISC ($TOl=10^{-1}$)  & $\underset{}{\mathbf{}}$ & $\underset{}{\mathbf{}}$ & $\underset{}{\mathbf{}}$ & $\underset{}{\mathbf{}}$  \\
+MISC ($TOl=5.10^{-2}$)  & $\underset{}{\mathbf{}}$ & $\underset{}{\mathbf{}}$ & $\underset{}{\mathbf{}}$ & $\underset{-}{\mathbf{-}}$  \\
+MISC ($TOl=10^{-2}$)  & $\underset{ }{\mathbf{}}$ & $\underset{}{\mathbf{}}$ & $\underset{}{\mathbf{}}$ & $\underset{-}{\mathbf{-}}$  \\
+
+\hline
+\end{tabular}
+\caption{Quadrature error of MISC to compute Call option price of the different tolerances for different number of time steps. Case set $5$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, with Richardson extrapolation(level $1$). The numbers between parentheses are the corresponding absolute errors.}
+\label{Quadrature error of MISC to compute Call option price of the different tolerances for different number of time steps. Case set $5$ parameters, with Richardson extrapolation(level $1$). The numbers between parentheses are the corresponding absolute errors.}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{l*{6}{c}r}
+Method \textbackslash  Steps            & $1-2$ & $2-4$ & $4-8$ & $8-16$  \\
+\hline
+MISC ($TOl=5.10^{-1}$)  & $\mathbf{}$ & $\mathbf{}$ & $\mathbf{}$ & $\mathbf{}$ \\
+MISC ($TOl=10^{-1}$)  & $\mathbf{}$ & $\mathbf{}$ & $\mathbf{}$ & $\mathbf{}$  \\
+MISC ($TOl=5.10^{-2}$)  & $\mathbf{}$ & $\mathbf{}$ & $\mathbf{}$ & $\mathbf{-}$  \\
+MISC ($TOl=10^{-2}$)  & $\mathbf{}$ & $\mathbf{}$ & $\mathbf{}$ & $\mathbf{-}$  \\	
+MC  &$\mathbf{}$  & $\mathbf{}$  & $\mathbf{}$  & $\mathbf{}$ \\	
+\hline
+\end{tabular}
+\caption{Total  error of MISC and MC to compute Call option price of the different tolerances for different number of time steps. Case set $5$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, with Richardson extrapolation(level $1$). The numbers between parentheses are the corresponding absolute errors.}
+\label{Total  error of MISC and MC to compute Call option price of the different tolerances for different number of time steps. Case set $5$ parameters, with Richardson extrapolation(level $1$). The numbers between parentheses are the corresponding absolute errors.}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{l*{6}{c}r}
+Method \textbackslash  Steps            & $1-2$ & $2-4$ & $4-8$ & $8-16$ &   \\
+\hline
+MISC ($TOl=5.10^{-1}$)  & $-$ & $$ & $$ & $$  \\
+MISC ($TOl=10^{-1}$)  & $-$ & $-$ & $-$ & $-$  \\
+MISC ($TOl=5.10^{-2}$)  & $-$ & $-$ & $-$ & $-$  \\
+MISC ($TOl=10^{-2}$)  & $-$ & $-$ & $-$ & $-$  \\	
+MC method + Richardson (level 1) ($M=10^{6}$)  &$-$ & $-$  & $-$  & $-$ \\	
+\hline
+\end{tabular}
+\caption{Comparsion of the computational time of  MC and MISC, using Richardson extrapolation (level $1$), used to compute Call option price of rBergomi model for different number of time steps. Case set $5$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}}
+\label{Comparsion of the computational time of  MC and MISC, using Richardson extrapolation (level $1$), used to compute Call option price of rBergomi model for different number of time steps. Case set $5$ parameters}
+\end{table}
+
+
+ 
 \newpage
 \section{additional results}
 \subsection{Integrand plotting wrt different random inputs N=2, H=0.43}\label{Appendix:Integrand plotting wrt different random inputs N=2, H=0.43}
