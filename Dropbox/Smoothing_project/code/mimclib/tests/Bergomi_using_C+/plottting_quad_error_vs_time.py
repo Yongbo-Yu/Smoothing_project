@@ -18,15 +18,15 @@ from matplotlib.ticker import MaxNLocator
 
 
 
-#Case for parameter set 1 with richardson
-quad_err_N_2=np.array([ 0.1685,  0.1685, 0.1685,0.00001, 0.0183, 0.0183 ])
-misc_time_N_2=np.array([ 0.1,0.1,0.1,1,4,7])
-quad_err_N_4=np.array([0.0435, 0.0435, 0.1109,0.0407,0.0197,0.0154])
-misc_time_N_4=np.array([ 0.1,0.1,0.4,2,12,191])
-quad_err_N_8=np.array([  0.0197, 0.0899, 0.0730,0.0337, 0.0014,0.0014])
-misc_time_N_8=np.array([0.2,0.6,2 ,18,664,7650])
-quad_err_N_16=np.array([0.0014, 0.0674,0.0632, 0.0014,0.0112 ])
-misc_time_N_16=np.array([0.5,8,38,490,54065])
+# #Case for parameter set 1 with richardson
+# quad_err_N_2=np.array([ 0.1685,  0.1685, 0.1685,0.00001, 0.0183, 0.0183 ])
+# misc_time_N_2=np.array([ 0.1,0.1,0.1,1,4,7])
+# quad_err_N_4=np.array([0.0435, 0.0435, 0.1109,0.0407,0.0197,0.0154])
+# misc_time_N_4=np.array([ 0.1,0.1,0.4,2,12,191])
+# quad_err_N_8=np.array([  0.0197, 0.0899, 0.0730,0.0337, 0.0014,0.0014])
+# misc_time_N_8=np.array([0.2,0.6,2 ,18,664,7650])
+# quad_err_N_16=np.array([0.0014, 0.0674,0.0632, 0.0014,0.0112 ])
+# misc_time_N_16=np.array([0.5,8,38,490,54065])
 
 
 
@@ -71,15 +71,48 @@ misc_time_N_16=np.array([0.5,8,38,490,54065])
 
 
 
-# ##Case for parameter set 3 with richardson
-# quad_err_N_2=np.array([])
-# quad_err_N_4=np.array([])
-# quad_err_N_8=np.array([])
-# quad_err_N_16=np.array([])
-
+##Case for parameter set 3 with richardson
+# quad_err_N_2=np.array([0.0858,0.0858,0.0858,0.0040,0.0138,0.0124])
+# misc_time_N_2=np.array([ 0.1,0.1,0.1,3,30,234])
+# quad_err_N_4=np.array([0.1009,0.1076,0.0098,0.0076,	0.0151])
+# misc_time_N_4=np.array([ 0.1,0.2,2,24,9510])
+# quad_err_N_8=np.array([0.0800,0.0480,0.0307,0.0022])
+# misc_time_N_8=np.array([ 0.2,5,19,1900])
+# quad_err_N_16=np.array([0.0778, 0.0396])
+# misc_time_N_16=np.array([ 7,1375])
 		
 
+
+# ##Case for parameter set 4 non richardson
+# quad_err_N_2=np.array([2.3039,2.3039,2.3039,0.0302, 0.0805, 0.0201])
+# misc_time_N_2=np.array([ 0.1,0.1,0.1,0.8,4,80])
+# quad_err_N_4=np.array([2.2838,2.2838,2.2838,1.7807,0.0704])
+# misc_time_N_4=np.array([ 0.1,0.1,0.1,0.5,2368])
+# quad_err_N_8=np.array([2.0826,2.0826,2.0826,2.0826,0.0020])
+# misc_time_N_8=np.array([ 0.2,0.2,0.2,0.2,6750])
+
+
+
+# ##Case for parameter set 4 with richardson
+# quad_err_N_2=np.array([4.7386,4.7386,4.7386,   0.6540, 0.0704 ,0.0101 ])
+# misc_time_N_2=np.array([ 0.1,0.1,0.1,2,12,159])
+# quad_err_N_4=np.array([0.6238,0.6238,0.6238, 2.1630,0.0805])
+# misc_time_N_4=np.array([ 0.1,0.1,0.1,0.9,3652])
+# quad_err_N_8=np.array([ 1.7506,1.7506,1.7506,0.3119])
+# misc_time_N_8=np.array([ 0.2,0.2,0.2,1640])
+# quad_err_N_16=np.array([])
 	
+
+##Case for parameter set 5 non richardson
+quad_err_N_2=np.array([0.0088,0.0088,0.0088,0.0088,0.0016,0.0008 ])
+misc_time_N_2=np.array([ 0.1,0.1,0.1,0.1,0.5,1])
+quad_err_N_4=np.array([0.0144,0.0144,0.0144,0.0088,0.0016,0.0008 ])
+misc_time_N_4=np.array([ 0.1,0.1,0.1,0.5,3,6])
+quad_err_N_8=np.array([0.0176,0.0176,0.0176,0.0040,0.00005,0.0008])
+misc_time_N_8=np.array([ 0.2,0.2,0.2,8,24,140])
+quad_err_N_16=np.array([0.0176,0.0160,0.0064,0.0008,0.00005])
+misc_time_N_16=np.array([ 0.4,0.8,22,92,2226])
+
 
 fig = plt.figure()
 
@@ -94,5 +127,5 @@ plt.xlabel('relative Quadrature error',fontsize=14)
 
 plt.ylabel('CPU time',fontsize=14) 
 plt.subplots_adjust(wspace=0.6, hspace=0.6, left=0.15, bottom=0.22, right=0.96, top=0.96)
-plt.legend(loc='upper left')
-plt.savefig('./results/relative_quad_error_wrt_time_set1_with_rich.eps', format='eps', dpi=1000)  
+plt.legend(loc='lower left')
+plt.savefig('./results/relative_quad_error_wrt_time_set4_with_rich.eps', format='eps', dpi=1000)  

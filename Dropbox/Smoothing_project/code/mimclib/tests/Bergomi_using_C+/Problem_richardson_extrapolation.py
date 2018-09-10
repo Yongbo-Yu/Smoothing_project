@@ -14,7 +14,7 @@ class Problem_richardson_extrapolation(object):
 # attributes
     random_gen=None;
     elapsed_time=0.0;
-    N= 2# Number of time steps N, discretization resolution
+    N= 8# Number of time steps N, discretization resolution
   
     # for the values of below paramters, we need to see the paper as well check with Christian 
     x=0.235**2;   # this will provide the set of xi parameter values 
@@ -29,7 +29,7 @@ class Problem_richardson_extrapolation(object):
     T[0]=1.0
     k=Vector(1)     # this will provide the set of K (strike ) paramter value
     #k[0]=1.0
-    k[0]=0.8
+    k[0]=1.2
     
     MIn=1            # number of samples M (I think we do not need this paramter here by default in our case it should be =1)
 

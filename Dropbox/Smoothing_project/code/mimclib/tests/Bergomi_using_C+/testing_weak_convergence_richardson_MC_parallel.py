@@ -173,7 +173,7 @@ def weak_convergence_differences():
         Lb=np.zeros(4)
         Ub_diff=np.zeros(3)
         Lb_diff=np.zeros(3)
-        values=np.zeros((1*(10**4),4)) 
+        values=np.zeros((1*(10**5),4)) 
      
         num_cores = mp.cpu_count()
         print num_cores
@@ -193,7 +193,7 @@ def weak_convergence_differences():
             # results = Parallel(n_jobs=num_cores)(delayed(processInput)(j) for j in inputs)
             p =  pp.ProcessPool(num_cores)  # Processing Pool with four processors
             
-            values[:,i]= p.map(processInput, range((1*(10**4))))
+            values[:,i]= p.map(processInput, range((1*(10**5))))
 
             elapsed_time_qoi[i]=time.time()-start_time
             print  elapsed_time_qoi[i]
@@ -204,7 +204,7 @@ def weak_convergence_differences():
         error=np.abs(np.mean(values,axis=0) - 1) 
         elapsed_time_qoi=time.time()-start_time_2+elapsed_time_qoi
 
-        stand=np.std(values, axis = 0)/  float(np.sqrt((1*(10**4))))
+        stand=np.std(values, axis = 0)/  float(np.sqrt((1*(10**5))))
         Ub=np.abs(np.mean(values,axis=0) - 1)+1.96*stand
         Lb=np.abs(np.mean(values,axis=0) - 1)-1.96*stand
 
@@ -218,7 +218,7 @@ def weak_convergence_differences():
         differences= [values[:,i]-values[:,i+1] for i in range(0,3)]
         error_diff=np.abs(np.mean(differences,axis=1))
         print error_diff 
-        stand_diff=np.std(differences, axis = 1)/ float(np.sqrt((1*(10**4))))
+        stand_diff=np.std(differences, axis = 1)/ float(np.sqrt((1*(10**5))))
         print stand_diff
         Ub_diff=np.abs(np.mean(differences,axis=1))+1.96*stand_diff
         Lb_diff=np.abs(np.mean(differences,axis=1))-1.96*stand_diff
@@ -261,7 +261,7 @@ def weak_convergence_differences():
         plt.ylabel(r'$\mid  g(X_{\Delta t})-  g(X) \mid $',fontsize=14) 
         plt.subplots_adjust(wspace=0.6, hspace=0.6, left=0.15, bottom=0.22, right=0.96, top=0.96)
         plt.legend(loc='upper left')
-        plt.savefig('./results/weak_convergence_order_Bergomi_H_007_K_1_M_1_10_4_richardson_relative.eps', format='eps', dpi=1000)  
+        plt.savefig('./results/weak_convergence_order_Bergomi_H_007_K_1_M_1_10_5_richardson_relative.eps', format='eps', dpi=1000)  
 
         fig = plt.figure()
         plt.plot(dt_arr[0:3], error_diff,linewidth=2.0,label='weak_error' ,marker='>', hold=True) 
@@ -276,7 +276,7 @@ def weak_convergence_differences():
         plt.ylabel(r'$\mid  g(X_{\Delta t})-  g(X_{\Delta t/2}) \mid $',fontsize=14) 
         plt.subplots_adjust(wspace=0.6, hspace=0.6, left=0.15, bottom=0.22, right=0.96, top=0.96)
         plt.legend(loc='upper left')
-        plt.savefig('./results/weak_convergence_order_differences_Bergomi_H_007_K_1_M_1_10_4_richardson_relative.eps', format='eps', dpi=1000)  
+        plt.savefig('./results/weak_convergence_order_differences_Bergomi_H_007_K_1_M_1_10_5_richardson_relative.eps', format='eps', dpi=1000)  
 
 #weak_convergence_rate_plotting()
 weak_convergence_differences()

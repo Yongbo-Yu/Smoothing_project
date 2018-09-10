@@ -25,21 +25,21 @@ MIn=1
 start=time.time()
 z=RBergomi.RBergomiST( x,  HIn, e,  r,  t, k,  NIn, MIn)
 
-a=np.zeros((10**5))
+a=np.zeros((10**2))
 W1 = Vector(NIn)
 W2 = Vector(NIn)
-for m in range(0,(10**5)):
+for m in range(0,(10**2)):
 	for i in range(0,NIn):
 		W1[i] = (np.random.normal(loc=0.0, scale=1.0))
 		W2[i] = np.random.normal(loc=0.0, scale=1.0)
 		#print W1[i]
 	a[m]=z.ComputePayoffRT_single(W1,W2)
 	
-print 'Relative Bias'	
+print ('Relative Bias')	
 print(np.mean(a))
 elapsed_time_qoi=time.time()-start;
-print 'Time'
-print  elapsed_time_qoi    
-print 'Stat Error'
-stand=np.std(a, axis = 0)/np.sqrt((10**5))
+print ('Time')
+print  (elapsed_time_qoi)    
+print ('Stat Error')
+stand=np.std(a, axis = 0)/np.sqrt((10**2))
 print(stand)
