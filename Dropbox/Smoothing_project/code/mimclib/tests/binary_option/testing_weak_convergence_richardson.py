@@ -167,13 +167,13 @@ def weak_convergence_differences():
     Lb=np.zeros(4)
     Ub_diff=np.zeros(3)
     Lb_diff=np.zeros(3)
-    values=np.zeros((7*(10**2),4)) 
+    values=np.zeros((1*(10**3),4)) 
     for i in range(0,4):
         print i
         start_time=time.time()
 
         prb = Problem_non_smooth_richardson_extrapolation(1,Nsteps_arr[i]) 
-        for j in range(7*(10**2)):
+        for j in range(1*(10**3)):
             
             values[j,i]=prb.objfun(Nsteps_arr[i])/float(exact)
 
@@ -191,7 +191,7 @@ def weak_convergence_differences():
     error=np.abs(np.mean(values,axis=0) - 1) 
     elapsed_time_qoi=time.time()-start_time_2+elapsed_time_qoi
     
-    stand=np.std(values, axis = 0)/  float(np.sqrt(7*(10**2)))
+    stand=np.std(values, axis = 0)/  float(np.sqrt(1*(10**3)))
     Ub=np.abs(np.mean(values,axis=0) - 1)+1.96*stand
     Lb=np.abs(np.mean(values,axis=0) - 1)-1.96*stand
     print(error)   
@@ -203,7 +203,7 @@ def weak_convergence_differences():
     differences= [values[:,i]-values[:,i+1] for i in range(0,3)]
     error_diff=np.abs(np.mean(differences,axis=1))
     print error_diff 
-    stand_diff=np.std(differences, axis = 1)/ float(np.sqrt(7*(10**2)))
+    stand_diff=np.std(differences, axis = 1)/ float(np.sqrt(1*(10**3)))
     print stand_diff
     Ub_diff=np.abs(np.mean(differences,axis=1))+1.96*stand_diff
     Lb_diff=np.abs(np.mean(differences,axis=1))-1.96*stand_diff

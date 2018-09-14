@@ -7,25 +7,25 @@ from matplotlib.ticker import MaxNLocator
 
 
 # #case non rich
-MC_normal_err=np.array([0.0467,0.0227,0.0145])
+# MC_normal_err=np.array([0.0467,0.0222,0.0146])
 
 
-MC_normal_time=np.array([7,65,191 ])
+# MC_normal_time=np.array([7,95,152 ])
 
-z_MC_normal= np.polyfit(np.log(MC_normal_err), np.log(MC_normal_time), 1)
-fit_MC_normal=np.exp(z_MC_normal[0]*np.log(MC_normal_err))
-print z_MC_normal[0]
-
-
+# z_MC_normal= np.polyfit(np.log(MC_normal_err), np.log(MC_normal_time), 1)
+# fit_MC_normal=np.exp(z_MC_normal[0]*np.log(MC_normal_err))
+# print z_MC_normal[0]
 
 
-MC_err=np.array([0.0471,0.0228,0.0148])
 
-MC_time=np.array([9, 60, 87 ])
 
-z_MC= np.polyfit(np.log(MC_err), np.log(MC_time), 1)
-fit_MC=np.exp(z_MC[0]*np.log(MC_err))
-print z_MC[0]
+# MC_err=np.array([0.0471,0.0221,0.0141])
+
+# MC_time=np.array([9, 96, 141 ])
+
+# z_MC= np.polyfit(np.log(MC_err), np.log(MC_time), 1)
+# fit_MC=np.exp(z_MC[0]*np.log(MC_err))
+# print z_MC[0]
 
 
 
@@ -39,29 +39,29 @@ print z_MISC[0]
 
 # #case with rich
 
-# MC_normal_rich_err=np.array([ 0.0116,0.0078,0.0029])
+MC_normal_rich_err=np.array([ 0.0116,0.0073,0.0029])
 
 
-# MC_normal_rich_time=np.array([12,24,190 ])
+MC_normal_rich_time=np.array([12,23,147 ])
 
-# z_MC_normal_rich= np.polyfit(np.log(MC_normal_rich_err), np.log(MC_normal_rich_time), 1)
-# fit_MC_normal_rich=np.exp(z_MC_normal_rich[0]*np.log(MC_normal_rich_err))
-# print z_MC_normal_rich[0]
-
-
-
-# MC_rich_err=np.array([0.0111,0.0075,0.0035])
-
-# MC_rich_time=np.array([60,77,152])
+z_MC_normal_rich= np.polyfit(np.log(MC_normal_rich_err), np.log(MC_normal_rich_time), 1)
+fit_MC_normal_rich=np.exp(z_MC_normal_rich[0]*np.log(MC_normal_rich_err))
+print z_MC_normal_rich[0]
 
 
-# z_MC_rich= np.polyfit(np.log(MC_rich_err), np.log(MC_rich_time), 1)
-# fit_MC_rich=np.exp(z_MC_rich[0]*np.log(MC_rich_err))
-# print z_MC_rich[0]
+
+MC_rich_err=np.array([0.0111,0.0070,0.0035])
+
+MC_rich_time=np.array([48,62,122])
 
 
-MISC_rich_err=np.array([ 0.0115,0.0079,0.0030])
-MISC_rich_time=np.array([4,4,9])
+z_MC_rich= np.polyfit(np.log(MC_rich_err), np.log(MC_rich_time), 1)
+fit_MC_rich=np.exp(z_MC_rich[0]*np.log(MC_rich_err))
+print z_MC_rich[0]
+
+
+MISC_rich_err=np.array([ 0.0115,0.0072,0.0032])
+MISC_rich_time=np.array([4,15,42])
 
 z_MISC_rich= np.polyfit(np.log(MISC_rich_err), np.log(MISC_rich_time), 1)
 fit_MISC_rich=np.exp(z_MISC_rich[0]*np.log(MISC_rich_err))

@@ -34,7 +34,7 @@ class Problem_non_smooth_richardson_extrapolation_call(object):
      # objfun:  beta #number of points in the first direction
     def objfun(self,Nsteps):
 
-        beta=10
+        beta=32
         yknots_right=np.polynomial.laguerre.laggauss(beta)
         yknots_left=yknots_right
 
@@ -242,7 +242,7 @@ class Problem_non_smooth_richardson_extrapolation_call(object):
 
 
 def weak_convergence_differences():    
-    exact=  15.8519
+    exact=  15.8519375549
     marker=['>', 'v', '^', 'o', '*','+','-',':']
     ax = figure().gca()
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))
@@ -254,20 +254,28 @@ def weak_convergence_differences():
     stand_diff=np.zeros(3)
     error=np.zeros(4)
     stand=np.zeros(4)
+    elapsed_time_qoi=np.zeros(4)
     Ub=np.zeros(4)
     Lb=np.zeros(4)
     Ub_diff=np.zeros(3)
     Lb_diff=np.zeros(3)
-    values=np.zeros((10**5,4)) 
+    values=np.zeros((1*(10**4),4)) 
     for i in range(0,4):
         print i
-        for j in range(10**5):
+        start_time=time.time()
+        for j in range(1*(10**4)):
             prb = Problem_non_smooth_richardson_extrapolation_call(1,Nsteps_arr[i]) 
             values[j,i]=prb.objfun(Nsteps_arr[i])/float(exact)
+
+        elapsed_time_qoi[i]=time.time()-start_time
+        print  elapsed_time_qoi[i]       
           
     
+
+    print elapsed_time_qoi
+
     error=np.abs(np.mean(values,axis=0) - 1) 
-    stand=np.std(values, axis = 0)/  float(np.sqrt(10**5))
+    stand=np.std(values, axis = 0)/  float(np.sqrt(1*(10**4)))
     Ub=np.abs(np.mean(values,axis=0) - 1)+1.96*stand
     Lb=np.abs(np.mean(values,axis=0) - 1)-1.96*stand
     print(error)   
@@ -279,7 +287,7 @@ def weak_convergence_differences():
     differences= [values[:,i]-values[:,i+1] for i in range(0,3)]
     error_diff=np.abs(np.mean(differences,axis=1))
     print error_diff 
-    stand_diff=np.std(differences, axis = 1)/ float(np.sqrt(10**5))
+    stand_diff=np.std(differences, axis = 1)/ float(np.sqrt(1*(10**4)))
     print stand_diff
     Ub_diff=np.abs(np.mean(differences,axis=1))+1.96*stand_diff
     Lb_diff=np.abs(np.mean(differences,axis=1))-1.96*stand_diff

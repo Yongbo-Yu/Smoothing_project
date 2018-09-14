@@ -20,7 +20,7 @@ fit_MC_normal=np.exp(z_MC_normal[0]*np.log(MC_normal_err))
 print z_MC_normal[0]
 
 MC_err=np.array([0.0223,0.0159,0.0095,0.0046])
-MC_time=np.array([1328,8140,21400, 63180])
+MC_time=np.array([1328,8140,21400, 70200])
 
 
 MISC_err=np.array([ 0.0223,0.0159,0.0095,0.0046])
@@ -55,11 +55,11 @@ print z_MISC_rich[0]
 
 fig = plt.figure()
 
-# plt.plot(MC_err,MC_time,linewidth=2.0,label='MC+root finding' , marker='>',hold=True) 
-# plt.plot(MC_err, fit_MC*10,linewidth=2.0,label=r'rate= %s' % format(z_MC[0]  , '.2f'), linestyle = '--')
+plt.plot(MC_err,MC_time,linewidth=2.0,label='MC+root finding' , marker='>',hold=True) 
+plt.plot(MC_err, fit_MC*10,linewidth=2.0,label=r'rate= %s' % format(z_MC[0]  , '.2f'), linestyle = '--')
 
-# plt.plot(MC_normal_err,MC_normal_time,linewidth=2.0,label='MC' , marker='>',hold=True) 
-# plt.plot(MC_normal_err, fit_MC_normal*10,linewidth=2.0,label=r'rate= %s' % format(z_MC_normal[0]  , '.2f'), linestyle = '--')
+plt.plot(MC_normal_err,MC_normal_time,linewidth=2.0,label='MC' , marker='>',hold=True) 
+plt.plot(MC_normal_err, fit_MC_normal*10,linewidth=2.0,label=r'rate= %s' % format(z_MC_normal[0]  , '.2f'), linestyle = '--')
 
 
 plt.plot(MISC_err,MISC_time,linewidth=2.0,label='MISC'  , marker='v',hold=True) 
@@ -67,8 +67,8 @@ plt.plot(MISC_err, fit_MISC*10,linewidth=2.0,label=r'rate= %s' % format(z_MISC[0
 
 # plt.plot(MC_rich_err,MC_rich_time,linewidth=2.0,label='MC+Rich' , marker='o',hold=True) 
 #plt.plot(MC_rich_err, fit_MC_rich*10,linewidth=2.0,label=r'rate= %s' % format(z_MC_rich[0]  , '.2f'), linestyle = '--')
-plt.plot(MISC_rich_err,MISC_rich_time,linewidth=2.0,label='MISC+Rich'  , marker='*',hold=True) 
-plt.plot(MISC_rich_err, fit_MISC_rich*10,linewidth=2.0,label=r'rate= %s' % format(z_MISC_rich[0]  , '.2f'), linestyle = '--')
+# plt.plot(MISC_rich_err,MISC_rich_time,linewidth=2.0,label='MISC+Rich'  , marker='*',hold=True) 
+# plt.plot(MISC_rich_err, fit_MISC_rich*10,linewidth=2.0,label=r'rate= %s' % format(z_MISC_rich[0]  , '.2f'), linestyle = '--')
 
 
 plt.yscale('log')
@@ -78,4 +78,4 @@ plt.xlabel('Error',fontsize=14)
 plt.ylabel('CPU time',fontsize=14) 
 plt.subplots_adjust(wspace=0.6, hspace=0.6, left=0.15, bottom=0.22, right=0.96, top=0.96)
 plt.legend(loc='upper right')
-plt.savefig('./results/error_vs_time_comparision.eps', format='eps', dpi=1000)  
+plt.savefig('./results/error_vs_time.eps', format='eps', dpi=1000)  

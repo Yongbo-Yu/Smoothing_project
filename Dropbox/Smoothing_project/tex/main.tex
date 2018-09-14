@@ -121,7 +121,7 @@ What has beed achieved so far:
 	\item Numerical outputs:
 	\begin{itemize}
 	
-	 \item \textbf{Example 1}: Tests for  the basket option with the smoothing trick as in \cite{bayersmoothing} (see Section \ref{sec:The basket option with smoothing trick with a time stepping procedure}): in that example we  checked the performance of MISC without time stepping scheme and also compare the results with reference \cite{bayersmoothing}. (Done).
+	 \item \textbf{Example 1}: Tests for  the basket option with the smoothing trick as in \cite{bayersmoothing} (see Section \ref{appendix:The basket option with smoothing trick with a time stepping procedure}): in that example we  checked the performance of MISC without time stepping scheme and also compare the results with reference \cite{bayersmoothing}. (Done).
 	
 	
 	
@@ -581,154 +581,30 @@ $\zeta$!)
 \newpage
 \section{Numerical examples}
 \subsection{Summary of numerical results}
+We conduct our experiments for $2$ different examples under discretized BS model: Binary and Call options.
 
-\subsection{The basket option with the smoothing trick as in \cite{bayersmoothing}}\label{sec:The basket option with smoothing trick with a time stepping procedure}
-
-The first experiment that we consider is the pricing of  a European  basket call option in a Black-Scholes model. The basket is composed of $d$ assets ($d=3,8,25$) and we use the same trick of smoothing the integrand that was proposed in \cite{bayersmoothing}. In this case, the dimension of the parameter space $N=d-1$. The interpolation over the parameter space is based on the tensorized Lagrangian interpolation technique with Gaussian  points.
-
-
-%\newpage
-\subsubsection{Results using MISC}
-In table \ref{table: Complexity rates of the different experiemnts  for the basket option using BS model}, we summarize the observed  complexity rates for different tested settings for the basket example. From this table, we can check that even with the $25$ dimensional case, the complexity rate in terms of the elapsed time is at least order $1$, which is better than MC, which is $2$. Detailed plots for each case are given by figures (\ref{fig:misc_3D_Basket_1}, \ref{fig:misc_3D_Basket_2}) for $d=3$, figures (\ref{fig:misc_8D_Basket_1}, \ref{fig:misc_8D_Basket_2}) for $d=8$ and figures (\ref{fig:misc_25D_Basket_1}, \ref{fig:misc_25D_Basket_2}) for $d=25$. Mainly, from the plots, 
-we checked  that we achive the prescribed tolerance using MISC, the convergence rates of mixed differences which is a basic assumption for using MISC (we observe exponential decay of error rates wrt to the number of quadrature points) and finally the complexity rates.
-
-
-\begin{table}[h!]
-	\centering
-	\begin{tabular}{l*{3}{c}r}
-		\# assets  \textbackslash          & $3$ & $8$ & $25$   \\
-		\hline
-		rate   & $-1/3$ & $-9/20$ & $-16/25$  \\
-		\hline
-	\end{tabular}
-	\caption{Complexity rates of the different experiments  for the basket option using BS model}
-	\label{table: Complexity rates of the different experiemnts  for the basket option using BS model}
-\end{table}	
-
-\subsubsection*{Case of $3$-dimensional Basket}
-\begin{figure}[!h]
-	\centering
-	\begin{subfigure}{.4\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{./figures/3D_basket/error_estimate.pdf}
-		\caption{Error estimate}
-		\label{fig:misc_3D_Basket_sub1}
-	\end{subfigure}%
-	\begin{subfigure}{.4\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{./figures/3D_basket/average_running_time.pdf}
-		\caption{Average running time as a function of $TOL$}
-		\label{fig:misc_3D_Basket_sub2}
-	\end{subfigure}%
-	\caption{Convergence and complexity results for the $3$-dimensional basket option using BS model.}
-	\label{fig:misc_3D_Basket_1}
-\end{figure}
+In Sections \ref{sec:Weak error plots_binary} and \ref{sec:Weak error plots_call}, we estimate the weak error  (Bias) of MC combined with root finding, for the different  examples, for $2$ scenarios involving with/without  Richardson extrapolation. The conclusions of this section are: 
+\begin{itemize}
+	\item Without Richardson extrapolation: For all cases, we get a weak error of order $\Delta t$, with different  constants. Interestingly,  for the call example, we needed to increase the number of quadrature points sufficiently, used for Laguerre quadrature,  to observe the right behavior of the weak error (See tables (\ref{Bias and Statistical errors of MC  for computing Binary option price  for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}, \ref{Bias and Statistical errors of MC  for computing Call option price  for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}) for the corresponding Bias values as well the statistical errors.). 
+	
+	\item With Richardson extrapolation: For the case of binary option, we get a weak error of order almost $\Delta t^2$. For the case of Call,   we get a weak error of order higher than $\Delta t^2$  (See tables (\ref{Bias and Statistical errors of MC  for computing Binary option price  for different number of time steps, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors.},\ref{Bias and Statistical errors of MC  for computing Call option price  for different number of time steps, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors.}) for the corresponding Bias values as well the statistical errors.).  
+\end{itemize}
 
 
 
-\begin{figure}[!h]
-	\centering
-	\begin{subfigure}{.4\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{./figures/3D_basket/level_work.pdf}
-		\caption{Average Computational time per level.}
-		\label{fig:misc_3D_Basket_sub3}
-	\end{subfigure}%
-	\begin{subfigure}{.4\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{./figures/3D_basket/levels_error_rate.pdf}
-		\caption{The convergence rate of mixed differences per level.}
-		\label{fig:misc_3D_Basket_sub4}
-	\end{subfigure}%
-	\caption{Convergence and work rates for discretization levels for the $3$-dimensional basket option using BS model.}
-	\label{fig:misc_3D_Basket_2}
-\end{figure}
 
-\FloatBarrier
-
-
-\subsubsection*{Case of $8$-dimensional Basket}
-\begin{figure}[!h]
-	\centering
-	\begin{subfigure}{.4\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{./figures/8D_basket/error_estimate.pdf}
-		\caption{Error estimate}
-		\label{fig:misc_8D_Basket_sub1}
-	\end{subfigure}%
-	\begin{subfigure}{.4\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{./figures/8D_basket/average_running_time.pdf}
-		\caption{Average running time as a function of $TOL$}
-		\label{fig:misc_8D_Basket_sub2}
-	\end{subfigure}%
-	\caption{Convergence and complexity results for  the $8$-dimensional basket option using BS model.}
-	\label{fig:misc_8D_Basket_1}
-\end{figure}
-
-
-
-\begin{figure}[!h]
-	\centering
-	\begin{subfigure}{.4\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{./figures/8D_basket/level_work.pdf}
-		\caption{Average Computational time per level.}
-		\label{fig:misc_8D_Basket_sub3}
-	\end{subfigure}%
-	\begin{subfigure}{.4\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{./figures/8D_basket/levels_error_rate.pdf}
-		\caption{The convergence rate of mixed differences per level.}
-		\label{fig:misc_8D_Basket_sub4}
-	\end{subfigure}%
-	\caption{Convergence and work rates for discretization levels for the $8$-dimensional basket option using BS model.}
-	\label{fig:misc_8D_Basket_2}
-\end{figure}
-\FloatBarrier
-
-\subsubsection*{Case of $25$-dimensional Basket}
-\begin{figure}[h!]
-	\centering
-	\begin{subfigure}{.4\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{./figures/25D_basket/error_estimate.pdf}
-		\caption{Error estimate}
-		\label{fig:misc_25D_Basket_sub1}
-	\end{subfigure}%
-	\begin{subfigure}{.4\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{./figures/25D_basket/average_running_time.pdf}
-		\caption{Average running time as a function of $TOL$}
-		\label{fig:misc_25D_Basket_sub2}
-	\end{subfigure}%
-	\caption{Convergence and complexity results for  the $25$-dimensional basket option using BS model.}
-	\label{fig:misc_25D_Basket_1}
-\end{figure}
-
-
-
-\begin{figure}[h!]
-	\centering
-	\begin{subfigure}{.4\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{./figures/25D_basket/level_work.pdf}
-		\caption{Average Computational time per level.}
-		\label{fig:misc_25D_Basket_sub3}
-	\end{subfigure}%
-	\begin{subfigure}{.4\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{./figures/25D_basket/levels_error_rate.pdf}
-		\caption{The convergence rate of mixed differences per level.}
-		\label{fig:misc_25D_Basket_sub4}
-	\end{subfigure}%
-	\caption{Convergence and work rates for discretization levels for the $25$-dimensional basket option using BS model.}
-	\label{fig:misc_25D_Basket_2}
-\end{figure}
-
-
-\FloatBarrier
-
+In Sections \ref{sec:Comparing relative errors, binary} and \ref{sec:Comparing relative errors, call}, we show tables and plots reporting  the different errors involved in MC method (Bias and Statistical error) and in MISC (Quadrature error). We do this for each example. The quadrature error is computed by subtracting the MISC solution from the biased solution with huge number of samples (to kill the statistical error). I explain in each section, what each table and plot  refers to. The conclusions of this section are: 
+\begin{itemize}
+	\item The Quadrature error of MISC is very stable with respect to $TOL_{\textbf{MISC}}$, for all cases. (See figures (\ref{fig:Quadrature_error_non_rich_Call},\ref{fig:Quadrature_error_non_rich_binary},\ref{fig:Quadrature_error_with_rich_Call},\ref{fig:Quadrature_error_with_rich_binary})).
+	
+	\item MISC is outperforming significantly MC and MC+root finding methods. The ratio of gain is more significant for the Call option compared to Binary option (See tables (\ref{Comparsion of the computational time of  MC and MISC, used to compute Binary option price  for different number of time steps, without Richardson extrapolation},\ref{Comparsion of the computational time of  MC and MISC, used to compute Binary option price  for different number of time steps, with Richardson extrapolation (level $1$)},\ref{Comparsion of the computational time of  MC and MISC, used to compute Call option price  for different number of time steps, without Richardson extrapolation})). See also figures (\ref{fig:Complexity plot for MC and MISC , Binary, Non rich},\ref{fig:Complexity plot for MC and MISC , Binary, with rich},\ref{fig:Complexity plot for MC and MISC , Call non rich}) for the comparison of complexity for different methods.
+	
+	\item Richardson extrapolation has a great advantage over the rate as well the constant for complexity of MISC:
+	\begin{itemize}
+		\item For the binary case: we may see from figure \ref{fig:Complexity plot for MC and MISC , Binary, comparison} and tables (\ref{Total error of MISC and MC to compute Binary option price of the different tolerances for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.},\ref{Comparsion of the computational time of  MC and MISC, used to compute Binary option price  for different number of time steps, without Richardson extrapolation},\ref{Total error of MISC and MC to compute Binary option price of the different tolerances for different number of time steps, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors.},\ref{Comparsion of the computational time of  MC and MISC, used to compute Binary option price  for different number of time steps, with Richardson extrapolation (level $1$)}), that without using Richardson extrapolation, with $16$ time steps, we achieve $1.4\%$ of total relative error, with a cost of $1090$ of CPU time. This cost is dramatically decreased when using Richardson extrapolation. In fact, with $16$ steps in the finer level, we only pay   $42$ of CPU time to get a  total relative error of $0.3\%$.
+		\item For the Call case: we may see from figure \ref{fig:Complexity plot for MC and MISC , Call, comparison} and tables (\ref{Total error of MISC and MC to compute Call option price of the different tolerances for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.},\ref{Comparsion of the computational time of  MC and MISC, used to compute Call option price  for different number of time steps, without Richardson extrapolation},\ref{Total error of MISC and MC to compute Call option price of the different tolerances for different number of time steps, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors.},\ref{Comparsion of the computational time of  MC and MISC, used to compute Call option price  for different number of time steps, with Richardson extrapolation (level $1$)}), that without using Richardson extrapolation, with $16$ time steps, we achieve $0.46\%$ of total relative error, with a cost of $656$ of CPU time. This cost is dramatically decreased when using Richardson extrapolation. In fact, with $8$ steps in the finer level, we only pay   $135$ of CPU time to get a  total relative error of $0.25\%$.
+	\end{itemize} 
+\end{itemize}
 
 \subsection{The discretized 1D Black-Scholes}\label{sec:The discretized 1D Black-Scholes}
 
@@ -895,9 +771,9 @@ We get the kink point by running Newton iteration with a precision of $10^{-10}$
 The paramters that we used in our numerical experiments are: $T=1$, $\sigma=0.4$ and $S_0=K=100$. The exact value of this case is $0.42074029$.
 
 \subsubsection{Weak error plots} \label{sec:Weak error plots_binary}
-In this section, we include the results of weak error rates for $3$ scenarios, without/with Richardson extrapolation (level $1$) and level $2$). We note that the weak errors plotted here correspond to relative errors. 
+In this section, we include the results of weak error rates, for the binary option example, for $2$ scenarios, without/with Richardson extrapolation (level $1$). We note that the weak errors plotted here correspond to relative errors.  The upper and lower bounds are $95\%$ confidence interval.
 
-From figure \ref{fig:Weak_rate_binary_without_rich}, we see that we get a weak error of order $\Delta t$. From figure \ref{fig:fig:Weak_rate_binary_with_rich}, we observe an improvement in the rate and the constant when using level $1$ of Richardson extrapolation. The upper and lower bounds are $95\%$ confidence interval.
+From figure \ref{fig:Weak_rate_binary_without_rich}, we see that we get a weak error of order $\Delta t$. From figure \ref{fig:fig:Weak_rate_binary_with_rich}, we observe an improvement in the rate and the constant when using level $1$ of Richardson extrapolation. The corresponding values of the Bias are reported in tables (\ref{Bias and Statistical errors of MC  for computing Binary option price  for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.},\ref{Bias and Statistical errors of MC  for computing Binary option price  for different number of time steps, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors.}).
 
 
 \begin{figure}[h!]
@@ -933,7 +809,7 @@ From figure \ref{fig:Weak_rate_binary_without_rich}, we see that we get a weak e
 		\label{fig:sub4}
 	\end{subfigure}
 	
-	\caption{The rate of convergence of the weak error for the binary option, with Richardson extraploation (level 1), using MC with $M=10^6$: a) $\abs{\expt{2 g(X_{\Delta t/2}) -g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{3 g(X_{\Delta t/2})-g(X_{\Delta t})-2 g(X_{\Delta t/4})}}$ }
+	\caption{The rate of convergence of the weak error for the binary option, with Richardson extraploation (level 1), using MC with $M=5.10^6$: a) $\abs{\expt{2 g(X_{\Delta t/2}) -g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{3 g(X_{\Delta t/2})-g(X_{\Delta t})-2 g(X_{\Delta t/4})}}$ }
 	\label{fig:fig:Weak_rate_binary_with_rich}
 \end{figure}
 
@@ -958,14 +834,13 @@ From figure \ref{fig:Weak_rate_binary_without_rich}, we see that we get a weak e
 %	\label{fig:fig:Weak_rate_binary_with_rich_level2}
 %\end{figure}
 \FloatBarrier
-\subsubsection{Comparing relative errors}
+\subsubsection{Comparing relative errors}\label{sec:Comparing relative errors, binary}
 
 
 \subsubsection*{Without Richardson extrapolation}
 
 
-
-
+In this Section, we report the results for the binary option, using the different Methods: MISC, MC $+$ root finding  and MC, without Richardson extrapolation . We mention that for MISC we used a very small tolerance for the Newton solver, when solving the Kink point problem ($TOL_{\text{Newton}}=10^{-10}$). We start by reporting the observed approximated values using different methods (See table \ref{table: Binary option price of the different methods for different number of time steps, without Richardson extrapolation.}.The biased values for MC method were computed using the values of Bias, reported in table \ref{Bias and Statistical errors of MC  for computing Binary option price  for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}. In table \ref{Quadrature error of MISC to compute Binary option price of the different tolerances for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}, we report the behavior of quadrature error with respect to MISC tolerance. We precise that the quadrature error is computed by substracting the MISC approximated value from the biased MC value. We report in red the values where MISC becomes stable (see also figure \ref{fig:Quadrature_error_non_rich_binary}). Those values where used to compute the needed number of samples for MC (with and without root finding), to achieve similar magnitude  for statistical error. Later, in table \ref{Total error of MISC and MC to compute Binary option price of the different tolerances for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}, we report the total relative error for all methods (Quadrature error + Bias for MISC and Statistical error + Bias for MC). We also report in table \ref{Comparsion of the computational time of  MC and MISC, used to compute Binary option price  for different number of time steps, without Richardson extrapolation}, the computational time needed for all different methods.  We finally provide in figure \ref{fig:Complexity plot for MC and MISC , Binary, Non rich}, the complexity rates for the different involved methods.
 \begin{table}[h!]
 	\centering
 	\begin{tabular}{l*{6}{c}r}
@@ -993,12 +868,12 @@ From figure \ref{fig:Weak_rate_binary_without_rich}, we see that we get a weak e
 	\begin{tabular}{l*{6}{c}r}
 		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$  \\
 		\hline
-		MC Bias   & 	$ \underset{(    
+		MC Bias $(M=10^{4})$  & 	$ \underset{(    
 			0.0412)}{\mathbf{0.0980}}$  & $\underset{( 0.0162)}{\mathbf{ 0.0384
 		}}$  & $\underset{(    0.0085
 	)}{\mathbf{0.0201}}$ & $\underset{(   0.0053)}{\mathbf{   0.0127}}$\\ 
 		
-		MC Statistical error  &  $\underset{( 5.0e-04)} {\mathbf{1.2e-03}}$  & $\underset{( 5.0e-04)} {\mathbf{1.2e-03}}$ & $\underset{(3.4e-04)} {\mathbf{8.0e-04}}$ & $\underset{( 2.7e-04)} {\mathbf{6.5e-04}}$	\\
+		MC Statistical error $(M=10^{4})$  &  $\underset{( 5.0e-04)} {\mathbf{1.2e-03}}$  & $\underset{( 5.0e-04)} {\mathbf{1.2e-03}}$ & $\underset{(3.4e-04)} {\mathbf{8.0e-04}}$ & $\underset{( 2.7e-04)} {\mathbf{6.5e-04}}$	\\
 %			MC: Statistical error ($M=10^6$)  &  $\underset{( 5.0e-04)} {\mathbf{1.2e-03}}$  & $\underset{( 5.0e-04)} {\mathbf{1.2e-03}}$ & $\underset{( 5.0e-04)} {\mathbf{1.2e-03}}$ & $\underset{( 5.0e-04)} {\mathbf{1.2e-03}}$	\\
 		\hline
 	\end{tabular}
@@ -1016,14 +891,14 @@ From figure \ref{fig:Weak_rate_binary_without_rich}, we see that we get a weak e
 		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$  \\
 		\hline
 		MISC ($TOl=5.10^{-1}$)  & $\underset{(2.4e-05)}{\mathbf{\red{1.0e-05}}}$ & $\underset{(0.0035)}{\mathbf{0.0083}}$  & $\underset{(0.0007)}{\mathbf{ 0.0017}}$ &$\underset{(0.0011)}{\mathbf{0.0026}}$ \\
-		MISC ($TOl=10^{-1}$)   & $\underset{(2.4e-05)}{\mathbf{\red{1.0e-05}}}$ & $\underset{(0.0035)}{\mathbf{0.0083}}$ & $\underset{(0.0009)}{\mathbf{\red{0.0021}}}$ & $\underset{(0.0011)}{\mathbf{
+		MISC ($TOl=10^{-1}$)   & $\underset{(2.4e-05)}{\mathbf{1.0e-05}}$ & $\underset{(0.0035)}{\mathbf{0.0083}}$ & $\underset{(0.0009)}{\mathbf{\red{0.0021}}}$ & $\underset{(0.0011)}{\mathbf{
 				0.0026}}$ \\
-		MISC ($TOl=5.10^{-2}$)  & $\underset{(2.4e-05)}{\mathbf{\red{1.0e-05}}}$& $\underset{(0.0034)}{\mathbf{0.0081}}$ & $\underset{(0.0008)}{\mathbf{ 0.0019}}$& $\underset{(0.0011)}{\mathbf{
+		MISC ($TOl=5.10^{-2}$)  & $\underset{(2.4e-05)}{\mathbf{1.0e-05}}$& $\underset{(0.0034)}{\mathbf{0.0081}}$ & $\underset{(0.0008)}{\mathbf{ 0.0019}}$& $\underset{(0.0011)}{\mathbf{
 				0.0026}}$ \\
-		MISC ($TOl=10^{-2}$)  & $\underset{(2.4e-05)}{\mathbf{\red{1.0e-05}}}$ & $\underset{(0.0037)}{\mathbf{\red{0.0088}}}$ & $\underset{(0.0008)}{\mathbf{ 0.0019}}$ & $\underset{(0.0011)}{\mathbf{
+		MISC ($TOl=10^{-2}$)  & $\underset{(2.4e-05)}{\mathbf{1.0e-05}}$ & $\underset{(0.0037)}{\mathbf{\red{0.0088}}}$ & $\underset{(0.0008)}{\mathbf{ 0.0019}}$ & $\underset{(0.0011)}{\mathbf{
 				0.0026}}$ \\
-		MISC ($TOl=10^{-3}$)  & $\underset{(2.4e-05)}{\mathbf{\red{1.0e-05}}}$ & $\underset{(0.0037)}{\mathbf{0.0088}}$& $\underset{(0.0009)}{\mathbf{0.0021}}$& $\underset{(0.0007)}{\mathbf{\red{ 0.0017}}}$ \\
-			MISC ($TOl=10^{-4}$)  & $\underset{(2.4e-05)}{\mathbf{\red{1.0e-05}}}$ & $\underset{(0.0037)}{\mathbf{0.0088}}$& $\underset{(0.0009)}{\mathbf{0.0021}}$& $\underset{(-)}{\mathbf{ -}}$ \\
+		MISC ($TOl=10^{-3}$)  & $\underset{(2.4e-05)}{\mathbf{1.0e-05}}$ & $\underset{(0.0037)}{\mathbf{0.0088}}$& $\underset{(0.0009)}{\mathbf{0.0021}}$& $\underset{(0.0007)}{\mathbf{\red{ 0.0017}}}$ \\
+			MISC ($TOl=10^{-4}$)  & $\underset{(2.4e-05)}{\mathbf{1.0e-05}}$ & $\underset{(0.0037)}{\mathbf{0.0088}}$& $\underset{(0.0009)}{\mathbf{0.0021}}$& $\underset{(-)}{\mathbf{ -}}$ \\
 		\hline
 	\end{tabular}
 	\caption{Quadrature error of MISC to compute Binary option price of the different tolerances for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
@@ -1056,11 +931,12 @@ From figure \ref{fig:Weak_rate_binary_without_rich}, we see that we get a weak e
 		MISC ($TOl=10^{-3}$)  & $\mathbf{0.0980}$  & $\mathbf{ 0.0472}$  & $\mathbf{ 0.0222}$  & $\mathbf{\red{0.0144}}$\\
 	MISC ($TOl=10^{-4}$)  & $\mathbf{0.0980}$ & $\mathbf{0.0472}$ & $\mathbf{ 0.0222}$ & $\mathbf{-}$  \\
 		\hline
-		MC+root finding   &  $\mathbf{\red{-}}$ & $\mathbf{\red{0.0471}}$ & $\mathbf{\red{0.0228}}$ & $\mathbf{\red{0.0148}}$  \\	
-			MC     &  $\mathbf{\red{-}}$ & $\mathbf{\red{0.0467}}$ & $\mathbf{\red{0.0227}}$ & $\mathbf{\red{0.0145}}$  \\	
+		MC+root finding   &  $\mathbf{\red{-}}$ & $\mathbf{\red{0.0471 }}$ & $\mathbf{\red{0.0221}}$ & $\mathbf{\red{0.0141}}$  \\	
+			MC     &  $\mathbf{\red{-}}$ & $\mathbf{\red{0.0467}}$ & $\mathbf{\red{0.0222}}$ & $\mathbf{\red{0.0146}}$  \\	
 		\hline
+	
 	\end{tabular}
-	\caption{Total error of MISC and MC to compute Binary option price of the different tolerances for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
+	\caption{Total error of MISC and MC to compute Binary option price of the different tolerances for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors. We will not include later the first point, corresponding to number of time steps $N=2$, since as from table \ref{Quadrature error of MISC to compute Binary option price of the different tolerances for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}, MISC is killing the quadrature error for that case.}
 	\label{Total error of MISC and MC to compute Binary option price of the different tolerances for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
 \end{table}
 
@@ -1072,18 +948,21 @@ From figure \ref{fig:Weak_rate_binary_without_rich}, we see that we get a weak e
 	\begin{tabular}{l*{6}{c}r}
 		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$ &   \\
 		\hline
-		MISC ($TOl=5.10^{-1}$)  & $\red{0.3}$ & $0.8$ & $2$ & $\red{9}$  \\
+		MISC ($TOl=5.10^{-1}$)  & $\red{0.3}$ & $0.8$ & $2$ & $9$  \\
 		MISC ($TOl=10^{-1}$)   & $0.3$ & $0.8$ & $\red{9}$ & $49$  \\
 		MISC ($TOl=5.10^{-2}$)   & $0.3$ & $1.3$ & $12$ & $59$  \\
 		MISC ($TOl=10^{-2}$)   & $0.3$ & $\red{2}$ & $14$ & $63$  \\
-		MISC ($TOl=10^{-3}$)   & $0.3$ & $2$ & $34$ & $1090$  \\
+		MISC ($TOl=10^{-3}$)   & $0.3$ & $2$ & $34$ & $\red{1090}$  \\
     	MISC ($TOl=10^{-4}$)   & $0.3$ & $16$ & $193$ & $-$  \\
 		\hline
-		MC+root finding method ($M=10^4$)    & $\red{-}$ & $\red{9}$ & $\red{60}$ & $\red{87}$  \\
-		MC method ($M=10^6$)    & $\red{-}$ & $\red{7}$ & $\red{65}$ & $\red{191}$  \\
+		MC+root finding method    & $\red{-}$ & $\red{9}$ & $\red{96}$ & $\red{141}$  \\
+		MC method    & $\red{-}$ & $\red{7}$ & $\red{95}$ & $\red{152}$  \\
 		\hline
+		Ratio of	$\text{(MC+root finding)}/\text{(MISC)}$ & $\red{-}$ & $\red{4.5}$ & $\red{11}$ & $\red{0.13}$  \\
+			Ratio of	$(\text{MC})/(\text{MISC})$ & $\red{-}$ & $\red{3.5}$ & $\red{11}$ & $\red{0.14}$  \\
+			\hline
 	\end{tabular}
-	\caption{Comparsion of the computational time of  MC and MISC, used to compute Binary option price  for different number of time steps, without Richardson extrapolation}
+	\caption{Comparsion of the computational time of  MC and MISC, used to compute Binary option price  for different number of time steps, without Richardson extrapolation. The average computational time of MC is computed over $10$ runs.}
 	\label{Comparsion of the computational time of  MC and MISC, used to compute Binary option price  for different number of time steps, without Richardson extrapolation}
 \end{table}
 
@@ -1102,7 +981,7 @@ From figure \ref{fig:Weak_rate_binary_without_rich}, we see that we get a weak e
 \FloatBarrier
 
 \subsubsection*{With Richardson extrapolation (level $1$)}
-
+In this Section, we report the results for the binary option, using the different Methods: MISC, MC $+$ root finding  and MC, with Richardson extrapolation . We mention that for MISC we used a very small tolerance for the Newton solver, when solving the Kink point problem ($TOL_{\text{Newton}}=10^{-10}$). We start by reporting the observed approximated values using different methods (See table \ref{table: Binary option price of the different methods for different number of time steps, with Richardson extrapolation (level1).}. The biased values for MC method were computed using the values of Bias, reported in table \ref{Bias and Statistical errors of MC  for computing Binary option price  for different number of time steps, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors.}. In table \ref{Quadrature error of MISC to compute Binary option price of the different tolerances for different number of time steps, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors.}, we report the behavior of quadrature error with respect to MISC tolerance. We precise that the quadrature error is computed by substracting the MISC approximated value from the biased MC value. We report in red the values where MISC becomes stable (see also figure \ref{fig:Quadrature_error_with_rich_binary}). Those values where used to compute the needed number of samples for MC (with and without root finding), to achieve similar magnitude  for statistical error. Later, in table \ref{Total error of MISC and MC to compute Binary option price of the different tolerances for different number of time steps, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors.}, we report the total relative error for all methods (Quadrature error + Bias for MISC and Statistical error + Bias for MC). We also report in table\ref{Comparsion of the computational time of  MC and MISC, used to compute Binary option price  for different number of time steps, with Richardson extrapolation (level $1$)}, the computational time needed for all different methods.  We finally provide in figure \ref{fig:Complexity plot for MC and MISC , Binary, with rich}, the complexity rates for the different involved methods, as well a comparison between the two versions of MISC (without/with Richardson extrapolation) in figure \ref{fig:Complexity plot for MC and MISC , Binary, comparison}.
 \begin{table}[h!]
 	\centering
 	\begin{tabular}{l*{6}{c}r}
@@ -1131,10 +1010,12 @@ From figure \ref{fig:Weak_rate_binary_without_rich}, we see that we get a weak e
 		\hline
 	MC Bias  ($M=5.10^{6}$)&$ \underset{(0.0032)}{\mathbf{0.0077}}$    & $\underset{(    0.0016
 		)}{\mathbf{0.0039}}$  & $\underset{(0.0008)}{\mathbf{0.0020}}$  & $\underset{(0.0003)}{\mathbf{0.0006}}$\\
+		MC Statistical error   ($M=5.10^{6}$)   & 	$ \underset{( 4.6e-05  )}{\mathbf{1.1e-04}}$  & $\underset{(3.5e-05)}{\mathbf{ 8.4e-05
+	}}$  & $\underset{(2.5e-05)}{\mathbf{6.0e-05}}$ & $\underset{(   1.8e-05 )}{\mathbf{  4.2e-05 }}$\\ 
 		
-		MC+root finding: Statistical error ($M=10^3$)     & 	$ \underset{( 3.5e-03  )}{\mathbf{8.3e-03}}$  & $\underset{(2.8e-03)}{\mathbf{ 6.6e-03
-		}}$  & $\underset{(1.8e-03)}{\mathbf{4.3e-03}}$ & $\underset{(  1.2e-03 )}{\mathbf{  2.9e-03 }}$\\ 
-		
+%		MC+root finding: Statistical error ($M=10^3$)     & 	$ \underset{( 3.5e-03  )}{\mathbf{8.3e-03}}$  & $\underset{(2.8e-03)}{\mathbf{ 6.6e-03
+%		}}$  & $\underset{(1.8e-03)}{\mathbf{4.3e-03}}$ & $\underset{(  1.2e-03 )}{\mathbf{  2.9e-03 }}$\\ 
+%		
 		\hline
 	\end{tabular}
 	\caption{Bias and Statistical errors of MC  for computing Binary option price  for different number of time steps, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors.}
@@ -1149,10 +1030,10 @@ From figure \ref{fig:Weak_rate_binary_without_rich}, we see that we get a weak e
 	\begin{tabular}{l*{6}{c}r}
 		Method \textbackslash  Steps            & $1-2$ & $2-4$ & $4-8$ & $8-16$  \\
 		\hline
-		MISC ($TOl=5.10^{-1}$)  & $\underset{(   1.0e-04)}{\mathbf{ \red{2.4e-04}}}$ & $\underset{(3.6e-03)}{\mathbf{8.6e-03}}$  & $\underset{(2.5e-03)}{\mathbf{\red{5.9e-03}}}$ &$\underset{(1.0e-03)}{\mathbf{\red{2.4e-03}}}$ \\
-		MISC ($TOl=10^{-1}$)   & $\underset{(   1.0e-04)}{\mathbf{ 2.4e-04}}$ & $\underset{(3.6e-03)}{\mathbf{8.6e-03}}$  & $\underset{(2.5e-03)}{\mathbf{5.9e-03}}$ &$\underset{(   1.1e-04)}{\mathbf{ 2.6e-03}}$ \\
+		MISC ($TOl=5.10^{-1}$)  & $\underset{(   1.0e-04)}{\mathbf{ \red{2.4e-04}}}$ & $\underset{(3.6e-03)}{\mathbf{8.6e-03}}$  & $\underset{(2.5e-03)}{\mathbf{5.9e-03}}$ &$\underset{(1.0e-03)}{\mathbf{2.4e-03}}$ \\
+		MISC ($TOl=10^{-1}$)   & $\underset{(   1.0e-04)}{\mathbf{ 2.4e-04}}$ & $\underset{(3.6e-03)}{\mathbf{8.6e-03}}$  & $\underset{(2.5e-03)}{\mathbf{5.9e-03}}$ &$\underset{(   1.1e-04)}{\mathbf{ \red{2.6e-03}}}$ \\
 		MISC ($TOl=5.10^{-2}$)  & $\underset{(   1.0e-04)}{\mathbf{ 2.4e-04}}$ & $\underset{(3.6e-03)}{\mathbf{8.6e-03}}$ & $\underset{(2.6e-03)}{\mathbf{6.2e-03}}$ &$\underset{(   1.1e-04)}{\mathbf{ 2.6e-03}}$ \\
-		MISC ($TOl=10^{-2}$)  & $\underset{(   1.0e-04)}{\mathbf{ 2.4e-04}}$ & $\underset{(3.2e-03)}{\mathbf{\red{7.6e-03}}}$  & $\underset{(2.2e-03)}{\mathbf{5.2e-03}}$ &$\underset{(   1.1e-04)}{\mathbf{ 2.6e-03}}$\\
+		MISC ($TOl=10^{-2}$)  & $\underset{(   1.0e-04)}{\mathbf{ 2.4e-04}}$ & $\underset{(3.2e-03)}{\mathbf{\red{7.6e-03}}}$  & $\underset{(2.2e-03)}{\mathbf{\red{5.2e-03}}}$ &$\underset{(   1.1e-04)}{\mathbf{ 2.6e-03}}$\\
 		MISC ($TOl=10^{-3}$)  & $\underset{(   1.0e-04)}{\mathbf{ 2.4e-04}}$ & $\underset{(3.2e-03)}{\mathbf{7.6e-03}}$  & $\underset{(1.7e-03)}{\mathbf{4.0e-03}}$ &$\underset{(   5.e-04)}{\mathbf{1.2e-03}}$ \\
 	MISC ($TOl=10^{-4}$)  & $\underset{(   1.0e-04)}{\mathbf{ 2.4e-04}}$ & $\underset{(3.1e-03)}{\mathbf{7.4e-03}}$  & $\underset{(1.7e-03)}{\mathbf{4.0e-03}}$ &$\underset{()}{\mathbf{}}$ \\
 		\hline
@@ -1179,19 +1060,20 @@ From figure \ref{fig:Weak_rate_binary_without_rich}, we see that we get a weak e
 	\begin{tabular}{l*{6}{c}r}
 		Method \textbackslash  Steps            & $1-2$ & $2-4$ & $4-8$ & $8-16$  \\
 		\hline
-		MISC ($TOl=5.10^{-1}$)  &  $\mathbf{\red{0.0079}}$ & $\mathbf{0.0125}$ & $\mathbf{\red{0.0079}}$ & $\mathbf{\red{0.0030}}$  \\
-		MISC ($TOl=10^{-1}$)  &   $\mathbf{0.0079}$& $\mathbf{0.0125}$ & $\mathbf{0.0079}$ & $\mathbf{0.0032}$  \\
+		MISC ($TOl=5.10^{-1}$)  &  $\mathbf{\red{0.0079}}$ & $\mathbf{0.0125}$ & $\mathbf{0.0079}$ & $\mathbf{0.0030}$  \\
+		MISC ($TOl=10^{-1}$)  &   $\mathbf{0.0079}$& $\mathbf{0.0125}$ & $\mathbf{0.0079}$ & $\mathbf{\red{0.0032}}$  \\
 		MISC ($TOl=5.10^{-2}$) &   $\mathbf{0.0079}$ & $\mathbf{0.0125}$ & $\mathbf{0.0082}$ & $\mathbf{0.0032}$  \\
-		MISC ($TOl=10^{-2}$)  &   $\mathbf{0.0079}$ & $\mathbf{\red{0.0115}}$ & $\mathbf{0.0072}$ & $\mathbf{0.0032}$  \\
+		MISC ($TOl=10^{-2}$)  &   $\mathbf{0.0079}$ & $\mathbf{\red{0.0115}}$ & $\mathbf{\red{0.0072}}$ & $\mathbf{0.0032}$  \\
 		MISC ($TOl=10^{-3}$) &   $\mathbf{0.0079}$ & $\mathbf{0.0115}$ & $\mathbf{0.0060}$ & $\mathbf{0.0018}$  \\
 
 	MISC ($TOl=10^{-4}$) &   $\mathbf{0.0079}$ & $\mathbf{0.0113}$ & $\mathbf{0.0060}$ & $\mathbf{-}$  \\
 		\hline
-		MC+root finding   &  $\mathbf{\red{-}}$ & $\mathbf{\red{0.0111}}$ & $\mathbf{\red{0.0075}}$ & $\mathbf{\red{0.0035}}$  \\	
-			MC    &  $\mathbf{\red{-}}$ & $\mathbf{\red{0.0116}}$ & $\mathbf{\red{0.0078}}$ & $\mathbf{\red{0.0029}}$  \\	
+		MC+root finding   &  $\mathbf{\red{-}}$ & $\mathbf{\red{0.0111}}$ & $\mathbf{\red{0.0070}}$ & $\mathbf{\red{0.0035}}$  \\	
+			MC    &  $\mathbf{\red{-}}$ & $\mathbf{\red{0.0116}}$ & $\mathbf{\red{0.0073}}$ & $\mathbf{\red{0.0029}}$  \\	
 		\hline
+		
 	\end{tabular}
-	\caption{Total error of MISC and MC to compute Binary option price of the different tolerances for different number of time steps, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors.}
+	\caption{Total error of MISC and MC to compute Binary option price of the different tolerances for different number of time steps, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors.  We will not include later the first point, corresponding to number of time steps $N=2$, since as from table \ref{Quadrature error of MISC to compute Binary option price of the different tolerances for different number of time steps, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors.}, MISC is killing the quadrature error for that case.}
 	\label{Total error of MISC and MC to compute Binary option price of the different tolerances for different number of time steps, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors.}
 \end{table}
 
@@ -1205,18 +1087,21 @@ From figure \ref{fig:Weak_rate_binary_without_rich}, we see that we get a weak e
 	\begin{tabular}{l*{6}{c}r}
 		Method \textbackslash  Steps            & $1-2$ & $2-4$ & $4-8$ & $8-16$ &   \\
 		\hline
-		MISC ($TOl=5.10^{-1}$) & $\red{0.3}$ & $1$ & $\red{4}$ & $\red{9}$  \\
-		MISC ($TOl=10^{-1}$)  & $0.3$& $1$ & $8$ & $42$  \\
+		MISC ($TOl=5.10^{-1}$) & $\red{0.3}$ & $1$ & $4$ & $9$  \\
+		MISC ($TOl=10^{-1}$)  & $0.3$& $1$ & $8$ & $\red{42}$  \\
 		MISC ($TOl=5.10^{-2}$)   & $0.3$ & $1$ & $10$ & $72$  \\
-		MISC ($TOl=10^{-2}$)  & $0.3$ & $\red{4}$ & $15$ & $78$  \\
+		MISC ($TOl=10^{-2}$)  & $0.3$ & $\red{4}$ & $\red{15}$ & $78$  \\
 		MISC ($TOl=10^{-3}$)   &$0.3$ & $4$ & $100$ & $2253$  \\
 			MISC ($TOl=10^{-4}$)   &$0.3$ & $68$ & $392$ & $$  \\
 		\hline
-		MC+root finding method     & $\red{-}$ & $\red{60}$ & $\red{77}$ & $\red{152}$  \\
-			MC   & $\red{-}$ & $\red{12}$ & $\red{24}$ & $\red{152}$  \\
+		MC+root finding method     & $\red{-}$ & $\red{48}$ & $\red{62}$ & $\red{122 }$  \\
+			MC   & $\red{-}$ & $\red{12}$ & $\red{23}$ & $\red{147}$  \\
+		\hline
+			Ratio of	$\text{(MC+root finding)}/\text{(MISC)}$ & $\red{-}$ & $\red{12}$ & $\red{4.1}$ & $\red{2.9}$  \\
+		Ratio of	$(\text{MC})/(\text{MISC})$ & $\red{-}$ & $\red{3}$ & $\red{1.5}$ & $\red{3.5}$  \\
 		\hline
 	\end{tabular}
-	\caption{Comparsion of the computational time of  MC and MISC, used to compute Binary option price  for different number of time steps, with Richardson extrapolation (level $1$)}
+	\caption{Comparsion of the computational time of  MC and MISC, used to compute Binary option price  for different number of time steps, with Richardson extrapolation (level $1$). The average computational time of MC is computed over $10$ runs.}
 	\label{Comparsion of the computational time of  MC and MISC, used to compute Binary option price  for different number of time steps, with Richardson extrapolation (level $1$)}
 \end{table}
 
@@ -1310,9 +1195,9 @@ The paramters that we used in our numerical experiments are: $T=1$, $\sigma=0.4$
 
 
 
-In this section, we include the results of weak error rates for  the call option for $3$ scenarios, without/with Richardson extrapolation (level $1$) and level $2$). We note that the weak errors plotted here correspond to relative errors.  We note that in order to get accurate estimates of the bias, we needed to kill the laguerre quadrature error by increasing $\beta$ ($\beta$: the number of quadrature points used for Laguere to get $h(\mathbf{z}_{-1})$). For illustration, we show to cases $\beta=10$ and $\beta=32$. We mention that from our numerical experiences that the bias did not change as we increase $\beta$ greater than $32$ points.
+In this section, we include the results of weak error rates for  the call option for $2$ scenarios, without/with Richardson extrapolation (level $1$). We note that the weak errors plotted here correspond to relative errors.  We note that in order to get accurate estimates of the bias, we needed to kill the laguerre quadrature error by increasing $\beta$ ($\beta$: the number of quadrature points used for Laguere to get $h(\mathbf{z}_{-1})$). For illustration, we show to cases $\beta=10$ and $\beta=32$. We mention that from our numerical experiences that the bias did not change as we increase $\beta$ greater than $32$ points.
 
-Focusing on the results produced by seeting $\beta=32$ (which gives the right behavior to be observed for the bias), we can see from figure \ref{fig:Weak_rate_call_without_rich_beta_32} that we get a weak error of order $\Delta t$ for the case without Richardson extrapolation. From figure \ref{fig:Weak_rate_call_with_rich_level1_beta_32},, we observe an improvement in the rate and the constant when using level $1$ of Richardson extrapolation, approximately of order $\Delta^2$. For all the plots below, the upper and lower bounds are $95\%$ confidence interval.
+Focusing on the results produced by seeting $\beta=32$ (which gives the right behavior to be observed for the bias), we can see from figure \ref{fig:Weak_rate_call_without_rich_beta_32} that we get a weak error of order $\Delta t$ for the case without Richardson extrapolation. From figure \ref{fig:Weak_rate_call_with_rich_level1_beta_32}, we observe an improvement in the rate and the constant when using level $1$ of Richardson extrapolation, approximately of order $\Delta t^2$. For all the plots below, the upper and lower bounds are $95\%$ confidence interval.
 
 
 
@@ -1440,8 +1325,12 @@ Focusing on the results produced by seeting $\beta=32$ (which gives the right be
 %\end{figure}
 
 \FloatBarrier
-\subsubsection{Comparing relative errors}
+\subsubsection{Comparing relative errors}\label{sec:Comparing relative errors, call}
 \subsubsection*{Without Richardson extrapolation}
+
+
+
+In this Section, we report the results for the Call option, using the different Methods: MISC, MC $+$ root finding  and MC, without Richardson extrapolation . We mention that for MISC we used a very small tolerance for the Newton solver, when solving the Kink point problem ($TOL_{\text{Newton}}=10^{-10}$), we also used $\beta=32$ (number of Laguerre quadrature points ). We start by reporting the observed approximated values using different methods (See table \ref{table:Call option price of the different methods for different number of time steps, without Richardson extrapolation.}). The biased values for MC method were computed using the values of Bias, reported in table \ref{Bias and Statistical errors of MC  for computing Call option price  for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}. In table \ref{Quadrature error of MISC to compute Call option price of the different tolerances for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}, we report the behavior of quadrature error with respect to MISC tolerance. We precise that the quadrature error is computed by substracting the MISC approximated value from the biased MC value. We report in red the values where MISC becomes stable (see also figure \ref{fig:Quadrature_error_non_rich_Call}). Those values where used to compute the needed number of samples for MC (with and without root finding), to achieve similar magnitude  for statistical error. Later, in table \ref{Total error of MISC and MC to compute Call option price of the different tolerances for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}, we report the total relative error for all methods (Quadrature error + Bias for MISC and Statistical error + Bias for MC). We also report in table \ref{Comparsion of the computational time of  MC and MISC, used to compute Call option price  for different number of time steps, without Richardson extrapolation}, the computational time needed for all different methods.  We finally provide in figure \ref{fig:Complexity plot for MC and MISC , Call non rich}, the complexity rates for the different involved methods.
 
 \begin{table}[h!]
 	\centering
@@ -1455,7 +1344,7 @@ Focusing on the results produced by seeting $\beta=32$ (which gives the right be
 		MISC ($TOl=10^{-3},\beta=32$) & $16.184$ & $16.103$ & $15.996$ & $-$  \\
 		
 		\hline
-		MC method ($M=10^{5}, \beta=32$)   & $  16.194$ & $ 16.099$ & $
+		MC method ($M=10^{5}$)   & $  16.194$ & $ 16.099$ & $
 		15.999$ & $  15.923$  \\
 		\hline
 	\end{tabular}
@@ -1469,11 +1358,11 @@ Focusing on the results produced by seeting $\beta=32$ (which gives the right be
 	\begin{tabular}{l*{6}{c}r}
 		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$  \\
 		\hline
-		MC Bias   & 	$ \underset{(      0.3424 )}{\mathbf{0.0216}}$  & $\underset{(0.2473)}{\mathbf{ 0.0156
+		MC Bias ($M=10^{5}$)  & 	$ \underset{(      0.3424 )}{\mathbf{0.0216}}$  & $\underset{(0.2473)}{\mathbf{ 0.0156
 		}}$  & $\underset{(  0.1474)}{\mathbf{0.0093}}$ & $\underset{(     0.0713
 	)}{\mathbf{  0.0045 }}$\\ 
 		
-		MC Statistical error     & 	$ \underset{( 7.5e-03  )}{\mathbf{4.4e-04}}$  & $\underset{(7.5e-03 )}{\mathbf{ 4.7e-04
+		MC Statistical error  ($M=10^{5}$)   & 	$ \underset{( 7.5e-03  )}{\mathbf{4.4e-04}}$  & $\underset{(7.5e-03 )}{\mathbf{ 4.7e-04
 		}}$  & $\underset{(6.3e-03 )}{\mathbf{4.0e-04}}$ & $\underset{( 4.9e-03 )}{\mathbf{ 3.1e-04  }}$\\ 
 	
 %		MC Statistical error ($M=10^4$)     & 	$ \underset{( 2.2e-02  )}{\mathbf{1.4e-03}}$  & 	$ \underset{( 2.2e-02  )}{\mathbf{1.4e-03}}$  & $\underset{(1.9e-02 )}{\mathbf{1.2e-03}}$ & $\underset{( 1.5e-02 )}{\mathbf{ 9.3e-04  }}$\\ 
@@ -1564,9 +1453,13 @@ Focusing on the results produced by seeting $\beta=32$ (which gives the right be
 		MISC ($TOl=10^{-3}$)   & $0.3$ & $28$ & $264$ & $-$  \\
 		\hline
 %		MC method ($M=10^5, \beta=32$)    & $168$ & $216$ & $290$ & $\red{432}$  \\
-			MC method +root finding   & $\red{1328}$ & $\red{8140}$ & $\red{21400}$ & $\red{63180}$  \\
+			MC method +root finding   & $\red{1328}$ & $\red{8140}$ & $\red{21400}$ & $\red{70200}$  \\
 				MC method & $\red{1450}$ & $\red{9990}$ & $\red{32790}$ & $\red{ 158108
 				}$  \\
+		\hline
+		
+			Ratio of	$\text{(MC+root finding)}/\text{(MISC)}$ & $\red{ 4.4e+03}$ & $\red{   1.4e+03}$ & $\red{369}$ & $\red{ 107}$  \\
+		Ratio of	$(\text{MC})/(\text{MISC})$ & $\red{ 4.8e+03}$ & $\red{ 1665}$ & $\red{ 565}$ & $\red{ 241}$  \\
 		\hline
 	\end{tabular}
 	\caption{Comparison of the computational time of  MC and MISC, used to compute Call option price  for different number of time steps, without Richardson extrapolation}
@@ -1581,13 +1474,20 @@ Focusing on the results produced by seeting $\beta=32$ (which gives the right be
 \includegraphics[width=0.7\linewidth]{./figures/Call_Complexity_rates/error_vs_time}
 
 \caption{Complexity plot for MC and MISC for the case without Richardson extrapolation.}
-\label{fig:Complexity plot for MC and MISC , Binary, non rich}
+\label{fig:Complexity plot for MC and MISC , Call non rich}
 \end{figure}
 
 
 \FloatBarrier
 
 \subsubsection*{With Richardson extrapolation (level $1$)}
+
+
+
+
+In this Section, we report the results for the Call option, using the different Methods: MISC, MC $+$ root finding  and MC, with Richardson extrapolation . We mention that for MISC we used a very small tolerance for the Newton solver, when solving the Kink point problem ($TOL_{\text{Newton}}=10^{-10}$), we also used $\beta=32$ (number of Laguerre quadrature points ). We start by reporting the observed approximated values using different methods (See table \ref{table: Call option price of the different methods for different number of time steps, with Richardson extrapolation (level1).}. The biased values for MC method were computed using the values of Bias, reported in table \ref{Bias and Statistical errors of MC  for computing Call option price  for different number of time steps, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors.}. In table \ref{Quadrature error of MISC to compute Call option price of the different tolerances for different number of time steps, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors.}, we report the behavior of quadrature error with respect to MISC tolerance. We precise that the quadrature error is computed by substracting the MISC approximated value from the biased MC value. We report in red the values where MISC becomes stable (see also figure \ref{fig:Quadrature_error_with_rich_Call}). Those values where used to compute the needed number of samples for MC (with and without root finding), to achieve similar magnitude  for statistical error. Later, in table \ref{Total error of MISC and MC to compute Call option price of the different tolerances for different number of time steps, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors.}, we report the total relative error for all methods (Quadrature error + Bias for MISC and Statistical error + Bias for MC). We also report in table\ref{Comparsion of the computational time of  MC and MISC, used to compute Call option price  for different number of time steps, with Richardson extrapolation (level $1$)}, the computational time needed for all different methods.  We finally provide in figure \ref{fig:Complexity plot for MC and MISC , Call, comparison}, the comparison between the two versions of MISC (without/with Richardson extrapolation).
+
+
 
 \begin{table}[h!]
 	\centering
@@ -1614,7 +1514,7 @@ Focusing on the results produced by seeting $\beta=32$ (which gives the right be
 	\begin{tabular}{l*{6}{c}r}
 		Method \textbackslash  Steps            & $1-2$ & $2-4$ & $4-8$ & $8-16$  \\
 		\hline
-		MC Bias ($M=10^5$)   & 	$ \underset{(    0.5627
+		MC Bias ($M=5.10^6$)   & 	$ \underset{(    0.5627
 			 )}{\mathbf{0.0355}}$  & $\underset{(  0.1664)}{\mathbf{ 0.0105
 		}}$  & $\underset{( 0.0380)}{\mathbf{0.0024}}$ & $\underset{( 0.0048
 	 )}{\mathbf{ 0.0003  }}$\\ 
@@ -1622,8 +1522,8 @@ Focusing on the results produced by seeting $\beta=32$ (which gives the right be
 		MC Statistical error ($M=5.10^6$)     & 	$ \underset{(  4.4e-03 )}{\mathbf{2.8e-04}}$  & $\underset{(3.8e-03 )}{\mathbf{ 2.4e-04
 		}}$  & $\underset{(3.0e-03)}{\mathbf{1.9e-04}}$ & $\underset{(2.2e-03 )}{\mathbf{ 1.4e-04  }}$\\ 
 		
-			MC Statistical error ($M=10^5$)     & 	$ \underset{(  1.4e-02 )}{\mathbf{9.0e-04}}$  & $\underset{(1.3e-02)}{\mathbf{ 8.0e-04
-		}}$  & $\underset{(9.4e-03)}{\mathbf{5.9e-04}}$ & $\underset{( 7.1e-03 )}{\mathbf{ 4.5e-04  }}$\\ 
+%			MC Statistical error ($M=10^5$)     & 	$ \underset{(  1.4e-02 )}{\mathbf{9.0e-04}}$  & $\underset{(1.3e-02)}{\mathbf{ 8.0e-04
+%		}}$  & $\underset{(9.4e-03)}{\mathbf{5.9e-04}}$ & $\underset{( 7.1e-03 )}{\mathbf{ 4.5e-04  }}$\\ 
 		\hline
 	\end{tabular}
 	\caption{Bias and Statistical errors of MC  for computing Call option price  for different number of time steps, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors.}
@@ -1639,12 +1539,12 @@ Focusing on the results produced by seeting $\beta=32$ (which gives the right be
 		Method \textbackslash  Steps            & $1-2$ & $2-4$ & $4-8$ & $8-16$  \\
 		\hline
 		MISC ($TOl=5.10^{-1}$)  & $\underset{(0.0039
-			)}{\mathbf{ 2.5e-04}}$ & $\underset{(0.0070)}{\mathbf{4.4e-04}}$  & $\underset{(0.0012
+			)}{\mathbf{ \red{2.5e-04}}}$ & $\underset{(0.0070)}{\mathbf{4.4e-04}}$  & $\underset{(0.0012
 			)}{\mathbf{7.6e-05}}$ &$\underset{(0.0054)}{\mathbf{3.4e-04}}$ \\
 		MISC ($TOl=10^{-1}$)   & $\underset{(0.0039
-			)}{\mathbf{ 2.5e-04}}$ & $\underset{(0.0070)}{\mathbf{4.4e-04}}$  & $\underset{(  0.0017)}{\mathbf{1.1e-04}}$ &$\underset{(0.0036)}{\mathbf{2.3e-04}}$ \\
+			)}{\mathbf{ 2.5e-04}}$ & $\underset{(0.0070)}{\mathbf{4.4e-04}}$  & $\underset{(  0.0017)}{\mathbf{1.1e-04}}$ &$\underset{(0.0036)}{\mathbf{\red{2.3e-04}}}$ \\
 		MISC ($TOl=5.10^{-2}$)  & $\underset{(0.0039
-			)}{\mathbf{ 2.5e-04}}$ & $\underset{(0.0034)}{\mathbf{2.1e-04}}$  & $\underset{(    0.0015)}{\mathbf{9.5e-05}}$ &$\underset{(0.0033)}{\mathbf{2.1e-04}}$ \\
+			)}{\mathbf{ 2.5e-04}}$ & $\underset{(0.0034)}{\mathbf{\red{\red{2.1e-04}}}}$  & $\underset{(    0.0015)}{\mathbf{\red{9.5e-05}}}$ &$\underset{(0.0033)}{\mathbf{2.1e-04}}$ \\
 		MISC ($TOl=10^{-2}$)  & $\underset{(0.0039
 			)}{\mathbf{ 2.5e-04}}$ & $\underset{(0.0034)}{\mathbf{2.1e-04}}$  & $\underset{(0.0012
 			)}{\mathbf{7.6e-05}}$&$\underset{(0.0028
@@ -1680,18 +1580,18 @@ Focusing on the results produced by seeting $\beta=32$ (which gives the right be
 	\begin{tabular}{l*{6}{c}r}
 		Method \textbackslash  Steps            & $1-2$ & $2-4$ & $4-8$ & $8-16$  \\
 		\hline
-		MISC ($TOl=5.10^{-1}$)  &  $\mathbf{\red{0.0357}}$ & $\mathbf{\red{0.0109}}$ & $\mathbf{\red{0.0025}}$ & $\mathbf{\red{0.0006}}$  \\
-		MISC ($TOl=10^{-1}$)  &  $\mathbf{0.0357}$ & $\mathbf{0.0109}$ & $\mathbf{0.0025}$ & $\mathbf{0.0005}$  \\
-		MISC ($TOl=5.10^{-2}$) &  $\mathbf{0.0357}$ & $\mathbf{0.0107}$ & $\mathbf{0.0025}$ & $\mathbf{0.0005}$  \\
-		MISC ($TOl=10^{-2}$)  &  $\mathbf{0.0357}$ & $\mathbf{0.0107}$ & $\mathbf{0.0025}$ & $\mathbf{0.0005}$ \\
-		MISC ($TOl=10^{-3}$) &  $\mathbf{0.0357}$ & $\mathbf{0.0107}$ & $\mathbf{0.0025}$ & $\mathbf{}$  \\
+		MISC ($TOl=5.10^{-1}$)  &  $\mathbf{\red{0.0358}}$ & $\mathbf{0.0109}$ & $\mathbf{0.0025}$ & $\mathbf{0.0006}$  \\
+		MISC ($TOl=10^{-1}$)  &  $\mathbf{0.0358}$ & $\mathbf{0.0109}$ & $\mathbf{0.0025}$ & $\mathbf{\red{0.0005}}$  \\
+		MISC ($TOl=5.10^{-2}$) &  $\mathbf{0.0358}$ & $\mathbf{\red{0.0107}}$ & $\mathbf{\red{0.0025}}$ & $\mathbf{0.0005}$  \\
+		MISC ($TOl=10^{-2}$)  &  $\mathbf{0.0358}$ & $\mathbf{0.0107}$ & $\mathbf{0.0025}$ & $\mathbf{0.0005}$ \\
+		MISC ($TOl=10^{-3}$) &  $\mathbf{0.0358}$ & $\mathbf{0.0107}$ & $\mathbf{0.0025}$ & $\mathbf{}$  \\
 		
 		\hline
 %		MC  ($M=5.10^6$)   &  $\mathbf{\red{0.0358}}$ & $\mathbf{\red{0.0107}}$ & $\mathbf{\red{0.0026}}$ & $\mathbf{\red{0.0004}}$  \\	
-			MC  ($M=10^5$)   &  $\mathbf{\red{0.0364}}$ & $\mathbf{\red{0.0113}}$ & $\mathbf{\red{0.0030}}$ & $\mathbf{\red{0.0008}}$  \\	
+%			MC + root finding  &  $\mathbf{\red{0.0358}}$ & $\mathbf{\red{0.0107}}$ & $\mathbf{\red{0.0025}}$ & $\mathbf{\red{0.}}$  \\	
 		\hline
 	\end{tabular}
-	\caption{Total error of MISC and MC to compute Call option price of the different tolerances for different number of time steps, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors.}
+	\caption{Total error of MISC  to compute Call option price of the different tolerances for different number of time steps, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors.}
 	\label{Total error of MISC and MC to compute Call option price of the different tolerances for different number of time steps, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors.}
 \end{table}
 
@@ -1705,16 +1605,16 @@ Focusing on the results produced by seeting $\beta=32$ (which gives the right be
 	\begin{tabular}{l*{6}{c}r}
 		Method \textbackslash  Steps            & $1-2$ & $2-4$ & $4-8$ & $8-16$ &   \\
 		\hline
-		MISC ($TOl=5.10^{-1}$) & $\red{0.3}$ & $\red{4}$ & $\red{56}$ & $\red{713}$  \\
-		MISC ($TOl=10^{-1}$)  & $0.3$  & $4$ & $107$ & $1126$  \\
-		MISC ($TOl=5.10^{-2}$)   & $0.3$  & $9$ & $135$ & $1253$  \\
+		MISC ($TOl=5.10^{-1}$) & $\red{0.3}$ & $4$ & $56$ & $713$  \\
+		MISC ($TOl=10^{-1}$)  & $0.3$  & $4$ & $107$ & $\red{1126}$  \\
+		MISC ($TOl=5.10^{-2}$)   & $0.3$  & $\red{9}$ & $\red{135}$ & $1253$  \\
 		MISC ($TOl=10^{-2}$)  &  $0.3$  & $9$ & $186$ & $3540$  \\
 		MISC ($TOl=10^{-3}$)   & $0.3$  & $63$ & $836$ & $$  \\
 		\hline
-		MC method ($M=10^5$)    & $\red{194}$ & $\red{394}$ & $\red{516}$ & $\red{725}$  \\
+%		MC +root finding   & $\red{ 2.4e+05}$ & $\red{ 4.3e+05}$ & $\red{ 3.5e+06}$ & $\red{-}$  \\
 		\hline
 	\end{tabular}
-	\caption{Comparsion of the computational time of  MC and MISC, used to compute Call option price  for different number of time steps, with Richardson extrapolation (level $1$)}
+	\caption{Comparsion of the computational time of  MISC, used to compute Call option price  for different number of time steps, with Richardson extrapolation (level $1$)}
 	\label{Comparsion of the computational time of  MC and MISC, used to compute Call option price  for different number of time steps, with Richardson extrapolation (level $1$)}
 \end{table}
 
@@ -1911,7 +1811,152 @@ Focusing on the results produced by seeting $\beta=32$ (which gives the right be
 
 
 \appendix
+\section{The basket option with the smoothing trick as in \cite{bayersmoothing}}\label{appendix:The basket option with smoothing trick with a time stepping procedure}
 
+The first experiment that we consider is the pricing of  a European  basket call option in a Black-Scholes model. The basket is composed of $d$ assets ($d=3,8,25$) and we use the same trick of smoothing the integrand that was proposed in \cite{bayersmoothing}. In this case, the dimension of the parameter space $N=d-1$. The interpolation over the parameter space is based on the tensorized Lagrangian interpolation technique with Gaussian  points.
+
+
+%\newpage
+\subsection{Results using MISC}
+In table \ref{table: Complexity rates of the different experiemnts  for the basket option using BS model}, we summarize the observed  complexity rates for different tested settings for the basket example. From this table, we can check that even with the $25$ dimensional case, the complexity rate in terms of the elapsed time is at least order $1$, which is better than MC, which is $2$. Detailed plots for each case are given by figures (\ref{fig:misc_3D_Basket_1}, \ref{fig:misc_3D_Basket_2}) for $d=3$, figures (\ref{fig:misc_8D_Basket_1}, \ref{fig:misc_8D_Basket_2}) for $d=8$ and figures (\ref{fig:misc_25D_Basket_1}, \ref{fig:misc_25D_Basket_2}) for $d=25$. Mainly, from the plots, 
+we checked  that we achive the prescribed tolerance using MISC, the convergence rates of mixed differences which is a basic assumption for using MISC (we observe exponential decay of error rates wrt to the number of quadrature points) and finally the complexity rates.
+
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{3}{c}r}
+		\# assets  \textbackslash          & $3$ & $8$ & $25$   \\
+		\hline
+		rate   & $-1/3$ & $-9/20$ & $-16/25$  \\
+		\hline
+	\end{tabular}
+	\caption{Complexity rates of the different experiments  for the basket option using BS model}
+	\label{table: Complexity rates of the different experiemnts  for the basket option using BS model}
+\end{table}	
+
+\subsubsection{Case of $3$-dimensional Basket}
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/3D_basket/error_estimate.pdf}
+		\caption{Error estimate}
+		\label{fig:misc_3D_Basket_sub1}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/3D_basket/average_running_time.pdf}
+		\caption{Average running time as a function of $TOL$}
+		\label{fig:misc_3D_Basket_sub2}
+	\end{subfigure}%
+	\caption{Convergence and complexity results for the $3$-dimensional basket option using BS model.}
+	\label{fig:misc_3D_Basket_1}
+\end{figure}
+
+
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/3D_basket/level_work.pdf}
+		\caption{Average Computational time per level.}
+		\label{fig:misc_3D_Basket_sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/3D_basket/levels_error_rate.pdf}
+		\caption{The convergence rate of mixed differences per level.}
+		\label{fig:misc_3D_Basket_sub4}
+	\end{subfigure}%
+	\caption{Convergence and work rates for discretization levels for the $3$-dimensional basket option using BS model.}
+	\label{fig:misc_3D_Basket_2}
+\end{figure}
+
+\FloatBarrier
+
+
+\subsubsection{Case of $8$-dimensional Basket}
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/8D_basket/error_estimate.pdf}
+		\caption{Error estimate}
+		\label{fig:misc_8D_Basket_sub1}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/8D_basket/average_running_time.pdf}
+		\caption{Average running time as a function of $TOL$}
+		\label{fig:misc_8D_Basket_sub2}
+	\end{subfigure}%
+	\caption{Convergence and complexity results for  the $8$-dimensional basket option using BS model.}
+	\label{fig:misc_8D_Basket_1}
+\end{figure}
+
+
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/8D_basket/level_work.pdf}
+		\caption{Average Computational time per level.}
+		\label{fig:misc_8D_Basket_sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/8D_basket/levels_error_rate.pdf}
+		\caption{The convergence rate of mixed differences per level.}
+		\label{fig:misc_8D_Basket_sub4}
+	\end{subfigure}%
+	\caption{Convergence and work rates for discretization levels for the $8$-dimensional basket option using BS model.}
+	\label{fig:misc_8D_Basket_2}
+\end{figure}
+\FloatBarrier
+
+\subsubsection{Case of $25$-dimensional Basket}
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/25D_basket/error_estimate.pdf}
+		\caption{Error estimate}
+		\label{fig:misc_25D_Basket_sub1}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/25D_basket/average_running_time.pdf}
+		\caption{Average running time as a function of $TOL$}
+		\label{fig:misc_25D_Basket_sub2}
+	\end{subfigure}%
+	\caption{Convergence and complexity results for  the $25$-dimensional basket option using BS model.}
+	\label{fig:misc_25D_Basket_1}
+\end{figure}
+
+
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/25D_basket/level_work.pdf}
+		\caption{Average Computational time per level.}
+		\label{fig:misc_25D_Basket_sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/25D_basket/levels_error_rate.pdf}
+		\caption{The convergence rate of mixed differences per level.}
+		\label{fig:misc_25D_Basket_sub4}
+	\end{subfigure}%
+	\caption{Convergence and work rates for discretization levels for the $25$-dimensional basket option using BS model.}
+	\label{fig:misc_25D_Basket_2}
+\end{figure}
+
+
+\FloatBarrier
 
 %\section{ Prices for different methods for binary option }\label{appendix:Call prices for different methods_binary}
 %

@@ -11,7 +11,7 @@ class Problem(object):
     K=None         # Strike price
     T=1.0                      # maturity
     sigma=None    # volatility
-    N=7   # discretization resolution
+    N=15   # discretization resolution
     d=None
     dt=None
 
