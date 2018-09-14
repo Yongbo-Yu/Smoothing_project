@@ -60,7 +60,7 @@ class Problem_non_smooth_richardson_extrapolation_call(object):
     def objfun(self,nelem,y):
         start_time=time.time()
 
-        beta=10
+        beta=32
         yknots_right=np.polynomial.laguerre.laggauss(beta)
         yknots_left=yknots_right
 

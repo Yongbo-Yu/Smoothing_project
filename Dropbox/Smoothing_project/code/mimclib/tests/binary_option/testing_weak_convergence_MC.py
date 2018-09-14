@@ -10,8 +10,7 @@ from matplotlib.ticker import MaxNLocator
 
 
 
-import pathos.multiprocessing as mp
-import pathos.pools as pp
+
 
 class Problem(object):
 
@@ -150,23 +149,19 @@ def weak_convergence_differences():
         Lb=np.zeros(4)
         Ub_diff=np.zeros(3)
         Lb_diff=np.zeros(3)
-        values=np.zeros((10**4,4)) 
-        num_cores = mp.cpu_count()
+        values=np.zeros((2*(10**3),4)) 
+       
         for i in range(0,4):
             
             print i
             start_time=time.time()
 
-            def processInput(j):
-                
-                prb = Problem(1,Nsteps_arr[i])
-
-                return prb.objfun(Nsteps_arr[i])/float(exact)
-
-            # results = Parallel(n_jobs=num_cores)(delayed(processInput)(j) for j in inputs)
-            p =  pp.ProcessPool(num_cores)  # Processing Pool with four processors
+            prb = Problem(1,Nsteps_arr[i]) 
+            for j in range(2*(10**3)):
+              
+                values[j,i]=prb.objfun(Nsteps_arr[i])/float(exact)
             
-            values[:,i]= p.map(processInput, range(((10**4))))  
+            
 
             elapsed_time_qoi[i]=time.time()-start_time
             print  elapsed_time_qoi[i]
@@ -176,7 +171,7 @@ def weak_convergence_differences():
         error=np.abs(np.mean(values,axis=0) - 1) 
         elapsed_time_qoi=time.time()-start_time_2+elapsed_time_qoi
 
-        stand=np.std(values, axis = 0)/  float(np.sqrt(10**4))
+        stand=np.std(values, axis = 0)/  float(np.sqrt(2*(10**3)))
         Ub=np.abs(np.mean(values,axis=0) - 1)+1.96*stand
         Lb=np.abs(np.mean(values,axis=0) - 1)-1.96*stand
 
@@ -189,7 +184,7 @@ def weak_convergence_differences():
         differences= [values[:,i]-values[:,i+1] for i in range(0,3)]
         error_diff=np.abs(np.mean(differences,axis=1))
         print error_diff 
-        stand_diff=np.std(differences, axis = 1)/ float(np.sqrt(10**4))
+        stand_diff=np.std(differences, axis = 1)/ float(np.sqrt(2*(10**3)))
         print stand_diff
         Ub_diff=np.abs(np.mean(differences,axis=1))+1.96*stand_diff
         Lb_diff=np.abs(np.mean(differences,axis=1))-1.96*stand_diff

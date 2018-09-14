@@ -14,7 +14,7 @@ class Problem(object):
     T=1.0                      # maturity
     sigma=None    # volatility
     #N=4    # number of time steps which will be equal to the number of brownian bridge components (we set is a power of 2)
-    N=15     # discretization resolution
+    N=15   # discretization resolution
     d=None
     dt=None
     smooth=0
@@ -60,7 +60,7 @@ class Problem(object):
     def objfun(self,nelem,y):
         if self.smooth==0:
             start_time=time.time()
-            beta=10
+            beta=32
             #print(len(y))
             y=y[0:self.N]
             #print(len(y))

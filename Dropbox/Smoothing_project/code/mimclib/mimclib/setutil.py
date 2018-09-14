@@ -472,7 +472,7 @@ class ProfCalculator(object):
 #Joakim instruction
 class MISCProfCalculator(ProfCalculator):
     def __init__(self, d_rates, s_err_rates):
-    	s_err_rates=s_err_rates[0:31]; #SET TO SAME AS INPUT DIMENSION
+    	s_err_rates=s_err_rates[0:7]; #SET TO SAME AS INPUT DIMENSION
         self.d = len(d_rates)
         self._handle = __lib__.CreateMISCProfCalc(len(d_rates),
                                                   len(s_err_rates),
