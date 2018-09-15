@@ -40,7 +40,7 @@ if not args.db:
     
       cmd_single = "python " + base + " -mimc_verbose 10 -db True -db_tag 1DBS_4steps_smooth_payoff2_10_5 " #verbose >0 detailed printing results
     
-      print(cmd_single.format(TOL=0.001))
+      print(cmd_single.format(TOL=0.00001))
    
     
     

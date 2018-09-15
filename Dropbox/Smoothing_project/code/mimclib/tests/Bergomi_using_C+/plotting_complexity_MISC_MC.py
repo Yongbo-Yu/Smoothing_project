@@ -6,12 +6,20 @@ from matplotlib.ticker import MaxNLocator
 
 
 
-# #Case for parameter set 5
-MC_err=np.array([ 0.0180,0.0084,0.0048,0.0014])
-MC_time=np.array([ 88,96,112,156])
-MISC_err=np.array([0.0182,0.0086,0.0042,0.0016 ])
-MISC_time=np.array([ 1,6,24,92])
+# #Case for parameter set 5, non rich
+MC_err=np.array([ 0.0182,0.0086,0.0050,0.0015])
+MC_time=np.array([  1.1e+03,  1.2e+03,  1.4e+03, 2.0e+03])
 
+z_MC= np.polyfit(np.log(MC_err), np.log(MC_time), 1)
+fit_MC=np.exp(z_MC[0]*np.log(MC_err))
+print z_MC[0]
+
+MISC_err=np.array([0.0182,0.0086,0.0050,0.0016 ])
+MISC_time=np.array([ 1,6,80,92])
+
+z_MISC= np.polyfit(np.log(MISC_err), np.log(MISC_time), 1)
+fit_MISC=np.exp(z_MISC[0]*np.log(MISC_err))
+print z_MISC[0]
 
 
 
@@ -24,7 +32,10 @@ MISC_time=np.array([ 1,6,24,92])
 fig = plt.figure()
 
 plt.plot(MC_err,MC_time,linewidth=2.0,label='MC' , marker='>',hold=True) 
+plt.plot(MC_err, fit_MC*1000,linewidth=2.0,label=r'rate= %s' % format(z_MC[0]  , '.2f'), linestyle = '--')
+
 plt.plot(MISC_err,MISC_time,linewidth=2.0,label='MISC'  , marker='v',hold=True) 
+plt.plot(MISC_err, fit_MISC*10,linewidth=2.0,label=r'rate= %s' % format(z_MISC[0]  , '.2f'), linestyle = '--')
 
 
 plt.yscale('log')

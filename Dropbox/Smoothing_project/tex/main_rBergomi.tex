@@ -915,6 +915,8 @@ In each case, we show a table of computed values using MISC for different tolera
 		MISC ($TOl=10^{-2}$)  & $0.1258$ & $0.1246$ & $0.1248$ & $0.1250$  \\
 		MISC ($TOl=10^{-3}$)  & $0.1271$ & $0.1259$ & $0.1253$ & $0.1249$  \\
 		MISC ($TOl=10^{-4}$)  & $0.1270$ & $0.1258$ & $0.1252$ & $-$  \\
+		
+			MISC ($TOl=10^{-5}$)  & $0.1270$ &$0.1258$ &  $0.1252$ & $-$  \\
 		\hline
 		MC method ($M=3.10^{6}$)   & $    0.1269$ & $0.1257$  & $0.1253$ & $0.1249$ \\		
 		
@@ -960,8 +962,12 @@ In each case, we show a table of computed values using MISC for different tolera
 		MISC ($TOl=10^{-3}$)  & $\underset{( 0.0002)}{\mathbf{    0.0016}}$ & $\underset{(0.0002
 			)}{\mathbf{ 0.0016
 		}}$ & $\underset{1.2e-06}{\mathbf{5e-05}}$ & $\underset{1.2e-06}{\mathbf{5e-05}}$  \\
-		MISC ($TOl=10^{-4}$)  & $\underset{( 0.0001)}{\mathbf{    0.0008}}$ & $\underset{0.0001}{\mathbf{0.0008}}$& $\underset{0.0001}{\mathbf{0.0008}}$ & $\underset{-}{\mathbf{-}}$  \\
+		MISC ($TOl=10^{-4}$)  & $\underset{( 0.0001)}{\mathbf{    \red{0.0008}}}$ & $\underset{0.0001}{\mathbf{\red{0.0008}}}$& $\underset{0.0001}{\mathbf{\red{0.0008}}}$ & $\underset{-}{\mathbf{-}}$  \\
+		
+			MISC ($TOl=10^{-5}$)  & $\underset{( 0.0001)}{\mathbf{    0.0008}}$ & $\underset{0.0001}{\mathbf{0.0008}}$& $\underset{0.0001}{\mathbf{0.0008}}$ & $\underset{-}{\mathbf{-}}$  \\
+		
 		\hline
+		
 	\end{tabular}
 	\caption{Quadrature error of MISC to compute Call option price of the different tolerances for different number of time steps. Case  set $5$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
 	\label{Quadrature error of MISC to compute Call option price of the different tolerances for different number of time steps. Case  set $5$ parameters, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
@@ -990,13 +996,15 @@ In each case, we show a table of computed values using MISC for different tolera
 		MISC ($TOl=10^{-1}$)  &  $\mathbf{0.0262}$ & $\mathbf{0.0222}$& $\mathbf{ 0.0218}$ & $\mathbf{ 0.0168}$   \\
 		MISC ($TOl=5.10^{-2}$)  & $\mathbf{0.0262}$ & $\mathbf{0.0222}$ & $\mathbf{ 0.0218}$ & $\mathbf{ 0.0072}$  \\
 		MISC ($TOl=10^{-2}$)  &  $\mathbf{0.0262}$ & $\mathbf{0.0166}$& $\mathbf{ 0.0082}$ & $\mathbf{ \red{0.0016}}$  \\
-		MISC ($TOl=10^{-3}$)  &  $\mathbf{0.0190}$ & $\mathbf{0.0094}$& $\mathbf{\red{0.0042}}$ & $\mathbf{ 0.0008}$  \\
-		MISC ($TOl=10^{-4}$)  &  $\mathbf{\red{0.0182}}$ & $\mathbf{\red{0.0086}}$& $\mathbf{0.0050}$ & $\mathbf{ -}$  \\
+		MISC ($TOl=10^{-3}$)  &  $\mathbf{0.0190}$ & $\mathbf{0.0094}$& $\mathbf{0.0042}$ & $\mathbf{ 0.0008}$  \\
+		MISC ($TOl=10^{-4}$)  &  $\mathbf{\red{0.0182}}$ & $\mathbf{\red{0.0086}}$& $\mathbf{\red{0.0050}}$ & $\mathbf{ -}$ \\
+			MISC ($TOl=10^{-5}$)  &  $\mathbf{0.0182}$ & $\mathbf{0.0086}$& $\mathbf{0.0050}$ & $\mathbf{ -}$ 
+			 \\
 		\hline
-		MC  ($M=3.10^6$)   & $\mathbf{0.0180}$  & $\mathbf{ 0.0084}$  & $\mathbf{0.0048}$ & $\mathbf{ 0.0014}$  \\		
+		MC  ($M=2.10^6$)   & $\mathbf{\red{0.0182}}$  & $\mathbf{ \red{0.0086}}$  & $\mathbf{\red{0.0050}}$ & $\mathbf{ \red{0.0015}}$  \\		
 		\hline
 	\end{tabular}
-	\caption{Total error of MISC and MC to compute Call option price of the different tolerances for different number of time steps. Case Case set $5$ parametrs of table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
+	\caption{Total relative error of MISC and MC to compute Call option price of the different tolerances for different number of time steps. Case Case set $5$ parametrs of table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
 	\label{Total error of MISC and MC to compute Call option price of the different tolerances for different number of time steps. Case set 5, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
 \end{table}
 
@@ -1011,13 +1019,25 @@ In each case, we show a table of computed values using MISC for different tolera
 		MISC ($TOl=10^{-1}$)  & $0.1$ & $0.1$ & $0.2$ & $0.8$ \\
 		MISC ($TOl=5.10^{-2}$)  & $0.1$ & $0.1$ & $0.2$ & $22$  \\
 		MISC ($TOl=10^{-2}$)  & $0.1$ & $0.5$ & $8$ & $\red{92}$ \\
-		MISC ($TOl=10^{-3}$)  & $0.5$ & $3$ & $\red{24}$ & $2226$ \\
-		MISC ($TOl=10^{-4}$)  & $\red{1}$ & $\red{6}$ & $140$ & $-$ \\
+		MISC ($TOl=10^{-3}$)  & $0.5$ & $3$ & $24$ & $2226$ \\
+		MISC ($TOl=10^{-4}$)  & $\red{1}$ & $\red{6}$ & $\red{80}$ & $-$\\
+		MISC ($TOl=10^{-5}$)  & $2$ & $32$ & $1760$ & $-$
+		 \\
 		\hline
-		MC method ($M=3.10^6$)   & $88$  & $96$  & $112$ & $156$  \\	
+		MC method ($M=2.10^6$)   & $ \red{1.1e+03}
+		
+		$  & $  \red{1.2e+03}$  & $  \red{1.4e+03}$ & $ \red{2.0e+03}
+		$  \\	
+		\hline
+		Ratio of $\left(MC/MISC \right)$ & $ \red{1.1e+03}
+		
+		$  & $  \red{200}$  & $  \red{  17.5
+		}$ & $ \red{ 21.7}
+		$  \\	
+		
 		\hline
 	\end{tabular}
-	\caption{Comparsion of the computational time of  MC and MISC, used to compute Call option price of rBergomi model for different number of time steps. Case set $5$ parametrs of table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.} }
+	\caption{Comparsion of the computational time of  MC and MISC, used to compute Call option price of rBergomi model for different number of time steps. Case set $5$ parametrs of table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. The average  MC CPU time is computed over $10$ runs. }
 	\label{Comparsion of the computational time of  MC and MISC, used to compute Call option price of rBergomi model for different number of time steps. Case set5}
 \end{table}
 
@@ -2465,13 +2485,13 @@ In each case, we show a table of computed values using MISC for different tolera
 \subsection{First and mixed differences rates}\label{sec:First and mixed differences rates}
 
 
-In this section, we plot the first and second order differences for the case without change of measure. These plots are important because they provide an indication about the efficiency and speed of MISC. We show the plots for the case of $H=0.07$ and  $N=4$ time steps (we observed similar behaviors for other scenarios of number of time steps). From figures (\ref{fig:first_diff_comp_K_1_H_007_wihtout_change_measure},\ref{fig:second_diff_comp_K_1_H_007_wihtout_change_measure}), we have the following observations:
+In this section, we plot the first and second order differences for the case without change of measure. These plots are important because they provide an indication about the efficiency and speed of MISC. We show the plots for the 3 parameters sets 1,2,5 in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}  and for  $N=4$ time steps (we observed similar behaviors for other scenarios of number of time steps). From figures (\ref{fig:first_diff_comp_K_1_H_007_wihtout_change_measure},\ref{fig:second_diff_comp_K_1_H_007_wihtout_change_measure}), we have the following observations:
 \begin{itemize}
 	\item i) As was expected, the slowest directions are those corresponding to $W^1$, compared to those of   $W^2$.
 	
 	\item ii)  We face a bad behavior for the second differences, for the case without change of measure, which may explain the potential instability observed by MISC as well its bad convergence behavior for high number of time steps. 
 \end{itemize}
-
+\subsubsection{Mixed differences for the case of set 2 in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}}\label{Mixed differences for the case of set 2}
 \begin{figure}[h!]
 	\centering
 	\begin{subfigure}{.4\textwidth}
@@ -2515,20 +2535,20 @@ In this section, we plot the first and second order differences for the case wit
 	
 	
 
-We tried to investigate the reason of the bad behavior observed for the mixed differences. From our experiments, we observed that whenever the mixed differences is diverging the maximum value of the integrand evaluated at quadrature points seems to blow up. We plot in figures (\ref{fig:Two dimensional Plotting of the integrand $I$_W12_view},\ref{fig:Two dimensional Plotting of the integrand $I$_W11_view})  the function evaluated with quadrature points without the gaussian weights. The integrand behavior without weights seems to blow up maybe with faster rate than how the weights of the Hermite quadrature is decaying. In order to solve the issue of the divergence of mixed difference, we need to understand the interplay between  the weights and the function values.
+We tried to investigate the reason of the bad behavior observed for the mixed differences. From our experiments, we observed that whenever the mixed differences is diverging the maximum value of the integrand evaluated at quadrature points seems to blow up. We plot in figure (\ref{fig:Two dimensional Plotting of the integrand $I$_W12_view})  the function evaluated with quadrature points without the gaussian weights. The integrand behavior without weights seems to blow up maybe with faster rate than how the weights of the Hermite quadrature is decaying. In order to solve the issue of the divergence of mixed difference, we need to understand the interplay between  the weights and the function values.
 
 
 \begin{figure}[h!]
 	\centering
 	\begin{subfigure}{.4\textwidth}
 		\centering
-		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/2D_plots/N_4/H_007/integrand_without_density/Bergomi_integrand_contours_K_1_H_007_W1_1_2_N_4_without_weights_0}
+			\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/2D_plots/N_4/integrand_without_density/H_007/Bergomi_integrand_contours_K_1_H_007_W1_1_2_N_4_without_weights_2_80}
 		\caption{}
 		\label{fig:sub3}
 	\end{subfigure}%
 	\begin{subfigure}{.4\textwidth}
 		\centering
-		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/2D_plots/N_4/H_007/integrand_without_density/Bergomi_integrand_contours_K_1_H_007_W1_1_2_N_4_without_weights_2_0}
+		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/2D_plots/N_4/integrand_without_density/H_007/Bergomi_integrand_contours_K_1_H_007_W1_1_2_N_4_without_weights_2_0}
 		\caption{}
 		\label{fig:sub4}
 	\end{subfigure}
@@ -2540,29 +2560,162 @@ We tried to investigate the reason of the bad behavior observed for the mixed di
 \end{figure}
 
 
+%\begin{figure}[h!]
+%	\centering
+%	\begin{subfigure}{.4\textwidth}
+%		\centering
+%		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/2D_plots/N_4/H_007/integrand_without_density/Bergomi_integrand_contours_K_1_H_007_W1_1_2_N_4_without_weights_80}
+%		\caption{}
+%		\label{fig:sub3}
+%	\end{subfigure}%
+%	\begin{subfigure}{.4\textwidth}
+%		\centering
+%		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/2D_plots/N_4/H_007/integrand_without_density/Bergomi_integrand_contours_K_1_H_007_W1_1_2_N_4_without_weights_2_80}
+%		\caption{}
+%		\label{fig:sub4}
+%	\end{subfigure}
+%	
+%	\caption{Two dimensional Plotting of the integrand $I$ (in \eqref{BS_formula_rbergomi}) without the Gaussian weight  for $H=0.07$ and $N=4$, function of $W_1$ coordinates $(W_1^1,W^2_1)$}
+%	\label{fig:Two dimensional Plotting of the integrand $I$_W11_view}
+%\end{figure}
+
+
+\FloatBarrier
+
+\subsubsection{Mixed differences for the case of set 1 in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}}\label{Mixed differences for the case of set 1}
 \begin{figure}[h!]
 	\centering
 	\begin{subfigure}{.4\textwidth}
 		\centering
-		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/2D_plots/N_4/H_007/integrand_without_density/Bergomi_integrand_contours_K_1_H_007_W1_1_2_N_4_without_weights_80}
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_mixed_error_rates/without_change_measure/N_4/H_043/first_difference_rbergomi_4steps_H_043_K_1_totally_hierarch_with_rate_W1}
 		\caption{}
 		\label{fig:sub3}
 	\end{subfigure}%
 	\begin{subfigure}{.4\textwidth}
 		\centering
-		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/2D_plots/N_4/H_007/integrand_without_density/Bergomi_integrand_contours_K_1_H_007_W1_1_2_N_4_without_weights_2_80}
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_mixed_error_rates/without_change_measure/N_4/H_043/first_difference_rbergomi_4steps_H_043_K_1_totally_hierarch_with_rate_W2}
 		\caption{}
 		\label{fig:sub4}
 	\end{subfigure}
 	
-	\caption{Two dimensional Plotting of the integrand $I$ (in \eqref{BS_formula_rbergomi}) without the Gaussian weight  for $H=0.07$ and $N=4$, function of $W_1$ coordinates $(W_1^1,W^2_1)$}
-	\label{fig:Two dimensional Plotting of the integrand $I$_W11_view}
+	
+	
+	\caption{The rate of convergence of  first order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$), for $K=1$, $H=0.43$: a) for $W^1$ b) for $W^2$}
+	\label{fig:first_diff_comp_K_1_H_043_wihtout_change_measure}
+\end{figure}
+
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_mixed_error_rates/without_change_measure/N_4/H_043/mixed_difference_order2_rbergomi_4steps_H_043_K_1_totally_hierarch_with_rate_W1}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_mixed_error_rates/without_change_measure/N_4/H_043/mixed_difference_order2_rbergomi_4steps_H_043_K_1_totally_hierarch_with_rate_W2}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of  second order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$), for $K=1$, $H=0.43$: a) for $W^1$ b) for $W^2$}
+	\label{fig:second_diff_comp_K_1_H_043_wihtout_change_measure}
+\end{figure}
+
+
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/2D_plots/N_4/integrand_without_density/H_043/Bergomi_integrand_contours_K_1_H_043_W1_1_2_N_4_without_weights_2_80}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/2D_plots/N_4/integrand_without_density/H_043/Bergomi_integrand_contours_K_1_H_043_W1_1_2_N_4_without_weights_2_0}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	
+	
+	\caption{Two dimensional Plotting of the integrand $I$ (in \eqref{BS_formula_rbergomi}) without the Gaussian weight  for $H=0.43$ and $N=4$, function of $W_1$ coordinates $(W_1^1,W^2_1)$}
+	\label{fig:Two dimensional Plotting of the integrand $I$_W12_view_set1}
+\end{figure}
+
+\FloatBarrier
+
+\subsubsection{Mixed differences for the case of set 5 in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}}\label{Mixed differences for the case of set 5}
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_mixed_error_rates/without_change_measure/N_4/H_002/first_difference_rbergomi_4steps_H_002_K_1_totally_hierarch_with_rate_W1}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_mixed_error_rates/without_change_measure/N_4/H_002/first_difference_rbergomi_4steps_H_002_K_1_totally_hierarch_with_rate_W2}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	
+	
+	\caption{The rate of convergence of  first order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$), for $K=1$, $H=0.02$: a) for $W^1$ b) for $W^2$}
+	\label{fig:first_diff_comp_K_1_H_002_wihtout_change_measure}
+\end{figure}
+
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_mixed_error_rates/without_change_measure/N_4/H_002/mixed_difference_order2_rbergomi_4steps_H_002_K_1_totally_hierarch_with_rate_W1}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_mixed_error_rates/without_change_measure/N_4/H_002/mixed_difference_order2_rbergomi_4steps_H_002_K_1_totally_hierarch_with_rate_W2}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of  second order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$), for $K=1$, $H=0.02$: a) for $W^1$ b) for $W^2$}
+	\label{fig:second_diff_comp_K_1_H_002_wihtout_change_measure}
 \end{figure}
 
 
 
 
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/2D_plots/N_4/integrand_without_density/H_002/Bergomi_integrand_contours_K_1_H_002_W1_1_2_N_4_without_weights_2_80}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/2D_plots/N_4/integrand_without_density/H_002/Bergomi_integrand_contours_K_1_H_002_W1_1_2_N_4_without_weights_2_0}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	
+	
+	\caption{Two dimensional Plotting of the integrand $I$ (in \eqref{BS_formula_rbergomi}) without the Gaussian weight  for $H=0.02$ and $N=4$, function of $W_1$ coordinates $(W_1^1,W^2_1)$}
+	\label{fig:Two dimensional Plotting of the integrand $I$_W12_view_set15}
+\end{figure}
 
+\FloatBarrier
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %References
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2724,64 +2877,64 @@ We tried to investigate the reason of the bad behavior observed for the mixed di
  \end{figure}
  
  
- 
- \begin{figure}[h!]
- 	\centering
- 	\begin{subfigure}{.4\textwidth}
- 		\centering
- 		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/2D_plots/N_4/H_007/Bergomi_integrand_contours_K_1_H_007_W1_1_2_N_4}
- 		\caption{}
- 		\label{fig:sub3}
- 	\end{subfigure}%
- 	\begin{subfigure}{.4\textwidth}
- 		\centering
- 		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/2D_plots/N_4/H_007/Bergomi_integrand_contours_K_1_H_007_W1_1_3_N_4}
- 		\caption{}
- 		\label{fig:sub4}
- 	\end{subfigure}
- 	\caption{Two dimensional Plotting of the integrand $I$ (in \eqref{BS_formula_rbergomi})  for $H=0.07$ and $N=4$, a)  function of $W_1^1$ and $W_1^2$ , b) function of $W_1^1$ and $W_1^3$ }
- 	\label{fig:Integrand_H_007_N_4_2D_W_1_2_3}
- \end{figure}
- 
- 
- \begin{figure}[h!]
- 	\centering
- 	\begin{subfigure}{.4\textwidth}
- 		\centering
- 		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/2D_plots/N_4/H_007/Bergomi_integrand_contours_K_1_H_007_W1_1_4_N_4}
- 		\caption{}
- 		\label{fig:sub3}
- 	\end{subfigure}%
- 	\begin{subfigure}{.4\textwidth}
- 		\centering
- 		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/2D_plots/N_4/H_007/Bergomi_integrand_contours_K_1_H_007_W1_2_3_N_4}
- 		\caption{}
- 		\label{fig:sub4}
- 	\end{subfigure}
- 	\caption{Two dimensional Plotting of the integrand $I$ (in \eqref{BS_formula_rbergomi})  for $H=0.07$ and $N=4$, a)  function of $W_1^1$ and $W_1^4$ , b) function of $W_1^2$ and $W_1^3$ }
- 	\label{fig:Integrand_H_007_N_4_2D_W_1_4_2_3}
- \end{figure}
- 
- 
- 
- \begin{figure}[h!]
- 	\centering
- 	\begin{subfigure}{.4\textwidth}
- 		\centering
- 		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/2D_plots/N_4/H_007/Bergomi_integrand_contours_K_1_H_007_W1_2_4_N_4}
- 		\caption{}
- 		\label{fig:sub3}
- 	\end{subfigure}%
- 	\begin{subfigure}{.4\textwidth}
- 		\centering
- 		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/2D_plots/N_4/H_007/Bergomi_integrand_contours_K_1_H_007_W1_3_4_N_4}
- 		\caption{}
- 		\label{fig:sub4}
- 	\end{subfigure}
- 	\caption{Two dimensional Plotting of the integrand $I$ (in \eqref{BS_formula_rbergomi})  for $H=0.07$ and $N=4$, a)  function of $W_1^2$ and $W_1^4$ , b) function of $W_1^3$ and $W_1^4$ }
- 	\label{fig:Integrand_H_007_N_4_2D_W_1_3_3_4}
- \end{figure}
- 
+% 
+% \begin{figure}[h!]
+% 	\centering
+% 	\begin{subfigure}{.4\textwidth}
+% 		\centering
+% 		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/2D_plots/N_4/H_007/Bergomi_integrand_contours_K_1_H_007_W1_1_2_N_4}
+% 		\caption{}
+% 		\label{fig:sub3}
+% 	\end{subfigure}%
+% 	\begin{subfigure}{.4\textwidth}
+% 		\centering
+% 		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/2D_plots/N_4/H_007/Bergomi_integrand_contours_K_1_H_007_W1_1_3_N_4}
+% 		\caption{}
+% 		\label{fig:sub4}
+% 	\end{subfigure}
+% 	\caption{Two dimensional Plotting of the integrand $I$ (in \eqref{BS_formula_rbergomi})  for $H=0.07$ and $N=4$, a)  function of $W_1^1$ and $W_1^2$ , b) function of $W_1^1$ and $W_1^3$ }
+% 	\label{fig:Integrand_H_007_N_4_2D_W_1_2_3}
+% \end{figure}
+% 
+% 
+% \begin{figure}[h!]
+% 	\centering
+% 	\begin{subfigure}{.4\textwidth}
+% 		\centering
+% 		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/2D_plots/N_4/H_007/Bergomi_integrand_contours_K_1_H_007_W1_1_4_N_4}
+% 		\caption{}
+% 		\label{fig:sub3}
+% 	\end{subfigure}%
+% 	\begin{subfigure}{.4\textwidth}
+% 		\centering
+% 		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/2D_plots/N_4/H_007/Bergomi_integrand_contours_K_1_H_007_W1_2_3_N_4}
+% 		\caption{}
+% 		\label{fig:sub4}
+% 	\end{subfigure}
+% 	\caption{Two dimensional Plotting of the integrand $I$ (in \eqref{BS_formula_rbergomi})  for $H=0.07$ and $N=4$, a)  function of $W_1^1$ and $W_1^4$ , b) function of $W_1^2$ and $W_1^3$ }
+% 	\label{fig:Integrand_H_007_N_4_2D_W_1_4_2_3}
+% \end{figure}
+% 
+% 
+% 
+% \begin{figure}[h!]
+% 	\centering
+% 	\begin{subfigure}{.4\textwidth}
+% 		\centering
+% 		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/2D_plots/N_4/H_007/Bergomi_integrand_contours_K_1_H_007_W1_2_4_N_4}
+% 		\caption{}
+% 		\label{fig:sub3}
+% 	\end{subfigure}%
+% 	\begin{subfigure}{.4\textwidth}
+% 		\centering
+% 		\includegraphics[width=1\linewidth]{./figures/integrand_plotting_rBergomi/2D_plots/N_4/H_007/Bergomi_integrand_contours_K_1_H_007_W1_3_4_N_4}
+% 		\caption{}
+% 		\label{fig:sub4}
+% 	\end{subfigure}
+% 	\caption{Two dimensional Plotting of the integrand $I$ (in \eqref{BS_formula_rbergomi})  for $H=0.07$ and $N=4$, a)  function of $W_1^2$ and $W_1^4$ , b) function of $W_1^3$ and $W_1^4$ }
+% 	\label{fig:Integrand_H_007_N_4_2D_W_1_3_3_4}
+% \end{figure}
+% 
  
 \FloatBarrier
 

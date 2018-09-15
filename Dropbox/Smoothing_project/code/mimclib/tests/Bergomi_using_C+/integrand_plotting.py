@@ -27,14 +27,16 @@ class Problem_measure_change(object):
   
     # for the values of below paramters, we need to see the paper as well check with Christian 
     x=0.235**2;   # this will provide the set of xi parameter values 
-    #x=0.00001;
+    #x=0.1;
     HIn=Vector(1)    # this will provide the set of H parameter values
-    HIn[0]=0.07
+    HIn[0]=0.43
+    #HIn[0]=0.02
     e=Vector(1)    # This will provide the set of eta paramter values
     e[0]=1.9
+    #e[0]=0.4
     r=Vector(1)   # this will provide the set of rho paramter values
     r[0]=-0.9
-    #r[0]=0
+    #r[0]=-0.7
     T=Vector(1)     # this will provide the set of T(time to maturity) parameter value
     T[0]=1.0
     k=Vector(1)     # this will provide the set of K (strike ) paramter value
@@ -122,8 +124,8 @@ class Problem_measure_change(object):
         bb=self.brownian_increments(y1,y_1)
         W1= [(bb[i+1]-bb[i]) *np.sqrt(self.N) for i in range(0,len(bb)-1)]
         
-        QoI=(self.z.ComputePayoffRT_single(W1,W1perp))*((2*np.pi)**(-self.N))*(np.exp(-0.5*y.dot(y))) #  computed payoff including weights
-        #QoI=(self.z.ComputePayoffRT_single(W1,W1perp)) #   computed payoff without weights
+        #QoI=(self.z.ComputePayoffRT_single(W1,W1perp))*((2*np.pi)**(-self.N))*(np.exp(-0.5*y.dot(y))) #  computed payoff including weights
+        QoI=(self.z.ComputePayoffRT_single(W1,W1perp)) #   computed payoff without weights
        
         return QoI    
          
@@ -250,7 +252,7 @@ ax.set_ylabel(r'$W_1^2$', fontsize=20, fontweight='bold')
 
 for ii in xrange(0,360,40):
         ax.view_init(elev=10., azim=ii)
-        plt.savefig("./results/Bergomi_integrand_contours_K_1_H_007_W1_1_2_N_4_with_weights_2_%d.pdf" % ii, dpi=600)
+        plt.savefig("./results/Bergomi_integrand_contours_K_1_H_043_W1_1_2_N_4_without_weights_2_%d.pdf" % ii, dpi=600)
 #plt.savefig('./results/Bergomi_integrand_contours_K_1_H_007_W1_1_2_N_4_without_weights_5.pdf', format='pdf', dpi=600)    
 
 
