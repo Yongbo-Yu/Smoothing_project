@@ -36,23 +36,23 @@ class Problem(object):
     N=4 # Number of time steps N, discretization resolution
   
     # for the values of below paramters, we need to see the paper as well check with Christian 
-    #x=0.235**2;   # this will provide the set of xi parameter values 
-    x=0.1
+    x=0.235**2;   # this will provide the set of xi parameter values 
+    #x=0.1
     HIn=Vector(1)    # this will provide the set of H parameter values
     #HIn[0]=0.43
-    #HIn[0]=0.07
-    HIn[0]=0.02
+    HIn[0]=0.07
+    #HIn[0]=0.02
     e=Vector(1)    # This will provide the set of eta paramter values
-    #e[0]=1.9
-    e[0]=0.4
+    e[0]=1.9
+    #e[0]=0.4
     r=Vector(1)   # this will provide the set of rho paramter values
-    #r[0]=-0.9
-    r[0]=-0.7
+    r[0]=-0.9
+    #r[0]=-0.7
     T=Vector(1)     # this will provide the set of T(time to maturity) parameter value
     T[0]=1.0
     k=Vector(1)     # this will provide the set of K (strike ) paramter value
     #k[0]=np.exp(-4)
-    k[0]=1
+    k[0]=1.2
     #y1perp = Vector(N)
     MIn=1        # number of samples M (I think we do not need this paramter here by default in our case it should be =1)
 
@@ -313,7 +313,7 @@ def first_difference_rate_plotting():
         plt.ylabel(r'$\mid \Delta E_{\mathbf{1}+k \bar{\beta}} \mid $',fontsize=14)  
      
     plt.legend(loc='lupper right')
-    plt.savefig('./results/first_difference_rbergomi_4steps_H_002_K_1_totally_hierarch_with_rate_W2.eps', format='eps', dpi=1000)
+    plt.savefig('./results/first_difference_rbergomi_4steps_H_007_K_12_totally_hierarch_with_rate_W2.eps', format='eps', dpi=1000)
 
 
 
@@ -435,7 +435,7 @@ def mixed_difference_order2_rate_plotting(d):
         plt.xlabel('k',fontsize=14)
         plt.ylabel(r'$\mid \Delta E_{\mathbf{1}+k \bar{\beta}} \mid $',fontsize=14)  
     plt.legend(loc='lupper left')
-    plt.savefig('./results/mixed_difference_order2_rbergomi_4steps_H_002_K_1_totally_hierarch_with_rate_W2.eps', format='eps', dpi=1000)       
+    plt.savefig('./results/mixed_difference_order2_rbergomi_4steps_H_007_K_12_totally_hierarch_with_rate_W2.eps', format='eps', dpi=1000)       
     
     
 

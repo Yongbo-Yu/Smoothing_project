@@ -29,7 +29,7 @@ class Problem_measure_change(object):
     x=0.235**2;   # this will provide the set of xi parameter values 
     #x=0.1;
     HIn=Vector(1)    # this will provide the set of H parameter values
-    HIn[0]=0.43
+    HIn[0]=0.07
     #HIn[0]=0.02
     e=Vector(1)    # This will provide the set of eta paramter values
     e[0]=1.9
@@ -41,7 +41,7 @@ class Problem_measure_change(object):
     T[0]=1.0
     k=Vector(1)     # this will provide the set of K (strike ) paramter value
     #k[0]=1
-    k[0]=1
+    k[0]=1.2
    # y1perp = Vector(N)
     MIn=1        # number of samples M (I think we do not need this paramter here by default in our case it should be =1)
 
@@ -252,7 +252,7 @@ ax.set_ylabel(r'$W_1^2$', fontsize=20, fontweight='bold')
 
 for ii in xrange(0,360,40):
         ax.view_init(elev=10., azim=ii)
-        plt.savefig("./results/Bergomi_integrand_contours_K_1_H_043_W1_1_2_N_4_without_weights_2_%d.pdf" % ii, dpi=600)
+        plt.savefig("./results/Bergomi_integrand_contours_K_12_H_007_W1_1_2_N_4_without_weights_2_%d.pdf" % ii, dpi=600)
 #plt.savefig('./results/Bergomi_integrand_contours_K_1_H_007_W1_1_2_N_4_without_weights_5.pdf', format='pdf', dpi=600)    
 
 
