@@ -15,6 +15,7 @@ from matplotlib.ticker import MaxNLocator
 
 
 import numpy as np
+np.set_printoptions(threshold=np.nan)
 from numpy import unravel_index
 
 
@@ -36,23 +37,23 @@ class Problem(object):
     N=4 # Number of time steps N, discretization resolution
   
     # for the values of below paramters, we need to see the paper as well check with Christian 
-    x=0.235**2;   # this will provide the set of xi parameter values 
-    #x=0.1
+    #x=0.235**2;   # this will provide the set of xi parameter values 
+    x=0.1
     HIn=Vector(1)    # this will provide the set of H parameter values
     #HIn[0]=0.43
-    HIn[0]=0.07
-    #HIn[0]=0.02
+    #HIn[0]=0.07
+    HIn[0]=0.02
     e=Vector(1)    # This will provide the set of eta paramter values
-    e[0]=1.9
-    #e[0]=0.4
+    #e[0]=1.9
+    e[0]=0.4
     r=Vector(1)   # this will provide the set of rho paramter values
-    r[0]=-0.9
-    #r[0]=-0.7
+    #r[0]=-0.9
+    r[0]=-0.7
     T=Vector(1)     # this will provide the set of T(time to maturity) parameter value
     T[0]=1.0
     k=Vector(1)     # this will provide the set of K (strike ) paramter value
     #k[0]=np.exp(-4)
-    k[0]=1.2
+    k[0]=0.8
     #y1perp = Vector(N)
     MIn=1        # number of samples M (I think we do not need this paramter here by default in our case it should be =1)
 
@@ -94,7 +95,7 @@ class Problem(object):
 
         QoI=self.z.ComputePayoffRT_single(W1,W1perp); # this is the computed payoff (when using usual hermite with gaussian density)
 
-        #QoI=self.z.ComputePayoffRT_single(W1,W1perp)*((2*np.pi)**(-self.N))*(np.exp(-0.5*y.dot(y)))*(np.exp(y.dot(y))); # this is the computed payoff 
+        #QoI=self.z.ComputePayoffRT_single(W1,W1perp)*(np.exp(0.5*y.dot(y)))*(2)**(-self.N/2) # this is the computed payoff 
         #(when using  hermite with e^{-x^2} density)
         return QoI
 
@@ -135,7 +136,7 @@ def knots_gaussian(n, mi, sigma):
     # w.r.t to the weight function
     # rho(x)=1/sqrt(2*pi*sigma) *exp( -(x-mi)^2 / (2*sigma^2) )
     # i.e. the density of a gaussian random variable
-    # with mean mi and standard deviation sigma
+    # wimth mean mi and standard deviation sigma
     # ----------------------------------------------------
     # Sparse Grid Matlab Kit
     # Copyright (c) 2009-2014 L. Tamellini, F. Nobile
@@ -170,6 +171,7 @@ def knots_gaussian(n, mi, sigma):
     w = w[ind]
     # modifies points according to mi, sigma (the weigths are unaffected)
     x = mi + np.sqrt(2) * sigma * x
+
     return x, w    
 
 # this method gives the number of points of the quadrature given the degree
@@ -189,7 +191,8 @@ def lev2knots_doubling(i):
     # ----------------------------------------------------
     i = np.array([i] if np.isscalar(i) else i, dtype=np.int)
     
-    m = 2 ** (i-1)+1
+    #m = 4* (i-1)+1
+    m = 2** (i-1)+1
     m[i==1] = 1
     m[i==0] = 0
     return m
@@ -245,10 +248,11 @@ def cartesian(arrays, out=None):
     return out               
 
 #     # fnknots  gives two arrays first one for quadrature points and the second one for weights
-fnKnots= lambda beta: knots_gaussian(lev2knots_doubling(1+beta),   0, 1.0)  
+fnKnots= lambda beta: knots_gaussian(lev2knots_doubling(1+beta),   0, 1.0) 
+
+#fnKnots= lambda beta: np.polynomial.hermite.hermgauss(lev2knots_doubling(1+beta)[0])
 
 
-#fnKnots= lambda beta: np.polynomial.hermite.hermgauss(2**beta+1)
 
 # this function computes and plots the first differences
 
@@ -258,7 +262,7 @@ def first_difference_rate_plotting():
     marker=['>', 'v', '^', 'o', '*','+','>','v']
     ax = figure().gca()
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))
-    for d1 in range(4,8,1):
+    for d1 in range(0,4,1):
         print(d1)
         mylist=[]
         bias=np.zeros(6)
@@ -280,8 +284,10 @@ def first_difference_rate_plotting():
             print('f=',QoI_fine)
             
 
+            
             coarse_ind_points=fnKnots(pts-1)[0]
             coarse_ind_weights=fnKnots(pts-1)[1]
+
             mylist[d1]=coarse_ind_points
             coarse_points=cartesian(mylist)
             coarse_values=[prb.SolveFor(coarse_points[i]) for i in range(0,lev2knots_doubling(pts))]
@@ -312,8 +318,8 @@ def first_difference_rate_plotting():
         plt.xlabel('k',fontsize=14)
         plt.ylabel(r'$\mid \Delta E_{\mathbf{1}+k \bar{\beta}} \mid $',fontsize=14)  
      
-    plt.legend(loc='lupper right')
-    plt.savefig('./results/first_difference_rbergomi_4steps_H_007_K_12_totally_hierarch_with_rate_W2.eps', format='eps', dpi=1000)
+    plt.legend(loc='upper right')
+    plt.savefig('./results/first_difference_rbergomi_4steps_H_002_K_08_totally_hierarch_with_rate_W1.eps', format='eps', dpi=1000)
 
 
 
@@ -323,7 +329,7 @@ def mixed_difference_order2_rate_plotting(d):
     marker=['>', 'v', '^', 'o', '*','+','-',':']
     ax = figure().gca()
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))
-    for k in range(4,8,1):  
+    for k in range(0,4,1):  
         if k==d:
             print('Hello')
             continue
@@ -355,7 +361,18 @@ def mixed_difference_order2_rate_plotting(d):
                 fine_weights=cartesian(mylist_weight)
                 weights_ff=np.asarray([np.prod(fine_weights[i]) for i in range (0,len(fine_weights))])
                 fine_values=[prb.SolveFor(fine_points[i]) for i in range(0,(lev2knots_doubling(1+pts)*lev2knots_doubling(1+pts)))]
+                # if pts>5:
+                    
+                #     weights_ff[np.multiply(fine_values,weights_ff)>0.004]=0
+                # if pts==6:
+                #     np.savetxt('fine_values.xls', fine_values , delimiter=',')   # X is an array
+                #     np.savetxt('weights_ff.xls', weights_ff, delimiter=',')   # X is an array
+                #     np.savetxt('prod.xls', np.multiply(fine_values,weights_ff) , delimiter=',')   # X is an array
+                #     np.savetxt('points.xls', fine_points , delimiter=',')   # X is an array
+
+                
                 QoI_fine_fine=weights_ff.dot(fine_values)
+            
                 print np.max(fine_values)
                 q=unravel_index(np.asarray(fine_values).argmax(),np.asarray(fine_values).shape)
                 # 
@@ -374,6 +391,12 @@ def mixed_difference_order2_rate_plotting(d):
                 coarse_weights=cartesian(mylist_weight)
                 weights_cc=np.asarray([np.prod(coarse_weights[i]) for i in range (0,len(coarse_weights))])
                 coarse_values=[prb.SolveFor(coarse_points[i]) for i in range(0,(lev2knots_doubling(pts)*lev2knots_doubling(pts)))]
+
+
+                # if pts>5:
+                    
+                #     weights_cc[np.multiply(coarse_values,weights_cc)>0.001]=0
+
                 QoI_coarse_coarse=weights_cc.dot(coarse_values)
                 print('cc=',QoI_coarse_coarse)
 
@@ -388,6 +411,12 @@ def mixed_difference_order2_rate_plotting(d):
                 coarse_weights=cartesian(mylist_weight)
                 weights_fc=np.asarray([np.prod(coarse_weights[i]) for i in range (0,len(coarse_weights))])
                 coarse_values=[prb.SolveFor(coarse_points[i]) for i in range(0,lev2knots_doubling(pts+1)*lev2knots_doubling(pts))]
+
+                # if pts>5:
+                    
+                #     weights_fc[np.multiply(coarse_values,weights_fc)>0.001]=0
+
+
                 QoI_fine_coarse=weights_fc.dot(coarse_values)
                 print('fc=',QoI_fine_coarse)
 
@@ -403,6 +432,10 @@ def mixed_difference_order2_rate_plotting(d):
                 coarse_weights=cartesian(mylist_weight)
                 weights_cf=np.asarray([np.prod(coarse_weights[i]) for i in range (0,len(coarse_weights))])
                 coarse_values=[prb.SolveFor(coarse_points[i]) for i in range(0,lev2knots_doubling(pts+1)*lev2knots_doubling(pts))]
+                # if pts>5:
+                #     weights_cf[np.multiply(coarse_values,weights_cf)>0.004]=0
+
+
                 QoI_coarse_fine=weights_cf.dot(coarse_values)
                 print('cf=',QoI_coarse_fine)
 
@@ -435,7 +468,7 @@ def mixed_difference_order2_rate_plotting(d):
         plt.xlabel('k',fontsize=14)
         plt.ylabel(r'$\mid \Delta E_{\mathbf{1}+k \bar{\beta}} \mid $',fontsize=14)  
     plt.legend(loc='lupper left')
-    plt.savefig('./results/mixed_difference_order2_rbergomi_4steps_H_007_K_12_totally_hierarch_with_rate_W2.eps', format='eps', dpi=1000)       
+    plt.savefig('./results/mixed_difference_order2_rbergomi_4steps_H_002_K_08_totally_hierarch_with_rate_W1.eps', format='eps', dpi=1000)       
     
     
 

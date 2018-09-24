@@ -29,6 +29,9 @@ import pyfftw
 import mpmath
 from numpy.random import multivariate_normal
 
+
+import multiprocessing
+
 def gen_Z(W, W_orth, p, N, steps):
     """
    gen_Z generates Z = p * W + sqrt( 1 - p^2 ) * W_orth
@@ -224,7 +227,7 @@ def gen_S(V, Z, S0, dt, N, steps):
     S = np.zeros((N, steps))
     S[:, 0] = S0
     S[:, 1:] = ne.evaluate('S0*exp(integral)', optimization='moderate')
-    print('Zeit für gen_S = ', time.time()-start)
+    print('time for gen_S = ', time.time()-start)
     return S
 
 def run_simulation(N, steps, T, k, S0, a, eta, xi, p, m):
@@ -248,32 +251,37 @@ def run_simulation(N, steps, T, k, S0, a, eta, xi, p, m):
     Output:
         ST values for the underlying.
     """
+
+    qmc=0
+
     dt = 1.0 / steps
     t = np.linspace(0, 1,  steps + 1)
     start1 = time.time()
     W = gen_W(k, a, N, steps)
-    print('Zeit für gen_W = ', time.time() - start1)
+    print('time for gen_W = ', time.time() - start1)
     start2 = time.time()
     W_orth = gen_W_orth(N, steps, dt)
-    print('Zeit für W_orth = ', time.time() - start2)
+    print('time for W_orth = ', time.time() - start2)
     start3 = time.time()
     Z = gen_Z(W[:, :steps, 0], W_orth, p, N, steps)
-    print('Zeit für gen_Z = ', time.time() - start3)
+    print('time for gen_Z = ', time.time() - start3)
     start4 = time.time()
     Y = gen_Y(k, W, a, N, steps, qmc)
-    print('Zeit für gen_Y = ', time.time() - start4)
+    print('time for gen_Y = ', time.time() - start4)
     start5 = time.time()
     V = gen_V(Y, t, a, eta, xi)
-    print('Zeit für gen_V = ', time.time() - start5)
+    print('time for gen_V = ', time.time() - start5)
     return  gen_S(V, Z, S0, dt, N, steps)[:,steps-1]
 
 
 if __name__ == '__main__':
     # Initializierung der Werte
     # Anzahl der Simulationen
-    N = 2**12
-    # m für 2^m
-    m = 14
+    #N = 2**12
+    N = 1
+    # m for 2^m
+    #m = 14
+    m = 2
     # Anzahl der Schritte pro Zeiteinheit, im Artikel definiert als n
     steps = 2 ** m
     # Schrittgroesse
@@ -281,12 +289,13 @@ if __name__ == '__main__':
     # Laufzeit/Maturity -- hat Einfluss auf die Gesamtanzahl der Schritte durch n*T, aber ich
     # denke ich werde das ignorieren und nur mit T = 1 arbeiten, d.h.
     # der Wert ist nur von theoretischem Interesse
-    # darüber wird die größe des grids festgelegt
+   
     T = 1
     # S0 the start price of the underlying
     S0 = 1
     # Kappa
-    k = 3
+    #k = 3
+    k = 1
     # Alpha
     a = -0.43
     # eta
@@ -298,42 +307,50 @@ if __name__ == '__main__':
     #set number of repeats
     
 
-    '''
-    For loop  which writes files to the hard drive.
-    Writes the values for ST of each simulation run in a .hdf5 file,
-    if the files shouldn't get saved just run the function
-    run_simulation outside the for loop. run_simulation
-    returns the values of ST.
-    '''
-    for repeats in [r]:
-        #save the parameters of the simulation in an array called parameters
-        parameters = np.array([N*repeats, steps, m,  
-                        T, dt, S0, k, a, eta,
-                        xi, p])
-        #set desired path, where the simulation resutls shoud get saved
-        #set values for the hdf file
-        '''
-        insert the filename, where the hdf. files should get saved
-        '''
-        fileName = f"*******"     
-        shape_carray = (N*repeats, m)
-        atom = tables.Float64Atom()
-        hdf5 = tables.open_file(fileName, mode='w')
-        filters = tables.Filters(complevel=5, complib='blosc')
-        #array where the simulation data gets saved
-        simulation_data = hdf5.create_carray(hdf5.root, 'simulation', atom, shape_carray, filters=filters)
-        #array where the parameters get saved
-        parameters_data = hdf5.create_carray(hdf5.root, 'parameters',atom,  (1,11), filters=filters)
-        #array where the time information gets saved
-        time_date = hdf5.create_carray(hdf5.root, 'time', atom, (m,4), filters = filters)
-        parameters_data[0,:] = parameters
-        for i in range(1,m+1):
-            start2 = time.time()
-            for r in range(repeats):
-                print('steps = ', 2**i, ' noch ', repeats - r, ' Wiederholungen', 'rho = ', p, 'kappa = ', k)
-                simulation_data[N*r:N*(r+1), i-1] = run_simulation(N,2**i,T,k,S0,a,eta,xi,p,m)
-            time_date[i-1,:] = np.array([N*repeats,2**i, k, time.time()-start2])
-    hdf5.close()
+
+    S_T=run_simulation(N, steps,T,k,S0,a,eta,xi,p,m)
+    print S_T
+
+
+
+    
+
+    # '''
+    # For loop  which writes files to the hard drive.
+    # Writes the values for ST of each simulation run in a .hdf5 file,
+    # if the files shouldn't get saved just run the function
+    # run_simulation outside the for loop. run_simulation
+    # returns the values of ST.
+    # '''
+    # for repeats in [r]:
+    #     #save the parameters of the simulation in an array called parameters
+    #     parameters = np.array([N*repeats, steps, m,  
+    #                     T, dt, S0, k, a, eta,
+    #                     xi, p])
+    #     #set desired path, where the simulation resutls shoud get saved
+    #     #set values for the hdf file
+    #     '''
+    #     insert the filename, where the hdf. files should get saved
+    #     '''
+    #     fileName = "save"     
+    #     shape_carray = (N*repeats, m)
+    #     atom = tables.Float64Atom()
+    #     hdf5 = tables.open_file(fileName, mode='w')
+    #     filters = tables.Filters(complevel=5, complib='blosc')
+    #     #array where the simulation data gets saved
+    #     simulation_data = hdf5.create_carray(hdf5.root, 'simulation', atom, shape_carray, filters=filters)
+    #     #array where the parameters get saved
+    #     parameters_data = hdf5.create_carray(hdf5.root, 'parameters',atom,  (1,11), filters=filters)
+    #     #array where the time information gets saved
+    #     time_date = hdf5.create_carray(hdf5.root, 'time', atom, (m,4), filters = filters)
+    #     parameters_data[0,:] = parameters
+    #     for i in range(1,m+1):
+    #         start2 = time.time()
+    #         for r in range(repeats):
+    #             print('steps = ', 2**i, ' noch ', repeats - r, ' Wiederholungen', 'rho = ', p, 'kappa = ', k)
+    #             simulation_data[N*r:N*(r+1), i-1] = run_simulation(N,2**i,T,k,S0,a,eta,xi,p,m)
+    #         time_date[i-1,:] = np.array([N*repeats,2**i, k, time.time()-start2])
+    # hdf5.close()
 
    
         

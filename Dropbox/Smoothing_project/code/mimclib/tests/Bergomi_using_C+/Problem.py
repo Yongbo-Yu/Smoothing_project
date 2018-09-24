@@ -12,7 +12,7 @@ class Problem(object):
 # attributes
     random_gen=None;
     elapsed_time=0.0;
-    N=8 # Number of time steps N, discretization resolution
+    N=2# Number of time steps N, discretization resolution
   
     # for the values of below paramters, we need to see the paper as well check with Christian 
     x=0.235**2;   # this will provide the set of xi parameter values 
@@ -30,8 +30,8 @@ class Problem(object):
     T=Vector(1)     # this will provide the set of T(time to maturity) parameter value
     T[0]=1.0
     k=Vector(1)     # this will provide the set of K (strike ) paramter value
-    #k[0]=1
-    k[0]=0.8
+    k[0]=1.2
+    #k[0]=1.2
    # y1perp = Vector(N)
     MIn=1        # number of samples M (I think we do not need this paramter here by default in our case it should be =1)
 
@@ -97,8 +97,11 @@ class Problem(object):
      
         QoI=self.z.ComputePayoffRT_single(W1,W1perp) # this is the computed payoff (when using usual hermite with gaussian density)
 
-        #QoI=self.z.ComputePayoffRT_single(W1,W1perp)*((2*np.pi)**(-self.N))*(np.exp(0.5*y.dot(y))); #this is the computed payoff 
+        #QoI=self.z.ComputePayoffRT_single(W1,W1perp)*(np.exp(0.5*y.dot(y)))*(2)**(-self.N); #this is the computed payoff 
+       
         #(when using  hermite with e^{-x^2} density)
+
+        # QoI=np.exp(-y.dot(y)/2)
         return QoI
 
 

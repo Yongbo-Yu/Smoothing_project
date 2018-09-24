@@ -26,22 +26,22 @@ class Problem_measure_change(object):
     N=4 # Number of time steps N, discretization resolution
   
     # for the values of below paramters, we need to see the paper as well check with Christian 
-    x=0.235**2;   # this will provide the set of xi parameter values 
-    #x=0.1;
+    #x=0.235**2;   # this will provide the set of xi parameter values 
+    x=0.1;
     HIn=Vector(1)    # this will provide the set of H parameter values
-    HIn[0]=0.07
-    #HIn[0]=0.02
+    #HIn[0]=0.07
+    HIn[0]=0.02
     e=Vector(1)    # This will provide the set of eta paramter values
-    e[0]=1.9
-    #e[0]=0.4
+    #e[0]=1.9
+    e[0]=0.4
     r=Vector(1)   # this will provide the set of rho paramter values
-    r[0]=-0.9
-    #r[0]=-0.7
+    #r[0]=-0.9
+    r[0]=-0.7
     T=Vector(1)     # this will provide the set of T(time to maturity) parameter value
     T[0]=1.0
     k=Vector(1)     # this will provide the set of K (strike ) paramter value
     #k[0]=1
-    k[0]=1.2
+    k[0]=0.8
    # y1perp = Vector(N)
     MIn=1        # number of samples M (I think we do not need this paramter here by default in our case it should be =1)
 
@@ -252,7 +252,7 @@ ax.set_ylabel(r'$W_1^2$', fontsize=20, fontweight='bold')
 
 for ii in xrange(0,360,40):
         ax.view_init(elev=10., azim=ii)
-        plt.savefig("./results/Bergomi_integrand_contours_K_12_H_007_W1_1_2_N_4_without_weights_2_%d.pdf" % ii, dpi=600)
+        plt.savefig("./results/Bergomi_integrand_contours_K_08_H_002_W1_1_2_N_4_without_weights_2_%d.pdf" % ii, dpi=600)
 #plt.savefig('./results/Bergomi_integrand_contours_K_1_H_007_W1_1_2_N_4_without_weights_5.pdf', format='pdf', dpi=600)    
 
 

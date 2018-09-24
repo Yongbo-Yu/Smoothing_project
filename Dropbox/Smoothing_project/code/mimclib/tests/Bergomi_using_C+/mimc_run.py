@@ -36,7 +36,7 @@ class MyRun:
     ## PROBLEM SPECIFIC
         # fnknots  gives two arrays first one for quadrature points and the second one for weights
         fnKnots= lambda beta: misc.knots_gaussian(misc.lev2knots_doubling(1+beta),  0, 1) # the standard gaussian
-        #fnKnots= lambda beta: np.polynomial.hermite.hermgauss(2**(beta)+1) #when using  hermite with e^{-x^2} density)
+        #fnKnots= lambda beta: np.polynomial.hermite.hermgauss(misc.lev2knots_doubling(1+beta)[0]) #when using  hermite with e^{-x^2} density)
         
     ##
         # Construct MiscSampler class with the following parameters    
@@ -93,6 +93,7 @@ class MyRun:
                                                          #lev2knots=lambda beta:misc.lev2knots_doubling(1+beta)
                                                          #my corrected version(otherwise with the previous version I get an error I need to check that)
                                                          lev2knots=lambda beta:misc.lev2knots_doubling(1+beta))
+
         #################### extrapolate error rates
         if s_fit_rates is not None:
             valid = np.nonzero(s_fit_rates > 1e-15)[0]  # rates that are negative or close to zero are not accurate.

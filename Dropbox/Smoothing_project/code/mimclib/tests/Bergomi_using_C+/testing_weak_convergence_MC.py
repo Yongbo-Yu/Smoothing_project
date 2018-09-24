@@ -48,7 +48,7 @@ class Problem(object):
     T=Vector(1)     # this will provide the set of T(time to maturity) parameter value
     T[0]=1.0
     k=Vector(1)     # this will provide the set of K (strike ) paramter value
-    k[0]=1
+    k[0]=0.8
    # y1perp = Vector(N)
     MIn=1        # number of samples M (I think we do not need this paramter here by default in our case it should be =1)
 
@@ -125,10 +125,11 @@ class Problem(object):
 
 def weak_convergence_differences():    
         #exact= 0.0712073 #exact value of K=1, H=0.43_xi_0.235^2_eta_1_9_r__09
-        #exact= 0.0792047  #exact value of K=1, H=0.07_xi_0.235^2_eta_1_9_r__09
+        # exact= 0.0792047  #exact value of K=1, H=0.07_xi_0.235^2_eta_1_9_r__09
         #exact= 0.224905759853  #exact value of K=0.8, H=0.07_xi_0.235^2_eta_1_9_r__09
         #exact= 0.00993973310944  #exact value of K=1.2, H=0.07_xi_0.235^2_eta_1_9_r__09
-        exact=0.124756301225  #exact value of K=1, H=0.02_xi_01_eta_0_4_r__07
+        #exact=0.124756301225  #exact value of K=1, H=0.02_xi_01_eta_0_4_r__07
+        exact=0.2407117  #exact value of K=0.8, H=0.02_xi_01_eta_0_4_r__07
         marker=['>', 'v', '^', 'o', '*','+','-',':']
         ax = figure().gca()
         ax.xaxis.set_major_locator(MaxNLocator(integer=True))
@@ -231,7 +232,7 @@ def weak_convergence_differences():
         plt.ylabel(r'$\mid  g(X_{\Delta t})-  g(X) \mid $',fontsize=14) 
         plt.subplots_adjust(wspace=0.6, hspace=0.6, left=0.15, bottom=0.22, right=0.96, top=0.96)
         plt.legend(loc='upper left')
-        plt.savefig('./results/weak_convergence_order_Bergomi_H_002_K_1_M_1_10_6_CI_relative.eps', format='eps', dpi=1000)  
+        plt.savefig('./results/weak_convergence_order_Bergomi_H_002_K_08_M_1_10_6_CI_relative.eps', format='eps', dpi=1000)  
 
         fig = plt.figure()
         plt.plot(dt_arr[0:3], error_diff,linewidth=2.0,label='weak_error' , marker='>', hold=True) 
@@ -246,7 +247,7 @@ def weak_convergence_differences():
         plt.ylabel(r'$\mid  g(X_{\Delta t})-  g(X_{\Delta t/2}) \mid $',fontsize=14) 
         plt.subplots_adjust(wspace=0.6, hspace=0.6, left=0.15, bottom=0.22, right=0.96, top=0.96)
         plt.legend(loc='upper left')
-        plt.savefig('./results/weak_convergence_order_differences_Bergomi_H_002_K_1_M_1_10_6_CI_relative.eps', format='eps', dpi=1000)  
+        plt.savefig('./results/weak_convergence_order_differences_Bergomi_H_002_K_08_M_1_10_6_CI_relative.eps', format='eps', dpi=1000)  
 
 #weak_convergence_rate_plotting()
 weak_convergence_differences() 
