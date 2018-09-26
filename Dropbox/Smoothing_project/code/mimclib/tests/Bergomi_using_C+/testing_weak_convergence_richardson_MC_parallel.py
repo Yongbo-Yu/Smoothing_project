@@ -165,24 +165,24 @@ def weak_convergence_differences():
         ax = figure().gca()
         ax.xaxis.set_major_locator(MaxNLocator(integer=True))
         # # feed parameters to the problem
-        Nsteps_arr=np.array([1,2,4,8])
+        Nsteps_arr=np.array([1,2,4])
        
         dt_arr=1.0/(Nsteps_arr)
-        error_diff=np.zeros(3)
-        stand_diff=np.zeros(3)
-        error=np.zeros(4)
-        stand=np.zeros(4)
-        elapsed_time_qoi=np.zeros(4)
-        Ub=np.zeros(4)
-        Lb=np.zeros(4)
-        Ub_diff=np.zeros(3)
-        Lb_diff=np.zeros(3)
-        values=np.zeros((4*(10**6),4)) 
+        error_diff=np.zeros(2)
+        stand_diff=np.zeros(2)
+        error=np.zeros(3)
+        stand=np.zeros(3)
+        elapsed_time_qoi=np.zeros(3)
+        Ub=np.zeros(3)
+        Lb=np.zeros(3)
+        Ub_diff=np.zeros(2)
+        Lb_diff=np.zeros(2)
+        values=np.zeros((4*(10**6),3)) 
      
         num_cores = mp.cpu_count()
         print num_cores
        
-        for i in range(0,4):
+        for i in range(0,3):
             print i
             start_time=time.time()
 
@@ -221,7 +221,7 @@ def weak_convergence_differences():
         print Ub
         
          
-        differences= [values[:,i]-values[:,i+1] for i in range(0,3)]
+        differences= [values[:,i]-values[:,i+1] for i in range(0,2)]
         error_diff=np.abs(np.mean(differences,axis=1))
         print error_diff 
         stand_diff=np.std(differences, axis = 1)/ float(np.sqrt((4*(10**6))))
@@ -237,19 +237,19 @@ def weak_convergence_differences():
         print z[0]
 
 
-        z3=np.zeros(4)
+        z3=np.zeros(3)
         z3[0]=2.0
         z3[1]=np.log(error[0])
         fit3=np.exp(z3[0]*np.log(dt_arr)+z3[1])
 
-        z_diff= np.polyfit(np.log(dt_arr[0:3]), np.log(error_diff), 1)
-        fit_diff=np.exp(z_diff[0]*np.log(dt_arr[0:3]))
+        z_diff= np.polyfit(np.log(dt_arr[0:2]), np.log(error_diff), 1)
+        fit_diff=np.exp(z_diff[0]*np.log(dt_arr[0:2]))
         print z_diff[0]
 
-        z3diff=np.zeros(3)
+        z3diff=np.zeros(2)
         z3diff[0]=2.0
         z3diff[1]=np.log(error_diff[0])
-        fit3diff=np.exp(z3diff[0]*np.log(dt_arr[0:3])+z3diff[1])
+        fit3diff=np.exp(z3diff[0]*np.log(dt_arr[0:2])+z3diff[1])
         
         fig = plt.figure()
 
@@ -270,15 +270,15 @@ def weak_convergence_differences():
         plt.savefig('./results/weak_convergence_order_Bergomi_H_002_K_12_M_4_10_6_richardson_relative.eps', format='eps', dpi=1000)  
 
         fig = plt.figure()
-        plt.plot(dt_arr[0:3], error_diff,linewidth=2.0,label='weak_error' ,marker='>', hold=True) 
-        plt.plot(dt_arr[0:3], Lb_diff,linewidth=2.0,label='Lb' ,linestyle = ':', hold=True) 
-        plt.plot(dt_arr[0:3], Ub_diff,linewidth=2.0,label='Ub' ,linestyle = ':', hold=True) 
+        plt.plot(dt_arr[0:2], error_diff,linewidth=2.0,label='weak_error' ,marker='>', hold=True) 
+        plt.plot(dt_arr[0:2], Lb_diff,linewidth=2.0,label='Lb' ,linestyle = ':', hold=True) 
+        plt.plot(dt_arr[0:2], Ub_diff,linewidth=2.0,label='Ub' ,linestyle = ':', hold=True) 
         plt.yscale('log')
         plt.xscale('log')
         plt.xlabel(r'$\Delta t$',fontsize=14)
 
-        plt.plot(dt_arr[0:3], fit_diff*10,linewidth=2.0,label=r'rate= %s' % format(z_diff[0]  , '.2f'), linestyle = '--')
-        plt.plot(dt_arr[0:3], fit3diff*10,linewidth=2.0,label=r'rate= %s' % format(z3diff[0]  , '.2f'), linestyle = '--')
+        plt.plot(dt_arr[0:2], fit_diff*10,linewidth=2.0,label=r'rate= %s' % format(z_diff[0]  , '.2f'), linestyle = '--')
+        plt.plot(dt_arr[0:2], fit3diff*10,linewidth=2.0,label=r'rate= %s' % format(z3diff[0]  , '.2f'), linestyle = '--')
         plt.ylabel(r'$\mid  g(X_{\Delta t})-  g(X_{\Delta t/2}) \mid $',fontsize=14) 
         plt.subplots_adjust(wspace=0.6, hspace=0.6, left=0.15, bottom=0.22, right=0.96, top=0.96)
         plt.legend(loc='upper left')

@@ -6,7 +6,7 @@ from matplotlib.pyplot import figure, show
 from matplotlib.ticker import MaxNLocator
 
 
-dt_arr=np.array([0.5, 0.1,  0.05, 0.01, 0.005,0.001, 0.0001])
+dt_arr=np.array([0.5, 0.1,  0.05, 0.01, 0.005,0.001])
 
 # #Case for parameter set 1 non richardson
 # quad_err_N_2=np.array([ 0.0868, 0.0868,0.0868,0.0017, 0.0017 , 0.0017,0.0017])
@@ -27,6 +27,14 @@ dt_arr=np.array([0.5, 0.1,  0.05, 0.01, 0.005,0.001, 0.0001])
 # quad_err_N_4=np.array([0.0435, 0.0435, 0.1109,0.0407,0.0197,0.0154])
 # quad_err_N_8=np.array([  0.0197, 0.0899, 0.0730,0.0337, 0.0014,0.0014])
 # quad_err_N_16=np.array([0.0014, 0.0674,0.0632, 0.0014,0.0112  ])
+
+
+
+# # #Case for parameter set 1 with richardson(level2)
+# quad_err_N_2=np.array([  0.0239,0.0576, 0.1755,0.0435,0.0169,	1.4e-04,	1.4e-04 ])
+# quad_err_N_4=np.array([0.0126,0.0520, 0.1011,0.0267,0.0028,0.0028])
+
+
 
 
 # #Case for parameter set 2 non richardson
@@ -58,6 +66,18 @@ dt_arr=np.array([0.5, 0.1,  0.05, 0.01, 0.005,0.001, 0.0001])
 # quad_err_N_16=np.array([0.1591, 0.0518,0.0518])
 
 
+
+
+# # #Case for parameter set 2 with richardson level2
+# quad_err_N_4=np.array([ 0.1629,0.1502,0.0278,0.0012])
+# quad_err_N_2=np.array([0.0152,0.0152,0.2462,0.0669,	0.0215,0.0013])
+
+
+# #Case for parameter set 2 with richardson level2,linear
+quad_err_N_2=np.array([ 0.0177,0.0177,0.2525,0.0278,0.0278,0.0088])
+quad_err_N_4=np.array([0.1553,0.1073,0.0038,0.0038 ])
+
+
 # #Case for parameter set 3 non richardson
 # quad_err_N_2=np.array([0.0471,0.0471,0.0471,0.0204,0.0027,  9.3e-04, 9.3e-04])
 # quad_err_N_4=np.array([0.0666, 0.0666,	0.0768, 0.0039, 0.0021])
@@ -73,10 +93,10 @@ dt_arr=np.array([0.5, 0.1,  0.05, 0.01, 0.005,0.001, 0.0001])
 # quad_err_N_16=np.array([0.0778, 0.0396])
 
 
-##Case for parameter set 4 non richardson
-quad_err_N_2=np.array([2.3039,2.3039,2.3039,0.0302, 0.3421,0.0805, 0.0201])
-quad_err_N_4=np.array([2.3240,2.3240,2.3240,1.8210,0.0050,0.0050])
-quad_err_N_8=np.array([2.0826,2.0826,2.0826,2.0826,0.0020])
+# ##Case for parameter set 4 non richardson
+# quad_err_N_2=np.array([2.3039,2.3039,2.3039,0.0302, 0.3421,0.0805, 0.0201])
+# quad_err_N_4=np.array([2.3240,2.3240,2.3240,1.8210,0.0050,0.0050])
+# quad_err_N_8=np.array([2.0826,2.0826,2.0826,2.0826,0.0020])
 # quad_err_N_16=np.array([])
 		
 # ##Case for parameter set 4 with richardson
@@ -123,9 +143,9 @@ quad_err_N_8=np.array([2.0826,2.0826,2.0826,2.0826,0.0020])
 
 fig = plt.figure()
 
-plt.plot(dt_arr, quad_err_N_2,linewidth=2.0,label=r'$N=2$' , marker='>',hold=True) 
-plt.plot(dt_arr[0:6], quad_err_N_4,linewidth=2.0,label=r'$N=4$' , marker='o',hold=True) 
-plt.plot(dt_arr[0:5], quad_err_N_8,linewidth=2.0,label=r'$N=8$'  , marker='v',hold=True) 
+plt.plot(dt_arr, quad_err_N_2,linewidth=2.0,label=r'$N=1-2-4$' , marker='>',hold=True) 
+plt.plot(dt_arr[0:4], quad_err_N_4,linewidth=2.0,label=r'$N=2-4-8$' , marker='o',hold=True) 
+# plt.plot(dt_arr[0:5], quad_err_N_8,linewidth=2.0,label=r'$N=8$'  , marker='v',hold=True) 
 # plt.plot(dt_arr[0:3], quad_err_N_16,linewidth=2.0,label=r'$N=16$'  , marker='*',hold=True) 
 
 plt.yscale('log')
@@ -137,5 +157,5 @@ plt.xlabel(r'$TOL_{MISC}$',fontsize=14)
 plt.ylabel('relative Quadrature error',fontsize=14) 
 plt.subplots_adjust(wspace=0.6, hspace=0.6, left=0.15, bottom=0.22, right=0.96, top=0.96)
 plt.legend(loc='upper left')
-plt.savefig('./results/relative_quad_error_wrt_MISC_TOL_set4_non_rich.eps', format='eps', dpi=1000)  
+plt.savefig('./results/relative_quad_error_wrt_MISC_TOL_set2_rich_level2_linear.eps', format='eps', dpi=1000)  
 

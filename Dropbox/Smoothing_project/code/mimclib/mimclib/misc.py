@@ -343,8 +343,8 @@ def lev2knots_doubling(i):
     # ----------------------------------------------------
     i = np.array([i] if np.isscalar(i) else i, dtype=np.int)
     #m=np.zeros_like(i)
-    m= 2 ** (i-1.0)+1
-    #m= 4 *(i-1.0)+1
+    #m= 2 ** (i-1.0)+1
+    m= 4 *(i-1.0)+1
     m=m.astype(np.int)
     m[i==1] = 1
     m[i==0] = 0
