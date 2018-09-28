@@ -1,4 +1,4 @@
-\documentclass[11pt]{article}
+ \documentclass[11pt]{article}
 
 \usepackage{smoothing_paper}
 \usepackage[section]{placeins}
@@ -121,7 +121,7 @@ What has beed achieved so far:
 	\item Numerical outputs:
 	\begin{itemize}
 	
-	 \item \textbf{Example 1}: Tests for  the basket option with the smoothing trick as in \cite{bayersmoothing} (see Section \ref{appendix:The basket option with smoothing trick with a time stepping procedure}): in that example we  checked the performance of MISC without time stepping scheme and also compare the results with reference \cite{bayersmoothing}. (Done).
+	 \item \textbf{Example 1}: Tests for  the basket option with the smoothing trick as in \cite{bayersmoothing} (see Section \ref{sec:The basket option with smoothing trick with a time stepping procedure}): in that example we  checked the performance of MISC without time stepping scheme and also compare the results with reference \cite{bayersmoothing}. (Done).
 	
 	
 	
@@ -268,8 +268,8 @@ Claiming that pre-integrating with respect to $z_1$ is the optimal option then f
 
 \begin{align}\label{eq: pre_integration_step_wrt_y1}
 \expt{g(X(T))}&=\int_{-\infty}^{\infty} \dots \int_{-\infty}^{\infty} G(z_1,\dots,z_N) \rho_N(\mathbf{z}) dz_1,\dots,dz_N \nonumber\\ 
-&=\int_{\rset^{d-1}} \left(\int_{-\infty}^\infty G(z_1,\mathbf{z}_{-1}) \rho(z_1) dz_1  \right) \rho_{d-1}(\mathbf{z}_{-1}) d\mathbf{z}_{-1}\nonumber\\	
-&=\int_{\rset^{d-1}} h(\mathbf{z}_{-1}) \rho_{d-1}(\mathbf{z}_{-1}) d\mathbf{z}_{-1}\COMMA \\ \nonumber
+&=\int_{\rset^{N-1}} \left(\int_{-\infty}^\infty G(z_1,\mathbf{z}_{-1}) \rho(z_1) dz_1  \right) \rho_{N-1}(\mathbf{z}_{-1}) d\mathbf{z}_{-1}\nonumber\\	
+&=\int_{\rset^{N-1}} h(\mathbf{z}_{-1}) \rho_{N-1}(\mathbf{z}_{-1}) d\mathbf{z}_{-1}\COMMA \\ \nonumber
 	&=\expt{h(\mathbf{z}_1)}
 \end{align}
 where $h(\mathbf{z}_{-1})=\int_{-\infty}^\infty G(z_1,\mathbf{z}_{-1}) \rho(z_1) dz_1=  E\left[ G\left(z_1, \ldots, z_N \right)  \mid z_1\right] $.
@@ -288,6 +288,21 @@ We have a natural error decomposition for the total error of computing the the e
 \mathcal{E} \le \mathcal{E}_Q(TOL_{\text{MISC}},N) + \mathcal{E}_B(N),
 \end{equation}
 where  $\mathcal{E}_Q$ is the quadrature error, function of MISC tolerance $TOL_{\text{MISC}}$ and $N$ (the number of time steps)  and  $\mathcal{E}_B$  is the bias, function of $N$ (the number of time steps) or $\Delta_t=\frac{T}{N}$ (size of the time grid). We provide a discussion about the different errors in Section \ref{sec:Error discussion}.
+
+
+\subsection{Extension to the High dimensional case}
+In the high dimensional case, we denote by $(z_1^{i},\dots,z_N^{i})$ the $N$ Gaussian independent rdv that will be used to construct the path of the $i$-th asset $X_i$, where $1 \le i \le d$ ($d$ denotes the number of underlyings considered in the basket). We keep the  same notations by denoting  $\psi: (z_1^{(i)},\dots,z_N^{(i)}) \rightarrow (B_1,\dots,B_N)$ the mapping of BB construction and by $\Phi: (B^{(i)}_1,\dots,B^{(i)}_N) \rightarrow X^{i}_T$, the mapping consisting of the time-stepping scheme. Then, we can express the option price as
+
+\begin{align}\label{eq: option price as integral_basket}
+	\expt{g(\mathbf{X}(T))}&=	\expt{g\left(\Phi \circ \psi \right) (z_1^{(1)}, \dots, z_N^{(1)}, \dots, z_1^{(d)},\dots,z^{(d)}_N)} \nonumber\\
+	&=\int_{\rset^{d \times N}} G(z_1^{(1)}, \dots, z_N^{(1)}, \dots, z_1^{(d)},\dots,z^{(d)}_N)) \rho_{d \times N}(\mathbf{z}) dz_1^{(1)} \dots dz_N^{(1)} \dots z_1^{(d)} \dots dz^{(d)}_N \COMMA
+\end{align}
+where $G=g \circ \Phi \circ \psi$ and
+
+\begin{equation}
+\rho_{d \times N}(\mathbf{z})=\frac{1}{(2 \pi)^{{d \times N}/2}} e^{-\frac{1}{2} \mathbf{z}^T \mathbf{z}} \PERIOD
+\end{equation}
+
 \subsection{MISC details} \label{sec:Details of the MISC}
 
 We focus on solving the problem of  approximating the expected value of $\expt{f(y)}$ on a tensorization of quadrature formulae over the stochastic domain, $\Gamma$. Assuming that $f(y)$ is a continuous function (analytic) over $\Gamma$. A quadrature approach is very adequate.
@@ -1698,9 +1713,157 @@ In this Section, we report the results for the Call option, using the different 
 
 
 
+\subsection{The basket option with the smoothing trick as in \cite{bayersmoothing}}\label{sec:The basket option with smoothing trick with a time stepping procedure}
+
+The first experiment that we consider is the pricing of  a European  basket call option in a Black-Scholes model. The basket is composed of $d$ assets ($d=3,8,25$) and we use the same trick of smoothing the integrand that was proposed in \cite{bayersmoothing}. In this case, the dimension of the parameter space $N=d-1$. The interpolation over the parameter space is based on the tensorized Lagrangian interpolation technique with Gaussian  points.
+
+
+%\newpage
+\subsubsection{Results using MISC}
+In table \ref{table: Complexity rates of the different experiemnts  for the basket option using BS model}, we summarize the observed  complexity rates for different tested settings for the basket example. From this table, we can check that even with the $25$ dimensional case, the complexity rate in terms of the elapsed time is at least order $1$, which is better than MC, which is $2$. Detailed plots for each case are given by figures (\ref{fig:misc_3D_Basket_1}, \ref{fig:misc_3D_Basket_2}) for $d=3$, figures (\ref{fig:misc_8D_Basket_1}, \ref{fig:misc_8D_Basket_2}) for $d=8$ and figures (\ref{fig:misc_25D_Basket_1}, \ref{fig:misc_25D_Basket_2}) for $d=25$. Mainly, from the plots, 
+we checked  that we achive the prescribed tolerance using MISC, the convergence rates of mixed differences which is a basic assumption for using MISC (we observe exponential decay of error rates wrt to the number of quadrature points) and finally the complexity rates. In the next Section, we try to extend these results to the time stepping framework.
+
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{3}{c}r}
+		\# assets  \textbackslash          & $3$ & $8$ & $25$   \\
+		\hline
+		rate   & $-1/3$ & $-9/20$ & $-16/25$  \\
+		\hline
+	\end{tabular}
+	\caption{Complexity rates of the different experiments  for the basket option using BS model}
+	\label{table: Complexity rates of the different experiemnts  for the basket option using BS model}
+\end{table}	
+
+\subsubsection*{Case of $3$-dimensional Basket}
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/3D_basket/error_estimate.pdf}
+		\caption{Error estimate}
+		\label{fig:misc_3D_Basket_sub1}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/3D_basket/average_running_time.pdf}
+		\caption{Average running time as a function of $TOL$}
+		\label{fig:misc_3D_Basket_sub2}
+	\end{subfigure}%
+	\caption{Convergence and complexity results for the $3$-dimensional basket option using BS model.}
+	\label{fig:misc_3D_Basket_1}
+\end{figure}
 
 
 
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/3D_basket/level_work.pdf}
+		\caption{Average Computational time per level.}
+		\label{fig:misc_3D_Basket_sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/3D_basket/levels_error_rate.pdf}
+		\caption{The convergence rate of mixed differences per level.}
+		\label{fig:misc_3D_Basket_sub4}
+	\end{subfigure}%
+	\caption{Convergence and work rates for discretization levels for the $3$-dimensional basket option using BS model.}
+	\label{fig:misc_3D_Basket_2}
+\end{figure}
+
+\FloatBarrier
+
+
+\subsubsection*{Case of $8$-dimensional Basket}
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/8D_basket/error_estimate.pdf}
+		\caption{Error estimate}
+		\label{fig:misc_8D_Basket_sub1}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/8D_basket/average_running_time.pdf}
+		\caption{Average running time as a function of $TOL$}
+		\label{fig:misc_8D_Basket_sub2}
+	\end{subfigure}%
+	\caption{Convergence and complexity results for  the $8$-dimensional basket option using BS model.}
+	\label{fig:misc_8D_Basket_1}
+\end{figure}
+
+
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/8D_basket/level_work.pdf}
+		\caption{Average Computational time per level.}
+		\label{fig:misc_8D_Basket_sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/8D_basket/levels_error_rate.pdf}
+		\caption{The convergence rate of mixed differences per level.}
+		\label{fig:misc_8D_Basket_sub4}
+	\end{subfigure}%
+	\caption{Convergence and work rates for discretization levels for the $8$-dimensional basket option using BS model.}
+	\label{fig:misc_8D_Basket_2}
+\end{figure}
+\FloatBarrier
+
+\subsubsection*{Case of $25$-dimensional Basket}
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/25D_basket/error_estimate.pdf}
+		\caption{Error estimate}
+		\label{fig:misc_25D_Basket_sub1}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/25D_basket/average_running_time.pdf}
+		\caption{Average running time as a function of $TOL$}
+		\label{fig:misc_25D_Basket_sub2}
+	\end{subfigure}%
+	\caption{Convergence and complexity results for  the $25$-dimensional basket option using BS model.}
+	\label{fig:misc_25D_Basket_1}
+\end{figure}
+
+
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/25D_basket/level_work.pdf}
+		\caption{Average Computational time per level.}
+		\label{fig:misc_25D_Basket_sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/25D_basket/levels_error_rate.pdf}
+		\caption{The convergence rate of mixed differences per level.}
+		\label{fig:misc_25D_Basket_sub4}
+	\end{subfigure}%
+	\caption{Convergence and work rates for discretization levels for the $25$-dimensional basket option using BS model.}
+	\label{fig:misc_25D_Basket_2}
+\end{figure}
+
+
+\FloatBarrier
+
+\subsection{The basket option under time stepping framework}\label{sec:The basket option under time stepping framework}
+
+
+\FloatBarrier
 
 \subsection{Results for  the CIR process}
 
@@ -1821,152 +1984,6 @@ The code of this section is found in the script discretized\_CIR.py, which compa
 
 
 \appendix
-\section{The basket option with the smoothing trick as in \cite{bayersmoothing}}\label{appendix:The basket option with smoothing trick with a time stepping procedure}
-
-The first experiment that we consider is the pricing of  a European  basket call option in a Black-Scholes model. The basket is composed of $d$ assets ($d=3,8,25$) and we use the same trick of smoothing the integrand that was proposed in \cite{bayersmoothing}. In this case, the dimension of the parameter space $N=d-1$. The interpolation over the parameter space is based on the tensorized Lagrangian interpolation technique with Gaussian  points.
-
-
-%\newpage
-\subsection{Results using MISC}
-In table \ref{table: Complexity rates of the different experiemnts  for the basket option using BS model}, we summarize the observed  complexity rates for different tested settings for the basket example. From this table, we can check that even with the $25$ dimensional case, the complexity rate in terms of the elapsed time is at least order $1$, which is better than MC, which is $2$. Detailed plots for each case are given by figures (\ref{fig:misc_3D_Basket_1}, \ref{fig:misc_3D_Basket_2}) for $d=3$, figures (\ref{fig:misc_8D_Basket_1}, \ref{fig:misc_8D_Basket_2}) for $d=8$ and figures (\ref{fig:misc_25D_Basket_1}, \ref{fig:misc_25D_Basket_2}) for $d=25$. Mainly, from the plots, 
-we checked  that we achive the prescribed tolerance using MISC, the convergence rates of mixed differences which is a basic assumption for using MISC (we observe exponential decay of error rates wrt to the number of quadrature points) and finally the complexity rates.
-
-
-\begin{table}[h!]
-	\centering
-	\begin{tabular}{l*{3}{c}r}
-		\# assets  \textbackslash          & $3$ & $8$ & $25$   \\
-		\hline
-		rate   & $-1/3$ & $-9/20$ & $-16/25$  \\
-		\hline
-	\end{tabular}
-	\caption{Complexity rates of the different experiments  for the basket option using BS model}
-	\label{table: Complexity rates of the different experiemnts  for the basket option using BS model}
-\end{table}	
-
-\subsubsection{Case of $3$-dimensional Basket}
-\begin{figure}[!h]
-	\centering
-	\begin{subfigure}{.4\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{./figures/3D_basket/error_estimate.pdf}
-		\caption{Error estimate}
-		\label{fig:misc_3D_Basket_sub1}
-	\end{subfigure}%
-	\begin{subfigure}{.4\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{./figures/3D_basket/average_running_time.pdf}
-		\caption{Average running time as a function of $TOL$}
-		\label{fig:misc_3D_Basket_sub2}
-	\end{subfigure}%
-	\caption{Convergence and complexity results for the $3$-dimensional basket option using BS model.}
-	\label{fig:misc_3D_Basket_1}
-\end{figure}
-
-
-
-\begin{figure}[!h]
-	\centering
-	\begin{subfigure}{.4\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{./figures/3D_basket/level_work.pdf}
-		\caption{Average Computational time per level.}
-		\label{fig:misc_3D_Basket_sub3}
-	\end{subfigure}%
-	\begin{subfigure}{.4\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{./figures/3D_basket/levels_error_rate.pdf}
-		\caption{The convergence rate of mixed differences per level.}
-		\label{fig:misc_3D_Basket_sub4}
-	\end{subfigure}%
-	\caption{Convergence and work rates for discretization levels for the $3$-dimensional basket option using BS model.}
-	\label{fig:misc_3D_Basket_2}
-\end{figure}
-
-\FloatBarrier
-
-
-\subsubsection{Case of $8$-dimensional Basket}
-\begin{figure}[!h]
-	\centering
-	\begin{subfigure}{.4\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{./figures/8D_basket/error_estimate.pdf}
-		\caption{Error estimate}
-		\label{fig:misc_8D_Basket_sub1}
-	\end{subfigure}%
-	\begin{subfigure}{.4\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{./figures/8D_basket/average_running_time.pdf}
-		\caption{Average running time as a function of $TOL$}
-		\label{fig:misc_8D_Basket_sub2}
-	\end{subfigure}%
-	\caption{Convergence and complexity results for  the $8$-dimensional basket option using BS model.}
-	\label{fig:misc_8D_Basket_1}
-\end{figure}
-
-
-
-\begin{figure}[!h]
-	\centering
-	\begin{subfigure}{.4\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{./figures/8D_basket/level_work.pdf}
-		\caption{Average Computational time per level.}
-		\label{fig:misc_8D_Basket_sub3}
-	\end{subfigure}%
-	\begin{subfigure}{.4\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{./figures/8D_basket/levels_error_rate.pdf}
-		\caption{The convergence rate of mixed differences per level.}
-		\label{fig:misc_8D_Basket_sub4}
-	\end{subfigure}%
-	\caption{Convergence and work rates for discretization levels for the $8$-dimensional basket option using BS model.}
-	\label{fig:misc_8D_Basket_2}
-\end{figure}
-\FloatBarrier
-
-\subsubsection{Case of $25$-dimensional Basket}
-\begin{figure}[h!]
-	\centering
-	\begin{subfigure}{.4\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{./figures/25D_basket/error_estimate.pdf}
-		\caption{Error estimate}
-		\label{fig:misc_25D_Basket_sub1}
-	\end{subfigure}%
-	\begin{subfigure}{.4\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{./figures/25D_basket/average_running_time.pdf}
-		\caption{Average running time as a function of $TOL$}
-		\label{fig:misc_25D_Basket_sub2}
-	\end{subfigure}%
-	\caption{Convergence and complexity results for  the $25$-dimensional basket option using BS model.}
-	\label{fig:misc_25D_Basket_1}
-\end{figure}
-
-
-
-\begin{figure}[h!]
-	\centering
-	\begin{subfigure}{.4\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{./figures/25D_basket/level_work.pdf}
-		\caption{Average Computational time per level.}
-		\label{fig:misc_25D_Basket_sub3}
-	\end{subfigure}%
-	\begin{subfigure}{.4\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{./figures/25D_basket/levels_error_rate.pdf}
-		\caption{The convergence rate of mixed differences per level.}
-		\label{fig:misc_25D_Basket_sub4}
-	\end{subfigure}%
-	\caption{Convergence and work rates for discretization levels for the $25$-dimensional basket option using BS model.}
-	\label{fig:misc_25D_Basket_2}
-\end{figure}
-
-
-\FloatBarrier
 
 %\section{ Prices for different methods for binary option }\label{appendix:Call prices for different methods_binary}
 %
