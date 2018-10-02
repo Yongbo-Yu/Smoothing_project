@@ -207,7 +207,7 @@ class Problem(object):
         
   
         
-        
+         
 
     def newtons_method(self,x0,y,eps=1e-10):
         delta = self.dx(x0,y)

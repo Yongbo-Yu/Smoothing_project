@@ -270,7 +270,7 @@ Claiming that pre-integrating with respect to $z_1$ is the optimal option then f
 \expt{g(X(T))}&=\int_{-\infty}^{\infty} \dots \int_{-\infty}^{\infty} G(z_1,\dots,z_N) \rho_N(\mathbf{z}) dz_1,\dots,dz_N \nonumber\\ 
 &=\int_{\rset^{N-1}} \left(\int_{-\infty}^\infty G(z_1,\mathbf{z}_{-1}) \rho(z_1) dz_1  \right) \rho_{N-1}(\mathbf{z}_{-1}) d\mathbf{z}_{-1}\nonumber\\	
 &=\int_{\rset^{N-1}} h(\mathbf{z}_{-1}) \rho_{N-1}(\mathbf{z}_{-1}) d\mathbf{z}_{-1}\COMMA \\ \nonumber
-	&=\expt{h(\mathbf{z}_1)}
+	&=\expt{h(\mathbf{z}_{-1})}
 \end{align}
 where $h(\mathbf{z}_{-1})=\int_{-\infty}^\infty G(z_1,\mathbf{z}_{-1}) \rho(z_1) dz_1=  E\left[ G\left(z_1, \ldots, z_N \right)  \mid z_1\right] $.
 
@@ -291,7 +291,7 @@ where  $\mathcal{E}_Q$ is the quadrature error, function of MISC tolerance $TOL_
 
 
 \subsection{Extension to the High dimensional case}
-In the high dimensional case, we denote by $(z_1^{i},\dots,z_N^{i})$ the $N$ Gaussian independent rdv that will be used to construct the path of the $i$-th asset $X_i$, where $1 \le i \le d$ ($d$ denotes the number of underlyings considered in the basket). We keep the  same notations by denoting  $\psi: (z_1^{(i)},\dots,z_N^{(i)}) \rightarrow (B_1,\dots,B_N)$ the mapping of BB construction and by $\Phi: (B^{(i)}_1,\dots,B^{(i)}_N) \rightarrow X^{i}_T$, the mapping consisting of the time-stepping scheme. Then, we can express the option price as
+In the high dimensional case, we denote by $(z_1^{(i)},\dots,z_N^{(i)})$ the $N$ Gaussian independent rdvs that will be used to construct the path of the $i$-th asset $X^{(i)}$, where $1 \le i \le d$ ($d$ denotes the number of underlyings considered in the basket). We keep the  same notations by denoting  $\psi: (z_1^{(i)},\dots,z_N^{(i)}) \rightarrow (B_1,\dots,B_N)$ the mapping of BB construction and by $\Phi: (B^{(i)}_1,\dots,B^{(i)}_N) \rightarrow X^{(i)}_T$, the mapping consisting of the time-stepping scheme. Then, we can express the option price as
 
 \begin{align}\label{eq: option price as integral_basket}
 	\expt{g(\mathbf{X}(T))}&=	\expt{g\left(\Phi \circ \psi \right) (z_1^{(1)}, \dots, z_N^{(1)}, \dots, z_1^{(d)},\dots,z^{(d)}_N)} \nonumber\\
@@ -303,6 +303,21 @@ where $G=g \circ \Phi \circ \psi$ and
 \rho_{d \times N}(\mathbf{z})=\frac{1}{(2 \pi)^{{d \times N}/2}} e^{-\frac{1}{2} \mathbf{z}^T \mathbf{z}} \PERIOD
 \end{equation}
 
+
+
+
+
+Now,  performing the  pre-integrating step with respect to $(z_1^{(1)},\dots, z_1^{(d)} )$, results in
+\begin{small}
+\begin{align}\label{eq: pre_integration_step_wrt_y1_basket}
+	\expt{g(\mathbf{X}(T))}&=\int_{\rset^{d \times N}} G(z_1^{(1)}, \dots, z_N^{(1)}, \dots, z_1^{(d)},\dots,z^{(d)}_N)) \rho_{d \times N}(\mathbf{z}) dz_1^{(1)} \dots dz_N^{(1)} \dots z_1^{(d)} \dots dz^{(d)}_N \nonumber\\ 
+	&=\int_{\rset^{d \times (N-1)}} \left(\int_{\rset^d} G(z^{(1)}_1,\mathbf{z}^{(1)}_{-1},\dots,z^{(d)}_1,\mathbf{z}^{(d)}_{-1} ) \rho_d(z_1^{(1)},\dots,z_1^{(d)}) dz_1^{(1)}\dots dz_1^{(d)}  \right) \rho_{d \times(N-1)}(\mathbf{z}_{-1}^{(1)},\dots,\mathbf{z}_{-1}^{(d)}) d\mathbf{z}_{-1}^{(1)}\dots d\mathbf{z}_{-1}^{(d)}\nonumber\\	
+	&=\int_{\rset^{d\times (N-1)}} h(\mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1} ) \rho_{d\times (N-1)}(\mathbf{z}_{-1}^{(1)},\dots,\mathbf{z}_{-1}^{(d)}) d\mathbf{z}^{(1)}_{-1} \dots d\mathbf{z}^{(d)}_{-1}\COMMA \\ \nonumber
+	&=\expt{h(\mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1} )}
+\end{align}
+
+\end{small}
+where $h(\mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1})=\int_{\rset^d} G(z^{(1)}_1,\mathbf{z}^{(1)}_{-1},\dots,z^{(d)}_1,\mathbf{z}^{(d)}_{-1} )   \rho_d(z_1^{(1)},\dots,z_1^{(d)}) dz_1^{(1)}\dots dz_1^{(d)}$.
 \subsection{MISC details} \label{sec:Details of the MISC}
 
 We focus on solving the problem of  approximating the expected value of $\expt{f(y)}$ on a tensorization of quadrature formulae over the stochastic domain, $\Gamma$. Assuming that $f(y)$ is a continuous function (analytic) over $\Gamma$. A quadrature approach is very adequate.
@@ -1178,7 +1193,7 @@ In this Section, we report the results for the binary option, using the differen
 In this case, the integrand $h(\mathbf{z}_{-1})$ is given by
 
 \begin{align}\label{smoothed_integrand_call_opt_2}
-	h(\mathbf{z}_{-1})&= \int_{\Omega}  \max \left(\Phi \circ \Psi(T;z_1,\mathbf{z}_{-1})-K,0\right) \frac{1}{\sqrt{2 \pi}} \operatorname{exp}(-z_1^2/2) dy 
+	h(\mathbf{z}_{-1})&= \int_{\Omega}  \max \left(\Phi \circ \Psi(T;z_1,\mathbf{z}_{-1})-K,0\right) \frac{1}{\sqrt{2 \pi}} \operatorname{exp}(-z_1^2/2) dz_1 
 \end{align}
 
 
@@ -1188,7 +1203,7 @@ $\Omega_i$ and such that the kink is located along the boundary of these areas. 
 as the sum of the separate integrals, \ie
 \begin{align}
 	h(\mathbf{z}_{-1}) &:=  \int_{\Omega} \max \left(\Phi \circ \Psi(T;z_1,\mathbf{z}_{-1})-K,0\right) \frac{1}{\sqrt{2 \pi}} \operatorname{exp}(-z_1^2/2) dy \\ \nonumber
-	&=\sum_{i=1}^{2}	\int_{\Omega_i} \max \left(\Phi \circ \Psi(T;z_1,\mathbf{z}_{-1})-K,0\right) \frac{1}{\sqrt{2 \pi}} \operatorname{exp}(-z_1^2/2) dy,
+	&=\sum_{i=1}^{2}	\int_{\Omega_i} \max \left(\Phi \circ \Psi(T;z_1,\mathbf{z}_{-1})-K,0\right) \frac{1}{\sqrt{2 \pi}} \operatorname{exp}(-z_1^2/2) dz_1,
 \end{align}
 
 
@@ -1715,7 +1730,7 @@ In this Section, we report the results for the Call option, using the different 
 
 \subsection{The basket option with the smoothing trick as in \cite{bayersmoothing}}\label{sec:The basket option with smoothing trick with a time stepping procedure}
 
-The first experiment that we consider is the pricing of  a European  basket call option in a Black-Scholes model. The basket is composed of $d$ assets ($d=3,8,25$) and we use the same trick of smoothing the integrand that was proposed in \cite{bayersmoothing}. In this case, the dimension of the parameter space $N=d-1$. The interpolation over the parameter space is based on the tensorized Lagrangian interpolation technique with Gaussian  points.
+The third experiment that we consider is the pricing of  a European  basket call option in a Black-Scholes model. The basket is composed of $d$ assets ($d=3,8,25$) and we use the same trick of smoothing the integrand that was proposed in \cite{bayersmoothing}. In this case, the dimension of the parameter space $N=d-1$. The interpolation over the parameter space is based on the tensorized Lagrangian interpolation technique with Gaussian  points. The aim of this section is to check the performance of MISC without time stepping. The main goal is to extend this case to the time stepping framework in the next section \ref{sec:The basket option under time stepping framework}
 
 
 %\newpage
@@ -1860,105 +1875,457 @@ we checked  that we achive the prescribed tolerance using MISC, the convergence 
 
 \FloatBarrier
 
-\subsection{The basket option under time stepping framework}\label{sec:The basket option under time stepping framework}
+\subsection{The basket call option under time stepping framework}\label{sec:The basket option under time stepping framework}
 
-
-\FloatBarrier
-
-\subsection{Results for  the CIR process}
-
-The impact of the Brownian bridge will disappear in the limit, which may make the effect of the smoothing, but also of the errors in the kink location difficult to identify . For this reason, we study a more complicated 1-dimensional problem. In fact, we use a CIR process. To avoid complications at the boundary, we use nice parameter choices, such that the discretized process is very unlikely to hit the boundary (Feller condition).
-
-
-
-The CIR model specifies that the instantaneous interest rate follows the SDE given by
-\begin{equation}\label{CIR_process}
-dX_t=a(b-X_t)dt+\sigma \sqrt{X_t} dW_t,\: X(0)=X_0>0
-\end{equation}
-where and $a>0$, $b>0$ and $\sigma>0$, are the parameters. The parameter $a$ corresponds to the speed of adjustment, $b$ to the mean and $\sigma$ to volatility. 
-
-If the parameters obey the following condition (known as the Feller condition) then the process $X_t$  is strictly positive
-\begin{equation}\label{Feller_condition}
-2 a b \geq\sigma^2.
-\end{equation}
-
-The SDE \eqref{CIR_process} is not explicitly solvable. In general there are two ways to do it, namely, exact simulation methods and approximation schemes. Exact simulation in general requires more time
-than a simulation with approximation schemes (Up to a factor 10). Therefore, it is used to compute expectations that depend on the values of the process at just a few fixed times. However, for expectations that depends on all the path (such as integrals) discretization schemes should be preferred. 
-
-The main problem  when discretizing a CIR process using Euler scheme is that it can lead to negative values for which the square root is not defined. In fact, if we consider the following straightforward Euler scheme on the time interval $[0,T]$ for a CIR process $X(t)$:
-\begin{equation}\label{Euler_CIR}
-\bar{X}(t_{i+1})=\bar{X}(t_i)+a(b-\bar{X}(t_i)) \Delta t_i+\sigma \sqrt{\bar{X}(t_i)} \Delta W_i,
-\end{equation}
-
-then it can lead to negative values since the Gaussian
-increment is not bounded from below. Thus, this  scheme is not well defined.
-
-Many modified Euler schemes were proposed to overcome this issue. For instance, Deelstra and Delbaen \cite{deelstra1998convergence} have propose the full truncation scheme given by
-\begin{equation}\label{Full_truncation_CIR}
-\bar{X}(t_{i+1})=\bar{X}(t_i)+a(b-\bar{X}(t_i)) \Delta t_i+\sigma \sqrt{\bar{X}(t_i)^+} \Delta W_i.
-\end{equation}
-
-Higham and Mao \cite{mao2007stochastic} proposed the following scheme
- \begin{equation}\label{partial_reflection_CIR}
- \bar{X}(t_{i+1})=\bar{X}(t_i)+a(b-\bar{X}(t_i)) \Delta t_i+\sigma \sqrt{\abs{\bar{X}(t_i)}} \Delta W_i.
- \end{equation}
- Lord et al \cite{lord2010comparison} proposed the following scheme
- 
- \begin{equation}\label{truncation_CIR}
- \bar{X}(t_{i+1})=\bar{X}(t_i)+a(b-\bar{X}(t_i)^+) \Delta t_i+\sigma \sqrt{\bar{X}(t_i)^+} \Delta W_i.
- \end{equation}
- 
- 
-Diop proposed in \cite{berkaoui2008euler} proposed the reflection scheme, given by
-\begin{equation}\label{Reflection_CIR}
-\bar{X}(t_{i+1})=\mid\bar{X}(t_i)+a(b-\bar{X}(t_i)) \Delta t_i+\sigma \sqrt{\bar{X}(t_i)} \Delta W_i \mid.
-\end{equation}
-Also, implicit and higher order schemes were proposed by Alfonsi \cite{alfonsi2005discretization,alfonsi2008second,alfonsi2010high}.
-
-Those modified Euler schemes were studied  numerically in \cite{alfonsi2005discretization}. It is observed that when $\sigma$ is small enough, typically $\sigma^2 \le 2a$, these schemes have a weak error of order one and a strong error of order $1/2$. However, when $\sigma$ is getting large, say $\sigma^2\gg 4a$, the convergence of all these schemes is degraded. As observed
-by Lord et al. \cite{lord2010comparison}, the schemes \eqref{Full_truncation_CIR} and \eqref{truncation_CIR} behave better than the schemes \eqref{partial_reflection_CIR} and \eqref{Reflection_CIR}. In fact, when $\sigma$ gets large, the CIR process spends more time close to zero and get stuck in the neighbourhood of zero when $\sigma$ is really large. When the scheme takes a negative value, the absolute value in  both schemes (\eqref{partial_reflection_CIR},\eqref{Reflection_CIR}) produces a noise that pushes the scheme away from zero. On the other hand, the positive part in truncation schemes cancels the noise when the scheme gets negative, which better reproduces the behaviour of the
-CIR process. 
-
-In the following, we use the scheme given by \eqref{Full_truncation_CIR} to simulate the discrete CIR process.
-\subsubsection{Location of the kink for the discrete problem: Using full truncation scheme}\label{sec:kink_location_full_truncation)_CIR}
-
-
-The full truncation scheme simulating the CIR process is given by \eqref{Full_truncation_CIR}. Here we are interested in finding the location of the kink for hockey-stick function.
-
-
-Using Brownian bridge construction given by \eqref{Brownian_bridge}, we have
-\begin{align}\label{recursion_full_truncation_CIR}
-X_{t_1}&= X_{t_0} \left[ 1- a \Delta t  \right]+ \sigma \sqrt{X_{t_0}^+} \left[   Y \frac{\Delta t}{\sqrt{T}} + \Delta B_0\right]+ ab \Delta t\nonumber\\
-X_{t_2}&= X_{t_1} \left[ 1- a \Delta t  \right]+ \sigma \sqrt{X_{t_1}^+} \left[   Y \frac{\Delta t}{\sqrt{T}} + \Delta B_1\right]+ ab \Delta t \nonumber\\ 
-\vdots &= \vdots =\vdots \nonumber\\
-X_{t_N}&= X_{t_{N-1}} \left[ 1- a \Delta t  \right]+ \sigma \sqrt{X_{t_{N-1}}^+} \left[   Y \frac{\Delta t}{\sqrt{T}} + \Delta B_{N-1} \right]+ ab \Delta t ,
-\end{align}
-
-
-to simplify the notation we set $f_i(y):=X_{t_i}$. Then  the location of the kink point for the approximate problem is equivalent to finding the roots of the polynomial $P(y_\ast(K))$, given by
-\begin{align}\label{polynomial_kink_location_CIR_full_truncation}
-P(y_{\ast}(K))=f_N(y_\ast(K))-\frac{K}{X_0},
-\end{align}
-where $f_N(y)$ is computed using recursion \eqref{recursion_full_truncation_CIR}.
-
-To apply the \textbf{Newton iteration method}, we need the derivative $P'=\frac{d P}{d y_\ast}=f_N'$, which is deduced from recursion \eqref{recursion_full_truncation_CIR}, and given by the the following relation
+The fourth example that we test is basket option under BS model where the process $\mathbf{X}$ is the discretized $d$-dimensional Black-Scholes model and the payoff function $g$ is given by
 \begin{align}
-f_i'(y) &= f_{i-1}'(y)\left[1-a \Delta t \right]+ \sigma \sqrt{f_{i-1}(y)^+} \left[ \frac{\Delta t}{\sqrt{T}}+ \left[y \frac{\Delta t}{\sqrt{T}}+\Delta B_{i-1}\right] \frac{f_{i-1}'(y)}{2} \right],\: 1 \le i \le N \nonumber\\
-f_0'&=0.
+g(\mathbf{X}(T))=\max\left(\sum_{i=1}^{d} \omega_{i} X^{(i)}(T)-K,0  \right)	
+\end{align}
+ Precisely, we are interested in the  $d$-dimensional lognormal example where the dynamics of the stock are given by
+
+\begin{align}\label{lognormal_dynamics_basket}
+	dX^{(i)}_t=\sigma^{(i)} X^{(i)}_t dW^{(i)}_t,
+\end{align}
+
+where $\{W^{(1)}, \dots,W^{(d)}\}$ are correlated Brownian motions with correlations $\rho_{ij}$.
+
+
+In the discrete case, we have
+
+\begin{align}\label{Brownian_bridge_BS_basket}
+	\Delta W^{(j)}_i&=(B^{(j)}_{t_{i+1}}-B^{(j)}_{t_i})+\Delta t \frac{z_1^{(j)}}{\sqrt{T}}, \quad 1 \le j \le d \nonumber\\
+	&= \Delta B^{(j)}_i + \Delta t \frac{z_1^{(j)}}{\sqrt{T}}, \quad 1 \le j \le d ,
+\end{align}
+
+implying that the numerical approximation of $X^{(j)}(T)$ satisfies
+\begin{align}
+	\bar{X}^{(j)}_T&=\Phi(\Delta t, z_1^{(j)}, \Delta B^{(j)}_0,\dots,\Delta B^{(j)}_{N-1}),  \quad 1 \le j \le d, \\ \nonumber
+	&=\Phi(\Delta t, \Psi(z_1^{(j)},\dots,z_N^{(j)})), \quad 1 \le j \le d,
+\end{align}
+for some path function $\Phi$ and Brwonian bridge map $\Psi$ as described in Section \ref{sec:Brwonian bridge construction}.
+
+
+
+Using results from section \ref{sec:The discretized 1D Black-Scholes}, we have
+
+\begin{align}
+	\bar{X}^{(j)}(T)=X_0^{(j)} \prod_{i=0}^{N-1} \left[ 1+\frac{\sigma^{(j)}}{\sqrt{T}} z^{(j)}_1 \Delta t+ \sigma^{(j)} \Delta B^{(j)}_{i}\right], \quad 1 \le j \le d.
+\end{align}
+Therefore, in order to determine $\mathbf{y}_{\ast}=(y_{\ast}^{(1)},\dots,y_{\ast}^{(d)})$, we need to solve
+\begin{align}
+	\mathbf{x}=\sum_{j=1}^{d} \omega_j X^{(j)}_0 \prod_{i=0}^{N-1} \left[ 1+\frac{\sigma^{(j)}}{\sqrt{T}} y^{(j)}_{\ast}(\mathbf{x}) \Delta t+ \sigma^{(j)} \Delta B^{(j)}_{i}\right],
+\end{align}
+
+which implies that the location of the kink point for the approximate problem is equivalent to finding the roots of the polynomial $P(\mathbf{y}_\ast(K))$, given by
+\begin{align}\label{polynomial_kink_location_basket}
+	P(\mathbf{y}_{\ast}(K))&=\sum_{j=1}^{d} \omega_j X^{(j)}_0 \prod_{i=0}^{N-1} \left[ 1+\frac{\sigma^{(j)}}{\sqrt{T}} y^{(j)}_{\ast} \Delta t+ \sigma^{(j)} \Delta B^{(j)}_{i}\right]-K, \nonumber\\
+	&=\sum_{j=1}^{d} \omega_j X^{(j)}_0 \left(\prod_{i=0}^{N-1} \left[ 1+\frac{\sigma^{(j)}}{\sqrt{T}} y_\ast^{(j)} \Delta t+ \sigma^{(j)} \Delta B^{(j)}_{i}\right]-\frac{K}{ \omega_j X^{(j)}_0  d}\right) \nonumber\\
+	&=\sum_{j=1}^{d} \omega_j X^{(j)}_0 P^{(j)}\left(y_\ast^{(j)}\left(\frac{K}{ \omega_j X^{(j)}_0  d }\right)\right)
+\end{align}
+
+Therefore, the problem of finding the kink in the $d$-dimensional problem is brought to finding the location of the kink for each dimension by solving the root of the polynomial $P^{(j)}\left(y_\ast^{(j)}\left(\frac{K}{\omega_j X^{(j)}_0 }\right)\right)$.  
+
+Using  \textbf{Newton iteration method}, we use the expression $P'=\frac{d P^{(j)}}{d y_\ast^{(j)}}$. If we denote $f_i^{(j)}(y)=1+\frac{\sigma^{(j)}}{\sqrt{T}} y \Delta t+ \sigma^{(j)} \Delta B^{(j)}_{i}$, then we can easily show that
+\begin{align}\label{polynomial_kink_location_derivative_basket}
+	P'^{(j)}(y)=\frac{\sigma^{(j)} \Delta t}{\sqrt{T}} \left( \prod_{i=0}^{N-1} f_i^{(j)}(y)\right) \left[ \sum_{i=0}^{N-1} \frac{1}{f_i^{(j)}(y)}\right].
 \end{align}
 
 
 
 
-\subsubsection{Results}
-The code of this section is found in the script discretized\_CIR.py, which compares the different ways of determining the kink location for 1D CIR model.
+Therefore, in this case, the integrand $h(\mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1})$ (as expressed in \ref{eq: pre_integration_step_wrt_y1_basket}) is given by
 
+\begin{align}\label{smoothed_integrand_basket_opt_2d}
+	h(\mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1})&= \int_{\Omega}  \max  \left[ \left(\sum_{j=1}^{d} \Phi \circ \Psi(T;z_1^{(j)},\mathbf{z}^{(j)}_{-1})\right)-K,0\right]   \rho_d(z_1^{(1)},\dots,z_1^{(d)}) dz_1^{(1)}\dots dz_1^{(d)}
+\end{align}
+
+
+We get the kink point by running Newton iteration in each dimension seperately for root solving of each polynomial $P^{(j)}$ as expressed in \ref{polynomial_kink_location_basket} with a precision of $10^{-10}$. We  decompose the total integration domain $\Omega$  into sub-domains $\Omega_i,\: i=1,2,\dots, 2^d$ such that the integrand is smooth in the interior of  $\Omega_i$ and such that the kink is located along the boundary of these areas. The total integral is then given as the sum of the separate integrals, \ie
+\begin{align}
+	h(\mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1}) &:=  \int_{\Omega}  \max  \left[ \left(\sum_{j=1}^{d} \Phi \circ \Psi(T;z_1^{(j)},\mathbf{z}^{(j)}_{-1})\right)-K,0\right]   \rho_d(z_1^{(1)},\dots,z_1^{(d)}) dz_1^{(1)}\dots dz_1^{(d)}  \nonumber\\
+	&=\sum_{i=1}^{2^d}	\int_{\Omega_i} 
+	 \max  \left[ \left(\sum_{j=1}^{d} \Phi \circ \Psi(T;z_1^{(j)},\mathbf{z}^{(j)}_{-1})\right)-K,0\right]   \rho_d(z_1^{(1)},\dots,z_1^{(d)}) dz_1^{(1)}\dots dz_1^{(d)},
+\end{align}
+
+where we use Gauss-laguerre quadrature with $\beta$ points to get each part.
+
+\FloatBarrier
+\subsubsection{Weak error plots for $2$-dimensional Basket call option} \label{sec:Weak error plots_Basket_2D_call}
+
+We consider the case of $2$-dimensional Basket call option, with parameters: $S^{(1,2)}=100$, $K=100$, $\sigma^{(1,2)}=0.2$, $\rho=0.3$, $r=0$, $T=1$.  The MC  value of this case (with large number of samples) is $6.437949$ with a statistical error equal to $	0.000328$.
+
+
+In this section, we include the results of weak error rates for $2$ scenarios, without/with Richardson extrapolation (level $1$). We note that the weak errors plotted here correspond to relative errors.  We note that in order to get accurate estimates of the bias, we needed to kill the laguerre quadrature error by increasing $\beta$ ($\beta$: the number of quadrature points used for Laguere to get $h(\mathbf{z}_{-1})$). For illustration, we show to cases $\beta=32$ and $\beta=64$. We mention that from our numerical experiences that the bias did not change as we increase $\beta$ greater than $64$ points.
+
+Focusing on the results produced by seeting $\beta=64$ (which gives the right behavior to be observed for the bias), we can see from figure \ref{fig:Weak_rate_call_without_rich_beta_64} that we get a weak error of order $\Delta t$ for the case without Richardson extrapolation. From figure \ref{fig:Weak_rate_call_with_rich_level1_beta_64}, we observe an improvement in the rate and the constant when using level $1$ of Richardson extrapolation, approximately of order $\Delta t^2$. For all the plots below, the upper and lower bounds are $95\%$ confidence interval.
+
+\subsubsection*{$\beta=16$}
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/weak_error_rates_basket_2d/without_richardson/Beta_16/weak_convergence_order_basket_option_2d_1_relative_M_10_5_beta_16}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/weak_error_rates_basket_2d/without_richardson/Beta_16/weak_convergence_order_differences_basket_option_2d_1_relative_M_10_5_beta_16}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of the weak error for the Basket ($2$-dimensional) call option, without Richardson extraploation, using MC with $M=10^5$: a) $\abs{\expt{g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{g(X_{\Delta t})-g(X_{\Delta t/2})}}$ }
+	\label{fig:Weak_rate_basket_2d_without_rich_beta_16}
+\end{figure}
+
+\subsubsection*{$\beta=32$}
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/weak_error_rates_basket_2d/without_richardson/Beta_32/weak_convergence_order_basket_option_2d_1_relative_M_5_10_4_beta_32}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/weak_error_rates_basket_2d/without_richardson/Beta_32/weak_convergence_order_differences_basket_option_2d_1_relative_M_5_10_4_beta_32}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of the weak error for the Basket ($2$-dimensional) call option, without Richardson extraploation, using MC with $5.M=10^4$: a) $\abs{\expt{g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{g(X_{\Delta t})-g(X_{\Delta t/2})}}$ }
+	\label{fig:Weak_rate_basket_2d_without_rich_beta_32}
+\end{figure}
+
+\subsubsection*{$\beta=64$}
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/weak_error_rates_basket_2d/without_richardson/Beta_64/weak_convergence_order_basket_option_2d_1_relative_M_5_10_4_beta_64}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/weak_error_rates_basket_2d/without_richardson/Beta_64/weak_convergence_order_differences_basket_option_2d_1_relative_M_5_10_4_beta_64}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of the weak error for the Basket ($2$-dimensional) call option, without Richardson extraploation, using MC with $5.M=10^4$: a) $\abs{\expt{g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{g(X_{\Delta t})-g(X_{\Delta t/2})}}$ }
+	\label{fig:Weak_rate_basket_2d_without_rich_beta_64}
+\end{figure}
 
 
 
 
 
 \FloatBarrier
+\subsubsection{Comparing relative errors}\label{sec:Comparing relative errors, basket call}
+\subsubsection*{Without Richardson extrapolation}
+\subsubsection*{$\beta=8$}
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$ &   \\
+		\hline
+		MISC ($TOl=5.10^{-1},\beta=8$)  & $  6.3988$ & $ 6.3726$ & $
+		6.3684$ & $ -
+		$  \\
+		MISC ($TOl=10^{-1},\beta=8$)  & $  6.3988$ & $
+		6.3897$ & $ 6.3849
+		$ &$-$  \\
+		MISC ($TOl=5.10^{-2},\beta=8$) & $  6.3988$ & $
+		6.3938$ & $ 6.3869
+		$ & $    -$  \\
+		MISC ($TOl=10^{-2},\beta=8$) & $ 6.4055$ & $   6.3969$ & $6.3880$ &$-$  \\
+		MISC ($TOl=10^{-3},\beta=8$) &  $ 6.4055$ & $    6.3969$ & $-$ & $-$  \\
+			MISC ($TOl=10^{-4},\beta=8$) &  $ 6.4055$ & $    6.3969$& $-$ & $-$  \\
+		\hline
+		MC method ($M=10^{7}$)   & $ - $ & $  -$ & $
+	$ & $  $  \\
+		\hline
+	\end{tabular}
+	\caption{Basket ($2$-dimensional) Call option price of the different methods for different number of time steps, without Richardson extrapolation.}
+	\label{table:Basket 2d option price of the different methods for different number of time steps, without Richardson extrapolation, beta_8}
+\end{table}
+
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{l*{6}{c}r}
+Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$ &   \\
+\hline
+MISC ($TOl=5.10^{-1}$) & $2.4$ & $8$ & $110$ & $-$  \\
+MISC ($TOl=10^{-1}$)  & $2.4$ & $37$ & $137$ & $-$  \\
+MISC ($TOl=5.10^{-2}$)  & $2.4$ & $42$ & $203$ & $-$  \\
+MISC ($TOl=10^{-2}$)  & $5$ & $45$ & $970$ & $-$  \\
+MISC ($TOl=10^{-3}$)   & $5$ & $126$ & $-$ & $-$  \\
+MISC ($TOl=10^{-4}$)   & $5$ & $191$ & $-$ & $-$  \\
+\hline
+MC method +root finding   & $\red{-}$ & $\red{-}$ & $\red{-}$ & $\red{-}$  \\
+MC method & $\red{-}$ & $\red{-}$ & $\red{-}$ & $\red{-
+}$  \\
+\hline
+
+Ratio of	$\text{(MC+root finding)}/\text{(MISC)}$ & $\red{-}$ & $\red{  -}$ & $\red{-}$ & $\red{ -}$  \\
+Ratio of	$(\text{MC})/(\text{MISC})$ & $\red{ -}$ & $\red{ -}$ & $\red{-}$ & $\red{ -}$  \\
+\hline
+\end{tabular}
+\caption{Comparison of the computational time of  MC and MISC, used to compute Basket ($2$-dimensional) Call option price  for different number of time steps, without Richardson extrapolation}
+\label{Comparsion of the computational time of  MC and MISC, used to compute Basket 2d Call option price  for different number of time steps, without Richardson extrapolation, beta_8}
+\end{table}
+
+
+
+\FloatBarrier
+\subsubsection*{$\beta=16$}
+\begin{table}[h!]
+\centering
+\begin{tabular}{l*{6}{c}r}
+Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$ &   \\
+\hline
+MISC ($TOl=5.10^{-1},\beta=16$)  & $
+6.4701$ & $  6.4443$ & $  6.4399$ & $
+6.4441$  \\
+MISC ($TOl=10^{-1},\beta=16$)  & $
+6.4701$ & $6.4613
+$ & $
+6.4564$ &$-$  \\
+MISC ($TOl=5.10^{-2},\beta=16$) & $
+6.4701$ & $   6.4661
+$ & $6.4574
+$ & $-$  \\
+MISC ($TOl=10^{-2},\beta=16$) & $  6.4770$ & $ 6.4683$ & $  6.4592
+$ &$-$  \\
+MISC ($TOl=10^{-3},\beta=16$) & $  6.4770$ & $6.4683$ & $-$ & $-$  \\
+MISC ($TOl=10^{-4},\beta=16$) & $  6.4770$ & $-$ & $-$ & $-$  \\
+\hline
+MC method ($M=10^{7}$)   & $  -
+$ & $ -$ & $
+$ & $  $  \\
+\hline
+\end{tabular}
+\caption{Basket ($2$-dimensional) Call option price of the different methods for different number of time steps, without Richardson extrapolation.}
+\label{table:Basket 2d option price of the different methods for different number of time steps, without Richardson extrapolation, beta_16}
+\end{table}
+
+
+
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$ &   \\
+		\hline
+		MISC ($TOl=5.10^{-1}$) & $5$ & $17$ & $260$ & $1765$  \\
+		MISC ($TOl=10^{-1}$)  & $5$ & $61$ & $372$ & $-$  \\
+		MISC ($TOl=5.10^{-2}$)  & $5$ & $74$ & $395$ & $-$  \\
+		MISC ($TOl=10^{-2}$)  & $10$ & $85$ & $1420$ & $-$  \\
+		MISC ($TOl=10^{-3}$)   & $10$ & $205$ & $-$ & $-$  \\
+			MISC ($TOl=10^{-4}$)   & $10$ & $-$ & $-$ & $-$  \\
+		\hline
+		MC method +root finding   & $\red{-}$ & $\red{-}$ & $\red{-}$ & $\red{-}$  \\
+		MC method & $\red{-}$ & $\red{-}$ & $\red{-}$ & $\red{-
+		}$  \\
+		\hline
+		
+		Ratio of	$\text{(MC+root finding)}/\text{(MISC)}$ & $\red{-}$ & $\red{  -}$ & $\red{-}$ & $\red{ -}$  \\
+		Ratio of	$(\text{MC})/(\text{MISC})$ & $\red{ -}$ & $\red{ -}$ & $\red{-}$ & $\red{ -}$  \\
+		\hline
+	\end{tabular}
+	\caption{Comparison of the computational time of  MC and MISC, used to compute Basket ($2$-dimensional) Call option price  for different number of time steps, without Richardson extrapolation}
+	\label{Comparsion of the computational time of  MC and MISC, used to compute Basket 2d Call option price  for different number of time steps, without Richardson extrapolation, beta_16}
+\end{table}
+\FloatBarrier
+\subsubsection*{With Richardson extrapolation (level $1$)}
+
+\subsubsection*{$\beta=8$}
+
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $1-2$ & $2-4$ & $4-8$ & $8-16$ &   \\
+		\hline
+		MISC ($TOl=5.10^{-1}$) & $  -$ & $-$ & $-$ & $-$  \\
+		MISC ($TOl=10^{-1}$)  & $  -$ & $-$ & $-$ & $-$  \\
+		MISC ($TOl=5.10^{-2}$) & $  -$ & $-$ & $-$ & $-$  \\
+		MISC ($TOl=10^{-2}$) & $  -$ & $-$ & $-$ & $-$  \\
+		MISC ($TOl=10^{-3}$) & $  -$ & $-$ & $-$ & $-$  \\
+		\hline
+		MC method ($M=5.10^{6}$)   & $  -$ & $-$ & $-$ & $-$  \\
+		\hline
+	\end{tabular}
+	\caption{Call option price of the different methods for different number of time steps, with Richardson extrapolation (level $1$).}
+	\label{table: Call option price of the different methods for different number of time steps, with Richardson extrapolation (level1),beta_8}
+\end{table}
+
+
+
+
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $1-2$ & $2-4$ & $4-8$ & $8-16$ &   \\
+		\hline
+		MISC ($TOl=5.10^{-1}$) & $-$  & $-$ & $-$ & $-$  \\
+		MISC ($TOl=10^{-1}$)  & $-$  & $-$ & $-$ & $-$  \\
+		MISC ($TOl=5.10^{-2}$)  & $-$  & $-$ & $-$ & $-$  \\
+		MISC ($TOl=10^{-2}$) & $-$  & $-$ & $-$ & $-$  \\
+		MISC ($TOl=10^{-3}$)   & $-$  & $-$ & $-$ & $-$  \\
+		\hline
+	
+		\hline
+		\end{tabular}
+		\caption{Comparsion of the computational time of  MISC, used to compute Call option price  for different number of time steps, with Richardson extrapolation (level $1$)}
+		\label{Comparsion of the computational time of  MC and MISC, used to compute Call option price  for different number of time steps, with Richardson extrapolation (level $1$),beta_8}
+		\end{table}
+\FloatBarrier
+\subsubsection*{$\beta=16$}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $1-2$ & $2-4$ & $4-8$ & $8-16$ &   \\
+		\hline
+		MISC ($TOl=5.10^{-1}$) & $  -$ & $-$ & $-$ & $-$  \\
+		MISC ($TOl=10^{-1}$)  & $  -$ & $-$ & $-$ & $-$  \\
+		MISC ($TOl=5.10^{-2}$) & $  -$ & $-$ & $-$ & $-$  \\
+		MISC ($TOl=10^{-2}$) & $  -$ & $-$ & $-$ & $-$  \\
+		MISC ($TOl=10^{-3}$) & $  -$ & $-$ & $-$ & $-$  \\
+		\hline
+		MC method ($M=5.10^{6}$)   & $  -$ & $-$ & $-$ & $-$  \\
+		\hline
+	\end{tabular}
+	\caption{Call option price of the different methods for different number of time steps, with Richardson extrapolation (level $1$).}
+	\label{table: Call option price of the different methods for different number of time steps, with Richardson extrapolation (level1),beta_16}
+\end{table}
+
+
+
+
+
+
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $1-2$ & $2-4$ & $4-8$ & $8-16$ &   \\
+		\hline
+		MISC ($TOl=5.10^{-1}$) & $-$  & $-$ & $-$ & $-$  \\
+		MISC ($TOl=10^{-1}$)  & $-$  & $-$ & $-$ & $-$  \\
+		MISC ($TOl=5.10^{-2}$)  & $-$  & $-$ & $-$ & $-$  \\
+		MISC ($TOl=10^{-2}$) & $-$  & $-$ & $-$ & $-$  \\
+		MISC ($TOl=10^{-3}$)   & $-$  & $-$ & $-$ & $-$  \\
+		\hline
+		
+		\hline
+	\end{tabular}
+	\caption{Comparsion of the computational time of  MISC, used to compute Call option price  for different number of time steps, with Richardson extrapolation (level $1$)}
+	\label{Comparsion of the computational time of  MC and MISC, used to compute Call option price  for different number of time steps, with Richardson extrapolation (level $1$),beta_16}
+\end{table}
+\FloatBarrier
+%\subsection{Results for  the CIR process}
+%
+%The impact of the Brownian bridge will disappear in the limit, which may make the effect of the smoothing, but also of the errors in the kink location difficult to identify . For this reason, we study a more complicated 1-dimensional problem. In fact, we use a CIR process. To avoid complications at the boundary, we use nice parameter choices, such that the discretized process is very unlikely to hit the boundary (Feller condition).
+%
+%
+%
+%The CIR model specifies that the instantaneous interest rate follows the SDE given by
+%\begin{equation}\label{CIR_process}
+%dX_t=a(b-X_t)dt+\sigma \sqrt{X_t} dW_t,\: X(0)=X_0>0
+%\end{equation}
+%where and $a>0$, $b>0$ and $\sigma>0$, are the parameters. The parameter $a$ corresponds to the speed of adjustment, $b$ to the mean and $\sigma$ to volatility. 
+%
+%If the parameters obey the following condition (known as the Feller condition) then the process $X_t$  is strictly positive
+%\begin{equation}\label{Feller_condition}
+%2 a b \geq\sigma^2.
+%\end{equation}
+%
+%The SDE \eqref{CIR_process} is not explicitly solvable. In general there are two ways to do it, namely, exact simulation methods and approximation schemes. Exact simulation in general requires more time
+%than a simulation with approximation schemes (Up to a factor 10). Therefore, it is used to compute expectations that depend on the values of the process at just a few fixed times. However, for expectations that depends on all the path (such as integrals) discretization schemes should be preferred. 
+%
+%The main problem  when discretizing a CIR process using Euler scheme is that it can lead to negative values for which the square root is not defined. In fact, if we consider the following straightforward Euler scheme on the time interval $[0,T]$ for a CIR process $X(t)$:
+%\begin{equation}\label{Euler_CIR}
+%\bar{X}(t_{i+1})=\bar{X}(t_i)+a(b-\bar{X}(t_i)) \Delta t_i+\sigma \sqrt{\bar{X}(t_i)} \Delta W_i,
+%\end{equation}
+%
+%then it can lead to negative values since the Gaussian
+%increment is not bounded from below. Thus, this  scheme is not well defined.
+%
+%Many modified Euler schemes were proposed to overcome this issue. For instance, Deelstra and Delbaen \cite{deelstra1998convergence} have propose the full truncation scheme given by
+%\begin{equation}\label{Full_truncation_CIR}
+%\bar{X}(t_{i+1})=\bar{X}(t_i)+a(b-\bar{X}(t_i)) \Delta t_i+\sigma \sqrt{\bar{X}(t_i)^+} \Delta W_i.
+%\end{equation}
+%
+%Higham and Mao \cite{mao2007stochastic} proposed the following scheme
+% \begin{equation}\label{partial_reflection_CIR}
+% \bar{X}(t_{i+1})=\bar{X}(t_i)+a(b-\bar{X}(t_i)) \Delta t_i+\sigma \sqrt{\abs{\bar{X}(t_i)}} \Delta W_i.
+% \end{equation}
+% Lord et al \cite{lord2010comparison} proposed the following scheme
+% 
+% \begin{equation}\label{truncation_CIR}
+% \bar{X}(t_{i+1})=\bar{X}(t_i)+a(b-\bar{X}(t_i)^+) \Delta t_i+\sigma \sqrt{\bar{X}(t_i)^+} \Delta W_i.
+% \end{equation}
+% 
+% 
+%Diop proposed in \cite{berkaoui2008euler} proposed the reflection scheme, given by
+%\begin{equation}\label{Reflection_CIR}
+%\bar{X}(t_{i+1})=\mid\bar{X}(t_i)+a(b-\bar{X}(t_i)) \Delta t_i+\sigma \sqrt{\bar{X}(t_i)} \Delta W_i \mid.
+%\end{equation}
+%Also, implicit and higher order schemes were proposed by Alfonsi \cite{alfonsi2005discretization,alfonsi2008second,alfonsi2010high}.
+%
+%Those modified Euler schemes were studied  numerically in \cite{alfonsi2005discretization}. It is observed that when $\sigma$ is small enough, typically $\sigma^2 \le 2a$, these schemes have a weak error of order one and a strong error of order $1/2$. However, when $\sigma$ is getting large, say $\sigma^2\gg 4a$, the convergence of all these schemes is degraded. As observed
+%by Lord et al. \cite{lord2010comparison}, the schemes \eqref{Full_truncation_CIR} and \eqref{truncation_CIR} behave better than the schemes \eqref{partial_reflection_CIR} and \eqref{Reflection_CIR}. In fact, when $\sigma$ gets large, the CIR process spends more time close to zero and get stuck in the neighbourhood of zero when $\sigma$ is really large. When the scheme takes a negative value, the absolute value in  both schemes (\eqref{partial_reflection_CIR},\eqref{Reflection_CIR}) produces a noise that pushes the scheme away from zero. On the other hand, the positive part in truncation schemes cancels the noise when the scheme gets negative, which better reproduces the behaviour of the
+%CIR process. 
+%
+%In the following, we use the scheme given by \eqref{Full_truncation_CIR} to simulate the discrete CIR process.
+%\subsubsection{Location of the kink for the discrete problem: Using full truncation scheme}\label{sec:kink_location_full_truncation)_CIR}
+%
+%
+%The full truncation scheme simulating the CIR process is given by \eqref{Full_truncation_CIR}. Here we are interested in finding the location of the kink for hockey-stick function.
+%
+%
+%Using Brownian bridge construction given by \eqref{Brownian_bridge}, we have
+%\begin{align}\label{recursion_full_truncation_CIR}
+%X_{t_1}&= X_{t_0} \left[ 1- a \Delta t  \right]+ \sigma \sqrt{X_{t_0}^+} \left[   Y \frac{\Delta t}{\sqrt{T}} + \Delta B_0\right]+ ab \Delta t\nonumber\\
+%X_{t_2}&= X_{t_1} \left[ 1- a \Delta t  \right]+ \sigma \sqrt{X_{t_1}^+} \left[   Y \frac{\Delta t}{\sqrt{T}} + \Delta B_1\right]+ ab \Delta t \nonumber\\ 
+%\vdots &= \vdots =\vdots \nonumber\\
+%X_{t_N}&= X_{t_{N-1}} \left[ 1- a \Delta t  \right]+ \sigma \sqrt{X_{t_{N-1}}^+} \left[   Y \frac{\Delta t}{\sqrt{T}} + \Delta B_{N-1} \right]+ ab \Delta t ,
+%\end{align}
+%
+%
+%to simplify the notation we set $f_i(y):=X_{t_i}$. Then  the location of the kink point for the approximate problem is equivalent to finding the roots of the polynomial $P(y_\ast(K))$, given by
+%\begin{align}\label{polynomial_kink_location_CIR_full_truncation}
+%P(y_{\ast}(K))=f_N(y_\ast(K))-\frac{K}{X_0},
+%\end{align}
+%where $f_N(y)$ is computed using recursion \eqref{recursion_full_truncation_CIR}.
+%
+%To apply the \textbf{Newton iteration method}, we need the derivative $P'=\frac{d P}{d y_\ast}=f_N'$, which is deduced from recursion \eqref{recursion_full_truncation_CIR}, and given by the the following relation
+%\begin{align}
+%f_i'(y) &= f_{i-1}'(y)\left[1-a \Delta t \right]+ \sigma \sqrt{f_{i-1}(y)^+} \left[ \frac{\Delta t}{\sqrt{T}}+ \left[y \frac{\Delta t}{\sqrt{T}}+\Delta B_{i-1}\right] \frac{f_{i-1}'(y)}{2} \right],\: 1 \le i \le N \nonumber\\
+%f_0'&=0.
+%\end{align}
+%
+%
+%
+%
+%\subsubsection{Results}
+%The code of this section is found in the script discretized\_CIR.py, which compares the different ways of determining the kink location for 1D CIR model.
+%
+%
+%
+%
+%
+%
+%\FloatBarrier
 
 
 
