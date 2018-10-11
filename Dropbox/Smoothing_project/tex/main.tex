@@ -1877,6 +1877,7 @@ we checked  that we achive the prescribed tolerance using MISC, the convergence 
 
 \subsection{The basket call option under time stepping framework}\label{sec:The basket option under time stepping framework}
 
+
 The fourth example that we test is basket option under BS model where the process $\mathbf{X}$ is the discretized $d$-dimensional Black-Scholes model and the payoff function $g$ is given by
 \begin{align}
 g(\mathbf{X}(T))=\max\left(\sum_{i=1}^{d} \omega_{i} X^{(i)}(T)-K,0  \right)	
@@ -1940,7 +1941,7 @@ Therefore, in this case, the integrand $h(\mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}
 \end{align}
 
 
-We get the kink point by running Newton iteration in each dimension seperately for root solving of each polynomial $P^{(j)}$ as expressed in \ref{polynomial_kink_location_basket} with a precision of $10^{-10}$. We  decompose the total integration domain $\Omega$  into sub-domains $\Omega_i,\: i=1,2,\dots, 2^d$ such that the integrand is smooth in the interior of  $\Omega_i$ and such that the kink is located along the boundary of these areas. The total integral is then given as the sum of the separate integrals, \ie
+We get the kink point by running Newton iteration in each dimension seperately for root solving of each polynomial $P^{(j)}$ as expressed in \eqref{polynomial_kink_location_basket} with a precision of $10^{-10}$. We  decompose the total integration domain $\Omega$  into sub-domains $\Omega_i,\: i=1,2,\dots, 2^d$ such that the integrand is smooth in the interior of  $\Omega_i$ and such that the kink is located along the boundary of these areas. The total integral is then given as the sum of the separate integrals, \ie
 \begin{align}
 	h(\mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1}) &:=  \int_{\Omega}  \max  \left[ \left(\sum_{j=1}^{d} \Phi \circ \Psi(T;z_1^{(j)},\mathbf{z}^{(j)}_{-1})\right)-K,0\right]   \rho_d(z_1^{(1)},\dots,z_1^{(d)}) dz_1^{(1)}\dots dz_1^{(d)}  \nonumber\\
 	&=\sum_{i=1}^{2^d}	\int_{\Omega_i} 
@@ -1950,165 +1951,98 @@ We get the kink point by running Newton iteration in each dimension seperately f
 where we use Gauss-laguerre quadrature with $\beta$ points to get each part.
 
 \FloatBarrier
-\subsubsection{Weak error plots for $2$-dimensional Basket call option} \label{sec:Weak error plots_Basket_2D_call}
+\subsubsection{Case of  $2$-dimensional Basket call option}
+\subsubsection*{Weak error plots} \label{sec:Weak error plots_Basket_2D_call}
 
-We consider the case of $2$-dimensional Basket call option, with parameters: $S^{(1,2)}=100$, $K=100$, $\sigma^{(1,2)}=0.2$, $\rho=0.3$, $r=0$, $T=1$.  The MC  value of this case (with large number of samples) is $6.437949$ with a statistical error equal to $	0.000328$.
+We consider the case of $2$-dimensional Basket call option, with parameters: $S^{(1,2)}=100$, $K=100$, $\sigma^{(1,2)}=0.4$, $\rho=0.3$, $r=0$, $T=1$.  The MC  value of this case (with large number of samples) is $12.900784$ with a statistical error equal to $	0.001033$ (Provided by Premia).
 
 
-In this section, we include the results of weak error rates for $2$ scenarios, without/with Richardson extrapolation (level $1$). We note that the weak errors plotted here correspond to relative errors.  We note that in order to get accurate estimates of the bias, we needed to kill the laguerre quadrature error by increasing $\beta$ ($\beta$: the number of quadrature points used for Laguere to get $h(\mathbf{z}_{-1})$). For illustration, we show to cases $\beta=32$ and $\beta=64$. We mention that from our numerical experiences that the bias did not change as we increase $\beta$ greater than $64$ points.
+In this section, we include the results of weak error rates for $2$ scenarios, without/with Richardson extrapolation (level $1$). We note that the weak errors plotted here correspond to relative errors.  
 
-Focusing on the results produced by seeting $\beta=64$ (which gives the right behavior to be observed for the bias), we can see from figure \ref{fig:Weak_rate_call_without_rich_beta_64} that we get a weak error of order $\Delta t$ for the case without Richardson extrapolation. From figure \ref{fig:Weak_rate_call_with_rich_level1_beta_64}, we observe an improvement in the rate and the constant when using level $1$ of Richardson extrapolation, approximately of order $\Delta t^2$. For all the plots below, the upper and lower bounds are $95\%$ confidence interval.
+ We can see from figure \ref{fig:Weak_rate_basket_2d_without_rich} that we get a weak error of order $\Delta t$ for the case without Richardson extrapolation. 
+ 
+% From figure \ref{fig:Weak_rate_call_with_rich_level1_beta_64}, we observe an improvement in the rate and the constant when using level $1$ of Richardson extrapolation, approximately of order $\Delta t^2$. For all the plots below, the upper and lower bounds are $95\%$ confidence interval.
 
-\subsubsection*{$\beta=16$}
-\begin{figure}[h!]
-	\centering
-	\begin{subfigure}{.4\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{./figures/weak_error_rates_basket_2d/without_richardson/Beta_16/weak_convergence_order_basket_option_2d_1_relative_M_10_5_beta_16}
-		\caption{}
-		\label{fig:sub3}
-	\end{subfigure}%
-	\begin{subfigure}{.4\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{./figures/weak_error_rates_basket_2d/without_richardson/Beta_16/weak_convergence_order_differences_basket_option_2d_1_relative_M_10_5_beta_16}
-		\caption{}
-		\label{fig:sub4}
-	\end{subfigure}
-	
-	\caption{The rate of convergence of the weak error for the Basket ($2$-dimensional) call option, without Richardson extraploation, using MC with $M=10^5$: a) $\abs{\expt{g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{g(X_{\Delta t})-g(X_{\Delta t/2})}}$ }
-	\label{fig:Weak_rate_basket_2d_without_rich_beta_16}
-\end{figure}
 
-\subsubsection*{$\beta=32$}
 
 \begin{figure}[h!]
 	\centering
 	\begin{subfigure}{.4\textwidth}
 		\centering
-		\includegraphics[width=1\linewidth]{./figures/weak_error_rates_basket_2d/without_richardson/Beta_32/weak_convergence_order_basket_option_2d_1_relative_M_5_10_4_beta_32}
+		\includegraphics[width=1\linewidth]{./figures/weak_error_rates_basket_2d/without_richardson/weak_convergence_order_basket_option_2d_1_relative_M_4_10_7_plain}
 		\caption{}
 		\label{fig:sub3}
 	\end{subfigure}%
 	\begin{subfigure}{.4\textwidth}
 		\centering
-		\includegraphics[width=1\linewidth]{./figures/weak_error_rates_basket_2d/without_richardson/Beta_32/weak_convergence_order_differences_basket_option_2d_1_relative_M_5_10_4_beta_32}
+		\includegraphics[width=1\linewidth]{./figures/weak_error_rates_basket_2d/without_richardson/weak_convergence_order_differences_basket_option_2d_1_relative_M_4_10_7_plain}
 		\caption{}
 		\label{fig:sub4}
 	\end{subfigure}
 	
-	\caption{The rate of convergence of the weak error for the Basket ($2$-dimensional) call option, without Richardson extraploation, using MC with $5.M=10^4$: a) $\abs{\expt{g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{g(X_{\Delta t})-g(X_{\Delta t/2})}}$ }
-	\label{fig:Weak_rate_basket_2d_without_rich_beta_32}
+	\caption{The rate of convergence of the weak error for the Basket ($2$-dimensional) call option, without Richardson extraploation, using MC with $M=4.10^7$: a) $\abs{\expt{g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{g(X_{\Delta t})-g(X_{\Delta t/2})}}$ }
+	\label{fig:Weak_rate_basket_2d_without_rich}
 \end{figure}
 
-\subsubsection*{$\beta=64$}
+
+
+
+
 
 \begin{figure}[h!]
 	\centering
 	\begin{subfigure}{.4\textwidth}
 		\centering
-		\includegraphics[width=1\linewidth]{./figures/weak_error_rates_basket_2d/without_richardson/Beta_64/weak_convergence_order_basket_option_2d_1_relative_M_5_10_4_beta_64}
+		\includegraphics[width=1\linewidth]{./figures/weak_error_rates_basket_2d/with_richardson/weak_convergence_order_basket_option_2d_1_richardson_relative_M_4_10_7_plain}
 		\caption{}
 		\label{fig:sub3}
 	\end{subfigure}%
 	\begin{subfigure}{.4\textwidth}
 		\centering
-		\includegraphics[width=1\linewidth]{./figures/weak_error_rates_basket_2d/without_richardson/Beta_64/weak_convergence_order_differences_basket_option_2d_1_relative_M_5_10_4_beta_64}
+		\includegraphics[width=1\linewidth]{./figures/weak_error_rates_basket_2d/with_richardson/weak_convergence_order_differences_basket_option_2d_1_richardson_relative_M_4_10_7_plain}
 		\caption{}
 		\label{fig:sub4}
 	\end{subfigure}
 	
-	\caption{The rate of convergence of the weak error for the Basket ($2$-dimensional) call option, without Richardson extraploation, using MC with $5.M=10^4$: a) $\abs{\expt{g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{g(X_{\Delta t})-g(X_{\Delta t/2})}}$ }
-	\label{fig:Weak_rate_basket_2d_without_rich_beta_64}
+	\caption{The rate of convergence of the weak error for the  Basket ($2$-dimensional) call option with Richardson extraploation (level 1), using MC with $M=4.10^7$: a) $\abs{\expt{2 g(X_{\Delta t/2}) -g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{3 g(X_{\Delta t/2})-g(X_{\Delta t})-2 g(X_{\Delta t/4})}}$}
+	\label{fig:Weak_rate_call_with_rich_level1}
 \end{figure}
-
 
 
 
 
 \FloatBarrier
-\subsubsection{Comparing relative errors}\label{sec:Comparing relative errors, basket call}
+\subsubsection*{Comparing relative errors}\label{sec:Comparing relative errors, basket call}
 \subsubsection*{Without Richardson extrapolation}
-\subsubsection*{$\beta=8$}
-\begin{table}[h!]
-	\centering
-	\begin{tabular}{l*{6}{c}r}
-		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$ &   \\
-		\hline
-		MISC ($TOl=5.10^{-1},\beta=8$)  & $  6.3988$ & $ 6.3726$ & $
-		6.3684$ & $ -
-		$  \\
-		MISC ($TOl=10^{-1},\beta=8$)  & $  6.3988$ & $
-		6.3897$ & $ 6.3849
-		$ &$-$  \\
-		MISC ($TOl=5.10^{-2},\beta=8$) & $  6.3988$ & $
-		6.3938$ & $ 6.3869
-		$ & $    -$  \\
-		MISC ($TOl=10^{-2},\beta=8$) & $ 6.4055$ & $   6.3969$ & $6.3880$ &$-$  \\
-		MISC ($TOl=10^{-3},\beta=8$) &  $ 6.4055$ & $    6.3969$ & $-$ & $-$  \\
-			MISC ($TOl=10^{-4},\beta=8$) &  $ 6.4055$ & $    6.3969$& $-$ & $-$  \\
-		\hline
-		MC method ($M=10^{7}$)   & $ - $ & $  -$ & $
-	$ & $  $  \\
-		\hline
-	\end{tabular}
-	\caption{Basket ($2$-dimensional) Call option price of the different methods for different number of time steps, without Richardson extrapolation.}
-	\label{table:Basket 2d option price of the different methods for different number of time steps, without Richardson extrapolation, beta_8}
-\end{table}
 
 
-\begin{table}[h!]
-\centering
-\begin{tabular}{l*{6}{c}r}
-Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$ &   \\
-\hline
-MISC ($TOl=5.10^{-1}$) & $2.4$ & $8$ & $110$ & $-$  \\
-MISC ($TOl=10^{-1}$)  & $2.4$ & $37$ & $137$ & $-$  \\
-MISC ($TOl=5.10^{-2}$)  & $2.4$ & $42$ & $203$ & $-$  \\
-MISC ($TOl=10^{-2}$)  & $5$ & $45$ & $970$ & $-$  \\
-MISC ($TOl=10^{-3}$)   & $5$ & $126$ & $-$ & $-$  \\
-MISC ($TOl=10^{-4}$)   & $5$ & $191$ & $-$ & $-$  \\
-\hline
-MC method +root finding   & $\red{-}$ & $\red{-}$ & $\red{-}$ & $\red{-}$  \\
-MC method & $\red{-}$ & $\red{-}$ & $\red{-}$ & $\red{-
-}$  \\
-\hline
-
-Ratio of	$\text{(MC+root finding)}/\text{(MISC)}$ & $\red{-}$ & $\red{  -}$ & $\red{-}$ & $\red{ -}$  \\
-Ratio of	$(\text{MC})/(\text{MISC})$ & $\red{ -}$ & $\red{ -}$ & $\red{-}$ & $\red{ -}$  \\
-\hline
-\end{tabular}
-\caption{Comparison of the computational time of  MC and MISC, used to compute Basket ($2$-dimensional) Call option price  for different number of time steps, without Richardson extrapolation}
-\label{Comparsion of the computational time of  MC and MISC, used to compute Basket 2d Call option price  for different number of time steps, without Richardson extrapolation, beta_8}
-\end{table}
-
-
-
-\FloatBarrier
-\subsubsection*{$\beta=16$}
 \begin{table}[h!]
 \centering
 \begin{tabular}{l*{6}{c}r}
 Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$ &   \\
 \hline
 MISC ($TOl=5.10^{-1},\beta=16$)  & $
-6.4701$ & $  6.4443$ & $  6.4399$ & $
-6.4441$  \\
+ 13.0009$ & $    12.8577$ & $    12.8854$ & $
+   12.9000$  \\
 MISC ($TOl=10^{-1},\beta=16$)  & $
-6.4701$ & $6.4613
+ 13.0009$ & $   12.9912
 $ & $
-6.4564$ &$-$  \\
+12.9556
+$ &$ 12.9231$  \\
 MISC ($TOl=5.10^{-2},\beta=16$) & $
-6.4701$ & $   6.4661
-$ & $6.4574
+ 13.0009$ & $    13.0049
+$ & $ 12.9550
+
 $ & $-$  \\
-MISC ($TOl=10^{-2},\beta=16$) & $  6.4770$ & $ 6.4683$ & $  6.4592
+MISC ($TOl=10^{-2},\beta=16$) & $  13.0548$ & $    13.0046$ & $   12.9550
 $ &$-$  \\
-MISC ($TOl=10^{-3},\beta=16$) & $  6.4770$ & $6.4683$ & $-$ & $-$  \\
-MISC ($TOl=10^{-4},\beta=16$) & $  6.4770$ & $-$ & $-$ & $-$  \\
+MISC ($TOl=10^{-3},\beta=16$) & $   13.0548$ & $   13.0046$ & $-$ & $-$  \\
+MISC ($TOl=10^{-4},\beta=16$) & $  13.0545$ & $   13.0047$ & $-$ & $-$  \\
+MISC ($TOl=10^{-5},\beta=16$) & $  13.0545$ & $-$ & $-$ & $-$  \\
 \hline
-MC method ($M=10^{7}$)   & $  -
-$ & $ -$ & $
-$ & $  $  \\
+MC method ($M=4.10^{7}$)   & $  13.0203
+$ & $ 12.9969$ & $12.9301
+$ & $ 12.9194 $  \\
 \hline
 \end{tabular}
 \caption{Basket ($2$-dimensional) Call option price of the different methods for different number of time steps, without Richardson extrapolation.}
@@ -2118,98 +2052,239 @@ $ & $  $  \\
 
 
 
+
+
+
+
+
+
+
 \begin{table}[h!]
 	\centering
 	\begin{tabular}{l*{6}{c}r}
-		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$ &   \\
+		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$  \\
 		\hline
-		MISC ($TOl=5.10^{-1}$) & $5$ & $17$ & $260$ & $1765$  \\
-		MISC ($TOl=10^{-1}$)  & $5$ & $61$ & $372$ & $-$  \\
-		MISC ($TOl=5.10^{-2}$)  & $5$ & $74$ & $395$ & $-$  \\
-		MISC ($TOl=10^{-2}$)  & $10$ & $85$ & $1420$ & $-$  \\
-		MISC ($TOl=10^{-3}$)   & $10$ & $205$ & $-$ & $-$  \\
-			MISC ($TOl=10^{-4}$)   & $10$ & $-$ & $-$ & $-$  \\
-		\hline
-		MC method +root finding   & $\red{-}$ & $\red{-}$ & $\red{-}$ & $\red{-}$  \\
-		MC method & $\red{-}$ & $\red{-}$ & $\red{-}$ & $\red{-
-		}$  \\
-		\hline
+		MC Bias ($M=4.10^{7}$)  & 	$ \underset{(      0.1195
+			 )}{\mathbf{0.0093}}$  & $\underset{(0.0968
+			 )}{\mathbf{ 0.0075
+		}}$  & $\underset{(  0.0297)}{\mathbf{0.0023}}$ & $\underset{(         0.0181
+	
+			)}{\mathbf{  0.0014 }}$\\ 
 		
-		Ratio of	$\text{(MC+root finding)}/\text{(MISC)}$ & $\red{-}$ & $\red{  -}$ & $\red{-}$ & $\red{ -}$  \\
-		Ratio of	$(\text{MC})/(\text{MISC})$ & $\red{ -}$ & $\red{ -}$ & $\red{-}$ & $\red{ -}$  \\
+		MC Statistical error  ($M=4.10^{7}$)   & 	$ \underset{( 3.2e-03  )}{\mathbf{2.5e-04}}$  & $\underset{(3.5e-03 )}{\mathbf{ 2.7e-04
+		}}$  & $\underset{(3.6e-03 )}{\mathbf{2.8e-04}}$ & $\underset{( 3.6e-03 )}{\mathbf{ 2.8e-04  }}$\\ 
 		\hline
 	\end{tabular}
-	\caption{Comparison of the computational time of  MC and MISC, used to compute Basket ($2$-dimensional) Call option price  for different number of time steps, without Richardson extrapolation}
-	\label{Comparsion of the computational time of  MC and MISC, used to compute Basket 2d Call option price  for different number of time steps, without Richardson extrapolation, beta_16}
+	\caption{Bias and Statistical errors of MC  for computing Basket ($2$-dimensional) Call option price  for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
+	\label{Bias and Statistical errors of MC  for computing Basket 2d Call option price  for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
 \end{table}
+
+
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{l*{6}{c}r}
+Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$  \\
+\hline
+MISC ($TOl=5.10^{-1}$)  & $\underset{(  0.0194)}{\mathbf{    0.0015}}$  & $\underset{(   0.1392
+	)}{\mathbf{    0.0108}}$ & $\underset{( 0.0447
+	
+	-
+	)}{\mathbf{ 0.0035}}$ &$\underset{(
+	0.0194)}{\mathbf{   \red{ 0.0015}}}$ \\
+MISC ($TOl=10^{-1}$)  & $\underset{(  0.0194)}{\mathbf{    0.0015}}$   & $\underset{(   0.0057)}{\mathbf{4.4e-04}}$ & $\underset{(0.0255)}{\mathbf{\red{0.0020}}}$ &$\underset{(0.0037)}{\mathbf{2.9e-04}}$ \\
+MISC ($TOl=5.10^{-2}$)  & $\underset{(  0.0194)}{\mathbf{    0.0015}}$  & $\underset{( 0.0080)}{\mathbf{\red{6.2e-04}}}$ & $\underset{(
+	0.0249
+	)}{\mathbf{0.0019}}$ &$\underset{(-)}{\mathbf{-}}$ \\
+MISC ($TOl=10^{-2}$)  & $\underset{( 0.0345)}{\mathbf{\red{0.0027}}}$  & $\underset{( 0.0077)}{\mathbf{6.0e-04}}$ & $\underset{(
+	0.0249
+	)}{\mathbf{0.0019}}$&$\underset{(-)}{\mathbf{-}}$ \\
+MISC ($TOl=10^{-3}$)  & $\underset{( 0.0345)}{\mathbf{0.0027}}$  & $\underset{( 0.0077)}{\mathbf{6.0e-04}}$ & $\underset{(
+-
+	)}{\mathbf{-}}$ &$\underset{(-)}{\mathbf{-}}$ \\
+MISC ($TOl=10^{-4}$)  & $\underset{( 0.0342)}{\mathbf{0.0027
+}}$  & $\underset{( 0.0078)}{\mathbf{6.0e-04}}$& $\underset{(
+	-
+	)}{\mathbf{-}}$ &$\underset{(-)}{\mathbf{-}}$ \\
+MISC ($TOl=10^{-5}$)  & $\underset{( 0.0342)}{\mathbf{0.0027
+}}$  & $\underset{( -)}{\mathbf{-}}$ & $\underset{(
+	-
+	)}{\mathbf{-}}$ &$\underset{(-)}{\mathbf{-}}$ \\
+\hline
+\end{tabular}
+\caption{Quadrature error of MISC to compute Basket ($2$-dimensional) Call option price of the different tolerances for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
+\label{Quadrature error of MISC to compute Basket 2d Call option price of the different tolerances for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors, beta_16}
+\end{table}
+
+
+	\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\linewidth]{./figures/Basket_2d_MISC_quadrature_error/relative_quad_error_wrt_MISC_TOL_non_rich}
+	
+	
+	\caption{Relative quadrature error of MISC to compute Basket ($2$-dimensional) Call option price of the different tolerances for different number of time steps, without Richardson extrapolation.}
+	\label{fig:Quadrature_error_non_rich_basket_Call}
+\end{figure}
+
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$  \\
+		\hline
+		MISC ($TOl=5.10^{-1}$) &$\mathbf{0.0108}$ & $\mathbf{0.0183}$ & $\mathbf{0.0058}$ & $\mathbf{\red{0.0029}}$  \\	
+		MISC ($TOl=10^{-1}$) & $\mathbf{0.0108}$ & $\mathbf{0.0079}$ & $\mathbf{\red{0.0043}}$ & $\mathbf{0.0017}$  \\	
+		MISC ($TOl=5.10^{-2}$) & $\mathbf{0.0108}$ & $\mathbf{\red{0.0081}}$ & $\mathbf{0.0042}$ & $\mathbf{-}$  \\	
+		MISC ($TOl=10^{-2}$)& $\mathbf{\red{0.0120}}$ & $\mathbf{0.0081}$ &$\mathbf{0.0042}$ & $\mathbf{-}$  \\	
+		MISC ($TOl=10^{-3}$) &  $\mathbf{0.0120}$& $\mathbf{0.0081}$ & $\mathbf{-}$ & $\mathbf{-}$  \\	
+		MISC ($TOl=10^{-4}$) &  $\mathbf{0.0120}$& $\mathbf{0.0081}$ & $\mathbf{-}$ & $\mathbf{-}$  \\
+		MISC ($TOl=10^{-5}$) &  $\mathbf{0.0120}$& $\mathbf{-}$ & $\mathbf{-}$ & $\mathbf{-}$  \\
+		\hline	
+		MC +root finding  & $\mathbf{\red{0.0120}}$ & $\mathbf{\red{0.0081}}$ & $\mathbf{\red{0.0042}}$ & $\mathbf{\red{0.0029}}$\\
+		MC   &  $\mathbf{\red{0.0119}}$ & $\mathbf{\red{0.0081}}$ & $\mathbf{\red{0.0042}}$ & $\mathbf{\red{0.0029}}$  \\	
+		\hline
+	\end{tabular}
+	\caption{Total error of MISC and MC to compute Basket ($2$-dimensional) Call option price of the different tolerances for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
+	\label{Total error of MISC and MC to compute Basket 2dCall option price of the different tolerances for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors,beta_16}
+\end{table}
+
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{l*{6}{c}r}
+Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$ &   \\
+\hline
+MISC ($TOl=5.10^{-1}$) & $3$ & $15$ & $197$ & $\red{ 1048}$  \\
+MISC ($TOl=10^{-1}$)  & $3$ & $34$ & $\red{217}$ & $ 7324$  \\
+MISC ($TOl=5.10^{-2}$)  & $3$ & $\red{44}$ & $917$ & $-$  \\
+MISC ($TOl=10^{-2}$)  & $\red{4}$ & $98$ & $1825$ & $-$  \\
+MISC ($TOl=10^{-3}$)   & $4$ & $245$ & $-$ & $-$  \\
+MISC ($TOl=10^{-4}$)   & $23$ & $1035$ & $-$ & $-$  \\
+MISC ($TOl=10^{-5}$)   & $58$ & $-$ & $-$ & $-$  \\
+\hline
+MC method +root finding   & $\red{  557}$ & $\red{   13564}$ & $\red{  1218}$ & $\red{ 1749
+}$  \\
+MC method & $\red{164}$ & $\red{3518}$ & $\red{451}$ & $\red{1112}$  \\
+\hline
+
+Ratio of	$\text{(MC+root finding)}/\text{(MISC)}$ & $\red{139}$ & $\red{  308}$ & $\red{5.6}$ & $\red{1.7}$  \\
+Ratio of	$(\text{MC})/(\text{MISC})$ & $\red{41}$ & $\red{80}$ & $\red{2.1}$ & $\red{ 1.1}$  \\
+\hline
+\end{tabular}
+\caption{Comparison of the computational time of  MC and MISC, used to compute Basket ($2$-dimensional) Call option price  for different number of time steps, without Richardson extrapolation}
+\label{Comparsion of the computational time of  MC and MISC, used to compute Basket 2d Call option price  for different number of time steps, without Richardson extrapolation, beta_16}
+\end{table}
+
+
+
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\linewidth]{./figures/Basket_2d_Complexity_rates/error_vs_time}
+	
+	\caption{Complexity plot for MC and MISC for the case without Richardson extrapolation.}
+	\label{fig:Complexity plot for MC and MISC , Basket 2d Call non rich}
+\end{figure}
+
 \FloatBarrier
 \subsubsection*{With Richardson extrapolation (level $1$)}
 
-\subsubsection*{$\beta=8$}
+
 
 
 \begin{table}[h!]
 	\centering
 	\begin{tabular}{l*{6}{c}r}
-		Method \textbackslash  Steps            & $1-2$ & $2-4$ & $4-8$ & $8-16$ &   \\
+		Method \textbackslash  Steps            & $1-2$ & $2-4$ & $4-8$  \\
 		\hline
-		MISC ($TOl=5.10^{-1}$) & $  -$ & $-$ & $-$ & $-$  \\
-		MISC ($TOl=10^{-1}$)  & $  -$ & $-$ & $-$ & $-$  \\
-		MISC ($TOl=5.10^{-2}$) & $  -$ & $-$ & $-$ & $-$  \\
-		MISC ($TOl=10^{-2}$) & $  -$ & $-$ & $-$ & $-$  \\
-		MISC ($TOl=10^{-3}$) & $  -$ & $-$ & $-$ & $-$  \\
+		MISC ($TOl=5.10^{-1}$, $\beta=16$) & $   13.0821
+		$ & $ 12.7353
+		$ & $   12.8138$   \\
+		MISC ($TOl=10^{-1}$, $\beta=16$)  & $    13.1898
+		$ & $ 12.8791
+		$ & $   12.9055$  \\
+		MISC ($TOl=5.10^{-2}$, $\beta=16$) & $    13.1898
+		$ & $ 12.9151 $ & $-$   \\
+		MISC ($TOl=10^{-2}$,$\beta=16$ ) & $    13.1898
+		$ & $ 
+		12.9567$ & $-$  \\
+		MISC ($TOl=10^{-3}$, $\beta=16$) & $    13.1898
+		$ & $ 12.9558$ & $-$ \\
+			MISC ($TOl=10^{-4}$,$\beta=16$) & $  13.1893
+			  
+		$ & $-$ & $-$  \\
 		\hline
-		MC method ($M=5.10^{6}$)   & $  -$ & $-$ & $-$ & $-$  \\
+		MC method ($M=4.10^{7}$)   & $ 13.1927$ & $12.9768$ & $12.9322$ \\
 		\hline
 	\end{tabular}
-	\caption{Call option price of the different methods for different number of time steps, with Richardson extrapolation (level $1$).}
-	\label{table: Call option price of the different methods for different number of time steps, with Richardson extrapolation (level1),beta_8}
-\end{table}
-
-
-
-
-
-\begin{table}[h!]
-	\centering
-	\begin{tabular}{l*{6}{c}r}
-		Method \textbackslash  Steps            & $1-2$ & $2-4$ & $4-8$ & $8-16$ &   \\
-		\hline
-		MISC ($TOl=5.10^{-1}$) & $-$  & $-$ & $-$ & $-$  \\
-		MISC ($TOl=10^{-1}$)  & $-$  & $-$ & $-$ & $-$  \\
-		MISC ($TOl=5.10^{-2}$)  & $-$  & $-$ & $-$ & $-$  \\
-		MISC ($TOl=10^{-2}$) & $-$  & $-$ & $-$ & $-$  \\
-		MISC ($TOl=10^{-3}$)   & $-$  & $-$ & $-$ & $-$  \\
-		\hline
-	
-		\hline
-		\end{tabular}
-		\caption{Comparsion of the computational time of  MISC, used to compute Call option price  for different number of time steps, with Richardson extrapolation (level $1$)}
-		\label{Comparsion of the computational time of  MC and MISC, used to compute Call option price  for different number of time steps, with Richardson extrapolation (level $1$),beta_8}
-		\end{table}
-\FloatBarrier
-\subsubsection*{$\beta=16$}
-
-\begin{table}[h!]
-	\centering
-	\begin{tabular}{l*{6}{c}r}
-		Method \textbackslash  Steps            & $1-2$ & $2-4$ & $4-8$ & $8-16$ &   \\
-		\hline
-		MISC ($TOl=5.10^{-1}$) & $  -$ & $-$ & $-$ & $-$  \\
-		MISC ($TOl=10^{-1}$)  & $  -$ & $-$ & $-$ & $-$  \\
-		MISC ($TOl=5.10^{-2}$) & $  -$ & $-$ & $-$ & $-$  \\
-		MISC ($TOl=10^{-2}$) & $  -$ & $-$ & $-$ & $-$  \\
-		MISC ($TOl=10^{-3}$) & $  -$ & $-$ & $-$ & $-$  \\
-		\hline
-		MC method ($M=5.10^{6}$)   & $  -$ & $-$ & $-$ & $-$  \\
-		\hline
-	\end{tabular}
-	\caption{Call option price of the different methods for different number of time steps, with Richardson extrapolation (level $1$).}
+	\caption{Basket $2$-dimensional Call option price of the different methods for different number of time steps, with Richardson extrapolation (level $1$).}
 	\label{table: Call option price of the different methods for different number of time steps, with Richardson extrapolation (level1),beta_16}
 \end{table}
 
 
 
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $1-2$ & $2-4$ & $4-8$ & $8-16$  \\
+		\hline
+		MC Bias ($M=4.10^7$)   & 	$ \underset{(    0.2919
+			
+			)}{\mathbf{0.0226}}$  & $\underset{(    0.0760)}{\mathbf{ 0.0059
+		}}$  & $\underset{(   0.0314)}{\mathbf{0.0024}}$ & $\underset{( 0.0085
+	
+			)}{\mathbf{ 0.0007}}$\\ 
+		
+		MC Statistical error ($M=4.10^7$)     & 	$ \underset{(  3.7e-03 )}{\mathbf{2.9e-04}}$  & $ \underset{(  3.7e-03 )}{\mathbf{2.9e-04}}$ & $ \underset{(  3.7e-03 )}{\mathbf{2.9e-04}}$ & $ \underset{(  3.6e-03 )}{\mathbf{2.8e-04}}$\\ 
+		
+		\hline
+	\end{tabular}
+	\caption{Bias and Statistical errors of MC  for computing Basket ($2$-dimensional) Call option price  for different number of time steps, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors.}
+	\label{Bias and Statistical errors of MC  for computing Basket ($2$-dimensional) Call option price  for different number of time steps, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors,beta_16}
+\end{table}
+
+
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $1-2$ & $2-4$ & $4-8$   \\
+		\hline
+		MISC ($TOl=5.10^{-1}$)  & $\underset{(0.1106)}{\mathbf{0.0086
+		}}$ & $\underset{(0.2415)}{\mathbf{0.0187}}$& $\underset{(
+		    0.1184
+		
+			)}{\mathbf{ 0.0092}}$  \\
+		MISC ($TOl=10^{-1}$)  & $\underset{(0.0029)}{\mathbf{\red{0.0002}
+		}}$  & $\underset{(     0.0977
+	 )}{\mathbf{      0.0076}}$& $\underset{(
+		    0.0267
+		
+			)}{\mathbf{   \red{0.0021}}}$  \\
+		MISC ($TOl=5.10^{-2}$) & $\underset{(0.0029)}{\mathbf{0.0002
+		}}$ & $\underset{(    0.0617)}{\mathbf{  0.0048}}$& $\underset{(
+			-
+			)}{\mathbf{-}}$  \\
+		MISC ($TOl=10^{-2}$)  & $\underset{(0.0029)}{\mathbf{0.0002
+		}}$ & $\underset{(  0.0201)}{\mathbf{   \red{0.0016}}}$& $\underset{(
+			-
+			)}{\mathbf{-}}$ \\
+		MISC ($TOl=10^{-3}$)  & $\underset{(0.0029)}{\mathbf{0.0002
+		}}$  & $\underset{(    0.0210
+	)}{\mathbf{   0.0016}}$& $\underset{(
+			-
+			)}{\mathbf{-}}$  \\
+		MISC ($TOl=10^{-4}$)  & $\underset{(0.0029)}{\mathbf{0.0002
+		}}$ & $\underset{(-)}{\mathbf{-}}$& $\underset{(
+			-
+			)}{\mathbf{-}}$  \\
+	
+		\hline
+	\end{tabular}
+	\caption{Quadrature error of MISC to compute Basket ($2$-dimensional) call option price of the different tolerances for different number of time steps, with Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
+	\label{Quadrature error of MISC to compute Basket 2d Call option price of the different tolerances for different number of time steps, with Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors, beta_16}
+\end{table}
+
 
 
 
@@ -2217,21 +2292,124 @@ $ & $  $  \\
 \begin{table}[h!]
 	\centering
 	\begin{tabular}{l*{6}{c}r}
-		Method \textbackslash  Steps            & $1-2$ & $2-4$ & $4-8$ & $8-16$ &   \\
+		Method \textbackslash  Steps            & $1-2$ & $2-4$ & $4-8$   \\
 		\hline
-		MISC ($TOl=5.10^{-1}$) & $-$  & $-$ & $-$ & $-$  \\
-		MISC ($TOl=10^{-1}$)  & $-$  & $-$ & $-$ & $-$  \\
-		MISC ($TOl=5.10^{-2}$)  & $-$  & $-$ & $-$ & $-$  \\
-		MISC ($TOl=10^{-2}$) & $-$  & $-$ & $-$ & $-$  \\
-		MISC ($TOl=10^{-3}$)   & $-$  & $-$ & $-$ & $-$  \\
+		MISC ($TOl=5.10^{-1}$) & $\mathbf{0.0312}$& $\mathbf{0.0246}$ & $\mathbf{0.0116}$  \\
+		MISC ($TOl=10^{-1}$) & $\mathbf{\red{0.0228}}$& $\mathbf{0.0135}$ & $\mathbf{\red{0.0045}}$   \\	
+		MISC ($TOl=5.10^{-2}$) & $\mathbf{0.0228}$& $\mathbf{0.0107}$ & $\mathbf{-}$   \\
+		MISC ($TOl=10^{-2}$)& $\mathbf{0.0228}$& $\mathbf{\red{0.0075}}$ & $\mathbf{-}$   \\	
+		MISC ($TOl=10^{-3}$) & $\mathbf{0.0228}$& $\mathbf{0.0075}$ & $\mathbf{-}$ \\
+		MISC ($TOl=10^{-4}$) & $\mathbf{0.0228}$& $\mathbf{-}$ & $\mathbf{-}$  \\
+		\hline	
+		MC +root finding & $\mathbf{\red{-}}$ & $\mathbf{\red{-}}$ & $\mathbf{\red{-}}$   \\	
+		MC   &  $\mathbf{\red{-}}$ & $\mathbf{\red{-}}$ & $\mathbf{\red{-}}$   \\	
+		\hline
+	\end{tabular}
+	\caption{Total relative error of MISC and MC to compute Basket ($2$-dimensional) call option price of the different tolerances for different number of time steps, with Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
+	\label{Total error of MISC and MC to compute Basket 2dCall option price of the different tolerances for different number of time steps, with Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors,beta_16}
+\end{table}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $1-2$ & $2-4$ & $4-8$     \\
+		\hline
+		MISC ($TOl=5.10^{-1}$) & $5$  & $39$ & $396$  \\
+		MISC ($TOl=10^{-1}$)  & $\red{8}$  & $70$ & $ \red{1379}$  \\
+		MISC ($TOl=5.10^{-2}$)  & $8$  & $76$ & $-$   \\
+		MISC ($TOl=10^{-2}$) & $8$  & $ \red{262}$ & $-$ \\
+		MISC ($TOl=10^{-3}$)   & $8$  & $339$ & $-$   \\
+		MISC ($TOl=10^{-4}$)   & $55$  & $-$ & $-$   \\
 		\hline
 		
 		\hline
 	\end{tabular}
-	\caption{Comparsion of the computational time of  MISC, used to compute Call option price  for different number of time steps, with Richardson extrapolation (level $1$)}
+	\caption{Comparison of the computational time of  MISC, used to compute Basket $2$-dimensional Call option price  for different number of time steps, with Richardson extrapolation (level $1$)}
 	\label{Comparsion of the computational time of  MC and MISC, used to compute Call option price  for different number of time steps, with Richardson extrapolation (level $1$),beta_16}
 \end{table}
 \FloatBarrier
+
+\subsubsection{Case of  $3$-dimensional Basket call option}
+\subsubsection*{Weak error plots} \label{sec:Weak error plots_Basket_3D_call}
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/weak_error_rates_basket_3d/without_richardson/weak_convergence_order_basket_option_3d_1_relative_M_7_10_7_plain_1}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/weak_error_rates_basket_3d/without_richardson/weak_convergence_order_differences_basket_option_3d_1_relative_M_7_10_7_plain_1}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of the weak error for the Basket ($3$-dimensional) call option, without Richardson extraploation, using MC with $M=7.10^7$: a) $\abs{\expt{g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{g(X_{\Delta t})-g(X_{\Delta t/2})}}$ }
+	\label{fig:Weak_rate_basket_3d_without_rich}
+\end{figure}
+\FloatBarrier
+
+\subsubsection*{Comparing relative errors}\label{sec:Comparing relative errors, basket_3d call}
+\subsubsection*{Without Richardson extrapolation}
+
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$ &   \\
+		\hline
+		MISC ($TOl=5.10^{-1},\beta=16$)  & $-$ & $-$ & $-$ & $-$  \\
+		MISC ($TOl=10^{-1},\beta=16$)   & $-$ & $-$ & $-$ & $-$  \\
+		MISC ($TOl=5.10^{-2},\beta=16$) & $-$ & $-$ & $-$ & $-$  \\
+		MISC ($TOl=10^{-2},\beta=16$) & $-$ & $-$ & $-$ & $-$  \\
+		MISC ($TOl=10^{-3},\beta=16$)  & $-$ & $-$ & $-$ & $-$  \\
+		MISC ($TOl=10^{-4},\beta=16$)  & $-$ & $-$ & $-$ & $-$  \\
+		MISC ($TOl=10^{-5},\beta=16$)  & $-$ & $-$ & $-$ & $-$  \\
+		\hline
+		MC method ($M=7.10^{7}$)    & $11.8139$ & $-$ & $-$ & $-$  \\
+		\hline
+	\end{tabular}
+	\caption{Basket ($3$-dimensional) Call option price of the different methods for different number of time steps, without Richardson extrapolation.}
+	\label{table:Basket 3d option price of the different methods for different number of time steps, without Richardson extrapolation, beta_}
+\end{table}
+
+
+
+
+
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$ &   \\
+		\hline
+		MISC ($TOl=5.10^{-1}$)  & $-$ & $-$ & $-$ & $-$  \\
+		MISC ($TOl=10^{-1}$)   & $-$ & $-$ & $-$ & $-$  \\
+		MISC ($TOl=5.10^{-2}$)   & $-$ & $-$ & $-$ & $-$  \\
+		MISC ($TOl=10^{-2}$) & $-$ & $-$ & $-$ & $-$  \\
+		MISC ($TOl=10^{-3}$)   & $-$ & $-$ & $-$ & $-$  \\
+		MISC ($TOl=10^{-4}$)   & $-$ & $-$ & $-$ & $-$  \\
+		MISC ($TOl=10^{-5}$)   & $-$ & $-$ & $-$ & $-$  \\
+		\hline
+		MC method +root finding   & $-$ & $-$ & $-$ & $-$  \\
+		MC method  & $-$ & $-$ & $-$ & $-$  \\
+		\hline
+		
+		Ratio of	$\text{(MC+root finding)}/\text{(MISC)}$  & $-$ & $-$ & $-$ & $-$  \\
+		Ratio of	$(\text{MC})/(\text{MISC})$ & $-$ & $-$ & $-$ & $-$  \\
+		\hline
+	\end{tabular}
+	\caption{Comparison of the computational time of  MC and MISC, used to compute Basket ($3$-dimensional) Call option price  for different number of time steps, without Richardson extrapolation}
+	\label{Comparsion of the computational time of  MC and MISC, used to compute Basket 3d Call option price  for different number of time steps, without Richardson extrapolation, beta_16}
+\end{table}
+
+
+
+
+
 %\subsection{Results for  the CIR process}
 %
 %The impact of the Brownian bridge will disappear in the limit, which may make the effect of the smoothing, but also of the errors in the kink location difficult to identify . For this reason, we study a more complicated 1-dimensional problem. In fact, we use a CIR process. To avoid complications at the boundary, we use nice parameter choices, such that the discretized process is very unlikely to hit the boundary (Feller condition).

@@ -1,0 +1,222 @@
+We recall that our goal is to compute the expectation in \eqref{BS_formula_rbergomi}. In fact, as seen in Section \ref{sec:Simulation of the rBergomi model}, we need   $2N$ dimensional Gaussian inputs for the used  hybrid  scheme ($N$ is the number of time steps in  the time grid), namely
+\begin{itemize}
+	\item $\{W^1_i\}_{i=1}^N$: The $N$ Gaussian random variables that are defined in Section  \ref{sec:The rBergomi model}.
+	\item $\{W^2_j\}_{j=1}^N$: An artificial introduced $N$ Gaussian random variables that are used for left-rule points in the hybrid scheme, as explained in Section  \ref{sec:Simulation of the rBergomi model}.
+\end{itemize}
+
+Thus, we can rewrite \eqref{BS_formula_rbergomi} as 
+
+
+\begin{align}\label{BS_formula_rbergomi_2}
+C_{RB}\left( T, K \right)&=E\left[C_{BS}\left( S_0 = \operatorname{exp}\left(\rho \int_0^T \sqrt{v_t} dW_t^1 - \frac{1}{2}
+\rho^2 \int_0^T v_t dt\right),\ K = K, \ T = 1, \ \sigma^2 = (1-\rho^2)
+\int_0^T v_t dt \right) \right], \nonumber \\
+&\approx \int_{\rset^{2N}} C_{BS} \left(G(W^1_1,\dots,W^1_N,W^2_1,\dots,W^2_N)\right) \rho_{N}(\mathbf{W}^1)  \rho_{N}(\mathbf{W}^2) dW_1^1 \dots dW_N^1  dW_1^2 \dots dW_N^2
+\end{align}
+
+where $G$  maps  $2N$ independent standard Gaussian random inputs to the parameters fed to Black-Scholes formula as in \eqref{BS_formula_rbergomi_2}, and  $\rho_N$ is the multivariate gaussian density, given by 
+
+\begin{equation*}\label{eq: multivariate gaussian distribution}
+\rho_N(\mathbf{z})=\frac{1}{(2 \pi)^{N/2}} e^{-\frac{1}{2} \mathbf{z}^T \mathbf{z}} \PERIOD
+\end{equation*} 
+
+Therefore, the initial integration problem that we are solving lives in $2 N$-dimensional space, which becomes very large as the number of time steps $N$, used in the hybrid scheme, increases.
+
+
+Our approach of approximating the expectation in \eqref{BS_formula_rbergomi_2} is based on multi-index stochastic collocation (MISC), proposed in \cite{haji2016multi}. We describe the  MISC solver in our context in Section \ref{sec:Details of the MISC}.  To make an effective use of MISC, we apply two pre-transformations to overcome the issue of facing a high dimensional integrand, due to the discretization scheme used for simulating the rBergomi dynamics. The first pre-transformation consists of applying a hierarchical  path generation method, based on Brownian
+bridge (Bb) construction, with the aim of reducing the effective dimension as  described  in Section \ref{sec:Brwonian bridge construction}. The second pre-transformation consists of applying Richardson extrapolation to reduce the bias, resulting in reducing  the maximum number of dimensions needed for the integration problem. Details about  Richardson extrapolation  are provided in Section \ref{sec:Richardson extrapolation}.
+
+
+
+
+If we denote by $\mathcal{E}$ the total error of computing the  expectation in \eqref{BS_formula_rbergomi} using MISC solver, then we have a natural error decomposition, giving by
+ 
+\begin{equation}\label{eq:total_error}
+\mathcal{E} \le \mathcal{E}_Q(TOL_{\text{MISC}},N) + \mathcal{E}_B(N),
+\end{equation}
+where  $\mathcal{E}_Q$ is the quadrature error, function of MISC tolerance:  $TOL_{\text{MISC}}$ and $N$: the number of time steps,  and  $\mathcal{E}_B$  is the bias, function of $N$  or $\Delta_t=\frac{T}{N}$ (size of the time grid).
+
+
+
+
+\subsection{The MISC solver}\label{sec:Details of the MISC}
+
+Assume we want to  solve the problem of  approximating the expected value of $\expt{f(Y)}$ on a tensorization of quadrature formulae over the stochastic domain, $\Gamma$. We also  assume that $f(y)$ is a continuous function (analytic) over $\Gamma$. 
+
+To introduce simplified notations, we start with the one-dimension case. Let us define $\beta \le 1$ be an integer positive value referred to as a "stochastic discretization level", and $m: \nset \rightarrow \nset$ be a strictly increasing function with $m(0)=0$ and $m(1)=1$, that we call a "level-to-nodes function". At level $\beta$, we consider a set of $m(\beta)$ distinct quadrature points in $(-\infty; \infty)$, $\mathcal{H}^{m(\beta)}=\{y^1_\beta,y^2_\beta,\dots,y_\beta^{m(\beta)}\} \subset [-\infty,\infty]$, and a set of quadrature weights, $\boldsymbol{\omega}^{m(\beta)}=\{\omega^1_\beta,\omega^2_\beta,\dots,\omega_\beta^{m(\beta)}\}$. We also let $C^0((-\infty,\infty))$ be the set of real-valued continuous functions over $(-\infty, \infty)$. We then define the quadrature operator as
+
+
+\begin{equation}
+Q(m(\beta)):C^0((-\infty,\infty)) \rightarrow \rset, \quad Q(m(\beta))[f]= \sum_{j=1}^{m(\beta)} f(y^j_\beta) \omega_\beta^j.
+\end{equation}
+
+
+
+
+
+In our case, and follwing \eqref{BS_formula_rbergomi_2}, we have a multi-variate integration problem and  we have, given the previous notations,    $f:=C_{\text{BS}}\circ G$, $\mathbf{Y}=(\mathbf{W}^1,\mathbf{W}^2)$, and  $\Gamma$  is finite dimensional and given by a $2N$ tensor product of intervals.  Therefore,  we define, for any multi-index $\boldsymbol{\beta}$
+
+$$Q^{m(\boldsymbol{\beta})}: \Gamma \rightarrow \rset,\quad  Q^{m(\boldsymbol{\beta})}= \bigotimes_{n = 1}^{2N} Q^{m(\beta_n)} $$
+
+where the $n$-th quadrature operator is understood to act only on the $n$-th variable of $f$. Practically, we obtain the value of $Q^{m(\boldsymbol{\beta})}[f]$  by considering the tensor grid $\mathcal{T}^{m(\boldsymbol{\beta})}= \times_{n = 1}^{2N}  \mathcal{H}^{m(\beta_n)}$ with cardinality $\#\mathcal{T}^{m(\boldsymbol{\beta})}=\prod_{n=1}^{2N} m (\beta_n)$ and computing
+
+$$ Q^{\mathcal{T}^{m(\boldsymbol{\beta})}}[f]= \sum_{j=1}^{\#\mathcal{T}^{m(\boldsymbol{\beta})}} f(\hat{y}_j) \bar{\omega}_j$$
+where $\hat{y}_j \in \mathcal{T}^{m(\boldsymbol{\beta})}$ amd $\bar{\omega}_j$ are  products of weights of the univariate quadrature rules.
+\begin{remark}
+We note that the quadrature points are chosen to optimize the convergence properties of the quadrature error.  For instance, in our context, since we are dealing with Gaussian densities, using Gauss-Hermite quadrature points is the appropriate choice.
+\end{remark}
+
+A direct approximation $\expt{f[\mathbf{Y}]} \approx Q^{m(\boldsymbol{\beta})}[f]$ is not an appropriate option  due to the well-known "curse of dimensionality" effect. We use MISC as it was suggested  in \cite{haji2016multi}. MISC is a hierarchical adaptive sparse grids quadrature strategy that uses  stochastic discretizations  and classic sparsification approach to obtain an effective approximation scheme for $\expt{f}$. 
+
+ For the sake
+of concreteness, in our setting from \eqref{BS_formula_rbergomi_2}, we are left with a $2N$- dimensional Gaussian random inputs, which are chosen independently, resulting in  $2N$ numerical parameters for MISC, which we use as the basis of the multi-index construction, reflecting the fact that $W^1_i$ and $W^2_j$ can vary independently of each other regardless of $i \neq j$ or $i = j$. Let $l \in \{1, \ldots, 2N\}$ and set
+\begin{equation}
+p_l \coloneqq
+\begin{cases}
+W^1_l, & 1 \le l \le N,\\
+W^2_{l-N}, & N+1 \le l \le 2N.
+\end{cases}
+\end{equation}
+
+
+%by $\mathbf{m}(\ell)=(m(l_1),\dots, m(l_{2N}))$ the number of quadrature points used in each direction, and  we denote
+
+For a multi-index $\ell = (l_i)_{i=1}^{2N} \in \mathbb{N}^{2N}$, we denote  by
+$Q_N^\ell \coloneqq Q^{N,m(\ell)}(p_{\ell})$ the result of a discretized
+integral, using $N$ time steps , with parameters $p_\ell \coloneqq (p_{l_i})_{i=1}^{2N}$, and with a number of quadrature points $m(l_i)$ in the dimension $p_{l_i}$. We further define the set of
+differences $\Delta Q^N_\ell$ as follows: for a single index $1 \le i \le 2N$,
+let
+\begin{equation}
+\Delta_i Q_N^\ell \coloneqq \left\{ 
+\aligned 
+Q_N^{\ell} - Q_N^{\ell'} \text{ with } \ell' =\ell - e_i, & \text{ if } \ell_i>0 \\
+Q_N^\ell & \text{ otherwise}
+\endaligned
+\right.
+\end{equation}
+where $e_i$ denotes the $i$th $2N$-dimensional unit vector. Then, $\Delta
+Q_N^\ell$ is defined as
+\begin{equation}
+\Delta Q_N^\ell \coloneqq \left( \prod_{i=1}^{2N} \Delta_i \right) Q_N^\ell.
+\end{equation}
+For instance, when $N = 1$, then 
+\begin{multline*}
+	\Delta Q_1^\ell = \Delta_2 \Delta_1 Q_1^{(l_1, l_2)} = \Delta_2\left( Q_1^{(l_1,
+		l_2)} - Q_1^{(l_1-1,l_2)} \right) = \Delta_2 Q_1^{(l_1,
+		l_2)} - \Delta_2 Q_1^{(l_1-1,l_2)} 
+	\\= Q_1^{(l_1, l_2)} - Q_1^{(l_1, l_2-1)} - Q_1^{(l_1-1, l_2)} + Q_1^{(l_1-1, l_2-1)}.
+\end{multline*}
+
+We have the telescoping property
+\begin{equation}
+Q_N^\infty = \sum_{l_1=0}^\infty \cdots \sum_{l_{2N} = 0}^\infty \Delta
+Q_N^{(l_1, \ldots, l_{2N})} = \sum_{\ell \in \mathbb{N}^{2N}} \Delta Q_N^\ell,
+\end{equation}
+provided that $l_1 \to \infty$, \ldots,
+$l_{2N} \to \infty$, where $Q^\infty_N$ is the biased option price, computed with $N$ time steps.
+
+As stated before, our goal is to approximate, $Q_N^\infty$, then   the actual MISC estimator  computed using a  given a set of multi-indices $\mathcal{I} \subset
+\mathbb{N}^{2N}$, is given by
+\begin{equation*}
+	Q_N^{\mathcal{I}} \coloneqq \sum_{\ell \in \mathcal{I}} \Delta Q_N^\ell.
+\end{equation*}
+
+The quadrature error in this  case  is given by
+\begin{equation}\label{eq:quadrature error}
+	\mathcal{E}_Q(TOL_{\text{MISC}},N) =\abs{Q_N^\infty - Q_N^\mathcal{I}} \le \sum_{\ell \in \mathbb{N}^{2N} \setminus
+		\mathcal{I}} \abs{\Delta Q_N^\ell}.
+\end{equation}
+
+If we denote the computational work at level $\ell = (l_1, \ldots, l_{2N})$, for adding an increment $\Delta Q_N^{\ell}$
+in the telescoping sum, by  $\mathcal{W}_N^\ell$, then the  construction of the optimal  $\mathcal{I}$ will be done by profit thresholding, i.e.,
+for a certain threshold value $T$, we add a multi-index $\ell$ to
+$\mathcal{I}$ provided that
+\begin{equation*}
+	\log\left( \frac{\abs{\Delta Q_N^\ell}}{\mathcal{W}_N^ \ell} \right) \le T.
+\end{equation*}
+
+
+\begin{remark}
+	In this paper, we limited ourselves to designing a new alternative method  based on hierarchical adaptive sparse grids quadrature for computing option prices under rBergomi model. Giving the significant performance of our novel designed algorithm, we expect that designing a method based on QMC can bring similar or more gains as  our approach. An investigation of the performance of QMC in a similar context is left for a future work.
+\end{remark}
+
+
+
+\subsection{Brownian bridge construction}\label{sec:Brwonian bridge construction}
+In the literature of adaptive sparse grids and  QMC, several hierarchical path generation methods (PGMs) or transformation methods have been proposed to reduce the effective dimension. Among these transformations, we cite  the Brownian
+bridge (Bb)  construction \cite{morokoff1994quasi}, the principal component analysis (PCA)  \cite{acworth1998comparison} and the linear transformation (LT) \cite{imai2004minimizing}, etc \dots  
+
+In our context, sampling the Brownian motion can be constructed either sequentially using a standard random walk construction or hierarchically using   other hierarchical PGM as listed above. For our purposes, to make an effective use of MISC, which profits from anisotropy, we use the Bb construction since it produces  dimensions with different importance for MISC (creates anisotropy), contrary to random walk procedure for which all the dimension of the stochastic space have equal importance (isotropic).  This pre-transformation  reduces the effective dimension dimension  of the problem and as a consquence accelerates the MISC procedure by reducing the computational cost.
+
+
+Let us denote $\{t_i\}_{i=0}^{N}$ the grid of time steps, then the Bb construction \cite{glasserman2004monte} consists of the following: given a past value $B_{t_i}$ and a future value $B_{t_k}$, the value $B_{t_j}$ (with $t_i < t_j < t_k$) can be generated according to the formula:
+\begin{equation}
+B_{t_j}=(1-\rho) B_{t_i}+\rho B_{t_k}+ \sqrt{\rho (1-\rho)(k-i) \Delta t} z, \: z \sim \mathcal{N}(0,1) \COMMA
+\end{equation}
+where $\rho=\frac{j-i}{k-i}$.  In particular, if $N$ is a power of $2$, then given $B_0=0$, Bb generates the Brownian motion at times $T, T/2,T/4,3T/4,\dots$ according
+\begin{align}\label{eq:BB construction}
+	B_T&=\sqrt{T}z_1\nonumber\\
+	B_{T/2}&= \frac{1}{2}(B_{0}+B_{T})+\sqrt{T/4}z_2= \frac{\sqrt{T}}{2} z_1+\frac{\sqrt{T}}{2} z_2\nonumber\\
+	B_{T/4}&=\frac{1}{2} (B_{0}+B_{T/2})+\sqrt{T/8}z_3= \frac{\sqrt{T}}{4} z_1+\frac{\sqrt{T}}{4} z_2+\sqrt{T/8}z_3\nonumber\\
+	\vdots \nonumber\\
+\end{align}
+where $\{z_j\}_{j=1}^{N}$ are independent standard normal variables.  In Bb construction scheme given by \eqref{eq:BB construction}, the most important values that determine the large scale structure of Brownian motion are the first components of $\mathbf{z} = (z_1,\dots,z_N)$.
+
+
+
+\begin{remark}
+In this paper, we chose to couple Brownian bridge construction with the MISC solver to reduce the effective dimension, since it is the less costly option in terms of computational work and the easiest to implement. We did not investigate the performance of MISC when coupling it with other hierarchical path generations method such as PCA or LT, which could be left as a future work that looks for the optimal PGM to couple with MISC in this context.
+\end{remark}
+
+
+
+\subsection{Richardson extrapolation}\label{sec:Richardson extrapolation}
+
+
+Another  pre-transformation that we coupled with MISC is Richardson extrapolation. In fact, applying level $\ell$ of Richardson extrapolation reduces dramtically the bias and as a consequence reduces the needed number of time steps $N$ used in the coarsest level to achive a certain error tolerance. This means basically that Richardson extrapolation reduces directly the total dimension of the integration problem for achieving some error tolerance.
+
+
+We  recall that the Euler scheme has weak order $1$ so that
+
+\begin{align}\label{Euler_weak_error}
+	\abs{\expt{f(\hat{X}_T^h)}-\expt{f(X_T)} }  \leq C h
+\end{align}
+
+for some constant $C$, all sufficiently small $h$ and suitably smooth $f$. It can be easily  shown that  \eqref{Euler_weak_error} can be improved to
+
+
+\begin{align}\label{Euler_weak_error_strenghten}
+	\expt{f(\hat{X}_T^h)}= \expt{f(X_T)} + c h +\Ordo{h^2} \COMMA
+\end{align}
+
+
+where $c$ depends on $f$. 
+
+Applying \eqref{Euler_weak_error_strenghten} with discretization step $2h$, we  obtain
+
+\begin{align}\label{Euler_weak_error_strenghten_2h}
+	\expt{f(\hat{X}_T^{2h})}= \expt{f(X_T)} + 2 c h +\Ordo{h^2} \COMMA
+\end{align}
+
+implying
+
+\begin{align}\label{Richardson_extrapol}
+	2 \expt{f(\hat{X}_T^{2h})}- \expt{f(\hat{X}_T^{h})} =\expt{f(X_T)} + \Ordo{h^2} \COMMA
+\end{align}
+
+For higher levels extrapolations, we use the following: Let us denote by $h_J=h_0.2^{-J}$ the grid sizes (where $h_0$ is the coarsest grid size), by $K$ the level of the Richardson extrapolation, and by $I(J,K)$ the approximation of $\expt{f^(\hat{X}_T^{h_J})}$ by terms up to level $K$ (leading to a weak error of order $K$), then we have
+
+\begin{align}
+I(J,K)=\frac{2^K\left[I(J,K-1)-I(J-1,K-1)\right]}{2^K-1} +\Ordo{h^{K+1}},\quad J=1,2,\dots, K=1,2,\dots
+\end{align}
+
+
+\begin{remark}
+	Although we report later in Section \ref{sec:Numerical tests}, some plots of the weak error (Bias) rates for cases with/without Richardson extrapolation, we emphasize that our results are pure experimental, and hence we cannot be sure what will happen in the asymptotic regime. In fact, in this work, we target prices estimates with a sufficiently small value  of error tolerance,  when using few number of time steps, \ie  in the pre-asymptotic regime.
+\end{remark}
+\begin{remark}
+	We note that we did not apply Richardson extrapolation for all our numerical experiments. In fact, as it will be illustrated later in Section \ref{sec:Numerical tests}, for some parameters constellations, we can get a satisfactory small error tolerance even without applying a level $1$ of Richatdson extrapolation. Those cases basically are characterized by a sufficiently small bias in the pre-asymptotic regime.	
+\end{remark}
+
+
+
