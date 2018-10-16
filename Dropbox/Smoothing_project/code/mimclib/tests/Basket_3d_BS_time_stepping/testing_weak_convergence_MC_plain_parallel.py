@@ -207,7 +207,7 @@ def weak_convergence_differences():
         Lb=np.zeros(4)
         Ub_diff=np.zeros(3)
         Lb_diff=np.zeros(3)
-        values=np.zeros((7*(10**7),4)) 
+        values=np.zeros((8*(10**7),4)) 
          
       
         
@@ -226,7 +226,7 @@ def weak_convergence_differences():
             
             p =  pp.ProcessPool(num_cores)  # Processing Pool with four processors
         
-            values[:,i]= p.map(processInput, range(((7*(10**7)))))  
+            values[:,i]= p.map(processInput, range(((8*(10**7)))))  
            
             elapsed_time_qoi[i]=time.time()-start_time
             print np.mean(values[:,i]*float(exact))
@@ -243,7 +243,7 @@ def weak_convergence_differences():
         print elapsed_time_qoi
  
         error=np.abs(np.mean(values,axis=0) - 1) 
-        stand=np.std(values, axis = 0)/  float(np.sqrt(7*(10**7)))
+        stand=np.std(values, axis = 0)/  float(np.sqrt(8*(10**7)))
         Ub=np.abs(np.mean(values,axis=0) - 1)+1.96*stand
         Lb=np.abs(np.mean(values,axis=0) - 1)-1.96*stand
         print(error)   
@@ -254,7 +254,7 @@ def weak_convergence_differences():
         differences= [values[:,i]-values[:,i+1] for i in range(0,3)]
         error_diff=np.abs(np.mean(differences,axis=1))
         print error_diff 
-        stand_diff=np.std(differences, axis = 1)/ float(np.sqrt(7*(10**7)))
+        stand_diff=np.std(differences, axis = 1)/ float(np.sqrt(8*(10**7)))
         print stand_diff
         Ub_diff=np.abs(np.mean(differences,axis=1))+1.96*stand_diff
         Lb_diff=np.abs(np.mean(differences,axis=1))-1.96*stand_diff
@@ -300,7 +300,7 @@ def weak_convergence_differences():
         plt.ylabel(r'$\mid  g(X_{\Delta t})-  g(X) \mid $',fontsize=14) 
         plt.subplots_adjust(wspace=0.6, hspace=0.6, left=0.15, bottom=0.22, right=0.96, top=0.96)
         plt.legend(loc='upper left')
-        plt.savefig('./results/weak_convergence_order_basket_option_3d_1_relative_M_7_10_7_plain.eps', format='eps', dpi=1000)  
+        plt.savefig('./results/weak_convergence_order_basket_option_3d_1_relative_M_8_10_7_plain.eps', format='eps', dpi=1000)  
  
         fig = plt.figure()
         plt.plot(dt_arr[0:3], error_diff,linewidth=2.0,label='weak_error' ,linestyle = '--',marker='>', hold=True) 
@@ -315,7 +315,7 @@ def weak_convergence_differences():
         plt.ylabel(r'$\mid  g(X_{\Delta t})-  g(X_{\Delta t/2}) \mid $',fontsize=14) 
         plt.subplots_adjust(wspace=0.6, hspace=0.6, left=0.15, bottom=0.22, right=0.96, top=0.96)
         plt.legend(loc='upper left')
-        plt.savefig('./results/weak_convergence_order_differences_basket_option_3d_1_relative_M_7_10_7_plain.eps', format='eps', dpi=1000)  
+        plt.savefig('./results/weak_convergence_order_differences_basket_option_3d_1_relative_M_8_10_7_plain.eps', format='eps', dpi=1000)  
  
  
 weak_convergence_differences()   

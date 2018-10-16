@@ -102,7 +102,7 @@ class Problem(object):
         #step3
 
 
-        beta=16
+        beta=8
         yknots_right=np.polynomial.laguerre.laggauss(beta)
         yknots_left=yknots_right
 

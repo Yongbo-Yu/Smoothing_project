@@ -29,7 +29,7 @@ class Problem(object):
         #self.sigma=np.random.uniform(0.3,0.4,self.basket_d) #vector of volatilities
         self.sigma=0.4*np.ones(self.basket_d) 
         self.K= coeff*self.c.dot(self.S0)                           # Strike price and coeff determine if we have in/at/out the money option
-        self.w=self.c*self.S0* np.exp(-0.5*pow(self.sigma,2)*self.T)    #new weights
+        self.w=self.c*self.S0    #new weights
         #self.rho=self.correlation()                                                  #correlation matrx
         #self.rho=np.array([[1 , 0.3,  0.3],[ 0.3,  1 , 0.3],[0.3 , 0.3 ,1] ])
         #from numpy import concatenate, zeros
@@ -67,14 +67,45 @@ class Problem(object):
 
     # objfun
     def objfun(self,nelem,y):
-        y=y[0:self.basket_d-1];
         start_time=time.time();
+        
+        #preparing point for Laguerre
+        beta=8
+        yknots_right=np.polynomial.laguerre.laggauss(beta)
+        yknots_left=yknots_right
+
+
+        
         lambda_vect,V=self.factorization()
-        A=np.diag(np.sqrt(lambda_vect[1:]))
-        #print(A)
-        #print(y)
-        z=A.dot(y) 
-        QoI=self.Call_BS(self.h(z,V,self.w)*np.exp((lambda_vect[0]/2)),self.K,np.sqrt(lambda_vect[0]))
+
+        bar_y=stock_price_trajectory_basket_BS(y)
+        
+        bar_z=np.log(K/float(self.h(bar_y,V,self.w)))
+
+
+        
+       
+
+
+
+        mylist_left=[]
+        mylist_left.append(yknots_left[0])
+        mylist_left[1:]=[np.array(y[i]) for i in range(0,len(y))]
+        points_left=self.cartesian(mylist_left)
+        x_l= np.exp()
+        QoI_left= yknots_left[1].dot(self.payoff(x_l)*((1/np.sqrt(2 * np.pi)) * np.exp(-((bar_z-points_left[:,0])**2)/2)* np.exp(points_left[:,0])))
+
+        mylist_right=[]
+        mylist_right.append(yknots_right[0])
+        mylist_right[1:]=[np.array(y[i]) for i in range(0,len(y))]
+        points_right=self.cartesian(mylist_right)
+        x_r=np.asarray([self.stock_price_trajectory_1D_BS(points_right[i,0]+bar_z,points_right[i,1:])[0] for i in range(0,len(yknots_right[0]))])
+        QoI_right= yknots_right[1].dot(self.payoff(x_r)*(1/np.sqrt(2 * np.pi)) * np.exp(-((points_right[:,0]+bar_z)**2)/2)* np.exp(points_right[:,0]))
+
+        QoI=QoI_left+QoI_right
+
+
+
         elapsed_time_qoi=time.time()-start_time;
         self.elapsed_time=self.elapsed_time+elapsed_time_qoi;
 
@@ -82,14 +113,79 @@ class Problem(object):
        
         return QoI
 
-    # this function computes the price of European call option BS model
-    def Call_BS(self,S0,K,sigma):
-        #here we assume that maturity T=1 and interest rate r=0
-        from scipy.stats import norm
-        d1=(1/sigma)*(np.log(S0/K)+((sigma**2)/2))
-        d2=(1/sigma)*(np.log(S0/K)-((sigma**2)/2))
-        price=S0*norm.cdf(d1)-K*norm.cdf(d2)
-        return price
+    
+
+
+
+
+    def brownian_increments(self,y1,y):
+        t=np.linspace(0, self.T, self.N+1)     
+        h=self.N
+        j_max=1
+        bb= np.zeros((1,self.N+1))
+        bb[0,h]=np.sqrt(self.T)*y1
+       
+        
+        for k in range(1,self.d+1):
+            i_min=h//2
+            i=i_min
+            l=0
+            r=h
+            for j in range(1,j_max+1):
+                a=((t[r]-t[i])* bb[0,l]+(t[i]-t[l])*bb[0,r])/float(t[r]-t[l])
+                b=np.sqrt((t[i]-t[l])*(t[r]-t[i])/float(t[r]-t[l]))
+                bb[0,i]=a+b*y[i-1]
+                i=i+h
+                l=l+h
+                r=r+h
+            j_max=2*j_max
+            h=i_min 
+        return bb    
+
+
+      # This function simulates a basket BS trajectory for stock price, it plays the role of f_1 in our notes
+    def stock_price_trajectory_basket_BS(self,y):
+
+        for i in range (basket_d-1):
+            bb[i,:]=self.brownian_increments(y[i*self.N],y[i*self.N+1])
+
+        
+        for i in range (basket_d-1):
+
+            dW[i,:]= [bb[i,j+1]-bb[i,j]  for j in range(0,self.N)] 
+    
+
+
+
+        # construct the correlated  brownian bridge increments
+        lower_triang_cholesky = np.linalg.cholesky(self.rho)
+     
+        dW=np.dot(lower_triang_cholesky,dW)  
+          
+          for i in range (basket_d-1):
+
+            dWbb[i,:]= dW[i,:]-(self.dt/np.sqrt(self.T))*y[i*self.N] 
+          
+
+
+        X=np.zeros((self.basket_d-1,self.N+1)) #here will store the BS trajectory
+      
+        X[:,0]=self.S0
+        for n in range(1,self.N+1):
+            for i in  range (basket_d-1):
+                X[i,n]=X[i,n-1]*(1+self.sigma[i]*dW[i,n-1])
+       
+      
+        
+        return X[:,-1]
+
+
+      # this function defines the payoff function used here
+    def payoff(self,x): 
+       #print(x)
+       g=(x-self.K)
+       g[g < 0] = 0
+       return g      
     
     # This function computes the transformation operation
     def h(self,y_bar, V,w):

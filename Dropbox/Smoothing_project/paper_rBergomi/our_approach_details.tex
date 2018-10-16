@@ -136,6 +136,60 @@ $\mathcal{I}$ provided that
 \end{equation*}
 
 
+
+\begin{remark}
+	We mention that the choice of the hierarchy of quadrature points, $m(\ell)$, is flexible in the MISC solver and can be fixed by the user, depending on the convergence properties of the problem at hand. For instance, for the sake of reproducibility, in our numerical experiments, we used a linear hierarchy: $m(l)=4 (l-1)+1,\: 1 \le l $, for results of parameters sets $1$ and $2$ in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. For the remaining parameters sets in table  \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, we used a geometric hierarchy: $m(\ell)=2^{l-1}+1, \:1 \le l $.
+\end{remark} 
+
+
+\begin{remark}
+As emphasized in \cite{haji2016multi}, one important requirement to get the optimal performance of MISC solver is to check  the convergence of first and mixed differences operators (See \cite{haji2016multi} for details). We checked this requirement in all our numerical experiments, and for illustration, we show in figures ( \ref{fig:first_diff_comp_K_1_H_002}, \ref{fig:second_diff_comp_K_1_H_002}), the convergence of first and second order differences for the case of parameters set $3$ in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. 
+\end{remark} 
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.3\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_mixed_error_rates/without_change_measure/N_4/H_002/first_difference_rbergomi_4steps_H_002_K_1_totally_hierarch_with_rate_W1}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.3\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_mixed_error_rates/without_change_measure/N_4/H_002/first_difference_rbergomi_4steps_H_002_K_1_totally_hierarch_with_rate_W2}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	
+	
+	\caption{The rate of convergence of  first order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$), for parameters set $3$ in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. The number of quadrature points used in the $i$-th dimension is $N_i=2^{\beta_i-1}+1$. a) wrt $W^1$ b) wrt $W^2$.}
+	\label{fig:first_diff_comp_K_1_H_002}
+\end{figure}
+
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.3\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_mixed_error_rates/without_change_measure/N_4/H_002/mixed_difference_order2_rbergomi_4steps_H_002_K_1_totally_hierarch_with_rate_W1}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.3\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_mixed_error_rates/without_change_measure/N_4/H_002/mixed_difference_order2_rbergomi_4steps_H_002_K_1_totally_hierarch_with_rate_W2}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The rate of convergence of  second order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$), for parameters set $3$ in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. The number of quadrature points used in the $i$-th dimension is $N_i=2^{\beta_i-1}+1$. a) wrt $W^1$ b) wrt $W^2$.}
+	\label{fig:second_diff_comp_K_1_H_002}
+\end{figure}
+
+\FloatBarrier
+
+
 \begin{remark}
 	In this paper, we limited ourselves to designing a new alternative method  based on hierarchical adaptive sparse grids quadrature for computing option prices under rBergomi model. Giving the significant performance of our novel designed algorithm, we expect that designing a method based on QMC can bring similar or more gains as  our approach. An investigation of the performance of QMC in a similar context is left for a future work.
 \end{remark}
@@ -144,7 +198,7 @@ $\mathcal{I}$ provided that
 
 \subsection{Brownian bridge construction}\label{sec:Brwonian bridge construction}
 In the literature of adaptive sparse grids and  QMC, several hierarchical path generation methods (PGMs) or transformation methods have been proposed to reduce the effective dimension. Among these transformations, we cite  the Brownian
-bridge (Bb)  construction \cite{morokoff1994quasi}, the principal component analysis (PCA)  \cite{acworth1998comparison} and the linear transformation (LT) \cite{imai2004minimizing}, etc \dots  
+bridge (Bb)  construction \cite{morokoff1994quasi,moskowitz1996smoothness,caflisch1997valuation}, the principal component analysis (PCA)  \cite{acworth1998comparison} and the linear transformation (LT) \cite{imai2004minimizing}, etc \dots  
 
 In our context, sampling the Brownian motion can be constructed either sequentially using a standard random walk construction or hierarchically using   other hierarchical PGM as listed above. For our purposes, to make an effective use of MISC, which profits from anisotropy, we use the Bb construction since it produces  dimensions with different importance for MISC (creates anisotropy), contrary to random walk procedure for which all the dimension of the stochastic space have equal importance (isotropic).  This pre-transformation  reduces the effective dimension dimension  of the problem and as a consquence accelerates the MISC procedure by reducing the computational cost.
 
@@ -173,7 +227,7 @@ In this paper, we chose to couple Brownian bridge construction with the MISC sol
 \subsection{Richardson extrapolation}\label{sec:Richardson extrapolation}
 
 
-Another  pre-transformation that we coupled with MISC is Richardson extrapolation. In fact, applying level $\ell$ of Richardson extrapolation reduces dramtically the bias and as a consequence reduces the needed number of time steps $N$ used in the coarsest level to achive a certain error tolerance. This means basically that Richardson extrapolation reduces directly the total dimension of the integration problem for achieving some error tolerance.
+Another  pre-transformation that we coupled with MISC is Richardson extrapolation \cite{talay1990expansion}. In fact, applying level $\ell$ of Richardson extrapolation reduces dramtically the bias and as a consequence reduces the needed number of time steps $N$ used in the coarsest level to achive a certain error tolerance. This means basically that Richardson extrapolation reduces directly the total dimension of the integration problem for achieving some error tolerance.
 
 
 We  recall that the Euler scheme has weak order $1$ so that
