@@ -121,17 +121,17 @@ What has beed achieved so far:
 	\item Numerical outputs:
 	\begin{itemize}
 	
-	 \item \textbf{Example 1}: Tests for  the basket option with the smoothing trick as in \cite{bayersmoothing} (see Section \ref{sec:The basket option with smoothing trick with a time stepping procedure}): in that example we  checked the performance of MISC without time stepping scheme and also compare the results with reference \cite{bayersmoothing}. (Done).
+	 \item \textbf{Example 1}: Tests for  the basket option with the smoothing trick as in \cite{bayersmoothing}: in that example we  checked the performance of MISC without time stepping scheme and also compare the results with reference \cite{bayersmoothing} (See Section \ref{sec:The basket option with smoothing trick without a time stepping procedure}). (Done).
 	
 	
 	
-		\item 	  \textbf{Example 2}: The one dimensional binary option under discretized BS model (see Section \ref{sec:Results for the binary option example}):  We tested a simple case which is given by the binary option. We tested the weak rates (with and without using the Richardson extrapolation). The results are  promising (Done).
+		\item 	  \textbf{Example 2}: The one dimensional binary option under discretized BS model (see Section \ref{sec:Results for the binary option example}). The results are  promising (See Section \ref{sec:Results for the binary option example}) (Done).
 		
-		\item \textbf{Example 3}: The one dimensional call option under discretized BS model (see Section \ref{sec:Results for the call option example}). The results are  promising (Done).
+		\item \textbf{Example 3}: The one dimensional call option under discretized BS model (see Section \ref{sec:Results for the call option example}). The results are  promising (See Section \ref{sec:Results for the call option example}) (Done).
 		\end{itemize}
 	\item  Theoretical outputs:
 	\begin{itemize}
-		\item Heuristic proof of analiticity (See attached file.)
+		\item Heuristic proof of analiticity.
 	\end{itemize}
 \end{enumerate}
 
@@ -320,9 +320,9 @@ Now,  performing the  pre-integrating step with respect to $(z_1^{(1)},\dots, z_
 where $h(\mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1})=\int_{\rset^d} G(z^{(1)}_1,\mathbf{z}^{(1)}_{-1},\dots,z^{(d)}_1,\mathbf{z}^{(d)}_{-1} )   \rho_d(z_1^{(1)},\dots,z_1^{(d)}) dz_1^{(1)}\dots dz_1^{(d)}$.
 \subsection{The MISC solver} \label{sec:Details of the MISC}
 
-We focus on solving the problem of  approximating the expected value of $\expt{f(y)}$ on a tensorization of quadrature formulae over the stochastic domain, $\Gamma$. Assuming that $f(y)$ is a continuous function (analytic) over $\Gamma$. A quadrature approach is very adequate.
+Assume we want to  solve the problem of  approximating the expected value of $\expt{f(Y)}$ on a tensorization of quadrature formulae over the stochastic domain, $\Gamma$. We also  assume that $f(y)$ is a continuous function (analytic) over $\Gamma$. 
 
-Let us define $\beta \le 1$ be an integer positive value referred to as a "stochastic discretization level", and $m: \nset \rightarrow \nset$ be a strictly increasing function with $m(0)=0$ and $m(1)=1$, that we call a "level-to-nodes function". At level $\beta$, we consider a set of $m(\beta)$ distinct quadrature points in $(-\infty; \infty)$, $\mathcal{H}^{m(\beta)}=\{y^1_\beta,y^2_\beta,\dots,y_\beta^{m(\beta)}\} \subset [-\infty,\infty]$, and a set of quadrature weights, $\mathcal{W}^{m(\beta)}=\{\omega^1_\beta,\omega^2_\beta,\dots,\omega_\beta^{m(\beta)}\}$. We also let $C^0((-\infty,\infty))$ be the set of real-valued continuous functions over $(-\infty, \infty)$. We then define the quadrature operator as
+To introduce simplified notations, we start with the one-dimension case. Let us define $\beta \le 1$ be an integer positive value referred to as a "stochastic discretization level", and $m: \nset \rightarrow \nset$ be a strictly increasing function with $m(0)=0$ and $m(1)=1$, that we call a "level-to-nodes function". At level $\beta$, we consider a set of $m(\beta)$ distinct quadrature points in $(-\infty; \infty)$, $\mathcal{H}^{m(\beta)}=\{y^1_\beta,y^2_\beta,\dots,y_\beta^{m(\beta)}\} \subset [-\infty,\infty]$, and a set of quadrature weights, $\boldsymbol{\omega}^{m(\beta)}=\{\omega^1_\beta,\omega^2_\beta,\dots,\omega_\beta^{m(\beta)}\}$. We also let $C^0((-\infty,\infty))$ be the set of real-valued continuous functions over $(-\infty, \infty)$. We then define the quadrature operator as
 
 
 \begin{equation}
@@ -333,88 +333,89 @@ Q(m(\beta)):C^0((-\infty,\infty)) \rightarrow \rset, \quad Q(m(\beta))[f]= \sum_
 
 
 
+In our case, and following \eqref{eq: pre_integration_step_wrt_y1_basket}, we have a multi-variate integration problem and  we have, given the previous notations,    $f:=h$, $\mathbf{Y}=(\mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1})$, and  $\Gamma$  is finite dimensional and given by a $d (N-1)$ tensor product of intervals.  Therefore,  we define, for any multi-index $\boldsymbol{\beta}$
 
-In the multi-variate case $\Gamma$ is defined as a countable tensor
-product of intervals. Therefore,  we define, for any definitely supported multi-index $\boldsymbol{\beta} \in \mathcal{L}_+$
+$$Q^{m(\boldsymbol{\beta})}: \Gamma \rightarrow \rset,\quad  Q^{m(\boldsymbol{\beta})}= \bigotimes_{n = 1}^{d (N-1)} Q^{m(\beta_n)} $$
 
-$$Q^{m(\boldsymbol{\beta})}: \Gamma \rightarrow \rset,\quad  Q^{m(\boldsymbol{\beta})}= \bigotimes_{n \ge 1} Q^{m(\beta_n)} $$
-
-where the $n$-th quadrature operator is understood to act only on the $n$-th variable of $f$. Practically, we obtain the value of $Q^{m(\boldsymbol{\beta})}[f]$  by considering the tensor grid $\mathcal{T}^{m(\boldsymbol{\beta})}= \times_{n \ge 1} \mathcal{H}^{m(\beta_n)}$ with cardinality $\#\mathcal{T}^{m(\boldsymbol{\beta})}=\prod_{n \ge 1} m (\beta_n)$ and computing
+where the $n$-th quadrature operator is understood to act only on the $n$-th variable of $f$. Practically, we obtain the value of $Q^{m(\boldsymbol{\beta})}[f]$  by considering the tensor grid $\mathcal{T}^{m(\boldsymbol{\beta})}= \times_{n = 1}^{d (N-1)}  \mathcal{H}^{m(\beta_n)}$ with cardinality $\#\mathcal{T}^{m(\boldsymbol{\beta})}=\prod_{n=1}^{d (N-1)} m (\beta_n)$ and computing
 
 $$ Q^{\mathcal{T}^{m(\boldsymbol{\beta})}}[f]= \sum_{j=1}^{\#\mathcal{T}^{m(\boldsymbol{\beta})}} f(\hat{y}_j) \bar{\omega}_j$$
-where $\hat{y}_j \in \mathcal{T}^{m(\boldsymbol{\beta})}$ amd $\bar{\omega}_j$ are (infinite) products of weights of the univariate quadrature rules. We Note that it is essential in this construction that $m(1)=1$ so that the cardinality of $\mathcal{T}^{m(\boldsymbol{\beta})}$ is finite for any $\boldsymbol{\beta} \in \mathcal{L}_+$ and $ \omega_{\beta_n}^1=1$ whenever $n = 1$, so that all weights, $\bar{\omega}_j$, are bounded.
+where $\hat{y}_j \in \mathcal{T}^{m(\boldsymbol{\beta})}$ amd $\bar{\omega}_j$ are  products of weights of the univariate quadrature rules.
+\begin{remark}
+	We note that the quadrature points are chosen to optimize the convergence properties of the quadrature error.  For instance, in our context, since we are dealing with Gaussian densities, using Gauss-Hermite quadrature points is the appropriate choice.
+\end{remark}
 
-We mention that the quadrature points are chosen to optimize the convergence properties of the quadrature error.  
-
-A direct approximation $\expt{f} \approx Q^{m(\boldsymbol{\beta})}[f]$ is not an appropriate option  due to the well-known "curse of dimensionality" effect. We use multi-index stochastic collocation (MISC) as it was suggested  in \cite{haji2016multi}. MISC as a hierarchical adaptive quadrature strategy that uses  stochastic discretizations  and classic sparsification approach to obtain an effective approximation scheme for $\expt{f}$. 
 
 
-In our setting, we are left with a $N$-dimensional Gaussian random inputs, which are chosen independently, and which we use as the basis of the multi-index construction. 
 
-For a multi-index $\ell = (l_i)_{i=1}^{N} \in \mathbb{N}^{N}$, we denote by
-$Q^N_\ell \coloneqq Q(m_{\ell})$ the result of a discretized
-integral, using $N$ time steps , with parameters $m_\ell \coloneqq (m_{l_i})_{i=1}^{N}$. We further define the set of
-differences $\Delta Q^N_\ell$ as follows: for a single index $1 \le i \le N$,
+
+
+
+
+
+A direct approximation $\expt{f[\mathbf{Y}]} \approx Q^{m(\boldsymbol{\beta})}[f]$ is not an appropriate option  due to the well-known "curse of dimensionality" effect. We use MISC as it was suggested  in \cite{haji2016multi}. MISC is a hierarchical adaptive sparse grids quadrature strategy that uses  stochastic discretizations  and classic sparsification approach to obtain an effective approximation scheme for $\expt{f}$.
+
+
+
+ For the sake
+of concreteness, in our setting from \eqref{eq: pre_integration_step_wrt_y1_basket}, we are left with a $d(N-1)$- dimensional Gaussian random inputs, which are chosen independently, resulting in  $d(N-1)$ numerical parameters for MISC, which we use as the basis of the multi-index construction. Let $l \in \{1, \ldots, d (N-1)\}$ and set
+\begin{equation}
+p_l \coloneqq z_{i1+1},  \quad 1 \le i \le d,\quad  (i-1)(N-1)+1\le l \le i (N-1).
+\end{equation}
+
+
+For a multi-index $\ell = (l_i)_{i=1}^{d(N-1)} \in \mathbb{N}^{d(N-1)}$, we denote  by
+$Q_N^\ell \coloneqq Q^{N,m(\ell)}(p_{\ell})$ the result of a discretized
+integral, using $N$ time steps , with parameters $p_\ell \coloneqq (p_{l_i})_{i=1}^{d(N-1)}$, and with a number of quadrature points $m(l_i)$ in the dimension $p_{l_i}$. We further define the set of
+differences $\Delta Q^N_\ell$ as follows: for a single index $1 \le i \le d (N-1)$,
 let
 \begin{equation}
-\Delta_i Q^N_\ell \coloneqq \left\{ 
+\Delta_i Q_N^\ell \coloneqq \left\{ 
 \aligned 
-Q^N(m_\ell) - Q^N(m_\ell') \text{ with } m_\ell' =
-m_{\ell - e_i}, & \text{ if } \ell_i>0 \\
-Q^N(m_\ell) & \text{ otherwise}
+Q_N^{\ell} - Q_N^{\ell'} \text{ with } \ell' =\ell - e_i, & \text{ if } \ell_i>0 \\
+Q_N^\ell & \text{ otherwise}
 \endaligned
 \right.
 \end{equation}
-where $e_i$ denotes the $i$th $N$-dimensional unit vector.  Then, $\Delta
-Q^N_\ell$ is defined as
-
-%We also define the mixed difference  operator
-%
-%\begin{equation}\label{eq;Mix_diff_op}
-%\boldsymbol{\Delta} Q^N_\ell = \bigotimes_{i \ge 1} \Delta_iQ^N_\ell= \sum_{\mathbf{i} \in \{0,1\}^\nset} (-1)^\abs{\mathbf{i}} 
-%\end{equation}
-
-
-
+where $e_i$ denotes the $i$th $d (N-1)$-dimensional unit vector. Then, $\Delta
+Q_N^\ell$ is defined as
 \begin{equation}
-\Delta Q^N_\ell \coloneqq \left( \prod_{i=1}^{N} \Delta_i \right) Q^N_\ell.
+\Delta Q_N^\ell \coloneqq \left( \prod_{i=1}^{d(N-1)} \Delta_i \right) Q_N^\ell.
 \end{equation}
 
 
-Note that $Q^N(m)$ converges to the biased option price (denoted by $Q^N(\infty)$ as
-$m \to \infty$. Hence, we have the telescoping property
+
+
+
+We have the telescoping property
 \begin{equation}
-Q^N(\infty) = \sum_{l_1=0}^\infty \cdots \sum_{l_{N} = 0}^\infty \Delta
-Q^N_{(l_1, \ldots, l_{N})} = \sum_{\ell \in \mathbb{N}^{N}} \Delta Q^N_\ell,
+Q_N^\infty = \sum_{l_1=0}^\infty \cdots \sum_{l_{d(N-1)} = 0}^\infty \Delta
+Q_N^{(l_1, \ldots, l_{d(N-1)})} = \sum_{\ell \in \mathbb{N}^{d(N-1)}} \Delta Q_N^\ell,
 \end{equation}
-provided that $m_{l_1} \xrightarrow{l_1 \to \infty} \infty$, \ldots,
-$m_{l_{N}} \xrightarrow{l_{N} \to \infty} \infty$. The telescoping property
-is accompanied by a corresponding error factorization, i.e., the size of the
-increment $\Delta Q^N_\ell$ can be bounded by a product of error terms depending
-on $m_i$.
+provided that $l_1 \to \infty$, \ldots,
+$l_{d(N-1)} \to \infty$, where $Q^\infty_N$ is the biased option price, computed with $N$ time steps.
 
-
-We denote the computational work at level $\ell = (l_1, \ldots, l_{N})$  for adding an increment $\Delta Q^N_{\ell}$
-in the telescoping sum by  $W^N_\ell$, and   define the actual estimator for the quantity of interest
-$Q^N(\infty)$: given a set of multi-indices $\mathcal{I} \subset
-\mathbb{N}^{N}$, let
+As stated before, our goal is to approximate, $Q_N^\infty$, then   the actual MISC estimator  computed using a  given a set of multi-indices $\mathcal{I} \subset
+\mathbb{N}^{d(N-1)}$, is given by
 \begin{equation*}
-	Q^N(\mathcal{I}) \coloneqq \sum_{\ell \in \mathcal{I}} \Delta Q^N_\ell.
-\end{equation*}
-Then the error is given by
-\begin{equation*}
-	\abs{Q^N(\infty) - Q^N(\mathcal{I})} \le \sum_{\ell \in \mathbb{N}^{N} \setminus
-		\mathcal{I}} \abs{\Delta Q^N_\ell},
+	Q_N^{\mathcal{I}} \coloneqq \sum_{\ell \in \mathcal{I}} \Delta Q_N^\ell.
 \end{equation*}
 
+The quadrature error in this  case  is given by
+\begin{equation}\label{eq:quadrature error}
+\mathcal{E}_Q(TOL_{\text{MISC}},N) =\abs{Q_N^\infty - Q_N^\mathcal{I}} \le \sum_{\ell \in \mathbb{N}^{d(N-1)} \setminus
+	\mathcal{I}} \abs{\Delta Q_N^\ell}.
+\end{equation}
 
-The construction of $\mathcal{I}$ will be done by profit thresholding, i.e.,
+If we denote the computational work at level $\ell = (l_1, \ldots, l_{d(N-1)})$, for adding an increment $\Delta Q_N^{\ell}$
+in the telescoping sum, by  $\mathcal{W}_N^\ell$, then the  construction of the optimal  $\mathcal{I}$ will be done by profit thresholding, i.e.,
 for a certain threshold value $T$, we add a multi-index $\ell$ to
 $\mathcal{I}$ provided that
 \begin{equation*}
-	\log\left( \frac{\abs{\Delta Q^N_\ell}}{W_\ell^N} \right) \le T.
+	\log\left( \frac{\abs{\Delta Q_N^\ell}}{\mathcal{W}_N^ \ell} \right) \le T.
 \end{equation*}
-(Actually, we take the error estimate instead of the true error.)
+
+
 
 \subsection{Path generation methods (PGM)}\label{sec:Path generation methods (PGM)}
 
@@ -856,13 +857,13 @@ From figure \ref{fig:Weak_rate_binary_without_rich}, we see that we get a weak e
 
 \begin{figure}[h!]
 	\centering
-	\begin{subfigure}{.4\textwidth}
+	\begin{subfigure}{.35\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{./figures/binary_weak_error/without_richardson/weak_convergence_order_binary_option_relative_M_10_4}
 		\caption{}
 		\label{fig:sub3}
 	\end{subfigure}%
-	\begin{subfigure}{.4\textwidth}
+	\begin{subfigure}{.35\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{./figures/binary_weak_error/without_richardson/weak_convergence_order_differences_binary_option_relative_M_10_4}
 		\caption{}
@@ -874,13 +875,13 @@ From figure \ref{fig:Weak_rate_binary_without_rich}, we see that we get a weak e
 \end{figure}
 \begin{figure}[h!]
 	\centering
-	\begin{subfigure}{.4\textwidth}
+	\begin{subfigure}{.35\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{./figures/binary_weak_error/with_richardson/weak_convergence_order_binary_richardson_relative_M_5_10_6}
 		\caption{}
 		\label{fig:sub3}
 	\end{subfigure}%
-	\begin{subfigure}{.4\textwidth}
+	\begin{subfigure}{.35\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{./figures/binary_weak_error/with_richardson/weak_convergence_order_differences_binary_richardson_relative_M_5_10_6}
 		\caption{}
@@ -919,6 +920,7 @@ From figure \ref{fig:Weak_rate_binary_without_rich}, we see that we get a weak e
 
 
 In this Section, we report the results for the binary option, using the different Methods: MISC, MC $+$ root finding  and MC, without Richardson extrapolation . We mention that for MISC we used a very small tolerance for the Newton solver, when solving the Kink point problem ($TOL_{\text{Newton}}=10^{-10}$). We start by reporting the observed approximated values using different methods (See table \ref{table: Binary option price of the different methods for different number of time steps, without Richardson extrapolation.}. The biased values for MC method were computed using the values of Bias, reported in table \ref{Bias and Statistical errors of MC  for computing Binary option price  for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}. In table \ref{Quadrature error of MISC to compute Binary option price of the different tolerances for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}, we report the behavior of quadrature error with respect to MISC tolerance. We precise that the quadrature error is computed by substracting the MISC approximated value from the biased MC value. We report in red the values where MISC becomes stable (see also figure \ref{fig:Quadrature_error_non_rich_binary}). Those values where used to compute the needed number of samples for MC (with and without root finding), to achieve similar magnitude  for statistical error. Later, in table \ref{Total error of MISC and MC to compute Binary option price of the different tolerances for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}, we report the total relative error for all methods (Quadrature error + Bias for MISC and Statistical error + Bias for MC). We also report in table \ref{Comparsion of the computational time of  MC and MISC, used to compute Binary option price  for different number of time steps, without Richardson extrapolation}, the computational time needed for all different methods.  We finally provide in figure \ref{fig:Complexity plot for MC and MISC , Binary, Non rich}, the complexity rates for the different involved methods.
+\FloatBarrier
 \begin{table}[h!]
 	\centering
 	\begin{tabular}{l*{6}{c}r}
@@ -940,7 +942,7 @@ In this Section, we report the results for the binary option, using the differen
 	\caption{Binary option price of the different methods for different number of time steps, without Richardson extrapolation.}
 	\label{table: Binary option price of the different methods for different number of time steps, without Richardson extrapolation.}
 \end{table}
-
+\FloatBarrier
 \begin{table}[h!]
 	\centering
 	\begin{tabular}{l*{6}{c}r}
@@ -959,6 +961,7 @@ In this Section, we report the results for the binary option, using the differen
 	\label{Bias and Statistical errors of MC  for computing Binary option price  for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
 \end{table}
 
+\FloatBarrier
 
 
 
@@ -983,10 +986,10 @@ In this Section, we report the results for the binary option, using the differen
 	\label{Quadrature error of MISC to compute Binary option price of the different tolerances for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
 \end{table}
 
-
+\FloatBarrier
 	\begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.7\linewidth]{./figures/Binary_MISC_quadrature_error/relative_quad_error_wrt_MISC_TOL_non_rich}
+	\includegraphics[width=0.4\linewidth]{./figures/Binary_MISC_quadrature_error/relative_quad_error_wrt_MISC_TOL_non_rich}
 	
 	
 	\caption{Relative quadrature error of MISC to compute Binary option price of the different tolerances for different number of time steps, without Richardson extrapolation.}
@@ -995,7 +998,7 @@ In this Section, we report the results for the binary option, using the differen
 
 
 
-
+\FloatBarrier
 
 \begin{table}[h!]
 	\centering
@@ -1019,7 +1022,7 @@ In this Section, we report the results for the binary option, using the differen
 \end{table}
 
 
-
+\FloatBarrier
 
 \begin{table}[h!]
 	\centering
@@ -1046,11 +1049,11 @@ In this Section, we report the results for the binary option, using the differen
 
 
 
-
+\FloatBarrier
 
 	\begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.7\linewidth]{./figures/Binary_Complexity_rates/error_vs_time}
+	\includegraphics[width=0.4\linewidth]{./figures/Binary_Complexity_rates/error_vs_time}
 	
 	\caption{Complexity plot for MC and MISC for the case without Richardson extrapolation.}
 	\label{fig:Complexity plot for MC and MISC , Binary, Non rich}
@@ -1060,6 +1063,9 @@ In this Section, we report the results for the binary option, using the differen
 
 \subsubsection*{With Richardson extrapolation (level $1$)}
 In this Section, we report the results for the binary option, using the different Methods: MISC, MC $+$ root finding  and MC, with Richardson extrapolation . We mention that for MISC we used a very small tolerance for the Newton solver, when solving the Kink point problem ($TOL_{\text{Newton}}=10^{-10}$). We start by reporting the observed approximated values using different methods (See table \ref{table: Binary option price of the different methods for different number of time steps, with Richardson extrapolation (level1).}. The biased values for MC method were computed using the values of Bias, reported in table \ref{Bias and Statistical errors of MC  for computing Binary option price  for different number of time steps, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors.}. In table \ref{Quadrature error of MISC to compute Binary option price of the different tolerances for different number of time steps, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors.}, we report the behavior of quadrature error with respect to MISC tolerance. We precise that the quadrature error is computed by substracting the MISC approximated value from the biased MC value. We report in red the values where MISC becomes stable (see also figure \ref{fig:Quadrature_error_with_rich_binary}). Those values where used to compute the needed number of samples for MC (with and without root finding), to achieve similar magnitude  for statistical error. Later, in table \ref{Total error of MISC and MC to compute Binary option price of the different tolerances for different number of time steps, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors.}, we report the total relative error for all methods (Quadrature error + Bias for MISC and Statistical error + Bias for MC). We also report in table\ref{Comparsion of the computational time of  MC and MISC, used to compute Binary option price  for different number of time steps, with Richardson extrapolation (level $1$)}, the computational time needed for all different methods.  We finally provide in figure \ref{fig:Complexity plot for MC and MISC , Binary, with rich}, the complexity rates for the different involved methods, as well a comparison between the two versions of MISC (without/with Richardson extrapolation) in figure \ref{fig:Complexity plot for MC and MISC , Binary, comparison}.
+
+\FloatBarrier
+
 \begin{table}[h!]
 	\centering
 	\begin{tabular}{l*{6}{c}r}
@@ -1080,7 +1086,7 @@ In this Section, we report the results for the binary option, using the differen
 	\label{table: Binary option price of the different methods for different number of time steps, with Richardson extrapolation (level1).}
 \end{table}
 
-
+\FloatBarrier
 \begin{table}[h!]
 	\centering
 	\begin{tabular}{l*{6}{c}r}
@@ -1100,6 +1106,7 @@ In this Section, we report the results for the binary option, using the differen
 	\label{Bias and Statistical errors of MC  for computing Binary option price  for different number of time steps, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors.}
 \end{table}
 
+\FloatBarrier
 
 
 
@@ -1121,17 +1128,17 @@ In this Section, we report the results for the binary option, using the differen
 \end{table}
 
 
-
+\FloatBarrier
 	\begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.7\linewidth]{./figures/Binary_MISC_quadrature_error/relative_quad_error_wrt_MISC_TOL_with_rich}
+	\includegraphics[width=0.4\linewidth]{./figures/Binary_MISC_quadrature_error/relative_quad_error_wrt_MISC_TOL_with_rich}
 	
 	
 	\caption{Relative quadrature error of MISC to compute Binary option price of the different tolerances for different number of time steps, with Richardson extrapolation.}
 	\label{fig:Quadrature_error_with_rich_binary}
 \end{figure}
 
-
+\FloatBarrier
 
 \begin{table}[h!]
 	\centering
@@ -1157,7 +1164,7 @@ In this Section, we report the results for the binary option, using the differen
 
 
 
-
+\FloatBarrier
 
 
 \begin{table}[h!]
@@ -1183,10 +1190,10 @@ In this Section, we report the results for the binary option, using the differen
 	\label{Comparsion of the computational time of  MC and MISC, used to compute Binary option price  for different number of time steps, with Richardson extrapolation (level $1$)}
 \end{table}
 
-
+\FloatBarrier
 	\begin{figure}[h!]
 \centering
-\includegraphics[width=0.7\linewidth]{./figures/Binary_Complexity_rates/error_vs_time_rich}
+\includegraphics[width=0.4\linewidth]{./figures/Binary_Complexity_rates/error_vs_time_rich}
 
 \caption{Complexity plot for MC and MISC for the case with Richardson extrapolation.}
 \label{fig:Complexity plot for MC and MISC , Binary, with rich}
@@ -1197,10 +1204,11 @@ In this Section, we report the results for the binary option, using the differen
 
 
 
+\FloatBarrier
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=0.7\linewidth]{./figures/Binary_Complexity_rates/error_vs_time_comparison}
+\includegraphics[width=0.4\linewidth]{./figures/Binary_Complexity_rates/error_vs_time_comparison}
 
 \caption{Complexity plot for MISC without and with Richardson extrapolation, for the Binary option.}
 \label{fig:Complexity plot for MC and MISC , Binary, comparison}
@@ -1284,13 +1292,13 @@ Focusing on the results produced by seeting $\beta=32$ (which gives the right be
 
 \begin{figure}[h!]
 	\centering
-	\begin{subfigure}{.4\textwidth}
+	\begin{subfigure}{.35\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{./figures/weak_error_rates_call/Beta_10/without_richardson/weak_convergence_order_call_option_relative_M_10_5}
 		\caption{}
 		\label{fig:sub3}
 	\end{subfigure}%
-	\begin{subfigure}{.4\textwidth}
+	\begin{subfigure}{.35\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{./figures/weak_error_rates_call/Beta_10/without_richardson/weak_convergence_order_differences_call_option_relative_M_10_5}
 		\caption{}
@@ -1302,13 +1310,13 @@ Focusing on the results produced by seeting $\beta=32$ (which gives the right be
 \end{figure}
 \begin{figure}[h!]
 	\centering
-	\begin{subfigure}{.4\textwidth}
+	\begin{subfigure}{.35\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{./figures/weak_error_rates_call/Beta_10/with_richardson/weak_convergence_order_call_richardson_relative_M_10_6}
 		\caption{}
 		\label{fig:sub3}
 	\end{subfigure}%
-	\begin{subfigure}{.4\textwidth}
+	\begin{subfigure}{.35\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{./figures/weak_error_rates_call/Beta_10/with_richardson/weak_convergence_order_differences_call_richardson_relative_M_10_6}
 		\caption{}
@@ -1346,13 +1354,13 @@ Focusing on the results produced by seeting $\beta=32$ (which gives the right be
 
 \begin{figure}[h!]
 	\centering
-	\begin{subfigure}{.4\textwidth}
+	\begin{subfigure}{.35\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{./figures/weak_error_rates_call/Beta_32/without_rich/weak_convergence_order_call_option_relative_M_10_5}
 		\caption{}
 		\label{fig:sub3}
 	\end{subfigure}%
-	\begin{subfigure}{.4\textwidth}
+	\begin{subfigure}{.35\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{./figures/weak_error_rates_call/Beta_32/without_rich/weak_convergence_order_differences_call_option_relative_M_10_5}
 		\caption{}
@@ -1365,13 +1373,13 @@ Focusing on the results produced by seeting $\beta=32$ (which gives the right be
 
 \begin{figure}[h!]
 	\centering
-	\begin{subfigure}{.4\textwidth}
+	\begin{subfigure}{.35\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{./figures/weak_error_rates_call/Beta_32/with_rich/weak_convergence_order_call_richardson_relative}
 		\caption{}
 		\label{fig:sub3}
 	\end{subfigure}%
-	\begin{subfigure}{.4\textwidth}
+	\begin{subfigure}{.35\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{./figures/weak_error_rates_call/Beta_32/with_rich/weak_convergence_order_differences_call_richardson_relative}
 		\caption{}
@@ -1480,10 +1488,10 @@ In this Section, we report the results for the Call option, using the different 
 	\label{Quadrature error of MISC to compute Call option price of the different tolerances for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
 \end{table}
 
-
+\FloatBarrier
 	\begin{figure}[h!]
 \centering
-\includegraphics[width=0.7\linewidth]{./figures/Call_MISC_quadrature_error/relative_quad_error_wrt_MISC_TOL_non_rich}
+\includegraphics[width=0.4\linewidth]{./figures/Call_MISC_quadrature_error/relative_quad_error_wrt_MISC_TOL_non_rich}
 
 
 \caption{Relative quadrature error of MISC to compute Call option price of the different tolerances for different number of time steps, without Richardson extrapolation.}
@@ -1491,7 +1499,7 @@ In this Section, we report the results for the Call option, using the different 
 \end{figure}
 
 
-
+\FloatBarrier
 \begin{table}[h!]
 	\centering
 	\begin{tabular}{l*{6}{c}r}
@@ -1514,7 +1522,7 @@ In this Section, we report the results for the Call option, using the different 
 	\label{Total error of MISC and MC to compute Call option price of the different tolerances for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
 \end{table}
 
-
+\FloatBarrier
 
 
 
@@ -1546,10 +1554,10 @@ In this Section, we report the results for the Call option, using the different 
 
 
 
-
+\FloatBarrier
 	\begin{figure}[h!]
 \centering
-\includegraphics[width=0.7\linewidth]{./figures/Call_Complexity_rates/error_vs_time}
+\includegraphics[width=0.4\linewidth]{./figures/Call_Complexity_rates/error_vs_time}
 
 \caption{Complexity plot for MC and MISC for the case without Richardson extrapolation.}
 \label{fig:Complexity plot for MC and MISC , Call non rich}
@@ -1637,12 +1645,12 @@ In this Section, we report the results for the Call option, using the different 
 	\label{Quadrature error of MISC to compute Call option price of the different tolerances for different number of time steps, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors.}
 \end{table}
 
-
+\FloatBarrier
 
 
 	\begin{figure}[h!]
 \centering
-\includegraphics[width=0.7\linewidth]{./figures/Call_MISC_quadrature_error/relative_quad_error_wrt_MISC_TOL_with_rich}
+\includegraphics[width=0.4\linewidth]{./figures/Call_MISC_quadrature_error/relative_quad_error_wrt_MISC_TOL_with_rich}
 
 
 \caption{Relative quadrature error of MISC to compute Call option price of the different tolerances for different number of time steps, with Richardson extrapolation.}
@@ -1652,6 +1660,7 @@ In this Section, we report the results for the Call option, using the different 
 
 
 
+\FloatBarrier
 
 \begin{table}[h!]
 	\centering
@@ -1675,7 +1684,7 @@ In this Section, we report the results for the Call option, using the different 
 
 
 
-
+\FloatBarrier
 
 
 \begin{table}[h!]
@@ -1696,6 +1705,8 @@ In this Section, we report the results for the Call option, using the different 
 	\label{Comparsion of the computational time of  MC and MISC, used to compute Call option price  for different number of time steps, with Richardson extrapolation (level $1$)}
 \end{table}
 
+
+\FloatBarrier
 %	\begin{figure}[h!]
 %	\centering
 %	\includegraphics[width=0.7\linewidth]{./figures/Call_Complexity_rates/error_vs_time_rich}
@@ -1712,7 +1723,7 @@ In this Section, we report the results for the Call option, using the different 
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.7\linewidth]{./figures/Call_Complexity_rates/error_vs_time_comparision}
+	\includegraphics[width=0.4\linewidth]{./figures/Call_Complexity_rates/error_vs_time_comparision}
 	
 	\caption{Complexity plot for MISC without and with Richardson extrapolation, for the Call option.}
 	\label{fig:Complexity plot for MC and MISC , Call, comparison}
@@ -1780,7 +1791,7 @@ In this Section, we report the results for the Call option, using the different 
 
 \subsection{The basket call option under time stepping framework}\label{sec:The basket option under time stepping framework}
 
-\subsubsection{Setting $1$}
+\subsubsection{First way}
 We consider a European Basket call option consisting of $d$ assets. The $i$-th asset $X^{(i)}$ of the basket $(i=1,\dots,d)$ is given by 
 
 \begin{equation}
@@ -1792,10 +1803,20 @@ f(Z)=\max\left(\sum_{i=1}^{d} c_i X^{(i)}_T(Z) -K,0\right)\COMMA
 \end{equation}
 where $c_i$ is the corresponding weight of the $i$-th asset, $Z \in \rset^{N \times d}$ is standard Gaussian  vector, and 
 
+
+\begin{equation}
+X^{(i)}_{k \Delta t} (Z)=X^{(i)}_0 e^{-\frac{\sigma_i^2}{2} k \Delta t} \exp\left(\sum_{j=1}^{d  N} C_{(k-1) d +i,j} Z_j\right) \PERIOD
+\end{equation}
+
+Therefore, we have
+
 \begin{equation}
 X^{(i)}_{T} (Z)=X^{(i)}_{N \Delta t}(Z)=X^{(i)}_0 e^{-\frac{\sigma_i^2}{2} T} \exp\left(\sum_{j=1}^{d  N} C_{(N-1) d +i,j} Z_j\right) \COMMA
 \end{equation}
 where $C$ is a $dN \times dN$-matrix with $C C^T=\tilde{\Sigma}:=R  \otimes \Sigma$, and $R$ is an $d \times d$-matrix with $R_{ij}=\sqrt{T/N} \rho_{ij} \sigma_i\sigma_j$. 
+
+For notation simplification, let us denote $\mathbf{Z}^{(i)}:=(Z_{N(i-1)+1}, \dots, Z_{iN})$ and  $\mathbf{Z}^{(i)}_{-1}:=(Z_{N(i-1)+2}, \dots, Z_{iN})$. 
+
 
 Going back to \eqref{eq:basket_call_payoff}, we have 
 \begin{align}\label{eq:basket_call_payoff_2}
@@ -1803,15 +1824,24 @@ f(Z)&=\max\left(\sum_{i=1}^{d} c_i S^{(i)}_T(Z) -K,0\right) \nonumber\\
 &=\max\left(\sum_{i=1}^{d} w_i \exp\left(\sum_{j=1}^{dN}C_{(N-1) d +i,j} Z_j\right) -K,0\right) \nonumber\\
 &=\max\left(\sum_{i=1}^{d} w_i \left( \exp\left(\sum_{\ell=1}^{d}C_{(N-1) d +i,(\ell-1)N+1} Z_{(\ell-1)N+1}+\sum_{\underset{j \neq (\ell-1)N+1, 1\le \ell\le d} {j=1}}^{dN}C_{(N-1) d +i,j} Z_j \right)\right) -K,0\right) \nonumber \\
 &=\max\left(\sum_{i=1}^{d} w_i \exp(y_i)  \exp\left(\sum_{\underset{j \neq (\ell-1)N+1, 1\le \ell\le d} {j=1}}^{dN}C_{(N-1) d +i,j} Z_j \right) -K,0\right)\nonumber\\
-&=\max\left(\sum_{i=1}^{d} w_i \exp(y_i)  h_i( Z_2, \dots,Z_N, Z_{N+1}, \dots,Z_{2N},\dots, Z_{(d-1)N+2},\dots,Z_{dN}, \dots,Z_N)-K,0\right)
+&=\max\left(\sum_{i=1}^{d} w_i \exp(y_i)  h_i( \mathbf{Z}^{(1)}_{-1}, \dots \mathbf{Z}^{(d)}_{-1})-K,0\right)
  \COMMA
 \end{align}
-where $w_i=c_i X^{(i)}_0 e^{-\frac{\sigma_i^2}{2} T}$, $y_i=\sum_{\ell=1}^{d}C_{(N-1) d +i,(\ell-1)N+1} Z_{(\ell-1)N+1}$ ($y_i$ can be seen always as a linear combination including the first factors in each asset dimension).
+where
+ \begin{align*}
+	w_i&=c_i X^{(i)}_0 e^{-\frac{\sigma_i^2}{2} T}\\
+	y_i&=\sum_{\ell=1}^{d}C_{(N-1) d +i,(\ell-1)N+1} Z_{(\ell-1)N+1}\\
+h_i( \mathbf{Z}^{(1)}_{-1}, \dots \mathbf{Z}^{(d)}_{-1})&=	\exp\left(\sum_{\underset{j \neq (\ell-1)N+1, 1\le \ell\le d} {j=1}}^{dN}C_{(N-1) d +i,j} Z_j \right)\PERIOD
+\end{align*}
+
+ $y_i$ can be seen always as a linear combination including the first factors in each asset dimension.
+ 
+ Giving the representation given by \ref{eq:basket_call_payoff_2}, it seems to me that we need first to solve root finding problem wrt $\{y_i\}_{i=1}^d$, then giving $\{y_i^\ast\}_{i=1}^d$, we get the kink locations $\{Z_{N(i-1)+1}^\ast\}_{i=1}^d$ by solving a $d$-dimensional system.  Another way maybe to solve the problem is to mimic the methodology in \cite{bayersmoothing}. However, it is not clear to me yet 
 
 
-\subsubsection{Setting $2$}
+\subsubsection{Second way}
 
-The fourth example that we test is basket option under BS model where the process $\mathbf{X}$ is the discretized $d$-dimensional Black-Scholes model and the payoff function $g$ is given by
+We consider the basket option under BS model where the process $\mathbf{X}$ is the discretized $d$-dimensional Black-Scholes model and the payoff function $g$ is given by
 \begin{align}
 g(\mathbf{X}(T))=\max\left(\sum_{i=1}^{d} \omega_{i} X^{(i)}(T)-K,0  \right)	
 \end{align}
@@ -1900,13 +1930,13 @@ In this section, we include the results of weak error rates for $2$ scenarios, w
 
 \begin{figure}[h!]
 	\centering
-	\begin{subfigure}{.4\textwidth}
+	\begin{subfigure}{.35\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{./figures/weak_error_rates_basket_2d/without_richardson/weak_convergence_order_basket_option_2d_1_relative_M_4_10_7_plain}
 		\caption{}
 		\label{fig:sub3}
 	\end{subfigure}%
-	\begin{subfigure}{.4\textwidth}
+	\begin{subfigure}{.35\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{./figures/weak_error_rates_basket_2d/without_richardson/weak_convergence_order_differences_basket_option_2d_1_relative_M_4_10_7_plain}
 		\caption{}
@@ -1924,13 +1954,13 @@ In this section, we include the results of weak error rates for $2$ scenarios, w
 
 \begin{figure}[h!]
 	\centering
-	\begin{subfigure}{.4\textwidth}
+	\begin{subfigure}{.35\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{./figures/weak_error_rates_basket_2d/with_richardson/weak_convergence_order_basket_option_2d_1_richardson_relative_M_4_10_7_plain}
 		\caption{}
 		\label{fig:sub3}
 	\end{subfigure}%
-	\begin{subfigure}{.4\textwidth}
+	\begin{subfigure}{.35\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{./figures/weak_error_rates_basket_2d/with_richardson/weak_convergence_order_differences_basket_option_2d_1_richardson_relative_M_4_10_7_plain}
 		\caption{}
@@ -1988,7 +2018,7 @@ $ & $ 12.9194 $  \\
 
 
 
-
+\FloatBarrier
 
 
 
@@ -2013,7 +2043,7 @@ $ & $ 12.9194 $  \\
 \end{table}
 
 
-
+\FloatBarrier
 \begin{table}[h!]
 \centering
 \begin{tabular}{l*{6}{c}r}
@@ -2049,16 +2079,17 @@ MISC ($TOl=10^{-5}$)  & $\underset{( 0.0342)}{\mathbf{0.0027
 \label{Quadrature error of MISC to compute Basket 2d Call option price of the different tolerances for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors, beta_16}
 \end{table}
 
-
+\FloatBarrier
 	\begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.7\linewidth]{./figures/Basket_2d_MISC_quadrature_error/relative_quad_error_wrt_MISC_TOL_non_rich}
+	\includegraphics[width=0.4\linewidth]{./figures/Basket_2d_MISC_quadrature_error/relative_quad_error_wrt_MISC_TOL_non_rich}
 	
 	
 	\caption{Relative quadrature error of MISC to compute Basket ($2$-dimensional) Call option price of the different tolerances for different number of time steps, without Richardson extrapolation.}
 	\label{fig:Quadrature_error_non_rich_basket_Call}
 \end{figure}
 
+\FloatBarrier
 
 \begin{table}[h!]
 	\centering
@@ -2081,6 +2112,7 @@ MISC ($TOl=10^{-5}$)  & $\underset{( 0.0342)}{\mathbf{0.0027
 	\label{Total error of MISC and MC to compute Basket 2dCall option price of the different tolerances for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors,beta_16}
 \end{table}
 
+\FloatBarrier
 
 \begin{table}[h!]
 \centering
@@ -2109,11 +2141,11 @@ Ratio of	$(\text{MC})/(\text{MISC})$ & $\red{41}$ & $\red{80}$ & $\red{2.1}$ & $
 \end{table}
 
 
-
+\FloatBarrier
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.7\linewidth]{./figures/Basket_2d_Complexity_rates/error_vs_time}
+	\includegraphics[width=0.4\linewidth]{./figures/Basket_2d_Complexity_rates/error_vs_time}
 	
 	\caption{Complexity plot for MC and MISC for the case without Richardson extrapolation.}
 	\label{fig:Complexity plot for MC and MISC , Basket 2d Call non rich}
@@ -2122,7 +2154,7 @@ Ratio of	$(\text{MC})/(\text{MISC})$ & $\red{41}$ & $\red{80}$ & $\red{2.1}$ & $
 \FloatBarrier
 \subsubsection*{With Richardson extrapolation (level $1$)}
 
-
+\FloatBarrier
 
 
 \begin{table}[h!]
@@ -2154,7 +2186,7 @@ Ratio of	$(\text{MC})/(\text{MISC})$ & $\red{41}$ & $\red{80}$ & $\red{2.1}$ & $
 	\label{table: Call option price of the different methods for different number of time steps, with Richardson extrapolation (level1),beta_16}
 \end{table}
 
-
+\FloatBarrier
 
 \begin{table}[h!]
 	\centering
@@ -2176,7 +2208,7 @@ Ratio of	$(\text{MC})/(\text{MISC})$ & $\red{41}$ & $\red{80}$ & $\red{2.1}$ & $
 	\label{Bias and Statistical errors of MC  for computing Basket ($2$-dimensional) Call option price  for different number of time steps, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors,beta_16}
 \end{table}
 
-
+\FloatBarrier
 
 \begin{table}[h!]
 	\centering
@@ -2221,7 +2253,7 @@ Ratio of	$(\text{MC})/(\text{MISC})$ & $\red{41}$ & $\red{80}$ & $\red{2.1}$ & $
 
 
 
-
+\FloatBarrier
 \begin{table}[h!]
 	\centering
 	\begin{tabular}{l*{6}{c}r}
@@ -2241,7 +2273,7 @@ Ratio of	$(\text{MC})/(\text{MISC})$ & $\red{41}$ & $\red{80}$ & $\red{2.1}$ & $
 	\caption{Total relative error of MISC and MC to compute Basket ($2$-dimensional) call option price of the different tolerances for different number of time steps, with Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
 	\label{Total error of MISC and MC to compute Basket 2dCall option price of the different tolerances for different number of time steps, with Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors,beta_16}
 \end{table}
-
+\FloatBarrier
 \begin{table}[h!]
 	\centering
 	\begin{tabular}{l*{6}{c}r}
@@ -2267,13 +2299,13 @@ Ratio of	$(\text{MC})/(\text{MISC})$ & $\red{41}$ & $\red{80}$ & $\red{2.1}$ & $
 
 \begin{figure}[h!]
 	\centering
-	\begin{subfigure}{.4\textwidth}
+	\begin{subfigure}{.35\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{./figures/weak_error_rates_basket_3d/without_richardson/weak_convergence_order_basket_option_3d_1_relative_M_7_10_7_plain_1}
 		\caption{}
 		\label{fig:sub3}
 	\end{subfigure}%
-	\begin{subfigure}{.4\textwidth}
+	\begin{subfigure}{.35\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{./figures/weak_error_rates_basket_3d/without_richardson/weak_convergence_order_differences_basket_option_3d_1_relative_M_7_10_7_plain_1}
 		\caption{}
@@ -2340,7 +2372,7 @@ Ratio of	$(\text{MC})/(\text{MISC})$ & $\red{41}$ & $\red{80}$ & $\red{2.1}$ & $
 \end{table}
 
 
-\subsection{The basket option with the smoothing trick as in \cite{bayersmoothing}}\label{sec:The basket option with smoothing trick with a time stepping procedure}
+\subsection{The basket option with the smoothing trick as in \cite{bayersmoothing}}\label{sec:The basket option with smoothing trick without a time stepping procedure}
 
 The third experiment that we consider is the pricing of  a European  basket call option in a Black-Scholes model. The basket is composed of $d$ assets ($d=3,8,25$) and we use the same trick of smoothing the integrand that was proposed in \cite{bayersmoothing}. In this case, the dimension of the parameter space $N=d-1$. The interpolation over the parameter space is based on the tensorized Lagrangian interpolation technique with Gaussian  points. The aim of this section is to check the performance of MISC without time stepping. The main goal is to extend this case to the time stepping framework in the next section \ref{sec:The basket option under time stepping framework}
 
