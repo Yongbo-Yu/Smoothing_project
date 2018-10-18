@@ -128,6 +128,8 @@ What has beed achieved so far:
 		\item 	  \textbf{Example 2}: The one dimensional binary option under discretized BS model (see Section \ref{sec:Results for the binary option example}). The results are  promising (See Section \ref{sec:Results for the binary option example}) (Done).
 		
 		\item \textbf{Example 3}: The one dimensional call option under discretized BS model (see Section \ref{sec:Results for the call option example}). The results are  promising (See Section \ref{sec:Results for the call option example}) (Done).
+		
+		\item \textbf{Example 4}: The multi dimensional basket call option under discretized BS model (see Section \ref{sec:The basket option under time stepping framework}). (Under process).
 		\end{itemize}
 	\item  Theoretical outputs:
 	\begin{itemize}
@@ -154,12 +156,13 @@ Some works \cite{griebel2013smoothing,bayersmoothing, griebel2017note,griewank20
 to jumps for  the case of an arithmetic average digital Asian option with the principal component analysis (PCA). The main findings in \cite{griebel2013smoothing,griebel2017note} was obtained  for an  integrand  of the form $f(\mathbf{x}) = \max(\phi(\mathbf{x}), 0)$ with $\phi$ being smooth. In fact, by assuming  i) the $d$-dimensional function $\phi$ has a positive partial derivative with respect to $x_j$ for some $j \in \{1,\dots,d\}$, ii) certain growth conditions at infinity are satisfied, the authors showed that the ANOVA terms of $f$ that do not depend on the variable $x_j$ are smooth.   We note that \cite{griebel2013smoothing,griebel2017note,griewank2017high} focus  more on  theoretical aspects of applying QMC in such a setting. On the other hand, we focus more on  specific practical problems, where we add the adaptivity paradigm to the picture.
 
 A recent work \cite{xiao2018conditional} adresses similar kind of problems using QMC. Being very much related to \cite{bayersmoothing}, the authors i) assume that the conditional expectation can be computed explicitly, by imposing very strong assumptions. ii) Secondly, they  use  PCA on the gradients to reduce the effective dimension. In our work, we do not make such assumptions, which is why we need numerical methods, more precisely root finding and the quadrature in the first direction.
-\subsection{Notation}
-In the following, we clarify some notations that we will be using in this paper:
-\begin{itemize}
-	\item Given $\mathbf{x} \in  \rset^N$, $\mid \mathbf{x} \mid_0$  denotes the number of non-zero components of $\mathbf{x}$.
-	\item $\mathcal{L}_+$ denotes the set of sequences with positive components with only finitely many elements larger than $1$, \ie,  $\mathcal{L}_+=\{\boldsymbol{\beta}\in \nset_+^\nset: \mid \boldsymbol{\beta}-1\mid_0<\infty  \}$.
-\end{itemize}
+
+%\subsection{Notation}
+%In the following, we clarify some notations that we will be using in this paper:
+%\begin{itemize}
+%	\item Given $\mathbf{x} \in  \rset^N$, $\mid \mathbf{x} \mid_0$  denotes the number of non-zero components of $\mathbf{x}$.
+%	\item $\mathcal{L}_+$ denotes the set of sequences with positive components with only finitely many elements larger than $1$, \ie,  $\mathcal{L}_+=\{\boldsymbol{\beta}\in \nset_+^\nset: \mid \boldsymbol{\beta}-1\mid_0<\infty  \}$.
+%\end{itemize}
 
 
 
@@ -218,15 +221,15 @@ where we evaluate the inner integral for each $\mathbf{z}_{-j}$ and which result
 
 We note that  conditions (\eqref{assump:Monotonicity condition} and \eqref{assump:Growth condition}) imply that for each $\mathbf{z}_{-j}$, the function $\phi \circ \Phi(z_j,\mathbf{z}_{-j})$ either has a simple  root $z_j$ or is positive for all $z_j \in \rset$.
 
-We generally do not have a closed form for the inside integral in \ref{eq:multivariate integral with smoothing}. Therefore, the pre-integration (conditional sampling)  step should be performed numerically.
+We generally do not have a closed form for the inside integral in \eqref{eq:multivariate integral with smoothing}. Therefore, the pre-integration (conditional sampling)  step should be performed numerically.
 
 
 \section{Details of our approach}\label{sec:Details of our approach}
 
 
- In the following, we describe our approach which basically can be seen as a two stage method. In the first step, we use root finding procedure to get the inside integral  in \ref{eq:multivariate integral with smoothing}, then in a second stage we employ adaptive quadraure, multi-index stochastic collocation (MISC), to compute the obtained smooth integrand.
+ In the following, we describe our approach which basically can be seen as a two stage method. In the first step, we use root finding procedure to get the inner integral  in \eqref{eq:multivariate integral with smoothing}, then in a second stage we employ adaptive quadraure, multi-index stochastic collocation (MISC), to compute the obtained smooth integrand.
 
-
+\subsection{The one dimensional case}
 For illustration purposes, let us focus on the one dimensional case, where under the risk-neutral measure, the undelying asset follows the geometric Brownian motion (GBM)
 
 \begin{align}\label{eq:GBM_asset_price_dynamics}
@@ -237,17 +240,10 @@ dX_t= r X_t dt+\sigma X_t dB_t \COMMA
 	X_t=  X_0 \exp(( r-\sigma^2) t+\sigma B_t) \PERIOD
 \end{align}
 
-The Brownian motion $B_t$ can be constructed either sequentially using a standard random walk construction or hierarchically using Brownian bridge (BB) construction. To make an effective use of MISC, which is badly affected by isotropy, we use the BB construction since it produces  dimensions with different importance for MISC (creates anisotropy), contrary to random walk procedure for which all the dimension of the stochastic space have equal importance (isotropic). We explain the BB construction in Section \ref{sec:Brwonian bridge construction}. This transformation plays a role of reducing the effective dimension of the problem and as a consquence accelerating the MISC procedure by reducing the compotational cost.
+The Brownian motion $B_t$ can be constructed either sequentially using a standard random walk construction or hierarchically using Brownian bridge (Bb) construction. To make an effective use of MISC, which profits from  anisotropy, we use the Bb construction since it produces  dimensions with different importance for MISC (creates anisotropy), contrary to random walk procedure for which all the dimension of the stochastic space have equal importance (isotropic). We explain the Bb construction in Section \ref{sec:Brwonian bridge construction}.
 
 
-
-Another way to reduce the dimension of the problem is by using Richardson extrapolation, explained in Section \ref{sec:Richardson extrapolation}. In fact, Richardson extrapolation acts on both the bias (by reducing it) and MISC procedure by redcing the number of needed time steps, $N$, neeeded to achive a certain tolerance, resulting in a lower dimensional problem.
-
-
-
-
-
-Let us denote by $\psi: (z_1,\dots,z_N) \rightarrow (B_1,\dots,B_N)$ the mapping of BB construction and by $\Phi: (B_1,\dots,B_N) \rightarrow X_T$, the mapping consisting of the time-stepping scheme. Then, we can express the option price as
+Let us denote by $\psi: (z_1,\dots,z_N) \rightarrow (B_1,\dots,B_N)$ the mapping of Bb construction and by $\Phi: (B_1,\dots,B_N) \rightarrow X_T$, the mapping consisting of the time-stepping scheme. Then, we can express the option price as
 
 \begin{align}\label{eq: option price as integral}
 \expt{g(X(T))}&=		\expt{g\left(\Phi \circ \psi \right) (z_1,\dots,z_N)} \nonumber\\
@@ -279,19 +275,18 @@ Since $g$ can have a kink  or jump. Computing $h(\mathbf{z}_{-1})$ in the pre-in
 
 
 
-Once we perform stage $1$ procedure,  we use  multi-index stochastic collocation (MISC) procedure, suggested in \cite{haji2016multi}, to compute the expectation $\expt{h(\mathbf{z}_1)}$ . We describe the general strategy for the multi-index construction in Section \ref{sec:Details of the MISC}. 
+Once we perform stage $1$ procedure,  we use  multi-index stochastic collocation (MISC) procedure, suggested in \cite{haji2016multi}, to compute the expectation $\expt{h(\mathbf{z}_{-1})}$ . We describe the general strategy for the multi-index construction in Section \ref{sec:Details of the MISC}. 
 
 
-We have a natural error decomposition for the total error of computing the the expectation in \eqref{eq: pre_integration_step_wrt_y1}, namely, $\mathcal{E}$
+We have a natural error decomposition for the total error of computing the expectation in \eqref{eq: pre_integration_step_wrt_y1}, namely, $\mathcal{E}$
 
 \begin{equation}\label{eq:total_error}
 \mathcal{E} \le \mathcal{E}_Q(TOL_{\text{MISC}},N) + \mathcal{E}_B(N),
 \end{equation}
-where  $\mathcal{E}_Q$ is the quadrature error, function of MISC tolerance $TOL_{\text{MISC}}$ and $N$ (the number of time steps)  and  $\mathcal{E}_B$  is the bias, function of $N$ (the number of time steps) or $\Delta_t=\frac{T}{N}$ (size of the time grid). We provide a discussion about the different errors in Section \ref{sec:Error discussion}.
+where  $\mathcal{E}_Q$ is the quadrature error, function of MISC tolerance $TOL_{\text{MISC}}$ and $N$ (the number of time steps)  and  $\mathcal{E}_B$  is the bias, function of $N$ (the number of time steps) or $\Delta_t=\frac{T}{N}$ (size of the time grid). 
 
-
-\subsection{Extension to the High dimensional case}
-In the high dimensional case, we denote by $(z_1^{(i)},\dots,z_N^{(i)})$ the $N$ Gaussian independent rdvs that will be used to construct the path of the $i$-th asset $X^{(i)}$, where $1 \le i \le d$ ($d$ denotes the number of underlyings considered in the basket). We keep the  same notations by denoting  $\psi: (z_1^{(i)},\dots,z_N^{(i)}) \rightarrow (B_1,\dots,B_N)$ the mapping of BB construction and by $\Phi: (B^{(i)}_1,\dots,B^{(i)}_N) \rightarrow X^{(i)}_T$, the mapping consisting of the time-stepping scheme. Then, we can express the option price as
+\subsection{Extension to the high dimensional case}
+In the high dimensional case, we denote by $(z_1^{(i)},\dots,z_N^{(i)})$ the $N$ Gaussian independent rdvs that will be used to construct the path of the $i$-th asset $X^{(i)}$, where $1 \le i \le d$ ($d$ denotes the number of underlyings considered in the basket). We keep the  same notations by denoting  $\psi: (z_1^{(i)},\dots,z_N^{(i)}) \rightarrow (B_1,\dots,B_N)$ the mapping of Bb construction and by $\Phi: (B^{(i)}_1,\dots,B^{(i)}_N) \rightarrow X^{(i)}_T$, the mapping consisting of the time-stepping scheme. Then, we can express the option price as
 
 \begin{align}\label{eq: option price as integral_basket}
 	\expt{g(\mathbf{X}(T))}&=	\expt{g\left(\Phi \circ \psi \right) (z_1^{(1)}, \dots, z_N^{(1)}, \dots, z_1^{(d)},\dots,z^{(d)}_N)} \nonumber\\
@@ -307,7 +302,7 @@ where $G=g \circ \Phi \circ \psi$ and
 
 
 
-Now,  performing the  pre-integrating step with respect to $(z_1^{(1)},\dots, z_1^{(d)} )$, results in
+Now,  performing the  pre-integrating step with respect to the coarse rdvs $(z_1^{(1)},\dots, z_1^{(d)} )$, results in
 \begin{small}
 \begin{align}\label{eq: pre_integration_step_wrt_y1_basket}
 	\expt{g(\mathbf{X}(T))}&=\int_{\rset^{d \times N}} G(z_1^{(1)}, \dots, z_N^{(1)}, \dots, z_1^{(d)},\dots,z^{(d)}_N)) \rho_{d \times N}(\mathbf{z}) dz_1^{(1)} \dots dz_N^{(1)} \dots z_1^{(d)} \dots dz^{(d)}_N \nonumber\\ 
@@ -419,6 +414,10 @@ $\mathcal{I}$ provided that
 
 \subsection{Path generation methods (PGM)}\label{sec:Path generation methods (PGM)}
 
+In the literature of adaptive sparse grids and  QMC, several hierarchical path generation methods (PGMs) or transformation methods have been proposed to reduce the effective dimension. Among these transformations, we cite the Brownian
+bridge (Bb)  construction \cite{moskowitz1996smoothness,caflisch1997valuation,morokoff1998generating,larcher2003tractability}, the principal component analysis (PCA)  \cite{acworth1998comparison} and the linear transformation (LT) \cite{imai2004minimizing}, etc \dots 
+
+
 Assume that one wants to compute $\expt{g(B)}$, where $B$ is a Brownian motion with index set $[0,T]$. In most applications this is can be reasonably approximated by $\expt{\tilde{g}\left(B_{\frac{T}{N}}, \dots, B_{\frac{T N}{N}}  \right)}$, where $\tilde{g}$ is a function of the set of discrete Brownian paths.
 
 There are three classical methods for sampling from $\left(B_{\frac{T}{N}}, \dots, B_{\frac{T N}{N}}  \right)$ given a standard normal vector $Z$, namely the forward method, the Brownian bridge (Bb) construction and the principal component analysis (PCA) construction. All of these constructions may be written in the form $\left(B_{\frac{T}{N}}, \dots, B_{\frac{T N}{N}}  \right)=AZ$, where $A$ is an $N \times N$ real matrix with 
@@ -445,7 +444,7 @@ For instance, the matrix $A$ corresponding to the forward method is given by
 	\PERIOD
 \end{equation*}  
  
- In the case of Bb construction \cite{moskowitz1996smoothness,caflisch1997valuation,morokoff1998generating,larcher2003tractability}, details about the construction are given in Section \ref{sec:Brwonian bridge construction}, and  the corresponding matrix $A$, For $N=8$ is given by 
+ In the case of Bb construction, details about the construction are given in Section \ref{sec:Brwonian bridge construction}, and  the corresponding matrix $A$, For $N=8$ is given by 
  
  \begin{equation*}
  	A^{\text{Bb}} = \sqrt{T}  \begin{bmatrix}
@@ -465,13 +464,19 @@ For instance, the matrix $A$ corresponding to the forward method is given by
 
 When doing PCA construction \cite{acworth1998comparison}, we have $A^{\text{PCA}}=VD$, where $\Sigma=V D^2V^T$ is the singular value decomposition of $\Sigma$. 
  
-\subsection{Brownian bridge (Bb) construction}\label{sec:Brwonian bridge construction}
+\subsubsection{Brownian bridge (Bb) construction}\label{sec:Brwonian bridge construction}
 
-Let us denote $\{t_i\}_{i=0}^{N}$ the grid of time steps, then the BB construction \cite{glasserman2004monte} consists of the following: given a past value $B_{t_i}$ and a future value $B_{t_k}$, the value $B_{t_j}$ (with $t_i < t_j < t_k$) can be generated according to the formula:
+
+ 
+
+In our context, sampling the Brownian motion can be constructed either sequentially using a standard random walk construction or hierarchically using   other hierarchical PGM as listed above. For our purposes, to make an effective use of MISC, which profits from anisotropy, we use the Bb construction since it produces  dimensions with different importance for MISC (creates anisotropy), contrary to random walk procedure for which all the dimension of the stochastic space have equal importance (isotropic).  This pre-transformation  reduces the effective dimension dimension  of the problem and as a consquence accelerates the MISC procedure by reducing the computational cost.
+
+
+Let us denote $\{t_i\}_{i=0}^{N}$ the grid of time steps, then the Bb construction \cite{glasserman2004monte} consists of the following: given a past value $B_{t_i}$ and a future value $B_{t_k}$, the value $B_{t_j}$ (with $t_i < t_j < t_k$) can be generated according to the formula:
 \begin{equation}
 B_{t_j}=(1-\rho) B_{t_i}+\rho B_{t_k}+ \sqrt{\rho (1-\rho)(k-i) \Delta t} z, \: z \sim \mathcal{N}(0,1) \COMMA
 \end{equation}
-where $\rho=\frac{j-i}{k-i}$.  In particular, if $N$ is a power of $2$, then given $B_0=0$, BB generates the Brownian motion at times $T, T/2,T/4,3T/4,\dots$ according
+where $\rho=\frac{j-i}{k-i}$.  In particular, if $N$ is a power of $2$, then given $B_0=0$, Bb generates the Brownian motion at times $T, T/2,T/4,3T/4,\dots$ according
 \begin{align}\label{eq:BB construction}
 	B_T&=\sqrt{T}z_1\nonumber\\
 	B_{T/2}&= \frac{1}{2}(B_{0}+B_{T})+\sqrt{T/4}z_2= \frac{\sqrt{T}}{2} z_1+\frac{\sqrt{T}}{2} z_2\nonumber\\
@@ -486,6 +491,8 @@ on the values of $B_T$ and $B_0$, and proceed by progressively filling in interm
 
 
 \subsection{Richardson extrapolation}\label{sec:Richardson extrapolation}
+
+Another  pre-transformation that we coupled with MISC is Richardson extrapolation \cite{talay1990expansion}. In fact, applying level $\ell$ of Richardson extrapolation reduces dramtically the bias and as a consequence reduces the needed number of time steps $N$ used in the coarsest level to achive a certain error tolerance. This means basically that Richardson extrapolation reduces directly the total dimension of the integration problem for achieving some error tolerance.
 
 
 We  recall that the Euler (often) scheme has weak order $1$ so that
@@ -654,60 +661,32 @@ $\zeta$!)
 
 
 
-\subsection{Discussion about the Bias}
 
-\subsection{Discussion about the Quadrature error}
-\newpage
-\section{Numerical examples}
-\subsection{Summary of numerical results}
-We conduct our experiments for $2$ different examples under discretized BS model: Binary and Call options.
+\section{Numerical experiments}
 
-In Sections \ref{sec:Weak error plots_binary} and \ref{sec:Weak error plots_call}, we estimate the weak error  (Bias) of MC combined with root finding, for the different  examples, for $2$ scenarios involving with/without  Richardson extrapolation. The conclusions of this section are: 
-\begin{itemize}
-	\item Without Richardson extrapolation: For all cases, we get a weak error of order $\Delta t$, with different  constants. Interestingly,  for the call example, we needed to increase the number of quadrature points sufficiently, used for Laguerre quadrature,  to observe the right behavior of the weak error (See tables (\ref{Bias and Statistical errors of MC  for computing Binary option price  for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}, \ref{Bias and Statistical errors of MC  for computing Call option price  for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}) for the corresponding Bias values as well the statistical errors.). 
-	
-	\item With Richardson extrapolation: For the case of binary option, we get a weak error of order almost $\Delta t^2$. For the case of Call,   we get a weak error of order higher than $\Delta t^2$  (See tables (\ref{Bias and Statistical errors of MC  for computing Binary option price  for different number of time steps, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors.},\ref{Bias and Statistical errors of MC  for computing Call option price  for different number of time steps, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors.}) for the corresponding Bias values as well the statistical errors.).  
-\end{itemize}
-
-
-
-
-In Sections \ref{sec:Comparing relative errors, binary} and \ref{sec:Comparing relative errors, call}, we show tables and plots reporting  the different errors involved in MC method (Bias and Statistical error) and in MISC (Quadrature error). We do this for each example. The quadrature error is computed by subtracting the MISC solution from the biased solution with huge number of samples (to kill the statistical error). I explain in each section, what each table and plot  refers to. The conclusions of this section are: 
-\begin{itemize}
-	\item The Quadrature error of MISC is very stable with respect to $TOL_{\textbf{MISC}}$, for all cases. (See figures (\ref{fig:Quadrature_error_non_rich_Call},\ref{fig:Quadrature_error_non_rich_binary},\ref{fig:Quadrature_error_with_rich_Call},\ref{fig:Quadrature_error_with_rich_binary})).
-	
-	\item MISC is outperforming significantly MC and MC+root finding methods. The ratio of gain is more significant for the Call option compared to Binary option (See tables (\ref{Comparsion of the computational time of  MC and MISC, used to compute Binary option price  for different number of time steps, without Richardson extrapolation},\ref{Comparsion of the computational time of  MC and MISC, used to compute Binary option price  for different number of time steps, with Richardson extrapolation (level $1$)},\ref{Comparsion of the computational time of  MC and MISC, used to compute Call option price  for different number of time steps, without Richardson extrapolation})). See also figures (\ref{fig:Complexity plot for MC and MISC , Binary, Non rich},\ref{fig:Complexity plot for MC and MISC , Binary, with rich},\ref{fig:Complexity plot for MC and MISC , Call non rich}) for the comparison of complexity for different methods.
-	
-	\item Richardson extrapolation has a great advantage over the rate as well the constant for complexity of MISC:
-	\begin{itemize}
-		\item For the binary case: we may see from figure \ref{fig:Complexity plot for MC and MISC , Binary, comparison} and tables (\ref{Total error of MISC and MC to compute Binary option price of the different tolerances for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.},\ref{Comparsion of the computational time of  MC and MISC, used to compute Binary option price  for different number of time steps, without Richardson extrapolation},\ref{Total error of MISC and MC to compute Binary option price of the different tolerances for different number of time steps, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors.},\ref{Comparsion of the computational time of  MC and MISC, used to compute Binary option price  for different number of time steps, with Richardson extrapolation (level $1$)}), that without using Richardson extrapolation, with $16$ time steps, we achieve $1.4\%$ of total relative error, with a cost of $1090$ of CPU time. This cost is dramatically decreased when using Richardson extrapolation. In fact, with $16$ steps in the finer level, we only pay   $42$ of CPU time to get a  total relative error of $0.3\%$.
-		\item For the Call case: we may see from figure \ref{fig:Complexity plot for MC and MISC , Call, comparison} and tables (\ref{Total error of MISC and MC to compute Call option price of the different tolerances for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.},\ref{Comparsion of the computational time of  MC and MISC, used to compute Call option price  for different number of time steps, without Richardson extrapolation},\ref{Total error of MISC and MC to compute Call option price of the different tolerances for different number of time steps, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors.},\ref{Comparsion of the computational time of  MC and MISC, used to compute Call option price  for different number of time steps, with Richardson extrapolation (level $1$)}), that without using Richardson extrapolation, with $16$ time steps, we achieve $0.46\%$ of total relative error, with a cost of $656$ of CPU time. This cost is dramatically decreased when using Richardson extrapolation. In fact, with $8$ steps in the finer level, we only pay   $135$ of CPU time to get a  total relative error of $0.25\%$.
-	\end{itemize} 
-\end{itemize}
 
 \subsection{The discretized 1D Black-Scholes}\label{sec:The discretized 1D Black-Scholes}
 
-The second example that we test is the binary and  call options under BS model where the process $X$ is the discretized 1D Black-Scholes model and the payoff function $g$ is the indicator or maximum function, and which has a kink. Precisely, we are interested in the  $1$-D lognormal example where the dynamics of the stock are given by
+The first two  examples that we will  test later are  the single binary and  call options under BS model where the process $X$ is the discretized one dimensional Black-Scholes model and the payoff function $g$ is the indicator or maximum function, and which has a kink. Precisely, we are interested in the  $1$-d lognormal example where the dynamics of the stock are given by
 
 \begin{align}\label{lognormal_dynamics}
-	dX_t=\sigma X_t dW_t.
+	dX_t=\sigma X_t dB_t,
 \end{align}
 
 
-Assume that $\{W_t, 0 \leq t \leq T\} $ is a standard one-dimensional Brownian motion, and $(z_1,\dots,z_N)$ are standard gaussian random variables, then, in the discrete case, we have
+where $\{B_t, 0 \leq t \leq T\} $ is a standard one-dimensional Brownian motion. In the discrete case, the numerical approximation of $X(T)$, using $N$ time steps ($\Delta t=\frac{T}{N}$), satisfies
 
-\begin{align}\label{Brownian_bridge_BS_1D}
-	\Delta W_i&=(B_{t_{i+1}}-B_{t_i})+\Delta t \frac{z_1}{\sqrt{T}} \nonumber\\
-	&= \Delta B_i + \Delta t \frac{z_1}{\sqrt{T}},
-\end{align}
+%\begin{align}\label{Brownian_bridge_BS_1D}
+%	\Delta W_i&=(B_{t_{i+1}}-B_{t_i})+\Delta t \frac{z_1}{\sqrt{T}} \nonumber\\
+%	&= \Delta B_i + \Delta t \frac{z_1}{\sqrt{T}},
+%\end{align}
 
-implying that the numerical approximation of $X(T)$ satisfies
+
 \begin{align}
 	\bar{X}_T&=\Phi(\Delta t, z_1, \Delta B_0,\dots,\Delta B_{N-1}), \\ \nonumber
-	&=\Phi(\Delta t, \Psi(z_1,\dots,z_N))
+	&=\Phi(\Delta t, \Psi(z_1,\dots,z_N))\COMMA
 \end{align}
-for some path function $\Phi$ and Brwonian bridge map $\Psi$ as described in Section \ref{sec:Brwonian bridge construction}.
-
+wehre $(z_1,\dots,z_N)$ are standard Gaussian random variables, for some path function $\Phi$ and Brownian bridge map $\Psi$ as described in Section \ref{sec:Brwonian bridge construction}.
 
 %We are interested in simulating the values of $W_{t_1},\dots, W_{t_N}$ at $N$ discrete times, where $0 = t_0 < t_1 <\dots < t_N = T $ and $W_{t_0}= 0$. We also assume that $t_j-t_{j-1}=\dt=T/N,\: j = 1, 2, \dots, N$, and denote $W_i = W_{t_i}$ in the following. Let $\mathbf{W} = (W_1,\dots, W_N )^T$ , then $\mathbf{W} \sim \mathcal{N}(\mathbf{0},\Sigma)$,
 %where $\mathcal{N}(\mathbf{0},\Sigma)$ is a multivariate normal distribution with mean vector $\mathbf{0}$ and covariance matrix $\Sigma$.
@@ -735,18 +714,22 @@ $ is the strike price then  the exact location of the continuous problem is give
 
 \subsubsection*{Exact location of the kink for the discrete problem}
 The discrete problem of model \eqref{lognormal_dynamics} is solved by simulating 
-\begin{align}\label{Discrete_problem}
-	\Delta X_{t_i}&=\sigma X_{t_i} \Delta W_{i},\: 0 \le i \le N-1 \nonumber\\
-	X_{t_{i+1}}-X_{t_{i}}&=\sigma X_{t_i} \left(W_{t_{i+1}}-W_{t_i}\right),\: 0<i<N
-\end{align}
-where $X(T_0)=X_0$ and $X(t_N)=X(T)$. 
-
-Using Brownian bridge construction given by \eqref{Brownian_bridge_BS_1D}, we have
+%\begin{align}\label{Discrete_problem}
+%	\Delta X_{t_i}&=\sigma X_{t_i} \Delta W_{i},\: 0 \le i \le N-1 \nonumber\\
+%	X_{t_{i+1}}-X_{t_{i}}&=\sigma X_{t_i} \left(W_{t_{i+1}}-W_{t_i}\right),\: 0<i<N
+%\end{align}
+%where $X(T_0)=X_0$ and $X(t_N)=X(T)$. 
+%
+%Using Brownian bridge construction given by \eqref{Brownian_bridge_BS_1D}, we have
 \begin{align}
-	X_{t_1}&= X_{t_0} \left[ 1+\frac{\sigma}{\sqrt{T}} z_1 \Delta t+ \sigma \Delta B_0\right]=X_{t_0} \left[ 1+\sigma \Delta W_0 \right] \nonumber\\
-	X_{t_2}&= X_{t_1} \left[ 1+\frac{\sigma}{\sqrt{T}} z_1 \Delta t+ \sigma \Delta B_1\right]=X_{t_1} \left[ 1+\sigma \Delta W_1 \right] \nonumber\\
-	\vdots &= \vdots =\vdots \nonumber\\
-	X_{t_N}&= X_{t_{N-1}} \left[ 1+\frac{\sigma}{\sqrt{T}} z_1 \Delta t+ \sigma \Delta B_{N-1}\right]= X_{t_{N-1}}  \left[ 1+\sigma \Delta W_{N-1} \right],
+	X_{t_1}&= X_{t_0} \left[ 1+\frac{\sigma}{\sqrt{T}} z_1 \Delta t+ \sigma \Delta B_0\right]\nonumber\\
+	%=X_{t_0} \left[ 1+\sigma \Delta W_0 \right] \nonumber\\
+	X_{t_2}&= X_{t_1} \left[ 1+\frac{\sigma}{\sqrt{T}} z_1 \Delta t+ \sigma \Delta B_1\right]\nonumber\\
+%	=X_{t_1} \left[ 1+\sigma \Delta W_1 \right] \nonumber\\
+	\vdots &= \vdots\nonumber\\
+%	 =\vdots \nonumber\\
+	X_{t_N}&= X_{t_{N-1}} \left[ 1+\frac{\sigma}{\sqrt{T}} z_1 \Delta t+ \sigma \Delta B_{N-1}\right]
+	%= X_{t_{N-1}}  \left[ 1+\sigma \Delta W_{N-1} \right],
 \end{align}
 
 implying that
@@ -774,6 +757,20 @@ Here, we try to  find the roots of polynomial $P(y_{\ast}(K))$, given by \eqref{
 
  
 
+Therefore, in this case, the integrand $h(\mathbf{z}_{-1})$ (as expressed in \eqref{eq: pre_integration_step_wrt_y1}) is given by
+
+\begin{align}\label{smoothed_integrand_single_opt_1d}
+	h(\mathbf{z}_{-1})&= \int_{\Omega}  \max  \left[ \left( \Phi \circ \Psi(T;z_1,\mathbf{z}_{-1})\right)-K,0\right]   \rho_1(z_1) dz_1.
+\end{align}
+
+We get the kink point by running Newton iteration  for root solving of the polynomial $P$ as expressed in \eqref{polynomial_kink_location} with a precision of $10^{-10}$. We  decompose the total integration domain $\Omega$  into sub-domains $\Omega_i,\: i=1,2$ such that the integrand is smooth in the interior of  $\Omega_i$ and such that the kink is located along the boundary of these areas. The total integral is then given as the sum of the separate integrals, \ie
+\begin{align}
+	h(\mathbf{z}_{-1}) &:=  \int_{\Omega}  \max  \left[ \left(\Phi \circ \Psi(T;z_1,\mathbf{z}_{-1})\right)-K,0\right]   \rho_1(z_1) dz_1 \nonumber\\
+	&=\sum_{i=1}^{2}	\int_{\Omega_i} 
+	\max  \left[ \left( \Phi \circ \Psi(T;z_1,\mathbf{z}_{-1})\right)-K,0\right]   \rho_d(z_1) dz_1,
+\end{align}
+
+where we use Gauss-laguerre quadrature with $\beta$ points to get each part.
 
 
 %\subsubsection{Results}
@@ -831,7 +828,187 @@ Here, we try to  find the roots of polynomial $P(y_{\ast}(K))$, given by \eqref{
 
 
 
-\subsection{Results for the binary option example}\label{sec:Results for the binary option example}
+\subsection{The  basket call option under the discretized multi-dimensional Black-Scholes}\label{sec:The basket option under time stepping framework}
+
+In the following, I present two ways of solving the root finding problem in multi-dimension. The first way, presented in Section \ref{sec: First way},  is an extension of Section \ref{sec:The discretized 1D Black-Scholes}, and the numerical results in Section \ref{sec:Result for the  $2$-dimensional Basket call option} are based on applying this way of numerical smoothing. In the second way, presented in Section \ref{sec: Second way}, we tried a different approach that is inspired by  the work of \cite{bayersmoothing}.
+
+\subsubsection{First way}\label{sec: First way}
+In this suggested way, I try to extend the way we solved the one dimensional problem, as in Section \ref{sec:The discretized 1D Black-Scholes}, to higher dimensions.
+
+We consider the basket option under multi-dimensional BS model where the process $\mathbf{X}$ is the discretized $d$-dimensional Black-Scholes model and the payoff function $g$ is given by
+\begin{align}
+	g(\mathbf{X}(T))=\max\left(\sum_{i=1}^{d} \omega_{i} X^{(i)}(T)-K,0  \right)	
+\end{align}
+Precisely, we are interested in the  $d$-dimensional lognormal example where the dynamics of the stock are given by
+
+\begin{align}\label{lognormal_dynamics_basket}
+	dX^{(i)}_t=\sigma^{(i)} X^{(i)}_t dB^{(i)}_t,
+\end{align}
+
+where $\{B^{(1)}, \dots,B^{(d)}\}$ are correlated Brownian motions with correlations $\rho_{ij}$.
+
+
+In the discrete case, the numerical approximation of $X^{(j)}(T)$ satisfies
+
+%\begin{align}\label{Brownian_bridge_BS_basket}
+%	\Delta W^{(j)}_i&=(B^{(j)}_{t_{i+1}}-B^{(j)}_{t_i})+\Delta t \frac{z_1^{(j)}}{\sqrt{T}}, \quad 1 \le j \le d \nonumber\\
+%	&= \Delta B^{(j)}_i + \Delta t \frac{z_1^{(j)}}{\sqrt{T}}, \quad 1 \le j \le d ,
+%\end{align}
+%
+%implying that 
+
+\begin{align}
+	\bar{X}^{(j)}_T&=\Phi(\Delta t, z_1^{(j)}, \Delta B^{(j)}_0,\dots,\Delta B^{(j)}_{N-1}),  \quad 1 \le j \le d, \\ \nonumber
+	&=\Phi(\Delta t, \Psi(z_1^{(j)},\dots,z_N^{(j)})), \quad 1 \le j \le d,
+\end{align}
+for some path function $\Phi$ and Brownian bridge map $\Psi$ as described in Section \ref{sec:Brwonian bridge construction}.
+
+
+
+Using results from section \ref{sec:The discretized 1D Black-Scholes}, we have
+
+\begin{align}
+	\bar{X}^{(j)}(T)=X_0^{(j)} \prod_{i=0}^{N-1} \left[ 1+\frac{\sigma^{(j)}}{\sqrt{T}} z^{(j)}_1 \Delta t+ \sigma^{(j)} \Delta B^{(j)}_{i}\right], \quad 1 \le j \le d.
+\end{align}
+Therefore, in order to determine $\mathbf{y}_{\ast}=(y_{\ast}^{(1)},\dots,y_{\ast}^{(d)})$, we need to solve
+\begin{align}
+	\mathbf{x}=\sum_{j=1}^{d} \omega_j X^{(j)}_0 \prod_{i=0}^{N-1} \left[ 1+\frac{\sigma^{(j)}}{\sqrt{T}} y^{(j)}_{\ast}(\mathbf{x}) \Delta t+ \sigma^{(j)} \Delta B^{(j)}_{i}\right],
+\end{align}
+
+which implies that the location of the kink point for the approximate problem is equivalent to finding the roots of the polynomial $P(\mathbf{y}_\ast(K))$, given by
+\begin{align}\label{polynomial_kink_location_basket}
+	P(\mathbf{y}_{\ast}(K))&=\sum_{j=1}^{d} \omega_j X^{(j)}_0 \prod_{i=0}^{N-1} \left[ 1+\frac{\sigma^{(j)}}{\sqrt{T}} y^{(j)}_{\ast} \Delta t+ \sigma^{(j)} \Delta B^{(j)}_{i}\right]-K, \nonumber\\
+	&=\sum_{j=1}^{d} \omega_j X^{(j)}_0 \left(\prod_{i=0}^{N-1} \left[ 1+\frac{\sigma^{(j)}}{\sqrt{T}} y_\ast^{(j)} \Delta t+ \sigma^{(j)} \Delta B^{(j)}_{i}\right]-\frac{K}{ \omega_j X^{(j)}_0  d}\right) \nonumber\\
+	&=\sum_{j=1}^{d} \omega_j X^{(j)}_0 P^{(j)}\left(y_\ast^{(j)}\left(\frac{K}{ \omega_j X^{(j)}_0  d }\right)\right)
+\end{align}
+
+Therefore, the problem of finding the kink in the $d$-dimensional problem is brought to finding the location of the kink for each dimension by solving the root of the polynomial $P^{(j)}\left(y_\ast^{(j)}\left(\frac{K}{\omega_j X^{(j)}_0 }\right)\right)$.  
+
+Using  \textbf{Newton iteration method}, we use the expression $P'=\frac{d P^{(j)}}{d y_\ast^{(j)}}$. If we denote $f_i^{(j)}(y)=1+\frac{\sigma^{(j)}}{\sqrt{T}} y \Delta t+ \sigma^{(j)} \Delta B^{(j)}_{i}$, then we can easily show that
+\begin{align}\label{polynomial_kink_location_derivative_basket}
+	P'^{(j)}(y)=\frac{\sigma^{(j)} \Delta t}{\sqrt{T}} \left( \prod_{i=0}^{N-1} f_i^{(j)}(y)\right) \left[ \sum_{i=0}^{N-1} \frac{1}{f_i^{(j)}(y)}\right].
+\end{align}
+
+
+
+
+Therefore, in this case, the integrand $h(\mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1})$ (as expressed in \eqref{eq: pre_integration_step_wrt_y1_basket}) is given by
+
+\begin{align}\label{smoothed_integrand_basket_opt_2d}
+	h(\mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1})&= \int_{\Omega}  \max  \left[ \left(\sum_{j=1}^{d} \Phi \circ \Psi(T;z_1^{(j)},\mathbf{z}^{(j)}_{-1})\right)-K,0\right]   \rho_d(z_1^{(1)},\dots,z_1^{(d)}) dz_1^{(1)}\dots dz_1^{(d)}.
+\end{align}
+
+
+We get the kink point by running Newton iteration in each dimension seperately for root solving of each polynomial $P^{(j)}$ as expressed in \eqref{polynomial_kink_location_basket} with a precision of $10^{-10}$. We  decompose the total integration domain $\Omega$  into sub-domains $\Omega_i,\: i=1,2,\dots, 2^d$ such that the integrand is smooth in the interior of  $\Omega_i$ and such that the kink is located along the boundary of these areas. The total integral is then given as the sum of the separate integrals, \ie
+\begin{align}
+	h(\mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1}) &:=  \int_{\Omega}  \max  \left[ \left(\sum_{j=1}^{d} \Phi \circ \Psi(T;z_1^{(j)},\mathbf{z}^{(j)}_{-1})\right)-K,0\right]   \rho_d(z_1^{(1)},\dots,z_1^{(d)}) dz_1^{(1)}\dots dz_1^{(d)}  \nonumber\\
+	&=\sum_{i=1}^{2^d}	\int_{\Omega_i} 
+	\max  \left[ \left(\sum_{j=1}^{d} \Phi \circ \Psi(T;z_1^{(j)},\mathbf{z}^{(j)}_{-1})\right)-K,0\right]   \rho_d(z_1^{(1)},\dots,z_1^{(d)}) dz_1^{(1)}\dots dz_1^{(d)},
+\end{align}
+
+where we use Gauss-laguerre quadrature with $\beta$ points to get each part.
+
+\FloatBarrier
+
+
+\subsubsection{Second way}\label{sec: Second way}
+ The $i$-th asset $X^{(i)}$ of the basket $(i=1,\dots,d)$ is given by 
+
+\begin{equation}
+X^{(i)}_{k \Delta t}=X^{(i)}_0 \exp\left( -\frac{\sigma_i^2}{2} k \Delta t +\sigma_i B^{(i)}_{k\Delta t}\right), \quad 1 \le k \le N  \COMMA
+\end{equation} 
+where $X^{(i)}_0$ is the current price of the $i$-th asset, $\sigma_i$ is the volatility of the $i$-th asset and $B=(B^{(1)},\dots, B^{(d)})$ is a $d$-dimensional Brownian motion. The correlation between $B^{(i)}$ and $B^{(j)}$ is denoted by $\rho_{ij}$. The payoff function of the European basket option is given by 
+\begin{equation}\label{eq:basket_call_payoff}
+f(Z)=\max\left(\sum_{i=1}^{d} c_i X^{(i)}_T(Z) -K,0\right)\COMMA
+\end{equation}
+where $c_i$ is the corresponding weight of the $i$-th asset, $Z \in \rset^{N \times d}$ is standard Gaussian  vector, and 
+
+
+\begin{equation}
+X^{(i)}_{k \Delta t} (Z)=X^{(i)}_0 e^{-\frac{\sigma_i^2}{2} k \Delta t} \exp\left(\sum_{j=1}^{d  N} C_{(k-1) d +i,j} Z_j\right) \PERIOD
+\end{equation}
+where $C$ is a $dN \times dN$-matrix with $C C^T=\tilde{\Sigma}:=R  \otimes \Sigma$, and $R$ is an $d \times d$-matrix with $R_{ij}=\sqrt{T/N} \rho_{ij} \sigma_i\sigma_j$. 
+
+Therefore, we have
+
+\begin{align}\label{eq:asset_dynamics_last_inc}
+X^{(i)}_{T} (Z)=X^{(i)}_{N \Delta t}(Z)&=X^{(i)}_0 e^{-\frac{\sigma_i^2}{2} T} \exp\left(\sum_{j=1}^{d  N} C_{(N-1) d +i,j} Z_j\right) \nonumber\\
+&=w^{(i)}  \exp\left(A_{i\ast} Z\right)\COMMA
+\end{align}
+where $w^{(i)}=X^{(i)}_0 e^{-\frac{\sigma_i^2}{2} T} $,  $A$ is a   $d \times dN$  matrix such that $A:=\left(C_{(N-1) d +i,j} \right)_{1 \le i \le d, \: 1 \le j \le dN }$, and $A_{i\ast}$ is the $i$-th row vector of A.
+
+
+
+
+
+
+
+
+%For notation simplification, let us denote  by $\mathbf{Z}^{(i)}:=(Z_{N(i-1)+1}, \dots, Z_{iN})$ and  $\mathbf{Z}^{(i)}_{-1}:=(Z_{N(i-1)+2}, \dots, Z_{iN})$. 
+
+
+Going back to \eqref{eq:basket_call_payoff}, we have 
+\begin{align}\label{eq:basket_call_payoff_2}
+	f(Z)&=\max\left(\sum_{i=1}^{d} c_i S^{(i)}_T(Z) -K,0\right) \nonumber\\
+	&=\max\left(\sum_{i=1}^{d} w_i \exp\left(\sum_{j=1}^{dN}C_{(N-1) d +i,j} Z_j\right) -K,0\right) \nonumber\\
+	&=\max\left(\sum_{i=1}^{d} w_i \left( \exp\left(\sum_{\ell=1}^{d}C_{(N-1) d +i,(\ell-1)N+1} Z_{(\ell-1)N+1}+\sum_{\underset{j \neq (\ell-1)N+1, 1\le \ell\le d} {j=1}}^{dN}C_{(N-1) d +i,j} Z_j \right)\right) -K,0\right) \nonumber \\
+	&=\max\left(\sum_{i=1}^{d} w_i \exp(y_i)  \exp\left(\sum_{\underset{j \neq (\ell-1)N+1, 1\le \ell\le d} {j=1}}^{dN}C_{(N-1) d +i,j} Z_j \right) -K,0\right)\nonumber\\
+	&=\max\left(\sum_{i=1}^{d} w_i \exp(y_i)  h_i( \mathbf{Z}^{(1)}_{-1}, \dots \mathbf{Z}^{(d)}_{-1})-K,0\right)
+	\COMMA
+\end{align}
+where
+\begin{align*}
+	w_i&=c_i X^{(i)}_0 e^{-\frac{\sigma_i^2}{2} T}\\
+	y_i&=\sum_{\ell=1}^{d}C_{(N-1) d +i,(\ell-1)N+1} Z_{(\ell-1)N+1}\\
+	h_i( \mathbf{Z}^{(1)}_{-1}, \dots \mathbf{Z}^{(d)}_{-1})&=	\exp\left(\sum_{\underset{j \neq (\ell-1)N+1, 1\le \ell\le d} {j=1}}^{dN}C_{(N-1) d +i,j} Z_j \right)\PERIOD
+\end{align*}
+
+$y_i$ can be seen always as a linear combination including the first factors in each asset dimension.
+
+Giving the representation given by \eqref{eq:basket_call_payoff_2}, it seems to me that we need first to solve root finding problem wrt $\{y_i\}_{i=1}^d$, then giving $\{y_i^\ast\}_{i=1}^d$, we get the kink locations $\{Z_{N(i-1)+1}^\ast\}_{i=1}^d$ by solving a $d$-dimensional system. 
+
+
+
+Another way maybe to solve the problem is to mimic the methodology in \cite{bayersmoothing}. In fact, 
+
+
+
+
+
+\subsection{Summary of numerical results}
+We conduct our experiments for $3$ different examples under discretized BS model: i) single Binary, ii) single Call, and  basket call options (We just includeded results for 2-dimensional basket, I still have issue for higher dimensions that we need to discuss, and this is maybe related to the way I am solving the problem in high dimension).
+
+In Sections \ref{sec:Weak error plots_binary} ,\ref{sec:Weak error plots_call} and \ref{sec:Weak error plots_Basket_2D_call}, we estimate the weak error  (Bias) of MC combined with root finding, for the different  examples, for $2$ scenarios involving with/without  Richardson extrapolation. The conclusions of this section are: 
+\begin{itemize}
+	\item Without Richardson extrapolation: For all cases, we get a weak error of order $\Delta t$, with different  constants. Interestingly,  for the call example, we needed to increase the number of quadrature points sufficiently, used for Laguerre quadrature,  to observe the right behavior of the weak error (See tables (\ref{Bias and Statistical errors of MC  for computing Binary option price  for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}, \ref{Bias and Statistical errors of MC  for computing Call option price  for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.},\ref{Bias and Statistical errors of MC  for computing Basket 2d Call option price  for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}) for the corresponding bias values as well the statistical errors.). 
+	
+	\item With Richardson extrapolation: For the case of binary  and $2$-dimensional basket call options, we get a weak error of order almost $\Delta t^2$. For the case of single call,   we get a weak error of order higher than $\Delta t^2$  (See tables (\ref{Bias and Statistical errors of MC  for computing Binary option price  for different number of time steps, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors.},\ref{Bias and Statistical errors of MC  for computing Call option price  for different number of time steps, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors.}, \ref{Bias and Statistical errors of MC  for computing Basket ($2$-dimensional) Call option price  for different number of time steps, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors,beta_16}) for the corresponding bias values as well the statistical errors.).  
+\end{itemize}
+
+
+\begin{remark}
+	We emphasize that the reported weak rates correspond to the pre-asymptotic regime that we are interested in. We are not interested on estimating the rates specifically but rather a sufficient precise estimate of the weak error (Bias), $\mathcal{E}_B(N)$, for different time steps $N$, in order to get the biased MC  solution for a given discretization, that we denoted $Q^N(\infty)$ in Section \ref{sec:Details of the MISC}.  For a fixed discretization, the corresponding biased solution will be set as a reference solution to the MISC solver in order to estimate the quadrature error $\mathcal{E}_Q(TOL_{\text{MISC}},N)$.	
+\end{remark}
+
+
+In Sections \ref{sec:Comparing relative errors, binary}, \ref{sec:Comparing relative errors, call} and \ref{sec:Comparing relative errors, basket call}, we show tables and plots reporting  the different errors involved in MC method (bias and statistical error), and in MISC (Quadrature error). The quadrature error (see \eqref{eq:quadrature error}) is computed by subtracting the MISC solution from the biased solution, computed with sufficiently large  number of samples (to kill the statistical error). Given that both methods, MC and MISC, have the same bias,  the computational time of MC and MISC is compared such that the statistical error is almost equal to the stable quadrature error produced by MISC.
+
+The conclusions of those sections are: 
+
+
+\begin{itemize}
+	\item The Quadrature error of MISC is very stable with respect to $TOL_{\textbf{MISC}}$, for all cases. (See figures (\ref{fig:Quadrature_error_non_rich_Call},\ref{fig:Quadrature_error_non_rich_binary},\ref{fig:Quadrature_error_with_rich_Call},\ref{fig:Quadrature_error_with_rich_binary})).
+	
+	\item MISC is outperforming significantly MC and MC+root finding methods. The ratio of gain is more significant for the Call option compared to Binary option (See tables (\ref{Comparsion of the computational time of  MC and MISC, used to compute Binary option price  for different number of time steps, without Richardson extrapolation},\ref{Comparsion of the computational time of  MC and MISC, used to compute Binary option price  for different number of time steps, with Richardson extrapolation (level $1$)},\ref{Comparsion of the computational time of  MC and MISC, used to compute Call option price  for different number of time steps, without Richardson extrapolation})). See also figures (\ref{fig:Complexity plot for MC and MISC , Binary, Non rich},\ref{fig:Complexity plot for MC and MISC , Binary, with rich},\ref{fig:Complexity plot for MC and MISC , Call non rich}) for the comparison of complexity for different methods.
+	
+	\item Richardson extrapolation has a great advantage over the rate as well the constant for complexity of MISC:
+	\begin{itemize}
+		\item For the binary case: we may see from figure \ref{fig:Complexity plot for MC and MISC , Binary, comparison} and tables (\ref{Total error of MISC and MC to compute Binary option price of the different tolerances for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.},\ref{Comparsion of the computational time of  MC and MISC, used to compute Binary option price  for different number of time steps, without Richardson extrapolation},\ref{Total error of MISC and MC to compute Binary option price of the different tolerances for different number of time steps, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors.},\ref{Comparsion of the computational time of  MC and MISC, used to compute Binary option price  for different number of time steps, with Richardson extrapolation (level $1$)}), that without using Richardson extrapolation, with $16$ time steps, we achieve $1.4\%$ of total relative error, with a cost of $1090$ of CPU time. This cost is dramatically decreased when using Richardson extrapolation. In fact, with $16$ steps in the finer level, we only pay   $42$ of CPU time to get a  total relative error of $0.3\%$.
+		\item For the Call case: we may see from figure \ref{fig:Complexity plot for MC and MISC , Call, comparison} and tables (\ref{Total error of MISC and MC to compute Call option price of the different tolerances for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.},\ref{Comparsion of the computational time of  MC and MISC, used to compute Call option price  for different number of time steps, without Richardson extrapolation},\ref{Total error of MISC and MC to compute Call option price of the different tolerances for different number of time steps, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors.},\ref{Comparsion of the computational time of  MC and MISC, used to compute Call option price  for different number of time steps, with Richardson extrapolation (level $1$)}), that without using Richardson extrapolation, with $16$ time steps, we achieve $0.46\%$ of total relative error, with a cost of $656$ of CPU time. This cost is dramatically decreased when using Richardson extrapolation. In fact, with $8$ steps in the finer level, we only pay   $135$ of CPU time to get a  total relative error of $0.25\%$.
+	\end{itemize} 
+\end{itemize}
+
+\subsection{Results for the single binary option example}\label{sec:Results for the binary option example}
 
 In this case, the integrand $h(\mathbf{z}_{-1})$ is given by
 
@@ -1243,7 +1420,7 @@ In this Section, we report the results for the binary option, using the differen
 
 
 \FloatBarrier
-\subsection{Results for the Call option example}\label{sec:Results for the call option example}
+\subsection{Results for the single call option example}\label{sec:Results for the call option example}
 
 
 In this case, the integrand $h(\mathbf{z}_{-1})$ is given by
@@ -1789,133 +1966,9 @@ In this Section, we report the results for the Call option, using the different 
 
 
 
-\subsection{The basket call option under time stepping framework}\label{sec:The basket option under time stepping framework}
 
-\subsubsection{First way}
-We consider a European Basket call option consisting of $d$ assets. The $i$-th asset $X^{(i)}$ of the basket $(i=1,\dots,d)$ is given by 
-
-\begin{equation}
-X^{(i)}_{k \Delta t}=X^{(i)}_0 \exp\left( -\frac{\sigma_i^2}{2} k \Delta t +\sigma_i B^{(i)}_{k\Delta t}\right), \quad 1 \le k \le N  \COMMA
-\end{equation} 
-where $X^{(i)}_0$ is the current price of the $i$-th asset, $\sigma_i$ is the volatility of the $i$-th asset and $B=(B^{(1)},\dots, B^{(d)})$ is a $d$-dimensional Brownian motion. The correlation between $B^{(i)}$ and $B^{(j)}$ is denoted by $\rho_{ij}$. The payoff function of the European basket option is given by 
-\begin{equation}\label{eq:basket_call_payoff}
-f(Z)=\max\left(\sum_{i=1}^{d} c_i X^{(i)}_T(Z) -K,0\right)\COMMA
-\end{equation}
-where $c_i$ is the corresponding weight of the $i$-th asset, $Z \in \rset^{N \times d}$ is standard Gaussian  vector, and 
-
-
-\begin{equation}
-X^{(i)}_{k \Delta t} (Z)=X^{(i)}_0 e^{-\frac{\sigma_i^2}{2} k \Delta t} \exp\left(\sum_{j=1}^{d  N} C_{(k-1) d +i,j} Z_j\right) \PERIOD
-\end{equation}
-
-Therefore, we have
-
-\begin{equation}
-X^{(i)}_{T} (Z)=X^{(i)}_{N \Delta t}(Z)=X^{(i)}_0 e^{-\frac{\sigma_i^2}{2} T} \exp\left(\sum_{j=1}^{d  N} C_{(N-1) d +i,j} Z_j\right) \COMMA
-\end{equation}
-where $C$ is a $dN \times dN$-matrix with $C C^T=\tilde{\Sigma}:=R  \otimes \Sigma$, and $R$ is an $d \times d$-matrix with $R_{ij}=\sqrt{T/N} \rho_{ij} \sigma_i\sigma_j$. 
-
-For notation simplification, let us denote $\mathbf{Z}^{(i)}:=(Z_{N(i-1)+1}, \dots, Z_{iN})$ and  $\mathbf{Z}^{(i)}_{-1}:=(Z_{N(i-1)+2}, \dots, Z_{iN})$. 
-
-
-Going back to \eqref{eq:basket_call_payoff}, we have 
-\begin{align}\label{eq:basket_call_payoff_2}
-f(Z)&=\max\left(\sum_{i=1}^{d} c_i S^{(i)}_T(Z) -K,0\right) \nonumber\\
-&=\max\left(\sum_{i=1}^{d} w_i \exp\left(\sum_{j=1}^{dN}C_{(N-1) d +i,j} Z_j\right) -K,0\right) \nonumber\\
-&=\max\left(\sum_{i=1}^{d} w_i \left( \exp\left(\sum_{\ell=1}^{d}C_{(N-1) d +i,(\ell-1)N+1} Z_{(\ell-1)N+1}+\sum_{\underset{j \neq (\ell-1)N+1, 1\le \ell\le d} {j=1}}^{dN}C_{(N-1) d +i,j} Z_j \right)\right) -K,0\right) \nonumber \\
-&=\max\left(\sum_{i=1}^{d} w_i \exp(y_i)  \exp\left(\sum_{\underset{j \neq (\ell-1)N+1, 1\le \ell\le d} {j=1}}^{dN}C_{(N-1) d +i,j} Z_j \right) -K,0\right)\nonumber\\
-&=\max\left(\sum_{i=1}^{d} w_i \exp(y_i)  h_i( \mathbf{Z}^{(1)}_{-1}, \dots \mathbf{Z}^{(d)}_{-1})-K,0\right)
- \COMMA
-\end{align}
-where
- \begin{align*}
-	w_i&=c_i X^{(i)}_0 e^{-\frac{\sigma_i^2}{2} T}\\
-	y_i&=\sum_{\ell=1}^{d}C_{(N-1) d +i,(\ell-1)N+1} Z_{(\ell-1)N+1}\\
-h_i( \mathbf{Z}^{(1)}_{-1}, \dots \mathbf{Z}^{(d)}_{-1})&=	\exp\left(\sum_{\underset{j \neq (\ell-1)N+1, 1\le \ell\le d} {j=1}}^{dN}C_{(N-1) d +i,j} Z_j \right)\PERIOD
-\end{align*}
-
- $y_i$ can be seen always as a linear combination including the first factors in each asset dimension.
- 
- Giving the representation given by \ref{eq:basket_call_payoff_2}, it seems to me that we need first to solve root finding problem wrt $\{y_i\}_{i=1}^d$, then giving $\{y_i^\ast\}_{i=1}^d$, we get the kink locations $\{Z_{N(i-1)+1}^\ast\}_{i=1}^d$ by solving a $d$-dimensional system.  Another way maybe to solve the problem is to mimic the methodology in \cite{bayersmoothing}. However, it is not clear to me yet 
-
-
-\subsubsection{Second way}
-
-We consider the basket option under BS model where the process $\mathbf{X}$ is the discretized $d$-dimensional Black-Scholes model and the payoff function $g$ is given by
-\begin{align}
-g(\mathbf{X}(T))=\max\left(\sum_{i=1}^{d} \omega_{i} X^{(i)}(T)-K,0  \right)	
-\end{align}
- Precisely, we are interested in the  $d$-dimensional lognormal example where the dynamics of the stock are given by
-
-\begin{align}\label{lognormal_dynamics_basket}
-	dX^{(i)}_t=\sigma^{(i)} X^{(i)}_t dW^{(i)}_t,
-\end{align}
-
-where $\{W^{(1)}, \dots,W^{(d)}\}$ are correlated Brownian motions with correlations $\rho_{ij}$.
-
-
-In the discrete case, we have
-
-\begin{align}\label{Brownian_bridge_BS_basket}
-	\Delta W^{(j)}_i&=(B^{(j)}_{t_{i+1}}-B^{(j)}_{t_i})+\Delta t \frac{z_1^{(j)}}{\sqrt{T}}, \quad 1 \le j \le d \nonumber\\
-	&= \Delta B^{(j)}_i + \Delta t \frac{z_1^{(j)}}{\sqrt{T}}, \quad 1 \le j \le d ,
-\end{align}
-
-implying that the numerical approximation of $X^{(j)}(T)$ satisfies
-\begin{align}
-	\bar{X}^{(j)}_T&=\Phi(\Delta t, z_1^{(j)}, \Delta B^{(j)}_0,\dots,\Delta B^{(j)}_{N-1}),  \quad 1 \le j \le d, \\ \nonumber
-	&=\Phi(\Delta t, \Psi(z_1^{(j)},\dots,z_N^{(j)})), \quad 1 \le j \le d,
-\end{align}
-for some path function $\Phi$ and Brwonian bridge map $\Psi$ as described in Section \ref{sec:Brwonian bridge construction}.
-
-
-
-Using results from section \ref{sec:The discretized 1D Black-Scholes}, we have
-
-\begin{align}
-	\bar{X}^{(j)}(T)=X_0^{(j)} \prod_{i=0}^{N-1} \left[ 1+\frac{\sigma^{(j)}}{\sqrt{T}} z^{(j)}_1 \Delta t+ \sigma^{(j)} \Delta B^{(j)}_{i}\right], \quad 1 \le j \le d.
-\end{align}
-Therefore, in order to determine $\mathbf{y}_{\ast}=(y_{\ast}^{(1)},\dots,y_{\ast}^{(d)})$, we need to solve
-\begin{align}
-	\mathbf{x}=\sum_{j=1}^{d} \omega_j X^{(j)}_0 \prod_{i=0}^{N-1} \left[ 1+\frac{\sigma^{(j)}}{\sqrt{T}} y^{(j)}_{\ast}(\mathbf{x}) \Delta t+ \sigma^{(j)} \Delta B^{(j)}_{i}\right],
-\end{align}
-
-which implies that the location of the kink point for the approximate problem is equivalent to finding the roots of the polynomial $P(\mathbf{y}_\ast(K))$, given by
-\begin{align}\label{polynomial_kink_location_basket}
-	P(\mathbf{y}_{\ast}(K))&=\sum_{j=1}^{d} \omega_j X^{(j)}_0 \prod_{i=0}^{N-1} \left[ 1+\frac{\sigma^{(j)}}{\sqrt{T}} y^{(j)}_{\ast} \Delta t+ \sigma^{(j)} \Delta B^{(j)}_{i}\right]-K, \nonumber\\
-	&=\sum_{j=1}^{d} \omega_j X^{(j)}_0 \left(\prod_{i=0}^{N-1} \left[ 1+\frac{\sigma^{(j)}}{\sqrt{T}} y_\ast^{(j)} \Delta t+ \sigma^{(j)} \Delta B^{(j)}_{i}\right]-\frac{K}{ \omega_j X^{(j)}_0  d}\right) \nonumber\\
-	&=\sum_{j=1}^{d} \omega_j X^{(j)}_0 P^{(j)}\left(y_\ast^{(j)}\left(\frac{K}{ \omega_j X^{(j)}_0  d }\right)\right)
-\end{align}
-
-Therefore, the problem of finding the kink in the $d$-dimensional problem is brought to finding the location of the kink for each dimension by solving the root of the polynomial $P^{(j)}\left(y_\ast^{(j)}\left(\frac{K}{\omega_j X^{(j)}_0 }\right)\right)$.  
-
-Using  \textbf{Newton iteration method}, we use the expression $P'=\frac{d P^{(j)}}{d y_\ast^{(j)}}$. If we denote $f_i^{(j)}(y)=1+\frac{\sigma^{(j)}}{\sqrt{T}} y \Delta t+ \sigma^{(j)} \Delta B^{(j)}_{i}$, then we can easily show that
-\begin{align}\label{polynomial_kink_location_derivative_basket}
-	P'^{(j)}(y)=\frac{\sigma^{(j)} \Delta t}{\sqrt{T}} \left( \prod_{i=0}^{N-1} f_i^{(j)}(y)\right) \left[ \sum_{i=0}^{N-1} \frac{1}{f_i^{(j)}(y)}\right].
-\end{align}
-
-
-
-
-Therefore, in this case, the integrand $h(\mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1})$ (as expressed in \ref{eq: pre_integration_step_wrt_y1_basket}) is given by
-
-\begin{align}\label{smoothed_integrand_basket_opt_2d}
-	h(\mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1})&= \int_{\Omega}  \max  \left[ \left(\sum_{j=1}^{d} \Phi \circ \Psi(T;z_1^{(j)},\mathbf{z}^{(j)}_{-1})\right)-K,0\right]   \rho_d(z_1^{(1)},\dots,z_1^{(d)}) dz_1^{(1)}\dots dz_1^{(d)}
-\end{align}
-
-
-We get the kink point by running Newton iteration in each dimension seperately for root solving of each polynomial $P^{(j)}$ as expressed in \eqref{polynomial_kink_location_basket} with a precision of $10^{-10}$. We  decompose the total integration domain $\Omega$  into sub-domains $\Omega_i,\: i=1,2,\dots, 2^d$ such that the integrand is smooth in the interior of  $\Omega_i$ and such that the kink is located along the boundary of these areas. The total integral is then given as the sum of the separate integrals, \ie
-\begin{align}
-	h(\mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1}) &:=  \int_{\Omega}  \max  \left[ \left(\sum_{j=1}^{d} \Phi \circ \Psi(T;z_1^{(j)},\mathbf{z}^{(j)}_{-1})\right)-K,0\right]   \rho_d(z_1^{(1)},\dots,z_1^{(d)}) dz_1^{(1)}\dots dz_1^{(d)}  \nonumber\\
-	&=\sum_{i=1}^{2^d}	\int_{\Omega_i} 
-	 \max  \left[ \left(\sum_{j=1}^{d} \Phi \circ \Psi(T;z_1^{(j)},\mathbf{z}^{(j)}_{-1})\right)-K,0\right]   \rho_d(z_1^{(1)},\dots,z_1^{(d)}) dz_1^{(1)}\dots dz_1^{(d)},
-\end{align}
-
-where we use Gauss-laguerre quadrature with $\beta$ points to get each part.
-
-\FloatBarrier
-\subsubsection{Case of  $2$-dimensional Basket call option}
-\subsubsection*{Weak error plots} \label{sec:Weak error plots_Basket_2D_call}
+\subsection{Result for the  $2$-dimensional Basket call option}\label{sec:Result for the  $2$-dimensional Basket call option}
+\subsubsection{Weak error plots} \label{sec:Weak error plots_Basket_2D_call}
 
 We consider the case of $2$-dimensional Basket call option, with parameters: $S^{(1,2)}=100$, $K=100$, $\sigma^{(1,2)}=0.4$, $\rho=0.3$, $r=0$, $T=1$.  The MC  value of this case (with large number of samples) is $12.900784$ with a statistical error equal to $	0.001033$ (Provided by Premia).
 
@@ -1975,7 +2028,7 @@ In this section, we include the results of weak error rates for $2$ scenarios, w
 
 
 \FloatBarrier
-\subsubsection*{Comparing relative errors}\label{sec:Comparing relative errors, basket call}
+\subsubsection{Comparing relative errors}\label{sec:Comparing relative errors, basket call}
 \subsubsection*{Without Richardson extrapolation}
 
 
@@ -2294,82 +2347,82 @@ Ratio of	$(\text{MC})/(\text{MISC})$ & $\red{41}$ & $\red{80}$ & $\red{2.1}$ & $
 \end{table}
 \FloatBarrier
 
-\subsubsection{Case of  $3$-dimensional Basket call option}
-\subsubsection*{Weak error plots} \label{sec:Weak error plots_Basket_3D_call}
-
-\begin{figure}[h!]
-	\centering
-	\begin{subfigure}{.35\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{./figures/weak_error_rates_basket_3d/without_richardson/weak_convergence_order_basket_option_3d_1_relative_M_7_10_7_plain_1}
-		\caption{}
-		\label{fig:sub3}
-	\end{subfigure}%
-	\begin{subfigure}{.35\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{./figures/weak_error_rates_basket_3d/without_richardson/weak_convergence_order_differences_basket_option_3d_1_relative_M_7_10_7_plain_1}
-		\caption{}
-		\label{fig:sub4}
-	\end{subfigure}
-	
-	\caption{The rate of convergence of the weak error for the Basket ($3$-dimensional) call option, without Richardson extraploation, using MC with $M=7.10^7$: a) $\abs{\expt{g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{g(X_{\Delta t})-g(X_{\Delta t/2})}}$ }
-	\label{fig:Weak_rate_basket_3d_without_rich}
-\end{figure}
-\FloatBarrier
-
-\subsubsection*{Comparing relative errors}\label{sec:Comparing relative errors, basket_3d call}
-\subsubsection*{Without Richardson extrapolation}
-
-
-\begin{table}[h!]
-	\centering
-	\begin{tabular}{l*{6}{c}r}
-		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$ &   \\
-		\hline
-		MISC ($TOl=5.10^{-1},\beta=16$)  & $-$ & $-$ & $-$ & $-$  \\
-		MISC ($TOl=10^{-1},\beta=16$)   & $-$ & $-$ & $-$ & $-$  \\
-		MISC ($TOl=5.10^{-2},\beta=16$) & $-$ & $-$ & $-$ & $-$  \\
-		MISC ($TOl=10^{-2},\beta=16$) & $-$ & $-$ & $-$ & $-$  \\
-		MISC ($TOl=10^{-3},\beta=16$)  & $-$ & $-$ & $-$ & $-$  \\
-		MISC ($TOl=10^{-4},\beta=16$)  & $-$ & $-$ & $-$ & $-$  \\
-		MISC ($TOl=10^{-5},\beta=16$)  & $-$ & $-$ & $-$ & $-$  \\
-		\hline
-		MC method ($M=7.10^{7}$)    & $-$ & $-$ & $-$ & $-$  \\
-		\hline
-	\end{tabular}
-	\caption{Basket ($3$-dimensional) Call option price of the different methods for different number of time steps, without Richardson extrapolation.}
-	\label{table:Basket 3d option price of the different methods for different number of time steps, without Richardson extrapolation, beta_}
-\end{table}
-
-
-
-
-
-
-\begin{table}[h!]
-	\centering
-	\begin{tabular}{l*{6}{c}r}
-		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$ &   \\
-		\hline
-		MISC ($TOl=5.10^{-1}$)  & $-$ & $-$ & $-$ & $-$  \\
-		MISC ($TOl=10^{-1}$)   & $-$ & $-$ & $-$ & $-$  \\
-		MISC ($TOl=5.10^{-2}$)   & $-$ & $-$ & $-$ & $-$  \\
-		MISC ($TOl=10^{-2}$) & $-$ & $-$ & $-$ & $-$  \\
-		MISC ($TOl=10^{-3}$)   & $-$ & $-$ & $-$ & $-$  \\
-		MISC ($TOl=10^{-4}$)   & $-$ & $-$ & $-$ & $-$  \\
-		MISC ($TOl=10^{-5}$)   & $-$ & $-$ & $-$ & $-$  \\
-		\hline
-		MC method +root finding   & $-$ & $-$ & $-$ & $-$  \\
-		MC method  & $-$ & $-$ & $-$ & $-$  \\
-		\hline
-		
-		Ratio of	$\text{(MC+root finding)}/\text{(MISC)}$  & $-$ & $-$ & $-$ & $-$  \\
-		Ratio of	$(\text{MC})/(\text{MISC})$ & $-$ & $-$ & $-$ & $-$  \\
-		\hline
-	\end{tabular}
-	\caption{Comparison of the computational time of  MC and MISC, used to compute Basket ($3$-dimensional) Call option price  for different number of time steps, without Richardson extrapolation}
-	\label{Comparsion of the computational time of  MC and MISC, used to compute Basket 3d Call option price  for different number of time steps, without Richardson extrapolation, beta_16}
-\end{table}
+%\subsubsection{Case of  $3$-dimensional Basket call option}
+%\subsubsection*{Weak error plots} \label{sec:Weak error plots_Basket_3D_call}
+%
+%\begin{figure}[h!]
+%	\centering
+%	\begin{subfigure}{.35\textwidth}
+%		\centering
+%		\includegraphics[width=1\linewidth]{./figures/weak_error_rates_basket_3d/without_richardson/weak_convergence_order_basket_option_3d_1_relative_M_7_10_7_plain_1}
+%		\caption{}
+%		\label{fig:sub3}
+%	\end{subfigure}%
+%	\begin{subfigure}{.35\textwidth}
+%		\centering
+%		\includegraphics[width=1\linewidth]{./figures/weak_error_rates_basket_3d/without_richardson/weak_convergence_order_differences_basket_option_3d_1_relative_M_7_10_7_plain_1}
+%		\caption{}
+%		\label{fig:sub4}
+%	\end{subfigure}
+%	
+%	\caption{The rate of convergence of the weak error for the Basket ($3$-dimensional) call option, without Richardson extraploation, using MC with $M=7.10^7$: a) $\abs{\expt{g(X_{\Delta t})}-g(X)}$  b) $\abs{\expt{g(X_{\Delta t})-g(X_{\Delta t/2})}}$ }
+%	\label{fig:Weak_rate_basket_3d_without_rich}
+%\end{figure}
+%\FloatBarrier
+%
+%\subsubsection*{Comparing relative errors}\label{sec:Comparing relative errors, basket_3d call}
+%\subsubsection*{Without Richardson extrapolation}
+%
+%
+%\begin{table}[h!]
+%	\centering
+%	\begin{tabular}{l*{6}{c}r}
+%		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$ &   \\
+%		\hline
+%		MISC ($TOl=5.10^{-1},\beta=16$)  & $-$ & $-$ & $-$ & $-$  \\
+%		MISC ($TOl=10^{-1},\beta=16$)   & $-$ & $-$ & $-$ & $-$  \\
+%		MISC ($TOl=5.10^{-2},\beta=16$) & $-$ & $-$ & $-$ & $-$  \\
+%		MISC ($TOl=10^{-2},\beta=16$) & $-$ & $-$ & $-$ & $-$  \\
+%		MISC ($TOl=10^{-3},\beta=16$)  & $-$ & $-$ & $-$ & $-$  \\
+%		MISC ($TOl=10^{-4},\beta=16$)  & $-$ & $-$ & $-$ & $-$  \\
+%		MISC ($TOl=10^{-5},\beta=16$)  & $-$ & $-$ & $-$ & $-$  \\
+%		\hline
+%		MC method ($M=7.10^{7}$)    & $-$ & $-$ & $-$ & $-$  \\
+%		\hline
+%	\end{tabular}
+%	\caption{Basket ($3$-dimensional) Call option price of the different methods for different number of time steps, without Richardson extrapolation.}
+%	\label{table:Basket 3d option price of the different methods for different number of time steps, without Richardson extrapolation, beta_}
+%\end{table}
+%
+%
+%
+%
+%
+%
+%\begin{table}[h!]
+%	\centering
+%	\begin{tabular}{l*{6}{c}r}
+%		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$ &   \\
+%		\hline
+%		MISC ($TOl=5.10^{-1}$)  & $-$ & $-$ & $-$ & $-$  \\
+%		MISC ($TOl=10^{-1}$)   & $-$ & $-$ & $-$ & $-$  \\
+%		MISC ($TOl=5.10^{-2}$)   & $-$ & $-$ & $-$ & $-$  \\
+%		MISC ($TOl=10^{-2}$) & $-$ & $-$ & $-$ & $-$  \\
+%		MISC ($TOl=10^{-3}$)   & $-$ & $-$ & $-$ & $-$  \\
+%		MISC ($TOl=10^{-4}$)   & $-$ & $-$ & $-$ & $-$  \\
+%		MISC ($TOl=10^{-5}$)   & $-$ & $-$ & $-$ & $-$  \\
+%		\hline
+%		MC method +root finding   & $-$ & $-$ & $-$ & $-$  \\
+%		MC method  & $-$ & $-$ & $-$ & $-$  \\
+%		\hline
+%		
+%		Ratio of	$\text{(MC+root finding)}/\text{(MISC)}$  & $-$ & $-$ & $-$ & $-$  \\
+%		Ratio of	$(\text{MC})/(\text{MISC})$ & $-$ & $-$ & $-$ & $-$  \\
+%		\hline
+%	\end{tabular}
+%	\caption{Comparison of the computational time of  MC and MISC, used to compute Basket ($3$-dimensional) Call option price  for different number of time steps, without Richardson extrapolation}
+%	\label{Comparsion of the computational time of  MC and MISC, used to compute Basket 3d Call option price  for different number of time steps, without Richardson extrapolation, beta_16}
+%\end{table}
 
 
 \subsection{The basket option with the smoothing trick as in \cite{bayersmoothing}}\label{sec:The basket option with smoothing trick without a time stepping procedure}

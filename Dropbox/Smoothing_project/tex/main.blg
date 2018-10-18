@@ -3,50 +3,51 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: main.aux
 The style file: plain.bst
 Database file #1: smoothing.bib
+Warning--I didn't find a database entry for "imai2004minimizing"
 Warning--empty journal in bayersmoothing
 Warning--empty year in bayersmoothing
 Warning--empty publisher in caflisch1997valuation
 Warning--empty journal in gerstner2007sparse
 Warning--empty year in gerstner2007sparse
-You've used 15 entries,
+You've used 16 entries,
             2118 wiz_defined-function locations,
-            589 strings with 6468 characters,
-and the built_in function-call counts, 4790 in all, are:
-= -- 472
-> -- 227
+            596 strings with 6677 characters,
+and the built_in function-call counts, 5123 in all, are:
+= -- 507
+> -- 240
 < -- 1
-+ -- 91
-- -- 74
-* -- 350
-:= -- 821
-add.period$ -- 44
-call.type$ -- 15
-change.case$ -- 80
++ -- 96
+- -- 78
+* -- 376
+:= -- 876
+add.period$ -- 47
+call.type$ -- 16
+change.case$ -- 85
 chr.to.int$ -- 0
-cite$ -- 20
-duplicate$ -- 173
-empty$ -- 368
-format.name$ -- 74
-if$ -- 968
+cite$ -- 21
+duplicate$ -- 184
+empty$ -- 395
+format.name$ -- 78
+if$ -- 1036
 int.to.chr$ -- 0
-int.to.str$ -- 15
-missing$ -- 17
-newline$ -- 76
-num.names$ -- 30
-pop$ -- 83
+int.to.str$ -- 16
+missing$ -- 18
+newline$ -- 81
+num.names$ -- 32
+pop$ -- 86
 preamble$ -- 1
-purify$ -- 67
+purify$ -- 71
 quote$ -- 0
-skip$ -- 109
+skip$ -- 117
 stack$ -- 0
-substring$ -- 309
-swap$ -- 18
+substring$ -- 339
+swap$ -- 19
 text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 56
+type$ -- 60
 warning$ -- 5
-while$ -- 51
-width$ -- 17
-write$ -- 157
-(There were 5 warnings)
+while$ -- 55
+width$ -- 18
+write$ -- 168
+(There were 6 warnings)
