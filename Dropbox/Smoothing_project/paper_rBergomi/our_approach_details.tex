@@ -8,7 +8,7 @@ Thus, we can rewrite \eqref{BS_formula_rbergomi} as
 
 
 \begin{align}\label{BS_formula_rbergomi_2}
-C_{RB}\left( T, K \right)&=E\left[C_{BS}\left( S_0 = \operatorname{exp}\left(\rho \int_0^T \sqrt{v_t} dW_t^1 - \frac{1}{2}
+C_{RB}\left( T, K \right)&=\text{E}\left[C_{BS}\left( S_0 = \operatorname{exp}\left(\rho \int_0^T \sqrt{v_t} dW_t^1 - \frac{1}{2}
 \rho^2 \int_0^T v_t dt\right),\ K = K, \ T = 1, \ \sigma^2 = (1-\rho^2)
 \int_0^T v_t dt \right) \right], \nonumber \\
 &\approx \int_{\rset^{2N}} C_{BS} \left(G(\mathbf{W}^1,\mathbf{W}^2)\right) \rho_{N}(\mathbf{W}^1)  \rho_{N}(\mathbf{W}^2) d\mathbf{W}^1 \mathbf{W}^2
@@ -118,7 +118,7 @@ As stated before, our goal is to approximate $Q^{\infty}_{N}$. The MISC estimato
 
 The quadrature error in this  case  is given by
 \begin{equation}\label{eq:quadrature error}
-	\mathcal{E}_Q(TOL_{\text{MISC}},N) =\abs{Q_N^\infty - Q_N^\mathcal{I}} \le \sum_{\ell \in \mathbb{N}^{2N} \setminus
+	\mathcal{E}_Q(\text{TOL}_{\text{MISC}},N) =\abs{Q_N^\infty - Q_N^\mathcal{I}} \le \sum_{\ell \in \mathbb{N}^{2N} \setminus
 		\mathcal{I}} \abs{\Delta Q_N^\ell}.
 \end{equation}
 
@@ -158,7 +158,7 @@ As emphasized in \cite{haji2016multi}, one important requirement to get the opti
 	
 	
 	
-	\caption{The rate of convergence of  first order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$) with respect to $W^1$ (a)  and  with respect to $W^2$ (b), for parameter set $3$ in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. The number of quadrature points used in the $i$-th dimension is $N_i=2^{\beta_i-1}+1$. }
+	\caption{The rate of convergence of  first order differences $\abs{\Delta \text{E}_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$) with respect to $W^1$ (a)  and  with respect to $W^2$ (b), for parameter set $3$ in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. The number of quadrature points used in the $i$-th dimension is $N_i=2^{\beta_i-1}+1$. }
 	\label{fig:first_diff_comp_K_1_H_002}
 \end{figure}
 
@@ -178,7 +178,7 @@ As emphasized in \cite{haji2016multi}, one important requirement to get the opti
 		\label{fig:sub4}
 	\end{subfigure}
 	
-	\caption{The rate of convergence of  second order differences $\abs{\Delta E_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$) with respect to $W^1$ (a)  and  with respect to $W^2$ (b), for parameter set $3$ in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. The number of quadrature points used in the $i$-th dimension is $N_i=2^{\beta_i-1}+1$.}
+	\caption{The rate of convergence of  second order differences $\abs{\Delta \text{E}_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$) with respect to $W^1$ (a)  and  with respect to $W^2$ (b), for parameter set $3$ in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. The number of quadrature points used in the $i$-th dimension is $N_i=2^{\beta_i-1}+1$.}
 	\label{fig:second_diff_comp_K_1_H_002}
 \end{figure}
 

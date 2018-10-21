@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  20 OCT 2018 18:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  21 OCT 2018 17:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1292,7 +1292,16 @@ Missing character: There is no r in font nullfont!
 Missing character: There is no o in font nullfont!
 Missing character: There is no r in font nullfont!
 ! Undefined control sequence.
-l.15 ...quadrature error $\mathcal{E}_Q(TOL_{\text
+l.15 ... the quadrature error $\mathcal{E}_Q(\text
+                                                  {TOL}_{\text{MISC}},N)$.
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.15 ...ure error $\mathcal{E}_Q(\text{TOL}_{\text
                                                   {MISC}},N)$.
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1341,8 +1350,8 @@ Overfull \hbox (10.86105pt too wide) in paragraph at lines 15--17
 
 
 Overfull \hbox (79.8502pt too wide) in paragraph at lines 15--17
-\OMS/cmsy/m/n/10 E[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 TOL[]; N\OT1/cmr/m/n/10 )
-$
+\OMS/cmsy/m/n/10 E[]\OT1/cmr/m/n/10 ([][]\OML/cmm/m/it/10 ; N\OT1/cmr/m/n/10 )$
+
  []
 
 Missing character: There is no I in font nullfont!
@@ -9406,8 +9415,19 @@ Missing character: There is no S in font nullfont!
 Missing character: There is no C in font nullfont!
 Missing character: There is no ( in font nullfont!
 ! Undefined control sequence.
-l.617 		MISC ($TOL_{\text
-                         {MISC}}=10^{-1}$)  & $\mathbf{
+<recently read> \text 
+                      
+l.617 		MISC ($\text
+                    {TOL}_{\text{MISC}}=10^{-1}$)  & $\mathbf{
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.617 		MISC ($\text{TOL}_{\text
+                                {MISC}}=10^{-1}$)  & $\mathbf{
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -9421,8 +9441,19 @@ Missing character: There is no S in font nullfont!
 Missing character: There is no C in font nullfont!
 Missing character: There is no ( in font nullfont!
 ! Undefined control sequence.
-l.627 		MISC ($TOL_{\text
-                         {MISC}}=10^{-2}$)  & $\mathbf{
+<recently read> \text 
+                      
+l.627 		MISC ($\text
+                    {TOL}_{\text{MISC}}=10^{-2}$)  & $\mathbf{
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.627 		MISC ($\text{TOL}_{\text
+                                {MISC}}=10^{-2}$)  & $\mathbf{
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -9458,8 +9489,19 @@ Missing character: There is no S in font nullfont!
 Missing character: There is no C in font nullfont!
 Missing character: There is no ( in font nullfont!
 ! Undefined control sequence.
-l.632 		MISC ($TOL_{\text
-                         {MISC}}=10^{-3}$)        & $\mathbf{
+<recently read> \text 
+                      
+l.632 		MISC ($\text
+                    {TOL}_{\text{MISC}}=10^{-3}$)        & $\mathbf{
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.632 		MISC ($\text{TOL}_{\text
+                                {MISC}}=10^{-3}$)        & $\mathbf{
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -9473,8 +9515,19 @@ Missing character: There is no S in font nullfont!
 Missing character: There is no C in font nullfont!
 Missing character: There is no ( in font nullfont!
 ! Undefined control sequence.
-l.636 		MISC ($TOL_{\text
-                         {MISC}}=10^{-4}$)        & $\mathbf{       \red{0.5...
+<recently read> \text 
+                      
+l.636 		MISC ($\text
+                    {TOL}_{\text{MISC}}=10^{-4}$)        & $\mathbf{       \...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.636 		MISC ($\text{TOL}_{\text
+                                {MISC}}=10^{-4}$)        & $\mathbf{       \...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -9958,8 +10011,19 @@ Missing character: There is no S in font nullfont!
 Missing character: There is no C in font nullfont!
 Missing character: There is no ( in font nullfont!
 ! Undefined control sequence.
-l.657 		MISC ($TOL_{\text
-                         {MISC}}=10^{-1}$)  & $0.08$ & $0.13$ & $0.7$   \\
+<recently read> \text 
+                      
+l.657 		MISC ($\text
+                    {TOL}_{\text{MISC}}=10^{-1}$)  & $0.08$ & $0.13$ & $0.7$...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.657 		MISC ($\text{TOL}_{\text
+                                {MISC}}=10^{-1}$)  & $0.08$ & $0.13$ & $0.7$...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -9973,8 +10037,19 @@ Missing character: There is no S in font nullfont!
 Missing character: There is no C in font nullfont!
 Missing character: There is no ( in font nullfont!
 ! Undefined control sequence.
-l.659 		MISC ($TOL_{\text
-                         {MISC}}=10^{-2}$)  & $0.2$& $\red{5}$ & $\red{333}$...
+<recently read> \text 
+                      
+l.659 		MISC ($\text
+                    {TOL}_{\text{MISC}}=10^{-2}$)  & $0.2$& $\red{5}$ & $\re...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.659 		MISC ($\text{TOL}_{\text
+                                {MISC}}=10^{-2}$)  & $0.2$& $\red{5}$ & $\re...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -9985,7 +10060,7 @@ Missing character: There is no ) in font nullfont!
 ! Undefined control sequence.
 <recently read> \red 
                      
-l.659 ...L_{\text{MISC}}=10^{-2}$)  & $0.2$& $\red
+l.659 ...}_{\text{MISC}}=10^{-2}$)  & $0.2$& $\red
                                                   {5}$ & $\red{333}$   \\
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -10010,8 +10085,19 @@ Missing character: There is no S in font nullfont!
 Missing character: There is no C in font nullfont!
 Missing character: There is no ( in font nullfont!
 ! Undefined control sequence.
-l.660 		MISC ($TOL_{\text
-                         {MISC}}=10^{-3}$)  &  $2$ & $73$ & $3650$  \\
+<recently read> \text 
+                      
+l.660 		MISC ($\text
+                    {TOL}_{\text{MISC}}=10^{-3}$)  &  $2$ & $73$ & $3650$  \\
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.660 		MISC ($\text{TOL}_{\text
+                                {MISC}}=10^{-3}$)  &  $2$ & $73$ & $3650$  \\
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -10025,8 +10111,19 @@ Missing character: There is no S in font nullfont!
 Missing character: There is no C in font nullfont!
 Missing character: There is no ( in font nullfont!
 ! Undefined control sequence.
-l.661 		MISC ($TOL_{\text
-                         {MISC}}=10^{-4}$)  & $\red{43}$ & $1240$ & $-$  \\
+<recently read> \text 
+                      
+l.661 		MISC ($\text
+                    {TOL}_{\text{MISC}}=10^{-4}$)  & $\red{43}$ & $1240$ & $...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.661 		MISC ($\text{TOL}_{\text
+                                {MISC}}=10^{-4}$)  & $\red{43}$ & $1240$ & $...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -10037,7 +10134,7 @@ Missing character: There is no ) in font nullfont!
 ! Undefined control sequence.
 <recently read> \red 
                      
-l.661 ...SC ($TOL_{\text{MISC}}=10^{-4}$)  & $\red
+l.661 ...ext{TOL}_{\text{MISC}}=10^{-4}$)  & $\red
                                                   {43}$ & $1240$ & $-$  \\
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -11232,8 +11329,19 @@ Missing character: There is no S in font nullfont!
 Missing character: There is no C in font nullfont!
 Missing character: There is no ( in font nullfont!
 ! Undefined control sequence.
-l.740 		MISC ($TOL_{\text
-                         {MISC}}=10^{-1}$)  & $\mathbf{  1.3281}$ & $\mathbf...
+<recently read> \text 
+                      
+l.740 		MISC ($\text
+                    {TOL}_{\text{MISC}}=10^{-1}$)  & $\mathbf{  1.3281}$ & $...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.740 		MISC ($\text{TOL}_{\text
+                                {MISC}}=10^{-1}$)  & $\mathbf{  1.3281}$ & $...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -11247,8 +11355,19 @@ Missing character: There is no S in font nullfont!
 Missing character: There is no C in font nullfont!
 Missing character: There is no ( in font nullfont!
 ! Undefined control sequence.
-l.741 		MISC ($TOL_{\text
-                         {MISC}}=5.10^{-2}$)  & $\mathbf{  1.3281}$ & $\math...
+<recently read> \text 
+                      
+l.741 		MISC ($\text
+                    {TOL}_{\text{MISC}}=5.10^{-2}$)  & $\mathbf{  1.3281}$ &...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.741 		MISC ($\text{TOL}_{\text
+                                {MISC}}=5.10^{-2}$)  & $\mathbf{  1.3281}$ &...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -11273,8 +11392,19 @@ Missing character: There is no S in font nullfont!
 Missing character: There is no C in font nullfont!
 Missing character: There is no ( in font nullfont!
 ! Undefined control sequence.
-l.742 		MISC ($TOL_{\text
-                         {MISC}}=10^{-2}$)  & $\mathbf{   1.0806
+<recently read> \text 
+                      
+l.742 		MISC ($\text
+                    {TOL}_{\text{MISC}}=10^{-2}$)  & $\mathbf{   1.0806
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.742 		MISC ($\text{TOL}_{\text
+                                {MISC}}=10^{-2}$)  & $\mathbf{   1.0806
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -11299,8 +11429,19 @@ Missing character: There is no S in font nullfont!
 Missing character: There is no C in font nullfont!
 Missing character: There is no ( in font nullfont!
 ! Undefined control sequence.
-l.744 		MISC ($TOL_{\text
-                         {MISC}}=10^{-3}$)  & $\mathbf{ \red{  1.0288}}$ & $...
+<recently read> \text 
+                      
+l.744 		MISC ($\text
+                    {TOL}_{\text{MISC}}=10^{-3}$)  & $\mathbf{ \red{  1.0288...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.744 		MISC ($\text{TOL}_{\text
+                                {MISC}}=10^{-3}$)  & $\mathbf{ \red{  1.0288...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -11782,8 +11923,19 @@ Missing character: There is no S in font nullfont!
 Missing character: There is no C in font nullfont!
 Missing character: There is no ( in font nullfont!
 ! Undefined control sequence.
-l.765 		MISC ($TOL_{\text
-                         {MISC}}=10^{-1}$)  & $0.1$ & $0.18$ & $1.6$  \\
+<recently read> \text 
+                      
+l.765 		MISC ($\text
+                    {TOL}_{\text{MISC}}=10^{-1}$)  & $0.1$ & $0.18$ & $1.6$  \\
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.765 		MISC ($\text{TOL}_{\text
+                                {MISC}}=10^{-1}$)  & $0.1$ & $0.18$ & $1.6$  \\
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -11797,8 +11949,19 @@ Missing character: There is no S in font nullfont!
 Missing character: There is no C in font nullfont!
 Missing character: There is no ( in font nullfont!
 ! Undefined control sequence.
-l.766 		MISC ($TOL_{\text
-                         {MISC}}=5.10^{-2}$)  & $0.1$ & $0.6$ & $\red{37}$  \\
+<recently read> \text 
+                      
+l.766 		MISC ($\text
+                    {TOL}_{\text{MISC}}=5.10^{-2}$)  & $0.1$ & $0.6$ & $\red...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.766 		MISC ($\text{TOL}_{\text
+                                {MISC}}=5.10^{-2}$)  & $0.1$ & $0.6$ & $\red...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -11823,8 +11986,19 @@ Missing character: There is no S in font nullfont!
 Missing character: There is no C in font nullfont!
 Missing character: There is no ( in font nullfont!
 ! Undefined control sequence.
-l.767 		MISC ($TOL_{\text
-                         {MISC}}=10^{-2}$)  & $1.3$ & $\red{6}$ & $2382$  \\
+<recently read> \text 
+                      
+l.767 		MISC ($\text
+                    {TOL}_{\text{MISC}}=10^{-2}$)  & $1.3$ & $\red{6}$ & $23...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.767 		MISC ($\text{TOL}_{\text
+                                {MISC}}=10^{-2}$)  & $1.3$ & $\red{6}$ & $23...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -11849,8 +12023,19 @@ Missing character: There is no S in font nullfont!
 Missing character: There is no C in font nullfont!
 Missing character: There is no ( in font nullfont!
 ! Undefined control sequence.
-l.768 		MISC ($TOL_{\text
-                         {MISC}}=10^{-3}$)  & $\red{3.5}$ & $ 244$ & $-$   \\
+<recently read> \text 
+                      
+l.768 		MISC ($\text
+                    {TOL}_{\text{MISC}}=10^{-3}$)  & $\red{3.5}$ & $ 244$ & ...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.768 		MISC ($\text{TOL}_{\text
+                                {MISC}}=10^{-3}$)  & $\red{3.5}$ & $ 244$ & ...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -11861,7 +12046,7 @@ Missing character: There is no ) in font nullfont!
 ! Undefined control sequence.
 <recently read> \red 
                      
-l.768 ...SC ($TOL_{\text{MISC}}=10^{-3}$)  & $\red
+l.768 ...ext{TOL}_{\text{MISC}}=10^{-3}$)  & $\red
                                                   {3.5}$ & $ 244$ & $-$   \\
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -13045,8 +13230,19 @@ Missing character: There is no S in font nullfont!
 Missing character: There is no C in font nullfont!
 Missing character: There is no ( in font nullfont!
 ! Undefined control sequence.
-l.853 		MISC ($TOL_{\text
-                         {MISC}}=10^{-1}$)  & $\mathbf{ 0.2588
+<recently read> \text 
+                      
+l.853 		MISC ($\text
+                    {TOL}_{\text{MISC}}=10^{-1}$)  & $\mathbf{ 0.2588
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.853 		MISC ($\text{TOL}_{\text
+                                {MISC}}=10^{-1}$)  & $\mathbf{ 0.2588
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -13060,8 +13256,19 @@ Missing character: There is no S in font nullfont!
 Missing character: There is no C in font nullfont!
 Missing character: There is no ( in font nullfont!
 ! Undefined control sequence.
-l.855 		MISC ($TOL_{\text
-                         {MISC}}=5.10^{-2}$)  & $\mathbf{   0.4936
+<recently read> \text 
+                      
+l.855 		MISC ($\text
+                    {TOL}_{\text{MISC}}=5.10^{-2}$)  & $\mathbf{   0.4936
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.855 		MISC ($\text{TOL}_{\text
+                                {MISC}}=5.10^{-2}$)  & $\mathbf{   0.4936
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -13086,8 +13293,19 @@ Missing character: There is no S in font nullfont!
 Missing character: There is no C in font nullfont!
 Missing character: There is no ( in font nullfont!
 ! Undefined control sequence.
-l.857 		MISC ($TOL_{\text
-                         {MISC}}=10^{-2}$)  & $\mathbf{ \red{0.2689}}$ & $\m...
+<recently read> \text 
+                      
+l.857 		MISC ($\text
+                    {TOL}_{\text{MISC}}=10^{-2}$)  & $\mathbf{ \red{0.2689}}...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.857 		MISC ($\text{TOL}_{\text
+                                {MISC}}=10^{-2}$)  & $\mathbf{ \red{0.2689}}...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -13567,8 +13785,19 @@ Missing character: There is no S in font nullfont!
 Missing character: There is no C in font nullfont!
 Missing character: There is no ( in font nullfont!
 ! Undefined control sequence.
-l.875 		MISC ($TOL_{\text
-                         {MISC}}=10^{-1}$)  & $0.2$ & $2$ &   \\
+<recently read> \text 
+                      
+l.875 		MISC ($\text
+                    {TOL}_{\text{MISC}}=10^{-1}$)  & $0.2$ & $2$ &   \\
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.875 		MISC ($\text{TOL}_{\text
+                                {MISC}}=10^{-1}$)  & $0.2$ & $2$ &   \\
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -13582,8 +13811,19 @@ Missing character: There is no S in font nullfont!
 Missing character: There is no C in font nullfont!
 Missing character: There is no ( in font nullfont!
 ! Undefined control sequence.
-l.876 		MISC ($TOL_{\text
-                         {MISC}}=5.10^{-2}$)  & $0.5$ & $\red{74}$  \\
+<recently read> \text 
+                      
+l.876 		MISC ($\text
+                    {TOL}_{\text{MISC}}=5.10^{-2}$)  & $0.5$ & $\red{74}$  \\
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.876 		MISC ($\text{TOL}_{\text
+                                {MISC}}=5.10^{-2}$)  & $0.5$ & $\red{74}$  \\
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -13608,8 +13848,19 @@ Missing character: There is no S in font nullfont!
 Missing character: There is no C in font nullfont!
 Missing character: There is no ( in font nullfont!
 ! Undefined control sequence.
-l.877 		MISC ($TOL_{\text
-                         {MISC}}=10^{-2}$)  & $\red{9}$ & $3455$   \\
+<recently read> \text 
+                      
+l.877 		MISC ($\text
+                    {TOL}_{\text{MISC}}=10^{-2}$)  & $\red{9}$ & $3455$   \\
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.877 		MISC ($\text{TOL}_{\text
+                                {MISC}}=10^{-2}$)  & $\red{9}$ & $3455$   \\
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -13620,7 +13871,7 @@ Missing character: There is no ) in font nullfont!
 ! Undefined control sequence.
 <recently read> \red 
                      
-l.877 ...SC ($TOL_{\text{MISC}}=10^{-2}$)  & $\red
+l.877 ...ext{TOL}_{\text{MISC}}=10^{-2}$)  & $\red
                                                   {9}$ & $3455$   \\
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -15124,8 +15375,19 @@ Missing character: There is no S in font nullfont!
 Missing character: There is no C in font nullfont!
 Missing character: There is no ( in font nullfont!
 ! Undefined control sequence.
-l.975 		MISC ($TOL_{\text
-                         {MISC}}=10^{-1}$)  &  $\mathbf{0.0262}$ & $\mathbf{...
+<recently read> \text 
+                      
+l.975 		MISC ($\text
+                    {TOL}_{\text{MISC}}=10^{-1}$)  &  $\mathbf{0.0262}$ & $\...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.975 		MISC ($\text{TOL}_{\text
+                                {MISC}}=10^{-1}$)  &  $\mathbf{0.0262}$ & $\...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -15139,8 +15401,19 @@ Missing character: There is no S in font nullfont!
 Missing character: There is no C in font nullfont!
 Missing character: There is no ( in font nullfont!
 ! Undefined control sequence.
-l.977 		MISC ($TOL_{\text
-                         {MISC}}=10^{-2}$)  &  $\mathbf{0.0262}$ & $\mathbf{...
+<recently read> \text 
+                      
+l.977 		MISC ($\text
+                    {TOL}_{\text{MISC}}=10^{-2}$)  &  $\mathbf{0.0262}$ & $\...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.977 		MISC ($\text{TOL}_{\text
+                                {MISC}}=10^{-2}$)  &  $\mathbf{0.0262}$ & $\...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -15165,8 +15438,19 @@ Missing character: There is no S in font nullfont!
 Missing character: There is no C in font nullfont!
 Missing character: There is no ( in font nullfont!
 ! Undefined control sequence.
-l.978 		MISC ($TOL_{\text
-                         {MISC}}=10^{-3}$)  &  $\mathbf{0.0190}$ & $\mathbf{...
+<recently read> \text 
+                      
+l.978 		MISC ($\text
+                    {TOL}_{\text{MISC}}=10^{-3}$)  &  $\mathbf{0.0190}$ & $\...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.978 		MISC ($\text{TOL}_{\text
+                                {MISC}}=10^{-3}$)  &  $\mathbf{0.0190}$ & $\...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -15191,8 +15475,19 @@ Missing character: There is no S in font nullfont!
 Missing character: There is no C in font nullfont!
 Missing character: There is no ( in font nullfont!
 ! Undefined control sequence.
-l.979 		MISC ($TOL_{\text
-                         {MISC}}=10^{-4}$)  &  $\mathbf{\red{0.0182}}$ & $\m...
+<recently read> \text 
+                      
+l.979 		MISC ($\text
+                    {TOL}_{\text{MISC}}=10^{-4}$)  &  $\mathbf{\red{0.0182}}...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.979 		MISC ($\text{TOL}_{\text
+                                {MISC}}=10^{-4}$)  &  $\mathbf{\red{0.0182}}...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -15696,8 +15991,19 @@ Missing character: There is no S in font nullfont!
 Missing character: There is no C in font nullfont!
 Missing character: There is no ( in font nullfont!
 ! Undefined control sequence.
-l.998 		MISC ($TOL_{\text
-                         {MISC}}=10^{-1}$)  & $0.1$ & $0.1$ & $0.2$ & $0.8$ \\
+<recently read> \text 
+                      
+l.998 		MISC ($\text
+                    {TOL}_{\text{MISC}}=10^{-1}$)  & $0.1$ & $0.1$ & $0.2$ &...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.998 		MISC ($\text{TOL}_{\text
+                                {MISC}}=10^{-1}$)  & $0.1$ & $0.1$ & $0.2$ &...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -15711,8 +16017,19 @@ Missing character: There is no S in font nullfont!
 Missing character: There is no C in font nullfont!
 Missing character: There is no ( in font nullfont!
 ! Undefined control sequence.
-l.1000 		MISC ($TOL_{\text
-                          {MISC}}=10^{-2}$)  & $0.1$ & $0.5$ & $8$ & $\red{9...
+<recently read> \text 
+                      
+l.1000 		MISC ($\text
+                     {TOL}_{\text{MISC}}=10^{-2}$)  & $0.1$ & $0.5$ & $8$ & ...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.1000 		MISC ($\text{TOL}_{\text
+                                 {MISC}}=10^{-2}$)  & $0.1$ & $0.5$ & $8$ & ...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -15737,8 +16054,19 @@ Missing character: There is no S in font nullfont!
 Missing character: There is no C in font nullfont!
 Missing character: There is no ( in font nullfont!
 ! Undefined control sequence.
-l.1001 		MISC ($TOL_{\text
-                          {MISC}}=10^{-3}$)  & $0.5$ & $3$ & $\red{24}$ & $2...
+<recently read> \text 
+                      
+l.1001 		MISC ($\text
+                     {TOL}_{\text{MISC}}=10^{-3}$)  & $0.5$ & $3$ & $\red{24...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.1001 		MISC ($\text{TOL}_{\text
+                                 {MISC}}=10^{-3}$)  & $0.5$ & $3$ & $\red{24...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -15763,8 +16091,19 @@ Missing character: There is no S in font nullfont!
 Missing character: There is no C in font nullfont!
 Missing character: There is no ( in font nullfont!
 ! Undefined control sequence.
-l.1002 		MISC ($TOL_{\text
-                          {MISC}}=10^{-4}$)  & $\red{1}$ & $\red{6}$ & $80$ ...
+<recently read> \text 
+                      
+l.1002 		MISC ($\text
+                     {TOL}_{\text{MISC}}=10^{-4}$)  & $\red{1}$ & $\red{6}$ ...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.1002 		MISC ($\text{TOL}_{\text
+                                 {MISC}}=10^{-4}$)  & $\red{1}$ & $\red{6}$ ...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -15775,7 +16114,7 @@ Missing character: There is no ) in font nullfont!
 ! Undefined control sequence.
 <recently read> \red 
                      
-l.1002 ...C ($TOL_{\text{MISC}}=10^{-4}$)  & $\red
+l.1002 ...xt{TOL}_{\text{MISC}}=10^{-4}$)  & $\red
                                                   {1}$ & $\red{6}$ & $80$ & ...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -17225,8 +17564,19 @@ Missing character: There is no S in font nullfont!
 Missing character: There is no C in font nullfont!
 Missing character: There is no ( in font nullfont!
 ! Undefined control sequence.
-l.1099 		MISC ($TOL_{\text
-                          {MISC}}=10^{-1}$)  &$0.0273$  &$0.0225$ & $0.0181$...
+<recently read> \text 
+                      
+l.1099 		MISC ($\text
+                     {TOL}_{\text{MISC}}=10^{-1}$)  &$0.0273$  &$0.0225$ & $...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.1099 		MISC ($\text{TOL}_{\text
+                                 {MISC}}=10^{-1}$)  &$0.0273$  &$0.0225$ & $...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -17240,8 +17590,19 @@ Missing character: There is no S in font nullfont!
 Missing character: There is no C in font nullfont!
 Missing character: There is no ( in font nullfont!
 ! Undefined control sequence.
-l.1101 			MISC ($TOL_{\text
-                           {MISC}}=10^{-2}$)  & $0.0193$  & $0.0041$ & $\red...
+<recently read> \text 
+                      
+l.1101 			MISC ($\text
+                      {TOL}_{\text{MISC}}=10^{-2}$)  & $0.0193$  & $0.0041$ ...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.1101 			MISC ($\text{TOL}_{\text
+                                  {MISC}}=10^{-2}$)  & $0.0193$  & $0.0041$ ...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -17266,8 +17627,19 @@ Missing character: There is no S in font nullfont!
 Missing character: There is no C in font nullfont!
 Missing character: There is no ( in font nullfont!
 ! Undefined control sequence.
-l.1102 		MISC ($TOL_{\text
-                          {MISC}}=10^{-3}$)  & $\red{0.0057}$  & $\red{0.002...
+<recently read> \text 
+                      
+l.1102 		MISC ($\text
+                     {TOL}_{\text{MISC}}=10^{-3}$)  & $\red{0.0057}$  & $\re...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.1102 		MISC ($\text{TOL}_{\text
+                                 {MISC}}=10^{-3}$)  & $\red{0.0057}$  & $\re...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -17278,7 +17650,7 @@ Missing character: There is no ) in font nullfont!
 ! Undefined control sequence.
 <recently read> \red 
                      
-l.1102 ...C ($TOL_{\text{MISC}}=10^{-3}$)  & $\red
+l.1102 ...xt{TOL}_{\text{MISC}}=10^{-3}$)  & $\red
                                                   {0.0057}$  & $\red{0.0025}...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -17769,8 +18141,19 @@ Missing character: There is no S in font nullfont!
 Missing character: There is no C in font nullfont!
 Missing character: There is no ( in font nullfont!
 ! Undefined control sequence.
-l.1122 		MISC ($TOL_{\text
-                          {MISC}}=10^{-1}$)   & $0.15$ & $0.25$ & $1$  \\
+<recently read> \text 
+                      
+l.1122 		MISC ($\text
+                     {TOL}_{\text{MISC}}=10^{-1}$)   & $0.15$ & $0.25$ & $1$...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.1122 		MISC ($\text{TOL}_{\text
+                                 {MISC}}=10^{-1}$)   & $0.15$ & $0.25$ & $1$...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -17784,8 +18167,19 @@ Missing character: There is no S in font nullfont!
 Missing character: There is no C in font nullfont!
 Missing character: There is no ( in font nullfont!
 ! Undefined control sequence.
-l.1124 		MISC ($TOL_{\text
-                          {MISC}}=10^{-2}$)   & $0.6$ & $10$ & $\red{112}$  \\
+<recently read> \text 
+                      
+l.1124 		MISC ($\text
+                     {TOL}_{\text{MISC}}=10^{-2}$)   & $0.6$ & $10$ & $\red{...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.1124 		MISC ($\text{TOL}_{\text
+                                 {MISC}}=10^{-2}$)   & $0.6$ & $10$ & $\red{...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -17810,8 +18204,19 @@ Missing character: There is no S in font nullfont!
 Missing character: There is no C in font nullfont!
 Missing character: There is no ( in font nullfont!
 ! Undefined control sequence.
-l.1125 		MISC ($TOL_{\text
-                          {MISC}}=10^{-3}$)  & $\red{3.5}$ & $\red{34}$ & $3...
+<recently read> \text 
+                      
+l.1125 		MISC ($\text
+                     {TOL}_{\text{MISC}}=10^{-3}$)  & $\red{3.5}$ & $\red{34...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.1125 		MISC ($\text{TOL}_{\text
+                                 {MISC}}=10^{-3}$)  & $\red{3.5}$ & $\red{34...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -17822,7 +18227,7 @@ Missing character: There is no ) in font nullfont!
 ! Undefined control sequence.
 <recently read> \red 
                      
-l.1125 ...C ($TOL_{\text{MISC}}=10^{-3}$)  & $\red
+l.1125 ...xt{TOL}_{\text{MISC}}=10^{-3}$)  & $\red
                                                   {3.5}$ & $\red{34}$ & $315...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -19316,8 +19721,19 @@ Missing character: There is no S in font nullfont!
 Missing character: There is no C in font nullfont!
 Missing character: There is no ( in font nullfont!
 ! Undefined control sequence.
-l.1220 		MISC ($TOL_{\text
-                          {MISC}}=10^{-1}$)  &  $\mathbf{0.0083}$ & $\mathbf...
+<recently read> \text 
+                      
+l.1220 		MISC ($\text
+                     {TOL}_{\text{MISC}}=10^{-1}$)  &  $\mathbf{0.0083}$ & $...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.1220 		MISC ($\text{TOL}_{\text
+                                 {MISC}}=10^{-1}$)  &  $\mathbf{0.0083}$ & $...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -19331,8 +19747,19 @@ Missing character: There is no S in font nullfont!
 Missing character: There is no C in font nullfont!
 Missing character: There is no ( in font nullfont!
 ! Undefined control sequence.
-l.1222 		MISC ($TOL_{\text
-                          {MISC}}=10^{-2}$)  &  $\mathbf{0.0083}$ & $\mathbf...
+<recently read> \text 
+                      
+l.1222 		MISC ($\text
+                     {TOL}_{\text{MISC}}=10^{-2}$)  &  $\mathbf{0.0083}$ & $...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.1222 		MISC ($\text{TOL}_{\text
+                                 {MISC}}=10^{-2}$)  &  $\mathbf{0.0083}$ & $...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -19357,8 +19784,19 @@ Missing character: There is no S in font nullfont!
 Missing character: There is no C in font nullfont!
 Missing character: There is no ( in font nullfont!
 ! Undefined control sequence.
-l.1223 		MISC ($TOL_{\text
-                          {MISC}}=10^{-3}$)  &  $\mathbf{0.0083}$& $\mathbf{...
+<recently read> \text 
+                      
+l.1223 		MISC ($\text
+                     {TOL}_{\text{MISC}}=10^{-3}$)  &  $\mathbf{0.0083}$& $\...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.1223 		MISC ($\text{TOL}_{\text
+                                 {MISC}}=10^{-3}$)  &  $\mathbf{0.0083}$& $\...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -19383,8 +19821,19 @@ Missing character: There is no S in font nullfont!
 Missing character: There is no C in font nullfont!
 Missing character: There is no ( in font nullfont!
 ! Undefined control sequence.
-l.1224 		MISC ($TOL_{\text
-                          {MISC}}=10^{-4}$)  &  $\mathbf{\red{0.0058}}$ & $\...
+<recently read> \text 
+                      
+l.1224 		MISC ($\text
+                     {TOL}_{\text{MISC}}=10^{-4}$)  &  $\mathbf{\red{0.0058}...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.1224 		MISC ($\text{TOL}_{\text
+                                 {MISC}}=10^{-4}$)  &  $\mathbf{\red{0.0058}...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -19884,8 +20333,19 @@ Missing character: There is no S in font nullfont!
 Missing character: There is no C in font nullfont!
 Missing character: There is no ( in font nullfont!
 ! Undefined control sequence.
-l.1242 		MISC ($TOL_{\text
-                          {MISC}}=10^{-1}$)  & $0.1$ & $0.1$ & $0.1$ & $1$ \\
+<recently read> \text 
+                      
+l.1242 		MISC ($\text
+                     {TOL}_{\text{MISC}}=10^{-1}$)  & $0.1$ & $0.1$ & $0.1$ ...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.1242 		MISC ($\text{TOL}_{\text
+                                 {MISC}}=10^{-1}$)  & $0.1$ & $0.1$ & $0.1$ ...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -19899,8 +20359,19 @@ Missing character: There is no S in font nullfont!
 Missing character: There is no C in font nullfont!
 Missing character: There is no ( in font nullfont!
 ! Undefined control sequence.
-l.1244 		MISC ($TOL_{\text
-                          {MISC}}=10^{-2}$)  & $0.1$ & $0.15$ & $9$ & $\red{...
+<recently read> \text 
+                      
+l.1244 		MISC ($\text
+                     {TOL}_{\text{MISC}}=10^{-2}$)  & $0.1$ & $0.15$ & $9$ &...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.1244 		MISC ($\text{TOL}_{\text
+                                 {MISC}}=10^{-2}$)  & $0.1$ & $0.15$ & $9$ &...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -19925,8 +20396,19 @@ Missing character: There is no S in font nullfont!
 Missing character: There is no C in font nullfont!
 Missing character: There is no ( in font nullfont!
 ! Undefined control sequence.
-l.1245 		MISC ($TOL_{\text
-                          {MISC}}=10^{-3}$)  & $0.2$ & $2$ & $\red{27}$ & $2...
+<recently read> \text 
+                      
+l.1245 		MISC ($\text
+                     {TOL}_{\text{MISC}}=10^{-3}$)  & $0.2$ & $2$ & $\red{27...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.1245 		MISC ($\text{TOL}_{\text
+                                 {MISC}}=10^{-3}$)  & $0.2$ & $2$ & $\red{27...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -19951,8 +20433,19 @@ Missing character: There is no S in font nullfont!
 Missing character: There is no C in font nullfont!
 Missing character: There is no ( in font nullfont!
 ! Undefined control sequence.
-l.1246 		MISC ($TOL_{\text
-                          {MISC}}=10^{-4}$)  & $\red{1}$ & $\red{6}$ & $136$...
+<recently read> \text 
+                      
+l.1246 		MISC ($\text
+                     {TOL}_{\text{MISC}}=10^{-4}$)  & $\red{1}$ & $\red{6}$ ...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.1246 		MISC ($\text{TOL}_{\text
+                                 {MISC}}=10^{-4}$)  & $\red{1}$ & $\red{6}$ ...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -19963,7 +20456,7 @@ Missing character: There is no ) in font nullfont!
 ! Undefined control sequence.
 <recently read> \red 
                      
-l.1246 ...C ($TOL_{\text{MISC}}=10^{-4}$)  & $\red
+l.1246 ...xt{TOL}_{\text{MISC}}=10^{-4}$)  & $\red
                                                   {1}$ & $\red{6}$ & $136$ &...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -21374,8 +21867,19 @@ Missing character: There is no S in font nullfont!
 Missing character: There is no C in font nullfont!
 Missing character: There is no ( in font nullfont!
 ! Undefined control sequence.
-l.1353 		MISC ($TOL_{\text
-                          {MISC}}=10^{-1}$)  & $\mathbf{0.0914}$ & $\mathbf{...
+<recently read> \text 
+                      
+l.1353 		MISC ($\text
+                     {TOL}_{\text{MISC}}=10^{-1}$)  & $\mathbf{0.0914}$ & $\...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.1353 		MISC ($\text{TOL}_{\text
+                                 {MISC}}=10^{-1}$)  & $\mathbf{0.0914}$ & $\...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -21389,8 +21893,19 @@ Missing character: There is no S in font nullfont!
 Missing character: There is no C in font nullfont!
 Missing character: There is no ( in font nullfont!
 ! Undefined control sequence.
-l.1355 		MISC ($TOL_{\text
-                          {MISC}}=10^{-2}$)  &  $\mathbf{0.0914}$& $\mathbf{...
+<recently read> \text 
+                      
+l.1355 		MISC ($\text
+                     {TOL}_{\text{MISC}}=10^{-2}$)  &  $\mathbf{0.0914}$& $\...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.1355 		MISC ($\text{TOL}_{\text
+                                 {MISC}}=10^{-2}$)  &  $\mathbf{0.0914}$& $\...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -21404,8 +21919,19 @@ Missing character: There is no S in font nullfont!
 Missing character: There is no C in font nullfont!
 Missing character: There is no ( in font nullfont!
 ! Undefined control sequence.
-l.1356 		MISC ($TOL_{\text
-                          {MISC}}=10^{-3}$)  &  $\mathbf{\red{0.0655}}$& $\m...
+<recently read> \text 
+                      
+l.1356 		MISC ($\text
+                     {TOL}_{\text{MISC}}=10^{-3}$)  &  $\mathbf{\red{0.0655}...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.1356 		MISC ($\text{TOL}_{\text
+                                 {MISC}}=10^{-3}$)  &  $\mathbf{\red{0.0655}...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -21931,8 +22457,19 @@ Missing character: There is no S in font nullfont!
 Missing character: There is no C in font nullfont!
 Missing character: There is no ( in font nullfont!
 ! Undefined control sequence.
-l.1375 		MISC ($TOL_{\text
-                          {MISC}}=10^{-1}$)  & $0.1$ & $0.1$ & $0.2$ & $0.5$ \\
+<recently read> \text 
+                      
+l.1375 		MISC ($\text
+                     {TOL}_{\text{MISC}}=10^{-1}$)  & $0.1$ & $0.1$ & $0.2$ ...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.1375 		MISC ($\text{TOL}_{\text
+                                 {MISC}}=10^{-1}$)  & $0.1$ & $0.1$ & $0.2$ ...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -21946,8 +22483,19 @@ Missing character: There is no S in font nullfont!
 Missing character: There is no C in font nullfont!
 Missing character: There is no ( in font nullfont!
 ! Undefined control sequence.
-l.1377 		MISC ($TOL_{\text
-                          {MISC}}=10^{-2}$)  & $0.1$ & $0.1$ & $8$ & $97$ \\
+<recently read> \text 
+                      
+l.1377 		MISC ($\text
+                     {TOL}_{\text{MISC}}=10^{-2}$)  & $0.1$ & $0.1$ & $8$ & ...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.1377 		MISC ($\text{TOL}_{\text
+                                 {MISC}}=10^{-2}$)  & $0.1$ & $0.1$ & $8$ & ...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -21961,8 +22509,19 @@ Missing character: There is no S in font nullfont!
 Missing character: There is no C in font nullfont!
 Missing character: There is no ( in font nullfont!
 ! Undefined control sequence.
-l.1378 		MISC ($TOL_{\text
-                          {MISC}}=10^{-3}$)  & $\red{0.7}$ & $\red{4}$ & $\r...
+<recently read> \text 
+                      
+l.1378 		MISC ($\text
+                     {TOL}_{\text{MISC}}=10^{-3}$)  & $\red{0.7}$ & $\red{4}...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.1378 		MISC ($\text{TOL}_{\text
+                                 {MISC}}=10^{-3}$)  & $\red{0.7}$ & $\red{4}...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -21973,7 +22532,7 @@ Missing character: There is no ) in font nullfont!
 ! Undefined control sequence.
 <recently read> \red 
                      
-l.1378 ...C ($TOL_{\text{MISC}}=10^{-3}$)  & $\red
+l.1378 ...xt{TOL}_{\text{MISC}}=10^{-3}$)  & $\red
                                                   {0.7}$ & $\red{4}$ & $\red...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -22615,10 +23174,10 @@ Overfull \hbox (10.86105pt too wide) in paragraph at lines 1409--1413
 
  
 Here is how much of TeX's memory you used:
- 79 strings out of 493014
- 4578 string characters out of 6133351
+ 80 strings out of 493014
+ 4582 string characters out of 6133351
  100788 words of memory out of 5000000
- 3714 multiletter control sequences out of 15000+600000
+ 3715 multiletter control sequences out of 15000+600000
  4567 words of font info for 17 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  18i,10n,16p,3617b,167s stack positions out of 5000i,500n,10000p,200000b,80000s
