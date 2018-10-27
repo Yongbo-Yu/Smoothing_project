@@ -6,7 +6,7 @@ from matplotlib.pyplot import figure, show
 from matplotlib.ticker import MaxNLocator
 
 
-dt_arr=np.array([0.5, 0.1,  0.05, 0.01, 0.005,0.001])
+dt_arr=np.array([0.5, 0.1,  0.05, 0.01, 0.001,0.0001])
 
 # #Case for parameter set 1 non richardson
 # quad_err_N_2=np.array([ 0.0868, 0.0868,0.0868,0.0017, 0.0017 , 0.0017,0.0017])
@@ -45,11 +45,11 @@ dt_arr=np.array([0.5, 0.1,  0.05, 0.01, 0.005,0.001])
 
 
 
-# #Case for parameter set 2 non richardson+ linear hierarchy
-# quad_err_N_2=np.array([  0.1525,  0.1525, 0.1525, 0.1247,0.0288,2.5e-04])
-# quad_err_N_4=np.array([ 0.1231, 0.1231, 0.1686, 6.3e-04,6.3e-04 ,06.3e-04])
-# quad_err_N_8=np.array([ 0.1353, 0.1555, 0.0823, 0.0053,0.0053 ])
-# quad_err_N_16=np.array([0.1414, 0.0429,0.0101,0.0101 ])
+#Case for parameter set 2 non richardson+ linear hierarchy
+quad_err_N_2=np.array([  0.1525,  0.1525, 0.1525, 0.1247,0.0288,2.5e-04])
+quad_err_N_4=np.array([ 0.1231, 0.1231, 0.1686, 6.3e-04,6.3e-04 ,06.3e-04])
+quad_err_N_8=np.array([ 0.1353, 0.1555, 0.0823, 0.0053,0.0053 ])
+quad_err_N_16=np.array([0.1414, 0.0429,0.0101,0.0101 ])
 
 
 # #Case for parameter set 2 with richardson
@@ -73,9 +73,9 @@ dt_arr=np.array([0.5, 0.1,  0.05, 0.01, 0.005,0.001])
 # quad_err_N_2=np.array([0.0152,0.0152,0.2462,0.0669,	0.0215,0.0013])
 
 
-# #Case for parameter set 2 with richardson level2,linear
-quad_err_N_2=np.array([ 0.0177,0.0177,0.2525,0.0278,0.0278,0.0088])
-quad_err_N_4=np.array([0.1553,0.1073,0.0038,0.0038 ])
+# # #Case for parameter set 2 with richardson level2,linear
+# quad_err_N_2=np.array([ 0.0177,0.0177,0.2525,0.0278,0.0278,0.0088])
+# quad_err_N_4=np.array([0.1553,0.1073,0.0038,0.0038 ])
 
 
 # #Case for parameter set 3 non richardson
@@ -143,10 +143,10 @@ quad_err_N_4=np.array([0.1553,0.1073,0.0038,0.0038 ])
 
 fig = plt.figure()
 
-plt.plot(dt_arr, quad_err_N_2,linewidth=2.0,label=r'$N=1-2-4$' , marker='>',hold=True) 
-plt.plot(dt_arr[0:4], quad_err_N_4,linewidth=2.0,label=r'$N=2-4-8$' , marker='o',hold=True) 
-# plt.plot(dt_arr[0:5], quad_err_N_8,linewidth=2.0,label=r'$N=8$'  , marker='v',hold=True) 
-# plt.plot(dt_arr[0:3], quad_err_N_16,linewidth=2.0,label=r'$N=16$'  , marker='*',hold=True) 
+plt.plot(dt_arr, quad_err_N_2,linewidth=2.0,label=r'$N=2$' , marker='>',hold=True) 
+plt.plot(dt_arr[0:6], quad_err_N_4,linewidth=2.0,label=r'$N=4$' , marker='o',hold=True) 
+plt.plot(dt_arr[0:5], quad_err_N_8,linewidth=2.0,label=r'$N=8$'  , marker='v',hold=True) 
+plt.plot(dt_arr[0:4], quad_err_N_16,linewidth=2.0,label=r'$N=16$'  , marker='*',hold=True) 
 
 plt.yscale('log')
 plt.xscale('log')
@@ -157,5 +157,5 @@ plt.xlabel(r'$TOL_{MISC}$',fontsize=14)
 plt.ylabel('relative Quadrature error',fontsize=14) 
 plt.subplots_adjust(wspace=0.6, hspace=0.6, left=0.15, bottom=0.22, right=0.96, top=0.96)
 plt.legend(loc='upper left')
-plt.savefig('./results/relative_quad_error_wrt_MISC_TOL_set2_rich_level2_linear.eps', format='eps', dpi=1000)  
+plt.savefig('./results/relative_quad_error_wrt_MISC_TOL_set2_non_rich_linear.eps', format='eps', dpi=1000)  
 
