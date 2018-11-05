@@ -1,17 +1,17 @@
 We recall that our goal is to compute the expectation in \eqref{BS_formula_rbergomi}. In fact, as seen in Section \ref{sec:Simulation of the rBergomi model}, we need   $2N$ dimensional Gaussian inputs for the used  hybrid  scheme ($N$ is the number of time steps in  the time grid), namely
 \begin{itemize}
-	\item $\{W^1_i\}_{i=1}^N$: The $N$ Gaussian random variables that are defined in Section  \ref{sec:The rBergomi model}.
-	\item $\{W^2_j\}_{j=1}^N$: An artificial introduced $N$ Gaussian random variables that are used for left-rule points in the hybrid scheme, as explained in Section  \ref{sec:Simulation of the rBergomi model}.
+	\item $\mathbf{W}^{(1)}=\{W^{(1)}_i\}_{i=1}^N$: The $N$ Gaussian random variables that are defined in Section  \ref{sec:The rBergomi model}.
+	\item $\mathbf{W}^{(2)}=\{W^{(2)}_j\}_{j=1}^N$: An artificial introduced $N$ Gaussian random variables that are used for left-rule points in the hybrid scheme, as explained in Section  \ref{sec:Simulation of the rBergomi model}.
 \end{itemize}
 
 Thus, we can rewrite \eqref{BS_formula_rbergomi} as 
 
 
 \begin{align}\label{BS_formula_rbergomi_2}
-C_{RB}\left( T, K \right)&=\text{E}\left[C_{BS}\left( S_0 = \operatorname{exp}\left(\rho \int_0^T \sqrt{v_t} dW_t^1 - \frac{1}{2}
+C_{\text{RB}}\left( T, K \right)&=\text{E}\left[C_{\text{BS}}\left( S_0 = \operatorname{exp}\left(\rho \int_0^T \sqrt{v_t} dW_t^1 - \frac{1}{2}
 \rho^2 \int_0^T v_t dt\right),\ k = K, \ \sigma^2 = (1-\rho^2)
 \int_0^T v_t dt \right) \right], \nonumber \\
-&\approx \int_{\rset^{2N}} C_{BS} \left(G(\mathbf{W}^1,\mathbf{W}^2)\right) \rho_{N}(\mathbf{W}^1)  \rho_{N}(\mathbf{W}^2) d\mathbf{W}^1 \mathbf{W}^2
+&\approx \int_{\rset^{2N}} C_{BS} \left(G(\mathbf{W}^{(1)},\mathbf{W}^{(2)})\right) \rho_{N}(\mathbf{W}^{(1)})  \rho_{N}(\mathbf{W}^{(2)}) d\mathbf{W}^{(1)} d\mathbf{W}^{(2)}:=C_{RB}^{N},
 \end{align}
 
 where $G$  maps  $2N$ independent standard Gaussian random inputs to the parameters fed to Black-Scholes formula as in \eqref{BS_formula_rbergomi_2}, and  $\rho_N$ is the multivariate Gaussian density, given by 
@@ -29,12 +29,13 @@ bridge (Bb) construction, with the aim of reducing the effective dimension as  d
 
 
 
-If we denote by $\mathcal{E}_{\text{tot}}$ the total error of computing the  expectation in \eqref{BS_formula_rbergomi} using MISC solver, then we have a natural error decomposition, giving by
+If we denote by $\mathcal{E}_{\text{tot}}$ the total error of approximating the  expectation in \eqref{BS_formula_rbergomi} using the MISC estimator, $Q_N$, then we have a natural error decomposition, giving by
  
-\begin{equation}\label{eq:total_error}
-\mathcal{E} \le \mathcal{E}_Q(\text{TOL}_{\text{MISC}},N) + \mathcal{E}_B(N),
-\end{equation}
-where  $\mathcal{E}_Q$ is the quadrature error, a function of the MISC tolerance:  $\text{TOL}_{\text{MISC}}$ and $N$: the number of time steps,  and  $\mathcal{E}_B$  is the bias, function of $N$.
+\begin{align}\label{eq:total_error}
+\mathcal{E}_{\text{tot}} & \le \abs{C_{\text{RB}}-C_{\text{RB}}^N}+\abs{C_{\text{RB}}^N-Q_{N}}\nonumber\\
+  & \le \mathcal{E}_B(N)+ \mathcal{E}_Q(\text{TOL}_{\text{MISC}},N),
+\end{align}
+where  $\mathcal{E}_Q$ is the quadrature error, a function of the MISC tolerance:  $\text{TOL}_{\text{MISC}}$ and $N$: the number of time steps, $\mathcal{E}_B$  is the bias, function of $N$, and $C_{\text{RB}}^N$ is the biased price computed with $N$ time steps as given by \eqref{BS_formula_rbergomi_2}.
 
 \subsection{The MISC solver}\label{sec:Details of the MISC}
 
@@ -51,7 +52,7 @@ Q(m(\beta)):C^0(\rset) \rightarrow \rset, \quad Q(m(\beta))[f]= \sum_{j=1}^{m(\b
 
 
 
-In our case, and following \eqref{BS_formula_rbergomi_2}, we have a multi-variate integration problem and  we have, given the previous notations,    $f:=C_{\text{BS}}\circ G$, $\mathbf{Y}=(\mathbf{W}^1,\mathbf{W}^2)$, and  $\Gamma=\rset^{2N}$.  Therefore,  we define for any multi-index $\boldsymbol{\beta} \in \nset^{2N}$
+In our case, and following \eqref{BS_formula_rbergomi_2}, we have a multi-variate integration problem and  we have, given the previous notations,    $f:=C_{\text{BS}}\circ G$, $\mathbf{Y}=(\mathbf{W}^{(1)},\mathbf{W}^{(2)})$, and  $\Gamma=\rset^{2N}$.  Therefore,  we define for any multi-index $\boldsymbol{\beta} \in \nset^{2N}$
 
 $$Q^{m(\boldsymbol{\beta})}: \Gamma \rightarrow \rset,\quad  Q^{m(\boldsymbol{\beta})}= \bigotimes_{n = 1}^{2N} Q^{m(\beta_n)} $$
 
@@ -66,74 +67,77 @@ We note that the quadrature points are chosen to optimize the convergence proper
 A direct approximation $\expt{f[\mathbf{Y}]} \approx Q^{m(\boldsymbol{\beta})}[f]$ is not an appropriate option  due to the well-known ``curse of dimensionality" effect. We use MISC as in \cite{haji2016multi}, which is a hierarchical adaptive sparse grids quadrature strategy that uses  stochastic discretizations  and classic sparsification approach to obtain an effective approximation scheme for $\expt{f}$. 
 
  For the sake
-of concreteness, in our setting, we are left with a $2N$-dimensional Gaussian random inputs, which are chosen independently, resulting in  $2N$ numerical parameters for MISC, which we use as the basis of the multi-index construction, reflecting the fact that $W^1_i$ and $W^2_j$ can vary independently of each other regardless of $i \neq j$ or $i = j$. Let $l \in \{1, \ldots, 2N\}$ and set
-\begin{equation}
-p_l \coloneqq
-\begin{cases}
-W^1_l, & 1 \le l \le N,\\
-W^2_{l-N}, & N+1 \le l \le 2N.
-\end{cases}
-\end{equation}
+of concreteness, in our setting, we are left with a $2N$-dimensional Gaussian random inputs, which are chosen independently, resulting in  $2N$ numerical parameters for MISC, which we use as the basis of the multi-index construction. For a multi-index $\boldsymbol{\beta} = (\beta_n)_{n=1}^{2N} \in \mathbb{N}^{2N}$, we denote  by
+$Q_N^{\boldsymbol{\beta}}$,   the result of approximating \eqref{BS_formula_rbergomi_2} with a number of quadrature points  in the $i$-th dimension equal to  $m(\beta_i)$. We further define the set of
+differences $\Delta Q_N^{\boldsymbol{\beta}}$ as follows: for a single index $1 \le i \le 2N$,
+let
+
+%, reflecting the fact that $W^1_i$ and $W^2_j$ can vary independently of each other regardless of $i \neq j$ or $i = j$. 
+%
+%Let $ \in \{1, \ldots, 2N\}$ and set
+%\begin{equation}
+%p_l \coloneqq
+%\begin{cases}
+%W^1_l, & 1 \le l \le N,\\
+%W^2_{l-N}, & N+1 \le l \le 2N.
+%\end{cases}
+%\end{equation}
 
 
 %by $\mathbf{m}(\ell)=(m(l_1),\dots, m(l_{2N}))$ the number of quadrature points used in each direction, and  we denote
 
-For a multi-index $\ell = (l_i)_{i=1}^{2N} \in \mathbb{N}^{2N}$, we denote  by
-$Q_N^\ell \coloneqq Q^{N,m(\ell)}(p_{\ell})$ the result of a discretized
-integral (we emphasize that the ``integral" here is the  time integral, not the expectation integral) using $N$ time steps and with parameters $p_\ell \coloneqq (p_{l_i})_{i=1}^{2N}$, and with a number of quadrature points $m(l_i)$ in the dimension $p_{l_i}$. We further define the set of
-differences $\Delta Q^N_\ell$ as follows: for a single index $1 \le i \le 2N$,
-let
+
 \begin{equation}
-\Delta_i Q_N^\ell \coloneqq \left\{ 
+\Delta_i Q_N^{\boldsymbol{\beta}} \coloneqq \left\{ 
 \aligned 
- Q_N^{\ell} &- Q_N^{\ell'}  \text{ with } \ell' =\ell - e_i, \text{ if } \ell_i>0 \\
- Q_N^\ell &, \quad  \text{ otherwise}
+ Q_N^{\boldsymbol{\beta}} &- Q_N^{\boldsymbol{\beta}'}  \text{ with } \boldsymbol{\beta}' =\boldsymbol{\beta} - e_i, \text{ if } \boldsymbol{\beta}_i>0 \\
+ Q_N^{\boldsymbol{\beta}} &, \quad  \text{ otherwise}
 \endaligned
 \right.
 \end{equation}
 where $e_i$ denotes the $i$th $2N$-dimensional unit vector. Then, $\Delta
-Q_N^\ell$ is defined as
+Q_N^{\boldsymbol{\beta}}$ is defined as
 \begin{equation}
-\Delta Q_N^\ell \coloneqq \left( \prod_{i=1}^{2N} \Delta_i \right) Q_N^\ell.
+\Delta Q_N^{\boldsymbol{\beta}} \coloneqq \left( \prod_{i=1}^{2N} \Delta_i \right) Q_N^{\boldsymbol{\beta}}.
 \end{equation}
 For instance, when $N = 1$, then 
 \begin{multline*}
-	\Delta Q_1^\ell = \Delta_2 \Delta_1 Q_1^{(l_1, l_2)} = \Delta_2\left( Q_1^{(l_1,
-		l_2)} - Q_1^{(l_1-1,l_2)} \right) = \Delta_2 Q_1^{(l_1,
-		l_2)} - \Delta_2 Q_1^{(l_1-1,l_2)} 
-	\\= Q_1^{(l_1, l_2)} - Q_1^{(l_1, l_2-1)} - Q_1^{(l_1-1, l_2)} + Q_1^{(l_1-1, l_2-1)}.
+	\Delta Q_1^{\boldsymbol{\beta}} = \Delta_2 \Delta_1 Q_1^{(\beta_1, \beta_2)} = \Delta_2\left( Q_1^{(\beta_1,
+		\beta_2)} - Q_1^{(\beta_1-1,\beta_2)} \right) = \Delta_2 Q_1^{(\beta_1,
+		\beta_2)} - \Delta_2 Q_1^{(\beta_1-1,\beta_2)} 
+	\\= Q_1^{(\beta_1, \beta_2)} - Q_1^{(\beta_1, \beta_2-1)} - Q_1^{(\beta_1-1, \beta_2)} + Q_1^{(\beta_1-1, \beta_2-1)}.
 \end{multline*}
 
 We have the telescoping property
 \begin{equation}
-Q_N^\infty = \sum_{l_1=0}^\infty \cdots \sum_{l_{2N} = 0}^\infty \Delta
-Q_N^{(l_1, \ldots, l_{2N})} = \sum_{\ell \in \mathbb{N}^{2N}} \Delta Q_N^\ell,
+C_{RB}^{N}=Q_N^\infty = \sum_{\beta_1=0}^\infty \cdots \sum_{\beta_{2N} = 0}^\infty \Delta
+Q_N^{(\beta_1, \ldots, \beta_{2N})} = \sum_{\boldsymbol{\beta} \in \mathbb{N}^{2N}} \Delta Q_N^{\boldsymbol{\beta}}.
 \end{equation}
-where $Q^\infty_N$ is the biased option price computed with $N$ time steps.
 
-As stated before, our goal is to approximate $Q^{\infty}_{N}$. The MISC estimator computed using a set of multi-indices $\mathcal{I}\subset \nset^{2N}$ is given by
+
+ The MISC estimator used for approximating \eqref{BS_formula_rbergomi_2}, and using a set of multi-indices $\mathcal{I}\subset \nset^{2N}$ is given by
 \begin{equation*}
-	Q_N^{\mathcal{I}} \coloneqq \sum_{\ell \in \mathcal{I}} \Delta Q_N^\ell.
+	Q_N^{\mathcal{I}} \coloneqq \sum_{\boldsymbol{\beta} \in \mathcal{I}} \Delta Q_N^{\boldsymbol{\beta}}.
 \end{equation*}
 
 The quadrature error in this  case  is given by
 \begin{equation}\label{eq:quadrature error}
-	\mathcal{E}_Q(\text{TOL}_{\text{MISC}},N) =\abs{Q_N^\infty - Q_N^\mathcal{I}} \le \sum_{\ell \in \mathbb{N}^{2N} \setminus
-		\mathcal{I}} \abs{\Delta Q_N^\ell}.
+	\mathcal{E}_Q(\text{TOL}_{\text{MISC}},N) =\abs{Q_N^\infty - Q_N^\mathcal{I}} \le \sum_{\boldsymbol{\beta} \in \mathbb{N}^{2N} \setminus
+		\mathcal{I}} \abs{\Delta Q_N^{\boldsymbol{\beta}}}.
 \end{equation}
 
-If we denote the computational work at level $\ell = (l_1, \ldots, l_{2N})$ for adding an increment $\Delta Q_N^{\ell}$
-in the telescoping sum by  $\mathcal{W}_N^\ell$, then the  construction of the optimal  $\mathcal{I}$ will be done by profit thresholding, i.e.,
-for a certain threshold value $\bar{T}$, we add a multi-index $\ell$ to
+If we denote the computational work at level $\boldsymbol{\beta} = (\beta_1, \ldots, \beta_{2N})$ for adding an increment $\Delta Q_N^{\boldsymbol{\beta}}$
+in the telescoping sum by  $\mathcal{W_N^{\boldsymbol{\beta}}}$, then the  construction of the optimal  $\mathcal{I}$ will be done by profit thresholding, i.e.,
+for a certain threshold value $\bar{T}$, we add a multi-index $\boldsymbol{\beta}$ to
 $\mathcal{I}$ provided that
 \begin{equation*}
-	\log\left( \frac{\abs{\Delta Q_N^\ell}}{\mathcal{W}_N^ \ell} \right) \le \bar{T}.
+	\log\left( \frac{\abs{\Delta Q_N^{\boldsymbol{\beta}}}}{\mathcal{W}_N^{\boldsymbol{\beta}}} \right) \le \bar{T}.
 \end{equation*}
 
 
 
 \begin{remark}
-	The choice of the hierarchy of quadrature points, $m(\ell)$, is flexible in the MISC solver and can be fixed by the user, depending on the convergence properties of the problem at hand. For instance, for the sake of reproducibility, in our numerical experiments we used a linear hierarchy: $m(l)=4 (l-1)+1,\: 1 \le l $, for results of parameter set $1$ in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. For the remaining parameter sets in table  \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, we used a geometric hierarchy: $m(l)=2^{l-1}+1, \:1 \le l $.
+	The choice of the hierarchy of quadrature points, $m(\boldsymbol{\beta})$, is flexible in the MISC solver and can be fixed by the user, depending on the convergence properties of the problem at hand. For instance, for the sake of reproducibility, in our numerical experiments we used a linear hierarchy: $m(\beta)=4 (\beta-1)+1,\: 1 \le \beta $, for results of parameter set $1$ in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. For the remaining parameter sets in table  \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, we used a geometric hierarchy: $m(\beta)=2^{\beta-1}+1, \:1 \le \beta $.
 \end{remark} 
 
 
@@ -143,13 +147,13 @@ As emphasized in \cite{haji2016multi}, one important requirement to get the opti
 
 \begin{figure}[h!]
 	\centering
-	\begin{subfigure}{.3\textwidth}
+	\begin{subfigure}{.4\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{./figures/rBergomi_mixed_error_rates/without_change_measure/N_4/H_002/first_difference_rbergomi_4steps_H_002_K_1_totally_hierarch_with_rate_W1}
 		\caption{}
 		\label{fig:sub3}
 	\end{subfigure}%
-	\begin{subfigure}{.3\textwidth}
+	\begin{subfigure}{.4\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{./figures/rBergomi_mixed_error_rates/without_change_measure/N_4/H_002/first_difference_rbergomi_4steps_H_002_K_1_totally_hierarch_with_rate_W2}
 		\caption{}
@@ -158,27 +162,27 @@ As emphasized in \cite{haji2016multi}, one important requirement to get the opti
 	
 	
 	
-	\caption{The rate of convergence of  first order differences $\abs{\Delta \text{E}_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$) with respect to $W^1$ (a)  and  with respect to $W^2$ (b), for parameter set $2$ in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. The number of quadrature points used in the $i$-th dimension is $N_i=2^{\beta_i-1}+1$. }
+	\caption{The rate of convergence of  first order differences $\abs{\Delta \text{E}_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$) with respect to $W^{(1)}$ (a)  and  with respect to $W^{(2)}$ (b), for parameter set $2$ in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. The number of quadrature points used in the $i$-th dimension is $N_i=2^{\beta_i-1}+1$. }
 	\label{fig:first_diff_comp_K_1_H_002}
 \end{figure}
 
 
 \begin{figure}[h!]
 	\centering
-	\begin{subfigure}{.3\textwidth}
+	\begin{subfigure}{.4\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{./figures/rBergomi_mixed_error_rates/without_change_measure/N_4/H_002/mixed_difference_order2_rbergomi_4steps_H_002_K_1_totally_hierarch_with_rate_W1}
 		\caption{}
 		\label{fig:sub3}
 	\end{subfigure}%
-	\begin{subfigure}{.3\textwidth}
+	\begin{subfigure}{.4\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{./figures/rBergomi_mixed_error_rates/without_change_measure/N_4/H_002/mixed_difference_order2_rbergomi_4steps_H_002_K_1_totally_hierarch_with_rate_W2}
 		\caption{}
 		\label{fig:sub4}
 	\end{subfigure}
 	
-	\caption{The rate of convergence of  second order differences $\abs{\Delta \text{E}_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$) with respect to $W^1$ (a)  and  with respect to $W^2$ (b), for parameter set $2$ in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. The number of quadrature points used in the $i$-th dimension is $N_i=2^{\beta_i-1}+1$.}
+	\caption{The rate of convergence of  second order differences $\abs{\Delta \text{E}_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$) with respect to $W^{(1)}$ (a)  and  with respect to $W^{(2)}$ (b), for parameter set $2$ in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. The number of quadrature points used in the $i$-th dimension is $N_i=2^{\beta_i-1}+1$.}
 	\label{fig:second_diff_comp_K_1_H_002}
 \end{figure}
 
