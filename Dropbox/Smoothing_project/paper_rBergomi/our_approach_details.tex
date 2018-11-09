@@ -1,7 +1,7 @@
 We recall that our goal is to compute the expectation in \eqref{BS_formula_rbergomi}. In fact, as seen in Section \ref{sec:Simulation of the rBergomi model}, we need   $2N$ dimensional Gaussian inputs for the used  hybrid  scheme ($N$ is the number of time steps in  the time grid), namely
 \begin{itemize}
 	\item $\mathbf{W}^{(1)}=\{W^{(1)}_i\}_{i=1}^N$: The $N$ Gaussian random variables that are defined in Section  \ref{sec:The rBergomi model}.
-	\item $\mathbf{W}^{(2)}=\{W^{(2)}_j\}_{j=1}^N$: An artificial introduced $N$ Gaussian random variables that are used for left-rule points in the hybrid scheme, as explained in Section  \ref{sec:Simulation of the rBergomi model}.
+	\item $\mathbf{W}^{(2)}=\{W^{(2)}_j\}_{j=1}^N$: An artificially introduced $N$ Gaussian random variables that are used for left-rule points in the hybrid scheme, as explained in Section  \ref{sec:Simulation of the rBergomi model}.
 \end{itemize}
 
 Thus, we can rewrite \eqref{BS_formula_rbergomi} as 
@@ -39,13 +39,13 @@ where  $\mathcal{E}_Q$ is the quadrature error, a function of the MISC tolerance
 
 \subsection{The MISC solver}\label{sec:Details of the MISC}
 
-We assume that we want to approximate the expected value $\text{E}[f(Y)]$ of an analytic function $f\colon \Gamma \to \rset$ using a tensorization of quadrature formula over $\Gamma$.
+We assume that we want to approximate the expected value $\text{E}[f(Y)]$ of an analytic function $f\colon \Gamma \to \rset$ using a tensorization of quadrature formulas over $\Gamma$.
 
 To introduce simplified notations, we start with the one-dimensional case. Let us denote by $\beta \geq 1$ an integer referred to as a ``stochastic discretization level", and by $m: \nset \rightarrow \nset$  a strictly increasing function with $m(0)=0$ and $m(1)=1$, that we call  ``level-to-nodes function". At level $\beta$, we consider a set of $m(\beta)$ distinct quadrature points in $\rset$, $\mathcal{H}^{m(\beta)}=\{y^1_\beta,y^2_\beta,\dots,y_\beta^{m(\beta)}\} \subset \rset$, and a set of quadrature weights, $\boldsymbol{\omega}^{m(\beta)}=\{\omega^1_\beta,\omega^2_\beta,\dots,\omega_\beta^{m(\beta)}\}$. We also let $C^0(\rset)$ be the set of real-valued continuous functions over $\rset$. We then define the quadrature operator as
 
 
 \begin{equation}
-Q(m(\beta)):C^0(\rset) \rightarrow \rset, \quad Q(m(\beta))[f]= \sum_{j=1}^{m(\beta)} f(y^j_\beta) \omega_\beta^j.
+Q^{m(\beta)}:C^0(\rset) \rightarrow \rset, \quad Q^{m(\beta)}[f]= \sum_{j=1}^{m(\beta)} f(y^j_\beta) \omega_\beta^j.
 \end{equation}
 
 
@@ -56,15 +56,16 @@ In our case, and following \eqref{BS_formula_rbergomi_2}, we have a multi-variat
 
 $$Q^{m(\boldsymbol{\beta})}: \Gamma \rightarrow \rset,\quad  Q^{m(\boldsymbol{\beta})}= \bigotimes_{n = 1}^{2N} Q^{m(\beta_n)} $$
 
-where the $n$-th quadrature operator is understood to act only on the $n$-th variable of $f$. Practically, we obtain the value of $Q^{m(\boldsymbol{\beta})}[f]$  by considering the tensor grid $\mathcal{T}^{m(\boldsymbol{\beta})}= \prod_{n = 1}^{2N}  \mathcal{H}^{m(\beta_n)}$ with cardinality $\#\mathcal{T}^{m(\boldsymbol{\beta})}=\prod_{n=1}^{2N} m (\beta_n)$ and computing
+where the $n$-th quadrature operator is understood to act only on the $n$-th variable of $f$. Practically, we obtain the value of $Q^{m(\boldsymbol{\beta})}[f]$  by considering the grid $\mathcal{T}^{m(\boldsymbol{\beta})}= \prod_{n = 1}^{2N}  \mathcal{H}^{m(\beta_n)}$ with cardinality $\#\mathcal{T}^{m(\boldsymbol{\beta})}=\prod_{n=1}^{2N} m (\beta_n)$ and computing
 
-$$ Q^{\mathcal{T}^{m(\boldsymbol{\beta})}}[f]= \sum_{j=1}^{\#\mathcal{T}^{m(\boldsymbol{\beta})}} f(\hat{y}_j) \bar{\omega}_j$$
-where $\hat{y}_j \in \mathcal{T}^{m(\boldsymbol{\beta})}$ and $\bar{\omega}_j$ are  products of weights of the univariate quadrature rules.
+$$ Q^{m(\boldsymbol{\beta})}[f]= \sum_{j=1}^{\#\mathcal{T}^{m(\boldsymbol{\beta})}} f(\hat{y}_j) \bar{\omega}_j$$
+where $\hat{y}_j \in \mathcal{T}^{m(\boldsymbol{\beta})}$ and $\bar{\omega}_j$ are  products of weights of the univariate quadrature rules. To simplify notation, hereafter, we replace  $Q^{m(\boldsymbol{\beta})}$ by $Q^{\boldsymbol{\beta}}$.
+
 \begin{remark}
 We note that the quadrature points are chosen to optimize the convergence properties of the quadrature error.  For instance, in our context, since we are dealing with Gaussian densities, using Gauss-Hermite quadrature points is the appropriate choice.
 \end{remark}
 
-A direct approximation $\expt{f[\mathbf{Y}]} \approx Q^{m(\boldsymbol{\beta})}[f]$ is not an appropriate option  due to the well-known ``curse of dimensionality" effect. We use MISC as in \cite{haji2016multi}, which is a hierarchical adaptive sparse grids quadrature strategy that uses  stochastic discretizations  and classic sparsification approach to obtain an effective approximation scheme for $\expt{f}$. 
+A direct approximation $\expt{f[\mathbf{Y}]} \approx Q^{\boldsymbol{\beta}}[f]$ is not an appropriate option  due to the well-known ``curse of dimensionality" effect. We use MISC as in \cite{haji2016multi}, which is a hierarchical adaptive sparse grids quadrature strategy that uses  stochastic discretizations  and classic sparsification approach to obtain an effective approximation scheme for $\expt{f}$. 
 
  For the sake
 of concreteness, in our setting, we are left with a $2N$-dimensional Gaussian random inputs, which are chosen independently, resulting in  $2N$ numerical parameters for MISC, which we use as the basis of the multi-index construction. For a multi-index $\boldsymbol{\beta} = (\beta_n)_{n=1}^{2N} \in \mathbb{N}^{2N}$, we denote  by
@@ -72,19 +73,7 @@ $Q_N^{\boldsymbol{\beta}}$,   the result of approximating \eqref{BS_formula_rber
 differences $\Delta Q_N^{\boldsymbol{\beta}}$ as follows: for a single index $1 \le i \le 2N$,
 let
 
-%, reflecting the fact that $W^1_i$ and $W^2_j$ can vary independently of each other regardless of $i \neq j$ or $i = j$. 
-%
-%Let $ \in \{1, \ldots, 2N\}$ and set
-%\begin{equation}
-%p_l \coloneqq
-%\begin{cases}
-%W^1_l, & 1 \le l \le N,\\
-%W^2_{l-N}, & N+1 \le l \le 2N.
-%\end{cases}
-%\end{equation}
 
-
-%by $\mathbf{m}(\ell)=(m(l_1),\dots, m(l_{2N}))$ the number of quadrature points used in each direction, and  we denote
 
 
 \begin{equation}
@@ -108,7 +97,7 @@ For instance, when $N = 1$, then
 	\\= Q_1^{(\beta_1, \beta_2)} - Q_1^{(\beta_1, \beta_2-1)} - Q_1^{(\beta_1-1, \beta_2)} + Q_1^{(\beta_1-1, \beta_2-1)}.
 \end{multline*}
 
-We have the telescoping property
+Given the definition of $C_{RB}^{N}$ by \eqref{BS_formula_rbergomi_2}, we have the telescoping property
 \begin{equation}
 C_{RB}^{N}=Q_N^\infty = \sum_{\beta_1=0}^\infty \cdots \sum_{\beta_{2N} = 0}^\infty \Delta
 Q_N^{(\beta_1, \ldots, \beta_{2N})} = \sum_{\boldsymbol{\beta} \in \mathbb{N}^{2N}} \Delta Q_N^{\boldsymbol{\beta}}.
@@ -126,13 +115,23 @@ The quadrature error in this  case  is given by
 		\mathcal{I}} \abs{\Delta Q_N^{\boldsymbol{\beta}}}.
 \end{equation}
 
-If we denote the computational work at level $\boldsymbol{\beta} = (\beta_1, \ldots, \beta_{2N})$ for adding an increment $\Delta Q_N^{\boldsymbol{\beta}}$
-in the telescoping sum by  $\mathcal{W_N^{\boldsymbol{\beta}}}$, then the  construction of the optimal  $\mathcal{I}$ will be done by profit thresholding, i.e.,
-for a certain threshold value $\bar{T}$, we add a multi-index $\boldsymbol{\beta}$ to
-$\mathcal{I}$ provided that
-\begin{equation*}
-	\log\left( \frac{\abs{\Delta Q_N^{\boldsymbol{\beta}}}}{\mathcal{W}_N^{\boldsymbol{\beta}}} \right) \le \bar{T}.
-\end{equation*}
+
+We define the work contribution, $\Delta \mathcal{W}^{\boldsymbol{\beta}}$, to be the computational cost  required to add  $\Delta Q_N^{\boldsymbol{\beta}}$ to $Q^{\mathcal{I}}_N$, and the error contribution, $\Delta E^{\boldsymbol{\beta}}$, to be  a measure of how much the quadrature error, defined in \eqref{eq:quadrature error}, would decrease once $\Delta Q_N^{\boldsymbol{\beta}}$  has been added to  $Q^{\mathcal{I}}_N$, that is 
+
+
+\begin{align}\label{eq:Work_error_contributions}
+\Delta \mathcal{W}_{\boldsymbol{\beta}} &= \text{Work}[Q^{\mathcal{I} \cup \{\boldsymbol{\beta}\}}_N]-\text{Work}[Q^{\mathcal{I}}_N] \nonumber\\
+\Delta E_{\boldsymbol{\beta}} &= \abs{Q^{\mathcal{I} \cup \{\boldsymbol{\beta}\}}_N]-Q^{\mathcal{I}}_N}.
+\end{align}
+
+
+
+ The  construction of the optimal  $\mathcal{I}$ will be done by profit thresholding, that is, for a certain threshold value $\bar{T}$, and a profit of a hierarchical surplus defined by
+ \begin{equation*}
+ P_{\boldsymbol{\beta}}= \frac{\abs{\Delta Q_N^{\boldsymbol{\beta}}}}{\Delta\mathcal{W}_N^{\boldsymbol{\beta}}},
+ \end{equation*}
+  the optimal index set  $\mathcal{I}$  for MISC  is given by 
+ $\mathcal{I}=\{\boldsymbol{\beta}: P_{\boldsymbol{\beta}}	 \ge \bar{T}\}$.
 
 
 
@@ -142,7 +141,7 @@ $\mathcal{I}$ provided that
 
 
 \begin{remark}
-As emphasized in \cite{haji2016multi}, one important requirement to get the optimal performance of MISC solver is to check  the convergence of first and mixed differences operators (See \cite{haji2016multi} for details). We checked this requirement in all our numerical experiments, and for illustration, we show in figures (\ref{fig:first_diff_comp_K_1_H_002}, \ref{fig:second_diff_comp_K_1_H_002}), the convergence of first and second order differences for the case of parameter set $2$ in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. 
+As emphasized in \cite{haji2016multi}, one important requirement to get the optimal performance of MISC solver is to check  the error convergence, defined by \eqref{eq:Work_error_contributions},  of first and mixed differences operators, (see \cite{haji2016multi} for details). We checked this requirement in all our numerical experiments, and for illustration, we show in figures (\ref{fig:first_diff_comp_K_1_H_002}, \ref{fig:second_diff_comp_K_1_H_002}), the error convergence of first and second order differences for the case of parameter set $2$ in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}.  These plots show that: i) $\Delta \text{E}_{\boldsymbol{\beta}}$ decreases exponentially fast with respect to $\beta_i$, and ii) $\Delta \text{E}_{\boldsymbol{\beta}}$ has a  product structure since  we  observe  a faster error decay for second differences compared to corresponding first differences operators.
 \end{remark} 
 
 \begin{figure}[h!]
@@ -162,7 +161,7 @@ As emphasized in \cite{haji2016multi}, one important requirement to get the opti
 	
 	
 	
-	\caption{The rate of convergence of  first order differences $\abs{\Delta \text{E}_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$) with respect to $W^{(1)}$ (a)  and  with respect to $W^{(2)}$ (b), for parameter set $2$ in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. The number of quadrature points used in the $i$-th dimension is $N_i=2^{\beta_i-1}+1$. }
+	\caption{The rate of error convergence of first order differences $\abs{\Delta \text{E}_{\boldsymbol{\beta}}}$ ($\boldsymbol{\beta}=\mathbf{1}+k \bar{\boldsymbol{\beta}}$) with respect to $\mathbf{W}^{(1)}$ (a)  and  with respect to $\mathbf{W}^{(2)}$ (b), for parameter set $2$ in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. The number of quadrature points used in the $i$-th dimension is $N_i=2^{\beta_i-1}+1$. }
 	\label{fig:first_diff_comp_K_1_H_002}
 \end{figure}
 
@@ -182,7 +181,7 @@ As emphasized in \cite{haji2016multi}, one important requirement to get the opti
 		\label{fig:sub4}
 	\end{subfigure}
 	
-	\caption{The rate of convergence of  second order differences $\abs{\Delta \text{E}_{\beta}}$ ($\beta=\mathbf{1}+k \bar{\beta}$) with respect to $W^{(1)}$ (a)  and  with respect to $W^{(2)}$ (b), for parameter set $2$ in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. The number of quadrature points used in the $i$-th dimension is $N_i=2^{\beta_i-1}+1$.}
+	\caption{The rate of error convergence of  second order differences $\abs{\Delta \text{E}_{\boldsymbol{\beta}}}$ ($\boldsymbol{\beta}=\mathbf{1}+k \bar{\boldsymbol{\beta}}$) with respect to $\mathbf{W}^{(1)}$ (a)  and  with respect to $\mathbf{W}^{(2)}$ (b), for parameter set $2$ in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. The number of quadrature points used in the $i$-th dimension is $N_i=2^{\beta_i-1}+1$.}
 	\label{fig:second_diff_comp_K_1_H_002}
 \end{figure}
 
@@ -206,14 +205,17 @@ Let us denote $\{t_i\}_{i=0}^{N}$ the grid of time steps, then the Bb constructi
 \begin{equation}
 B_{t_j}=(1-\rho) B_{t_i}+\rho B_{t_k}+ \sqrt{\rho (1-\rho)(k-i) \Delta t} z, \: z \sim \mathcal{N}(0,1) \COMMA
 \end{equation}
-where $\rho=\frac{j-i}{k-i}$.  In particular, if $N$ is a power of $2$, then given $B_0=0$, Bb generates the Brownian motion at times $T, T/2,T/4,3T/4,\dots$ according
-\begin{align}\label{eq:BB construction}
-	B_T&=\sqrt{T}z_1\nonumber\\
-	B_{T/2}&= \frac{1}{2}(B_{0}+B_{T})+\sqrt{T/4}z_2= \frac{\sqrt{T}}{2} z_1+\frac{\sqrt{T}}{2} z_2\nonumber\\
-	B_{T/4}&=\frac{1}{2} (B_{0}+B_{T/2})+\sqrt{T/8}z_3= \frac{\sqrt{T}}{4} z_1+\frac{\sqrt{T}}{4} z_2+\sqrt{T/8}z_3\nonumber\\
-	\vdots \nonumber\\
-\end{align}
-where $\{z_j\}_{j=1}^{N}$ are independent standard normal variables.  In Bb construction scheme given by \eqref{eq:BB construction}, the most important values that determine the large scale structure of Brownian motion are the first components of $\mathbf{z} = (z_1,\dots,z_N)$.
+where $\rho=\frac{j-i}{k-i}$.  
+
+
+%In particular, if $N$ is a power of $2$, then given $B_0=0$, Bb generates the Brownian motion at times $T, T/2,T/4,3T/4,\dots$ according
+%\begin{align}\label{eq:BB construction}
+%	B_T&=\sqrt{T}z_1\nonumber\\
+%	B_{T/2}&= \frac{1}{2}(B_{0}+B_{T})+\sqrt{T/4}z_2= \frac{\sqrt{T}}{2} z_1+\frac{\sqrt{T}}{2} z_2\nonumber\\
+%	B_{T/4}&=\frac{1}{2} (B_{0}+B_{T/2})+\sqrt{T/8}z_3= \frac{\sqrt{T}}{4} z_1+\frac{\sqrt{T}}{4} z_2+\sqrt{T/8}z_3\nonumber\\
+%	\vdots \nonumber\\
+%\end{align}
+%where $\{z_j\}_{j=1}^{N}$ are independent standard normal variables.  In Bb construction scheme given by \eqref{eq:BB construction}, the most important values that determine the large scale structure of Brownian motion are the first components of $\mathbf{z} = (z_1,\dots,z_N)$.
 
 
 
@@ -265,9 +267,9 @@ I(J,K_\text{R})=\frac{2^{K_\text{R}}\left[I(J,K_\text{R}-1)-I(J-1,K_\text{R}-1)\
 
 
 
-%\begin{remark}
-%	We note that we did not apply Richardson extrapolation for all our numerical experiments. In fact, as it will be illustrated later in Section \ref{sec:Numerical tests}, for some parameter constellations, we can get a satisfactory small error tolerance even without applying a level $1$ of Richardson extrapolation. Those cases basically are characterized by a sufficiently small bias in the pre-asymptotic regime.	
-%\end{remark}
+\begin{remark}
+We emphasize that through our work, we are interested in the pre-asymptotic regime (small number of time steps), and the use of Richardson extrapolation is justified by our observed experimental results in that regime (see Section \ref{sec:Weak error plots_no_change}),  which show an order $1$ of convergence for the weak error. However, we do not claim that the observed rates will scale well in the asymptotic regime. 
+\end{remark}
 
 
 
