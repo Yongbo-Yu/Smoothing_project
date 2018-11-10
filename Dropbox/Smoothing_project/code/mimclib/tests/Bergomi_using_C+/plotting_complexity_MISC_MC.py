@@ -12,7 +12,7 @@ from matplotlib.ticker import MaxNLocator
 
 # z_MC= np.polyfit(np.log(MC_err), np.log(MC_time), 1)
 # fit_MC=np.exp(z_MC[0]*np.log(MC_err))
-# print z_MC[0]
+# # print z_MC[0]
 
 # MISC_err=np.array([0.0182,0.0086,0.0050,0.0016 ])
 # MISC_time=np.array([ 1,6,24,92])
@@ -183,32 +183,32 @@ from matplotlib.ticker import MaxNLocator
 ##############################################################################
 # # #Case for parameter set 7, non rich
 
-# MC_err=np.array([0.0657,0.0337,0.0209,0.0136])       	
+MC_err=np.array([0.0657,0.0337,0.0209,0.0136])       	
 	
-# MC_time=np.array([ 154,229,420,938])  
+MC_time=np.array([ 154,229,420,938])  
 		
 
-# z_MC= np.polyfit(np.log(MC_err), np.log(MC_time), 1)
-# fit_MC=np.exp(z_MC[0]*np.log(MC_err))
-# print z_MC[0]
+z_MC= np.polyfit(np.log(MC_err), np.log(MC_time), 1)
+fit_MC=np.exp(z_MC[0]*np.log(MC_err))
+print z_MC[0]
 
-# MISC_err=np.array([0.0655,0.0334,0.0205,0.0135])
-# MISC_time=np.array([ 0.7,4,26,1984])
+MISC_err=np.array([0.0655,0.0334,0.0205,0.0135])
+MISC_time=np.array([ 0.7,4,26,1984])
 
-# z_MISC= np.polyfit(np.log(MISC_err), np.log(MISC_time), 1)
-# fit_MISC=np.exp(z_MISC[0]*np.log(MISC_err))
-# print z_MISC[0]
+z_MISC= np.polyfit(np.log(MISC_err), np.log(MISC_time), 1)
+fit_MISC=np.exp(z_MISC[0]*np.log(MISC_err))
+print z_MISC[0]
 
 
 
 ##############################################################################
 # # # #Case for parameter set 2, non rich+linear
-MISC_err=np.array([0.2928,0.1595])
-MISC_time=np.array([ 5,333])
+# MISC_err=np.array([0.2928,0.1595])
+# MISC_time=np.array([ 5,333])
 
-z_MISC= np.polyfit(np.log(MISC_err), np.log(MISC_time), 1)
-fit_MISC=np.exp(z_MISC[0]*np.log(MISC_err))
-print z_MISC[0]
+# z_MISC= np.polyfit(np.log(MISC_err), np.log(MISC_time), 1)
+# fit_MISC=np.exp(z_MISC[0]*np.log(MISC_err))
+# print z_MISC[0]
 
 # # # # #Case for parameter set 2, with rich+linear
 # # MC_rich_err=np.array([ 1.0288,0.0787,0.0250  ])
@@ -218,22 +218,22 @@ print z_MISC[0]
 # # fit_MC_rich=np.exp(z_MC_rich[0]*np.log(MC_rich_err))
 # # print z_MC_rich[0]
 
-MISC_rich_err=np.array([1.0288,0.0787,0.0250 ])
-MISC_rich_time=np.array([ 3.5,6,37])
+# MISC_rich_err=np.array([1.0288,0.0787,0.0250 ])
+# MISC_rich_time=np.array([ 3.5,6,37])
 
-z_MISC_rich= np.polyfit(np.log(MISC_rich_err), np.log(MISC_rich_time), 1)
-fit_MISC_rich=np.exp(z_MISC_rich[0]*np.log(MISC_rich_err))
-print z_MISC_rich[0]
+# z_MISC_rich= np.polyfit(np.log(MISC_rich_err), np.log(MISC_rich_time), 1)
+# fit_MISC_rich=np.exp(z_MISC_rich[0]*np.log(MISC_rich_err))
+# print z_MISC_rich[0]
 
 # # # # #Case for parameter set 2, with rich(level2)+linear
 
 
-MISC_rich_2_err=np.array([0.2689,0.0096])
-MISC_rich_2_time=np.array([ 9,74])
+# MISC_rich_2_err=np.array([0.2689,0.0096])
+# MISC_rich_2_time=np.array([ 9,74])
 
-z_MISC_rich_2= np.polyfit(np.log(MISC_rich_2_err), np.log(MISC_rich_2_time), 1)
-fit_MISC_rich_2=np.exp(z_MISC_rich_2[0]*np.log(MISC_rich_2_err))
-print z_MISC_rich_2[0]
+# z_MISC_rich_2= np.polyfit(np.log(MISC_rich_2_err), np.log(MISC_rich_2_time), 1)
+# fit_MISC_rich_2=np.exp(z_MISC_rich_2[0]*np.log(MISC_rich_2_err))
+# print z_MISC_rich_2[0]
 
 ##############################################################################
 
@@ -261,20 +261,20 @@ print z_MISC_rich_2[0]
 
 fig = plt.figure()
 
-# plt.plot(MC_err,MC_time,linewidth=2.0,label='MC' , marker='>',hold=True) 
-# plt.plot(MC_err, fit_MC*1000,linewidth=2.0,label=r'rate= %s' % format(z_MC[0]  , '.2f'), linestyle = '--')
+plt.plot(MC_err,MC_time,linewidth=2.0,label='MC' , marker='>',hold=True) 
+plt.plot(MC_err, fit_MC*10,linewidth=2.0,label=r'rate= %s' % format(z_MC[0]  , '.2f'), linestyle = '--')
 
 plt.plot(MISC_err,MISC_time,linewidth=2.0,label='MISC'  , marker='v',hold=True) 
-plt.plot(MISC_err, fit_MISC*10,linewidth=2.0,label=r'rate= %s' % format(z_MISC[0]  , '.2f'), linestyle = '--')
+plt.plot(MISC_err, fit_MISC*0.000001,linewidth=2.0,label=r'rate= %s' % format(z_MISC[0]  , '.2f'), linestyle = '--')
 
 # plt.plot(MC_rich_err,MC_rich_time,linewidth=2.0,label='MC+Rich' , marker='>',hold=True) 
 # plt.plot(MC_rich_err, fit_MC_rich*10,linewidth=2.0,label=r'rate= %s' % format(z_MC_rich[0]  , '.2f'), linestyle = '--')
 
-plt.plot(MISC_rich_err,MISC_rich_time,linewidth=2.0,label='MISC+Rich(level 1)'  , marker='v',hold=True) 
-plt.plot(MISC_rich_err, fit_MISC_rich*10,linewidth=2.0,label=r'rate= %s' % format(z_MISC_rich[0]  , '.2f'), linestyle = '--')
+# plt.plot(MISC_rich_err,MISC_rich_time,linewidth=2.0,label='MISC+Rich(level 1)'  , marker='v',hold=True) 
+# plt.plot(MISC_rich_err, fit_MISC_rich*0.0005,linewidth=2.0,label=r'rate= %s' % format(z_MISC_rich[0]  , '.2f'), linestyle = '--')
 
-plt.plot(MISC_rich_2_err,MISC_rich_2_time,linewidth=2.0,label='MISC+Rich(level 2)'  , marker='v',hold=True) 
-plt.plot(MISC_rich_2_err, fit_MISC_rich_2*10,linewidth=2.0,label=r'rate= %s' % format(z_MISC_rich_2[0]  , '.2f'), linestyle = '--')
+# plt.plot(MISC_rich_2_err,MISC_rich_2_time,linewidth=2.0,label='MISC+Rich(level 2)'  , marker='v',hold=True) 
+# plt.plot(MISC_rich_2_err, fit_MISC_rich_2*10,linewidth=2.0,label=r'rate= %s' % format(z_MISC_rich_2[0]  , '.2f'), linestyle = '--')
 
 plt.yscale('log')
 plt.xscale('log')
@@ -282,5 +282,5 @@ plt.xlabel('Error',fontsize=14)
 
 plt.ylabel('CPU time',fontsize=14) 
 plt.subplots_adjust(wspace=0.6, hspace=0.6, left=0.15, bottom=0.22, right=0.96, top=0.96)
-plt.legend(loc='upper left')
-plt.savefig('./results/error_vs_time_set2_comparison_linear.eps', format='eps', dpi=1000)  
+plt.legend(loc='upper right')
+plt.savefig('./results/error_vs_time_set7.eps', format='eps', dpi=1000)  
