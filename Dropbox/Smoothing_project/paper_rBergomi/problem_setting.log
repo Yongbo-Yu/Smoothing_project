@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  10 NOV 2018 10:16
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  11 NOV 2018 09:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2198,26 +2198,6 @@ Missing character: There is no g in font nullfont!
 Missing character: There is no a in font nullfont!
 Missing character: There is no l in font nullfont!
 Missing character: There is no e in font nullfont!
-Missing character: There is no , in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no h in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no r in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no f in font nullfont!
-Missing character: There is no o in font nullfont!
-Missing character: There is no r in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no n in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no g in font nullfont!
-Missing character: There is no r in font nullfont!
-Missing character: There is no a in font nullfont!
-Missing character: There is no b in font nullfont!
-Missing character: There is no l in font nullfont!
-Missing character: There is no e in font nullfont!
 Missing character: There is no . in font nullfont!
 Missing character: There is no W in font nullfont!
 Missing character: There is no e in font nullfont!
@@ -3958,23 +3938,13 @@ Missing character: There is no o in font nullfont!
 Missing character: There is no n in font nullfont!
 Missing character: There is no o in font nullfont!
 Missing character: There is no f in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no h in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no r in font nullfont!
-Missing character: There is no m in font nullfont!
-Missing character: There is no s in font nullfont!
 Missing character: There is no a in font nullfont!
 Missing character: There is no n in font nullfont!
 Missing character: There is no d in font nullfont!
-Missing character: There is no a in font nullfont!
-Missing character: There is no s in font nullfont!
 Missing character: There is no i in font nullfont!
 Missing character: There is no n in font nullfont!
 ! Undefined control sequence.
-l.90 ...$ and $V=\int_{0}^{T} v_t dt$ as in \eqref
+l.90 ...t^1$ and $V=\int_{0}^{T} v_t dt$ in \eqref
                                                   {BS_formula_rbergomi}, mai...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -3987,13 +3957,13 @@ Missing character: There is no S in font nullfont!
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.90 ...d $V=\int_{0}^{T} v_t dt$ as in \eqref{BS_
+l.90 ... and $V=\int_{0}^{T} v_t dt$ in \eqref{BS_
                                                   formula_rbergomi}, mainly ...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Extra }, or forgotten $.
-l.90 ... v_t dt$ as in \eqref{BS_formula_rbergomi}
+l.90 ...{T} v_t dt$ in \eqref{BS_formula_rbergomi}
                                                   , mainly because of the si...
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -4676,7 +4646,6 @@ Missing character: There is no f in font nullfont!
 Missing character: There is no o in font nullfont!
 Missing character: There is no r in font nullfont!
 Missing character: There is no m in font nullfont!
-Missing character: There is no s in font nullfont!
 Missing character: There is no a in font nullfont!
 Missing character: There is no ( in font nullfont!
 Missing character: There is no ) in font nullfont!
@@ -4742,8 +4711,8 @@ Missing character: There is no t in font nullfont!
 Missing character: There is no r in font nullfont!
 Missing character: There is no i in font nullfont!
 Missing character: There is no x in font nullfont!
-Missing character: There is no . in font nullfont!
-Missing character: There is no O in font nullfont!
+Missing character: There is no , in font nullfont!
+Missing character: There is no o in font nullfont!
 Missing character: There is no n in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no c in font nullfont!
@@ -4845,6 +4814,7 @@ Missing character: There is no n in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no d in font nullfont!
+Missing character: There is no a in font nullfont!
 Missing character: There is no - in font nullfont!
 Missing character: There is no d in font nullfont!
 Missing character: There is no i in font nullfont!
@@ -5065,13 +5035,8 @@ Overfull \hbox (122.95262pt too wide) in paragraph at lines 94--96
  []
 
 
-Overfull \hbox (12.77782pt too wide) in paragraph at lines 94--96
-\/cmr/m/n/10 2 \OMS/cmsy/m/n/10 ^^B
- []
-
-
-Overfull \hbox (9.12497pt too wide) in paragraph at lines 94--96
-\OML/cmm/m/it/10 N$
+Overfull \hbox (14.12498pt too wide) in paragraph at lines 94--96
+\/cmr/m/n/10 2\OML/cmm/m/it/10 N$
  []
 
 
@@ -5582,13 +5547,8 @@ Overfull \hbox (14.66806pt too wide) in paragraph at lines 97--101
  []
 
 
-Overfull \hbox (12.77782pt too wide) in paragraph at lines 97--101
-\/cmr/m/n/10 2 \OMS/cmsy/m/n/10 ^^B
- []
-
-
-Overfull \hbox (9.12497pt too wide) in paragraph at lines 97--101
-\OML/cmm/m/it/10 N$
+Overfull \hbox (14.12498pt too wide) in paragraph at lines 97--101
+\/cmr/m/n/10 2\OML/cmm/m/it/10 N$
  []
 
 
@@ -5991,12 +5951,50 @@ Overfull \hbox (8.88892pt too wide) in paragraph at lines 102--103
  []
 
 
-Overfull \hbox (20.0pt too wide) in paragraph at lines 104--104
-[] 
- []
+! LaTeX Error: Environment align undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.104 \begin{align}
+                   \label{eq:Hybrid_scheme}
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.105 \widetilde
+                {W}^H_{\frac{i}{N}} \approx \bar{W}^H_{\frac{i}{N}}&:= \sqrt...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Misplaced alignment tab character &.
+l.105 ...c{i}{N}} \approx \bar{W}^H_{\frac{i}{N}}&
+                                                  := \sqrt{2H} \left(\int_{\...
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+<recently read> &
+                 
+l.106 &
+       = \sqrt{2H} \left(  W^2_i+\sum_{k=2}^{i} \left(\frac{b_k}{N}\right)^{...
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
 
 ! Undefined control sequence.
-l.105 ...-W_{\frac{i-k}{N}}^1\right)\right) \COMMA
+l.106 ...1-W_{\frac{i-k}{N}}^1\right)\right)\COMMA
                                                   
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -6005,9 +6003,28 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-Overfull \hbox (375.91008pt too wide) detected at line 106
-[][] \OMS/cmsy/m/n/10 ^^Y [] \/cmr/m/n/10 := [] []
- []
+! LaTeX Error: \begin{document} ended by \end{align}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.107 \end{align}
+                 
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.107 \end{align}
+                 
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
 
 Missing character: There is no w in font nullfont!
 Missing character: There is no h in font nullfont!
@@ -6040,12 +6057,37 @@ Missing character: There is no a in font nullfont!
 Missing character: There is no n in font nullfont!
 Missing character: There is no d in font nullfont!
 
-Overfull \hbox (9.12497pt too wide) in paragraph at lines 106--108
- $\OML/cmm/m/it/10 N$
+Overfull \hbox (48.97359pt too wide) in paragraph at lines 105--109
+[]$[] \OMS/cmsy/m/n/10 ^^Y
+ []
+
+
+Overfull \hbox (31.75137pt too wide) in paragraph at lines 105--109
+[] \/cmr/m/n/10 :=
+ []
+
+
+Overfull \hbox (308.71034pt too wide) in paragraph at lines 105--109
+[] [] [] 
+ []
+
+
+Overfull \hbox (7.7778pt too wide) in paragraph at lines 105--109
+\/cmr/m/n/10 =
+ []
+
+
+Overfull \hbox (224.19731pt too wide) in paragraph at lines 105--109
+[] []$
+ []
+
+
+Overfull \hbox (9.12497pt too wide) in paragraph at lines 105--109
+\OML/cmm/m/it/10 N$
  []
 
 ! Undefined control sequence.
-l.108 ...\right)^{\frac{1}{H-\frac{1}{2}}} \PERIOD
+l.109 ...\right)^{\frac{1}{H-\frac{1}{2}}} \PERIOD
                                                   $$
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -6054,7 +6096,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-Overfull \hbox (150.91614pt too wide) detected at line 108
+Overfull \hbox (150.91614pt too wide) detected at line 109
 \OML/cmm/m/it/10 b[] \/cmr/m/n/10 := [][]
  []
 
@@ -6067,7 +6109,7 @@ Missing character: There is no m in font nullfont!
 Missing character: There is no i in font nullfont!
 Missing character: There is no n in font nullfont!
 ! Undefined control sequence.
-l.110 The sum in \eqref
+l.111 The sum in \eqref
                        {eq:Hybrid_scheme} requires the most computational ef...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -6087,13 +6129,13 @@ Missing character: There is no d in font nullfont!
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.110 The sum in \eqref{eq:Hybrid_
+l.111 The sum in \eqref{eq:Hybrid_
                                   scheme} requires the most computational ef...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Extra }, or forgotten $.
-l.110 The sum in \eqref{eq:Hybrid_scheme}
+l.111 The sum in \eqref{eq:Hybrid_scheme}
                                           requires the most computational ef...
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -6102,7 +6144,7 @@ the way to recover is to insert both the forgotten and the
 deleted material, e.g., by typing `I$}'.
 
 ! Undefined control sequence.
-l.110 ...fort in the simulation. Given that \eqref
+l.111 ...fort in the simulation. Given that \eqref
                                                   {eq:Hybrid_scheme} can be ...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -6114,7 +6156,7 @@ and I'll forget about whatever was undefined.
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
                                                   \space undefined\on@line .
-l.110 ...volution  (see \cite{bennedsen2017hybrid}
+l.111 ...volution  (see \cite{bennedsen2017hybrid}
                                                   ), we employ the fast Four...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -6124,10 +6166,10 @@ and I'll forget about whatever was undefined.
 
 
 LaTeX Warning: Citation `bennedsen2017hybrid' on page  undefined on input line 
-110.
+111.
 
 ! Undefined control sequence.
-l.110 ... to evaluate it, which results in  $\Ordo
+l.111 ... to evaluate it, which results in  $\Ordo
                                                   {N \log N}$ floating point...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -6139,13 +6181,13 @@ Missing character: There is no N in font nullfont!
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.110 ...luate it, which results in  $\Ordo{N \log
+l.111 ...luate it, which results in  $\Ordo{N \log
                                                    N}$ floating point operat...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Extra }, or forgotten $.
-l.110 ...te it, which results in  $\Ordo{N \log N}
+l.111 ...te it, which results in  $\Ordo{N \log N}
                                                   $ floating point operations.
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -6178,12 +6220,12 @@ Missing character: There is no n in font nullfont!
 Missing character: There is no s in font nullfont!
 Missing character: There is no . in font nullfont!
 
-Overfull \hbox (20.0pt too wide) in paragraph at lines 110--111
+Overfull \hbox (20.0pt too wide) in paragraph at lines 111--112
 []
  []
 
 
-Overfull \hbox (869.4081pt too wide) in paragraph at lines 110--111
+Overfull \hbox (869.4081pt too wide) in paragraph at lines 111--112
 []\OML/cmm/m/it/10 chemerequiresthemostcomputationaleffortinthesimulation:Given
 that[]canbeseenasdiscreteconvolution\/cmr/m/n/10 (\OML/cmm/m/it/10 see\/cmr/m/n
 /10 [[]])\OML/cmm/m/it/10 ; weemploythefastFouriertransformtoevaluateit; whichr
@@ -6191,7 +6233,7 @@ esultsin$
  []
 
 
-Overfull \hbox (23.70828pt too wide) in paragraph at lines 110--111
+Overfull \hbox (23.70828pt too wide) in paragraph at lines 111--112
 [] \OML/cmm/m/it/10 N$
  []
 
@@ -6383,9 +6425,9 @@ Missing character: There is no . in font nullfont!
 Here is how much of TeX's memory you used:
  44 strings out of 493014
  588 string characters out of 6133351
- 62601 words of memory out of 5000000
+ 63601 words of memory out of 5000000
  3680 multiletter control sequences out of 15000+600000
  4913 words of font info for 18 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 20i,5n,26p,672b,156s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 20i,5n,26p,661b,156s stack positions out of 5000i,500n,10000p,200000b,80000s
 !  ==> Fatal error occurred, no output PDF file produced!
