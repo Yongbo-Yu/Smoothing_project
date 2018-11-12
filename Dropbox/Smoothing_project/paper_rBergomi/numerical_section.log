@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  11 NOV 2018 10:40
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  12 NOV 2018 10:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2457,6 +2457,15 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
+l.136 \red
+          {
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
 l.137 \subsection
                  {Comparing the different  errors and computational time for...
 The control sequence at the end of the top line
@@ -3248,11 +3257,7 @@ Missing character: There is no i in font nullfont!
 Missing character: There is no n in font nullfont!
 Missing character: There is no g in font nullfont!
 Missing character: There is no a in font nullfont!
-Missing character: There is no - in font nullfont!
-Missing character: There is no c in font nullfont!
-Missing character: There is no o in font nullfont!
-Missing character: There is no r in font nullfont!
-Missing character: There is no e in font nullfont!
+Missing character: There is no n in font nullfont!
 Missing character: There is no I in font nullfont!
 Missing character: There is no n in font nullfont!
 Missing character: There is no t in font nullfont!
@@ -3311,11 +3316,6 @@ Overfull \hbox (48.33334pt too wide) in paragraph at lines 141--142
 
 Overfull \hbox (10.86105pt too wide) in paragraph at lines 141--142
 []
- []
-
-
-Overfull \hbox (10.00003pt too wide) in paragraph at lines 141--142
-\OT1/cmr/m/n/10 40$
  []
 
 
@@ -17066,9 +17066,9 @@ and I'll forget about whatever was undefined.
 Here is how much of TeX's memory you used:
  74 strings out of 493014
  4412 string characters out of 6133351
- 90201 words of memory out of 5000000
+ 90236 words of memory out of 5000000
  3709 multiletter control sequences out of 15000+600000
  4567 words of font info for 17 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 19i,11n,19p,2746b,177s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 19i,11n,19p,2746b,191s stack positions out of 5000i,500n,10000p,200000b,80000s
 !  ==> Fatal error occurred, no output PDF file produced!

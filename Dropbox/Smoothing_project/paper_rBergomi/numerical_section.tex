@@ -133,12 +133,12 @@ We emphasize that the reported weak rates correspond to the pre-asymptotic regim
 
 
 
-
+\red{
 \subsection{Comparing the different  errors and computational time for MC and MISC}\label{sec:Comparing different  errors and complexity for MC and MISC}
 
 
 
-In this Section, we conduct a comparison between MC and MISC in terms of errors and computational time. we show tables and plots reporting  the different relative errors involved in MC method (bias and statistical error), and in MISC (bias and quadrature error).  Fixing a  sufficiently small error tolerance in the price estimates,  we also compare the computational time needed for both methods to meet the desired error tolerance. The results are reported for the different sets of parameters defined in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, and we consider   a number of time steps $N \in \{2,4,8,16\}$.  The options are priced in terms of the moneyness.  We emphasize that all reported errors are relative errors normalized by the reference solutions provided in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. We also note that  in all cases the actual work (runtime) is obtained using a $40$-core Intel(R) Xeon(R) CPU E$5$-$268$ architecture. 
+In this Section, we conduct a comparison between MC and MISC in terms of errors and computational time. we show tables and plots reporting  the different relative errors involved in MC method (bias and statistical error), and in MISC (bias and quadrature error).  Fixing a  sufficiently small error tolerance in the price estimates,  we also compare the computational time needed for both methods to meet the desired error tolerance. The results are reported for the different sets of parameters defined in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, and we consider   a number of time steps $N \in \{2,4,8,16\}$.  The options are priced in terms of the moneyness.  We emphasize that all reported errors are relative errors normalized by the reference solutions provided in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. We also note that  in all cases the actual work (runtime) is obtained using an Intel(R) Xeon(R) CPU E$5$-$268$ architecture. 
 
 
 Through our conducted numerical experiments for each parameter set, we follow these steps to get our reported results:
@@ -1415,6 +1415,6 @@ For the case of set $4$, we just conduct our numerical experiments for the case 
 	\label{fig:Complexity plot for MC and MISC for Case set $5$ parameters}
 \end{figure}
 \FloatBarrier
-
+}
 
 
