@@ -138,8 +138,8 @@ We show in Table \ref{table:Summary of our numerical results.} the summary of ou
 	\begin{small}
 	\begin{tabular}{l*{4}{c}r}
 		Parameter set           & Level of Richardson extrapolation    &  Total relative error  & Ratio of CPU time  $\left(\text{MC}/ \text{MISC} \right)$ \\
-			Set $1$ & level $1$ &  $3\%$&  $1.4$ \\	
-              & level $2$ &  $1\%$ &  $5$ \\	
+			Set $1$ & level $1$ &  $3\%$&  $1.6$ \\	
+              & level $2$ &  $1\%$ &  $>9$ \\	
               \hline
             Set $2$  & without    &  $0.2\%$&  $5$ \\		
 				 \hline
@@ -524,7 +524,7 @@ We show in Table \ref{table:Summary of our numerical results.} the summary of ou
 \subsubsection{Case of set $1$ parameters in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.} }
 \label{sec:Case of set $2$ parameters_linear}
 
-For the case of set $1$, we conduct our numerical experiments for $3$ different scenarios: i) without Richardson extrapolation (see Tables \ref{Total error of MISC and MC to compute Call option price of the different tolerances for different number of time steps. Case $K=1$, $H=0.07$, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors,linear} and \ref{Comparsion of the computational time of  MC and MISC, used to compute Call option price of rBergomi model for different number of time steps. Case $K=1, H=0.07$, linear}), ii) with (level $1$) Richardson extrapolation (see Tables \ref{Total  error of MISC and MC to compute Call option price of the different tolerances for different number of time steps. Case set $2$ parameters, with Richardson extrapolation(level $1$). The numbers between parentheses are the corresponding absolute errors,relative} and \ref{Comparsion of the computational time of  MC and MISC, using Richardson extrapolation (level $1$), used to compute Call option price of rBergomi model for different number of time steps. Case set $2$ parameters,linear}), and iii) with (level $2$) Richardson extrapolation (see Tables \ref{Total  error of MISC and MC to compute Call option price of the different tolerances for different number of time steps. Case set $2$ parameters, with Richardson extrapolation(level $2$). The numbers between parentheses are the corresponding absolute errors,linear} and \ref{Comparsion of the computational time of  MC and MISC, using Richardson extrapolation (level $2$), used to compute Call option price of rBergomi model for different number of time steps. Case set $2$ parameters,linear}).  Our numerical experiments show that  MISC coupled with (level $1$) Richardson extrapolation is $1.4$ times faster than MC coupled with (level $1$) Richardson extrapolation, to achieve a total relative error around $3\%$. This gain is improved when applying level $2$ Richardson extrapolation. In fact,  MISC coupled with (level $2$)  Richardson extrapolation is  more than $5$ times faster than MC coupled with (level $2$)  Richardson extrapolation, to achieve a total relative error below  $1\%$. Applying Richardson extrapolation brought a significant improvement for MISC (see Figure \ref{fig:Complexity plot for  MISC for Case set $2$ parameters, comparison} and related tables). We note that the values marked in red correspond to the total relative errors plotted in Figure \ref{fig:Complexity plot for  MISC for Case set $2$ parameters, comparison}, and will be used for computational work comparison against MC.
+For the case of set $1$, we conduct our numerical experiments for $3$ different scenarios: i) without Richardson extrapolation (see Tables \ref{Total error of MISC and MC to compute Call option price of the different tolerances for different number of time steps. Case $K=1$, $H=0.07$, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors,linear} and \ref{Comparsion of the computational time of  MC and MISC, used to compute Call option price of rBergomi model for different number of time steps. Case $K=1, H=0.07$, linear}), ii) with (level $1$) Richardson extrapolation (see Tables \ref{Total  error of MISC and MC to compute Call option price of the different tolerances for different number of time steps. Case set $2$ parameters, with Richardson extrapolation(level $1$). The numbers between parentheses are the corresponding absolute errors,relative} and \ref{Comparsion of the computational time of  MC and MISC, using Richardson extrapolation (level $1$), used to compute Call option price of rBergomi model for different number of time steps. Case set $2$ parameters,linear}), and iii) with (level $2$) Richardson extrapolation (see Tables \ref{Total  error of MISC and MC to compute Call option price of the different tolerances for different number of time steps. Case set $2$ parameters, with Richardson extrapolation(level $2$). The numbers between parentheses are the corresponding absolute errors,linear} and \ref{Comparsion of the computational time of  MC and MISC, using Richardson extrapolation (level $2$), used to compute Call option price of rBergomi model for different number of time steps. Case set $2$ parameters,linear}).  Our numerical experiments show that  MISC coupled with (level $1$) Richardson extrapolation is $1.6$ times faster than MC coupled with (level $1$) Richardson extrapolation, to achieve a total relative error around $3\%$. This gain is improved when applying level $2$ Richardson extrapolation. In fact,  MISC coupled with (level $2$)  Richardson extrapolation is  more than $9$ times faster than MC coupled with (level $2$)  Richardson extrapolation, to achieve a total relative error below  $1\%$. Applying Richardson extrapolation brought a significant improvement for MISC (see Figure \ref{fig:Complexity plot for  MISC for Case set $2$ parameters, comparison} and related tables). We note that the values marked in red correspond to the total relative errors plotted in Figure \ref{fig:Complexity plot for  MISC for Case set $2$ parameters, comparison}, and will be used for computational work comparison against MC.
 
 %\subsubsection*{Without Richardson extrapolation}
 %\begin{table}[!h]
@@ -603,14 +603,14 @@ For the case of set $1$, we conduct our numerical experiments for $3$ different 
 		}}$ \\
 
 		MISC ($\text{TOL}_{\text{MISC}}=10^{-2}$)  & $\underset{(0.54,0.12)}{\mathbf{ 
-			0.66}}$ & $ \underset{(0.29,6e-04)}{\mathbf{  \red{0.29}}}$ & $\underset{(0.15,0.01)}{\mathbf{    0.16}}$&  $ \underset{(0.07,0.01)}{\mathbf{\red{0.08}}}$  \\
-		MISC ($\text{TOL}_{\text{MISC}}=10^{-3}$)        & $\underset{(0.54,0.10)}{\mathbf{
-			0.64}}$  &  $ \underset{(0.29,6e-04)}{\mathbf{
-			0.29
-		}}$ &  $\underset{(0.15,0.01)}{\mathbf{    \red{0.16}}}$ &  $-$ \\
-		MISC ($\text{TOL}_{\text{MISC}}=10^{-4}$)        & $\underset{(0.54,3e-04)}{\mathbf{       0.54}}$  & $ \underset{(0.29,6e-04)}{\mathbf{
-			0.29
-		}}$  &  $-$ &  $-$\\
+			0.66}}$ & $ \underset{(0.29,6e-04)}{\mathbf{  \red{0.29}}}$ & $\underset{(0.15,0.01)}{\mathbf{    \red{0.16}}}$&  $ \underset{(0.07,0.01)}{\mathbf{\red{0.08}}}$  \\
+%		MISC ($\text{TOL}_{\text{MISC}}=10^{-3}$)        & $\underset{(0.54,0.10)}{\mathbf{
+%			0.64}}$  &  $ \underset{(0.29,6e-04)}{\mathbf{
+%			0.29
+%		}}$ &  $\underset{(0.15,0.01)}{\mathbf{    \red{0.16}}}$ &  $-$ \\
+%		MISC ($\text{TOL}_{\text{MISC}}=10^{-4}$)        & $\underset{(0.54,3e-04)}{\mathbf{       0.54}}$  & $ \underset{(0.29,6e-04)}{\mathbf{
+%			0.29
+%		}}$  &  $-$ &  $-$\\
 		%\hline
 %		MC    & $\underset{(0.54,3e-03)}{\mathbf{0.54}}$  & $\underset{(0.29,1e-03)}{\mathbf{0.29}}$  &$\underset{(0.15,0.01)}{
 %				\mathbf{0.16}}$ & \\	
@@ -639,9 +639,9 @@ For the case of set $1$, we conduct our numerical experiments for $3$ different 
 		MISC ($\text{TOL}_{\text{MISC}}=10^{-1}$)  & $\red{0.08}$ & $\red{0.13}$ & $0.7$  & $163$ \\
 %		MISC ($\text{TOL}_{\text{MISC}}=5.10^{-2}$)  & $0.08$ & $0.25$ & $7$   \\
 		MISC ($\text{TOL}_{\text{MISC}}=10^{-2}$)  & $0.2$& $\red{5}$ & $\red{333}$ &  $\red{1602}$\\
-		MISC ($\text{TOL}_{\text{MISC}}=10^{-3}$)  &  $2$ & $73$ & $3650$ &  $-$ \\		
-		MISC ($\text{TOL}_{\text{MISC}}=10^{-4}$)  & $43$ & $1240$ & $-$ &   $-$\\	
-	
+%		MISC ($\text{TOL}_{\text{MISC}}=10^{-3}$)  &  $2$ & $73$ & $3650$ &  $-$ \\		
+%		MISC ($\text{TOL}_{\text{MISC}}=10^{-4}$)  & $43$ & $1240$ & $-$ &   $-$\\	
+%	
 %		\hline
 %		MC method & $220$  & $358$  & $9$ & \\
 		\hline	
@@ -721,7 +721,7 @@ For the case of set $1$, we conduct our numerical experiments for $3$ different 
 		MISC ($\text{TOL}_{\text{MISC}}=5.10^{-2}$)  & $\underset{(0.96,0.37)}{\mathbf{  1.33}}$ & $\underset{(0.07,0.16)}{\mathbf{ 0.23}}$ & $\underset{(0.015,0.010)}{\mathbf{  \red{0.025}}}$   \\
 		MISC ($\text{TOL}_{\text{MISC}}=10^{-2}$)  & $\underset{(0.96,0.12)}{\mathbf{   1.08
 		}}$ & $\underset{(0.07,0.01)}{\mathbf{\red{0.08}}}$ & $\underset{(0.015,0.010)}{\mathbf{ 0.025}}$  \\
-		MISC ($\text{TOL}_{\text{MISC}}=10^{-3}$)  & $\underset{(0.96,0.07)}{\mathbf{  1.03}}$ & $\underset{(0.07,0.01)}{\mathbf{    0.08}}$ & $\mathbf{-}$  \\
+%		MISC ($\text{TOL}_{\text{MISC}}=10^{-3}$)  & $\underset{(0.96,0.07)}{\mathbf{  1.03}}$ & $\underset{(0.07,0.01)}{\mathbf{    0.08}}$ & $\mathbf{-}$  \\
 		
 
 %		\hline
@@ -751,14 +751,14 @@ For the case of set $1$, we conduct our numerical experiments for $3$ different 
 		MISC ($\text{TOL}_{\text{MISC}}=10^{-1}$)  & $\red{0.1}$ & $\red{0.2}$ & $1.6$  \\
 		MISC ($\text{TOL}_{\text{MISC}}=5.10^{-2}$)  & $0.1$ & $0.6$ & $\red{37}$  \\
 		MISC ($\text{TOL}_{\text{MISC}}=10^{-2}$)  & $1.3$ & $\red{6}$ & $2382$  \\
-		MISC ($\text{TOL}_{\text{MISC}}=10^{-3}$)  & $3.5$ & $ 244$ & $-$   \\
+%		MISC ($\text{TOL}_{\text{MISC}}=10^{-3}$)  & $3.5$ & $ 244$ & $-$   \\
 		
 %		MISC ($\text{TOL}_{\text{MISC}}=10^{-4}$)  & $140$ & $-$ & $-$ \\
 %		\hline	
 %		MC  &$\red{12}$ & $\red{113}$  & $\red{130}$   \\
 
 			\hline	
-		MC  &$0.005$ & $2$  & $50$   \\
+		MC  &$0.003$ & $2$  & $60$   \\
 		
 %		\hline	
 %		Ratio of CPU time $\left(\text{MC}/ \text{MISC} \right)$  &$\red{ 3.4
@@ -826,7 +826,7 @@ For the case of set $1$, we conduct our numerical experiments for $3$ different 
 		Method \textbackslash  Steps            & $1-2-4$ & $2-4-8$  \\
 		\hline
 
-		MISC ($\text{TOL}_{\text{MISC}}=10^{-1}$)  & $\underset{(0.24,0.02)}{\mathbf{ 0.26
+		MISC ($\text{TOL}_{\text{MISC}}=10^{-1}$)  & $\underset{(0.24,0.30)}{\mathbf{ 0.54
 		}}$ & $\underset{(0.006,0.107)}{\mathbf{ \red{0.113}}}$ \\
 		MISC ($\text{TOL}_{\text{MISC}}=5.10^{-2}$)  & $\underset{(0.24,0.25)}{\mathbf{   \red{0.49}
 		}}$ & $\underset{(0.006,0.003)}{\mathbf{ \red{0.009}} }$  \\
@@ -838,7 +838,7 @@ For the case of set $1$, we conduct our numerical experiments for $3$ different 
 			
 				\hline
 		MC   & $\underset{(0.24,0.21)}{\mathbf{0.45}}$  & $\underset{(0.006,0.006)}{\mathbf{0.012}}$    \\
-			M(\# MC samples) & $4 \times 10^2$  & $2 \times 10^5$   \\
+			M(\# MC samples) & $4 \times 10^2$  & $4 \times 10^5$   \\
 		\hline
 	\end{tabular}
 	\caption{Total relative  error of MISC, coupled with Richardson extrapolation (level $2$), with different tolerances, and MC, coupled with Richardson extrapolation (level $2$), to compute call option price for different number of time steps.  The values between parentheses correspond to the different errors contributing to the total relative error: for MISC we report the bias and quadrature errors and for MC we report the bias and the statistical errors. }
@@ -861,7 +861,7 @@ For the case of set $1$, we conduct our numerical experiments for $3$ different 
 %		MC    & $ \red{  118}$  & $\red{1274}$  \\
 %		
 		\hline
-		MC    & $ 0.6$  & $350$  \\
+		MC    & $ 0.2$  & $690$  \\
 		
 %		\hline
 %		Ratio of CPU time $\left(\text{MC}/ \text{MISC} \right)$  &$\red{13}$ & $\red{  17}$   \\
@@ -967,7 +967,7 @@ For the case of set $2$, we just conduct our numerical experiments for the case 
 %%		%\hline
 %%%		MC    & $\underset{(0.02,5e-04)}{\mathbf{0.02}}$  &  $\underset{(0.008,5e-04)}{\mathbf{0.009}}$  & $\underset{(0.004,5e-04)}{\mathbf{0.005}}$ & $\underset{(0.001,4e-04)}{\mathbf{0.001}}$  \\	
 %%%			M(\# MC samples) 	& $5 \times 10^6$  &  $5 \times 10^6$  & $5 \times 10^6$ & $5 \times 10^6$  \\
-%%			\hline
+			\hline
 				MC    & $\underset{(0.02,0.02)}{\mathbf{0.04}}$  &  $\underset{(0.008,0.008)}{\mathbf{0.016}}$  & $\underset{(0.004,0.003)}{\mathbf{0.007}}$ & $\underset{(0.001,0.001)}{\mathbf{0.002}}$  \\	
 			M(\# MC samples) 	& $4 \times 10^3$  &  $2 \times 10^4$  & $  10^5$ & $10^6$  \\
 		\hline
@@ -1222,8 +1222,8 @@ For the case of set $3$, we just conduct our numerical experiments for the case 
 
 		MISC ($\text{TOL}_{\text{MISC}}=10^{-1}$)  &  $\underset{(0.006,0.002)}{\mathbf{\red{0.008}}}$ & $\underset{(0.004,0.005)}{\mathbf{0.009}}$& $\underset{(0.003,0.005)}{\mathbf{ 0.008}}$ & $\underset{(0.002,0.007)}{\mathbf{ 0.009}}$   \\
 
-		MISC ($\text{TOL}_{\text{MISC}}=10^{-2}$)  &  $\underset{(0.006,0.002)}{\mathbf{0.008}}$ & $\underset{(0.004,0.005)}{\mathbf{0.009}}$& $\underset{(0.003,0.002)}{\mathbf{ 0.005}}$ & $\underset{(0.002,1e-04)}{\mathbf{ 0.002}}$  \\
-		MISC ($\text{TOL}_{\text{MISC}}=10^{-3}$)  &  $\underset{(0.006,0.002)}{\mathbf{0.008}}$& $\underset{(0.004,0.002)}{\mathbf{0.006}}$& $\underset{(0.003,1e-04)}{\mathbf{0.003}}$  & $\underset{(0.002,1e-04)}{\mathbf{ \red{0.002}}}$  \\
+		MISC ($\text{TOL}_{\text{MISC}}=10^{-2}$)  &  $\underset{(0.006,0.002)}{\mathbf{0.008}}$ & $\underset{(0.004,0.005)}{\mathbf{0.009}}$& $\underset{(0.003,0.002)}{\mathbf{ 0.005}}$ & $\underset{(0.002,1e-04)}{\mathbf{ \red{0.002}}}$  \\
+		MISC ($\text{TOL}_{\text{MISC}}=10^{-3}$)  &  $\underset{(0.006,0.002)}{\mathbf{0.008}}$& $\underset{(0.004,0.002)}{\mathbf{0.006}}$& $\underset{(0.003,1e-04)}{\mathbf{0.003}}$  & $\underset{(0.002,1e-04)}{\mathbf{ 0.002}}$  \\
 		MISC ($\text{TOL}_{\text{MISC}}=10^{-4}$)  &  $\underset{(0.006,4e-04)}{\mathbf{\red{0.006}}}$ & $\underset{(0.004,2e-04)}{\mathbf{\red{0.004}}}$& $\underset{(0.003,1e-04)}{\mathbf{0.003}}$ & $\mathbf{ -}$ \\
 
 		

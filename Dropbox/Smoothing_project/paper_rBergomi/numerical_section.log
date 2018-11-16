@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  15 NOV 2018 14:42
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  16 NOV 2018 16:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -6673,7 +6673,7 @@ Overfull \hbox (5.00002pt too wide) in paragraph at lines 527--528
 
 
 Overfull \hbox (12.77782pt too wide) in paragraph at lines 527--528
-\OT1/cmr/m/n/10 1\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 4$
+\OT1/cmr/m/n/10 1\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 6$
  []
 
 
@@ -6698,7 +6698,7 @@ Overfull \hbox (5.00002pt too wide) in paragraph at lines 527--528
 
 
 Overfull \hbox (5.00002pt too wide) in paragraph at lines 527--528
-\OT1/cmr/m/n/10 5$
+\OT1/cmr/m/n/10 9$
  []
 
 
@@ -7034,7 +7034,18 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.606 ...,0.01)}{\mathbf{    0.16}}$&  $ \underset
+<argument>  \red 
+                 {0.16}
+l.606 ...rset{(0.15,0.01)}{\mathbf{    \red{0.16}}
+                                                  }$&  $ \underset{(0.07,0.0...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.606 ...}{\mathbf{    \red{0.16}}}$&  $ \underset
                                                   {(0.07,0.01)}{\mathbf{\red...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -7047,120 +7058,6 @@ and I'll forget about whatever was undefined.
                 {0.08}
 l.606 ...underset{(0.07,0.01)}{\mathbf{\red{0.08}}
                                                   }$  \\
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-Missing character: There is no M in font nullfont!
-Missing character: There is no I in font nullfont!
-Missing character: There is no S in font nullfont!
-Missing character: There is no C in font nullfont!
-Missing character: There is no ( in font nullfont!
-! Undefined control sequence.
-<recently read> \text 
-                      
-l.607 		MISC ($\text
-                    {TOL}_{\text{MISC}}=10^{-3}$)        & $\underset{(0.54,...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.607 		MISC ($\text{TOL}_{\text
-                                {MISC}}=10^{-3}$)        & $\underset{(0.54,...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-Missing character: There is no ) in font nullfont!
-! Undefined control sequence.
-<recently read> \underset 
-                          
-l.607 ...text{MISC}}=10^{-3}$)        & $\underset
-                                                  {(0.54,0.10)}{\mathbf{
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.608 			0.64}}$  &  $ \underset
-                                {(0.29,6e-04)}{\mathbf{
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-<recently read> \underset 
-                          
-l.610 		}}$ &  $\underset
-                         {(0.15,0.01)}{\mathbf{    \red{0.16}}}$ &  $-$ \\
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-<argument>  \red 
-                 {0.16}
-l.610 ...rset{(0.15,0.01)}{\mathbf{    \red{0.16}}
-                                                  }$ &  $-$ \\
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-Missing character: There is no M in font nullfont!
-Missing character: There is no I in font nullfont!
-Missing character: There is no S in font nullfont!
-Missing character: There is no C in font nullfont!
-Missing character: There is no ( in font nullfont!
-! Undefined control sequence.
-<recently read> \text 
-                      
-l.611 		MISC ($\text
-                    {TOL}_{\text{MISC}}=10^{-4}$)        & $\underset{(0.54,...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.611 		MISC ($\text{TOL}_{\text
-                                {MISC}}=10^{-4}$)        & $\underset{(0.54,...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-Missing character: There is no ) in font nullfont!
-! Undefined control sequence.
-<recently read> \underset 
-                          
-l.611 ...text{MISC}}=10^{-4}$)        & $\underset
-                                                  {(0.54,3e-04)}{\mathbf{   ...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.611 ...4)}{\mathbf{       0.54}}$  & $ \underset
-                                                  {(0.29,6e-04)}{\mathbf{
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -7596,7 +7493,7 @@ Overfull \hbox (20.0pt too wide) in paragraph at lines 591--629
  []
 
 
-Overfull \hbox (389.92041pt too wide) in paragraph at lines 591--629
+Overfull \hbox (375.8198pt too wide) in paragraph at lines 591--629
 []
  []
 
@@ -7737,58 +7634,6 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-Missing character: There is no M in font nullfont!
-Missing character: There is no I in font nullfont!
-Missing character: There is no S in font nullfont!
-Missing character: There is no C in font nullfont!
-Missing character: There is no ( in font nullfont!
-! Undefined control sequence.
-<recently read> \text 
-                      
-l.642 		MISC ($\text
-                    {TOL}_{\text{MISC}}=10^{-3}$)  &  $2$ & $73$ & $3650$ & ...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.642 		MISC ($\text{TOL}_{\text
-                                {MISC}}=10^{-3}$)  &  $2$ & $73$ & $3650$ & ...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-Missing character: There is no ) in font nullfont!
-Missing character: There is no M in font nullfont!
-Missing character: There is no I in font nullfont!
-Missing character: There is no S in font nullfont!
-Missing character: There is no C in font nullfont!
-Missing character: There is no ( in font nullfont!
-! Undefined control sequence.
-<recently read> \text 
-                      
-l.643 		MISC ($\text
-                    {TOL}_{\text{MISC}}=10^{-4}$)  & $43$ & $1240$ & $-$ &  ...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.643 		MISC ($\text{TOL}_{\text
-                                {MISC}}=10^{-4}$)  & $43$ & $1240$ & $-$ &  ...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-Missing character: There is no ) in font nullfont!
 Missing character: There is no M in font nullfont!
 Missing character: There is no C in font nullfont!
 Missing character: There is no m in font nullfont!
@@ -8003,7 +7848,7 @@ Overfull \hbox (20.0pt too wide) in paragraph at lines 633--659
  []
 
 
-Overfull \hbox (166.05267pt too wide) in paragraph at lines 633--659
+Overfull \hbox (163.83044pt too wide) in paragraph at lines 633--659
 []
  []
 
@@ -8255,54 +8100,6 @@ and I'll forget about whatever was undefined.
                           
 l.723 ...0.01)}{\mathbf{\red{0.08}}}$ & $\underset
                                                   {(0.015,0.010)}{\mathbf{ 0...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-Missing character: There is no M in font nullfont!
-Missing character: There is no I in font nullfont!
-Missing character: There is no S in font nullfont!
-Missing character: There is no C in font nullfont!
-Missing character: There is no ( in font nullfont!
-! Undefined control sequence.
-<recently read> \text 
-                      
-l.724 		MISC ($\text
-                    {TOL}_{\text{MISC}}=10^{-3}$)  & $\underset{(0.96,0.07)}...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.724 		MISC ($\text{TOL}_{\text
-                                {MISC}}=10^{-3}$)  & $\underset{(0.96,0.07)}...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-Missing character: There is no ) in font nullfont!
-! Undefined control sequence.
-<recently read> \underset 
-                          
-l.724 ...OL}_{\text{MISC}}=10^{-3}$)  & $\underset
-                                                  {(0.96,0.07)}{\mathbf{  1....
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-<recently read> \underset 
-                          
-l.724 ....96,0.07)}{\mathbf{  1.03}}$ & $\underset
-                                                  {(0.07,0.01)}{\mathbf{    ...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -8937,32 +8734,6 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 Missing character: There is no M in font nullfont!
-Missing character: There is no I in font nullfont!
-Missing character: There is no S in font nullfont!
-Missing character: There is no C in font nullfont!
-Missing character: There is no ( in font nullfont!
-! Undefined control sequence.
-<recently read> \text 
-                      
-l.754 		MISC ($\text
-                    {TOL}_{\text{MISC}}=10^{-3}$)  & $3.5$ & $ 244$ & $-$   \\
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.754 		MISC ($\text{TOL}_{\text
-                                {MISC}}=10^{-3}$)  & $3.5$ & $ 244$ & $-$   \\
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-Missing character: There is no ) in font nullfont!
-Missing character: There is no M in font nullfont!
 Missing character: There is no C in font nullfont!
 
 ! LaTeX Error: \caption outside float.
@@ -9257,7 +9028,7 @@ Missing character: There is no ( in font nullfont!
 <recently read> \text 
                       
 l.829 		MISC ($\text
-                    {TOL}_{\text{MISC}}=10^{-1}$)  & $\underset{(0.24,0.02)}...
+                    {TOL}_{\text{MISC}}=10^{-1}$)  & $\underset{(0.24,0.30)}...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -9266,7 +9037,7 @@ and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
 l.829 		MISC ($\text{TOL}_{\text
-                                {MISC}}=10^{-1}$)  & $\underset{(0.24,0.02)}...
+                                {MISC}}=10^{-1}$)  & $\underset{(0.24,0.30)}...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -9278,7 +9049,7 @@ Missing character: There is no ) in font nullfont!
 <recently read> \underset 
                           
 l.829 ...OL}_{\text{MISC}}=10^{-1}$)  & $\underset
-                                                  {(0.24,0.02)}{\mathbf{ 0.26
+                                                  {(0.24,0.30)}{\mathbf{ 0.54
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -13028,7 +12799,18 @@ and I'll forget about whatever was undefined.
 <recently read> \underset 
                           
 l.1225 ...3,0.002)}{\mathbf{ 0.005}}$ & $\underset
-                                                  {(0.002,1e-04)}{\mathbf{ 0...
+                                                  {(0.002,1e-04)}{\mathbf{ \...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument>  \red 
+                 {0.002}
+l.1225 ...set{(0.002,1e-04)}{\mathbf{ \red{0.002}}
+                                                  }$  \\
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -13098,18 +12880,7 @@ and I'll forget about whatever was undefined.
 <recently read> \underset 
                           
 l.1226 ...3,1e-04)}{\mathbf{0.003}}$  & $\underset
-                                                  {(0.002,1e-04)}{\mathbf{ \...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-<argument>  \red 
-                 {0.002}
-l.1226 ...set{(0.002,1e-04)}{\mathbf{ \red{0.002}}
-                                                  }$  \\
+                                                  {(0.002,1e-04)}{\mathbf{ 0...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -15645,7 +15416,7 @@ and I'll forget about whatever was undefined.
 Here is how much of TeX's memory you used:
  75 strings out of 493014
  3966 string characters out of 6133351
- 83218 words of memory out of 5000000
+ 81011 words of memory out of 5000000
  3710 multiletter control sequences out of 15000+600000
  4567 words of font info for 17 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
