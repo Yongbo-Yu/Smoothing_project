@@ -1,0 +1,69 @@
+In our case, once we fix $N$, we define from \eqref{BS_formula_rbergomi_2}
+
+\begin{equation}
+F^N=C_{\text{BS}}(G(\mathbf{W}^{(1)},\mathbf{W}^{(2)})) \PERIOD
+\end{equation}
+
+We introduce the set $C^0(\rset)$ of real-valued continuous functions over $\rset$, and the subspace of polynomials of degree at most $q$ over $\rset$, $\mathbb{P}^q(\rset) \subset C^0(\rset)$. Next,
+we consider a sequence of univariate Lagrangian interpolant operators in each dimension $Y_n$ ($1 \le n \le 2N$), that is, $\{U_n^{m(\beta_n)}\}_{\beta_n \in \nset_+}$ (we refer to the value $\beta_n$ as the interpolation level). Each interpolant is built over a set of $m(\beta_n)$ collocation points, $\mathcal{H}^{m(\beta_n)}=\{y^1_n,y^2_n,\dots,y^{m(\beta_n)}_n\} \subset \rset$, thus, the interpolant yields a polynomial approximation,
+
+
+\begin{equation}
+U^{m(\beta_n)}:C^0(\rset) \rightarrow \mathbb{P}^{m(\beta_n)-1}(\rset), \quad U^{m(\beta_n)}[F^N](y_n)= \sum_{j=1}^{m(\beta_n)} \left( f(y^j_n) \prod_{k=1;k \neq j}^{m(\beta_n)} \frac{y_n-y_n^k}{y_n^j-y_n^k}\right) \PERIOD
+\end{equation}
+
+The $2N$-variate Lagrangian interpolant can then be built by a tensorization of univariate interpolants: denote by $C^0(\rset^{2N})$ the space of real-valued $2N$-variate continuous functions over $\rset^{2N}$ and by $\mathbb{P}^{\mathbf{q}}(\rset^{2N}) = \otimes_{n=1}^{2N} \mathbb{P}^{\mathbf{q}_n}(\rset)$ the subspace of polynomials of degree at most $q_n$ over $\rset$, with $\mathbf{q}=(q_1,\dots,q_{2N})\in  \nset^{2N}$, and consider a multi-index $\boldsymbol{\beta} \in \nset^{2N}_+$ assigning the interpolation level in each direction, $y_n$, then  the multivariate interpolant can then be written as
+
+$$U^{m(\boldsymbol{\beta})}: C^0(\rset^{2N}) \rightarrow \mathbb{P}^{m(\boldsymbol{\beta})-1}(\rset^{2N}) ,\quad  U^{m(\boldsymbol{\beta})}[F^N](\mathbf{y})= \bigotimes_{n = 1}^{2N} U^{m(\beta_n)} [F^N](\mathbf{y}) \COMMA $$
+
+
+Given this construction, we can define the MISC interpolant  for approximating $F^N$, using a set of multi indices $\mathcal{I} \in \nset^{2N}$ as
+
+\begin{equation}
+I^{mathcal{I}}[F^N]= \sum_{\boldsymbol{\beta} \in \mathcal{I}} \Delta U_N^{\boldsymbol{\beta}}
+\end{equation}
+
+where 
+
+\begin{equation}
+\Delta_i U_N^{\boldsymbol{\beta}} = \left\{ 
+\aligned 
+ U_N^{\boldsymbol{\beta}} &- U_N^{\boldsymbol{\beta}'}  \text{, with } \boldsymbol{\beta}' =\boldsymbol{\beta} - e_i, \text{ if } \boldsymbol{\beta}_i>0 \\
+ U_N^{\boldsymbol{\beta}} &, \quad  \text{ otherwise}
+\endaligned
+\right.
+\end{equation}
+
+
+where $e_i$ denotes the $i$th $2N$-dimensional unit vector. Then, $\Delta
+U_N^{\boldsymbol{\beta}}$ is defined as
+\begin{equation}
+\Delta U_N^{\boldsymbol{\beta}} = \left( \prod_{i=1}^{2N} \Delta_i \right) U_N^{\boldsymbol{\beta}}.
+\end{equation}
+
+We define the interpolation error induced by MISC as
+
+\begin{equation}
+e_{N}= F^N-I^{mathcal{I}}[F^N] \PERIOD
+\end{equation}
+
+
+\red{\textbf{Question $1$}  Do we have a bound on the interpolation error of MISC, $e_{N}$? If yes, then we may simply integrate that bound to get the MISC quadrature error, $\mathcal{E}_Q(\text{TOL}_{\text{MISC}},N)$, defined in \eqref{eq:total_error}. }
+
+Another strategy for estimating the MISC quadrature error, is to estimate $\expt{e_N}$ using MC by sampling directly $e_N$.
+
+If we define $Y=F^N+(Q_N^{\mathcal{I}}-I^{mathcal{I}}[F^N])$ (where $Q_N^{\mathcal{I}}$ is the MISC quadrature estimator, defined in \eqref{eq:MISC_quad_estimator}, then we have
+
+\begin{align}\label{eq:Control_variate}
+\expt{Y}&=\expt{F^N}\nonumber\\
+Var{Y}&=Var[e_N]< Var(\mathcal{A}_{\text{MC}})\COMMA
+\end{align}
+where $\mathcal{A}_{\text{MC}}$ is the MC estimator for $\expt{F^N}$.
+
+\eqref{eq:Control_variate} shows that MISC can be seen as a control variate for MC estimator and consequently as a powerful reduction tool.
+
+\red{\textbf{Question $2$}: Do we just motivate this idea of variance reduction, or do we need also to provide more details here?
+}
+
+\red{\textbf{Question $3$}: What are the points that you suggest we give more details about this section?
+}
