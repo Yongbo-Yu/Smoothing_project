@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  29 NOV 2018 09:53
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  15 DEC 2018 20:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1816,6 +1816,7 @@ Missing character: There is no a in font nullfont!
 Missing character: There is no n in font nullfont!
 Missing character: There is no o in font nullfont!
 Missing character: There is no n in font nullfont!
+Missing character: There is no - in font nullfont!
 Missing character: There is no n in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no g in font nullfont!
@@ -2193,74 +2194,26 @@ Missing character: There is no r in font nullfont!
 Missing character: There is no a in font nullfont!
 Missing character: There is no s in font nullfont!
 
-Overfull \hbox (20.0pt too wide) in paragraph at lines 33--34
-[]
- []
+! LaTeX Error: Environment equation* undefined.
 
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.34 \begin{equation*}
+                      
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
 
-Overfull \hbox (6.18402pt too wide) in paragraph at lines 33--34
-\OML/cmm/m/it/10 ^^L$
- []
-
-
-Overfull \hbox (24.33565pt too wide) in paragraph at lines 33--34
-\OML/cmm/m/it/10 m \OT1/cmr/m/n/10 :\OMS/cmsy/m/n/10 !$
- []
-
-
-Overfull \hbox (32.11346pt too wide) in paragraph at lines 33--34
-\OML/cmm/m/it/10 m\OT1/cmr/m/n/10 (0) =
- []
-
-
-Overfull \hbox (5.00002pt too wide) in paragraph at lines 33--34
-\OT1/cmr/m/n/10 0$
- []
-
-
-Overfull \hbox (32.11346pt too wide) in paragraph at lines 33--34
-\OML/cmm/m/it/10 m\OT1/cmr/m/n/10 (1) =
- []
-
-
-Overfull \hbox (5.00002pt too wide) in paragraph at lines 33--34
-\OT1/cmr/m/n/10 1$
- []
-
-
-Overfull \hbox (6.18402pt too wide) in paragraph at lines 33--34
-\OML/cmm/m/it/10 ^^L$
- []
-
-
-Overfull \hbox (22.74196pt too wide) in paragraph at lines 33--34
-\OML/cmm/m/it/10 m\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 ^^L\OT1/cmr/m/n/10 )$
- []
-
-
-Overfull \hbox (37.8375pt too wide) in paragraph at lines 33--34
-\OMS/cmsy/m/n/10 H[] \OT1/cmr/m/n/10 =
- []
-
-
-Overfull \hbox (91.8178pt too wide) in paragraph at lines 33--34
-\OMS/cmsy/m/n/10 f\OML/cmm/m/it/10 y[]; y[]; [] ; y[]\OMS/cmsy/m/n/10 g ^^Z$
- []
-
-
-Overfull \hbox (35.8791pt too wide) in paragraph at lines 33--34
-\OML/cmm/m/it/10 ![] \OT1/cmr/m/n/10 =
- []
-
-
-Overfull \hbox (85.22743pt too wide) in paragraph at lines 33--34
-\OMS/cmsy/m/n/10 f\OML/cmm/m/it/10 ![]; ![]; [] ; ![]\OMS/cmsy/m/n/10 g$
- []
-
-
-Overfull \hbox (20.12642pt too wide) in paragraph at lines 33--34
-\OML/cmm/m/it/10 C[]\OT1/cmr/m/n/10 ()$
- []
+Missing character: There is no Q in font nullfont!
+! Missing $ inserted.
+<inserted text> 
+                $
+l.35 Q^
+       {m(\beta)}:C^0(\rset) \rightarrow \rset, \quad Q^{m(\beta)}[f]= \sum_...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
 
 ! Undefined control sequence.
 l.35 Q^{m(\beta)}:C^0(\rset
@@ -2281,12 +2234,28 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-Overfull \hbox (182.18484pt too wide) detected at line 36
-\OML/cmm/m/it/10 Q[] \OT1/cmr/m/n/10 : \OML/cmm/m/it/10 C[]\OT1/cmr/m/n/10 () \
-OMS/cmsy/m/n/10 !\OML/cmm/m/it/10 ;  Q[]\OT1/cmr/m/n/10 [\OML/cmm/m/it/10 f\OT1
-/cmr/m/n/10 ] = [] \OML/cmm/m/it/10 f\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 y[]\OT1/
-cmr/m/n/10 )\OML/cmm/m/it/10 ![]:
- []
+! LaTeX Error: \begin{document} ended by \end{equation*}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.36 \end{equation*}
+                    
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.36 \end{equation*}
+                    
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
 
 Missing character: There is no I in font nullfont!
 Missing character: There is no n in font nullfont!
@@ -2392,17 +2361,237 @@ Missing character: There is no o in font nullfont!
 Missing character: There is no n in font nullfont!
 Missing character: There is no s in font nullfont!
 Missing character: There is no . in font nullfont!
-Missing character: There is no T in font nullfont!
+Missing character: There is no F in font nullfont!
+Missing character: There is no u in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no t in font nullfont!
 Missing character: There is no h in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no r in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no f in font nullfont!
+Missing character: There is no m in font nullfont!
 Missing character: There is no o in font nullfont!
 Missing character: There is no r in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no , in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no e in font nullfont!
 Missing character: There is no w in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no d in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no g in font nullfont!
+Missing character: There is no w in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no G in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no u in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no d in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no , in font nullfont!
+Missing character: There is no u in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no g in font nullfont!
+Missing character: There is no G in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no u in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no H in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no q in font nullfont!
+Missing character: There is no u in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no d in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no u in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no p in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no p in font nullfont!
+Missing character: There is no p in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no p in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no . in font nullfont!
+
+Overfull \hbox (20.0pt too wide) in paragraph at lines 33--38
+[]
+ []
+
+
+Overfull \hbox (6.18402pt too wide) in paragraph at lines 33--38
+\OML/cmm/m/it/10 ^^L$
+ []
+
+
+Overfull \hbox (24.33565pt too wide) in paragraph at lines 33--38
+\OML/cmm/m/it/10 m \OT1/cmr/m/n/10 :\OMS/cmsy/m/n/10 !$
+ []
+
+
+Overfull \hbox (32.11346pt too wide) in paragraph at lines 33--38
+\OML/cmm/m/it/10 m\OT1/cmr/m/n/10 (0) =
+ []
+
+
+Overfull \hbox (5.00002pt too wide) in paragraph at lines 33--38
+\OT1/cmr/m/n/10 0$
+ []
+
+
+Overfull \hbox (32.11346pt too wide) in paragraph at lines 33--38
+\OML/cmm/m/it/10 m\OT1/cmr/m/n/10 (1) =
+ []
+
+
+Overfull \hbox (5.00002pt too wide) in paragraph at lines 33--38
+\OT1/cmr/m/n/10 1$
+ []
+
+
+Overfull \hbox (6.18402pt too wide) in paragraph at lines 33--38
+\OML/cmm/m/it/10 ^^L$
+ []
+
+
+Overfull \hbox (22.74196pt too wide) in paragraph at lines 33--38
+\OML/cmm/m/it/10 m\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 ^^L\OT1/cmr/m/n/10 )$
+ []
+
+
+Overfull \hbox (37.8375pt too wide) in paragraph at lines 33--38
+\OMS/cmsy/m/n/10 H[] \OT1/cmr/m/n/10 =
+ []
+
+
+Overfull \hbox (91.8178pt too wide) in paragraph at lines 33--38
+\OMS/cmsy/m/n/10 f\OML/cmm/m/it/10 y[]; y[]; [] ; y[]\OMS/cmsy/m/n/10 g ^^Z$
+ []
+
+
+Overfull \hbox (35.8791pt too wide) in paragraph at lines 33--38
+\OML/cmm/m/it/10 ![] \OT1/cmr/m/n/10 =
+ []
+
+
+Overfull \hbox (85.22743pt too wide) in paragraph at lines 33--38
+\OMS/cmsy/m/n/10 f\OML/cmm/m/it/10 ![]; ![]; [] ; ![]\OMS/cmsy/m/n/10 g$
+ []
+
+
+Overfull \hbox (20.12642pt too wide) in paragraph at lines 33--38
+\OML/cmm/m/it/10 C[]\OT1/cmr/m/n/10 ()$
+ []
+
+
+Overfull \hbox (24.29578pt too wide) in paragraph at lines 33--38
+[] \OT1/cmr/m/n/10 :
+ []
+
+
+Overfull \hbox (32.90414pt too wide) in paragraph at lines 33--38
+\OML/cmm/m/it/10 C[]\OT1/cmr/m/n/10 () \OMS/cmsy/m/n/10 !
+ []
+
+
+Overfull \hbox (53.17358pt too wide) in paragraph at lines 33--38
+\OML/cmm/m/it/10 ;  Q[]\OT1/cmr/m/n/10 [\OML/cmm/m/it/10 f\OT1/cmr/m/n/10 ] =
+ []
+
+
+Overfull \hbox (69.40596pt too wide) in paragraph at lines 33--38
+[][] \OML/cmm/m/it/10 f\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 y[]\OT1/cmr/m/n/10 )\O
+ML/cmm/m/it/10 ![]:$
+ []
+
+
+Overfull \hbox (120.4497pt too wide) in paragraph at lines 33--38
+[]\OML/cmm/m/it/10 ormula[]bergomi[]amulti \OMS/cmsy/m/n/10 ^^@
+ []
+
+
+Overfull \hbox (158.8805pt too wide) in paragraph at lines 33--38
+\OML/cmm/m/it/10 variateintegrationproblemwith;$$[] \OMS/cmsy/m/n/10 ^^N
+ []
+
+
+Overfull \hbox (7.86249pt too wide) in paragraph at lines 33--38
+\OML/cmm/m/it/10 G$
+ []
+
+
+Overfull \hbox (19.5374pt too wide) in paragraph at lines 33--38
+\OT1/cmr/bx/n/10 Y \OT1/cmr/m/n/10 =
+ []
+
+
+Overfull \hbox (57.79164pt too wide) in paragraph at lines 33--38
+\OT1/cmr/m/n/10 (\OT1/cmr/bx/n/10 W[]\OML/cmm/m/it/10 ; \OT1/cmr/bx/n/10 W[]\OT
+1/cmr/m/n/10 )$
+ []
+
+
+Overfull \hbox (28.37639pt too wide) in paragraph at lines 33--38
+\OT1/cmr/m/n/10 ^^@ =[]$
+ []
+
+Missing character: There is no W in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no d in font nullfont!
 Missing character: There is no e in font nullfont!
@@ -2430,8 +2619,8 @@ Missing character: There is no x in font nullfont!
 ! Undefined control sequence.
 <recently read> \boldsymbol 
                             
-l.37 ...we define for any multi-index $\boldsymbol
-                                                  {\beta} \in \nset^{2N}$
+l.39 We define for any multi-index $\boldsymbol
+                                               {\beta} \in \nset^{2N}$
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -2439,7 +2628,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.37 ... multi-index $\boldsymbol{\beta} \in \nset
+l.39 ... multi-index $\boldsymbol{\beta} \in \nset
                                                   ^{2N}$
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -2448,48 +2637,17 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-Overfull \hbox (120.4497pt too wide) in paragraph at lines 36--38
-      $[]\OML/cmm/m/it/10 ormula[]bergomi[]amulti \OMS/cmsy/m/n/10 ^^@
+Overfull \hbox (20.0pt too wide) in paragraph at lines 39--40
+[]
  []
 
 
-Overfull \hbox (158.8805pt too wide) in paragraph at lines 36--38
-\OML/cmm/m/it/10 variateintegrationproblemwith;$$[] \OMS/cmsy/m/n/10 ^^N
- []
-
-
-Overfull \hbox (7.86249pt too wide) in paragraph at lines 36--38
-\OML/cmm/m/it/10 G$
- []
-
-
-Overfull \hbox (19.5374pt too wide) in paragraph at lines 36--38
-\OT1/cmr/bx/n/10 Y \OT1/cmr/m/n/10 =
- []
-
-
-Overfull \hbox (57.79164pt too wide) in paragraph at lines 36--38
-\OT1/cmr/m/n/10 (\OT1/cmr/bx/n/10 W[]\OML/cmm/m/it/10 ; \OT1/cmr/bx/n/10 W[]\OT
-1/cmr/m/n/10 )$
- []
-
-
-Overfull \hbox (28.37639pt too wide) in paragraph at lines 36--38
-\OT1/cmr/m/n/10 ^^@ =[]$
- []
-
-
-Overfull \hbox (27.19928pt too wide) in paragraph at lines 36--38
+Overfull \hbox (27.19928pt too wide) in paragraph at lines 39--40
 \OML/cmm/m/it/10 ^^L \OMS/cmsy/m/n/10 2[]$ 
  []
 
-
-Overfull \hbox (20.0pt too wide) in paragraph at lines 39--39
-[] 
- []
-
 ! Undefined control sequence.
-l.39 $$Q^{m(\boldsymbol
+l.40 $$Q^{m(\boldsymbol
                        {\beta})}: C^0(\rset^{2N}) \rightarrow \rset,\quad  Q...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -2498,7 +2656,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.39 $$Q^{m(\boldsymbol{\beta})}: C^0(\rset
+l.40 $$Q^{m(\boldsymbol{\beta})}: C^0(\rset
                                            ^{2N}) \rightarrow \rset,\quad  Q...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -2507,7 +2665,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.39 ...beta})}: C^0(\rset^{2N}) \rightarrow \rset
+l.40 ...beta})}: C^0(\rset^{2N}) \rightarrow \rset
                                                   ,\quad  Q^{m(\boldsymbol{\...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -2516,7 +2674,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.39 ... \rightarrow \rset,\quad  Q^{m(\boldsymbol
+l.40 ... \rightarrow \rset,\quad  Q^{m(\boldsymbol
                                                   {\beta})}= \bigotimes_{n =...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -2525,7 +2683,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.39 ...gotimes_{n = 1}^{2N} Q^{m(\beta_n)} \COMMA
+l.40 ...gotimes_{n = 1}^{2N} Q^{m(\beta_n)} \COMMA
                                                    $$
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -2534,7 +2692,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-Overfull \hbox (171.84538pt too wide) detected at line 39
+Overfull \hbox (171.84538pt too wide) detected at line 40
 \OML/cmm/m/it/10 Q[] \OT1/cmr/m/n/10 : \OML/cmm/m/it/10 C[]\OT1/cmr/m/n/10 ([])
  \OMS/cmsy/m/n/10 !\OML/cmm/m/it/10 ;  Q[] \OT1/cmr/m/n/10 = [] \OML/cmm/m/it/1
 0 Q[]
@@ -2640,7 +2798,7 @@ Missing character: There is no e in font nullfont!
 Missing character: There is no o in font nullfont!
 Missing character: There is no f in font nullfont!
 ! Undefined control sequence.
-l.40 ..., we obtain the value of $Q^{m(\boldsymbol
+l.41 ..., we obtain the value of $Q^{m(\boldsymbol
                                                   {\beta})}[f]$  by using th...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -2663,7 +2821,7 @@ Missing character: There is no r in font nullfont!
 Missing character: There is no i in font nullfont!
 Missing character: There is no d in font nullfont!
 ! Undefined control sequence.
-l.40 ...using the grid $\mathcal{T}^{m(\boldsymbol
+l.41 ...using the grid $\mathcal{T}^{m(\boldsymbol
                                                   {\beta})}= \prod_{n = 1}^{...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -2688,7 +2846,7 @@ Missing character: There is no i in font nullfont!
 Missing character: There is no t in font nullfont!
 Missing character: There is no y in font nullfont!
 ! Undefined control sequence.
-l.40 ... cardinality $\#\mathcal{T}^{m(\boldsymbol
+l.41 ... cardinality $\#\mathcal{T}^{m(\boldsymbol
                                                   {\beta})}=\prod_{n=1}^{2N}...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -2710,48 +2868,48 @@ Missing character: There is no i in font nullfont!
 Missing character: There is no n in font nullfont!
 Missing character: There is no g in font nullfont!
 
-Overfull \hbox (6.00235pt too wide) in paragraph at lines 39--41
+Overfull \hbox (6.00235pt too wide) in paragraph at lines 40--42
   $\OML/cmm/m/it/10 n$
  []
 
 
-Overfull \hbox (6.00235pt too wide) in paragraph at lines 39--41
+Overfull \hbox (6.00235pt too wide) in paragraph at lines 40--42
 \OML/cmm/m/it/10 n$
  []
 
 
-Overfull \hbox (5.97226pt too wide) in paragraph at lines 39--41
+Overfull \hbox (5.97226pt too wide) in paragraph at lines 40--42
 \OML/cmm/m/it/10 f$
  []
 
 
-Overfull \hbox (38.17366pt too wide) in paragraph at lines 39--41
+Overfull \hbox (38.17366pt too wide) in paragraph at lines 40--42
 \OML/cmm/m/it/10 Q[]\OT1/cmr/m/n/10 [\OML/cmm/m/it/10 f\OT1/cmr/m/n/10 ]$
  []
 
 
-Overfull \hbox (37.2839pt too wide) in paragraph at lines 39--41
+Overfull \hbox (37.2839pt too wide) in paragraph at lines 40--42
 \OMS/cmsy/m/n/10 T[] \OT1/cmr/m/n/10 =
  []
 
 
-Overfull \hbox (58.50572pt too wide) in paragraph at lines 39--41
+Overfull \hbox (58.50572pt too wide) in paragraph at lines 40--42
 [][] \OMS/cmsy/m/n/10 H[]$
  []
 
 
-Overfull \hbox (45.61726pt too wide) in paragraph at lines 39--41
+Overfull \hbox (45.61726pt too wide) in paragraph at lines 40--42
 \OT1/cmr/m/n/10 #\OMS/cmsy/m/n/10 T[] \OT1/cmr/m/n/10 =
  []
 
 
-Overfull \hbox (54.33699pt too wide) in paragraph at lines 39--41
+Overfull \hbox (54.33699pt too wide) in paragraph at lines 40--42
 [][] \OML/cmm/m/it/10 m\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 ^^L[]\OT1/cmr/m/n/10 )
 $
  []
 
 ! Undefined control sequence.
-l.41 $$ Q^{m(\boldsymbol
+l.42 $$ Q^{m(\boldsymbol
                         {\beta})}[f]= \sum_{j=1}^{\#\mathcal{T}^{m(\boldsymb...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -2760,7 +2918,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.41 ...= \sum_{j=1}^{\#\mathcal{T}^{m(\boldsymbol
+l.42 ...= \sum_{j=1}^{\#\mathcal{T}^{m(\boldsymbol
                                                   {\beta})}} f(\hat{y}_j) \b...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -2769,7 +2927,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.41 ...eta})}} f(\hat{y}_j) \bar{\omega}_j \COMMA
+l.42 ...eta})}} f(\hat{y}_j) \bar{\omega}_j \COMMA
                                                   $$
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -2778,7 +2936,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-Overfull \hbox (115.69089pt too wide) detected at line 41
+Overfull \hbox (115.69089pt too wide) detected at line 42
 \OML/cmm/m/it/10 Q[]\OT1/cmr/m/n/10 [\OML/cmm/m/it/10 f\OT1/cmr/m/n/10 ] = [] \
 OML/cmm/m/it/10 f\OT1/cmr/m/n/10 ([])[]
  []
@@ -2789,7 +2947,7 @@ Missing character: There is no e in font nullfont!
 Missing character: There is no r in font nullfont!
 Missing character: There is no e in font nullfont!
 ! Undefined control sequence.
-l.42 ... $\hat{y}_j \in \mathcal{T}^{m(\boldsymbol
+l.43 ... $\hat{y}_j \in \mathcal{T}^{m(\boldsymbol
                                                   {\beta})}$ and $\bar{\omeg...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -2890,7 +3048,7 @@ Missing character: There is no a in font nullfont!
 Missing character: There is no c in font nullfont!
 Missing character: There is no e in font nullfont!
 ! Undefined control sequence.
-l.42 ..., hereafter, we replace  $Q^{m(\boldsymbol
+l.43 ..., hereafter, we replace  $Q^{m(\boldsymbol
                                                   {\beta})}$ by $Q^{\boldsym...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -2901,7 +3059,7 @@ and I'll forget about whatever was undefined.
 Missing character: There is no b in font nullfont!
 Missing character: There is no y in font nullfont!
 ! Undefined control sequence.
-l.42 ...m(\boldsymbol{\beta})}$ by $Q^{\boldsymbol
+l.43 ...m(\boldsymbol{\beta})}$ by $Q^{\boldsymbol
                                                   {\beta}}$.
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -2911,269 +3069,29 @@ and I'll forget about whatever was undefined.
 
 Missing character: There is no . in font nullfont!
 
-Overfull \hbox (18.56078pt too wide) in paragraph at lines 41--43
+Overfull \hbox (18.56078pt too wide) in paragraph at lines 42--44
  $[] \OMS/cmsy/m/n/10 2
  []
 
 
-Overfull \hbox (26.7284pt too wide) in paragraph at lines 41--43
+Overfull \hbox (26.7284pt too wide) in paragraph at lines 42--44
 \OMS/cmsy/m/n/10 T[]$
  []
 
 
-Overfull \hbox (10.4381pt too wide) in paragraph at lines 41--43
+Overfull \hbox (10.4381pt too wide) in paragraph at lines 42--44
 []$
  []
 
 
-Overfull \hbox (26.64583pt too wide) in paragraph at lines 41--43
+Overfull \hbox (26.64583pt too wide) in paragraph at lines 42--44
 \OML/cmm/m/it/10 Q[]$
  []
 
 
-Overfull \hbox (13.29968pt too wide) in paragraph at lines 41--43
+Overfull \hbox (13.29968pt too wide) in paragraph at lines 42--44
 \OML/cmm/m/it/10 Q[]$ 
  []
-
-
-! LaTeX Error: Environment remark undefined.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.44 \begin{remark}
-                   
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-Missing character: There is no W in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no n in font nullfont!
-Missing character: There is no o in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no h in font nullfont!
-Missing character: There is no a in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no h in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no q in font nullfont!
-Missing character: There is no u in font nullfont!
-Missing character: There is no a in font nullfont!
-Missing character: There is no d in font nullfont!
-Missing character: There is no r in font nullfont!
-Missing character: There is no a in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no u in font nullfont!
-Missing character: There is no r in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no p in font nullfont!
-Missing character: There is no o in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no n in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no s in font nullfont!
-Missing character: There is no a in font nullfont!
-Missing character: There is no r in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no c in font nullfont!
-Missing character: There is no h in font nullfont!
-Missing character: There is no o in font nullfont!
-Missing character: There is no s in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no n in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no o in font nullfont!
-Missing character: There is no o in font nullfont!
-Missing character: There is no p in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no m in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no z in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no h in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no c in font nullfont!
-Missing character: There is no o in font nullfont!
-Missing character: There is no n in font nullfont!
-Missing character: There is no v in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no r in font nullfont!
-Missing character: There is no g in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no n in font nullfont!
-Missing character: There is no c in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no p in font nullfont!
-Missing character: There is no r in font nullfont!
-Missing character: There is no o in font nullfont!
-Missing character: There is no p in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no r in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no s in font nullfont!
-Missing character: There is no o in font nullfont!
-Missing character: There is no f in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no h in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no q in font nullfont!
-Missing character: There is no u in font nullfont!
-Missing character: There is no a in font nullfont!
-Missing character: There is no d in font nullfont!
-Missing character: There is no r in font nullfont!
-Missing character: There is no a in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no u in font nullfont!
-Missing character: There is no r in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no r in font nullfont!
-Missing character: There is no r in font nullfont!
-Missing character: There is no o in font nullfont!
-Missing character: There is no r in font nullfont!
-Missing character: There is no . in font nullfont!
-Missing character: There is no F in font nullfont!
-Missing character: There is no o in font nullfont!
-Missing character: There is no r in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no n in font nullfont!
-Missing character: There is no s in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no a in font nullfont!
-Missing character: There is no n in font nullfont!
-Missing character: There is no c in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no , in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no n in font nullfont!
-Missing character: There is no o in font nullfont!
-Missing character: There is no u in font nullfont!
-Missing character: There is no r in font nullfont!
-Missing character: There is no c in font nullfont!
-Missing character: There is no o in font nullfont!
-Missing character: There is no n in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no x in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no , in font nullfont!
-Missing character: There is no s in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no n in font nullfont!
-Missing character: There is no c in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no w in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no a in font nullfont!
-Missing character: There is no r in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no d in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no a in font nullfont!
-Missing character: There is no l in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no n in font nullfont!
-Missing character: There is no g in font nullfont!
-Missing character: There is no w in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no h in font nullfont!
-Missing character: There is no G in font nullfont!
-Missing character: There is no a in font nullfont!
-Missing character: There is no u in font nullfont!
-Missing character: There is no s in font nullfont!
-Missing character: There is no s in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no a in font nullfont!
-Missing character: There is no n in font nullfont!
-Missing character: There is no d in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no n in font nullfont!
-Missing character: There is no s in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no s in font nullfont!
-Missing character: There is no , in font nullfont!
-Missing character: There is no u in font nullfont!
-Missing character: There is no s in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no n in font nullfont!
-Missing character: There is no g in font nullfont!
-Missing character: There is no G in font nullfont!
-Missing character: There is no a in font nullfont!
-Missing character: There is no u in font nullfont!
-Missing character: There is no s in font nullfont!
-Missing character: There is no s in font nullfont!
-Missing character: There is no - in font nullfont!
-Missing character: There is no H in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no r in font nullfont!
-Missing character: There is no m in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no q in font nullfont!
-Missing character: There is no u in font nullfont!
-Missing character: There is no a in font nullfont!
-Missing character: There is no d in font nullfont!
-Missing character: There is no r in font nullfont!
-Missing character: There is no a in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no u in font nullfont!
-Missing character: There is no r in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no p in font nullfont!
-Missing character: There is no o in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no n in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no s in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no s in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no h in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no a in font nullfont!
-Missing character: There is no p in font nullfont!
-Missing character: There is no p in font nullfont!
-Missing character: There is no r in font nullfont!
-Missing character: There is no o in font nullfont!
-Missing character: There is no p in font nullfont!
-Missing character: There is no r in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no a in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no c in font nullfont!
-Missing character: There is no h in font nullfont!
-Missing character: There is no o in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no c in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no . in font nullfont!
-
-! LaTeX Error: \begin{document} ended by \end{remark}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.46 \end{remark}
-                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
 
 Missing character: There is no A in font nullfont!
 Missing character: There is no d in font nullfont!
@@ -3198,7 +3116,7 @@ Missing character: There is no n in font nullfont!
 ! Undefined control sequence.
 <recently read> \expt 
                       
-l.47 A direct approximation $\expt
+l.45 A direct approximation $\expt
                                   {f[\mathbf{Y}]} \approx Q^{\boldsymbol{\be...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -3207,7 +3125,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.47 ...expt{f[\mathbf{Y}]} \approx Q^{\boldsymbol
+l.45 ...expt{f[\mathbf{Y}]} \approx Q^{\boldsymbol
                                                   {\beta}}[f]$ is not an app...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -3385,6 +3303,7 @@ Missing character: There is no s in font nullfont!
 Missing character: There is no a in font nullfont!
 Missing character: There is no n in font nullfont!
 Missing character: There is no d in font nullfont!
+Missing character: There is no a in font nullfont!
 Missing character: There is no c in font nullfont!
 Missing character: There is no l in font nullfont!
 Missing character: There is no a in font nullfont!
@@ -3458,7 +3377,7 @@ Missing character: There is no r in font nullfont!
 ! Undefined control sequence.
 <recently read> \expt 
                       
-l.47 ... effective approximation scheme for $\expt
+l.45 ... effective approximation scheme for $\expt
                                                   {f}$.^^L
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -3468,37 +3387,29 @@ and I'll forget about whatever was undefined.
 
 Missing character: There is no . in font nullfont!
 
-Overfull \hbox (20.0pt too wide) in paragraph at lines 45--47
+Overfull \hbox (20.0pt too wide) in paragraph at lines 45--45
 []
  []
 
 
-Overfull \hbox (31.06523pt too wide) in paragraph at lines 45--47
+Overfull \hbox (31.06523pt too wide) in paragraph at lines 45--45
 [] \OMS/cmsy/m/n/10 ^^Y
  []
 
 
-Overfull \hbox (24.82751pt too wide) in paragraph at lines 45--47
+Overfull \hbox (24.82751pt too wide) in paragraph at lines 45--45
 \OML/cmm/m/it/10 Q[]\OT1/cmr/m/n/10 [\OML/cmm/m/it/10 f\OT1/cmr/m/n/10 ]$
  []
 
 
-Overfull \hbox (5.97226pt too wide) in paragraph at lines 45--47
+Overfull \hbox (5.97226pt too wide) in paragraph at lines 45--45
 \OML/cmm/m/it/10 f$ 
  []
 
-Missing character: There is no F in font nullfont!
+Missing character: There is no T in font nullfont!
 Missing character: There is no o in font nullfont!
-Missing character: There is no r in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no h in font nullfont!
+Missing character: There is no b in font nullfont!
 Missing character: There is no e in font nullfont!
-Missing character: There is no s in font nullfont!
-Missing character: There is no a in font nullfont!
-Missing character: There is no k in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no o in font nullfont!
-Missing character: There is no f in font nullfont!
 Missing character: There is no c in font nullfont!
 Missing character: There is no o in font nullfont!
 Missing character: There is no n in font nullfont!
@@ -3507,10 +3418,6 @@ Missing character: There is no r in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no t in font nullfont!
 Missing character: There is no e in font nullfont!
-Missing character: There is no n in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no s in font nullfont!
-Missing character: There is no s in font nullfont!
 Missing character: There is no , in font nullfont!
 Missing character: There is no i in font nullfont!
 Missing character: There is no n in font nullfont!
@@ -3703,7 +3610,7 @@ Missing character: There is no x in font nullfont!
 ! Undefined control sequence.
 <recently read> \boldsymbol 
                             
-l.49 ...nstruction. For a multi-index $\boldsymbol
+l.47 ...nstruction. For a multi-index $\boldsymbol
                                                   {\beta} = (\beta_n)_{n=1}^...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -3712,7 +3619,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.49 ...{\beta} = (\beta_n)_{n=1}^{2N} \in \mathbb
+l.47 ...{\beta} = (\beta_n)_{n=1}^{2N} \in \mathbb
                                                   {N}^{2N}$, we denote  by
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -3732,7 +3639,7 @@ Missing character: There is no e in font nullfont!
 Missing character: There is no b in font nullfont!
 Missing character: There is no y in font nullfont!
 ! Undefined control sequence.
-l.50 $Q_N^{\boldsymbol
+l.48 $Q_N^{\boldsymbol
                       {\beta}}$,   the result of approximating \eqref{BS_for...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -3766,7 +3673,7 @@ Missing character: There is no i in font nullfont!
 Missing character: There is no n in font nullfont!
 Missing character: There is no g in font nullfont!
 ! Undefined control sequence.
-l.50 ...a}}$,   the result of approximating \eqref
+l.48 ...a}}$,   the result of approximating \eqref
                                                   {BS_formula_rbergomi_2} wi...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -3779,13 +3686,13 @@ Missing character: There is no S in font nullfont!
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.50 ...,   the result of approximating \eqref{BS_
+l.48 ...,   the result of approximating \eqref{BS_
                                                   formula_rbergomi_2} with a...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Extra }, or forgotten $.
-l.50 ...pproximating \eqref{BS_formula_rbergomi_2}
+l.48 ...pproximating \eqref{BS_formula_rbergomi_2}
                                                    with a number of quadratu...
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -3799,7 +3706,7 @@ Missing character: There is no ( in font nullfont!
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.50 ...in the $i$-th dimension equal to  $m(\beta
+l.48 ...in the $i$-th dimension equal to  $m(\beta
                                                   _i)$. We further define th...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -3840,7 +3747,7 @@ Missing character: There is no c in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no s in font nullfont!
 ! Undefined control sequence.
-l.51 differences $\Delta Q_N^{\boldsymbol
+l.49 differences $\Delta Q_N^{\boldsymbol
                                          {\beta}}$ as follows: for a single ...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -3878,68 +3785,28 @@ Missing character: There is no l in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no t in font nullfont!
 
-Overfull \hbox (20.0pt too wide) in paragraph at lines 49--53
-[]
- []
+! LaTeX Error: Environment equation* undefined.
 
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.51 \begin{equation*}
+                      
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
 
-Overfull \hbox (14.12498pt too wide) in paragraph at lines 49--53
-\OT1/cmr/m/n/10 2\OML/cmm/m/it/10 N$
- []
-
-
-Overfull \hbox (14.12498pt too wide) in paragraph at lines 49--53
-\OT1/cmr/m/n/10 2\OML/cmm/m/it/10 N$
- []
-
-
-Overfull \hbox (16.73953pt too wide) in paragraph at lines 49--53
-\OML/cmm/m/it/10 ^^L \OT1/cmr/m/n/10 =
- []
-
-
-Overfull \hbox (43.89015pt too wide) in paragraph at lines 49--53
-\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 ^^L[]\OT1/cmr/m/n/10 )[] \OMS/cmsy/m/n/10 2
- []
-
-
-Overfull \hbox (20.69583pt too wide) in paragraph at lines 49--53
-\OML/cmm/m/it/10 N[]$
- []
-
-
-Overfull \hbox (15.49028pt too wide) in paragraph at lines 49--53
-\OML/cmm/m/it/10 Q[]$
- []
-
-
-Overfull \hbox (363.46057pt too wide) in paragraph at lines 49--53
-[]\OML/cmm/m/it/10 ormula[]bergomi[]withanumberofquadraturepointsinthe$$\OMS/cm
-sy/m/n/10 ^^@\OML/cmm/m/it/10 thdimensionequalto$$^^L[]\OT1/cmr/m/n/10 )$
- []
-
-
-Overfull \hbox (23.82364pt too wide) in paragraph at lines 49--53
-\OT1/cmr/m/n/10 ^^A\OML/cmm/m/it/10 Q[]$
- []
-
-
-Overfull \hbox (15.55553pt too wide) in paragraph at lines 49--53
-\OT1/cmr/m/n/10 1 \OMS/cmsy/m/n/10 ^^T
- []
-
-
-Overfull \hbox (14.00064pt too wide) in paragraph at lines 49--53
-\OML/cmm/m/it/10 i \OMS/cmsy/m/n/10 ^^T
- []
-
-
-Overfull \hbox (14.12498pt too wide) in paragraph at lines 49--53
-\OT1/cmr/m/n/10 2\OML/cmm/m/it/10 N$
- []
+! Missing $ inserted.
+<inserted text> 
+                $
+l.52 \Delta
+           _i Q_N^{\boldsymbol{\beta}} = \left\{
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
 
 ! Undefined control sequence.
-l.54 \Delta_i Q_N^{\boldsymbol
+l.52 \Delta_i Q_N^{\boldsymbol
                               {\beta}} = \left\{
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -3948,7 +3815,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.55 \aligned
+l.53 \aligned
              
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -3957,7 +3824,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.56  Q_N^{\boldsymbol
+l.54  Q_N^{\boldsymbol
                       {\beta}} &- Q_N^{\boldsymbol{\beta}'}  \text{, with } ...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -3966,7 +3833,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Misplaced alignment tab character &.
-l.56  Q_N^{\boldsymbol{\beta}} &
+l.54  Q_N^{\boldsymbol{\beta}} &
                                 - Q_N^{\boldsymbol{\beta}'}  \text{, with } ...
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -3976,7 +3843,7 @@ you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
 ! Undefined control sequence.
-l.56  Q_N^{\boldsymbol{\beta}} &- Q_N^{\boldsymbol
+l.54  Q_N^{\boldsymbol{\beta}} &- Q_N^{\boldsymbol
                                                   {\beta}'}  \text{, with } ...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -3985,7 +3852,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.56 ...beta}} &- Q_N^{\boldsymbol{\beta}'}  \text
+l.54 ...beta}} &- Q_N^{\boldsymbol{\beta}'}  \text
                                                   {, with } \boldsymbol{\bet...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -3994,7 +3861,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.56 ...ymbol{\beta}'}  \text{, with } \boldsymbol
+l.54 ...ymbol{\beta}'}  \text{, with } \boldsymbol
                                                   {\beta}' =\boldsymbol{\bet...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -4003,7 +3870,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.56 ...{, with } \boldsymbol{\beta}' =\boldsymbol
+l.54 ...{, with } \boldsymbol{\beta}' =\boldsymbol
                                                   {\beta} - e_i, \text{ if }...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -4012,7 +3879,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.56 ...l{\beta}' =\boldsymbol{\beta} - e_i, \text
+l.54 ...l{\beta}' =\boldsymbol{\beta} - e_i, \text
                                                   { if } \boldsymbol{\beta}_...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -4021,7 +3888,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.56 ...mbol{\beta} - e_i, \text{ if } \boldsymbol
+l.54 ...mbol{\beta} - e_i, \text{ if } \boldsymbol
                                                   {\beta}_i>0 \\
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -4030,7 +3897,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.57  Q_N^{\boldsymbol
+l.55  Q_N^{\boldsymbol
                       {\beta}} &, \quad  \text{ otherwise}
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -4039,7 +3906,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Misplaced alignment tab character &.
-l.57  Q_N^{\boldsymbol{\beta}} &
+l.55  Q_N^{\boldsymbol{\beta}} &
                                 , \quad  \text{ otherwise}
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -4049,7 +3916,7 @@ you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
 ! Undefined control sequence.
-l.57  Q_N^{\boldsymbol{\beta}} &, \quad  \text
+l.55  Q_N^{\boldsymbol{\beta}} &, \quad  \text
                                               { otherwise}
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -4058,7 +3925,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.58 \endaligned
+l.56 \endaligned
                 
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -4067,9 +3934,28 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-Overfull \hbox (270.47278pt too wide) detected at line 60
-\OT1/cmr/m/n/10 ^^A[]\OML/cmm/m/it/10 Q[] \OT1/cmr/m/n/10 = []
- []
+! LaTeX Error: \begin{document} ended by \end{equation*}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.58 \end{equation*}
+                    
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.58 \end{equation*}
+                    
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
 
 Missing character: There is no w in font nullfont!
 Missing character: There is no h in font nullfont!
@@ -4117,7 +4003,7 @@ Missing character: There is no e in font nullfont!
 Missing character: There is no n in font nullfont!
 Missing character: There is no , in font nullfont!
 ! Undefined control sequence.
-l.62 Q_N^{\boldsymbol
+l.60 Q_N^{\boldsymbol
                      {\beta}}$ is defined as
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -4137,27 +4023,28 @@ Missing character: There is no d in font nullfont!
 Missing character: There is no a in font nullfont!
 Missing character: There is no s in font nullfont!
 
-Overfull \hbox (7.98555pt too wide) in paragraph at lines 60--63
- $\OML/cmm/m/it/10 e[]$
- []
+! LaTeX Error: Environment equation* undefined.
 
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.61 \begin{equation*}
+                      
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
 
-Overfull \hbox (3.44513pt too wide) in paragraph at lines 60--63
-\OML/cmm/m/it/10 i$
- []
-
-
-Overfull \hbox (14.12498pt too wide) in paragraph at lines 60--63
-\OT1/cmr/m/n/10 2\OML/cmm/m/it/10 N$
- []
-
-
-Overfull \hbox (23.82364pt too wide) in paragraph at lines 60--63
-\OT1/cmr/m/n/10 ^^A\OML/cmm/m/it/10 Q[]$
- []
+! Missing $ inserted.
+<inserted text> 
+                $
+l.62 \Delta
+            Q_N^{\boldsymbol{\beta}} = \left( \prod_{i=1}^{2N} \Delta_i \rig...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
 
 ! Undefined control sequence.
-l.64 \Delta Q_N^{\boldsymbol
+l.62 \Delta Q_N^{\boldsymbol
                             {\beta}} = \left( \prod_{i=1}^{2N} \Delta_i \rig...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -4166,7 +4053,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.64 ...=1}^{2N} \Delta_i \right) Q_N^{\boldsymbol
+l.62 ...=1}^{2N} \Delta_i \right) Q_N^{\boldsymbol
                                                   {\beta}}.
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -4175,75 +4062,29 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-Overfull \hbox (99.20853pt too wide) detected at line 65
-\OT1/cmr/m/n/10 ^^A\OML/cmm/m/it/10 Q[] \OT1/cmr/m/n/10 = [] \OML/cmm/m/it/10 Q
-[]:
- []
-
-
-! LaTeX Error: The font size command \normalsize is not defined:
-               there is probably something wrong with the class file.
+! LaTeX Error: \begin{document} ended by \end{equation*}.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.65 \end{equation}
-                   
+l.63 \end{equation*}
+                    
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
-[1{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
-! Undefined control sequence.
-<write> ...bel{BS_formula_rbergomi_2}{{}{\thepage 
-                                                  }}
-l.65 \end{equation}
-                   
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
+! Missing $ inserted.
+<inserted text> 
+                $
+l.63 \end{equation*}
+                    
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
 
-\newlabel{BS_formula_rbergomi_2}{{}{}}
-! Undefined control sequence.
-<write> ...ate gaussian distribution}{{}{\thepage 
-                                                  }}
-l.65 \end{equation}
-                   
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-\newlabel{eq: multivariate gaussian distribution}{{}{}}
-! Undefined control sequence.
-<write> \newlabel{eq:total_error}{{}{\thepage 
-                                              }}
-l.65 \end{equation}
-                   
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-\newlabel{eq:total_error}{{}{}}
-! Undefined control sequence.
-<write> ...l{sec:Details of the MISC}{{}{\thepage 
-                                                  }}
-l.65 \end{equation}
-                   
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-\newlabel{sec:Details of the MISC}{{}{}}
-]
 Missing character: There is no F in font nullfont!
 Missing character: There is no o in font nullfont!
 Missing character: There is no r in font nullfont!
@@ -4266,14 +4107,13 @@ Missing character: There is no h in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no n in font nullfont!
 
-
 ! LaTeX Error: Environment multline* undefined.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.67 \begin{multline*}
+l.65 \begin{multline*}
                       
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -4282,13 +4122,13 @@ or  <return>  to continue without it.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.68 	\Delta
+l.66 	\Delta
              Q_1^{\boldsymbol{\beta}} = \Delta_2 \Delta_1 Q_1^{(\beta_1, \be...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Undefined control sequence.
-l.68 	\Delta Q_1^{\boldsymbol
+l.66 	\Delta Q_1^{\boldsymbol
                              {\beta}} = \Delta_2 \Delta_1 Q_1^{(\beta_1, \be...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -4303,7 +4143,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.72 \end{multline*}
+l.70 \end{multline*}
                     
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -4312,7 +4152,7 @@ or  <return>  to continue without it.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.72 \end{multline*}
+l.70 \end{multline*}
                     
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -4343,7 +4183,7 @@ Missing character: There is no f in font nullfont!
 Missing character: There is no b in font nullfont!
 Missing character: There is no y in font nullfont!
 ! Undefined control sequence.
-l.73 ...n the definition of $C_{RB}^{N}$ by \eqref
+l.71 ...n the definition of $C_{RB}^{N}$ by \eqref
                                                   {BS_formula_rbergomi_2}, w...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -4356,13 +4196,13 @@ Missing character: There is no S in font nullfont!
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.73 ...e definition of $C_{RB}^{N}$ by \eqref{BS_
+l.71 ...e definition of $C_{RB}^{N}$ by \eqref{BS_
                                                   formula_rbergomi_2}, we ha...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Extra }, or forgotten $.
-l.73 ...{RB}^{N}$ by \eqref{BS_formula_rbergomi_2}
+l.71 ...{RB}^{N}$ by \eqref{BS_formula_rbergomi_2}
                                                   , we have the telescoping ...
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -4370,19 +4210,21 @@ you forgot something else, as in `\hbox{$x}'. In such cases
 the way to recover is to insert both the forgotten and the
 deleted material, e.g., by typing `I$}'.
 
-! Missing \endgroup inserted.
-<inserted text> 
-                \endgroup 
-l.74 \begin{equation}
-                     
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
+
+! LaTeX Error: Environment equation* undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.72 \begin{equation*}
+                      
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
 
 ! Undefined control sequence.
-l.76 ..., \ldots, \beta_{2N})} = \sum_{\boldsymbol
+l.74 ..., \ldots, \beta_{2N})} = \sum_{\boldsymbol
                                                   {\beta} \in \mathbb{N}^{2N...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -4391,7 +4233,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.76 ...})} = \sum_{\boldsymbol{\beta} \in \mathbb
+l.74 ...})} = \sum_{\boldsymbol{\beta} \in \mathbb
                                                   {N}^{2N}} \Delta Q_N^{\bol...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -4400,7 +4242,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.76 ...n \mathbb{N}^{2N}} \Delta Q_N^{\boldsymbol
+l.74 ...n \mathbb{N}^{2N}} \Delta Q_N^{\boldsymbol
                                                   {\beta}}.
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -4408,187 +4250,27 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-! You can't use `\eqno' in math mode.
-\endequation ->\eqno 
-                     \hbox {\@eqnnum }$$\@ignoretrue 
-l.77 \end{equation}
-                   
-Sorry, but I'm not programmed to handle this case;
-I'll just pretend that you didn't ask for it.
-If you're in the wrong mode, you might be able to
-return to the right one by typing `I}' or `I$' or `I\par'.
 
-
-! LaTeX Error: \begin{document} ended by \end{equation}.
+! LaTeX Error: \begin{document} ended by \end{equation*}.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.77 \end{equation}
-                   
+l.75 \end{equation*}
+                    
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
-! Missing $ inserted.
-<inserted text> 
-                $
-l.77 \end{equation}
-                   
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-! Missing } inserted.
-<inserted text> 
-                }
-l.77 \end{equation}
-                   
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-! Missing } inserted.
-<inserted text> 
-                }
-l.77 \end{equation}
-                   
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-! Missing } inserted.
-<inserted text> 
-                }
-l.77 \end{equation}
-                   
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-! Missing } inserted.
-<inserted text> 
-                }
-l.77 \end{equation}
-                   
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-! Missing } inserted.
-<inserted text> 
-                }
-l.77 \end{equation}
-                   
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-! Missing } inserted.
-<inserted text> 
-                }
-l.77 \end{equation}
-                   
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-! Missing } inserted.
-<inserted text> 
-                }
-l.77 \end{equation}
-                   
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-! Extra \endgroup.
-<recently read> \endgroup 
-                          
-l.77 \end{equation}
-                   
-Things are pretty mixed up, but I think the worst is over.
-
-Missing character: There is no T in font nullfont!
-Missing character: There is no h in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no M in font nullfont!
-Missing character: There is no I in font nullfont!
-Missing character: There is no S in font nullfont!
-Missing character: There is no C in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no s in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no m in font nullfont!
-Missing character: There is no a in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no o in font nullfont!
-Missing character: There is no r in font nullfont!
-Missing character: There is no u in font nullfont!
-Missing character: There is no s in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no d in font nullfont!
-Missing character: There is no f in font nullfont!
-Missing character: There is no o in font nullfont!
-Missing character: There is no r in font nullfont!
-Missing character: There is no a in font nullfont!
-Missing character: There is no p in font nullfont!
-Missing character: There is no p in font nullfont!
-Missing character: There is no r in font nullfont!
-Missing character: There is no o in font nullfont!
-Missing character: There is no x in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no m in font nullfont!
-Missing character: There is no a in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no n in font nullfont!
-Missing character: There is no g in font nullfont!
 ! Undefined control sequence.
-l.78 ...SC estimator used for approximating \eqref
+l.76 ...SC estimator used for approximating \eqref
                                                   {BS_formula_rbergomi_2}, a...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
-
-Missing character: There is no B in font nullfont!
-Missing character: There is no S in font nullfont!
-! Missing $ inserted.
-<inserted text> 
-                $
-l.78 ...stimator used for approximating \eqref{BS_
-                                                  formula_rbergomi_2}, and u...
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Extra }, or forgotten $.
-l.78 ...pproximating \eqref{BS_formula_rbergomi_2}
-                                                  , and using a set of multi...
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
 
 
 ! LaTeX Error: \mathcal allowed only in math mode.
@@ -4597,7 +4279,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.78 ...and using a set of multi-indices $\mathcal
+l.76 ...and using a set of multi-indices $\mathcal
                                                   {I}\subset \nset^{2N}$ is ...
 
 You're in trouble here.  Try typing  <return>  to proceed.
@@ -4607,13 +4289,13 @@ Missing character: There is no I in font nullfont!
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.78 ...a set of multi-indices $\mathcal{I}\subset
+l.76 ...a set of multi-indices $\mathcal{I}\subset
                                                    \nset^{2N}$ is given by
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Undefined control sequence.
-l.78 ...of multi-indices $\mathcal{I}\subset \nset
+l.76 ...of multi-indices $\mathcal{I}\subset \nset
                                                   ^{2N}$ is given by
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -4631,103 +4313,264 @@ Missing character: There is no n in font nullfont!
 Missing character: There is no b in font nullfont!
 Missing character: There is no y in font nullfont!
 
-Overfull \hbox (19.68048pt too wide) in paragraph at lines 65--79
-   $\OML/cmm/m/it/10 N \OT1/cmr/m/n/10 =
+Overfull \hbox (20.0pt too wide) in paragraph at lines 47--77
+[]
  []
 
 
-Overfull \hbox (5.00002pt too wide) in paragraph at lines 65--79
-\OT1/cmr/m/n/10 1$
+Overfull \hbox (14.12498pt too wide) in paragraph at lines 47--77
+\OT1/cmr/m/n/10 2\OML/cmm/m/it/10 N$
  []
 
 
-Overfull \hbox (32.18855pt too wide) in paragraph at lines 65--79
+Overfull \hbox (14.12498pt too wide) in paragraph at lines 47--77
+\OT1/cmr/m/n/10 2\OML/cmm/m/it/10 N$
+ []
+
+
+Overfull \hbox (16.73953pt too wide) in paragraph at lines 47--77
+\OML/cmm/m/it/10 ^^L \OT1/cmr/m/n/10 =
+ []
+
+
+Overfull \hbox (43.89015pt too wide) in paragraph at lines 47--77
+\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 ^^L[]\OT1/cmr/m/n/10 )[] \OMS/cmsy/m/n/10 2
+ []
+
+
+Overfull \hbox (20.69583pt too wide) in paragraph at lines 47--77
+\OML/cmm/m/it/10 N[]$
+ []
+
+
+Overfull \hbox (15.49028pt too wide) in paragraph at lines 47--77
+\OML/cmm/m/it/10 Q[]$
+ []
+
+
+Overfull \hbox (363.46057pt too wide) in paragraph at lines 47--77
+[]\OML/cmm/m/it/10 ormula[]bergomi[]withanumberofquadraturepointsinthe$$\OMS/cm
+sy/m/n/10 ^^@\OML/cmm/m/it/10 thdimensionequalto$$^^L[]\OT1/cmr/m/n/10 )$
+ []
+
+
+Overfull \hbox (23.82364pt too wide) in paragraph at lines 47--77
+\OT1/cmr/m/n/10 ^^A\OML/cmm/m/it/10 Q[]$
+ []
+
+
+Overfull \hbox (15.55553pt too wide) in paragraph at lines 47--77
+\OT1/cmr/m/n/10 1 \OMS/cmsy/m/n/10 ^^T
+ []
+
+
+Overfull \hbox (14.00064pt too wide) in paragraph at lines 47--77
+\OML/cmm/m/it/10 i \OMS/cmsy/m/n/10 ^^T
+ []
+
+
+Overfull \hbox (14.12498pt too wide) in paragraph at lines 47--77
+\OT1/cmr/m/n/10 2\OML/cmm/m/it/10 N$
+ []
+
+
+Overfull \hbox (37.70844pt too wide) in paragraph at lines 47--77
+\OT1/cmr/m/n/10 ^^A[]\OML/cmm/m/it/10 Q[] \OT1/cmr/m/n/10 =
+ []
+
+
+Overfull \hbox (229.98663pt too wide) in paragraph at lines 47--77
+[]$
+ []
+
+
+Overfull \hbox (7.98555pt too wide) in paragraph at lines 47--77
+\OML/cmm/m/it/10 e[]$
+ []
+
+
+Overfull \hbox (3.44513pt too wide) in paragraph at lines 47--77
+\OML/cmm/m/it/10 i$
+ []
+
+
+Overfull \hbox (14.12498pt too wide) in paragraph at lines 47--77
+\OT1/cmr/m/n/10 2\OML/cmm/m/it/10 N$
+ []
+
+
+Overfull \hbox (23.82364pt too wide) in paragraph at lines 47--77
+\OT1/cmr/m/n/10 ^^A\OML/cmm/m/it/10 Q[]$
+ []
+
+
+Overfull \hbox (34.37915pt too wide) in paragraph at lines 47--77
 \OT1/cmr/m/n/10 ^^A\OML/cmm/m/it/10 Q[] \OT1/cmr/m/n/10 =
  []
 
 
-Overfull \hbox (70.09955pt too wide) in paragraph at lines 65--79
+Overfull \hbox (68.10722pt too wide) in paragraph at lines 47--77
+[] \OML/cmm/m/it/10 Q[]:$
+ []
+
+
+Overfull \hbox (19.68048pt too wide) in paragraph at lines 47--77
+\OML/cmm/m/it/10 N \OT1/cmr/m/n/10 =
+ []
+
+
+Overfull \hbox (5.00002pt too wide) in paragraph at lines 47--77
+\OT1/cmr/m/n/10 1$
+ []
+
+
+Overfull \hbox (32.18855pt too wide) in paragraph at lines 47--77
+\OT1/cmr/m/n/10 ^^A\OML/cmm/m/it/10 Q[] \OT1/cmr/m/n/10 =
+ []
+
+
+Overfull \hbox (70.09955pt too wide) in paragraph at lines 47--77
 \OT1/cmr/m/n/10 ^^A[]^^A[]\OML/cmm/m/it/10 Q[] \OT1/cmr/m/n/10 =
  []
 
 
-Overfull \hbox (127.25449pt too wide) in paragraph at lines 65--79
+Overfull \hbox (127.25449pt too wide) in paragraph at lines 47--77
 \OT1/cmr/m/n/10 ^^A[] [] =
  []
 
 
-Overfull \hbox (54.50235pt too wide) in paragraph at lines 65--79
+Overfull \hbox (54.50235pt too wide) in paragraph at lines 47--77
 \OT1/cmr/m/n/10 ^^A[]\OML/cmm/m/it/10 Q[] \OMS/cmsy/m/n/10 ^^@
  []
 
 
-Overfull \hbox (56.9607pt too wide) in paragraph at lines 65--79
+Overfull \hbox (56.9607pt too wide) in paragraph at lines 47--77
 \OT1/cmr/m/n/10 ^^A[]\OML/cmm/m/it/10 Q[][] 
  []
 
 
-Overfull \hbox (7.7778pt too wide) in paragraph at lines 65--79
+Overfull \hbox (7.7778pt too wide) in paragraph at lines 47--77
 \OT1/cmr/m/n/10 =
  []
 
 
-Overfull \hbox (41.68286pt too wide) in paragraph at lines 65--79
+Overfull \hbox (41.68286pt too wide) in paragraph at lines 47--77
 \OML/cmm/m/it/10 Q[] \OMS/cmsy/m/n/10 ^^@
  []
 
 
-Overfull \hbox (51.919pt too wide) in paragraph at lines 65--79
+Overfull \hbox (51.919pt too wide) in paragraph at lines 47--77
 \OML/cmm/m/it/10 Q[] \OMS/cmsy/m/n/10 ^^@
  []
 
 
-Overfull \hbox (51.919pt too wide) in paragraph at lines 65--79
+Overfull \hbox (51.919pt too wide) in paragraph at lines 47--77
 \OML/cmm/m/it/10 Q[] \OT1/cmr/m/n/10 +
  []
 
 
-Overfull \hbox (57.15514pt too wide) in paragraph at lines 65--79
+Overfull \hbox (57.15514pt too wide) in paragraph at lines 47--77
 \OML/cmm/m/it/10 Q[]:$
  []
 
 
-Overfull \hbox (20.0903pt too wide) in paragraph at lines 65--79
+Overfull \hbox (20.0903pt too wide) in paragraph at lines 47--77
 \OML/cmm/m/it/10 C[]$
  []
 
 
-Overfull \hbox (252.34908pt too wide) in paragraph at lines 65--79
-[]\OML/cmm/m/it/10 ormula[]bergomi[]; wehavethetelescopingproperty$$C[] \OT1/cm
-r/m/n/10 =
+Overfull \hbox (252.34908pt too wide) in paragraph at lines 47--77
+[]\OML/cmm/m/it/10 ormula[]bergomi[]; wehavethetelescopingpropertyC[] \OT1/cmr/
+m/n/10 =
  []
 
 
-Overfull \hbox (26.9333pt too wide) in paragraph at lines 65--79
+Overfull \hbox (26.9333pt too wide) in paragraph at lines 47--77
 \OML/cmm/m/it/10 Q[] \OT1/cmr/m/n/10 =
  []
 
 
-Overfull \hbox (150.04349pt too wide) in paragraph at lines 65--79
+Overfull \hbox (150.04349pt too wide) in paragraph at lines 47--77
 [][] [] [][] \OT1/cmr/m/n/10 ^^A\OML/cmm/m/it/10 Q[] \OT1/cmr/m/n/10 =
  []
 
 
-Overfull \hbox (79.29572pt too wide) in paragraph at lines 65--79
-[][] \OT1/cmr/m/n/10 ^^A\OML/cmm/m/it/10 Q[]:[]$$$
+Overfull \hbox (463.40736pt too wide) in paragraph at lines 47--77
+[][] \OT1/cmr/m/n/10 ^^A\OML/cmm/m/it/10 Q[]:TheMISCestimatorusedforapproximati
+ng[]; andusingasetofmulti \OMS/cmsy/m/n/10 ^^@
  []
 
 
-Overfull \hbox (190.14961pt too wide) in paragraph at lines 65--79
-[]\OML/cmm/m/it/10 ormula[]bergomi[]; andusingasetofmulti \OMS/cmsy/m/n/10 ^^@
- []
-
-
-Overfull \hbox (51.11746pt too wide) in paragraph at lines 65--79
+Overfull \hbox (51.11746pt too wide) in paragraph at lines 47--77
 \OML/cmm/m/it/10 indices$$\OMS/cmsy/m/n/10 ^^Z[]$
  []
 
+
+! LaTeX Error: The font size command \normalsize is not defined:
+               there is probably something wrong with the class file.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.77 \begin{equation}
+                     \label{eq:MISC_quad_estimator}
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+[1{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 ! Undefined control sequence.
-l.80 	Q_N^{\mathcal{I}} = \sum_{\boldsymbol
+<write> ...bel{BS_formula_rbergomi_2}{{}{\thepage 
+                                                  }}
+l.77 \begin{equation}
+                     \label{eq:MISC_quad_estimator}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+\newlabel{BS_formula_rbergomi_2}{{}{}}
+! Undefined control sequence.
+<write> ...ate gaussian distribution}{{}{\thepage 
+                                                  }}
+l.77 \begin{equation}
+                     \label{eq:MISC_quad_estimator}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+\newlabel{eq: multivariate gaussian distribution}{{}{}}
+! Undefined control sequence.
+<write> \newlabel{eq:total_error}{{}{\thepage 
+                                              }}
+l.77 \begin{equation}
+                     \label{eq:MISC_quad_estimator}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+\newlabel{eq:total_error}{{}{}}
+! Undefined control sequence.
+<write> ...l{sec:Details of the MISC}{{}{\thepage 
+                                                  }}
+l.77 \begin{equation}
+                     \label{eq:MISC_quad_estimator}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+\newlabel{sec:Details of the MISC}{{}{}}
+]
+! Undefined control sequence.
+l.78 	Q_N^{\mathcal{I}} = \sum_{\boldsymbol
                                            {\beta} \in \mathcal{I}} \Delta Q...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -4736,7 +4579,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.80 ...} \in \mathcal{I}} \Delta Q_N^{\boldsymbol
+l.78 ...} \in \mathcal{I}} \Delta Q_N^{\boldsymbol
                                                   {\beta}}.
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -4745,7 +4588,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-Overfull \hbox (72.35461pt too wide) detected at line 81
+Overfull \hbox (72.35461pt too wide) detected at line 79
 []\OML/cmm/m/it/10 Q[] \OT1/cmr/m/n/10 = [] ^^A\OML/cmm/m/it/10 Q[]:
  []
 
@@ -4787,7 +4630,7 @@ Missing character: There is no n in font nullfont!
 Missing character: There is no b in font nullfont!
 Missing character: There is no y in font nullfont!
 ! Undefined control sequence.
-l.84 	\mathcal{E}_Q(\text
+l.82 	\mathcal{E}_Q(\text
                          {TOL}_{\text{MISC}},N) =\abs{Q_N^\infty - Q_N^\math...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -4796,7 +4639,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.84 	\mathcal{E}_Q(\text{TOL}_{\text
+l.82 	\mathcal{E}_Q(\text{TOL}_{\text
                                      {MISC}},N) =\abs{Q_N^\infty - Q_N^\math...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -4805,7 +4648,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.84 ...cal{E}_Q(\text{TOL}_{\text{MISC}},N) =\abs
+l.82 ...cal{E}_Q(\text{TOL}_{\text{MISC}},N) =\abs
                                                   {Q_N^\infty - Q_N^\mathcal...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -4814,7 +4657,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.84 ...y - Q_N^\mathcal{I}} \le \sum_{\boldsymbol
+l.82 ...y - Q_N^\mathcal{I}} \le \sum_{\boldsymbol
                                                   {\beta} \in \mathbb{N}^{2N...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -4823,7 +4666,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.84 ...} \le \sum_{\boldsymbol{\beta} \in \mathbb
+l.82 ...} \le \sum_{\boldsymbol{\beta} \in \mathbb
                                                   {N}^{2N} \setminus
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -4832,7 +4675,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.85 		\mathcal{I}} \abs
+l.83 		\mathcal{I}} \abs
                         {\Delta Q_N^{\boldsymbol{\beta}}}.
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -4841,7 +4684,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.85 		\mathcal{I}} \abs{\Delta Q_N^{\boldsymbol
+l.83 		\mathcal{I}} \abs{\Delta Q_N^{\boldsymbol
                                                 {\beta}}}.
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -4850,7 +4693,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-Overfull \hbox (215.14642pt too wide) detected at line 86
+Overfull \hbox (215.14642pt too wide) detected at line 84
 []\OMS/cmsy/m/n/10 E[]\OT1/cmr/m/n/10 ([][]\OML/cmm/m/it/10 ; N\OT1/cmr/m/n/10 
 ) = [] \OMS/cmsy/m/n/10 ^^T [] []\OML/cmm/m/it/10 :
  []
@@ -4884,7 +4727,7 @@ Missing character: There is no o in font nullfont!
 Missing character: There is no n in font nullfont!
 Missing character: There is no , in font nullfont!
 ! Undefined control sequence.
-l.87 ...ribution, $\Delta \mathcal{W}_{\boldsymbol
+l.85 ...ribution, $\Delta \mathcal{W}_{\boldsymbol
                                                   {\beta}}$, to be the compu...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -4931,7 +4774,7 @@ Missing character: There is no a in font nullfont!
 Missing character: There is no d in font nullfont!
 Missing character: There is no d in font nullfont!
 ! Undefined control sequence.
-l.87 ... required to add  $\Delta Q_N^{\boldsymbol
+l.85 ... required to add  $\Delta Q_N^{\boldsymbol
                                                   {\beta}}$ to $Q^{\mathcal{...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -4967,7 +4810,7 @@ Missing character: There is no o in font nullfont!
 Missing character: There is no n in font nullfont!
 Missing character: There is no , in font nullfont!
 ! Undefined control sequence.
-l.87 ...error contribution, $\Delta E_{\boldsymbol
+l.85 ...error contribution, $\Delta E_{\boldsymbol
                                                   {\beta}}$, to be  a measur...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -5026,7 +4869,7 @@ Missing character: There is no d in font nullfont!
 Missing character: There is no i in font nullfont!
 Missing character: There is no n in font nullfont!
 ! Undefined control sequence.
-l.87 ...ch the quadrature error, defined in \eqref
+l.85 ...ch the quadrature error, defined in \eqref
                                                   {eq:quadrature error}, wou...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -5071,7 +4914,7 @@ Missing character: There is no n in font nullfont!
 Missing character: There is no c in font nullfont!
 Missing character: There is no e in font nullfont!
 ! Undefined control sequence.
-l.87 ...uld decrease once $\Delta Q_N^{\boldsymbol
+l.85 ...uld decrease once $\Delta Q_N^{\boldsymbol
                                                   {\beta}}$  has been added ...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -5107,7 +4950,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.88 \begin{align}
+l.86 \begin{align}
                   \label{eq:Work_error_contributions}
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -5116,13 +4959,13 @@ or  <return>  to continue without it.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.89 \Delta
+l.87 \Delta
             \mathcal{W}_{\boldsymbol{\beta}} &= \text{Work}[Q^{\mathcal{I} \...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Undefined control sequence.
-l.89 \Delta \mathcal{W}_{\boldsymbol
+l.87 \Delta \mathcal{W}_{\boldsymbol
                                     {\beta}} &= \text{Work}[Q^{\mathcal{I} \...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -5131,7 +4974,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Misplaced alignment tab character &.
-l.89 \Delta \mathcal{W}_{\boldsymbol{\beta}} &
+l.87 \Delta \mathcal{W}_{\boldsymbol{\beta}} &
                                               = \text{Work}[Q^{\mathcal{I} \...
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -5141,7 +4984,7 @@ you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
 ! Undefined control sequence.
-l.89 ... \mathcal{W}_{\boldsymbol{\beta}} &= \text
+l.87 ... \mathcal{W}_{\boldsymbol{\beta}} &= \text
                                                   {Work}[Q^{\mathcal{I} \cup...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -5150,7 +4993,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.89 ...xt{Work}[Q^{\mathcal{I} \cup \{\boldsymbol
+l.87 ...xt{Work}[Q^{\mathcal{I} \cup \{\boldsymbol
                                                   {\beta}\}}_N]-\text{Work}[...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -5159,7 +5002,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.89 ...l{I} \cup \{\boldsymbol{\beta}\}}_N]-\text
+l.87 ...l{I} \cup \{\boldsymbol{\beta}\}}_N]-\text
                                                   {Work}[Q^{\mathcal{I}}_N] ...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -5168,7 +5011,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.90 \Delta E_{\boldsymbol
+l.88 \Delta E_{\boldsymbol
                           {\beta}} &= \abs{Q^{\mathcal{I} \cup \{\boldsymbol...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -5177,7 +5020,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Misplaced alignment tab character &.
-l.90 \Delta E_{\boldsymbol{\beta}} &
+l.88 \Delta E_{\boldsymbol{\beta}} &
                                     = \abs{Q^{\mathcal{I} \cup \{\boldsymbol...
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -5187,7 +5030,7 @@ you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
 ! Undefined control sequence.
-l.90 \Delta E_{\boldsymbol{\beta}} &= \abs
+l.88 \Delta E_{\boldsymbol{\beta}} &= \abs
                                           {Q^{\mathcal{I} \cup \{\boldsymbol...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -5196,7 +5039,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.90 ... &= \abs{Q^{\mathcal{I} \cup \{\boldsymbol
+l.88 ... &= \abs{Q^{\mathcal{I} \cup \{\boldsymbol
                                                   {\beta}\}}_N-Q^{\mathcal{I...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -5211,7 +5054,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.91 \end{align}
+l.89 \end{align}
                 
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -5220,7 +5063,7 @@ or  <return>  to continue without it.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.91 \end{align}
+l.89 \end{align}
                 
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -5367,7 +5210,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.93  \begin{equation*}
+l.91  \begin{equation*}
                        
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -5377,13 +5220,13 @@ Missing character: There is no P in font nullfont!
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.94  P_
+l.92  P_
         {\boldsymbol{\beta}}= \frac{\abs{\Delta E_{\boldsymbol{\beta}}}}{\De...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Undefined control sequence.
-l.94  P_{\boldsymbol
+l.92  P_{\boldsymbol
                     {\beta}}= \frac{\abs{\Delta E_{\boldsymbol{\beta}}}}{\De...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -5394,7 +5237,7 @@ and I'll forget about whatever was undefined.
 ! Undefined control sequence.
 <argument> \abs 
                 {\Delta E_{\boldsymbol {\beta }}}
-l.94 ...}}{\Delta\mathcal{W}_{\boldsymbol{\beta}}}
+l.92 ...}}{\Delta\mathcal{W}_{\boldsymbol{\beta}}}
                                                   ,
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -5405,7 +5248,7 @@ and I'll forget about whatever was undefined.
 ! Undefined control sequence.
 <argument> \abs {\Delta E_{\boldsymbol 
                                        {\beta }}}
-l.94 ...}}{\Delta\mathcal{W}_{\boldsymbol{\beta}}}
+l.92 ...}}{\Delta\mathcal{W}_{\boldsymbol{\beta}}}
                                                   ,
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -5416,7 +5259,7 @@ and I'll forget about whatever was undefined.
 ! Undefined control sequence.
 <argument> \Delta \mathcal {W}_{\boldsymbol 
                                             {\beta }}
-l.94 ...}}{\Delta\mathcal{W}_{\boldsymbol{\beta}}}
+l.92 ...}}{\Delta\mathcal{W}_{\boldsymbol{\beta}}}
                                                   ,
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -5431,7 +5274,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.95  \end{equation*}
+l.93  \end{equation*}
                      
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -5440,7 +5283,7 @@ or  <return>  to continue without it.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.95  \end{equation*}
+l.93  \end{equation*}
                      
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -5448,6 +5291,11 @@ With luck, this will get me unwedged. But if you
 really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
+Missing character: There is no w in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no e in font nullfont!
 Missing character: There is no t in font nullfont!
 Missing character: There is no h in font nullfont!
 Missing character: There is no e in font nullfont!
@@ -5483,7 +5331,7 @@ Missing character: There is no n in font nullfont!
 Missing character: There is no b in font nullfont!
 Missing character: There is no y in font nullfont!
 ! Undefined control sequence.
-l.97  $\mathcal{I}=\{\boldsymbol
+l.95  $\mathcal{I}=\{\boldsymbol
                                 {\beta}: P_{\boldsymbol{\beta}}	 \ge \bar{T}...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -5492,7 +5340,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.97 ...al{I}=\{\boldsymbol{\beta}: P_{\boldsymbol
+l.95 ...al{I}=\{\boldsymbol{\beta}: P_{\boldsymbol
                                                   {\beta}}	 \ge \bar{T}\}$.
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -5508,7 +5356,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.98 \begin{remark}
+l.96 \begin{remark}
                    
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -5557,7 +5405,7 @@ Missing character: There is no t in font nullfont!
 Missing character: There is no s in font nullfont!
 Missing character: There is no , in font nullfont!
 ! Undefined control sequence.
-l.99 ...archy of quadrature points, $m(\boldsymbol
+l.97 ...archy of quadrature points, $m(\boldsymbol
                                                   {\beta})$, is flexible in ...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -5794,7 +5642,7 @@ Missing character: There is no e in font nullfont!
 ! Undefined control sequence.
 <write> ...meter constellation.' on page \thepage 
                                                   \space undefined\on@line .
-l.99 ...l, for different parameter constellation.}
+l.97 ...l, for different parameter constellation.}
                                                   . For the remaining parame...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -5805,7 +5653,7 @@ and I'll forget about whatever was undefined.
 
 LaTeX Warning: Reference `table:Reference solution, using MC with $500$ time st
 eps, of Call option price under rBergomi model, for different parameter constel
-lation.' on page  undefined on input line 99.
+lation.' on page  undefined on input line 97.
 
 Missing character: There is no . in font nullfont!
 Missing character: There is no F in font nullfont!
@@ -5846,16 +5694,218 @@ Missing character: There is no e in font nullfont!
 ! Undefined control sequence.
 <write> ...meter constellation.' on page \thepage 
                                                   \space undefined\on@line .
-l.99 ...l, for different parameter constellation.}
+l.97 ...l, for different parameter constellation.}
                                                   , we used a geometric hier...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+LaTeX Warning: Reference `table:Reference solution, using MC with $500$ time st
+eps, of Call option price under rBergomi model, for different parameter constel
+lation.' on page  undefined on input line 97.
+
+Missing character: There is no , in font nullfont!
+Missing character: There is no w in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no u in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no d in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no g in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no y in font nullfont!
+Missing character: There is no : in font nullfont!
+Missing character: There is no . in font nullfont!
+
+! LaTeX Error: \begin{document} ended by \end{remark}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.98 \end{remark}
+                 
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: Environment remark undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.99 \begin{remark}
+                   
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+Missing character: There is no A in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no p in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no z in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no d in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no [ in font nullfont!
+\citation{haji2016multi}
+! Undefined control sequence.
+<write> ...: Citation `\@citeb ' on page \thepage 
+                                                  \space undefined\on@line .
+l.100 As emphasized in \cite{haji2016multi}
+                                           , one important requirement to ge...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+LaTeX Warning: Citation `haji2016multi' on page  undefined on input line 100.
+
+Missing character: There is no ] in font nullfont!
+Missing character: There is no , in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no p in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no q in font nullfont!
+Missing character: There is no u in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no g in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no p in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no p in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no f in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no f in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no M in font nullfont!
+Missing character: There is no I in font nullfont!
+Missing character: There is no S in font nullfont!
+Missing character: There is no C in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no d in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no k in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no v in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no g in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no , in font nullfont!
+Missing character: There is no d in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no f in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no d in font nullfont!
+Missing character: There is no b in font nullfont!
+Missing character: There is no y in font nullfont!
+! Undefined control sequence.
+l.100 ... the error convergence, defined by \eqref
+                                                  {eq:Work_error_contributio...
 (That makes 100 errors; please try again.) 
 Here is how much of TeX's memory you used:
  38 strings out of 493014
  722 string characters out of 6133351
- 62601 words of memory out of 5000000
+ 64601 words of memory out of 5000000
  3676 multiletter control sequences out of 15000+600000
  4567 words of font info for 17 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 18i,5n,21p,1016b,146s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 18i,5n,21p,1027b,154s stack positions out of 5000i,500n,10000p,200000b,80000s
 
 !  ==> Fatal error occurred, no output PDF file produced!

@@ -1,0 +1,83 @@
+To motivate our purposes, we consider the basket option under multi-dimensional GBM model where the process $\mathbf{X}$ is the discretized $d$-dimensional Black-Scholes model and the payoff function $g$ is given by
+\begin{align}
+	g(\mathbf{X}(T))=\max\left(\sum_{j=1}^{d} c_{i} X^{(j)}(T)-K,0  \right)	\PERIOD
+\end{align}
+Precisely, we are interested in the  $d$-dimensional lognormal example where the dynamics of the stock are given by
+\begin{align}\label{lognormal_dynamics_basket}
+	dX^{(j)}_t=\sigma^{(j)} X^{(j)}_t dB^{(i)}_t,
+\end{align}
+where $\{B^{(1)}, \dots,B^{(d)}\}$ are correlated Brownian motions with correlations $\rho_{ij}$.
+
+
+We denote by $(z_1^{(j)},\dots,z_N^{(j)})$ the $N$ Gaussian independent rdvs that will be used to construct the path of the $j$-th asset $\bar{X}^{(j)}$, where $1 \le j \le d$ ($d$ denotes the number of underlyings considered in the basket). We keep the  same notations by denoting  $\psi: (z_1^{(j)},\dots,z_N^{(j)}) \rightarrow (B_1,\dots,B_N)$ the mapping of Brownian bridge construction and by $\Phi: (\Delta t, B^{(j)}_1,\dots,B^{(j)}_N) \rightarrow \bar{X}^{(j)}_T$, the mapping consisting of the time-stepping scheme. Then, we can express the option price as
+\begin{align}\label{eq: option price as integral_basket}
+	\expt{g(\mathbf{X}(T))}&\approx	\expt{g\left(\Phi \circ \psi \right) (z_1^{(1)}, \dots, z_N^{(1)}, \dots, z_1^{(d)},\dots,z^{(d)}_N)} \nonumber\\
+	&=\int_{\rset^{d \times N}} G(z_1^{(1)}, \dots, z_N^{(1)}, \dots, z_1^{(d)},\dots,z^{(d)}_N)) \rho_{d \times N}(\mathbf{z}) dz_1^{(1)} \dots dz_N^{(1)} \dots z_1^{(d)} \dots dz^{(d)}_N \COMMA
+\end{align}
+where $G=g \circ \Phi \circ \psi$ and
+\begin{equation*}
+\rho_{d \times N}(\mathbf{z})=\frac{1}{(2 \pi)^{{d \times N}/2}} e^{-\frac{1}{2} \mathbf{z}^T \mathbf{z}} \PERIOD
+\end{equation*}
+
+In the discrete case, the numerical approximation of $X^{(j)}(T)$ satisfies
+\begin{align}
+	\bar{X}^{(j)}_T&=\Phi(\Delta t, z_1^{(j)}, \Delta B^{(j)}_0,\dots,\Delta B^{(j)}_{N-1}),  \quad 1 \le j \le d, \\ \nonumber
+	&=\Phi(\Delta t, \psi(z_1^{(j)},\dots,z_N^{(j)})), \quad 1 \le j \le d,
+\end{align}
+and precisely, we have
+\begin{align}\label{eq:discrete_rep}
+	\bar{X}^{(j)}(T)&=X_0^{(j)} \prod_{i=0}^{N-1} \left[ 1+\frac{\sigma^{(j)}}{\sqrt{T}} z^{(j)}_1 \Delta t+ \sigma^{(j)} \Delta B^{(j)}_{i}\right], \quad 1 \le j \le d \nonumber\\
+	&= \prod_{i=0}^{N-1} f_i^{(j)}(z^{(j)}_1) , \quad 1 \le j \le d \PERIOD
+\end{align}
+\subsection{Step $1$: Numerical smoothing}
+The first step of our idea is to smoothen the problem by solving the root finding problem in one dimension after using a sub-optimal linear mapping for the coarsest factors of the Brownian increments $\mathbf{z}_1=(z^{(1)}_1 , \dots, z^{(d)}_1)$. In fact, let us define for a certain $\boldsymbol{\alpha}=(\alpha_1,\dots,\alpha_d)$, the linear transformation
+\begin{align}\label{eq:linear_transformation}
+\omega&=L(\mathbf{z}_1) \nonumber\\
+&= \sum_{i=1}^{d} \alpha_i z^{(i)}_1
+\end{align}
+Then from \eqref{eq:discrete_rep}, we have
+ \begin{align}\label{eq:discrete_rep_2}
+	\bar{X}^{(j)}(T)&= \prod_{i=0}^{N-1} g_i^{(j)}(w) , \quad 1 \le j \le d\COMMA
+\end{align}
+where 
+
+\begin{align}\label{eq: incremental functions}
+g_i^{(j)}(w)&=X_0^{(j)}  \left[ 1+\frac{\sigma^{(j)}}{\sqrt{T}} \left( \frac{w- \sum_{l=1, l\neq j} \alpha_l z^{(l)}_1}{\alpha_j} \right) \Delta t+ \sigma^{(j)} \Delta B^{(j)}_{i}\right] \nonumber\\
+&=X_0^{(j)}  \left[ 1+\frac{\sigma^{(j)} \Delta t}{ \alpha_j \sqrt{T}} w -\frac{\sigma^{(j)}}{\sqrt{T}} \left( \frac{\sum_{l=1, l\neq j} \alpha_l z^{(l)}_1}{\alpha_j} \right) \Delta t+ \sigma^{(j)} \Delta B^{(j)}_{i}\right]
+\end{align}
+Therefore, in order to determine $w^{\ast}$, we need to solve
+\begin{align}
+	x=\sum_{j=1}^{d} c_j \prod_{i=0}^{N-1} g_i^{(j)}(w^{\ast}(x)),
+\end{align}
+which implies that the location of the kink point for the approximate problem is equivalent to finding the roots of the polynomial $P(w_\ast(K))$, given by
+\begin{align}\label{polynomial_kink_location_basket}
+	P(w^\ast(K))&=\left(\sum_{j=1}^{d} c_j \prod_{i=0}^{N-1}  g_i^{(j)}(w^{\ast}) \right) -K.
+\end{align}
+Using  \textbf{Newton iteration method}, we use the expression $P^\prime=\frac{d P}{d w^\ast}$, and we can easily show that
+\begin{align}\label{polynomial_kink_location_derivative_basket}
+	P^\prime(w)=\sum_{j=1}^{d} c_j \frac{\sigma^{(j)} \Delta} {\alpha_j\sqrt{T}} \left( \prod_{i=0}^{N-1} g_i^{(j)}(w) \right) \left[ \sum_{i=0}^{N-1} \frac{1}{g_i^{(j)}(w)}\right].
+\end{align}
+
+
+
+\red{
+\textbf{Question $2$:} One question that arises here: Do we have to optimize over $\boldsymbol{\alpha}$ to get the optimal linear transformation? If yes what will be the metric to be used to optimize with respect to it? If no, how do we check that choices of $\boldsymbol{\alpha}$ are good choices, at least not bad chosen directions?
+}
+\subsection{Step $2$: Integration}
+
+
+At this stage, we want to perform the pre-integrating step with respect to  $w^\ast$. In fact, we have from \eqref{eq: option price as integral_basket}
+\begin{small}
+\begin{align}\label{eq: pre_integration_step_wrt_y1_basket}
+	\expt{g(\mathbf{X}(T))}&=\int_{\rset^{d \times N}} G(z_1^{(1)}, \dots, z_N^{(1)}, \dots, z_1^{(d)},\dots,z^{(d)}_N)) \rho_{d \times N}(\mathbf{z}) dz_1^{(1)} \dots dz_N^{(1)} \dots z_1^{(d)} \dots dz^{(d)}_N \nonumber\\ 
+	&=\int_{\rset^{d \times (N-1)}} \left(\int_{\rset} G(w,\mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1} ) \rho_w(w) dw \right) \rho_{d \times(N-1)}(\mathbf{z}_{-1}^{(1)},\dots,\mathbf{z}_{-1}^{(d)}) d\mathbf{z}_{-1}^{(1)}\dots d\mathbf{z}_{-1}^{(d)}\nonumber\\	
+	&=\int_{\rset^{d\times (N-1)}} h(\mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1} ) \rho_{d\times (N-1)}(\mathbf{z}_{-1}^{(1)},\dots,\mathbf{z}_{-1}^{(d)}) d\mathbf{z}^{(1)}_{-1} \dots d\mathbf{z}^{(d)}_{-1}\COMMA \\ \nonumber
+	&=\expt{h(\mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1} )} \COMMA
+\end{align}
+\end{small}
+where $\rho_w \sim \mathcal{N}(0,\sum_{j=1}^d \alpha_j^2)$ and
+\begin{align}
+ h(\mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1})&=\int_{\rset} G(w,\mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1} ) \rho_w(w) dw \nonumber\\
+ &= \int_{-\infty}^{w^\ast} G(w,\mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1} ) \rho_w(w) dw+ \int_{w^\ast}^{+\infty} G(w,\mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1} ) \rho_w(w) dw
+\end{align}
+

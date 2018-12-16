@@ -1,13 +1,18 @@
-\documentclass[11pt]{article}
+ \documentclass[11pt]{article}
+
+%\usepackage{setspace}
 %\documentclass[final,leqno]{siamltex}
 \usepackage{smoothing_paper}
 
 
-\usepackage[section]{placeins}
 
+\usepackage[section]{placeins}
+\usepackage{tabularx,ragged2e,booktabs,caption}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%chiheb commands
 
+
+%%%%%%%%%%%%%%%%%
 \newcommand{\ie}{\emph{i.e.}}
 \newcommand{\eg}{\emph{e.g.}}
 \newcommand{\cf}{\emph{cf.}}
@@ -76,6 +81,8 @@
  Berlin, Germany.}
         \and Chiheb Ben Hammouda\thanks{King Abdullah University of Science and Technology (KAUST), Computer, Electrical and Mathematical Sciences \& Engineering Division (CEMSE), Thuwal $23955-6900$, Saudi Arabia ({\tt chiheb.benhammouda@kaust.edu.sa}).} 
 \and  Raul Tempone\thanks{King Abdullah University of Science and Technology (KAUST), Computer, Electrical and Mathematical Sciences \& Engineering Division (CEMSE), Thuwal $23955-6900$, Saudi Arabia ({\tt raul.tempone@kaust.edu.sa}).} \thanks{Alexander von Humboldt Professor in Mathematics of Uncertainty Quantification, RWTH Aachen University, Germany.}}
+
+%\doublespacing
 \begin{document}
 \maketitle
 
@@ -107,6 +114,12 @@
 \section{Details of our hierarchical method}\label{sec:Details our approach and error bounds}
 
 \input{our_approach_details}
+
+
+
+%\section{Details of Cholesky scheme coupled with hierarchical reresentation}\label{sec:Details of Cholesky scheme coupled with hierarchical reresentation}
+%
+%\input{Cholesky_hierarchical.tex}
 
 
 % \section{MISC error estimate}\label{sec:MISC error estimate}

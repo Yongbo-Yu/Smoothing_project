@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  18 OCT 2018 17:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  13 DEC 2018 08:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -820,36 +820,7 @@ Package: chngcntr 2009/09/02 v1.0a change counter resetting
 (/usr/local/texlive/2016/texmf-dist/tex/latex/placeins/placeins.sty
 Package: placeins 2005/04/18  v 2.2
 )
-(./main.aux
-
-LaTeX Warning: Label `eq: multivariate gaussian distribution' multiply defined.
-
-
-
-LaTeX Warning: Label `fig:sub3' multiply defined.
-
-
-LaTeX Warning: Label `sub@fig:sub3' multiply defined.
-
-
-LaTeX Warning: Label `fig:sub4' multiply defined.
-
-
-LaTeX Warning: Label `sub@fig:sub4' multiply defined.
-
-
-LaTeX Warning: Label `fig:sub3' multiply defined.
-
-
-LaTeX Warning: Label `sub@fig:sub3' multiply defined.
-
-
-LaTeX Warning: Label `fig:sub4' multiply defined.
-
-
-LaTeX Warning: Label `sub@fig:sub4' multiply defined.
-
-)
+(./main.aux)
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 73.
@@ -868,7 +839,8 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 73.
 LaTeX Font Info:    ... okay on input line 73.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 73.
 LaTeX Font Info:    ... okay on input line 73.
- (/usr/local/texlive/2016/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+
+(/usr/local/texlive/2016/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count161
 \scratchdimen=\dimen275
@@ -962,792 +934,72 @@ LaTeX Info: Redefining \nameref on input line 73.
 
 LaTeX Warning: No \author given.
 
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 80.
-(/usr/local/texlive/2016/texmf-dist/tex/latex/base/omscmr.fd
-File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 80.
- [1
+(./Motivation.tex [1
 
-{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
- [4] [5]
-Overfull \hbox (68.29488pt too wide) in paragraph at lines 312--312
-[] 
- []
+{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 
-[6] [7] [8]
-
-LaTeX Warning: Citation `imai2004minimizing' on page 9 undefined on input line 
-418.
-
-[9] [10] [11] [12] [13] [14] [15]
-Overfull \hbox (4.33667pt too wide) in paragraph at lines 831--831
-[]\OT1/cmr/bx/n/12 The bas-ket call op-tion un-der the dis-cretized multi-dimen
-sional Black-Scholes 
- []
-
-[16] [17] [18] [19] [20]
-Package epstopdf Info: Source file: <./figures/binary_weak_error/without_richar
-dson/weak_convergence_order_binary_option_relative_M_10_4.eps>
-(epstopdf)                    date: 2018-08-30 10:58:51
-(epstopdf)                    size: 29476 bytes
-(epstopdf)             Output file: <./figures/binary_weak_error/without_richar
-dson/weak_convergence_order_binary_option_relative_M_10_4-eps-converted-to.pdf>
-
-(epstopdf)                    date: 2018-08-30 11:11:21
-(epstopdf)                    size: 17833 bytes
-(epstopdf)             Command: <repstopdf --outfile=./figures/binary_weak_erro
-r/without_richardson/weak_convergence_order_binary_option_relative_M_10_4-eps-c
-onverted-to.pdf ./figures/binary_weak_error/without_richardson/weak_convergence
-_order_binary_option_relative_M_10_4.eps>
-(epstopdf)             \includegraphics on input line 1057.
-Package epstopdf Info: Output file is already uptodate.
-
-<./figures/binary_weak_error/without_richardson/weak_convergence_order_binary_o
-ption_relative_M_10_4-eps-converted-to.pdf, id=478, 462.72874pt x 346.29375pt>
-File: ./figures/binary_weak_error/without_richardson/weak_convergence_order_bin
-ary_option_relative_M_10_4-eps-converted-to.pdf Graphic file (type pdf)
-
-<use ./figures/binary_weak_error/without_richardson/weak_convergence_order_bina
-ry_option_relative_M_10_4-eps-converted-to.pdf>
-Package pdftex.def Info: ./figures/binary_weak_error/without_richardson/weak_co
-nvergence_order_binary_option_relative_M_10_4-eps-converted-to.pdf used on inpu
-t line 1057.
-(pdftex.def)             Requested size: 164.4171pt x 123.04346pt.
-Package epstopdf Info: Source file: <./figures/binary_weak_error/with_richardso
-n/weak_convergence_order_binary_richardson_relative_M_5_10_6.eps>
-(epstopdf)                    date: 2018-07-22 14:17:08
-(epstopdf)                    size: 36714 bytes
-(epstopdf)             Output file: <./figures/binary_weak_error/with_richardso
-n/weak_convergence_order_binary_richardson_relative_M_5_10_6-eps-converted-to.p
-df>
-(epstopdf)                    date: 2018-07-23 10:50:51
-(epstopdf)                    size: 19080 bytes
-(epstopdf)             Command: <repstopdf --outfile=./figures/binary_weak_erro
-r/with_richardson/weak_convergence_order_binary_richardson_relative_M_5_10_6-ep
-s-converted-to.pdf ./figures/binary_weak_error/with_richardson/weak_convergence
-_order_binary_richardson_relative_M_5_10_6.eps>
-(epstopdf)             \includegraphics on input line 1063.
-Package epstopdf Info: Output file is already uptodate.
-
-<./figures/binary_weak_error/with_richardson/weak_convergence_order_binary_rich
-ardson_relative_M_5_10_6-eps-converted-to.pdf, id=479, 462.72874pt x 346.29375p
-t>
-File: ./figures/binary_weak_error/with_richardson/weak_convergence_order_binary
-_richardson_relative_M_5_10_6-eps-converted-to.pdf Graphic file (type pdf)
-
-<use ./figures/binary_weak_error/with_richardson/weak_convergence_order_binary_
-richardson_relative_M_5_10_6-eps-converted-to.pdf>
-Package pdftex.def Info: ./figures/binary_weak_error/with_richardson/weak_conve
-rgence_order_binary_richardson_relative_M_5_10_6-eps-converted-to.pdf used on i
-nput line 1063.
-(pdftex.def)             Requested size: 164.4171pt x 123.04346pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[21 <./figures/binary_weak_error/without_richardson/weak_convergence_order_bina
-ry_option_relative_M_10_4-eps-converted-to.pdf> <./figures/binary_weak_error/wi
-th_richardson/weak_convergence_order_binary_richardson_relative_M_5_10_6-eps-co
-nverted-to.pdf>]
-Package epstopdf Info: Source file: <./figures/Binary_MISC_quadrature_error/rel
-ative_quad_error_wrt_MISC_TOL_non_rich.eps>
-(epstopdf)                    date: 2018-09-13 13:47:13
-(epstopdf)                    size: 37862 bytes
-(epstopdf)             Output file: <./figures/Binary_MISC_quadrature_error/rel
-ative_quad_error_wrt_MISC_TOL_non_rich-eps-converted-to.pdf>
-(epstopdf)                    date: 2018-09-13 13:55:00
-(epstopdf)                    size: 19707 bytes
-(epstopdf)             Command: <repstopdf --outfile=./figures/Binary_MISC_quad
-rature_error/relative_quad_error_wrt_MISC_TOL_non_rich-eps-converted-to.pdf ./f
-igures/Binary_MISC_quadrature_error/relative_quad_error_wrt_MISC_TOL_non_rich.e
-ps>
-(epstopdf)             \includegraphics on input line 1170.
-Package epstopdf Info: Output file is already uptodate.
-
-<./figures/Binary_MISC_quadrature_error/relative_quad_error_wrt_MISC_TOL_non_ri
-ch-eps-converted-to.pdf, id=562, 462.72874pt x 346.29375pt>
-File: ./figures/Binary_MISC_quadrature_error/relative_quad_error_wrt_MISC_TOL_n
-on_rich-eps-converted-to.pdf Graphic file (type pdf)
-
-<use ./figures/Binary_MISC_quadrature_error/relative_quad_error_wrt_MISC_TOL_no
-n_rich-eps-converted-to.pdf>
-Package pdftex.def Info: ./figures/Binary_MISC_quadrature_error/relative_quad_e
-rror_wrt_MISC_TOL_non_rich-eps-converted-to.pdf used on input line 1170.
-(pdftex.def)             Requested size: 187.89912pt x 140.61807pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[22 <./figures/Binary_MISC_quadrature_error/relative_quad_error_wrt_MISC_TOL_no
-n_rich-eps-converted-to.pdf>]
-Package epstopdf Info: Source file: <./figures/Binary_Complexity_rates/error_vs
-_time.eps>
-(epstopdf)                    date: 2018-09-14 16:13:41
-(epstopdf)                    size: 38053 bytes
-(epstopdf)             Output file: <./figures/Binary_Complexity_rates/error_vs
-_time-eps-converted-to.pdf>
-(epstopdf)                    date: 2018-09-14 16:22:07
-(epstopdf)                    size: 19765 bytes
-(epstopdf)             Command: <repstopdf --outfile=./figures/Binary_Complexit
-y_rates/error_vs_time-eps-converted-to.pdf ./figures/Binary_Complexity_rates/er
-ror_vs_time.eps>
-(epstopdf)             \includegraphics on input line 1234.
-Package epstopdf Info: Output file is already uptodate.
-
-<./figures/Binary_Complexity_rates/error_vs_time-eps-converted-to.pdf, id=606, 
-462.72874pt x 346.29375pt>
-File: ./figures/Binary_Complexity_rates/error_vs_time-eps-converted-to.pdf Grap
-hic file (type pdf)
-
-<use ./figures/Binary_Complexity_rates/error_vs_time-eps-converted-to.pdf>
-Package pdftex.def Info: ./figures/Binary_Complexity_rates/error_vs_time-eps-co
-nverted-to.pdf used on input line 1234.
-(pdftex.def)             Requested size: 187.89912pt x 140.61807pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[23 <./figures/Binary_Complexity_rates/error_vs_time-eps-converted-to.pdf>]
-Package epstopdf Info: Source file: <./figures/Binary_MISC_quadrature_error/rel
-ative_quad_error_wrt_MISC_TOL_with_rich.eps>
-(epstopdf)                    date: 2018-09-12 11:06:32
-(epstopdf)                    size: 34529 bytes
-(epstopdf)             Output file: <./figures/Binary_MISC_quadrature_error/rel
-ative_quad_error_wrt_MISC_TOL_with_rich-eps-converted-to.pdf>
-(epstopdf)                    date: 2018-09-12 11:15:07
-(epstopdf)                    size: 18989 bytes
-(epstopdf)             Command: <repstopdf --outfile=./figures/Binary_MISC_quad
-rature_error/relative_quad_error_wrt_MISC_TOL_with_rich-eps-converted-to.pdf ./
-figures/Binary_MISC_quadrature_error/relative_quad_error_wrt_MISC_TOL_with_rich
-.eps>
-(epstopdf)             \includegraphics on input line 1312.
-Package epstopdf Info: Output file is already uptodate.
-
-<./figures/Binary_MISC_quadrature_error/relative_quad_error_wrt_MISC_TOL_with_r
-ich-eps-converted-to.pdf, id=654, 462.72874pt x 346.29375pt>
-File: ./figures/Binary_MISC_quadrature_error/relative_quad_error_wrt_MISC_TOL_w
-ith_rich-eps-converted-to.pdf Graphic file (type pdf)
-
-<use ./figures/Binary_MISC_quadrature_error/relative_quad_error_wrt_MISC_TOL_wi
-th_rich-eps-converted-to.pdf>
-Package pdftex.def Info: ./figures/Binary_MISC_quadrature_error/relative_quad_e
-rror_wrt_MISC_TOL_with_rich-eps-converted-to.pdf used on input line 1312.
-(pdftex.def)             Requested size: 187.89912pt x 140.61807pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[24]
-Package epstopdf Info: Source file: <./figures/Binary_Complexity_rates/error_vs
-_time_rich.eps>
-(epstopdf)                    date: 2018-09-14 17:51:11
-(epstopdf)                    size: 38574 bytes
-(epstopdf)             Output file: <./figures/Binary_Complexity_rates/error_vs
-_time_rich-eps-converted-to.pdf>
-(epstopdf)                    date: 2018-09-14 17:59:17
-(epstopdf)                    size: 22352 bytes
-(epstopdf)             Command: <repstopdf --outfile=./figures/Binary_Complexit
-y_rates/error_vs_time_rich-eps-converted-to.pdf ./figures/Binary_Complexity_rat
-es/error_vs_time_rich.eps>
-(epstopdf)             \includegraphics on input line 1374.
-Package epstopdf Info: Output file is already uptodate.
-
-<./figures/Binary_Complexity_rates/error_vs_time_rich-eps-converted-to.pdf, id=
-661, 462.72874pt x 346.29375pt>
-File: ./figures/Binary_Complexity_rates/error_vs_time_rich-eps-converted-to.pdf
- Graphic file (type pdf)
-
-<use ./figures/Binary_Complexity_rates/error_vs_time_rich-eps-converted-to.pdf>
-Package pdftex.def Info: ./figures/Binary_Complexity_rates/error_vs_time_rich-e
-ps-converted-to.pdf used on input line 1374.
-(pdftex.def)             Requested size: 187.89912pt x 140.61807pt.
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[25 <./figures/Binary_MISC_quadrature_error/relative_quad_error_wrt_MISC_TOL_wi
-th_rich-eps-converted-to.pdf>]
-Package epstopdf Info: Source file: <./figures/Binary_Complexity_rates/error_vs
-_time_comparison.eps>
-(epstopdf)                    date: 2018-09-14 17:54:07
-(epstopdf)                    size: 36975 bytes
-(epstopdf)             Output file: <./figures/Binary_Complexity_rates/error_vs
-_time_comparison-eps-converted-to.pdf>
-(epstopdf)                    date: 2018-09-14 18:01:45
-(epstopdf)                    size: 19786 bytes
-(epstopdf)             Command: <repstopdf --outfile=./figures/Binary_Complexit
-y_rates/error_vs_time_comparison-eps-converted-to.pdf ./figures/Binary_Complexi
-ty_rates/error_vs_time_comparison.eps>
-(epstopdf)             \includegraphics on input line 1389.
-Package epstopdf Info: Output file is already uptodate.
-
-<./figures/Binary_Complexity_rates/error_vs_time_comparison-eps-converted-to.pd
-f, id=705, 462.72874pt x 346.29375pt>
-File: ./figures/Binary_Complexity_rates/error_vs_time_comparison-eps-converted-
-to.pdf Graphic file (type pdf)
-
-<use ./figures/Binary_Complexity_rates/error_vs_time_comparison-eps-converted-t
-o.pdf>
-Package pdftex.def Info: ./figures/Binary_Complexity_rates/error_vs_time_compar
-ison-eps-converted-to.pdf used on input line 1389.
-(pdftex.def)             Requested size: 187.89912pt x 140.61807pt.
- [26 <./figures/Binary_Complexity_rates/error_vs_time_rich-eps-converted-to.pdf
-> <./figures/Binary_Complexity_rates/error_vs_time_comparison-eps-converted-to.
-pdf>]
-Package epstopdf Info: Source file: <./figures/weak_error_rates_call/Beta_32/wi
-thout_rich/weak_convergence_order_call_option_relative_M_10_5.eps>
-(epstopdf)                    date: 2018-05-15 14:45:29
-(epstopdf)                    size: 45532 bytes
-(epstopdf)             Output file: <./figures/weak_error_rates_call/Beta_32/wi
-thout_rich/weak_convergence_order_call_option_relative_M_10_5-eps-converted-to.
-pdf>
-(epstopdf)                    date: 2018-07-23 10:57:57
-(epstopdf)                    size: 21590 bytes
-(epstopdf)             Command: <repstopdf --outfile=./figures/weak_error_rates
-_call/Beta_32/without_rich/weak_convergence_order_call_option_relative_M_10_5-e
-ps-converted-to.pdf ./figures/weak_error_rates_call/Beta_32/without_rich/weak_c
-onvergence_order_call_option_relative_M_10_5.eps>
-(epstopdf)             \includegraphics on input line 1537.
-Package epstopdf Info: Output file is already uptodate.
-
-<./figures/weak_error_rates_call/Beta_32/without_rich/weak_convergence_order_ca
-ll_option_relative_M_10_5-eps-converted-to.pdf, id=800, 578.16pt x 433.62pt>
-File: ./figures/weak_error_rates_call/Beta_32/without_rich/weak_convergence_ord
-er_call_option_relative_M_10_5-eps-converted-to.pdf Graphic file (type pdf)
-
-<use ./figures/weak_error_rates_call/Beta_32/without_rich/weak_convergence_orde
-r_call_option_relative_M_10_5-eps-converted-to.pdf>
-Package pdftex.def Info: ./figures/weak_error_rates_call/Beta_32/without_rich/w
-eak_convergence_order_call_option_relative_M_10_5-eps-converted-to.pdf used on 
-input line 1537.
-(pdftex.def)             Requested size: 164.4171pt x 123.3117pt.
-Package epstopdf Info: Source file: <./figures/weak_error_rates_call/Beta_32/wi
-th_rich/weak_convergence_order_call_richardson_relative.eps>
-(epstopdf)                    date: 2018-05-14 19:25:26
-(epstopdf)                    size: 34308 bytes
-(epstopdf)             Output file: <./figures/weak_error_rates_call/Beta_32/wi
-th_rich/weak_convergence_order_call_richardson_relative-eps-converted-to.pdf>
-(epstopdf)                    date: 2018-07-23 10:59:55
-(epstopdf)                    size: 17946 bytes
-(epstopdf)             Command: <repstopdf --outfile=./figures/weak_error_rates
-_call/Beta_32/with_rich/weak_convergence_order_call_richardson_relative-eps-con
-verted-to.pdf ./figures/weak_error_rates_call/Beta_32/with_rich/weak_convergenc
-e_order_call_richardson_relative.eps>
-(epstopdf)             \includegraphics on input line 1543.
-Package epstopdf Info: Output file is already uptodate.
-
-<./figures/weak_error_rates_call/Beta_32/with_rich/weak_convergence_order_call_
-richardson_relative-eps-converted-to.pdf, id=801, 462.72874pt x 346.29375pt>
-File: ./figures/weak_error_rates_call/Beta_32/with_rich/weak_convergence_order_
-call_richardson_relative-eps-converted-to.pdf Graphic file (type pdf)
-
-<use ./figures/weak_error_rates_call/Beta_32/with_rich/weak_convergence_order_c
-all_richardson_relative-eps-converted-to.pdf>
-Package pdftex.def Info: ./figures/weak_error_rates_call/Beta_32/with_rich/weak
-_convergence_order_call_richardson_relative-eps-converted-to.pdf used on input 
-line 1543.
-(pdftex.def)             Requested size: 164.4171pt x 123.04346pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[27 <./figures/weak_error_rates_call/Beta_32/without_rich/weak_convergence_orde
-r_call_option_relative_M_10_5-eps-converted-to.pdf> <./figures/weak_error_rates
-_call/Beta_32/with_rich/weak_convergence_order_call_richardson_relative-eps-con
-verted-to.pdf>]
-Package epstopdf Info: Source file: <./figures/Call_MISC_quadrature_error/relat
-ive_quad_error_wrt_MISC_TOL_non_rich.eps>
-(epstopdf)                    date: 2018-09-13 15:48:06
-(epstopdf)                    size: 31541 bytes
-(epstopdf)             Output file: <./figures/Call_MISC_quadrature_error/relat
-ive_quad_error_wrt_MISC_TOL_non_rich-eps-converted-to.pdf>
-(epstopdf)                    date: 2018-09-13 15:57:33
-(epstopdf)                    size: 18494 bytes
-(epstopdf)             Command: <repstopdf --outfile=./figures/Call_MISC_quadra
-ture_error/relative_quad_error_wrt_MISC_TOL_non_rich-eps-converted-to.pdf ./fig
-ures/Call_MISC_quadrature_error/relative_quad_error_wrt_MISC_TOL_non_rich.eps>
-(epstopdf)             \includegraphics on input line 1672.
-Package epstopdf Info: Output file is already uptodate.
-
-<./figures/Call_MISC_quadrature_error/relative_quad_error_wrt_MISC_TOL_non_rich
--eps-converted-to.pdf, id=886, 462.72874pt x 346.29375pt>
-File: ./figures/Call_MISC_quadrature_error/relative_quad_error_wrt_MISC_TOL_non
-_rich-eps-converted-to.pdf Graphic file (type pdf)
-
-<use ./figures/Call_MISC_quadrature_error/relative_quad_error_wrt_MISC_TOL_non_
-rich-eps-converted-to.pdf>
-Package pdftex.def Info: ./figures/Call_MISC_quadrature_error/relative_quad_err
-or_wrt_MISC_TOL_non_rich-eps-converted-to.pdf used on input line 1672.
-(pdftex.def)             Requested size: 187.89912pt x 140.61807pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[28 <./figures/Call_MISC_quadrature_error/relative_quad_error_wrt_MISC_TOL_non_
-rich-eps-converted-to.pdf>]
-Package epstopdf Info: Source file: <./figures/Call_Complexity_rates/error_vs_t
-ime.eps>
-(epstopdf)                    date: 2018-09-14 13:48:51
-(epstopdf)                    size: 27496 bytes
-(epstopdf)             Output file: <./figures/Call_Complexity_rates/error_vs_t
-ime-eps-converted-to.pdf>
-(epstopdf)                    date: 2018-09-14 13:56:46
-(epstopdf)                    size: 18664 bytes
-(epstopdf)             Command: <repstopdf --outfile=./figures/Call_Complexity_
-rates/error_vs_time-eps-converted-to.pdf ./figures/Call_Complexity_rates/error_
-vs_time.eps>
-(epstopdf)             \includegraphics on input line 1738.
-Package epstopdf Info: Output file is already uptodate.
-
-<./figures/Call_Complexity_rates/error_vs_time-eps-converted-to.pdf, id=929, 46
-2.72874pt x 346.29375pt>
-File: ./figures/Call_Complexity_rates/error_vs_time-eps-converted-to.pdf Graphi
-c file (type pdf)
-
-<use ./figures/Call_Complexity_rates/error_vs_time-eps-converted-to.pdf>
-Package pdftex.def Info: ./figures/Call_Complexity_rates/error_vs_time-eps-conv
-erted-to.pdf used on input line 1738.
-(pdftex.def)             Requested size: 187.89912pt x 140.61807pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[29 <./figures/Call_Complexity_rates/error_vs_time-eps-converted-to.pdf>]
-Package epstopdf Info: Source file: <./figures/Call_MISC_quadrature_error/relat
-ive_quad_error_wrt_MISC_TOL_with_rich.eps>
-(epstopdf)                    date: 2018-09-12 12:41:36
-(epstopdf)                    size: 31219 bytes
-(epstopdf)             Output file: <./figures/Call_MISC_quadrature_error/relat
-ive_quad_error_wrt_MISC_TOL_with_rich-eps-converted-to.pdf>
-(epstopdf)                    date: 2018-09-12 12:50:53
-(epstopdf)                    size: 18824 bytes
-(epstopdf)             Command: <repstopdf --outfile=./figures/Call_MISC_quadra
-ture_error/relative_quad_error_wrt_MISC_TOL_with_rich-eps-converted-to.pdf ./fi
-gures/Call_MISC_quadrature_error/relative_quad_error_wrt_MISC_TOL_with_rich.eps
->
-(epstopdf)             \includegraphics on input line 1831.
-Package epstopdf Info: Output file is already uptodate.
-
-<./figures/Call_MISC_quadrature_error/relative_quad_error_wrt_MISC_TOL_with_ric
-h-eps-converted-to.pdf, id=975, 462.72874pt x 346.29375pt>
-File: ./figures/Call_MISC_quadrature_error/relative_quad_error_wrt_MISC_TOL_wit
-h_rich-eps-converted-to.pdf Graphic file (type pdf)
-
-<use ./figures/Call_MISC_quadrature_error/relative_quad_error_wrt_MISC_TOL_with
-_rich-eps-converted-to.pdf>
-Package pdftex.def Info: ./figures/Call_MISC_quadrature_error/relative_quad_err
-or_wrt_MISC_TOL_with_rich-eps-converted-to.pdf used on input line 1831.
-(pdftex.def)             Requested size: 187.89912pt x 140.61807pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[30 <./figures/Call_MISC_quadrature_error/relative_quad_error_wrt_MISC_TOL_with
-_rich-eps-converted-to.pdf>]
-Package epstopdf Info: Source file: <./figures/Call_Complexity_rates/error_vs_t
-ime_comparision.eps>
-(epstopdf)                    date: 2018-09-13 16:57:50
-(epstopdf)                    size: 27064 bytes
-(epstopdf)             Output file: <./figures/Call_Complexity_rates/error_vs_t
-ime_comparision-eps-converted-to.pdf>
-(epstopdf)                    date: 2018-09-13 17:06:32
-(epstopdf)                    size: 18753 bytes
-(epstopdf)             Command: <repstopdf --outfile=./figures/Call_Complexity_
-rates/error_vs_time_comparision-eps-converted-to.pdf ./figures/Call_Complexity_
-rates/error_vs_time_comparision.eps>
-(epstopdf)             \includegraphics on input line 1904.
-Package epstopdf Info: Output file is already uptodate.
-
-<./figures/Call_Complexity_rates/error_vs_time_comparision-eps-converted-to.pdf
-, id=1020, 462.72874pt x 346.29375pt>
-File: ./figures/Call_Complexity_rates/error_vs_time_comparision-eps-converted-t
-o.pdf Graphic file (type pdf)
-
-<use ./figures/Call_Complexity_rates/error_vs_time_comparision-eps-converted-to
-.pdf>
-Package pdftex.def Info: ./figures/Call_Complexity_rates/error_vs_time_comparis
-ion-eps-converted-to.pdf used on input line 1904.
-(pdftex.def)             Requested size: 187.89912pt x 140.61807pt.
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 32.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1971.
+(hyperref)                removing `math shift' on input line 32.
+
+[2]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 66.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1971.
+(hyperref)                removing `math shift' on input line 66.
 
-Package epstopdf Info: Source file: <./figures/weak_error_rates_basket_2d/witho
-ut_richardson/weak_convergence_order_basket_option_2d_1_relative_M_4_10_7_plain
-.eps>
-(epstopdf)                    date: 2018-10-03 17:55:04
-(epstopdf)                    size: 32555 bytes
-(epstopdf)             Output file: <./figures/weak_error_rates_basket_2d/witho
-ut_richardson/weak_convergence_order_basket_option_2d_1_relative_M_4_10_7_plain
--eps-converted-to.pdf>
-(epstopdf)                    date: 2018-10-03 18:33:19
-(epstopdf)                    size: 19267 bytes
-(epstopdf)             Command: <repstopdf --outfile=./figures/weak_error_rates
-_basket_2d/without_richardson/weak_convergence_order_basket_option_2d_1_relativ
-e_M_4_10_7_plain-eps-converted-to.pdf ./figures/weak_error_rates_basket_2d/with
-out_richardson/weak_convergence_order_basket_option_2d_1_relative_M_4_10_7_plai
-n.eps>
-(epstopdf)             \includegraphics on input line 1989.
-Package epstopdf Info: Output file is already uptodate.
-
-<./figures/weak_error_rates_basket_2d/without_richardson/weak_convergence_order
-_basket_option_2d_1_relative_M_4_10_7_plain-eps-converted-to.pdf, id=1022, 462.
-72874pt x 346.29375pt>
-File: ./figures/weak_error_rates_basket_2d/without_richardson/weak_convergence_
-order_basket_option_2d_1_relative_M_4_10_7_plain-eps-converted-to.pdf Graphic f
-ile (type pdf)
-
-<use ./figures/weak_error_rates_basket_2d/without_richardson/weak_convergence_o
-rder_basket_option_2d_1_relative_M_4_10_7_plain-eps-converted-to.pdf>
-Package pdftex.def Info: ./figures/weak_error_rates_basket_2d/without_richardso
-n/weak_convergence_order_basket_option_2d_1_relative_M_4_10_7_plain-eps-convert
-ed-to.pdf used on input line 1989.
-(pdftex.def)             Requested size: 164.4171pt x 123.04346pt.
-Package epstopdf Info: Source file: <./figures/weak_error_rates_basket_2d/with_
-richardson/weak_convergence_order_basket_option_2d_1_richardson_relative_M_4_10
-_7_plain.eps>
-(epstopdf)                    date: 2018-10-04 13:13:10
-(epstopdf)                    size: 31132 bytes
-(epstopdf)             Output file: <./figures/weak_error_rates_basket_2d/with_
-richardson/weak_convergence_order_basket_option_2d_1_richardson_relative_M_4_10
-_7_plain-eps-converted-to.pdf>
-(epstopdf)                    date: 2018-10-04 14:21:05
-(epstopdf)                    size: 16593 bytes
-(epstopdf)             Command: <repstopdf --outfile=./figures/weak_error_rates
-_basket_2d/with_richardson/weak_convergence_order_basket_option_2d_1_richardson
-_relative_M_4_10_7_plain-eps-converted-to.pdf ./figures/weak_error_rates_basket
-_2d/with_richardson/weak_convergence_order_basket_option_2d_1_richardson_relati
-ve_M_4_10_7_plain.eps>
-(epstopdf)             \includegraphics on input line 1995.
-Package epstopdf Info: Output file is already uptodate.
-
-<./figures/weak_error_rates_basket_2d/with_richardson/weak_convergence_order_ba
-sket_option_2d_1_richardson_relative_M_4_10_7_plain-eps-converted-to.pdf, id=10
-23, 462.72874pt x 346.29375pt>
-File: ./figures/weak_error_rates_basket_2d/with_richardson/weak_convergence_ord
-er_basket_option_2d_1_richardson_relative_M_4_10_7_plain-eps-converted-to.pdf G
-raphic file (type pdf)
-
-<use ./figures/weak_error_rates_basket_2d/with_richardson/weak_convergence_orde
-r_basket_option_2d_1_richardson_relative_M_4_10_7_plain-eps-converted-to.pdf>
-Package pdftex.def Info: ./figures/weak_error_rates_basket_2d/with_richardson/w
-eak_convergence_order_basket_option_2d_1_richardson_relative_M_4_10_7_plain-eps
--converted-to.pdf used on input line 1995.
-(pdftex.def)             Requested size: 164.4171pt x 123.04346pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[31 <./figures/Call_Complexity_rates/error_vs_time_comparision-eps-converted-to
-.pdf>]
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[32 <./figures/weak_error_rates_basket_2d/without_richardson/weak_convergence_o
-rder_basket_option_2d_1_relative_M_4_10_7_plain-eps-converted-to.pdf> <./figure
-s/weak_error_rates_basket_2d/with_richardson/weak_convergence_order_basket_opti
-on_2d_1_richardson_relative_M_4_10_7_plain-eps-converted-to.pdf>]
-Package epstopdf Info: Source file: <./figures/Basket_2d_MISC_quadrature_error/
-relative_quad_error_wrt_MISC_TOL_non_rich.eps>
-(epstopdf)                    date: 2018-10-04 08:19:45
-(epstopdf)                    size: 37061 bytes
-(epstopdf)             Output file: <./figures/Basket_2d_MISC_quadrature_error/
-relative_quad_error_wrt_MISC_TOL_non_rich-eps-converted-to.pdf>
-(epstopdf)                    date: 2018-10-04 08:50:25
-(epstopdf)                    size: 19493 bytes
-(epstopdf)             Command: <repstopdf --outfile=./figures/Basket_2d_MISC_q
-uadrature_error/relative_quad_error_wrt_MISC_TOL_non_rich-eps-converted-to.pdf 
-./figures/Basket_2d_MISC_quadrature_error/relative_quad_error_wrt_MISC_TOL_non_
-rich.eps>
-(epstopdf)             \includegraphics on input line 2139.
-Package epstopdf Info: Output file is already uptodate.
-
-<./figures/Basket_2d_MISC_quadrature_error/relative_quad_error_wrt_MISC_TOL_non
-_rich-eps-converted-to.pdf, id=1151, 462.72874pt x 346.29375pt>
-File: ./figures/Basket_2d_MISC_quadrature_error/relative_quad_error_wrt_MISC_TO
-L_non_rich-eps-converted-to.pdf Graphic file (type pdf)
-
-<use ./figures/Basket_2d_MISC_quadrature_error/relative_quad_error_wrt_MISC_TOL
-_non_rich-eps-converted-to.pdf>
-Package pdftex.def Info: ./figures/Basket_2d_MISC_quadrature_error/relative_qua
-d_error_wrt_MISC_TOL_non_rich-eps-converted-to.pdf used on input line 2139.
-(pdftex.def)             Requested size: 187.89912pt x 140.61807pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[33 <./figures/Basket_2d_MISC_quadrature_error/relative_quad_error_wrt_MISC_TOL
-_non_rich-eps-converted-to.pdf>]
-Package epstopdf Info: Source file: <./figures/Basket_2d_Complexity_rates/error
-_vs_time.eps>
-(epstopdf)                    date: 2018-10-04 11:58:34
-(epstopdf)                    size: 27850 bytes
-(epstopdf)             Output file: <./figures/Basket_2d_Complexity_rates/error
-_vs_time-eps-converted-to.pdf>
-(epstopdf)                    date: 2018-10-04 12:07:51
-(epstopdf)                    size: 19303 bytes
-(epstopdf)             Command: <repstopdf --outfile=./figures/Basket_2d_Comple
-xity_rates/error_vs_time-eps-converted-to.pdf ./figures/Basket_2d_Complexity_ra
-tes/error_vs_time.eps>
-(epstopdf)             \includegraphics on input line 2202.
-Package epstopdf Info: Output file is already uptodate.
-
-<./figures/Basket_2d_Complexity_rates/error_vs_time-eps-converted-to.pdf, id=11
-95, 462.72874pt x 346.29375pt>
-File: ./figures/Basket_2d_Complexity_rates/error_vs_time-eps-converted-to.pdf G
-raphic file (type pdf)
-
-<use ./figures/Basket_2d_Complexity_rates/error_vs_time-eps-converted-to.pdf>
-Package pdftex.def Info: ./figures/Basket_2d_Complexity_rates/error_vs_time-eps
--converted-to.pdf used on input line 2202.
-(pdftex.def)             Requested size: 187.89912pt x 140.61807pt.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@ifnextchar' on input line 2429.
-
-[34 <./figures/Basket_2d_Complexity_rates/error_vs_time-eps-converted-to.pdf>]
-<./figures/3D_basket/error_estimate.pdf, id=1259, 462.52798pt x 346.89601pt>
-File: ./figures/3D_basket/error_estimate.pdf Graphic file (type pdf)
-
-<use ./figures/3D_basket/error_estimate.pdf>
-Package pdftex.def Info: ./figures/3D_basket/error_estimate.pdf used on input l
-ine 2457.
-(pdftex.def)             Requested size: 187.89912pt x 140.92615pt.
-
-<./figures/3D_basket/average_running_time.pdf, id=1260, 462.52798pt x 346.89601
-pt>
-File: ./figures/3D_basket/average_running_time.pdf Graphic file (type pdf)
- <use ./figures/3D_basket/average_running_time.pdf>
-Package pdftex.def Info: ./figures/3D_basket/average_running_time.pdf used on i
-nput line 2463.
-(pdftex.def)             Requested size: 187.89912pt x 140.92615pt.
-
-<./figures/3D_basket/level_work.pdf, id=1261, 462.52798pt x 346.89601pt>
-File: ./figures/3D_basket/level_work.pdf Graphic file (type pdf)
-
-<use ./figures/3D_basket/level_work.pdf>
-Package pdftex.def Info: ./figures/3D_basket/level_work.pdf used on input line 
-2477.
-(pdftex.def)             Requested size: 187.89912pt x 140.92615pt.
-
-<./figures/3D_basket/levels_error_rate.pdf, id=1262, 462.52798pt x 346.89601pt>
-File: ./figures/3D_basket/levels_error_rate.pdf Graphic file (type pdf)
-<use ./figures/3D_basket/levels_error_rate.pdf>
-Package pdftex.def Info: ./figures/3D_basket/levels_error_rate.pdf used on inpu
-t line 2483.
-(pdftex.def)             Requested size: 187.89912pt x 140.92615pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[35 <./figures/3D_basket/error_estimate.pdf> <./figures/3D_basket/average_runni
-ng_time.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/3D_basket/average_running_
-time.pdf): PDF inclusion: multiple pdfs with page group included in a single pa
-ge
->]
-<./figures/8D_basket/error_estimate.pdf, id=1355, 462.52798pt x 346.89601pt>
-File: ./figures/8D_basket/error_estimate.pdf Graphic file (type pdf)
-
-<use ./figures/8D_basket/error_estimate.pdf>
-Package pdftex.def Info: ./figures/8D_basket/error_estimate.pdf used on input l
-ine 2499.
-(pdftex.def)             Requested size: 187.89912pt x 140.92615pt.
-
-<./figures/8D_basket/average_running_time.pdf, id=1356, 462.52798pt x 346.89601
-pt>
-File: ./figures/8D_basket/average_running_time.pdf Graphic file (type pdf)
- <use ./figures/8D_basket/average_running_time.pdf>
-Package pdftex.def Info: ./figures/8D_basket/average_running_time.pdf used on i
-nput line 2505.
-(pdftex.def)             Requested size: 187.89912pt x 140.92615pt.
-
-<./figures/8D_basket/level_work.pdf, id=1357, 462.52798pt x 346.89601pt>
-File: ./figures/8D_basket/level_work.pdf Graphic file (type pdf)
-
-<use ./figures/8D_basket/level_work.pdf>
-Package pdftex.def Info: ./figures/8D_basket/level_work.pdf used on input line 
-2519.
-(pdftex.def)             Requested size: 187.89912pt x 140.92615pt.
-
-<./figures/8D_basket/levels_error_rate.pdf, id=1358, 462.52798pt x 346.89601pt>
-File: ./figures/8D_basket/levels_error_rate.pdf Graphic file (type pdf)
-<use ./figures/8D_basket/levels_error_rate.pdf>
-Package pdftex.def Info: ./figures/8D_basket/levels_error_rate.pdf used on inpu
-t line 2525.
-(pdftex.def)             Requested size: 187.89912pt x 140.92615pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[36 <./figures/3D_basket/level_work.pdf> <./figures/3D_basket/levels_error_rate
-.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/3D_basket/levels_error_rat
-e.pdf): PDF inclusion: multiple pdfs with page group included in a single page
-> <./figures/8D_basket/error_estimate.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/8D_basket/error_estimate.p
-df): PDF inclusion: multiple pdfs with page group included in a single page
-> <./figures/8D_basket/average_running_time.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/8D_basket/average_running_
-time.pdf): PDF inclusion: multiple pdfs with page group included in a single pa
-ge
->]
-<./figures/25D_basket/error_estimate.pdf, id=1536, 462.52798pt x 346.89601pt>
-File: ./figures/25D_basket/error_estimate.pdf Graphic file (type pdf)
-
-<use ./figures/25D_basket/error_estimate.pdf>
-Package pdftex.def Info: ./figures/25D_basket/error_estimate.pdf used on input 
-line 2539.
-(pdftex.def)             Requested size: 187.89912pt x 140.92615pt.
-
-<./figures/25D_basket/average_running_time.pdf, id=1537, 462.52798pt x 346.8960
-1pt>
-File: ./figures/25D_basket/average_running_time.pdf Graphic file (type pdf)
- <use ./figures/25D_basket/average_running_time.pdf>
-Package pdftex.def Info: ./figures/25D_basket/average_running_time.pdf used on 
-input line 2545.
-(pdftex.def)             Requested size: 187.89912pt x 140.92615pt.
-
-<./figures/25D_basket/level_work.pdf, id=1538, 462.52798pt x 346.89601pt>
-File: ./figures/25D_basket/level_work.pdf Graphic file (type pdf)
-
-<use ./figures/25D_basket/level_work.pdf>
-Package pdftex.def Info: ./figures/25D_basket/level_work.pdf used on input line
- 2559.
-(pdftex.def)             Requested size: 187.89912pt x 140.92615pt.
-
-<./figures/25D_basket/levels_error_rate.pdf, id=1539, 462.52798pt x 346.89601pt
->
-File: ./figures/25D_basket/levels_error_rate.pdf Graphic file (type pdf)
- <use ./figures/25D_basket/levels_error_rate.pdf>
-Package pdftex.def Info: ./figures/25D_basket/levels_error_rate.pdf used on inp
-ut line 2565.
-(pdftex.def)             Requested size: 187.89912pt x 140.92615pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[37 <./figures/8D_basket/level_work.pdf> <./figures/8D_basket/levels_error_rate
-.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/8D_basket/levels_error_rat
-e.pdf): PDF inclusion: multiple pdfs with page group included in a single page
-> <./figures/25D_basket/error_estimate.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/25D_basket/error_estimate.
-pdf): PDF inclusion: multiple pdfs with page group included in a single page
-> <./figures/25D_basket/average_running_time.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/25D_basket/average_running
-_time.pdf): PDF inclusion: multiple pdfs with page group included in a single p
-age
->] (./main.bbl
-Missing character: There is no ‚ in font cmr10!
-Missing character: There is no Ñ in font cmr10!
-Missing character: There is no ù in font cmr10!
-Missing character: There is no  in font cmr10!
-Missing character: There is no ù in font cmr10!
-Missing character: There is no ï in font cmr10!
-Missing character: There is no ï in font cmr10!
-Missing character: There is no ‚ in font cmr10!
-Missing character: There is no Ä in font cmr10!
-Missing character: There is no ú in font cmr10!
-Missing character: There is no ‚ in font cmr10!
-Missing character: There is no Ñ in font cmr10!
-Missing character: There is no ù in font cmr10!
-Missing character: There is no  in font cmr10!
-Missing character: There is no ù in font cmr10!
-Missing character: There is no ï in font cmr10!
-Missing character: There is no ï in font cmr10!
-Missing character: There is no ‚ in font cmr10!
-Missing character: There is no Ä in font cmr10!
-Missing character: There is no ù in font cmr10!
- [38 <./figures/25D_basket/level_work.pdf> <./figures/25D_basket/levels_error_r
-ate.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/25D_basket/levels_error_ra
-te.pdf): PDF inclusion: multiple pdfs with page group included in a single page
-
->]) [39]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 4692.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 4692.
+) (./appendix.tex) [3]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 108.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 108.
  (./main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 4692.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 4692.
-
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 108.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 108.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: CBECF230C210F45210B72073661D3405;6948.
-
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: There were multiply-defined labels.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 4692.
+(rerunfilecheck)             Checksum: 1E8626015588E1A3713EB9703A228661;452.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 108.
  ) 
 Here is how much of TeX's memory you used:
- 25804 strings out of 493014
- 453167 string characters out of 6133351
- 551483 words of memory out of 5000000
- 28629 multiletter control sequences out of 15000+600000
- 20088 words of font info for 79 fonts, out of 8000000 for 9000
+ 25208 strings out of 493014
+ 429966 string characters out of 6133351
+ 528266 words of memory out of 5000000
+ 28285 multiletter control sequences out of 15000+600000
+ 17889 words of font info for 71 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 66i,15n,96p,3267b,579s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 66i,11n,96p,3267b,341s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
 </usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></
 usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></u
 sr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></us
-r/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr
-/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/l
-ocal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/loc
-al/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local
-/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/t
-exlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/tex
-live/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local/tex
-live/2016/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib6.pfb></usr/local
-/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib8.pfb></usr/l
-ocal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/loc
-al/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local
-/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/t
-exlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texl
-ive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive
-/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/20
-16/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2016/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2016/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2016/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2016/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2016/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2016/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2016/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2016/texmf-dist/fo
-nts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2016/texmf-dis
-t/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
-Output written on main.pdf (39 pages, 908831 bytes).
+r/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/
+local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/lo
+cal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/loca
+l/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/
+texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local/
+texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/te
+xlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texl
+ive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texliv
+e/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2
+016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2016
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2016/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2016/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2016/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2016/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2016/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2016/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2016/texmf-dist/fon
+ts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2016/texmf-dist
+/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
+Output written on main.pdf (3 pages, 218806 bytes).
 PDF statistics:
- 1968 PDF objects out of 2073 (max. 8388607)
- 988 compressed objects within 10 object streams
- 221 named destinations out of 1000 (max. 500000)
- 422 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 153 PDF objects out of 1000 (max. 8388607)
+ 122 compressed objects within 2 object streams
+ 20 named destinations out of 1000 (max. 500000)
+ 37 words of extra memory for PDF output out of 10000 (max. 10000000)
 

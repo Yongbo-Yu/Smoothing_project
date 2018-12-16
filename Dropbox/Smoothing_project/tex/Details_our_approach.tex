@@ -1,0 +1,284 @@
+In the following, we describe our approach which basically can be seen as a two stage method. In the first step, we use root finding procedure to get the inner integral  in \eqref{eq:multivariate integral with smoothing}, then in a second stage we employ adaptive quadraure, multi-index stochastic collocation (MISC), to compute the obtained smooth integrand.
+
+\subsection{The one dimensional case}
+For illustration purposes, let us focus on the one dimensional case, where under the risk-neutral measure, the undelying asset follows the geometric Brownian motion (GBM)
+\begin{align}\label{eq:GBM_asset_price_dynamics}
+dX_t= r X_t dt+\sigma X_t dB_t \COMMA 
+\end{align}
+		where $r$ is the risk-free rate, $\sigma$ is the volatility and $B_t$ is the standard Brownian motion. The analytical solution to  \eqref{eq:GBM_asset_price_dynamics} is 
+\begin{align*}
+	X_t=  X_0 \exp(( r-\sigma^2) t+\sigma B_t) \PERIOD
+\end{align*}
+The Brownian motion $B_t$ can be constructed either sequentially using a standard random walk construction or hierarchically using Brownian bridge (Bb) construction. To make an effective use of MISC, which profits from  anisotropy, we use the Bb construction since it produces  dimensions with different importance for MISC (creates anisotropy), contrary to random walk procedure for which all the dimension of the stochastic space have equal importance (isotropic). We explain the Bb construction in Section \ref{sec:Brwonian bridge construction}.
+
+Let us denote by $\psi: (z_1,\dots,z_N) \rightarrow (B_1,\dots,B_N)$ the mapping of Bb construction and by $\Phi: (B_1,\dots,B_N) \rightarrow \bar{X}_T$, the mapping consisting of the time-stepping scheme. Then, we can express the option price as
+\begin{align}\label{eq: option price as integral}
+\expt{g(X(T))}&\approx E[g(\bar{\mathbf{X}}_T)] \nonumber\\
+&=\expt{g\left(\Phi \circ \psi \right) (z_1,\dots,z_N)} \nonumber\\
+&=\int_{-\infty}^{\infty} \dots \int_{-\infty}^{\infty} G(z_1,\dots,z_N)  \rho_N(\mathbf{z}) dz_1,\dots,dz_N \nonumber\\
+&= I_N (G) \COMMA
+\end{align}
+where $G=g \circ \Phi \circ \psi$ and
+\begin{equation*}\label{eq: multivariate gaussian distribution}
+\rho_N(\mathbf{z})=\frac{1}{(2 \pi)^{N/2}} e^{-\frac{1}{2} \mathbf{z}^T \mathbf{z}} \PERIOD
+\end{equation*}
+Now, we can easily apply the procedure of pre-integration  of section \ref{sec:General setting}, where we can assume that the payoff function $g$ can be either the  maximum or indicator function and $\phi=\Phi \circ \psi$. The remaining ingredient is to determine with respect to which variable $z_j$ we will integrate.
+
+Claiming that pre-integrating with respect to $z_1$ is the optimal option then from \eqref{eq: option price as integral}, we have
+\begin{align}\label{eq: pre_integration_step_wrt_y1}
+E[g(\bar{\mathbf{X}}_T)]&=\int_{-\infty}^{\infty} \dots \int_{-\infty}^{\infty} G(z_1,\dots,z_N) \rho_N(\mathbf{z}) dz_1,\dots,dz_N \nonumber\\ 
+&=\int_{\rset^{N-1}} \left(\int_{-\infty}^\infty G(z_1,\mathbf{z}_{-1}) \rho(z_1) dz_1  \right) \rho_{N-1}(\mathbf{z}_{-1}) d\mathbf{z}_{-1}\nonumber\\	
+&=\int_{\rset^{N-1}} h(\mathbf{z}_{-1}) \rho_{N-1}(\mathbf{z}_{-1}) d\mathbf{z}_{-1}\COMMA \\ \nonumber
+	&=\expt{h(\mathbf{z}_{-1})}
+\end{align}
+where $h(\mathbf{z}_{-1})=\int_{-\infty}^\infty G(z_1,\mathbf{z}_{-1}) \rho(z_1) dz_1=  E\left[ G\left(z_1, \ldots, z_N \right)  \mid z_1\right] $.
+
+Since $g$ can have a kink  or jump. Computing $h(\mathbf{z}_{-1})$ in the pre-integration step should be carried carefully to not deteriorate the smoothness of $h$. This can be done by applying a root finding procedure and then computing the uni-variate integral by summing the terms coming from integrating in each region where $g$ is smooth. In Sections (\ref{sec: Root Finding},\ref{sec:Description of the Domain Decomposition and Suitable Transformation}), we explain those points.
+
+Once we perform stage $1$ procedure,  we use  multi-index stochastic collocation (MISC) procedure, suggested in \cite{haji2016multi}, to compute the expectation $\expt{h(\mathbf{z}_{-1})}$ . We describe the general strategy for the multi-index construction in Section \ref{sec:Details of the MISC}. 
+
+If we denote by $\mathcal{E}_{\text{tot}}$ the total error of approximating the  expectation in \eqref{eq: option price as integral} using the MISC estimator, $Q_N$, then we have a natural error decomposition
+\begin{align}\label{eq:total_error}
+\mathcal{E}_{\text{tot}} & \le \abs{C_{\text{RB}}- I_{N}(G)}+\abs{I_{N}(G)-Q_{N}}\nonumber\\
+  & \le \mathcal{E}_B(N)+ \mathcal{E}_Q(\text{TOL}_{\text{MISC}},N),
+\end{align}
+where  $\mathcal{E}_Q$ is the quadrature error, $\mathcal{E}_B$  is the bias, and $I_{N}(G)$ is the biased price computed with $N$ time steps as given by \eqref{eq: option price as integral}.
+
+\subsection{Extension to the high dimensional case}
+In the high dimensional case, we denote by $(z_1^{(i)},\dots,z_N^{(i)})$ the $N$ Gaussian independent rdvs that will be used to construct the path of the $i$-th asset $\bar{X}^{(i)}$, where $1 \le i \le d$ ($d$ denotes the number of underlyings considered in the basket). We keep the  same notations by denoting  $\psi: (z_1^{(i)},\dots,z_N^{(i)}) \rightarrow (B_1,\dots,B_N)$ the mapping of Bb construction and by $\Phi: (B^{(i)}_1,\dots,B^{(i)}_N) \rightarrow \bar{X}^{(i)}_T$, the mapping consisting of the time-stepping scheme. Then, we can express the option price as
+\begin{align}\label{eq: option price as integral_basket}
+	\expt{g(\mathbf{X}(T))}&\approx	\expt{g\left(\Phi \circ \psi \right) (z_1^{(1)}, \dots, z_N^{(1)}, \dots, z_1^{(d)},\dots,z^{(d)}_N)} \nonumber\\
+	&=\int_{\rset^{d \times N}} G(z_1^{(1)}, \dots, z_N^{(1)}, \dots, z_1^{(d)},\dots,z^{(d)}_N)) \rho_{d \times N}(\mathbf{z}) dz_1^{(1)} \dots dz_N^{(1)} \dots z_1^{(d)} \dots dz^{(d)}_N \COMMA
+\end{align}
+where $G=g \circ \Phi \circ \psi$ and
+\begin{equation*}
+\rho_{d \times N}(\mathbf{z})=\frac{1}{(2 \pi)^{{d \times N}/2}} e^{-\frac{1}{2} \mathbf{z}^T \mathbf{z}} \PERIOD
+\end{equation*}
+Now,  performing the  pre-integrating step with respect to the coarse rdvs $(z_1^{(1)},\dots, z_1^{(d)} )$, results in
+\begin{small}
+\begin{align}\label{eq: pre_integration_step_wrt_y1_basket}
+	\expt{g(\mathbf{X}(T))}&=\int_{\rset^{d \times N}} G(z_1^{(1)}, \dots, z_N^{(1)}, \dots, z_1^{(d)},\dots,z^{(d)}_N)) \rho_{d \times N}(\mathbf{z}) dz_1^{(1)} \dots dz_N^{(1)} \dots z_1^{(d)} \dots dz^{(d)}_N \nonumber\\ 
+	&=\int_{\rset^{d \times (N-1)}} \left(\int_{\rset^d} G(z^{(1)}_1,\mathbf{z}^{(1)}_{-1},\dots,z^{(d)}_1,\mathbf{z}^{(d)}_{-1} ) \rho_d(z_1^{(1)},\dots,z_1^{(d)}) dz_1^{(1)}\dots dz_1^{(d)}  \right) \rho_{d \times(N-1)}(\mathbf{z}_{-1}^{(1)},\dots,\mathbf{z}_{-1}^{(d)}) d\mathbf{z}_{-1}^{(1)}\dots d\mathbf{z}_{-1}^{(d)}\nonumber\\	
+	&=\int_{\rset^{d\times (N-1)}} h(\mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1} ) \rho_{d\times (N-1)}(\mathbf{z}_{-1}^{(1)},\dots,\mathbf{z}_{-1}^{(d)}) d\mathbf{z}^{(1)}_{-1} \dots d\mathbf{z}^{(d)}_{-1}\COMMA \\ \nonumber
+	&=\expt{h(\mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1} )}
+\end{align}
+\end{small}
+where $h(\mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1})=\int_{\rset^d} G(z^{(1)}_1,\mathbf{z}^{(1)}_{-1},\dots,z^{(d)}_1,\mathbf{z}^{(d)}_{-1} )   \rho_d(z_1^{(1)},\dots,z_1^{(d)}) dz_1^{(1)}\dots dz_1^{(d)}$.
+
+
+\subsection{The MISC method} \label{sec:Details of the MISC}
+
+We assume that we want to approximate the expected value $\text{E}[f(Y)]$ of an analytic function $f\colon \Gamma \to \rset$ using a tensorization of quadrature formulas over $\Gamma$.
+
+To introduce simplified notations, we start with the one-dimensional case. Let us denote by $\beta$ a non negative integer, referred to as a ``stochastic discretization level", and by $m: \nset \rightarrow \nset$  a strictly increasing function with $m(0)=0$ and $m(1)=1$, that we call  ``level-to-nodes function". At level $\beta$, we consider a set of $m(\beta)$ distinct quadrature points in $\rset$, $\mathcal{H}^{m(\beta)}=\{y^1_\beta,y^2_\beta,\dots,y_\beta^{m(\beta)}\} \subset \rset$, and a set of quadrature weights, $\boldsymbol{\omega}^{m(\beta)}=\{\omega^1_\beta,\omega^2_\beta,\dots,\omega_\beta^{m(\beta)}\}$. We also let $C^0(\rset)$ be the set of real-valued continuous functions over $\rset$. We then define the quadrature operator as
+\begin{equation*}
+Q^{m(\beta)}:C^0(\rset) \rightarrow \rset, \quad Q^{m(\beta)}[f]= \sum_{j=1}^{m(\beta)} f(y^j_\beta) \omega_\beta^j.
+\end{equation*}
+In our case, we have in \eqref{eq: pre_integration_step_wrt_y1_basket} a multi-variate integration problem with, $f:=h$, $\mathbf{Y}=(\mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1})$,  and  $\Gamma=\rset^{d (N-1)}$, in the previous notations.  Therefore,  we define for any multi-index $\boldsymbol{\beta} \in \nset^{d (N-1)}$
+$$Q^{m(\boldsymbol{\beta})}: C^0(\rset^{d (N-1)}) \rightarrow \rset,\quad  Q^{m(\boldsymbol{\beta})}= \bigotimes_{n = 1}^{d (N-1)} Q^{m(\beta_n)} \COMMA $$
+where the $n$-th quadrature operator is understood to act only on the $n$-th variable of $f$. Practically, we obtain the value of $Q^{m(\boldsymbol{\beta})}[f]$  by considering the tensor grid $\mathcal{T}^{m(\boldsymbol{\beta})}= \times_{n = 1}^{d (N-1)}  \mathcal{H}^{m(\beta_n)}$ with cardinality $\#\mathcal{T}^{m(\boldsymbol{\beta})}=\prod_{n=1}^{d (N-1)} m (\beta_n)$ and computing
+
+$$ Q^{m(\boldsymbol{\beta})}[f]= \sum_{j=1}^{\#\mathcal{T}^{m(\boldsymbol{\beta})}} f(\hat{y}_j) \bar{\omega}_j \COMMA$$
+where $\hat{y}_j \in \mathcal{T}^{m(\boldsymbol{\beta})}$ and $\bar{\omega}_j$ are  products of weights of the univariate quadrature rules.
+\begin{remark}
+	We note that the quadrature points are chosen to optimize the convergence properties of the quadrature error.  For instance, in our context, since we are dealing with Gaussian densities, using Gauss-Hermite quadrature points is the appropriate choice.
+\end{remark}
+A direct approximation $\expt{f[\mathbf{Y}]} \approx Q^{\boldsymbol{\beta}}[f]$ is not an appropriate option  due to the well-known ``curse of dimensionality". We use MISC, which is a hierarchical adaptive sparse grids quadrature strategy that uses  stochastic discretizations  and classic sparsification approach to obtain an effective approximation scheme for $\expt{f}$. 
+
+For the sake of concreteness, in our setting, we are left with a $d (N-1)$-dimensional Gaussian random input, which is chosen independently, resulting in  $d (N-1)$ numerical parameters for MISC, which we use as the basis of the multi-index construction. For a multi-index $\boldsymbol{\beta} = (\beta_n)_{n=1}^{d (N-1)} \in \mathbb{N}^{d (N-1)}$, we denote  by
+$Q_N^{\boldsymbol{\beta}}$,   the result of approximating \eqref{eq: pre_integration_step_wrt_y1_basket} with a number of quadrature points  in the $i$-th dimension equal to  $m(\beta_i)$. We further define the set of
+differences $\Delta Q_N^{\boldsymbol{\beta}}$ as follows: for a single index $1 \le i \le d (N-1)$,
+let
+\begin{equation*}
+\Delta_i Q_N^{\boldsymbol{\beta}} = \left\{ 
+\aligned 
+ Q_N^{\boldsymbol{\beta}} &- Q_N^{\boldsymbol{\beta}'}  \text{, with } \boldsymbol{\beta}' =\boldsymbol{\beta} - e_i, \text{ if } \boldsymbol{\beta}_i>0 \\
+ Q_N^{\boldsymbol{\beta}} &, \quad  \text{ otherwise}
+\endaligned
+\right.
+\end{equation*}
+where $e_i$ denotes the $i$th $d (N-1)$-dimensional unit vector. Then, $\Delta
+Q_N^{\boldsymbol{\beta}}$ is defined as
+\begin{equation*}
+\Delta Q_N^{\boldsymbol{\beta}} = \left( \prod_{i=1}^{d (N-1)} \Delta_i \right) Q_N^{\boldsymbol{\beta}}.
+\end{equation*}
+Given the definition of $I^{N}(G)$ by \eqref{eq: pre_integration_step_wrt_y1_basket}, we have the telescoping property
+\begin{equation*}
+I^{N}(G)=Q_N^\infty = \sum_{\beta_1=0}^\infty \cdots \sum_{\beta_{d (N-1)} = 0}^\infty \Delta
+Q_N^{(\beta_1, \ldots, \beta_{d (N-1)})} = \sum_{\boldsymbol{\beta} \in \mathbb{N}^{d (N-1)}} \Delta Q_N^{\boldsymbol{\beta}}.
+\end{equation*}
+The MISC estimator used for approximating \eqref{eq: pre_integration_step_wrt_y1_basket}, and using a set of multi-indices $\mathcal{I}\subset \nset^{d (N-1)}$ is given by
+\begin{equation}\label{eq:MISC_quad_estimator}
+	Q_N^{\mathcal{I}} = \sum_{\boldsymbol{\beta} \in \mathcal{I}} \Delta Q_N^{\boldsymbol{\beta}}.
+\end{equation}
+The quadrature error in this  case  is given by
+\begin{equation}\label{eq:quadrature error}
+\mathcal{E}_Q(\text{TOL}_{\text{MISC}},N) =\abs{Q_N^\infty - Q_N^\mathcal{I}} \le \sum_{\ell \in \mathbb{N}^{d(N-1)} \setminus
+	\mathcal{I}} \abs{\Delta Q_N^\ell}.
+\end{equation}
+We define the work contribution, $\Delta \mathcal{W}_{\boldsymbol{\beta}}$, to be the computational cost  required to add  $\Delta Q_N^{\boldsymbol{\beta}}$ to $Q^{\mathcal{I}}_N$, and the error contribution, $\Delta E_{\boldsymbol{\beta}}$, to be  a measure of how much the quadrature error, defined in \eqref{eq:quadrature error}, would decrease once $\Delta Q_N^{\boldsymbol{\beta}}$  has been added to  $Q^{\mathcal{I}}_N$, that is 
+\begin{align}\label{eq:Work_error_contributions}
+\Delta \mathcal{W}_{\boldsymbol{\beta}} &= \text{Work}[Q^{\mathcal{I} \cup \{\boldsymbol{\beta}\}}_N]-\text{Work}[Q^{\mathcal{I}}_N] \nonumber\\
+\Delta E_{\boldsymbol{\beta}} &= \abs{Q^{\mathcal{I} \cup \{\boldsymbol{\beta}\}}_N-Q^{\mathcal{I}}_N}.
+\end{align}
+ The  construction of the optimal  $\mathcal{I}$ will be done by profit thresholding, that is, for a certain threshold value $\bar{T}$, and a profit of a hierarchical surplus defined by
+ \begin{equation*}
+ P_{\boldsymbol{\beta}}= \frac{\abs{\Delta E_{\boldsymbol{\beta}}}}{\Delta\mathcal{W}_{\boldsymbol{\beta}}},
+ \end{equation*}
+  the optimal index set  $\mathcal{I}$  for MISC  is given by 
+ $\mathcal{I}=\{\boldsymbol{\beta}: P_{\boldsymbol{\beta}}	 \ge \bar{T}\}$.
+ 
+ 
+\subsection{Path generation methods (PGM)}\label{sec:Path generation methods (PGM)}
+
+In the literature of adaptive sparse grids and  QMC, several hierarchical path generation methods (PGMs) or transformation methods have been proposed to reduce the effective dimension. Among these transformations, we cite the Brownian bridge (Bb)  construction \cite{moskowitz1996smoothness,caflisch1997valuation,morokoff1998generating,larcher2003tractability}, the principal component analysis (PCA)  \cite{acworth1998comparison} and the linear transformation (LT) \cite{imai2004minimizing}, etc \dots 
+
+Assume that one wants to compute $\expt{g(B)}$, where $B$ is a Brownian motion with index set $[0,T]$. In most applications this is can be reasonably approximated by $\expt{\tilde{g}\left(B_{\frac{T}{N}}, \dots, B_{\frac{T N}{N}}  \right)}$, where $\tilde{g}$ is a function of the set of discrete Brownian paths.
+
+There are three classical methods for sampling from $\left(B_{\frac{T}{N}}, \dots, B_{\frac{T N}{N}}  \right)$ given a standard normal vector $Z$, namely the forward method, the Brownian bridge (Bb) construction and the principal component analysis (PCA) construction. All of these constructions may be written in the form $\left(B_{\frac{T}{N}}, \dots, B_{\frac{T N}{N}}  \right)=AZ$, where $A$ is an $N \times N$ real matrix with 
+
+\begin{equation}\label{eq:covariance_matrix_in_time}
+A A^T =\Sigma:= \left(\frac{T}{N} \min(j,k)\right)_{j,k=1}^N=\frac{T}{N} \begin{bmatrix}
+	1       & 1 & 1 & \dots & 1\\
+	1     & 2 & 2 & \dots & 2 \\
+	1     & 2& 3 & \dots &3 \\
+	\vdots    & \vdots& \vdots & \ddots &\vdots \\
+	1      & 2 & 3 & \dots &N
+\end{bmatrix}
+\PERIOD
+\end{equation}   
+For instance, the matrix $A$ corresponding to the forward method is given by 
+\begin{equation*}
+	A^{F} = \sqrt{\frac{T}{N}}  \begin{bmatrix}
+		1       & 0  & \dots & 0\\
+		1     & 1  & \dots & 0 \\
+		\vdots    & \vdots & \ddots &\vdots \\
+		1      & 1&  \dots &1
+	\end{bmatrix}
+	\PERIOD
+\end{equation*}  
+In the case of Bb construction, details about the construction are given in Section \ref{sec:Brwonian bridge construction}, and  the corresponding matrix $A$, For $N=8$ is given by 
+ \begin{equation*}
+ 	A^{\text{Bb}} = \sqrt{T}  \begin{bmatrix}
+ 		\frac{1}{8}       & 	\frac{1}{8}   & 	\frac{\sqrt{2}}{8} & 0 &\frac{2}{8}  & 0 &0 & 0\\
+ 	\frac{2}{8}       & 	\frac{2}{8}   & 	\sqrt{2}\frac{ 2}{8} & 0 &0 & 0 &0 & 0\\
+ 		\frac{3}{8}       & 	\frac{3}{8}   & 	\frac{\sqrt{2}}{8} & 0 &0 &\frac{2}{8} &0  &0 \\
+ 		 	\frac{4}{8}       & 	\frac{4}{8}   & 	0 & 0 &0 & 0 &0 & 0\\
+ 		 	\frac{5}{8}       & 	\frac{3}{8}   & 	0 & \frac{\sqrt{2}}{8} &0 &0 &\frac{2}{8} &0 \\
+ 		 		\frac{6}{8}       & 	\frac{2}{8}   & 	0 & \sqrt{2}\frac{ 2}{8}  &0 & 0 &0 & 0\\
+ 		 			\frac{7}{8}       & 	\frac{1}{8}   & 	0 & \frac{\sqrt{2}}{8} &0 &0 &0 &\frac{2}{8}  \\
+ 		 			1       & 0  & 	0 & 0 &0 &0 &0 &0 \\
+ 	
+ 	\end{bmatrix}
+ 	\PERIOD
+ \end{equation*}
+When doing PCA construction \cite{acworth1998comparison}, we have $A^{\text{PCA}}=VD$, where $\Sigma=V D^2V^T$ is the singular value decomposition of $\Sigma$. 
+ 
+\subsubsection{Brownian bridge (Bb) construction}\label{sec:Brwonian bridge construction}
+In our context, sampling the Brownian motion can be constructed either sequentially using a standard random walk construction or hierarchically using   other hierarchical PGM as listed above. For our purposes, to make an effective use of MISC, which profits from anisotropy, we use the Bb construction since it produces  dimensions with different importance for MISC (creates anisotropy), contrary to random walk procedure for which all the dimension of the stochastic space have equal importance (isotropic).  This pre-transformation  reduces the effective dimension dimension  of the problem and as a consquence accelerates the MISC procedure by reducing the computational cost.
+
+Let us denote $\{t_i\}_{i=0}^{N}$ the grid of time steps, then the Bb construction \cite{glasserman2004monte} consists of the following: given a past value $B_{t_i}$ and a future value $B_{t_k}$, the value $B_{t_j}$ (with $t_i < t_j < t_k$) can be generated according to the formula:
+\begin{equation}
+B_{t_j}=(1-\rho) B_{t_i}+\rho B_{t_k}+ \sqrt{\rho (1-\rho)(k-i) \Delta t} z, \: z \sim \mathcal{N}(0,1) \COMMA
+\end{equation}
+where $\rho=\frac{j-i}{k-i}$.  In particular, if $N$ is a power of $2$, then given $B_0=0$, Bb generates the Brownian motion at times $T, T/2,T/4,3T/4,\dots$ according
+\begin{align}\label{eq:BB construction}
+	B_T&=\sqrt{T}z_1\nonumber\\
+	B_{T/2}&= \frac{1}{2}(B_{0}+B_{T})+\sqrt{T/4}z_2= \frac{\sqrt{T}}{2} z_1+\frac{\sqrt{T}}{2} z_2\nonumber\\
+	B_{T/4}&=\frac{1}{2} (B_{0}+B_{T/2})+\sqrt{T/8}z_3= \frac{\sqrt{T}}{4} z_1+\frac{\sqrt{T}}{4} z_2+\sqrt{T/8}z_3\nonumber\\
+	\vdots \nonumber\\
+\end{align}
+where $\{z_j\}_{j=1}^{N}$ are independent standard normal variables. 
+
+Describing construction \ref{eq:BB construction}: we  first generate the final value $B_T$, then sample $B_{T/2}$ conditional
+on the values of $B_T$ and $B_0$, and proceed by progressively filling in intermediate values. Bb uses the first several coordinates of the low-discrepancy points to determine the general shape of the Brownian path, and the last few coordinates influence only the fine detail of the path. Therefore, the most important values that determine the large scale structure of Brownian motion are the first components of $\mathbf{z} = (z_1,\dots,z_N)$.  
+
+\subsection{Richardson extrapolation}\label{sec:Richardson extrapolation}
+Another transformation that we coupled with MISC is Richardson extrapolation \cite{talay1990expansion}. In fact, applying level $K_\text{R}$ (level of extrapolation) of Richardson extrapolation reduces dramatically the bias and as a consequence reduces the  number of time steps $N$ needed in the coarsest level to achieve a certain error tolerance. This means basically that Richardson extrapolation directly reduces  the total dimension of the integration problem for achieving some error tolerance.
+
+We  recall that the Euler scheme has weak order one so that
+\begin{align}\label{Euler_weak_error}
+	\abs{\expt{f(\hat{X}_T^h)}-\expt{f(X_T)} }  \leq C h
+\end{align}
+for some constant $C$, all sufficiently small $h$ and suitably smooth $f$. It can be easily  shown that  \eqref{Euler_weak_error} can be improved to
+\begin{align}\label{Euler_weak_error_strenghten}
+	\expt{f(\hat{X}_T^h)}= \expt{f(X_T)} + c h +\Ordo{h^2} \COMMA
+\end{align}
+where $c$ depends on $f$. 
+
+Applying \eqref{Euler_weak_error_strenghten} with discretization step $2h$, we  obtain
+\begin{align*}
+	\expt{f(\hat{X}_T^{2h})}= \expt{f(X_T)} + 2 c h +\Ordo{h^2} \COMMA
+\end{align*}
+implying
+\begin{align*}
+	2 \expt{f(\hat{X}_T^{2h})}- \expt{f(\hat{X}_T^{h})} =\expt{f(X_T)} + \Ordo{h^2} \COMMA
+\end{align*}
+For higher levels of extrapolations, we use the following: Let us denote by $h_J=h_0 2^{-J}$ the grid sizes (where $h_0$ is the coarsest grid size), by $K_\text{R}$ the level of the Richardson extrapolation, and by $I(J,K_\text{R})$ the approximation of $\expt{f((X_T)}$ by terms up to level $K_\text{R}$ (leading to a weak error of order $K_\text{R}$), then we have the following recursion 
+\begin{align*}
+I(J,K_\text{R})=\frac{2^{K_\text{R}}\left[I(J,K_\text{R}-1)-I(J-1,K_\text{R}-1)\right]}{2^{K_\text{R}}-1},\quad J=1,2,\dots, K_\text{R}=1,2,\dots
+\end{align*}
+\begin{remark}
+We emphasize that through our work, we are interested in the pre-asymptotic regime (small number of time steps), and the use of Richardson extrapolation is justified by our observed experimental results in that regime (see Section \ref{sec:Weak error plots_no_change}),  which in particular, show an order one of convergence for the weak error. Although, we do not claim that the observed rates will scale well in the asymptotic regime, we observed that the pre-asymptotic regime is enough to get sufficiently accurate estimates for the option prices. 
+\end{remark}
+
+\subsection{Root Finding}\label{sec: Root Finding}
+Without loss of generality, we can assume that the integration domain  can
+be divided into two parts $\Omega_1$, and $\Omega_2$ such that the integrand $f$ is smooth and positive in $\Omega_1$ whereas $f(\mathbf{x}) = 0$ in $\Omega_2$. Therefore,
+\begin{equation}
+I f := \int_{\Omega_1} f(\mathbf{x}) d \mathbf{x}
+\end{equation}
+This situation may arise when the integrand is non-differentiable or noncontinuous along the boundary between $\Omega_1$ and $\Omega_2$. For these problems, kinks and jumps can efficiently be identified by a one-dimensional root finding. Then, the kinks and jumps can
+be transformed to the boundary of integration domain such that they no longer deteriorate the performance of the numerical methods. In fact, we  compute the zeros of the integrand  with respect to  the last dimension. In this dimension, then, e.g., Newton's method or bisection can be used to identify the point which separates $\Omega_1$ and $\Omega_2$. In our project, we use Newton 's iteration solver.
+
+Let us call $y$ the mapping such that: $y: \mathbf{z}_1 \rightarrow z^{\text{kink}}$, where  $z^{\text{kink}}$ is   the "location of
+irregularity", \ie,  $g$ is not smooth at the point $\phi \circ \Phi \circ \Psi(z^{\text{kink}}, \mathbf{z}_{-1})$. Generally, there might be (for given $\mathbf{z}_{-1}$
+\begin{itemize}
+	\item no solution, i.e., the integrand in the definition of $h(\mathbf{z}_{-1})$ above
+	is smooth (\textit{best case});
+	\item a unique solution;
+	\item multiple solutions.
+\end{itemize}
+
+Generally, we need to assume that we are in the first or second
+case. Specifically, we need that
+\begin{equation*}
+	\mathbf{z}_{-1} \mapsto h(\mathbf{z}_{-1}) \text{ and } \mathbf{z}_{-1} \mapsto \hat{h}(\mathbf{z}_{-1})
+\end{equation*}
+are smooth, where $\hat{h}$ denotes the numerical approximation of $h$ based
+on a grid containing $y(\mathbf{z}_{-1})$. In particular, $y$ itself should be smooth
+in $\mathbf{z}_{-1}$. This would already be challenging in practice in the third
+case. Moreover, in the general situation we expect the number of solutions $y$ to increase when the discretization of the SDE gets finer.
+
+In many situations, case $2$ (which is thought to include case 1) can be
+guaranteed by monotonicity (\red{I think we need to add also the growth condition}. For instance, in the case of one-dimensional SDEs
+with $z_1$ representing the terminal value of the underlying Brownian motion (and $\mathbf{z}_{-1}$ representing the Brownian bridge), this can often be seen from the SDE itself. Specifically, if each increment ``$dX$'' is increasing in $z_1$, no matter the value of $X$, then the solution $X_T$ must be increasing
+in $z_1$. This is easily seen to be true in examples such as the Black-Scholes model and the CIR process. (Strictly speaking, we have to distinguish between the continuous and discrete time solutions. In these examples, it does not matter.) On the other hand, it is also quite simple to construct counter examples, where monotonicity fails, for instance SDEs for which the ``volatility'' changes sign, such as a trigonometric function.\footnote{Actually, in every such case the simple remedy is to replace the volatility by its absolute value, which does not change the law of the solution. Hence, there does not seem to be a one-dimensional counter-example.}
+
+Even in multi-dimensional settings, such monotonicity conditions can hold in specific situations. For instance, in case of a basket option in a multivariate Black Scholes framework, we can choose a linear combination $z_1$ of the terminal values of the driving Bm, such that the basket is a monotone function of $z_1$. (The coefficients of the linear combination will depend on the correlations and the weights of the basket.) However, in that case this may actually not correspond to the optimal ``rotation'' in terms of optimizing the smoothing effect.
+
+\subsection{Description of the Domain Decomposition and Suitable Transformation}\label{sec:Description of the Domain Decomposition and Suitable Transformation}
+The payoff function is not smooth due to
+the nature of the option. In fact, the holder would not exercise
+the option if a purchase or sale of the underlying asset would lead to a loss. As a result, the discontinuity of the payoff function carries over to the integrand. In this case, The integrand shows a kink  or even a jump with respect to a  manifold. Since some
+(mixed) derivatives are not bounded at these manifolds, the smoothness requirements for the sparse grid method are clearly not fulfilled any more.
+
+The first step consists of identifying the areas 
+of discontinuity or non-differentiability. Then, we decompose the total integration domain $\Omega$ into sub-domains $\Omega_i,\: i=1,\dots,n$ such that the integrand is smooth in the interior of 
+$\Omega_i$ and such that all kinks and jumps are
+located along the boundary of these areas.  This procedure results in integrating several smooth functions, instead of one discontinuous function. The total integral is then given
+as the sum of the separate integrals, \ie
+\begin{align}
+	I f := \int_{\Omega} f(\mathbf{x}) d \mathbf{x}=\sum_{i=1}^{n}	\int_{\Omega_i} f(\mathbf{x}) d \mathbf{x}
+\end{align}
+In this way, the fast convergence of SG can
+be regained whereas the costs only increase by a constant (the number of terms in
+the sum), provided the cost required for the decomposition is sufficiently small such that it can be neglected.
+
+In general, such a decomposition is even more expensive than to integrate the function. Nevertheless, for some problem classes, the areas of discontinuity have a particular simple form, which allows to decompose the integration domain with
+costs that are much smaller than the benefit which results from the decomposition.  In this work, we consider those cases.
+
+In the literature, there two classes that have been tackled. In the first one, we have the information that the kinks are  part of the integration domain where the integrand is zero and can thus be identified by root finding as proposed in \cite{gerstner2007sparse}.
+
+In the second class, we have the information that the discontinuities are located on hyperplanes, which allows a decomposition first into polyhedrons and then into
+orthants as discussed in \cite{gerstner2008valuation}. In this work, we start by the first  class of problems.

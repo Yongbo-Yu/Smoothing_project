@@ -1,0 +1,45 @@
+\subsection{Errors in smoothing}
+\label{sec:errors-smoothing}
+
+For the analysis it is useful to assume that $\hat{h}$ is a smooth function of $\mathbf{z}_{-1}$, but in reality this is not going to be true. Specifically, if the true location $y$ of the non-smoothness in the system were available, we could actually guarantee $\hat{h}$ to be smooth, for instance by choosing 
+\begin{equation*}
+	\hat{h}(\mathbf{z}_{-1}) = \sum_{k=-K}^{K} \eta_k g\left( \phi \circ \Phi \circ \Psi\left( \zeta_k(y(\mathbf{z}_{-1})),
+	\mathbf{z}_{-1} \right) \right),
+\end{equation*}
+for points $\zeta_k \in \R$ with $\zeta_0 = y$ and corresponding weights
+$\eta_k$.\footnote{Of course, the points $\zeta_k$ have to be chosen in a
+	systematic manner depending on $y$.} However, in reality we have to
+numerical approximate $y$ by $\bar{y}$ with error
+$\abs{y - \bar{y}} \le \delta$. Now, the actual integrand in $\mathbf{z}_{-1}$ becomes 
+\begin{equation*}
+	\bar{h}(\mathbf{z}_{-1}) \coloneqq \sum_{k=-K}^{K} \eta_k g\left( \phi \circ \Phi \circ \Psi\left( \zeta_k(
+	\bar{y}(\mathbf{z}_{-1})), \mathbf{z}_{-1} \right) \right),
+\end{equation*}
+which we cannot assume to be smooth anymore. On the other hand, if
+$\zeta_k(y)$ is a continuous function of $y$ and $y$ and $\bar{y}$ are continuous in $\mathbf{z}_{-1}$, then \emph{eventually} we will have
+\begin{equation*}
+	\norm{\hat{h} - \bar{h}}_\infty \le \tol, \quad \norm{h - \bar{h}}_\infty
+	\le \tol, 
+\end{equation*}
+i.e., the smooth functions $h$ and $\hat{h}$ are close to the integrand $\bar{h}$. (Of course, this may depend on us choosing a good enough quadrature
+$\zeta$!) 
+\begin{remark}
+	If the adaptive collocation used for computing the integral of $\bar{h}$
+	depends on derivatives (or difference quotients) of its integrand $\bar{h}$,
+	then we may also need to make sure that derivatives of $\bar{h}$ are close
+	enough to derivatives of $\hat{h}$ or $h$. This may require higher order
+	solution methods for determining $y$.
+\end{remark}
+\begin{remark}
+	In some important cases, $f$ may be trivial (e.g., $\equiv 0$). In these
+	cases, we may be able to make sure that $\bar{y}$ never crosses the ``location of
+	non-smoothness''. Then even $\bar{h}$ is smooth.
+\end{remark}
+
+\begin{remark}
+	We expect that the global error of our procedure will be bounded by the weak error which is in our case of order $O(\Delta t)$. In this case, the overall complexity of our procedure will be of order $O(TOL^{-1})$. We note that this rate can be improved up to $O(TOL^{-\frac{1}{2}})$ if we use \textbf{Richardson extrapolation}. Another way that can improve the complexity could be based on \textbf{Cubature on Wiener Space} (This is left for a future work). The aimed complexity rate illustrates the contribution of our procedure which outperforms  Monte Carlo forward Euler (MC-FE) and multi-level MC-FE, having complexity rates of order $O(TOL^{-3})$  and $O(TOL^{-2} log(TOL)^2)$  respectively. 
+\end{remark}
+
+\begin{remark}
+	\item We need to check the impact of the error caused by the Newton iteration on the integration error. In the worst case, we expect that if the error in the Newton iteration is of order $O(\epsilon)$ than the integration error will be of order $\operatorname{log}(\epsilon)$. But we need to check that too.
+	\end{remark}

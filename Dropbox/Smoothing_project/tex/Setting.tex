@@ -1,0 +1,41 @@
+In the context of option pricing, we aim at approximating the option price, $E[g(\mathbf{X}(t))]$,  where $g:\mathbb{R}^d  \rightarrow \mathbb{R}$ is the payoff function  and where  the process of the asset prices $\mathbf{X} \in \mathbb{R}^d$ solves 
+\begin{align*}
+	\mathbf{X}(t)=\mathbf{X}(0)+ \int_{0}^{t} a(s,\mathbf{X}(s)) ds + \sum_{\ell=1}^{\ell_0} \int_{0}^{t} b^{\ell}(s,\mathbf{X}(s)) dW^{\ell}(s)
+\end{align*}
+Let us denote  by $\Phi: (\mathbf{z}_1,\dots,\mathbf{z}_N) \rightarrow \bar{\mathbf{X}}_T$, the mapping consisting of the time-stepping scheme, where $\{\mathbf{z}_i\}_{i=1}^N$ are independent $d$-dimensional Gaussian random vectors, and $N$ is the number of time steps. Without loss of Generality, we assume that $\Phi$ may include pre-processing transformations to reduce the effective dimension. We also assume that $d=1$ and the extension to higher dimension is trivial.
+
+In this setting, we are interetsed in the basic problem of approximating
+\begin{align}\label{eq:multivariate integral}
+E[g(\mathbf{X}(T))] &\approx E[g(\bar{\mathbf{X}}_T)] \nonumber\\
+&=\int_{\rset^N}g \circ \Phi(\mathbf{z})	d \mathbf{z}= \int_{-\infty}^{\infty} \dots \int_{-\infty}^{\infty} g \circ \Phi(z_1,\dots,z_N) \rho_d(\mathbf{z}) dz_1,\dots,dz_N \nonumber\\
+&=I_N (g \circ \Phi) \COMMA
+\end{align}
+with
+\begin{equation*}\label{eq: multivariate gaussian distribution}
+\rho_N(\mathbf{z})=\frac{1}{(2 \pi)^{N/2}} e^{-\frac{1}{2} \mathbf{z}^T \mathbf{z}} \PERIOD
+\end{equation*} 
+where $\rho$ is a continuous and strictly positive probability density function on $\rset$ and $g$ is a real-valued function integrable with respect to $\rho_N$.
+ 
+In this context, we work mainly with two possible structures of payoff function $g$. In fact, for the cases of call/put options, the payoff $g$ has a kink and  will be of the form 
+\begin{align*}
+g(\mathbf{x})=\max(\phi(\mathbf{x}),0).
+\end{align*}
+One can also encounter jumps in the payoff when working with binary digital options. In this case, $g$ is given by 
+\begin{align*}
+	g(\mathbf{x})=\mathbf{1}_{(\phi(\mathbf{x}) \ge 0)}.
+\end{align*}
+We introduce the notation $\mathbf{x}=(x_j,\mathbf{x}_{-j})$, where $\mathbf{x}_{-j}$ denotes the vector of length $d-1$ denoting all the variables other than $x_j$. Then, if we assume for some $j \in \{1,\dots,d\}$
+\begin{align}
+	\frac{\partial \phi}{\partial x_j}(\mathbf{x}) &>0,\: \forall \mathbf{x} \in \rset^d \: \: \textbf{(Monotonicity condition)}  \label{assump:Monotonicity condition}\\
+	\underset{x \rightarrow +\infty}{\lim} \phi(\mathbf{x})&=\underset{x \rightarrow +\infty}{\lim} \phi(x_j,\mathbf{x}_{-j})=+\infty, \: \text{or} \:\: \frac{\partial^2 \phi} {\partial x_j^2}(\mathbf{x}) \: \: \textbf{(Growth condition)}  \label{assump:Growth condition} \COMMA
+\end{align}
+then, using Fubini's theorem,  we can rewrite \eqref{eq:multivariate integral} as
+\begin{align}\label{eq:multivariate integral with smoothing}
+I_N (g \circ \Phi) &= \int_{\rset^{d-1}} \left(\int_{-\infty}^\infty g \circ\Phi(z_j,\mathbf{z}_{-j}) \rho(z_j) dz_j  \right) \rho_{z-1}(\mathbf{z}_{-j}) d\mathbf{z}_{-j}\COMMA \\ \nonumber	  
+&= \expt{E \left[g \circ\Phi(z_j,\mathbf{z}_{-j}) \mid z_j \right]}
+\end{align}
+where we evaluate the inner integral for each $\mathbf{z}_{-j}$ and which results in a smooth integrand for the outer $(N-1)$-dimensional integral. 
+
+We note that  conditions (\eqref{assump:Monotonicity condition} and \eqref{assump:Growth condition}) imply that for each $\mathbf{z}_{-j}$, the function $\phi \circ \Phi(z_j,\mathbf{z}_{-j})$ either has a simple  root $z_j$ or is positive for all $z_j \in \rset$.
+
+We generally do not have a closed form for the inside integral in \eqref{eq:multivariate integral with smoothing}. Therefore, the pre-integration (conditional sampling)  step should be performed numerically.
