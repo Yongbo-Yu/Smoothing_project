@@ -1,0 +1,49 @@
+Let us denote by the matrix $A$, the computable covariance matrix of  $ \widetilde{W}^H_{t_1},\dots, \widetilde{W}_{t_N},W^1_{t_1},\dots, W^1_{t_N}$.  We can use Cholesky decomposition of $A$ to produce exact samples of $W^1_{t_1},\dots, W^1_{t_N}, \widetilde{W}^H_{t_1},\dots, \widetilde{W}_{t_N}$.
+
+In fact let us denote by $L$ the triangular matrix resulting from Cholesky decomposition such that 
+\[
+L=
+\left(
+\begin{array}{c|c}
+L_1& 0 \\
+L_2 & L_3
+\end{array}
+\right),
+\]
+where $L_1, L_2,L_3$ are $N \times N$ matrices.
+
+Then, given  a $2 N$-dimensional Gaussian random input vector, $\mathbf{X}=(X_1, \dots,X_N, X_{N+1}, \dots, X_{2N})$, we have
+
+\begin{align}
+\mathbf{W}^{(1)}=L_3 \mathbf{X}_{N+1:2N}, \quad \widetilde{\mathbf{W}}= 
+\left(
+\begin{array}{c}
+L_1 \\
+L_2 
+\end{array}
+\right) \mathbf{X}.
+\end{align}
+On the other hand, let us assume that we can construct $\mathbf{W}^{(1)}$ hierarchically  through  Brownian bridge construction defined by the linear mapping given by the matrix $G$, then given a $ N$-dimensional Gaussian random input vector, $\mathbf{Z}^\prime$, we can write
+\begin{align*}
+\mathbf{W}^{(1)}=G  \mathbf{Z}^\prime \COMMA
+\end{align*}
+and consequently
+\begin{align*}
+ \mathbf{X}_{N+1:2N}= L_3^{-1} G  \mathbf{Z}^\prime \PERIOD
+\end{align*}
+Therefore, given a $2 N$-dimensional Gaussian random input vector, $\mathbf{Z}=(\mathbf{Z}^\prime,\mathbf{Z}^{\prime \prime})$, we define our hierarchical representation by
+\begin{align}\label{eq: Construction}
+\mathbf{X}=\left(
+\begin{array}{c|c}
+0 & I_{N} \\
+L_3^{-1} G & 0
+\end{array}
+\right) \mathbf{Z}.
+\end{align}
+
+We need to make sure that $\mathbf{X}$  have Gaussian distribution as an outcome of the construction \eqref{eq: Construction}. Consequently, we need to compute carefully $L_3^{-1}$.
+
+
+
+\textbf{TO-DO $1$}: Implement the appropriate Cholesky scheme, taking into account the above construction, and check if the hierarchical construction is giving good results.
+

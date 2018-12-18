@@ -17,7 +17,7 @@ In this section, we show the results obtained through the different numerical ex
 	\bottomrule[1.25pt]
 	\end{tabular}
 \end{small}
-	\caption{Reference solution, which is the  approximation of the call option price under the rBergomi model, defined in \eqref{BS_formula_rbergomi},  using MC with $500$ time steps and number of samples, $M=10^6$, for different parameter constellations.  The numbers between parentheses correspond to the statistical errors estimates.}
+	\caption{Reference solution, \red{which is the  approximation of the call option price under the rBergomi model, defined in \eqref{BS_formula_rbergomi}},  using MC with $500$ time steps and number of samples, $M=10^6$, for different parameter constellations.  The numbers between parentheses correspond to the statistical errors estimates.}
 	\label{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}
 \end{table}
 \FloatBarrier
@@ -43,7 +43,7 @@ For illustrative purposes, we only show the weak errors related to set $1$ in Ta
 		\label{fig:sub4}
 	\end{subfigure}
 	
-	\caption{The  convergence of the weak error $\mathcal{E}_B(N)$, defined in \eqref{eq:total_error}, using MC, for set $1$ parameter in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. We refer to $C_{\text{RB}}$ as $\expt{g(X)}$, and to $C_{\text{RB}}^{N}$ as  $\expt{g(X_{\Delta t})}$. The upper and lower bounds are $95\%$ confidence intervals. a) without Richardson extrapolation.  b) with Richardson extrapolation (level $1$).}
+	\caption{The  convergence of the weak error $\mathcal{E}_B(N)$, defined in \eqref{eq:total_error}, using MC, for set $1$ parameter in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. \red{We refer to $C_{\text{RB}}$ as $\expt{g(X)}$, and to $C_{\text{RB}}^{N}$ as  $\expt{g(X_{\Delta t})}$}. The upper and lower bounds are $95\%$ confidence intervals. a) without Richardson extrapolation.  b) with Richardson extrapolation (level $1$).}
 	\label{fig:Weak_rate_set1_set_2_without_rich}
 \end{figure}
 \FloatBarrier
@@ -130,15 +130,15 @@ Through our conducted numerical experiments for each parameter set, we follow th
 \begin{enumerate}
 \item[i)] For a fixed number of time steps, $N$, we compute an accurate estimate, using a large number of samples, $M$, of the biased  MC solution, $C_{RB}^{N}$. This step also provides us with an estimate of the bias error, $\mathcal{E}_B(N)$, defined by \eqref{eq:total_error}. 
 \item[ii)] The estimated  biased solution,  $C_{RB}^{N}$, is used as a reference solution  to MISC to compute the quadrature error, $\mathcal{E}_Q(\text{TOL}_{\text{MISC}},N)$, defined by \eqref{eq:quadrature error}.
-\item[iii)] In order to compare with MC method, the number of samples, $M$, is chosen so that  the statistical error of the Monte Carlo  method, $\mathcal{E}_S(M)$, satisfies
-\begin{align*}
+\item[iii)] \red{In order to compare with MC method, the number of samples, $M$, is chosen so that  the statistical error of the Monte Carlo  method, $\mathcal{E}_S(M)$, satisfies
+\begin{align}\label{optimal_number_samples}
 \mathcal{E}_S(M)= \mathcal{E}_B(N)=\frac{\mathcal{E}_{\text{tot}}}{2}\COMMA
-\end{align*}
+\end{align}
 where $\mathcal{E}_B(N)$ is the bias as defined in \eqref{eq:total_error} and
-$\mathcal{E}_{\text{tot}}$ is the total error. 
+$\mathcal{E}_{\text{tot}}$ is the total error}. 
 \end{enumerate}
 
-We show  the summary of our numerical findings in Table \ref{table:Summary of our numerical results.}, which  highlights the computational gains achieved by MISC over MC method to meet a certain error tolerance. More detailed results for each case of parameter set, as in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.},  are provided in  Sections \ref{sec:Case of set $2$ parameters_linear}, \ref{sec:Case of set 3 parameters}, \ref{sec:Case of set 4 parameters} and \ref{sec:Case of set 5 parameters}. 
+We show  the summary of our numerical findings in Table \ref{table:Summary of our numerical results.}, which  highlights the computational gains achieved by MISC over MC method to meet a certain error tolerance, \red{which we set approximately of around $1\%$}. More detailed results for each case of parameter set, as in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.},  are provided in  Sections \ref{sec:Case of set $2$ parameters_linear}, \ref{sec:Case of set 3 parameters}, \ref{sec:Case of set 4 parameters} and \ref{sec:Case of set 5 parameters}. 
 \FloatBarrier
 \begin{table}[!h]
 	\centering
@@ -158,7 +158,7 @@ We show  the summary of our numerical findings in Table \ref{table:Summary of ou
 		\bottomrule[1.25pt]
 	\end{tabular}
 \end{small}
-	\caption{Summary of relative errors and computational gains, achieved by the different methods. In this table, we highlight the computational gains achieved by MISC over MC method to meet a certain error tolerance. These gains are improved when applying Richardson extrapolation as observed for the case of parameters set $1$. We provide details about the way we compute these gains for each case, in the following sections.}
+	\caption{\red{Summary of relative errors and computational gains, achieved by the different methods. In this table, we highlight the computational gains achieved by MISC over MC method to meet a certain error tolerance. These gains are improved when applying Richardson extrapolation as observed for the case of parameters set $1$. We provide details about the way we compute these gains for each case, in the following sections}.}
 	\label{table:Summary of our numerical results.}
 \end{table}
 \FloatBarrier
@@ -634,7 +634,7 @@ In this section, we conduct our numerical experiments for three different scenar
 		M(\# MC samples)   & $2 \times 10$  & $4 \times 10$  &$10^2$  & $4 \times 10^2$ \\
 		\bottomrule[1.25pt]
 	\end{tabular}
-	\caption{Total relative error of MISC, without Richardson extrapolation, with different tolerances, and MC to compute the call option prices for different numbers of time steps. The values between parentheses correspond to the different errors contributing to the total relative error: for MISC we report the bias and quadrature errors and for MC we report the bias and the statistical errors estimates.}
+	\caption{Total relative error of MISC, without Richardson extrapolation, with different tolerances, and MC to compute the call option prices for different numbers of time steps. The values between parentheses correspond to the different errors contributing to the total relative error: for MISC we report the bias and quadrature errors and for MC we report the bias and the statistical errors estimates. \red{The number of MC samples, $M$, is chosen to satisfy \eqref{optimal_number_samples}}}
 	\label{Total error of MISC and MC to compute Call option price of the different tolerances for different number of time steps. Case $K=1$, $H=0.07$, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors,linear}
 \end{table}
 \FloatBarrier
@@ -754,7 +754,7 @@ In this section, we conduct our numerical experiments for three different scenar
 
 		\bottomrule[1.25pt]
 	\end{tabular}
-	\caption{Total relative error of MISC, coupled with Richardson extrapolation (level $1$), with different tolerances,  and MC, coupled with Richardson extrapolation (level $1$), to compute the call option price  for different numbers of time steps. The values between parentheses correspond to the different errors contributing to the total relative error: for MISC we report the bias and quadrature errors and for MC we report the bias and the statistical errors. The values marked in red correspond to the values used for computational work comparison against MC method, reported in Table \ref{table:Summary of our numerical results.}.}
+	\caption{Total relative error of MISC, coupled with Richardson extrapolation (level $1$), with different tolerances,  and MC, coupled with Richardson extrapolation (level $1$), to compute the call option price  for different numbers of time steps. The values between parentheses correspond to the different errors contributing to the total relative error: for MISC we report the bias and quadrature errors and for MC we report the bias and the statistical errors. \red{The number of MC samples, $M$, is chosen to satisfy \eqref{optimal_number_samples}}. The values marked in red correspond to the values used for computational work comparison against MC method, reported in Table \ref{table:Summary of our numerical results.}.}
 	\label{Total  error of MISC and MC to compute Call option price of the different tolerances for different number of time steps. Case set $2$ parameters, with Richardson extrapolation(level $1$). The numbers between parentheses are the corresponding absolute errors,relative}
 \end{table}
 \FloatBarrier
@@ -865,7 +865,7 @@ In this section, we conduct our numerical experiments for three different scenar
 			M(\# MC samples) & $4 \times 10^2$  & $4 \times 10^5$   \\
 		\bottomrule[1.25pt]
 	\end{tabular}
-	\caption{Total relative  error of MISC, coupled with Richardson extrapolation (level $2$), with different tolerances, and MC, coupled with Richardson extrapolation (level $2$), to compute the call option price for different numbers of time steps.  The values between parentheses correspond to the different errors contributing to the total relative error: for MISC we report the bias and quadrature errors and for MC we report the bias and the statistical errors. The values marked in red correspond to the values used for computational work comparison against MC method, reported in Table \ref{table:Summary of our numerical results.}.}
+	\caption{Total relative  error of MISC, coupled with Richardson extrapolation (level $2$), with different tolerances, and MC, coupled with Richardson extrapolation (level $2$), to compute the call option price for different numbers of time steps.  The values between parentheses correspond to the different errors contributing to the total relative error: for MISC we report the bias and quadrature errors and for MC we report the bias and the statistical errors. \red{The number of MC samples, $M$, is chosen to satisfy \eqref{optimal_number_samples}}. The values marked in red correspond to the values used for computational work comparison against MC method, reported in Table \ref{table:Summary of our numerical results.}.}
 	\label{Total  error of MISC and MC to compute Call option price of the different tolerances for different number of time steps. Case set $2$ parameters, with Richardson extrapolation(level $2$). The numbers between parentheses are the corresponding absolute errors,linear}
 \end{table}
 \FloatBarrier
@@ -904,7 +904,7 @@ In this section, we conduct our numerical experiments for three different scenar
 	\centering
 	\includegraphics[width=0.6\linewidth]{./figures/rBergomi_Complexity_rates/set2/error_vs_time_set2_full_comparison}
 	
-	\caption{Computational work comparison for  MISC and MC methods (with and without) Richardson extrapolation. This plot shows that to achieve a relative error below $1\%$, MISC coupled with level $2$ of Richardson extrapolation is the best option in terms of computational time. Furthermore, applying Richardson extrapolation bring a significant improvement for MISC and MC methods, in terms of numerical complexity.}
+	\caption{\red{Computational work comparison for  MISC and MC methods (with and without) Richardson extrapolation. This plot shows that to achieve a relative error below $1\%$, MISC coupled with level $2$ of Richardson extrapolation is the best option in terms of computational time. Furthermore, applying Richardson extrapolation bring a significant improvement for MISC and MC methods, in terms of numerical complexity}.}
 	\label{fig:Complexity plot for  MISC for Case set $2$ parameters, comparison}
 \end{figure}
 
@@ -1002,7 +1002,7 @@ In this section, we only conduct our numerical experiments for the case without 
 			M(\# MC samples) 	& $4 \times 10^3$  &  $2 \times 10^4$  & $  10^5$ & $10^6$  \\
 		\bottomrule[1.25pt]
 	\end{tabular}
-	\caption{Total relative error of MISC, without Richardson extrapolation,  with different tolerances, and MC to compute the call option price for different numbers of time steps. The values between parentheses correspond to the different errors contributing to the total relative error: for MISC we report the bias and quadrature errors and for MC we report the bias and the statistical errors estimates. The values marked in red correspond to the values used for computational work comparison against MC method, reported in Table \ref{table:Summary of our numerical results.}.}
+	\caption{Total relative error of MISC, without Richardson extrapolation,  with different tolerances, and MC to compute the call option price for different numbers of time steps. The values between parentheses correspond to the different errors contributing to the total relative error: for MISC we report the bias and quadrature errors and for MC we report the bias and the statistical errors estimates. \red{The number of MC samples, $M$, is chosen to satisfy \eqref{optimal_number_samples}}. The values marked in red correspond to the values used for computational work comparison against MC method, reported in Table \ref{table:Summary of our numerical results.}.}
 	\label{Total error of MISC and MC to compute Call option price of the different tolerances for different number of time steps. Case set 3, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
 \end{table}
 
@@ -1177,7 +1177,7 @@ In this section, we only conduct our numerical experiments for the case without 
 	\centering
 	\includegraphics[width=0.5\linewidth]{./figures/rBergomi_Complexity_rates/set5/error_vs_time_set5_full_comparison}
 	
-	\caption{Computational work comparison for  MISC  and MC methods. This plot shows that to achieve a relative error below $1\%$, MISC outperforms MC method in terms of computational time.}
+	\caption{\red{Computational work comparison for  MISC  and MC methods. This plot shows that to achieve a relative error below $1\%$, MISC outperforms MC method in terms of computational time}.}
 	\label{fig:Complexity plot for  MISC for case set $3$ parameters, comparison}
 \end{figure}
 
@@ -1271,7 +1271,7 @@ In this section, we only conduct our numerical experiments for the case without 
 		M(\# MC samples) 	& $2 \times 10^4$  & $4 \times 10^4$  & $6 \times 10^4$ & $8 \times 10^4$  \\
 		\bottomrule[1.25pt]
 	\end{tabular}
-	\caption{Total relative error of MISC, without Richardson extrapolation, with different tolerances, and MC to compute the call option price  for different numbers of time steps. The values between parentheses correspond to the different errors contributing to the total relative error: for MISC we report the bias and quadrature errors and for MC we report the bias and the statistical errors estimates. The values marked in red correspond to the values used for computational work comparison against MC method, reported in Table \ref{table:Summary of our numerical results.}.}
+	\caption{Total relative error of MISC, without Richardson extrapolation, with different tolerances, and MC to compute the call option price  for different numbers of time steps. The values between parentheses correspond to the different errors contributing to the total relative error: for MISC we report the bias and quadrature errors and for MC we report the bias and the statistical errors estimates. \red{The number of MC samples, $M$, is chosen to satisfy \eqref{optimal_number_samples}}. The values marked in red correspond to the values used for computational work comparison against MC method, reported in Table \ref{table:Summary of our numerical results.}.}
 	\label{Total error of MISC and MC to compute Call option price of the different tolerances for different number of time steps. Case set 4, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
 \end{table}
 
@@ -1324,7 +1324,7 @@ In this section, we only conduct our numerical experiments for the case without 
 	\centering
 	\includegraphics[width=0.5\linewidth]{./figures/rBergomi_Complexity_rates/set6/error_vs_time_set6_full_comparison}
 	
-	\caption{Comparison of computational work for MC and MISC methods. This plot shows that to achieve a relative error below $1\%$, MISC outperforms MC method in terms of computational time.}
+	\caption{\red{Comparison of computational work for MC and MISC methods. This plot shows that to achieve a relative error below $1\%$, MISC outperforms MC method in terms of computational time}.}
 	\label{fig:Complexity plot for MC and MISC for case set $4$ parameters}
 \end{figure}
 \FloatBarrier
@@ -1420,7 +1420,7 @@ In this section, we only conduct our numerical experiments for the case without 
 			M(\# MC samples)   & $6 \times 10^2$  & $2 \times 10^3$  & $8 \times 10^3$ & $2 \times 10^4$  \\		
 		\bottomrule[1.25pt]
 	\end{tabular}
-	\caption{Total relative error of MISC, without Richardson extrapolation, with  different tolerances,  and MC to compute the call option price  for different numbers of time steps. The values between parentheses correspond to the different errors contributing to the total relative error: for MISC we report the bias and quadrature errors and for MC we report the bias and the statistical errors estimates. The values marked in red correspond to the values used for computational work comparison against MC method, reported in Table \ref{table:Summary of our numerical results.}.}
+	\caption{Total relative error of MISC, without Richardson extrapolation, with  different tolerances,  and MC to compute the call option price  for different numbers of time steps. The values between parentheses correspond to the different errors contributing to the total relative error: for MISC we report the bias and quadrature errors and for MC we report the bias and the statistical errors estimates. \red{The number of MC samples, $M$, is chosen to satisfy \eqref{optimal_number_samples}}. The values marked in red correspond to the values used for computational work comparison against MC method, reported in Table \ref{table:Summary of our numerical results.}.}
 	\label{Total error of MISC and MC to compute Call option price of the different tolerances for different number of time steps. Case set 5, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
 \end{table}
 
@@ -1472,7 +1472,7 @@ In this section, we only conduct our numerical experiments for the case without 
 	\centering
 	\includegraphics[width=0.5\linewidth]{./figures/rBergomi_Complexity_rates/set7/error_vs_time_set7_full_comparison}
 	
-	\caption{Comparison of computational work for MC and MISC methods. This plot shows that to achieve a relative error around $1\%$, MISC and  MC methods have similar performance in terms of computational time.}
+	\caption{\red{Comparison of computational work for MC and MISC methods. This plot shows that to achieve a relative error around $1\%$, MISC and  MC methods have similar performance in terms of computational time}.}
 	\label{fig:Complexity plot for MC and MISC for Case set $5$ parameters}
 \end{figure}
 \FloatBarrier

@@ -1,0 +1,20 @@
+There are mainly two point that we want to improve comparing to the current version of the rBergomi manuscript:
+
+\begin{itemize}
+\item[i)] Provide some errors bounds for the quadrature error of MISC (See Section \ref{sec:MISC error estimate} for details). This will make the method more robust and more convincing in terms of practical use. In fact, at the current stage, the errors that we provide are functions of $\text{TOL}_{\text{MISC}}$, that is $ \mathcal{E}_Q(\text{TOL}_{\text{MISC}},N)=f(\text{TOL}_{\text{MISC}})$ and it is not clear to us the behavior of $f$.
+
+There are two ways to achieve this:
+
+\begin{enumerate}
+\item The first way relies on estimating the interpolation error and then by Monte Carlo deduce the quadrature error. We believe that the Monte Carlo error will be dominated by the statistical error and we need maybe few samples for its estimation. For this purpose, we will use the code provided by Joakim.  
+
+\item The second way will be an alternative for the first way in case we failed to have nice error bounds. It is more expensive but more reliable. It is based on learning the error curve which will be parameterized by the different parameters involved in the pricing problem under the rough Bergomi model in addition to MISC tolerance, $\text{TOL}_{\text{MISC}}$, and the number of time steps, $N$.
+\end{enumerate}
+
+\item[ii)] Some internal beliefs that maybe we are making wrong assumptions about the asymptotic rates of convergence for the weak error, when using the Hybrid scheme. Therefore, we suggest to test the first case of parameters with Cholesky scheme (See Section \ref{sec:Details of Cholesky scheme coupled with hierarchical reresentation} for details about Cholesky scheme). 
+
+\begin{itemize}
+\item If we find similar results as observed with the hybrid scheme then we may add just a remark or the results of Cholesky for that case. Otherwise, we may repeat all experiments, or change the used hierarchical representation. 
+\item It is critical also to check if the hierarchical representation is working for the Cholesky scheme as we observed in the case of the hybrid scheme. In fact, for the hybrid scheme it was clear that $\mathbf{W}^{(1)}$ dimensions are more important than those of $\mathbf{W}^{(2)}$, reducing already  the effective dimension from $2N$ to $N$, before even that the Brownian bridge construction creates more anisotropy for  $\mathbf{W}^{(1)}$ directions. However, in the Cholesky scheme, we do not have this obvious distinction.
+\end{itemize}
+\end{itemize}
