@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  19 DEC 2018 14:41
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  20 DEC 2018 13:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -514,7 +514,7 @@ Missing character: There is no [ in font nullfont!
 <write> ...: Citation `\@citeb ' on page \thepage 
                                                   \space undefined\on@line .
 l.5 ...S_t$ as defined in  \cite{bayer2016pricing}
-                                                  , \red{normalized to $r=0$...
+                                                  , normalized to $r=0$\foot...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -526,15 +526,6 @@ LaTeX Warning: Citation `bayer2016pricing' on page  undefined on input line 5.
 
 Missing character: There is no ] in font nullfont!
 Missing character: There is no , in font nullfont!
-! Undefined control sequence.
-l.5 ...s defined in  \cite{bayer2016pricing}, \red
-                                                  {normalized to $r=0$\footn...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
 Missing character: There is no n in font nullfont!
 Missing character: There is no o in font nullfont!
 Missing character: There is no r in font nullfont!
@@ -551,7 +542,7 @@ Missing character: There is no o in font nullfont!
 \@footnotetext ...tins {\reset@font \footnotesize 
                                                   \interlinepenalty \interfo...
 l.5 ...o $r=0$\footnote{$r$ is the interest rate.}
-                                                  }, which is defined by
+                                                  , which is defined by
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -562,7 +553,7 @@ and I'll forget about whatever was undefined.
 \@footnotetext ...}\color@begingroup \@makefntext 
                                                   {\rule \z@ \footnotesep \i...
 l.5 ...o $r=0$\footnote{$r$ is the interest rate.}
-                                                  }, which is defined by
+                                                  , which is defined by
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -1308,15 +1299,6 @@ With luck, this will get me unwedged. But if you
 really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
-! Undefined control sequence.
-l.20 \red
-         {By construction}, $\widetilde{W}^H $ is a centered, locally $(H-\e...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
 Missing character: There is no B in font nullfont!
 Missing character: There is no y in font nullfont!
 Missing character: There is no c in font nullfont!
@@ -1906,25 +1888,7 @@ Missing character: There is no t in font nullfont!
 Missing character: There is no i in font nullfont!
 Missing character: There is no o in font nullfont!
 Missing character: There is no n in font nullfont!
-! Undefined control sequence.
-l.29 ...ard Brownian motions with correlation \red
-                                                  {$\rho \in ]-1,1[$}, \red{...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
 Missing character: There is no , in font nullfont!
-! Undefined control sequence.
-l.29 ... correlation \red{$\rho \in ]-1,1[$}, \red
-                                                  {so that we can represent ...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
 Missing character: There is no s in font nullfont!
 Missing character: There is no o in font nullfont!
 Missing character: There is no t in font nullfont!
@@ -2180,7 +2144,7 @@ Overfull \hbox (10.55559pt too wide) in paragraph at lines 27--35
 
 
 Overfull \hbox (17.22223pt too wide) in paragraph at lines 27--35
-\/cmr/m/n/10 1\OML/cmm/m/it/10 ; \/cmr/m/n/10 1[$
+\/cmr/m/n/10 1\OML/cmm/m/it/10 ; \/cmr/m/n/10 0]$
  []
 
 
@@ -3662,15 +3626,6 @@ With luck, this will get me unwedged. But if you
 really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
-! Undefined control sequence.
-l.71 \red
-         {and by using the same procedure as in \cite{romano1997contingent} ...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
 Missing character: There is no a in font nullfont!
 Missing character: There is no n in font nullfont!
 Missing character: There is no d in font nullfont!
@@ -3729,7 +3684,7 @@ Missing character: There is no i in font nullfont!
 Missing character: There is no n in font nullfont!
 ! Undefined control sequence.
 l.71 ...ite{romano1997contingent} we obtain \eqref
-                                                  {BS_formula_rbergomi}}.
+                                                  {BS_formula_rbergomi}.
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -3742,21 +3697,12 @@ Missing character: There is no S in font nullfont!
 <inserted text> 
                 $
 l.71 ...romano1997contingent} we obtain \eqref{BS_
-                                                  formula_rbergomi}}.
+                                                  formula_rbergomi}.
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Extra }, or forgotten $.
 l.71 ...ent} we obtain \eqref{BS_formula_rbergomi}
-                                                  }.
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-! Extra }, or forgotten $.
-l.71 ...nt} we obtain \eqref{BS_formula_rbergomi}}
                                                   .
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -3984,15 +3930,6 @@ and I'll forget about whatever was undefined.
 LaTeX Warning: Citation `mccrickerd2018turbocharging' on page  undefined on inp
 ut line 73.
 
-! Undefined control sequence.
-l.73 ...} but for variance reduction purposes \red
-                                                  {only}.
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
 ! Missing $ inserted.
 <inserted text> 
                 $
@@ -4012,7 +3949,7 @@ Overfull \hbox (1429.9261pt too wide) in paragraph at lines 73--74
 hencegetasmooth; analyticintegrandinsidetheexpectation:Therefore; applyingspars
 equadraturetechniquesbecomesanadequateoptionforcomputingthecallpriceaswewillinv
 estigatelater:Asimilarconditioningwasusedin\/cmr/m/n/10 [[]]\OML/cmm/m/it/10 bu
-tforvariancereductionpurposes[]:$ 
+tforvariancereductionpurposesonly:$ 
  []
 
 ! Undefined control sequence.
@@ -4318,15 +4255,6 @@ Missing character: There is no r in font nullfont!
 Missing character: There is no i in font nullfont!
 Missing character: There is no d in font nullfont!
 Missing character: There is no . in font nullfont!
-! Undefined control sequence.
-l.77 ...a given time grid $t_1 <\dots < t_N$. \red
-                                                  {In the literature, there ...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
 Missing character: There is no I in font nullfont!
 Missing character: There is no n in font nullfont!
 Missing character: There is no t in font nullfont!
@@ -5433,19 +5361,6 @@ Overfull \hbox (122.95262pt too wide) in paragraph at lines 83--86
 \OML/cmm/m/it/10 W[]; [] ; W[]; []; [] ; []$ 
  []
 
-
-! LaTeX Error: Missing \begin{document}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.88 I
-      n this work, we adopt approach  $(ii)$ for the simulation of the rBerg...
-
-You're in trouble here.  Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
 Missing character: There is no I in font nullfont!
 Missing character: There is no n in font nullfont!
 Missing character: There is no t in font nullfont!
@@ -5723,7 +5638,7 @@ Missing character: There is no e in font nullfont!
 Missing character: There is no e in font nullfont!
 ! Undefined control sequence.
 l.88 ...n and step functions elsewhere (see \eqref
-                                                  {eq:Hybrid_scheme}). \red{...
+                                                  {eq:Hybrid_scheme}). We ut...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -5743,43 +5658,23 @@ Missing character: There is no d in font nullfont!
 <inserted text> 
                 $
 l.88 ...functions elsewhere (see \eqref{eq:Hybrid_
-                                                  scheme}). \red{We utilize ...
+                                                  scheme}). We utilize the h...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Extra }, or forgotten $.
 l.88 ...ns elsewhere (see \eqref{eq:Hybrid_scheme}
-                                                  ). \red{We utilize the hyb...
+                                                  ). We utilize the hybrid s...
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
 you forgot something else, as in `\hbox{$x}'. In such cases
 the way to recover is to insert both the forgotten and the
 deleted material, e.g., by typing `I$}'.
 
-! Undefined control sequence.
-l.88 ...where (see \eqref{eq:Hybrid_scheme}). \red
-                                                  {We utilize the hybrid sch...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Missing } inserted.
-<inserted text> 
-                }
-l.88 .... \red{We utilize the hybrid scheme with $
-                                                  \kappa=1$\footnote{There a...
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.88 ...{We utilize the hybrid scheme with $\kappa
+l.88 ... We utilize the hybrid scheme with $\kappa
                                                   =1$\footnote{There are dif...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -6040,7 +5935,7 @@ Type  H <return>  for immediate help.
  ...                                              
                                                   
 l.91 \end{align}
-                }
+                
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
@@ -6049,7 +5944,7 @@ or  <return>  to continue without it.
 <inserted text> 
                 $
 l.91 \end{align}
-                }
+                
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
 With luck, this will get me unwedged. But if you
@@ -6108,7 +6003,8 @@ Overfull \hbox (18.41808pt too wide) in paragraph at lines 88--93
 
 
 Overfull \hbox (195.98116pt too wide) in paragraph at lines 88--93
-[]\OML/cmm/m/it/10 cheme\/cmr/m/n/10 )\OML/cmm/m/it/10 :[]$$^^T \/cmr/m/n/10 =
+[]\OML/cmm/m/it/10 cheme\/cmr/m/n/10 )\OML/cmm/m/it/10 :Weutilizethehybridschem
+ewith$$^^T \/cmr/m/n/10 =
  []
 
 
@@ -6281,19 +6177,6 @@ ichresultsin$
 Overfull \hbox (23.70828pt too wide) in paragraph at lines 93--95
 [] \OML/cmm/m/it/10 N$
  []
-
-
-! LaTeX Error: Missing \begin{document}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.96 W
-      e note that the variates $\bar{W}_0^{H},\bar{W}_1^{H},\dots,\bar{W}_{\...
-
-You're in trouble here.  Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
 
 Missing character: There is no W in font nullfont!
 Missing character: There is no e in font nullfont!
@@ -6474,70 +6357,17 @@ Missing character: There is no b in font nullfont!
 Missing character: There is no y in font nullfont!
 Missing character: There is no . in font nullfont!
 
-Overfull \hbox (20.0pt too wide) in paragraph at lines 96--97
-[]
- []
-
-
-Overfull \hbox (88.61687pt too wide) in paragraph at lines 96--97
-[]\OML/cmm/m/it/10 ; []; [] ; []$
- []
-
-
-Overfull \hbox (18.29166pt too wide) in paragraph at lines 96--97
-\/cmr/m/n/10 [\OML/cmm/m/it/10 Nt\/cmr/m/n/10 ]$
- []
-
-
-Overfull \hbox (17.42828pt too wide) in paragraph at lines 96--97
-\/cmr/m/n/10 (\OML/cmm/m/it/10 ^^T \/cmr/m/n/10 +
- []
-
-
-Overfull \hbox (8.88892pt too wide) in paragraph at lines 96--97
-\/cmr/m/n/10 1)$
- []
-
-
-Overfull \hbox (57.79164pt too wide) in paragraph at lines 96--97
-\/cmr/m/n/10 (\OT1/cmr/bx/n/10 W[]\OML/cmm/m/it/10 ; \OT1/cmr/bx/n/10 W[]\/cmr/
-m/n/10 )$ 
- []
-
-! Undefined control sequence.
-l.98 \red
-         {
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-
 ! LaTeX Error: Environment remark undefined.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.99 \begin{remark}
+l.97 \begin{remark}
                    
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
-
-
-! LaTeX Error: Missing \begin{document}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.100 W
-       e emphasize that our method is not restricted to the use of one parti...
-
-You're in trouble here.  Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
 
 Missing character: There is no W in font nullfont!
 Missing character: There is no e in font nullfont!
@@ -6778,11 +6608,42 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.101 \end{remark}
-                  
+l.99 \end{remark}
+                 
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
+
+
+Overfull \hbox (20.0pt too wide) in paragraph at lines 96--100
+[]
+ []
+
+
+Overfull \hbox (88.61687pt too wide) in paragraph at lines 96--100
+[]\OML/cmm/m/it/10 ; []; [] ; []$
+ []
+
+
+Overfull \hbox (18.29166pt too wide) in paragraph at lines 96--100
+\/cmr/m/n/10 [\OML/cmm/m/it/10 Nt\/cmr/m/n/10 ]$
+ []
+
+
+Overfull \hbox (17.42828pt too wide) in paragraph at lines 96--100
+\/cmr/m/n/10 (\OML/cmm/m/it/10 ^^T \/cmr/m/n/10 +
+ []
+
+
+Overfull \hbox (8.88892pt too wide) in paragraph at lines 96--100
+\/cmr/m/n/10 1)$
+ []
+
+
+Overfull \hbox (57.79164pt too wide) in paragraph at lines 96--100
+\/cmr/m/n/10 (\OT1/cmr/bx/n/10 W[]\OML/cmm/m/it/10 ; \OT1/cmr/bx/n/10 W[]\/cmr/
+m/n/10 )$
+ []
 
 )
 ! Emergency stop.

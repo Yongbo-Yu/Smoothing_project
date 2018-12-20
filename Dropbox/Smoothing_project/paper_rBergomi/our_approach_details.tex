@@ -20,10 +20,9 @@ Therefore, the initial integration problem that we are solving lives in $2N$-dim
 Our approach of approximating the expectation in \eqref{BS_formula_rbergomi_2} is based on  hierarchical adaptive sparse grids, using the same construction as in MISC, proposed in \cite{haji2016multi}. We describe the  MISC method in our context in Section \ref{sec:Details of the MISC}.  To make an effective use of MISC, we  first apply two transformations to overcome the issue of facing a high dimensional integrand due to the discretization scheme used for simulating the rBergomi dynamics. The first transformation consists of applying a hierarchical  path generation method, based on Brownian bridge (Bb) construction, with the aim of reducing the effective dimension as  described  in Section \ref{sec:Brwonian bridge construction}. The second transformation consists of applying Richardson extrapolation to reduce the bias, resulting in reducing  the maximum number of dimensions needed for the integration problem. Details about  Richardson extrapolation  are provided in Section \ref{sec:Richardson extrapolation}.
 
 If we denote by $\mathcal{E}_{\text{tot}}$ the total error of approximating the  expectation in \eqref{BS_formula_rbergomi} using the MISC estimator, $Q_N$, then we have a natural error decomposition
-\red{
 \begin{align}\label{eq:total_error}
 \mathcal{E}_{\text{tot}} & \le \abs{C_{\text{RB}}-C_{\text{RB}}^N}+\abs{C_{\text{RB}}^N-Q_{N}} \le \mathcal{E}_B(N)+ \mathcal{E}_Q(\text{TOL}_{\text{MISC}},N),
-\end{align}}
+\end{align}
 where  $\mathcal{E}_Q$ is the quadrature error, $\mathcal{E}_B$  is the bias, and $C_{\text{RB}}^N$ is the biased price computed with $N$ time steps as given by \eqref{BS_formula_rbergomi_2}.
 
 \subsection{The MISC method}\label{sec:Details of the MISC}
@@ -42,8 +41,8 @@ where the $n$-th quadrature operator is understood to act only on the $n$-th var
 $$ Q^{m(\boldsymbol{\beta})}[f]= \sum_{j=1}^{\#\mathcal{T}^{m(\boldsymbol{\beta})}} f(\hat{y}_j) \bar{\omega}_j \COMMA$$
 where $\hat{y}_j \in \mathcal{T}^{m(\boldsymbol{\beta})}$ and $\bar{\omega}_j$ are  products of weights of the univariate quadrature rules. To simplify notation, hereafter, we replace  $Q^{m(\boldsymbol{\beta})}$ by $Q^{\boldsymbol{\beta}}$.
 
-A direct approximation $\expt{f[\mathbf{Y}]} \approx Q^{\boldsymbol{\beta}}[f]$ is not an appropriate option  due to the well-known ``curse of dimensionality". \red{We use  a hierarchical adaptive sparse grids\footnote{More details about sparse grids can be found in \cite{bungartz2004sparse}} quadrature strategy, specifically using the same
-construction as MISC}, and which uses  stochastic discretizations  and a classic sparsification approach to obtain an effective approximation scheme for $\expt{f}$. 
+A direct approximation $\expt{f[\mathbf{Y}]} \approx Q^{\boldsymbol{\beta}}[f]$ is not an appropriate option  due to the well-known ``curse of dimensionality". We use  a hierarchical adaptive sparse grids\footnote{More details about sparse grids can be found in \cite{bungartz2004sparse}.} quadrature strategy, specifically using the same
+construction as MISC, and which uses  stochastic discretizations  and a classic sparsification approach to obtain an effective approximation scheme for $\expt{f}$. 
 
 To be concrete, in our setting, we are left with a $2N$-dimensional Gaussian random input, which is chosen independently, resulting in  $2N$ numerical parameters for MISC, which we use as the basis of the multi-index construction. For a multi-index $\boldsymbol{\beta} = (\beta_n)_{n=1}^{2N} \in \mathbb{N}^{2N}$, we denote  by
 $Q_N^{\boldsymbol{\beta}}$,   the result of approximating \eqref{BS_formula_rbergomi_2} with a number of quadrature points  in the $i$-th dimension equal to  $m(\beta_i)$. We further define the set of
@@ -144,9 +143,9 @@ As emphasized in \cite{haji2016multi}, one important requirement to get the opti
 
 \FloatBarrier
 
-\red{\begin{remark}
-The analiticity assumption, stated in the beginning of Section \ref{sec:Details of the MISC}, is crucial for the optimal performance of our proposed method. In fact, although we face the issue of the  ``curse of dimensionality" when increasing $N$, the analiticity of $f$ implies an exponential convergence for sparse grids quadrature.
-\end{remark}} 
+\begin{remark}
+The analiticity assumption, stated in the beginning of Section \ref{sec:Details of the MISC}, is crucial for the optimal performance of our proposed method. In fact, although we face the issue of the  ``curse of dimensionality" when increasing $N$, the analiticity of $f$ implies a spectral convergence for sparse grids quadrature.
+\end{remark} 
 %
 %\begin{remark}
 %	In this paper, we limited ourselves to designing a novel alternative method  based on hierarchical adaptive sparse grids quadrature for computing option prices under the rBergomi model. Giving the significant performance gains of our novel designed algorithm, we expect that designing a method based on QMC can bring similar or more gains as  our approach.
@@ -239,7 +238,7 @@ where $\rho=\frac{j-i}{k-i}$.
 \subsection{Richardson extrapolation}\label{sec:Richardson extrapolation}
 Another transformation that we couple with MISC is Richardson extrapolation \cite{talay1990expansion}. In fact, applying level $K_\text{R}$ (level of extrapolation) of Richardson extrapolation  dramatically reduces the bias, and as a consequence reduces the  number of time steps $N$ needed in the coarsest level to achieve a certain error tolerance. As a consequence, Richardson extrapolation directly reduces  the total dimension of the integration problem for achieving some error tolerance.
 
-\red{Let us denote by $(X_t)_{0 \le t \le T}$ a certain stochastic process and by $(\hat{X}_{t_i}^h)_{0 \le  t_i \le T}$ its approximation using a suitable  scheme with a time step $h$.  Then, for sufficiently small $h$, and a suitable smooth function $f$, we assume that}
+Let us denote by $(X_t)_{0 \le t \le T}$ a certain stochastic process and by $(\hat{X}_{t_i}^h)_{0 \le  t_i \le T}$ its approximation using a suitable  scheme with a time step $h$.  Then, for sufficiently small $h$, and a suitable smooth function $f$, we assume that
 \begin{align}\label{Euler_weak_error_strenghten}
 	\expt{f(\hat{X}_T^h)}= \expt{f(X_T)} + c h +\Ordo{h^2} \PERIOD
 \end{align}
@@ -256,5 +255,5 @@ For higher levels of extrapolations, we use the following: Let us denote by $h_J
 I(J,K_\text{R})=\frac{2^{K_\text{R}}\left[I(J,K_\text{R}-1)-I(J-1,K_\text{R}-1)\right]}{2^{K_\text{R}}-1},\quad J=1,2,\dots, K_\text{R}=1,2,\dots
 \end{align*}
 \begin{remark}
-We emphasize that throughout our work, we are interested in the pre-asymptotic regime (a small number of time steps), and the use of Richardson extrapolation is justified by our observed experimental results in that regime (see Section \ref{sec:Weak error plots_no_change}),  which suggest  a convergence of order one for the weak error. Although, we do not claim that the observed rates will scale well in the asymptotic regime, we did observe that the pre-asymptotic regime is enough to get sufficiently accurate estimates for the option prices. \red{Furthermore, we emphasize that no proper weak error analysis has been done in the rough volatility context}. 
+We emphasize that throughout our work, we are interested in the pre-asymptotic regime (a small number of time steps), and the use of Richardson extrapolation is justified by our observed experimental results in that regime (see Section \ref{sec:Weak error plots_no_change}),  which suggest  a convergence of order one for the weak error. Although, we do not claim that the observed rates will scale well in the asymptotic regime, we did observe that the pre-asymptotic regime is enough to get sufficiently accurate estimates for the option prices. Furthermore, we emphasize that no proper weak error analysis has been done in the rough volatility context. 
 \end{remark}
