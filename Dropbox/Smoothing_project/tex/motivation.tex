@@ -1,83 +1,96 @@
 To motivate our purposes, we consider the basket option under multi-dimensional GBM model where the process $\mathbf{X}$ is the discretized $d$-dimensional Black-Scholes model and the payoff function $g$ is given by
 \begin{align}
-	g(\mathbf{X}(T))=\max\left(\sum_{j=1}^{d} c_{i} X^{(j)}(T)-K,0  \right)	\PERIOD
+	g(\mathbf{X}(T))=\max\left(\sum_{j=1}^{d} c_{j} X^{(j)}(T)-K,0  \right)	\PERIOD
 \end{align}
 Precisely, we are interested in the  $d$-dimensional lognormal example where the dynamics of the stock are given by
 \begin{align}\label{lognormal_dynamics_basket}
-	dX^{(j)}_t=\sigma^{(j)} X^{(j)}_t dB^{(i)}_t,
+	dX^{(j)}_t=\sigma^{(j)} X^{(j)}_t dW^{(j)}_t,
 \end{align}
-where $\{B^{(1)}, \dots,B^{(d)}\}$ are correlated Brownian motions with correlations $\rho_{ij}$.
+where $\{W^{(1)}, \dots,W^{(d)}\}$ are correlated Brownian motions with correlations $\rho_{ij}$.
 
 
-We denote by $(z_1^{(j)},\dots,z_N^{(j)})$ the $N$ Gaussian independent rdvs that will be used to construct the path of the $j$-th asset $\bar{X}^{(j)}$, where $1 \le j \le d$ ($d$ denotes the number of underlyings considered in the basket). We keep the  same notations by denoting  $\psi: (z_1^{(j)},\dots,z_N^{(j)}) \rightarrow (B_1,\dots,B_N)$ the mapping of Brownian bridge construction and by $\Phi: (\Delta t, B^{(j)}_1,\dots,B^{(j)}_N) \rightarrow \bar{X}^{(j)}_T$, the mapping consisting of the time-stepping scheme. Then, we can express the option price as
+We denote by $(Z_1^{(j)},\dots,Z_N^{(j)})$ the $N$ Gaussian independent rdvs that will be used to construct the path of the $j$-th asset $\bar{X}^{(j)}$, where $1 \le j \le d$ ($d$ denotes the number of underlyings considered in the basket). We denote  $\psi^{(j)}: (Z_1^{(j)},\dots,Z_N^{(j)}) \rightarrow (B_1^{(j)},\dots,B_N^{(j)})$ the mapping of Brownian bridge construction and by $\Phi: (\Delta t, \widetilde{B}^{(1)}_1,\dots,\widetilde{B}^{(1)}_N,\dots, \widetilde{B}^{(d)}_1,\dots,\widetilde{B}^{(d)}_N) \rightarrow \left(\bar{X}^{(1)}_T,\dots,\bar{X}^{(d)}_T \right)$, the mapping consisting of the time-stepping scheme, where $\widetilde{\mathbf{B}}$ is the correlated Brownian bridge that can be obtained from the non correlated Brownian bridge $\mathbf{B}$ through multiplication by the correlation matrix, we denote this transformation by $T: \left(B^{(1)}_1,\dots,B^{(1)}_N,\dots, B^{(d)}_1,\dots,B^{(d)}_N \right) \rightarrow \left(\widetilde{B}^{(1)}_1,\dots,\widetilde{B}^{(1)}_N,\dots, \widetilde{B}^{(d)}_1,\dots,\widetilde{B}^{(d)}_N\right)$. Then, we can express the option price as
 \begin{align}\label{eq: option price as integral_basket}
-	\expt{g(\mathbf{X}(T))}&\approx	\expt{g\left(\Phi \circ \psi \right) (z_1^{(1)}, \dots, z_N^{(1)}, \dots, z_1^{(d)},\dots,z^{(d)}_N)} \nonumber\\
+	\expt{g(\mathbf{X}(T))}&\approx	\expt{g\left(\bar{X}_T^{(1)}, \dots,\bar{X}_T^{(d)} \right)} \nonumber\\
+	&=\expt{g\left(\Phi\circ T\right) \left(B^{(1)}_1,\dots,B^{(1)}_N,\dots, B^{(d)}_1,\dots,B^{(d)}_N \right)} \nonumber\\
+		&=\expt{g\left(\Phi \circ T \right) \left(\psi^{(1)}(Z_1^{(1)}, \dots, Z_N^{(1)}), \dots, \psi^{(d)}(Z_1^{(d)},\dots,Z^{(d)}_N)\right)} \nonumber\\
 	&=\int_{\rset^{d \times N}} G(z_1^{(1)}, \dots, z_N^{(1)}, \dots, z_1^{(d)},\dots,z^{(d)}_N)) \rho_{d \times N}(\mathbf{z}) dz_1^{(1)} \dots dz_N^{(1)} \dots z_1^{(d)} \dots dz^{(d)}_N \COMMA
 \end{align}
-where $G=g \circ \Phi \circ \psi$ and
+where 
 \begin{equation*}
 \rho_{d \times N}(\mathbf{z})=\frac{1}{(2 \pi)^{{d \times N}/2}} e^{-\frac{1}{2} \mathbf{z}^T \mathbf{z}} \PERIOD
 \end{equation*}
 
-In the discrete case, the numerical approximation of $X^{(j)}(T)$ satisfies
-\begin{align}
-	\bar{X}^{(j)}_T&=\Phi(\Delta t, z_1^{(j)}, \Delta B^{(j)}_0,\dots,\Delta B^{(j)}_{N-1}),  \quad 1 \le j \le d, \\ \nonumber
-	&=\Phi(\Delta t, \psi(z_1^{(j)},\dots,z_N^{(j)})), \quad 1 \le j \le d,
-\end{align}
-and precisely, we have
+In the discrete case, we can show that the numerical approximation of $X^{(j)}(T)$ satisfies
+%\begin{align}
+%	\bar{X}^{(j)}_T&=\Phi(\Delta t, Z_1^{(j)}, \Delta \widetilde{B}^{(j)}_0,\dots,\Delta \widetilde{B}^{(j)}_{N-1}),  \quad 1 \le j \le d, \\ \nonumber
+%\end{align}
+%and precisely, we have
 \begin{align}\label{eq:discrete_rep}
-	\bar{X}^{(j)}(T)&=X_0^{(j)} \prod_{i=0}^{N-1} \left[ 1+\frac{\sigma^{(j)}}{\sqrt{T}} z^{(j)}_1 \Delta t+ \sigma^{(j)} \Delta B^{(j)}_{i}\right], \quad 1 \le j \le d \nonumber\\
-	&= \prod_{i=0}^{N-1} f_i^{(j)}(z^{(j)}_1) , \quad 1 \le j \le d \PERIOD
+	\bar{X}^{(j)}(T)&=X_0^{(j)} \prod_{i=0}^{N-1} \left[ 1+\frac{\sigma^{(j)}}{\sqrt{T}} Z^{(j)}_1 \Delta t+ \sigma^{(j)} \Delta \widetilde{B}^{(j)}_{i}\right], \quad 1 \le j \le d \nonumber\\
+	&= \prod_{i=0}^{N-1} f_i^{(j)}(Z^{(j)}_1) , \quad 1 \le j \le d \PERIOD
 \end{align}
 \subsection{Step $1$: Numerical smoothing}
-The first step of our idea is to smoothen the problem by solving the root finding problem in one dimension after using a sub-optimal linear mapping for the coarsest factors of the Brownian increments $\mathbf{z}_1=(z^{(1)}_1 , \dots, z^{(d)}_1)$. In fact, let us define for a certain $\boldsymbol{\alpha}=(\alpha_1,\dots,\alpha_d)$, the linear transformation
+The first step of our idea is to smoothen the problem by solving the root finding problem in one dimension after using a sub-optimal linear mapping for the coarsest factors of the Brownian increments $\mathbf{Z}_1=(Z^{(1)}_1 , \dots, Z^{(d)}_1)$. In fact, let us define for a certain $d \times d $ matrix $\mathcal{A} $, the linear mapping 
 \begin{align}\label{eq:linear_transformation}
-\omega&=L(\mathbf{z}_1) \nonumber\\
-&= \sum_{i=1}^{d} \alpha_i z^{(i)}_1
+\mathbf{Y}&=\mathcal{A} \mathbf{Z}_1 \PERIOD
 \end{align}
 Then from \eqref{eq:discrete_rep}, we have
  \begin{align}\label{eq:discrete_rep_2}
-	\bar{X}^{(j)}(T)&= \prod_{i=0}^{N-1} g_i^{(j)}(w) , \quad 1 \le j \le d\COMMA
+	\bar{X}^{(j)}(T)&= \prod_{i=0}^{N-1} f_i^{(j)}(\mathcal{A}^{-1} \mathbf{Y})_{j} , \quad 1 \le j \le d \COMMA \nonumber \\
+&=\prod_{i=0}^{N-1} g_i^{(j)}(Y_{1},\mathbf{Y}_{-1}) \quad 1 \le j \le d 
 \end{align}
-where 
+where, with defining $\mathcal{A}^{\text{inv}}= \mathcal{A}^{-1}$, we have
 
 \begin{align}\label{eq: incremental functions}
-g_i^{(j)}(w)&=X_0^{(j)}  \left[ 1+\frac{\sigma^{(j)}}{\sqrt{T}} \left( \frac{w- \sum_{l=1, l\neq j} \alpha_l z^{(l)}_1}{\alpha_j} \right) \Delta t+ \sigma^{(j)} \Delta B^{(j)}_{i}\right] \nonumber\\
-&=X_0^{(j)}  \left[ 1+\frac{\sigma^{(j)} \Delta t}{ \alpha_j \sqrt{T}} w -\frac{\sigma^{(j)}}{\sqrt{T}} \left( \frac{\sum_{l=1, l\neq j} \alpha_l z^{(l)}_1}{\alpha_j} \right) \Delta t+ \sigma^{(j)} \Delta B^{(j)}_{i}\right]
+g_i^{(j)}(Y_1,\mathbf{Y}_{-1})&=X_0^{(j)}  \left[ 1+\frac{\sigma^{(j)}}{\sqrt{T}} \left( \sum_{i=1}^d A^{\text{inv}}_{ji} Y_i \right) \Delta t+ \sigma^{(j)} \Delta \widetilde{B}^{(j)}_{i}\right] \nonumber\\
+&=X_0^{(j)}  \left[ 1+\frac{\sigma^{(j)} \Delta t}{\sqrt{T}} A^{\text{inv}}_{j1} Y_1 -\frac{\sigma^{(j)}}{\sqrt{T}} \left( \sum_{i=2}^d A^{\text{inv}}_{ji} Y_i  \right) \Delta t+ \sigma^{(j)} \Delta \widetilde{B}^{(j)}_{i}\right]
 \end{align}
-Therefore, in order to determine $w^{\ast}$, we need to solve
+Therefore, in order to determine $Y^{\ast}_1$, we need to solve
 \begin{align}
-	x=\sum_{j=1}^{d} c_j \prod_{i=0}^{N-1} g_i^{(j)}(w^{\ast}(x)),
+	x=\sum_{j=1}^{d} c_j \prod_{i=0}^{N-1} g_i^{(j)}(Y^{\ast}_1(x),\mathbf{Y}_{-1} ),
 \end{align}
-which implies that the location of the kink point for the approximate problem is equivalent to finding the roots of the polynomial $P(w_\ast(K))$, given by
+which implies that the location of the kink point for the approximate problem is equivalent to finding the roots of the polynomial $P(Y^\ast_1(K))$, given by
 \begin{align}\label{polynomial_kink_location_basket}
-	P(w^\ast(K))&=\left(\sum_{j=1}^{d} c_j \prod_{i=0}^{N-1}  g_i^{(j)}(w^{\ast}) \right) -K.
+	P(Y^\ast_1(K))&=\left(\sum_{j=1}^{d} c_j \prod_{i=0}^{N-1}  g_i^{(j)}(Y^{\ast}_1) \right) -K.
 \end{align}
-Using  \textbf{Newton iteration method}, we use the expression $P^\prime=\frac{d P}{d w^\ast}$, and we can easily show that
+Using  \textbf{Newton iteration method}, we use the expression $P^\prime=\frac{d P}{d Y^\ast_1}$, and we can easily show that
 \begin{align}\label{polynomial_kink_location_derivative_basket}
-	P^\prime(w)=\sum_{j=1}^{d} c_j \frac{\sigma^{(j)} \Delta} {\alpha_j\sqrt{T}} \left( \prod_{i=0}^{N-1} g_i^{(j)}(w) \right) \left[ \sum_{i=0}^{N-1} \frac{1}{g_i^{(j)}(w)}\right].
+	P^\prime(W_1)=\sum_{j=1}^{d} c_j \frac{\sigma^{(j)} \Delta t A^{\text{inv}}_{j1}} {\sqrt{T}} \left( \prod_{i=0}^{N-1} g_i^{(j)}(Y_1) \right) \left[ \sum_{i=0}^{N-1} \frac{1}{g_i^{(j)}(Y_1)}\right].
 \end{align}
 
 
 
-\red{
-\textbf{Question $2$:} One question that arises here: Do we have to optimize over $\boldsymbol{\alpha}$ to get the optimal linear transformation? If yes what will be the metric to be used to optimize with respect to it? If no, how do we check that choices of $\boldsymbol{\alpha}$ are good choices, at least not bad chosen directions?
-}
+\begin{remark}
+For our purposes, we suggest already that the coarsest factors of the Brownian increments are the most important ones, compared to the remaining factors. However, one may expect that in case we want to optimize over the choice of the linear mapping $\mathcal{A}$, and which direction is the most important for the kink location, one needs then to solve
+\begin{align*}
+\underset{\underset{\mathcal{A} \text{ is a rotation}} {\mathcal{A} \in \rset^{d \times d}}}{\operatorname{\sup}} \left(\underset{1 \le i \le d}{\max}\abs{ \frac{\partial g}{\partial Y_i}} \right) \COMMA
+\end{align*}
+which becomes hard to solve  when $d$ increases.
+\end{remark}
+
+\begin{remark}
+A general choice for $\mathcal{A}$ should in the family of rotations. However, we think that a sufficiently good matrix $\mathcal{A}$ would be the one leading to $Y_1=\sum_{i=1}^d Z_1^{(i)}$ up to re-scaling.
+\end{remark}
 \subsection{Step $2$: Integration}
 
 
-At this stage, we want to perform the pre-integrating step with respect to  $w^\ast$. In fact, we have from \eqref{eq: option price as integral_basket}
+At this stage, we want to perform the pre-integrating step with respect to  $W^\ast_1$. In fact, we have from \eqref{eq: option price as integral_basket}
 \begin{small}
 \begin{align}\label{eq: pre_integration_step_wrt_y1_basket}
 	\expt{g(\mathbf{X}(T))}&=\int_{\rset^{d \times N}} G(z_1^{(1)}, \dots, z_N^{(1)}, \dots, z_1^{(d)},\dots,z^{(d)}_N)) \rho_{d \times N}(\mathbf{z}) dz_1^{(1)} \dots dz_N^{(1)} \dots z_1^{(d)} \dots dz^{(d)}_N \nonumber\\ 
-	&=\int_{\rset^{d \times (N-1)}} \left(\int_{\rset} G(w,\mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1} ) \rho_w(w) dw \right) \rho_{d \times(N-1)}(\mathbf{z}_{-1}^{(1)},\dots,\mathbf{z}_{-1}^{(d)}) d\mathbf{z}_{-1}^{(1)}\dots d\mathbf{z}_{-1}^{(d)}\nonumber\\	
-	&=\int_{\rset^{d\times (N-1)}} h(\mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1} ) \rho_{d\times (N-1)}(\mathbf{z}_{-1}^{(1)},\dots,\mathbf{z}_{-1}^{(d)}) d\mathbf{z}^{(1)}_{-1} \dots d\mathbf{z}^{(d)}_{-1}\COMMA \\ \nonumber
-	&=\expt{h(\mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1} )} \COMMA
+	&=\int_{\rset^{dN-1}} \left(\int_{\rset} G(y_1,\mathbf{y}_{-1},\mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1} ) \rho_{y_1}(y_1) dy_1 \right)\rho_{d-1}(\mathbf{y}_{-1}) d\mathbf{y}_{-1} \rho_{d \times(N-1)}(\mathbf{z}_{-1}^{(1)},\dots,\mathbf{z}_{-1}^{(d)}) d\mathbf{z}_{-1}^{(1)}\dots d\mathbf{z}_{-1}^{(d)} \nonumber\\	
+	&=\int_{\rset^{dN-1}} h(\mathbf{y}_{-1},\mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1} )\rho_{d-1}(\mathbf{y}_{-1}) d\mathbf{y}_{-1}  \rho_{d\times (N-1)}(\mathbf{z}_{-1}^{(1)},\dots,\mathbf{z}_{-1}^{(d)}) d\mathbf{z}^{(1)}_{-1} \dots d\mathbf{z}^{(d)}_{-1}\COMMA \\ \nonumber
+	&=\expt{h(\mathbf{y}_{-1}, \mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1} )} \COMMA
 \end{align}
 \end{small}
-where $\rho_w \sim \mathcal{N}(0,\sum_{j=1}^d \alpha_j^2)$ and
+where
 \begin{align}
- h(\mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1})&=\int_{\rset} G(w,\mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1} ) \rho_w(w) dw \nonumber\\
- &= \int_{-\infty}^{w^\ast} G(w,\mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1} ) \rho_w(w) dw+ \int_{w^\ast}^{+\infty} G(w,\mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1} ) \rho_w(w) dw
+ h(\mathbf{y}_{-1},\mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1})&=\int_{\rset} G(y_1,\mathbf{y}_{-1},\mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1} ) \rho_{y_1}(y_1) dy_1 \nonumber\\
+ &= \int_{-\infty}^{y^\ast_1} G(y_1,\mathbf{y}_{-1},\mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1} ) \rho_{y_1}(y_1) dy_1\nonumber\\
+ &+ \int_{y_1^\ast}^{+\infty} G(y_1,\mathbf{y}_{-1},\mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1} ) \rho_{y_1}(y_1) dW_1
 \end{align}
 
+\section{The best call option case under GBM and Heston model}
+
+The second example that we consider for multi-dimension is the best call option under GBM and Heston model. I am in process of formulating this but somehow we agreed that the first potential directions of smoothing for the Heston model will be the first factors related to the asset prices.

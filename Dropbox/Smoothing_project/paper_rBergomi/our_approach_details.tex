@@ -8,7 +8,7 @@ We can rewrite \eqref{BS_formula_rbergomi} as
 C_{\text{RB}}\left( T, K \right)&=\text{E}\left[C_{\text{BS}}\left( S_0 = \operatorname{exp}\left(\rho \int_0^T \sqrt{v_t} dW_t^1 - \frac{1}{2}
 \rho^2 \int_0^T v_t dt\right),\ k = K, \ \sigma^2 = (1-\rho^2)
 \int_0^T v_t dt \right) \right] \nonumber \\
-&\approx \int_{\rset^{2N}} C_{BS} \left(G(\mathbf{W}^{(1)},\mathbf{W}^{(2)})\right) \rho_{N}(\mathbf{W}^{(1)})  \rho_{N}(\mathbf{W}^{(2)}) d\mathbf{W}^{(1)} d\mathbf{W}^{(2)} \nonumber \\
+&\approx \int_{\rset^{2N}} C_{BS} \left(G(\mathbf{w}^{(1)},\mathbf{w}^{(2)})\right) \rho_{N}(\mathbf{w}^{(1)})  \rho_{N}(\mathbf{w}^{(2)}) d\mathbf{w}^{(1)} d\mathbf{w}^{(2)} \nonumber \\
 &:=C_{RB}^{N},
 \end{align}
 where $G$  maps  $2N$ independent standard Gaussian random inputs to the parameters fed to Black-Scholes formula, and  $\rho_N$ is the multivariate Gaussian density, given by 
@@ -34,7 +34,7 @@ To introduce simplified notations, we start with the one-dimensional case. Let u
 \begin{equation*}
 Q^{m(\beta)}:C^0(\rset) \rightarrow \rset, \quad Q^{m(\beta)}[f]= \sum_{j=1}^{m(\beta)} f(y^j_\beta) \omega_\beta^j.
 \end{equation*}
-\red{In our case, we have in \eqref{BS_formula_rbergomi_2} a multi-variate integration problem with,  $f=C_{\text{BS}}\circ G$, $\mathbf{Y}=(\mathbf{W}^{(1)},\mathbf{W}^{(2)})$, and  $\Gamma=\rset^{2N}$, in the previous notations. Furthermore, since we are dealing with Gaussian densities, using Gauss-Hermite quadrature points is the appropriate choice}.
+In our case, we have in \eqref{BS_formula_rbergomi_2} a multi-variate integration problem with,  $f=C_{\text{BS}}\circ G$, $\mathbf{Y}=(\mathbf{W}^{(1)},\mathbf{W}^{(2)})$, and  $\Gamma=\rset^{2N}$, in the previous notations. Furthermore, since we are dealing with Gaussian densities, using Gauss-Hermite quadrature points is the appropriate choice.
 
 We define for any multi-index $\boldsymbol{\beta} \in \nset^{2N}$
 $$Q^{m(\boldsymbol{\beta})}: C^0(\rset^{2N}) \rightarrow \rset,\quad  Q^{m(\boldsymbol{\beta})}= \bigotimes_{n = 1}^{2N} Q^{m(\beta_n)} \COMMA $$
@@ -42,7 +42,7 @@ where the $n$-th quadrature operator is understood to act only on the $n$-th var
 $$ Q^{m(\boldsymbol{\beta})}[f]= \sum_{j=1}^{\#\mathcal{T}^{m(\boldsymbol{\beta})}} f(\hat{y}_j) \bar{\omega}_j \COMMA$$
 where $\hat{y}_j \in \mathcal{T}^{m(\boldsymbol{\beta})}$ and $\bar{\omega}_j$ are  products of weights of the univariate quadrature rules. To simplify notation, hereafter, we replace  $Q^{m(\boldsymbol{\beta})}$ by $Q^{\boldsymbol{\beta}}$.
 
-A direct approximation $\expt{f[\mathbf{Y}]} \approx Q^{\boldsymbol{\beta}}[f]$ is not an appropriate option  due to the well-known ``curse of dimensionality". \red{We use  a hierarchical adaptive sparse grids quadrature strategy, specifically using the same
+A direct approximation $\expt{f[\mathbf{Y}]} \approx Q^{\boldsymbol{\beta}}[f]$ is not an appropriate option  due to the well-known ``curse of dimensionality". \red{We use  a hierarchical adaptive sparse grids\footnote{More details about sparse grids can be found in \cite{bungartz2004sparse}} quadrature strategy, specifically using the same
 construction as MISC}, and which uses  stochastic discretizations  and a classic sparsification approach to obtain an effective approximation scheme for $\expt{f}$. 
 
 To be concrete, in our setting, we are left with a $2N$-dimensional Gaussian random input, which is chosen independently, resulting in  $2N$ numerical parameters for MISC, which we use as the basis of the multi-index construction. For a multi-index $\boldsymbol{\beta} = (\beta_n)_{n=1}^{2N} \in \mathbb{N}^{2N}$, we denote  by
@@ -94,9 +94,6 @@ We define the work contribution, $\Delta \mathcal{W}_{\boldsymbol{\beta}}$, to b
  \end{equation*}
   where the optimal index set  $\mathcal{I}$  for MISC  is given by 
  $\mathcal{I}=\{\boldsymbol{\beta}: P_{\boldsymbol{\beta}}	 \ge \bar{T}\}$.
-\red{\begin{remark}
-The analiticity assumption, stated in the beginning of Section \ref{sec:Details of the MISC}, is crucial for the optimal performance of our proposed method. In fact, although we face the issue of the  ``curse of dimensionality" when increasing $N$, the analiticity of $f$ implies an exponential convergence for sparse grids quadrature.
-\end{remark}} 
 \begin{remark}
 	The choice of the hierarchy of quadrature points, $m(\boldsymbol{\beta})$, is flexible in the MISC algorithm and can be fixed by the user, depending on the convergence properties of the problem at hand. For instance, for the sake of reproducibility, in our numerical experiments we used a linear hierarchy: $m(\beta)=4 (\beta-1)+1,\: 1 \le \beta $, for results of parameter set $1$ in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. For the remaining parameter sets in Table  \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, we used a geometric hierarchy: $m(\beta)=2^{\beta-1}+1, \:1 \le \beta $.
 \end{remark} 
@@ -147,6 +144,9 @@ As emphasized in \cite{haji2016multi}, one important requirement to get the opti
 
 \FloatBarrier
 
+\red{\begin{remark}
+The analiticity assumption, stated in the beginning of Section \ref{sec:Details of the MISC}, is crucial for the optimal performance of our proposed method. In fact, although we face the issue of the  ``curse of dimensionality" when increasing $N$, the analiticity of $f$ implies an exponential convergence for sparse grids quadrature.
+\end{remark}} 
 %
 %\begin{remark}
 %	In this paper, we limited ourselves to designing a novel alternative method  based on hierarchical adaptive sparse grids quadrature for computing option prices under the rBergomi model. Giving the significant performance gains of our novel designed algorithm, we expect that designing a method based on QMC can bring similar or more gains as  our approach.
@@ -210,7 +210,7 @@ As emphasized in \cite{haji2016multi}, one important requirement to get the opti
 \subsection{Brownian bridge construction}\label{sec:Brwonian bridge construction}
 In the literature of adaptive sparse grids and  QMC, several hierarchical path generation methods (PGMs) or transformation methods have been proposed to reduce the effective dimension. Among these transformations, we cite  the Brownian bridge (Bb)  construction \cite{morokoff1994quasi,moskowitz1996smoothness,caflisch1997valuation}, the principal component analysis (PCA)  \cite{acworth1998comparison} and the linear transformation (LT) \cite{imai2004minimizing}.
 
-In our context, the Brownian motion on a time discretization  can be constructed either sequentially using a standard random walk construction, or hierarchically using   other PGMs as listed above. For our purposes, to make an effective use of MISC, which benefits from anisotropy, we use the Bb construction since it produces  dimensions with different importance for MISC, contrary to a random walk procedure for which all the dimensions of the stochastic space have equal importance. \red{In fact, Bb uses the first several coordinates of the low-discrepancy points to determine the general shape of the Brownian path, and the last few coordinates influence only the fine detail of the path. Consequently, this transformation  reduces the effective dimension  of the problem, which results in accelerating the MISC method by reducing the computational cost}.
+In our context, the Brownian motion on a time discretization  can be constructed either sequentially using a standard random walk construction, or hierarchically using   other PGMs as listed above. For our purposes, to make an effective use of MISC, which benefits from anisotropy, we use the Bb construction since it produces  dimensions with different importance for MISC, contrary to a random walk procedure for which all the dimensions of the stochastic space have equal importance. In fact, Bb uses the first several coordinates of the low-discrepancy points to determine the general shape of the Brownian path, and the last few coordinates influence only the fine detail of the path. Consequently, this transformation  reduces the effective dimension  of the problem, which results in accelerating the MISC method by reducing the computational cost.
 
 Let us denote $\{t_i\}_{i=0}^{N}$ the grid of time steps. Then the Bb construction \cite{glasserman2004monte} consists of the following: given a past value $B_{t_i}$ and a future value $B_{t_k}$, the value $B_{t_j}$ (with $t_i < t_j < t_k$) can be generated according to 
 \begin{equation*}
@@ -256,5 +256,5 @@ For higher levels of extrapolations, we use the following: Let us denote by $h_J
 I(J,K_\text{R})=\frac{2^{K_\text{R}}\left[I(J,K_\text{R}-1)-I(J-1,K_\text{R}-1)\right]}{2^{K_\text{R}}-1},\quad J=1,2,\dots, K_\text{R}=1,2,\dots
 \end{align*}
 \begin{remark}
-We emphasize that throughout our work, we are interested in the pre-asymptotic regime (a small number of time steps), and the use of Richardson extrapolation is justified by our observed experimental results in that regime (see Section \ref{sec:Weak error plots_no_change}),  which suggest  a convergence of order one for the weak error. Although, we do not claim that the observed rates will scale well in the asymptotic regime, we did observe that the pre-asymptotic regime is enough to get sufficiently accurate estimates for the option prices. \red{We emphasize that, to the best of our knowledge, no proper weak error analysis has been done in the rough volatility context}. 
+We emphasize that throughout our work, we are interested in the pre-asymptotic regime (a small number of time steps), and the use of Richardson extrapolation is justified by our observed experimental results in that regime (see Section \ref{sec:Weak error plots_no_change}),  which suggest  a convergence of order one for the weak error. Although, we do not claim that the observed rates will scale well in the asymptotic regime, we did observe that the pre-asymptotic regime is enough to get sufficiently accurate estimates for the option prices. \red{Furthermore, we emphasize that no proper weak error analysis has been done in the rough volatility context}. 
 \end{remark}
