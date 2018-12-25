@@ -1,3 +1,97 @@
+\section{Continuous time, theoretical motivation }
+
+The purpose of this project is to approximate $\expt{g(\mathbf{X}_T)}$, where $g$ is a certain payoff function and $\mathbf{X}=(X_1, \dots, X_d)$ is described by the following SDE
+
+\begin{equation}\label{eq:SDE_interest}
+dX_i=a_i(X) dt + \sum_{j=1}^d b_{ij}(X) dW_j \PERIOD
+\end{equation}
+Without  loss of generality, we assume that the $\{W_j\}_{j=1}^d$ are uncorrelated (the correlation terms can be included the diffusion terms $b_j$).
+
+First, we start by representing hierarchically $\mathbf{W}$. In fact, we can write 
+
+\begin{align}
+W_j(t)&= \frac{t}{T} W_j(T)+B_j(t) \nonumber\\
+&= \frac{t}{\sqrt{T}} Y_j+B_j(t)\COMMA
+\end{align}
+with $Y_j \sim \mathcal{N}(0,1)$ iid and $\{B_j\}_{j=1}^d$ are the Brownian bridges.
+
+Now, we aim to represent $\mathbf{Y}=(Y_1,\dots,Y_d)$ hierarchically by using a discrete Brownian bridge (Bb) namely
+
+\begin{equation}\label{eq:smoothing_decomposition}
+\mathbf{Y}= \underset{\text{One dimensional projection}}{\underbrace{\mathbb{P}_0 \mathbf{Y}}} +  \underset{\text{Projection on the complementary}} {\underbrace{\mathbb{P}_{\perp} \mathbf{Y}}}\COMMA
+\end{equation} 
+where we write $\mathbb{P}_0 \mathbf{Y}=(\mathbf{Y}, \mathbf{v}) \mathbf{v}$, with $(.,.)$ denotes the scalar product and $\mid \mid \mathbf{v} \mid \mid=1$. We can easily show that $Z_v:=(Y,v)$ is normal with $\expt{Z_v}=0$ and $\text{Var}(Z_v)=1$. Furthermore, we can write
+\begin{align}\label{eq:smoothing_decomposition_componentwise}
+Y_j&=Z_v v_j+ (\mathbb{P}_{\perp} \mathbf{Y})_j\nonumber \\
+&=Z_v v_j+ (Z_v^\perp)_j \PERIOD
+\end{align}
+
+The first aim of the project is to determine the optimal direction $\mathbf{v}$. By optimal direction, we mean the direction that maximizes the smoothing effect, that is the one given by
+
+\begin{align}\label{optimality_criterion}
+\underset{\underset{\mid \mid \mathbf{v}\mid \mid=1} {\mathbf{v} \in \rset^{d \times 1}}}{\operatorname{\sup}} \left(\underset{1 \le i \le d}{\max}\abs{ \frac{\partial^2 g}{\partial^2 v_i}} \right) \PERIOD
+\end{align}
+
+\red{We need to check if it is better to consider the second derivative as a metric for optimality or not. Also, one may check if formulation  \eqref{optimality_criterion} is correct. For instance, one may consider also the following metric
+
+\begin{align}\label{optimality_criterion_2}
+\underset{\underset{\mid \mid \mathbf{v}\mid \mid=1} {\mathbf{v} \in \rset^{d \times 1}}}{\operatorname{\sup}} \left(\text{Var}\left[ g(\hat{X}_T) \right] \right) \COMMA
+\end{align}
+where $\hat{X}$ is defined in \eqref{eq:approximate_dynamics}.
+}
+
+Going back to the SDE \eqref{eq:SDE_interest}, we have 
+\begin{equation}
+dX_i=a_i(X) dt+\sum_{j=1}^d b_{ij}(X) Y_j \frac{dt}{\sqrt{T}} +\sum_{j=1}^d b_{ij}(X) Y_j \frac{dt}{\sqrt{T}}+\sum_{j=1}^d b_{ij}(X) dB_j \PERIOD
+\end{equation}
+
+Using \eqref{eq:smoothing_decomposition_componentwise}, then we have
+
+\begin{equation}\label{eq:SDE_decomposition_componentwise_exapanded}
+dX_i=\left(a_i(X)+\sum_{j=1}^d b_{ij}(X)  \frac{Z_v v_j}{\sqrt{T}}\right) dt+\left(\sum_{j=1}^d b_{ij}(X) \frac{(Z_v^\perp)_j}{\sqrt{T}}\right) dt +\sum_{j=1}^d b_{ij}(X) dB_j \PERIOD
+\end{equation}
+
+\subsection{First approach (Brutal)}
+
+We assume that the first term in the right-hand side of \eqref{eq:SDE_decomposition_componentwise_exapanded}  is the dominant term compared to the remaining terms (\red{We need to formulate clearly what we mean by this statement. Also I see some issues with this  assumption, since it implicitly implies from \eqref{eq:smoothing_decomposition_componentwise} that 
+$Y \approx Z_v v$, which is already a strong assumption about the solution $v$.}), and denote the approximate process $\hat{X}$, whose dynamics are given by
+\begin{align}\label{eq:approximate_dynamics}
+\frac{d\hat{X}_i}{dt}=a_i(\hat{X})+\sum_{j=1}^d b_{ij}(\hat{X})  \frac{Z_v v_j}{\sqrt{T}}, \quad 1 \le i \le d \COMMA
+\end{align}
+with mean 
+
+\begin{equation*}
+\frac{d\expt{\hat{X}_i}}{dt}=\expt{a_i(\hat{X})}+\sum_{j=1}^d \expt{b_{ij}(\hat{X})  \frac{Z_v v_j}{\sqrt{T}}}, \quad 1 \le i \le d \COMMA
+\end{equation*}
+and second moment
+\begin{align*}
+\frac{d\expt{\hat{X}^2_i}}{dt}&=2 \expt{\hat{X}_i \frac{d\hat{X}_i}{dt}}\nonumber\\
+&=2 \expt{\hat{X}_i a_i(\hat{X})}+\sum_{j=1}^d \expt{ \hat{X}_i b_{ij}(\hat{X})  \frac{Z_v v_j}{\sqrt{T}}}, \quad 1 \le i \le d \PERIOD
+\end{align*}
+Now, let us expand $\hat{X}$ around $Z_v$, that is
+
+\begin{align}
+\hat{X}_{(Z_v)}=\hat{X}_{(0)}+\hat{X}^\prime_{(0)} Z_v+\dots
+\end{align}
+Then, we have
+\begin{align}\label{eq:first_moment_approximation}
+\frac{d\expt{\hat{X}_i}}{dt}&\approx \expt{a_i(\hat{X}_{(0)})}+\sum_{j=1}^d \expt{b_{ij}(\hat{X}_{(0)})  \frac{Z_v v_j}{\sqrt{T}}}, \quad 1 \le i \le d\COMMA \nonumber\\ 
+&=a_i(\hat{X}_{(0)})+\sum_{j=1}^d b_{ij}(\hat{X}_{(0)})  \frac{\expt{Z_v} v_j}{\sqrt{T}}, \quad 1 \le i \le d\COMMA\nonumber\\ 
+&= a_i(\hat{X}_{(0)}), \quad 1 \le i \le d\PERIOD
+\end{align} 
+
+Similarly, if we approximate the second moment, we get
+\begin{align}\label{eq:second_moment_approximation}
+\frac{d\expt{\hat{X}^2_i}}{dt}&\approx 2 \expt{\hat{X}_{i,(0)} a_i(\hat{X}_{(0)})}+\sum_{j=1}^d \expt{ \hat{X}_{i,(0)} b_{ij}(\hat{X}_{(0)})  \frac{Z_v v_j}{\sqrt{T}}}, \quad 1 \le i \le d \COMMA \nonumber\\
+&\approx 2 \hat{X}_{i,(0)} a_i(\hat{X}_{(0)})+\sum_{j=1}^d \hat{X}_{i,(0)} b_{ij}(\hat{X}_{(0)})  \frac{\expt{ Z_v} v_j}{\sqrt{T}}, \quad 1 \le i \le d \COMMA \nonumber\\
+&\approx 2 \hat{X}_{i,(0)} a_i(\hat{X}_{(0)}), \quad 1 \le i \le d \PERIOD
+\end{align}
+The idea then is maximize, at the final time, the smoothing effect, represented by $\text{Var}\left[ g(\hat{X}_T) \right]$, where $\hat{X}_T \sim \mathcal{N}(\mu_T, \Sigma_T)$, such that $\mu_T, \Sigma_T$ are computed using   \eqref{eq:first_moment_approximation} and \eqref{eq:second_moment_approximation}.
+
+\red{There is an issue that I see here! In fact, if we just use  the zero order expansion of $\hat{X}$ to get \eqref{eq:first_moment_approximation} and \eqref{eq:second_moment_approximation}, then we end up with ODEs that does not depend on $v$. On the other hand, to get dependence with respect to $v$ we need to push the expansion  of $\hat{X}$ at least up to the first order which will involve $\hat{X}^{\prime }$, and which can make the approach complicated for instance if one consider Heston model for example.}
+
+
+\section{Discrete time, practical motivation }
 To motivate our purposes, we consider the basket option under multi-dimensional GBM model where the process $\mathbf{X}$ is the discretized $d$-dimensional Black-Scholes model and the payoff function $g$ is given by
 \begin{align}
 	g(\mathbf{X}(T))=\max\left(\sum_{j=1}^{d} c_{j} X^{(j)}(T)-K,0  \right)	\PERIOD
@@ -91,6 +185,6 @@ where
  &+ \int_{y_1^\ast}^{+\infty} G(y_1,\mathbf{y}_{-1},\mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1} ) \rho_{y_1}(y_1) dW_1
 \end{align}
 
-\section{The best call option case under GBM and Heston model}
+\subsection{The best call option case under GBM and Heston model}
 
 The second example that we consider for multi-dimension is the best call option under GBM and Heston model. I am in process of formulating this but somehow we agreed that the first potential directions of smoothing for the Heston model will be the first factors related to the asset prices.

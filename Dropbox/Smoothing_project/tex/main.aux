@@ -16,16 +16,307 @@
 \gdef\HyperFirstAtBeginDocument#1{#1}
 \providecommand\HyField@AuxAddToFields[1]{}
 \providecommand\HyField@AuxAddToCoFields[2]{}
-\@writefile{toc}{\contentsline {section}{\numberline {1}Motivation}{1}{section.1}}
-\newlabel{lognormal_dynamics_basket}{{1.2}{1}{Motivation}{equation.1.2}{}}
-\newlabel{eq: option price as integral_basket}{{1.3}{1}{Motivation}{equation.1.3}{}}
-\newlabel{eq:discrete_rep}{{1.4}{2}{Motivation}{equation.1.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.1}Step $1$: Numerical smoothing}{2}{subsection.1.1}}
-\newlabel{eq:linear_transformation}{{1.5}{2}{Step $1$: Numerical smoothing}{equation.1.5}{}}
-\newlabel{eq:discrete_rep_2}{{1.6}{2}{Step $1$: Numerical smoothing}{equation.1.6}{}}
-\newlabel{eq: incremental functions}{{1.7}{2}{Step $1$: Numerical smoothing}{equation.1.7}{}}
-\newlabel{polynomial_kink_location_basket}{{1.9}{2}{Step $1$: Numerical smoothing}{equation.1.9}{}}
-\newlabel{polynomial_kink_location_derivative_basket}{{1.10}{2}{Step $1$: Numerical smoothing}{equation.1.10}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.2}Step $2$: Integration}{3}{subsection.1.2}}
-\newlabel{eq: pre_integration_step_wrt_y1_basket}{{1.11}{3}{Step $2$: Integration}{equation.1.11}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {2}The best call option case under GBM and Heston model}{3}{section.2}}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Continuous time, theoretical motivation }{1}{section.1}}
+\newlabel{eq:SDE_interest}{{1.1}{1}{Continuous time, theoretical motivation}{equation.1.1}{}}
+\newlabel{eq:smoothing_decomposition}{{1.3}{1}{Continuous time, theoretical motivation}{equation.1.3}{}}
+\newlabel{eq:smoothing_decomposition_componentwise}{{1.4}{1}{Continuous time, theoretical motivation}{equation.1.4}{}}
+\newlabel{optimality_criterion}{{1.5}{2}{Continuous time, theoretical motivation}{equation.1.5}{}}
+\newlabel{optimality_criterion_2}{{1.6}{2}{Continuous time, theoretical motivation}{equation.1.6}{}}
+\newlabel{eq:SDE_decomposition_componentwise_exapanded}{{1.8}{2}{Continuous time, theoretical motivation}{equation.1.8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.1}First approach (Brutal)}{2}{subsection.1.1}}
+\newlabel{eq:approximate_dynamics}{{1.9}{2}{First approach (Brutal)}{equation.1.9}{}}
+\newlabel{eq:first_moment_approximation}{{1.11}{3}{First approach (Brutal)}{equation.1.11}{}}
+\newlabel{eq:second_moment_approximation}{{1.12}{3}{First approach (Brutal)}{equation.1.12}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Discrete time, practical motivation }{3}{section.2}}
+\newlabel{lognormal_dynamics_basket}{{2.2}{3}{Discrete time, practical motivation}{equation.2.2}{}}
+\newlabel{eq: option price as integral_basket}{{2.3}{4}{Discrete time, practical motivation}{equation.2.3}{}}
+\newlabel{eq:discrete_rep}{{2.4}{4}{Discrete time, practical motivation}{equation.2.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Step $1$: Numerical smoothing}{4}{subsection.2.1}}
+\newlabel{eq:linear_transformation}{{2.5}{4}{Step $1$: Numerical smoothing}{equation.2.5}{}}
+\newlabel{eq:discrete_rep_2}{{2.6}{4}{Step $1$: Numerical smoothing}{equation.2.6}{}}
+\newlabel{eq: incremental functions}{{2.7}{5}{Step $1$: Numerical smoothing}{equation.2.7}{}}
+\newlabel{polynomial_kink_location_basket}{{2.9}{5}{Step $1$: Numerical smoothing}{equation.2.9}{}}
+\newlabel{polynomial_kink_location_derivative_basket}{{2.10}{5}{Step $1$: Numerical smoothing}{equation.2.10}{}}
+\citation{haji2016multi}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Step $2$: Integration}{6}{subsection.2.2}}
+\newlabel{eq: pre_integration_step_wrt_y1_basket}{{2.11}{6}{Step $2$: Integration}{equation.2.11}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}The best call option case under GBM and Heston model}{6}{subsection.2.3}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Introduction}{6}{section.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}The goal and outline of the project}{6}{subsection.3.1}}
+\citation{bayersmoothing}
+\citation{bayersmoothing}
+\citation{bungartz2004sparse}
+\citation{griebel2013smoothing}
+\citation{bayersmoothing}
+\citation{griebel2017note}
+\citation{griewank2017high}
+\citation{xiao2018conditional}
+\citation{griebel2013smoothing}
+\citation{griebel2017note}
+\citation{griewank2017high}
+\citation{griebel2013smoothing}
+\citation{griebel2017note}
+\citation{griewank2017high}
+\citation{griebel2013smoothing}
+\citation{griebel2017note}
+\citation{griebel2013smoothing}
+\citation{griebel2017note}
+\citation{griebel2013smoothing}
+\citation{griebel2017note}
+\citation{griewank2017high}
+\citation{xiao2018conditional}
+\citation{bayersmoothing}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Literature review}{8}{subsection.3.2}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Problem formulation and Setting}{9}{section.4}}
+\newlabel{sec:General setting}{{4}{9}{Problem formulation and Setting}{section.4}{}}
+\newlabel{eq:multivariate integral}{{4.1}{9}{Problem formulation and Setting}{equation.4.1}{}}
+\newlabel{eq: multivariate gaussian distribution}{{4}{9}{Problem formulation and Setting}{equation.4.1}{}}
+\newlabel{assump:Monotonicity condition}{{4.2}{9}{Problem formulation and Setting}{equation.4.2}{}}
+\newlabel{assump:Growth condition}{{4.3}{9}{Problem formulation and Setting}{equation.4.3}{}}
+\newlabel{eq:multivariate integral with smoothing}{{4.4}{9}{Problem formulation and Setting}{equation.4.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Details of our approach}{10}{section.5}}
+\newlabel{sec:Details of our approach}{{5}{10}{Details of our approach}{section.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}The one dimensional case}{10}{subsection.5.1}}
+\newlabel{eq:GBM_asset_price_dynamics}{{5.1}{10}{The one dimensional case}{equation.5.1}{}}
+\newlabel{eq: option price as integral}{{5.2}{10}{The one dimensional case}{equation.5.2}{}}
+\newlabel{eq: multivariate gaussian distribution}{{5.1}{10}{The one dimensional case}{equation.5.2}{}}
+\citation{haji2016multi}
+\newlabel{eq: pre_integration_step_wrt_y1}{{5.3}{11}{The one dimensional case}{equation.5.3}{}}
+\newlabel{eq:total_error}{{5.4}{11}{The one dimensional case}{equation.5.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Extension to the high dimensional case}{11}{subsection.5.2}}
+\newlabel{eq: option price as integral_basket}{{5.5}{11}{Extension to the high dimensional case}{equation.5.5}{}}
+\newlabel{eq: pre_integration_step_wrt_y1_basket}{{5.6}{12}{Extension to the high dimensional case}{equation.5.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}The MISC method}{12}{subsection.5.3}}
+\newlabel{sec:Details of the MISC}{{5.3}{12}{The MISC method}{subsection.5.3}{}}
+\citation{moskowitz1996smoothness}
+\citation{caflisch1997valuation}
+\citation{morokoff1998generating}
+\citation{larcher2003tractability}
+\citation{acworth1998comparison}
+\citation{imai2004minimizing}
+\newlabel{eq:MISC_quad_estimator}{{5.7}{13}{The MISC method}{equation.5.7}{}}
+\newlabel{eq:quadrature error}{{5.8}{13}{The MISC method}{equation.5.8}{}}
+\newlabel{eq:Work_error_contributions}{{5.9}{13}{The MISC method}{equation.5.9}{}}
+\citation{acworth1998comparison}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Path generation methods (PGM)}{14}{subsection.5.4}}
+\newlabel{sec:Path generation methods (PGM)}{{5.4}{14}{Path generation methods (PGM)}{subsection.5.4}{}}
+\newlabel{eq:covariance_matrix_in_time}{{5.10}{14}{Path generation methods (PGM)}{equation.5.10}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.4.1}Brownian bridge (Bb) construction}{14}{subsubsection.5.4.1}}
+\newlabel{sec:Brwonian bridge construction}{{5.4.1}{14}{Brownian bridge (Bb) construction}{subsubsection.5.4.1}{}}
+\citation{glasserman2004monte}
+\citation{talay1990expansion}
+\newlabel{eq:BB construction}{{5.12}{15}{Brownian bridge (Bb) construction}{equation.5.12}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.5}Richardson extrapolation}{15}{subsection.5.5}}
+\newlabel{sec:Richardson extrapolation}{{5.5}{15}{Richardson extrapolation}{subsection.5.5}{}}
+\newlabel{Euler_weak_error}{{5.13}{15}{Richardson extrapolation}{equation.5.13}{}}
+\newlabel{Euler_weak_error_strenghten}{{5.14}{15}{Richardson extrapolation}{equation.5.14}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.6}Root Finding}{16}{subsection.5.6}}
+\newlabel{sec: Root Finding}{{5.6}{16}{Root Finding}{subsection.5.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.7}Description of the Domain Decomposition and Suitable Transformation}{17}{subsection.5.7}}
+\newlabel{sec:Description of the Domain Decomposition and Suitable Transformation}{{5.7}{17}{Description of the Domain Decomposition and Suitable Transformation}{subsection.5.7}{}}
+\citation{gerstner2007sparse}
+\citation{gerstner2008valuation}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Error discussion}{18}{section.6}}
+\newlabel{sec:Error discussion}{{6}{18}{Error discussion}{section.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Errors in smoothing}{18}{subsection.6.1}}
+\newlabel{sec:errors-smoothing}{{6.1}{18}{Errors in smoothing}{subsection.6.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Numerical experiments}{19}{section.7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}The discretized 1D Black-Scholes}{19}{subsection.7.1}}
+\newlabel{sec:The discretized 1D Black-Scholes}{{7.1}{19}{The discretized 1D Black-Scholes}{subsection.7.1}{}}
+\newlabel{lognormal_dynamics}{{7.1}{19}{The discretized 1D Black-Scholes}{equation.7.1}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.1.1}Determining the kink location}{19}{subsubsection.7.1.1}}
+\newlabel{sec:Determining the kink location}{{7.1.1}{19}{Determining the kink location}{subsubsection.7.1.1}{}}
+\newlabel{eq: kink_point_problem}{{7.3}{19}{Exact location of the kink for the continuous problem}{equation.7.3}{}}
+\newlabel{xact_location_continuous_problem}{{7.5}{20}{Exact location of the kink for the continuous problem}{equation.7.5}{}}
+\newlabel{polynomial_kink_location}{{7.9}{20}{Exact location of the kink for the discrete problem}{equation.7.9}{}}
+\newlabel{polynomial_kink_location_derivative}{{7.10}{20}{Approximate location of the discrete problem}{equation.7.10}{}}
+\citation{bayersmoothing}
+\newlabel{smoothed_integrand_single_opt_1d}{{7.11}{21}{Approximate location of the discrete problem}{equation.7.11}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}The basket call option under the discretized multi-dimensional Black-Scholes}{21}{subsection.7.2}}
+\newlabel{sec:The basket option under time stepping framework}{{7.2}{21}{The basket call option under the discretized multi-dimensional Black-Scholes}{subsection.7.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.2.1}First way}{21}{subsubsection.7.2.1}}
+\newlabel{sec: First way}{{7.2.1}{21}{First way}{subsubsection.7.2.1}{}}
+\newlabel{lognormal_dynamics_basket}{{7.14}{21}{First way}{equation.7.14}{}}
+\newlabel{polynomial_kink_location_basket}{{7.18}{22}{First way}{equation.7.18}{}}
+\newlabel{polynomial_kink_location_derivative_basket}{{7.19}{22}{First way}{equation.7.19}{}}
+\newlabel{smoothed_integrand_basket_opt_2d}{{7.20}{22}{First way}{equation.7.20}{}}
+\citation{bayersmoothing}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.2.2}Second way}{23}{subsubsection.7.2.2}}
+\newlabel{sec: Second way}{{7.2.2}{23}{Second way}{subsubsection.7.2.2}{}}
+\newlabel{eq:basket_call_payoff}{{7.23}{23}{Second way}{equation.7.23}{}}
+\newlabel{eq:asset_dynamics_last_inc}{{7.25}{23}{Second way}{equation.7.25}{}}
+\citation{bayersmoothing}
+\newlabel{eq:basket_call_payoff_2}{{7.27}{24}{Second way}{equation.7.27}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Summary of numerical results}{24}{subsection.7.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.4}Results for the single binary option example}{25}{subsection.7.4}}
+\newlabel{sec:Results for the binary option example}{{7.4}{25}{Results for the single binary option example}{subsection.7.4}{}}
+\newlabel{smoothed_integrand_binary_opt_2}{{7.28}{25}{Results for the single binary option example}{equation.7.28}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.4.1}Weak error plots}{26}{subsubsection.7.4.1}}
+\newlabel{sec:Weak error plots_binary}{{7.4.1}{26}{Weak error plots}{subsubsection.7.4.1}{}}
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig:sub3}{{7.1a}{26}{\relax }{figure.caption.4}{}}
+\newlabel{sub@fig:sub3}{{a}{26}{\relax }{figure.caption.4}{}}
+\newlabel{fig:sub4}{{7.1b}{26}{\relax }{figure.caption.4}{}}
+\newlabel{sub@fig:sub4}{{b}{26}{\relax }{figure.caption.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7.1}{\ignorespaces The rate of convergence of the weak error for the binary option. a) $\left \delimiter 69640972 \mathrm  {E}\left [g(X_{\Delta t})\right ]-g(X)\right \delimiter 86418188 $ b)$\left \delimiter 69640972 \mathrm  {E}\left [2 g(X_{\Delta t/2}) -g(X_{\Delta t})\right ]-g(X)\right \delimiter 86418188 $. \relax }}{26}{figure.caption.4}}
+\newlabel{fig:Weak_rate_binary}{{7.1}{26}{The rate of convergence of the weak error for the binary option. a) $\abs {\expt {g(X_{\Delta t})}-g(X)}$ b)$\abs {\expt {2 g(X_{\Delta t/2}) -g(X_{\Delta t})}-g(X)}$. \relax }{figure.caption.4}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.4.2}Comparing relative errors}{26}{subsubsection.7.4.2}}
+\newlabel{sec:Comparing relative errors, binary}{{7.4.2}{26}{Comparing relative errors}{subsubsection.7.4.2}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7.1}{\ignorespaces Binary option price of the different methods for different number of time steps, without Richardson extrapolation.\relax }}{26}{table.caption.6}}
+\newlabel{table: Binary option price of the different methods for different number of time steps, without Richardson extrapolation.}{{7.1}{26}{Binary option price of the different methods for different number of time steps, without Richardson extrapolation.\relax }{table.caption.6}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7.2}{\ignorespaces Bias and statistical errors of MC for computing binary option price for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.\relax }}{27}{table.caption.7}}
+\newlabel{Bias and Statistical errors of MC for computing Binary option price for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}{{7.2}{27}{Bias and statistical errors of MC for computing binary option price for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.\relax }{table.caption.7}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7.3}{\ignorespaces Quadrature error of MISC, with different tolerances, to compute binary option price for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors. The values marked in red correspond to stable quadrature errors for MISC, and will be used for complexity comparison against MC.\relax }}{27}{table.caption.8}}
+\newlabel{Quadrature error of MISC to compute Binary option price of the different tolerances for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}{{7.3}{27}{Quadrature error of MISC, with different tolerances, to compute binary option price for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors. The values marked in red correspond to stable quadrature errors for MISC, and will be used for complexity comparison against MC.\relax }{table.caption.8}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7.2}{\ignorespaces Relative quadrature error of MISC, with different tolerances, to compute binary option price for different number of time steps, without Richardson extrapolation.\relax }}{27}{figure.caption.9}}
+\newlabel{fig:Quadrature_error_non_rich_binary}{{7.2}{27}{Relative quadrature error of MISC, with different tolerances, to compute binary option price for different number of time steps, without Richardson extrapolation.\relax }{figure.caption.9}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7.4}{\ignorespaces Total relative error of MISC, with different tolerances, and MC to compute binary option price for different number of time steps, without Richardson extrapolation. The values marked in red, for MISC method, correspond to the total relative errors associated with stable quadrature errors for MISC, and will be used for complexity comparison against MC.\relax }}{28}{table.caption.10}}
+\newlabel{Total error of MISC and MC to compute Binary option price of the different tolerances for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}{{7.4}{28}{Total relative error of MISC, with different tolerances, and MC to compute binary option price for different number of time steps, without Richardson extrapolation. The values marked in red, for MISC method, correspond to the total relative errors associated with stable quadrature errors for MISC, and will be used for complexity comparison against MC.\relax }{table.caption.10}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7.5}{\ignorespaces Comparison of the computational time of MC and MISC, used to compute binary option price for different number of time steps, without Richardson extrapolation. The average computational time of MC is computed over $10$ runs.\relax }}{28}{table.caption.11}}
+\newlabel{Comparsion of the computational time of MC and MISC, used to compute Binary option price for different number of time steps, without Richardson extrapolation}{{7.5}{28}{Comparison of the computational time of MC and MISC, used to compute binary option price for different number of time steps, without Richardson extrapolation. The average computational time of MC is computed over $10$ runs.\relax }{table.caption.11}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7.3}{\ignorespaces Complexity plot for MC and MISC for the case without Richardson extrapolation.\relax }}{28}{figure.caption.12}}
+\newlabel{fig:Complexity plot for MC and MISC , Binary, Non rich}{{7.3}{28}{Complexity plot for MC and MISC for the case without Richardson extrapolation.\relax }{figure.caption.12}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7.6}{\ignorespaces Binary option price of the different methods for different number of time steps, with Richardson extrapolation (level $1$).\relax }}{29}{table.caption.14}}
+\newlabel{table: Binary option price of the different methods for different number of time steps, with Richardson extrapolation (level1).}{{7.6}{29}{Binary option price of the different methods for different number of time steps, with Richardson extrapolation (level $1$).\relax }{table.caption.14}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7.7}{\ignorespaces Bias and statistical errors of MC for computing binary option price for different number of time steps, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors.\relax }}{29}{table.caption.15}}
+\newlabel{Bias and Statistical errors of MC for computing Binary option price for different number of time steps, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors.}{{7.7}{29}{Bias and statistical errors of MC for computing binary option price for different number of time steps, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors.\relax }{table.caption.15}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7.8}{\ignorespaces Quadrature error of MISC, with different tolerances, to compute binary option price for different number of time steps, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors. The values marked in red correspond to stable quadrature errors for MISC, and will be used for complexity comparison against MC.\relax }}{29}{table.caption.16}}
+\newlabel{Quadrature error of MISC to compute Binary option price of the different tolerances for different number of time steps, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors.}{{7.8}{29}{Quadrature error of MISC, with different tolerances, to compute binary option price for different number of time steps, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors. The values marked in red correspond to stable quadrature errors for MISC, and will be used for complexity comparison against MC.\relax }{table.caption.16}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7.4}{\ignorespaces Relative quadrature error of MISC, with different tolerances, to compute binary option price of the different tolerances for different number of time steps, with Richardson extrapolation.\relax }}{30}{figure.caption.17}}
+\newlabel{fig:Quadrature_error_with_rich_binary}{{7.4}{30}{Relative quadrature error of MISC, with different tolerances, to compute binary option price of the different tolerances for different number of time steps, with Richardson extrapolation.\relax }{figure.caption.17}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7.9}{\ignorespaces Total relative error of MISC, with different tolerances, and MC to compute binary option price for different number of time steps, with Richardson extrapolation (level $1$). The values marked in red, for MISC method, correspond to the total relative errors associated with stable quadrature errors for MISC, and will be used for complexity comparison against MC.\relax }}{30}{table.caption.18}}
+\newlabel{Total error of MISC and MC to compute Binary option price of the different tolerances for different number of time steps, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors.}{{7.9}{30}{Total relative error of MISC, with different tolerances, and MC to compute binary option price for different number of time steps, with Richardson extrapolation (level $1$). The values marked in red, for MISC method, correspond to the total relative errors associated with stable quadrature errors for MISC, and will be used for complexity comparison against MC.\relax }{table.caption.18}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7.10}{\ignorespaces Comparison of the computational time of MC and MISC, used to compute binary option price for different number of time steps, with Richardson extrapolation (level $1$). The average computational time of MC is computed over $10$ runs.\relax }}{30}{table.caption.19}}
+\newlabel{Comparsion of the computational time of MC and MISC, used to compute Binary option price for different number of time steps, with Richardson extrapolation (level $1$)}{{7.10}{30}{Comparison of the computational time of MC and MISC, used to compute binary option price for different number of time steps, with Richardson extrapolation (level $1$). The average computational time of MC is computed over $10$ runs.\relax }{table.caption.19}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7.5}{\ignorespaces Complexity plot for MC and MISC for the case with Richardson extrapolation.\relax }}{31}{figure.caption.20}}
+\newlabel{fig:Complexity plot for MC and MISC , Binary, with rich}{{7.5}{31}{Complexity plot for MC and MISC for the case with Richardson extrapolation.\relax }{figure.caption.20}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7.6}{\ignorespaces Complexity plot for MISC without and with Richardson extrapolation, for the binary option.\relax }}{31}{figure.caption.21}}
+\newlabel{fig:Complexity plot for MC and MISC , Binary, comparison}{{7.6}{31}{Complexity plot for MISC without and with Richardson extrapolation, for the binary option.\relax }{figure.caption.21}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.5}Results for the single call option example}{31}{subsection.7.5}}
+\newlabel{sec:Results for the call option example}{{7.5}{31}{Results for the single call option example}{subsection.7.5}{}}
+\newlabel{smoothed_integrand_call_opt_2}{{7.30}{31}{Results for the single call option example}{equation.7.30}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.5.1}Weak error plots}{32}{subsubsection.7.5.1}}
+\newlabel{sec:Weak error plots_call}{{7.5.1}{32}{Weak error plots}{subsubsection.7.5.1}{}}
+\newlabel{fig:sub3}{{7.7a}{32}{\relax }{figure.caption.22}{}}
+\newlabel{sub@fig:sub3}{{a}{32}{\relax }{figure.caption.22}{}}
+\newlabel{fig:sub4}{{7.7b}{32}{\relax }{figure.caption.22}{}}
+\newlabel{sub@fig:sub4}{{b}{32}{\relax }{figure.caption.22}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7.7}{\ignorespaces The rate of convergence of the weak error for the call option using MC. a) $\left \delimiter 69640972 \mathrm  {E}\left [g(X_{\Delta t})\right ]-g(X)\right \delimiter 86418188 $ b)$\left \delimiter 69640972 \mathrm  {E}\left [2 g(X_{\Delta t/2}) -g(X_{\Delta t})\right ]-g(X)\right \delimiter 86418188 $ \relax }}{32}{figure.caption.22}}
+\newlabel{fig:Weak_rate_call_beta_32}{{7.7}{32}{The rate of convergence of the weak error for the call option using MC. a) $\abs {\expt {g(X_{\Delta t})}-g(X)}$ b)$\abs {\expt {2 g(X_{\Delta t/2}) -g(X_{\Delta t})}-g(X)}$ \relax }{figure.caption.22}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.5.2}Comparing relative errors}{32}{subsubsection.7.5.2}}
+\newlabel{sec:Comparing relative errors, call}{{7.5.2}{32}{Comparing relative errors}{subsubsection.7.5.2}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7.11}{\ignorespaces Call option price of the different methods for different number of time steps, without Richardson extrapolation.\relax }}{32}{table.caption.24}}
+\newlabel{table:Call option price of the different methods for different number of time steps, without Richardson extrapolation.}{{7.11}{32}{Call option price of the different methods for different number of time steps, without Richardson extrapolation.\relax }{table.caption.24}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7.12}{\ignorespaces Bias and statistical errors of MC for computing call option price for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.\relax }}{33}{table.caption.25}}
+\newlabel{Bias and Statistical errors of MC for computing Call option price for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}{{7.12}{33}{Bias and statistical errors of MC for computing call option price for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.\relax }{table.caption.25}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7.13}{\ignorespaces Quadrature error of MISC, with different tolerances, to compute call option price for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors. The values marked in red correspond to stable quadrature errors for MISC, and will be used for complexity comparison against MC.\relax }}{33}{table.caption.26}}
+\newlabel{Quadrature error of MISC to compute Call option price of the different tolerances for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}{{7.13}{33}{Quadrature error of MISC, with different tolerances, to compute call option price for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors. The values marked in red correspond to stable quadrature errors for MISC, and will be used for complexity comparison against MC.\relax }{table.caption.26}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7.8}{\ignorespaces Relative quadrature error of MISC, with different tolerances, to compute call option price for different number of time steps, without Richardson extrapolation.\relax }}{33}{figure.caption.27}}
+\newlabel{fig:Quadrature_error_non_rich_Call}{{7.8}{33}{Relative quadrature error of MISC, with different tolerances, to compute call option price for different number of time steps, without Richardson extrapolation.\relax }{figure.caption.27}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7.14}{\ignorespaces Total relative error of MISC, with different tolerances, and MC to compute call option price for different number of time steps, without Richardson extrapolation. The values marked in red, for MISC method, correspond to the total relative errors associated with stable quadrature errors for MISC, and will be used for complexity comparison against MC.\relax }}{34}{table.caption.28}}
+\newlabel{Total error of MISC and MC to compute Call option price of the different tolerances for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}{{7.14}{34}{Total relative error of MISC, with different tolerances, and MC to compute call option price for different number of time steps, without Richardson extrapolation. The values marked in red, for MISC method, correspond to the total relative errors associated with stable quadrature errors for MISC, and will be used for complexity comparison against MC.\relax }{table.caption.28}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7.15}{\ignorespaces Comparison of the computational time of MC and MISC, used to compute call option price for different number of time steps, without Richardson extrapolation. The average computational time of MC is computed over $10$ runs.\relax }}{34}{table.caption.29}}
+\newlabel{Comparsion of the computational time of MC and MISC, used to compute Call option price for different number of time steps, without Richardson extrapolation}{{7.15}{34}{Comparison of the computational time of MC and MISC, used to compute call option price for different number of time steps, without Richardson extrapolation. The average computational time of MC is computed over $10$ runs.\relax }{table.caption.29}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7.9}{\ignorespaces Complexity plot for MC and MISC for the case without Richardson extrapolation.\relax }}{34}{figure.caption.30}}
+\newlabel{fig:Complexity plot for MC and MISC , Call non rich}{{7.9}{34}{Complexity plot for MC and MISC for the case without Richardson extrapolation.\relax }{figure.caption.30}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7.16}{\ignorespaces Call option price of the different methods for different number of time steps, with Richardson extrapolation (level $1$).\relax }}{35}{table.caption.32}}
+\newlabel{table: Call option price of the different methods for different number of time steps, with Richardson extrapolation (level1).}{{7.16}{35}{Call option price of the different methods for different number of time steps, with Richardson extrapolation (level $1$).\relax }{table.caption.32}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7.17}{\ignorespaces Bias and statistical errors of MC for computing Call option price for different number of time steps, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors.\relax }}{35}{table.caption.33}}
+\newlabel{Bias and Statistical errors of MC for computing Call option price for different number of time steps, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors.}{{7.17}{35}{Bias and statistical errors of MC for computing Call option price for different number of time steps, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors.\relax }{table.caption.33}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7.18}{\ignorespaces Quadrature error of MISC, with different tolerances, to compute call option price for different number of time steps, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors. The values marked in red correspond to stable quadrature errors for MISC, and will be used for complexity comparison against MC.\relax }}{35}{table.caption.34}}
+\newlabel{Quadrature error of MISC to compute Call option price of the different tolerances for different number of time steps, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors.}{{7.18}{35}{Quadrature error of MISC, with different tolerances, to compute call option price for different number of time steps, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors. The values marked in red correspond to stable quadrature errors for MISC, and will be used for complexity comparison against MC.\relax }{table.caption.34}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7.10}{\ignorespaces Relative quadrature error of MISC, with different tolerances, to compute call option price for different number of time steps, with Richardson extrapolation.\relax }}{35}{figure.caption.35}}
+\newlabel{fig:Quadrature_error_with_rich_Call}{{7.10}{35}{Relative quadrature error of MISC, with different tolerances, to compute call option price for different number of time steps, with Richardson extrapolation.\relax }{figure.caption.35}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7.19}{\ignorespaces Total relative error of MISC, with different tolerances, to compute call option price for different number of time steps, with Richardson extrapolation (level $1$). The values marked in red, for MISC method, correspond to the total relative errors associated with stable quadrature errors for MISC, and will be used for complexity comparison against MC.\relax }}{36}{table.caption.36}}
+\newlabel{Total error of MISC and MC to compute Call option price of the different tolerances for different number of time steps, with Richardson extrapolation (level $1$). The numbers between parentheses are the corresponding absolute errors.}{{7.19}{36}{Total relative error of MISC, with different tolerances, to compute call option price for different number of time steps, with Richardson extrapolation (level $1$). The values marked in red, for MISC method, correspond to the total relative errors associated with stable quadrature errors for MISC, and will be used for complexity comparison against MC.\relax }{table.caption.36}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7.20}{\ignorespaces Comparison of the computational time of MISC, used to compute call option price for different number of time steps, with Richardson extrapolation (level $1$). The average computational time of MC is computed over $10$ runs.\relax }}{36}{table.caption.37}}
+\newlabel{Comparsion of the computational time of MC and MISC, used to compute Call option price for different number of time steps, with Richardson extrapolation (level $1$)}{{7.20}{36}{Comparison of the computational time of MISC, used to compute call option price for different number of time steps, with Richardson extrapolation (level $1$). The average computational time of MC is computed over $10$ runs.\relax }{table.caption.37}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7.11}{\ignorespaces Complexity plot for MISC without and with Richardson extrapolation, for the call option.\relax }}{36}{figure.caption.38}}
+\newlabel{fig:Complexity plot for MC and MISC , Call, comparison}{{7.11}{36}{Complexity plot for MISC without and with Richardson extrapolation, for the call option.\relax }{figure.caption.38}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.6}Result for the $2$-dimensional Basket call option}{36}{subsection.7.6}}
+\newlabel{sec:Result for the $2$-dimensional Basket call option}{{7.6}{36}{Result for the $2$-dimensional Basket call option}{subsection.7.6}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.6.1}Weak error plots}{36}{subsubsection.7.6.1}}
+\newlabel{sec:Weak error plots_Basket_2D_call}{{7.6.1}{36}{Weak error plots}{subsubsection.7.6.1}{}}
+\newlabel{fig:sub3}{{7.12a}{37}{\relax }{figure.caption.39}{}}
+\newlabel{sub@fig:sub3}{{a}{37}{\relax }{figure.caption.39}{}}
+\newlabel{fig:sub4}{{7.12b}{37}{\relax }{figure.caption.39}{}}
+\newlabel{sub@fig:sub4}{{b}{37}{\relax }{figure.caption.39}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7.12}{\ignorespaces The rate of convergence of the weak error for the Basket ($2$-dimensional) call option using MC. a) $\left \delimiter 69640972 \mathrm  {E}\left [g(X_{\Delta t})\right ]-g(X)\right \delimiter 86418188 $ b) $\left \delimiter 69640972 \mathrm  {E}\left [2 g(X_{\Delta t/2}) -g(X_{\Delta t})\right ]-g(X)\right \delimiter 86418188 $\relax }}{37}{figure.caption.39}}
+\newlabel{fig:Weak_rate_basket_2d}{{7.12}{37}{The rate of convergence of the weak error for the Basket ($2$-dimensional) call option using MC. a) $\abs {\expt {g(X_{\Delta t})}-g(X)}$ b) $\abs {\expt {2 g(X_{\Delta t/2}) -g(X_{\Delta t})}-g(X)}$\relax }{figure.caption.39}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.6.2}Comparing relative errors}{37}{subsubsection.7.6.2}}
+\newlabel{sec:Comparing relative errors, basket call}{{7.6.2}{37}{Comparing relative errors}{subsubsection.7.6.2}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7.21}{\ignorespaces Basket ($2$-dimensional) call option price of the different methods for different number of time steps, without Richardson extrapolation.\relax }}{37}{table.caption.41}}
+\newlabel{table:Basket 2d option price of the different methods for different number of time steps, without Richardson extrapolation, beta_16}{{7.21}{37}{Basket ($2$-dimensional) call option price of the different methods for different number of time steps, without Richardson extrapolation.\relax }{table.caption.41}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7.22}{\ignorespaces Bias and statistical errors of MC for computing Basket ($2$-dimensional) call option price for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.\relax }}{37}{table.caption.42}}
+\newlabel{Bias and Statistical errors of MC for computing Basket 2d Call option price for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}{{7.22}{37}{Bias and statistical errors of MC for computing Basket ($2$-dimensional) call option price for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.\relax }{table.caption.42}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7.23}{\ignorespaces Quadrature error of MISC, with different tolerances, to compute Basket ($2$-dimensional) call option price for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors. The values marked in red correspond to stable quadrature errors for MISC, and will be used for complexity comparison against MC.\relax }}{38}{table.caption.43}}
+\newlabel{Quadrature error of MISC to compute Basket 2d Call option price of the different tolerances for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors, beta_16}{{7.23}{38}{Quadrature error of MISC, with different tolerances, to compute Basket ($2$-dimensional) call option price for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors. The values marked in red correspond to stable quadrature errors for MISC, and will be used for complexity comparison against MC.\relax }{table.caption.43}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7.13}{\ignorespaces Relative quadrature error of MISC,with different tolerances, to compute Basket ($2$-dimensional) call option price for different number of time steps, without Richardson extrapolation.\relax }}{38}{figure.caption.44}}
+\newlabel{fig:Quadrature_error_non_rich_basket_Call}{{7.13}{38}{Relative quadrature error of MISC,with different tolerances, to compute Basket ($2$-dimensional) call option price for different number of time steps, without Richardson extrapolation.\relax }{figure.caption.44}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7.24}{\ignorespaces Total relative error of MISC, with different tolerances, and MC to compute Basket ($2$-dimensional) call option price for different number of time steps, without Richardson extrapolation. The values marked in red, for MISC method, correspond to the total relative errors associated with stable quadrature errors for MISC, and will be used for complexity comparison against MC.\relax }}{38}{table.caption.45}}
+\newlabel{Total error of MISC and MC to compute Basket 2dCall option price of the different tolerances for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors,beta_16}{{7.24}{38}{Total relative error of MISC, with different tolerances, and MC to compute Basket ($2$-dimensional) call option price for different number of time steps, without Richardson extrapolation. The values marked in red, for MISC method, correspond to the total relative errors associated with stable quadrature errors for MISC, and will be used for complexity comparison against MC.\relax }{table.caption.45}{}}
+\citation{bayersmoothing}
+\citation{bayersmoothing}
+\@writefile{lot}{\contentsline {table}{\numberline {7.25}{\ignorespaces Comparison of the computational time of MC and MISC, used to compute Basket ($2$-dimensional) call option price for different number of time steps, without Richardson extrapolation. The average computational time of MC is computed over $10$ runs.\relax }}{39}{table.caption.46}}
+\newlabel{Comparsion of the computational time of MC and MISC, used to compute Basket 2d Call option price for different number of time steps, without Richardson extrapolation, beta_16}{{7.25}{39}{Comparison of the computational time of MC and MISC, used to compute Basket ($2$-dimensional) call option price for different number of time steps, without Richardson extrapolation. The average computational time of MC is computed over $10$ runs.\relax }{table.caption.46}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7.14}{\ignorespaces Complexity plot for MC and MISC for the case without Richardson extrapolation.\relax }}{39}{figure.caption.47}}
+\newlabel{fig:Complexity plot for MC and MISC , Basket 2d Call non rich}{{7.14}{39}{Complexity plot for MC and MISC for the case without Richardson extrapolation.\relax }{figure.caption.47}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.7}The basket option with the smoothing trick as in \cite  {bayersmoothing}}{39}{subsection.7.7}}
+\newlabel{sec:The basket option with smoothing trick without a time stepping procedure}{{7.7}{39}{The basket option with the smoothing trick as in \cite {bayersmoothing}}{subsection.7.7}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.7.1}Results using MISC}{39}{subsubsection.7.7.1}}
+\@writefile{lot}{\contentsline {table}{\numberline {7.26}{\ignorespaces Complexity rates of the different experiments for the basket option using BS model\relax }}{40}{table.caption.48}}
+\newlabel{table: Complexity rates of the different experiemnts for the basket option using BS model}{{7.26}{40}{Complexity rates of the different experiments for the basket option using BS model\relax }{table.caption.48}{}}
+\newlabel{fig:misc_3D_Basket_sub1}{{7.15a}{40}{Error estimate\relax }{figure.caption.50}{}}
+\newlabel{sub@fig:misc_3D_Basket_sub1}{{a}{40}{Error estimate\relax }{figure.caption.50}{}}
+\newlabel{fig:misc_3D_Basket_sub2}{{7.15b}{40}{Average running time as a function of $\text {TOL}$\relax }{figure.caption.50}{}}
+\newlabel{sub@fig:misc_3D_Basket_sub2}{{b}{40}{Average running time as a function of $\text {TOL}$\relax }{figure.caption.50}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7.15}{\ignorespaces Convergence and complexity results for the $3$-dimensional basket option using BS model.\relax }}{40}{figure.caption.50}}
+\newlabel{fig:misc_3D_Basket_1}{{7.15}{40}{Convergence and complexity results for the $3$-dimensional basket option using BS model.\relax }{figure.caption.50}{}}
+\newlabel{fig:misc_3D_Basket_sub3}{{7.16a}{41}{Average Computational time per level.\relax }{figure.caption.51}{}}
+\newlabel{sub@fig:misc_3D_Basket_sub3}{{a}{41}{Average Computational time per level.\relax }{figure.caption.51}{}}
+\newlabel{fig:misc_3D_Basket_sub4}{{7.16b}{41}{The convergence rate of mixed differences per level.\relax }{figure.caption.51}{}}
+\newlabel{sub@fig:misc_3D_Basket_sub4}{{b}{41}{The convergence rate of mixed differences per level.\relax }{figure.caption.51}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7.16}{\ignorespaces Convergence and work rates for discretization levels for the $3$-dimensional basket option using BS model.\relax }}{41}{figure.caption.51}}
+\newlabel{fig:misc_3D_Basket_2}{{7.16}{41}{Convergence and work rates for discretization levels for the $3$-dimensional basket option using BS model.\relax }{figure.caption.51}{}}
+\newlabel{fig:misc_8D_Basket_sub1}{{7.17a}{41}{Error estimate\relax }{figure.caption.53}{}}
+\newlabel{sub@fig:misc_8D_Basket_sub1}{{a}{41}{Error estimate\relax }{figure.caption.53}{}}
+\newlabel{fig:misc_8D_Basket_sub2}{{7.17b}{41}{Average running time as a function of $TOL$\relax }{figure.caption.53}{}}
+\newlabel{sub@fig:misc_8D_Basket_sub2}{{b}{41}{Average running time as a function of $TOL$\relax }{figure.caption.53}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7.17}{\ignorespaces Convergence and complexity results for the $8$-dimensional basket option using BS model.\relax }}{41}{figure.caption.53}}
+\newlabel{fig:misc_8D_Basket_1}{{7.17}{41}{Convergence and complexity results for the $8$-dimensional basket option using BS model.\relax }{figure.caption.53}{}}
+\newlabel{fig:misc_8D_Basket_sub3}{{7.18a}{42}{Average Computational time per level.\relax }{figure.caption.54}{}}
+\newlabel{sub@fig:misc_8D_Basket_sub3}{{a}{42}{Average Computational time per level.\relax }{figure.caption.54}{}}
+\newlabel{fig:misc_8D_Basket_sub4}{{7.18b}{42}{The convergence rate of mixed differences per level.\relax }{figure.caption.54}{}}
+\newlabel{sub@fig:misc_8D_Basket_sub4}{{b}{42}{The convergence rate of mixed differences per level.\relax }{figure.caption.54}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7.18}{\ignorespaces Convergence and work rates for discretization levels for the $8$-dimensional basket option using BS model.\relax }}{42}{figure.caption.54}}
+\newlabel{fig:misc_8D_Basket_2}{{7.18}{42}{Convergence and work rates for discretization levels for the $8$-dimensional basket option using BS model.\relax }{figure.caption.54}{}}
+\newlabel{fig:misc_25D_Basket_sub1}{{7.19a}{42}{Error estimate\relax }{figure.caption.56}{}}
+\newlabel{sub@fig:misc_25D_Basket_sub1}{{a}{42}{Error estimate\relax }{figure.caption.56}{}}
+\newlabel{fig:misc_25D_Basket_sub2}{{7.19b}{42}{Average running time as a function of $TOL$\relax }{figure.caption.56}{}}
+\newlabel{sub@fig:misc_25D_Basket_sub2}{{b}{42}{Average running time as a function of $TOL$\relax }{figure.caption.56}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7.19}{\ignorespaces Convergence and complexity results for the $25$-dimensional basket option using BS model.\relax }}{42}{figure.caption.56}}
+\newlabel{fig:misc_25D_Basket_1}{{7.19}{42}{Convergence and complexity results for the $25$-dimensional basket option using BS model.\relax }{figure.caption.56}{}}
+\bibstyle{plain}
+\bibdata{smoothing}
+\bibcite{acworth1998comparison}{1}
+\bibcite{bayersmoothing}{2}
+\bibcite{bungartz2004sparse}{3}
+\bibcite{caflisch1997valuation}{4}
+\bibcite{gerstner2007sparse}{5}
+\bibcite{gerstner2008valuation}{6}
+\bibcite{glasserman2004monte}{7}
+\bibcite{griebel2013smoothing}{8}
+\bibcite{griebel2017note}{9}
+\bibcite{griewank2017high}{10}
+\bibcite{haji2016multi}{11}
+\newlabel{fig:misc_25D_Basket_sub3}{{7.20a}{43}{Average Computational time per level.\relax }{figure.caption.57}{}}
+\newlabel{sub@fig:misc_25D_Basket_sub3}{{a}{43}{Average Computational time per level.\relax }{figure.caption.57}{}}
+\newlabel{fig:misc_25D_Basket_sub4}{{7.20b}{43}{The convergence rate of mixed differences per level.\relax }{figure.caption.57}{}}
+\newlabel{sub@fig:misc_25D_Basket_sub4}{{b}{43}{The convergence rate of mixed differences per level.\relax }{figure.caption.57}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7.20}{\ignorespaces Convergence and work rates for discretization levels for the $25$-dimensional basket option using BS model.\relax }}{43}{figure.caption.57}}
+\newlabel{fig:misc_25D_Basket_2}{{7.20}{43}{Convergence and work rates for discretization levels for the $25$-dimensional basket option using BS model.\relax }{figure.caption.57}{}}
+\bibcite{larcher2003tractability}{12}
+\bibcite{morokoff1998generating}{13}
+\bibcite{moskowitz1996smoothness}{14}
+\bibcite{talay1990expansion}{15}
+\bibcite{xiao2018conditional}{16}
