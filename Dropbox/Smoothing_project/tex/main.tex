@@ -2,8 +2,9 @@
 
 \usepackage{smoothing_paper}
 \usepackage[section]{placeins}
+\usepackage{tabularx,ragged2e,booktabs,caption}
 
-
+\interfootnotelinepenalty=10000
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%chiheb commands
 
@@ -77,16 +78,23 @@
 %\input{scope_plan}
 
 %\section{Motivation}
-\input{Motivation}
 
 \section{Introduction}
 \input{Introduction.tex}
 
-\section{Problem formulation and Setting}\label{sec:General setting}
-\input{Setting.tex}
 
-\section{Details of our approach}\label{sec:Details of our approach}
+\section{Problem formulation and Setting}\label{sec:General setting}
+\input{Motivation}
+
+
+
+
+%\input{Setting.tex}
+\section{Analiticity Analysis}\label{sec:Analiticity Analysis}
+\input{analiticity_proofs}
+\section{Details of our hierarchical method}\label{sec:Details of our approach}
 \input{Details_our_approach}
+
 
 \section{Error discussion}\label{sec:Error discussion}
 \input{Error_discussion}

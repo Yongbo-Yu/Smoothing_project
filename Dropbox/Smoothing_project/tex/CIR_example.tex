@@ -1,0 +1,96 @@
+
+
+%\subsection{Results for  the CIR process}
+%
+%The impact of the Brownian bridge will disappear in the limit, which may make the effect of the smoothing, but also of the errors in the kink location difficult to identify . For this reason, we study a more complicated 1-dimensional problem. In fact, we use a CIR process. To avoid complications at the boundary, we use nice parameter choices, such that the discretized process is very unlikely to hit the boundary (Feller condition).
+%
+%
+%
+%The CIR model specifies that the instantaneous interest rate follows the SDE given by
+%\begin{equation}\label{CIR_process}
+%dX_t=a(b-X_t)dt+\sigma \sqrt{X_t} dW_t,\: X(0)=X_0>0
+%\end{equation}
+%where and $a>0$, $b>0$ and $\sigma>0$, are the parameters. The parameter $a$ corresponds to the speed of adjustment, $b$ to the mean and $\sigma$ to volatility. 
+%
+%If the parameters obey the following condition (known as the Feller condition) then the process $X_t$  is strictly positive
+%\begin{equation}\label{Feller_condition}
+%2 a b \geq\sigma^2.
+%\end{equation}
+%
+%The SDE \eqref{CIR_process} is not explicitly solvable. In general there are two ways to do it, namely, exact simulation methods and approximation schemes. Exact simulation in general requires more time
+%than a simulation with approximation schemes (Up to a factor 10). Therefore, it is used to compute expectations that depend on the values of the process at just a few fixed times. However, for expectations that depends on all the path (such as integrals) discretization schemes should be preferred. 
+%
+%The main problem  when discretizing a CIR process using Euler scheme is that it can lead to negative values for which the square root is not defined. In fact, if we consider the following straightforward Euler scheme on the time interval $[0,T]$ for a CIR process $X(t)$:
+%\begin{equation}\label{Euler_CIR}
+%\bar{X}(t_{i+1})=\bar{X}(t_i)+a(b-\bar{X}(t_i)) \Delta t_i+\sigma \sqrt{\bar{X}(t_i)} \Delta W_i,
+%\end{equation}
+%
+%then it can lead to negative values since the Gaussian
+%increment is not bounded from below. Thus, this  scheme is not well defined.
+%
+%Many modified Euler schemes were proposed to overcome this issue. For instance, Deelstra and Delbaen \cite{deelstra1998convergence} have propose the full truncation scheme given by
+%\begin{equation}\label{Full_truncation_CIR}
+%\bar{X}(t_{i+1})=\bar{X}(t_i)+a(b-\bar{X}(t_i)) \Delta t_i+\sigma \sqrt{\bar{X}(t_i)^+} \Delta W_i.
+%\end{equation}
+%
+%Higham and Mao \cite{mao2007stochastic} proposed the following scheme
+% \begin{equation}\label{partial_reflection_CIR}
+% \bar{X}(t_{i+1})=\bar{X}(t_i)+a(b-\bar{X}(t_i)) \Delta t_i+\sigma \sqrt{\abs{\bar{X}(t_i)}} \Delta W_i.
+% \end{equation}
+% Lord et al \cite{lord2010comparison} proposed the following scheme
+% 
+% \begin{equation}\label{truncation_CIR}
+% \bar{X}(t_{i+1})=\bar{X}(t_i)+a(b-\bar{X}(t_i)^+) \Delta t_i+\sigma \sqrt{\bar{X}(t_i)^+} \Delta W_i.
+% \end{equation}
+% 
+% 
+%Diop proposed in \cite{berkaoui2008euler} proposed the reflection scheme, given by
+%\begin{equation}\label{Reflection_CIR}
+%\bar{X}(t_{i+1})=\mid\bar{X}(t_i)+a(b-\bar{X}(t_i)) \Delta t_i+\sigma \sqrt{\bar{X}(t_i)} \Delta W_i \mid.
+%\end{equation}
+%Also, implicit and higher order schemes were proposed by Alfonsi \cite{alfonsi2005discretization,alfonsi2008second,alfonsi2010high}.
+%
+%Those modified Euler schemes were studied  numerically in \cite{alfonsi2005discretization}. It is observed that when $\sigma$ is small enough, typically $\sigma^2 \le 2a$, these schemes have a weak error of order one and a strong error of order $1/2$. However, when $\sigma$ is getting large, say $\sigma^2\gg 4a$, the convergence of all these schemes is degraded. As observed
+%by Lord et al. \cite{lord2010comparison}, the schemes \eqref{Full_truncation_CIR} and \eqref{truncation_CIR} behave better than the schemes \eqref{partial_reflection_CIR} and \eqref{Reflection_CIR}. In fact, when $\sigma$ gets large, the CIR process spends more time close to zero and get stuck in the neighbourhood of zero when $\sigma$ is really large. When the scheme takes a negative value, the absolute value in  both schemes (\eqref{partial_reflection_CIR},\eqref{Reflection_CIR}) produces a noise that pushes the scheme away from zero. On the other hand, the positive part in truncation schemes cancels the noise when the scheme gets negative, which better reproduces the behaviour of the
+%CIR process. 
+%
+%In the following, we use the scheme given by \eqref{Full_truncation_CIR} to simulate the discrete CIR process.
+%\subsubsection{Location of the kink for the discrete problem: Using full truncation scheme}\label{sec:kink_location_full_truncation)_CIR}
+%
+%
+%The full truncation scheme simulating the CIR process is given by \eqref{Full_truncation_CIR}. Here we are interested in finding the location of the kink for hockey-stick function.
+%
+%
+%Using Brownian bridge construction given by \eqref{Brownian_bridge}, we have
+%\begin{align}\label{recursion_full_truncation_CIR}
+%X_{t_1}&= X_{t_0} \left[ 1- a \Delta t  \right]+ \sigma \sqrt{X_{t_0}^+} \left[   Y \frac{\Delta t}{\sqrt{T}} + \Delta B_0\right]+ ab \Delta t\nonumber\\
+%X_{t_2}&= X_{t_1} \left[ 1- a \Delta t  \right]+ \sigma \sqrt{X_{t_1}^+} \left[   Y \frac{\Delta t}{\sqrt{T}} + \Delta B_1\right]+ ab \Delta t \nonumber\\ 
+%\vdots &= \vdots =\vdots \nonumber\\
+%X_{t_N}&= X_{t_{N-1}} \left[ 1- a \Delta t  \right]+ \sigma \sqrt{X_{t_{N-1}}^+} \left[   Y \frac{\Delta t}{\sqrt{T}} + \Delta B_{N-1} \right]+ ab \Delta t ,
+%\end{align}
+%
+%
+%to simplify the notation we set $f_i(y):=X_{t_i}$. Then  the location of the kink point for the approximate problem is equivalent to finding the roots of the polynomial $P(y_\ast(K))$, given by
+%\begin{align}\label{polynomial_kink_location_CIR_full_truncation}
+%P(y_{\ast}(K))=f_N(y_\ast(K))-\frac{K}{X_0},
+%\end{align}
+%where $f_N(y)$ is computed using recursion \eqref{recursion_full_truncation_CIR}.
+%
+%To apply the \textbf{Newton iteration method}, we need the derivative $P'=\frac{d P}{d y_\ast}=f_N'$, which is deduced from recursion \eqref{recursion_full_truncation_CIR}, and given by the the following relation
+%\begin{align}
+%f_i'(y) &= f_{i-1}'(y)\left[1-a \Delta t \right]+ \sigma \sqrt{f_{i-1}(y)^+} \left[ \frac{\Delta t}{\sqrt{T}}+ \left[y \frac{\Delta t}{\sqrt{T}}+\Delta B_{i-1}\right] \frac{f_{i-1}'(y)}{2} \right],\: 1 \le i \le N \nonumber\\
+%f_0'&=0.
+%\end{align}
+%
+%
+%
+%
+%\subsubsection{Results}
+%The code of this section is found in the script discretized\_CIR.py, which compares the different ways of determining the kink location for 1D CIR model.
+%
+%
+%
+%
+%
+%
+%\FloatBarrier

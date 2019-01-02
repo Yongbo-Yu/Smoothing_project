@@ -1,65 +1,7 @@
-\subsection{The goal and outline of the project}
-The first goal of the project is to approximate $\expt{f(X(t))}$, using multi-index stochastic collocation(MISC) method, proposed in \cite{haji2016multi},  where 
-
-\begin{itemize}
-	\item The payoff $f:\rset^d \rightarrow \rset$ has either jumps or kinks. Possible choices of $f$ that we wanted to test are:
-	
-	\begin{itemize}
-		\item hockey-stick function, i.e., put or call payoff functions;
-		\item indicator functions (both relevant in finance (binary option,\dots) and in other applications of estimation of probabilities of certain events);
-		\item delta-functions for density estimation (and derivatives thereof for	estimation of derivatives of the density).
-	\end{itemize}
-	More specifically, $f$ should be the composition of one of the above with a smooth function. (For instance, the basket option payoff as a function of the log-prices of the underlying.)
-	\item The process $X$ is simulated via a time-stepping scheme. Possible choices that we wanted to test are
-		\begin{itemize}
-		\item The one/multi dimensional discretized Black-Scholes(BS) process where we compare
-		different ways to identify the location of the kink, such as:
-		\begin{itemize}
-			\item Exact location of the continuous problem
-			\item  Exact location of the discrete problem by root  finding of a polynomial in $y$.
-			\item Newton iteration.
-		\end{itemize}
-
-		\item A relative simple interest rate model or stochastic volatility model, for instance CIR or Heston models: In fact,  the impact of the Brownian bridge will disappear in the limit, which may make the effect of the smoothing, 	but also of the errors in the kink location difficult to identify. For 	this reason, we suggest to study a more complicated 1-dimensional 	problem next. We suggest to use a CIR process. To avoid complications at the boundary, we suggest "nice" parameter choices, such that the discretized process is very unlikely to hit the boundary (Feller
-		condition).
-		\item The multi dimensional discretized Black-Scholes(BS) process: Here, we suggest to
-		return to the Black-Scholes model, but in multi-dimensional case. In this case,	linearizing the exponential, suggest that a good variable to use for smoothing might be the sum of the final values of the Brownian motion.
-		In general, though, one should probably eventually identify the	optimal direction(s) for smoothing via the duals algorithmic	differentiation.
-	\end{itemize}
-\end{itemize}
-The desired  outcome is a paper including 
-\begin{itemize}
-		\item Theoretical results including: i) an analiticity proof for the integrand in the time stepping setting, ii) a numerical analysis of the schemes involved, such as Newton iteration, etc.
-	\item Applications that  tests the examples above.
-
-\end{itemize}
-What has beed achieved so far: 
-
-\begin{enumerate}
-	\item Numerical outputs:
-	\begin{itemize}
-	
-	 \item \textbf{Example 1}: Tests for  the basket option with the smoothing trick as in \cite{bayersmoothing}: in that example we  checked the performance of MISC without time stepping scheme and also compare the results with reference \cite{bayersmoothing} (See Section \ref{sec:The basket option with smoothing trick without a time stepping procedure}). (Done).
-	
-	
-	
-		\item 	  \textbf{Example 2}: The one dimensional binary option under discretized BS model (see Section \ref{sec:Results for the binary option example}). The results are  promising (See Section \ref{sec:Results for the binary option example}) (Done).
-		
-		\item \textbf{Example 3}: The one dimensional call option under discretized BS model (see Section \ref{sec:Results for the call option example}). The results are  promising (See Section \ref{sec:Results for the call option example}) (Done).
-		
-		\item \textbf{Example 4}: The multi dimensional basket call option under discretized BS model (see Section \ref{sec:The basket option under time stepping framework}). (Under process).
-		\end{itemize}
-	\item  Theoretical outputs:
-	\begin{itemize}
-		\item Heuristic proof of analiticity.
-	\end{itemize}
-\end{enumerate}
-
-\subsection{Literature review}
 Many option pricing problems  require the computation of multivariate integrals. The dimension of these integrals
 is determined by the number of independent stochastic factors (e.g. the number of time steps in the time discretization or the number of assets under consideration).  The high dimension of these integrals can be treated with dimension-adaptive quadrature methods to have the desired convergence behavior.
 
-Unfortunately, in many cases, the  integrand contains either kinks and jumps. In fact, an option is normally considered worthless if the value falls below a predetermined strike price.  A kink  (discontinuity in the gradients) is present when the payoff function is  continuous, while a jump (discontinuity in the function)  exists when the payoff coreesponds to a binary or other digital options. The existence of kinks or jumps in the integrand  heavily degrades
+Unfortunately, in many cases, the  integrand contains either kinks and jumps. In fact, an option is normally considered worthless if the value falls below a predetermined strike price.  A kink  (discontinuity in the gradients) is present when the payoff function is  continuous, while a jump (discontinuity in the function)  exists when the payoff corresponds to a binary or other digital options. The existence of kinks or jumps in the integrand  heavily degrades
 the performance of quadrature formulas.  In this work, we are interested in solving this problem  by using adaptive  sparse grids (SG) methods coupled with suitable transformations. The main idea is to find lines or areas of discontinuity and to employ suitable transformations of the integration domain. Then  by a pre-integration (smoothing) step with respect to the dimension containing the kink/jump,  we end up with integrating  only over the smooth parts of the integrand and the fast convergence of the sparse grid method can be regained.
 
 One can ignore the kinks and jumps, and apply directly a method for integration over $\rset^d$.  Despite the  significant progress in SG methods \cite{bungartz2004sparse} for high dimensional integration  of  smooth integrands, few works have been done to deal with  cases involving integrands with kinks or jumps due to the decreasing performance of SG methods in the presence of kinks and jumps. 
@@ -68,6 +10,8 @@ Some works \cite{griebel2013smoothing,bayersmoothing, griebel2017note,griewank20
 to jumps for  the case of an arithmetic average digital Asian option with the principal component analysis (PCA). The main findings in \cite{griebel2013smoothing,griebel2017note} was obtained  for an  integrand  of the form $f(\mathbf{x}) = \max(\phi(\mathbf{x}), 0)$ with $\phi$ being smooth. In fact, by assuming  i) the $d$-dimensional function $\phi$ has a positive partial derivative with respect to $x_j$ for some $j \in \{1,\dots,d\}$, ii) certain growth conditions at infinity are satisfied, the authors showed that the ANOVA terms of $f$ that do not depend on the variable $x_j$ are smooth.   We note that \cite{griebel2013smoothing,griebel2017note,griewank2017high} focus  more on  theoretical aspects of applying QMC in such a setting. On the other hand, we focus more on  specific practical problems, where we add the adaptivity paradigm to the picture.
 
 A recent work \cite{xiao2018conditional} adresses similar kind of problems using QMC. Being very much related to \cite{bayersmoothing}, the authors i) assume that the conditional expectation can be computed explicitly, by imposing very strong assumptions. ii) Secondly, they  use  PCA on the gradients to reduce the effective dimension. In our work, we do not make such strong assumptions, which is why we need numerical methods, more precisely root finding and the quadrature in the first direction.
+
+
 
 %\subsection{Notation}
 %In the following, we clarify some notations that we will be using in this paper:

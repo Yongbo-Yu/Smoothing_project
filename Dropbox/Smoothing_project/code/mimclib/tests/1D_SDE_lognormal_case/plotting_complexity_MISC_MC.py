@@ -9,22 +9,22 @@ from matplotlib.ticker import MaxNLocator
 # case non richardson
 
 
-MC_normal_err=np.array([0.0223,0.0159,0.0095,0.0046])
+MC_normal_err=np.array([0.04,0.016,0.01,0.008])
 
 
-MC_normal_time=np.array([1450,9990,32790,158108 ])
+MC_normal_time=np.array([3,13,76,380 ])
 
 
 z_MC_normal= np.polyfit(np.log(MC_normal_err), np.log(MC_normal_time), 1)
 fit_MC_normal=np.exp(z_MC_normal[0]*np.log(MC_normal_err))
 print z_MC_normal[0]
 
-MC_err=np.array([0.0223,0.0159,0.0095,0.0046])
-MC_time=np.array([1328,8140,21400, 70200])
+MC_err=np.array([0.041,0.032,0.018,0.008])
+MC_time=np.array([3,16,70,408])
 
 
-MISC_err=np.array([ 0.0223,0.0159,0.0095,0.0046])
-MISC_time=np.array([ 0.3,6,58,656])
+MISC_err=np.array([ 0.022,0.018,0.009,0.005])
+MISC_time=np.array([ 0.3,3,17,473])
 
 z_MC= np.polyfit(np.log(MC_err), np.log(MC_time), 1)
 fit_MC=np.exp(z_MC[0]*np.log(MC_err))
@@ -39,31 +39,31 @@ print z_MISC[0]
 
 # MC_rich_err=np.array([0.0364,0.0113, 0.0030,0.0008])
 # MC_rich_time=np.array([ 194, 394,516, 725])
-MISC_rich_err=np.array([ 0.0357,0.0109,0.0025,0.0006])
-MISC_rich_time=np.array([ 0.3,4,56,713])
+# MISC_rich_err=np.array([ 0.0357,0.0109,0.0025,0.0006])
+# MISC_rich_time=np.array([ 0.3,4,56,713])
 
 
-# z_MC_rich= np.polyfit(np.log(MC_rich_err), np.log(MC_rich_time), 1)
-# fit_MC_rich=np.exp(z_MC_rich[0]*np.log(MC_rich_err))
-# print z_MC_rich[0]
+# # z_MC_rich= np.polyfit(np.log(MC_rich_err), np.log(MC_rich_time), 1)
+# # fit_MC_rich=np.exp(z_MC_rich[0]*np.log(MC_rich_err))
+# # print z_MC_rich[0]
 
 
-z_MISC_rich= np.polyfit(np.log(MISC_rich_err), np.log(MISC_rich_time), 1)
-fit_MISC_rich=np.exp(z_MISC_rich[0]*np.log(MISC_rich_err))
-print z_MISC_rich[0]
+# z_MISC_rich= np.polyfit(np.log(MISC_rich_err), np.log(MISC_rich_time), 1)
+# fit_MISC_rich=np.exp(z_MISC_rich[0]*np.log(MISC_rich_err))
+# print z_MISC_rich[0]
 
 
 fig = plt.figure()
 
 plt.plot(MC_err,MC_time,linewidth=2.0,label='MC+root finding' , marker='>',hold=True) 
-plt.plot(MC_err, fit_MC*10,linewidth=2.0,label=r'rate= %s' % format(z_MC[0]  , '.2f'), linestyle = '--')
+plt.plot(MC_err, fit_MC/1000,linewidth=2.0,label=r'rate= %s' % format(z_MC[0]  , '.2f'), linestyle = '--')
 
 plt.plot(MC_normal_err,MC_normal_time,linewidth=2.0,label='MC' , marker='>',hold=True) 
-plt.plot(MC_normal_err, fit_MC_normal*10,linewidth=2.0,label=r'rate= %s' % format(z_MC_normal[0]  , '.2f'), linestyle = '--')
+plt.plot(MC_normal_err, fit_MC_normal/10000,linewidth=2.0,label=r'rate= %s' % format(z_MC_normal[0]  , '.2f'), linestyle = '--')
 
 
 plt.plot(MISC_err,MISC_time,linewidth=2.0,label='MISC'  , marker='v',hold=True) 
-plt.plot(MISC_err, fit_MISC*10,linewidth=2.0,label=r'rate= %s' % format(z_MISC[0]  , '.2f'), linestyle = '--')
+plt.plot(MISC_err, fit_MISC/100000000,linewidth=2.0,label=r'rate= %s' % format(z_MISC[0]  , '.2f'), linestyle = '--')
 
 # plt.plot(MC_rich_err,MC_rich_time,linewidth=2.0,label='MC+Rich' , marker='o',hold=True) 
 #plt.plot(MC_rich_err, fit_MC_rich*10,linewidth=2.0,label=r'rate= %s' % format(z_MC_rich[0]  , '.2f'), linestyle = '--')

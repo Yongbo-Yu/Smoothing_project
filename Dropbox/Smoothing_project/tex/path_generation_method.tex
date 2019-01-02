@@ -1,0 +1,49 @@
+\subsection{Path generation methods (PGM)}\label{sec:Path generation methods (PGM)}
+
+In the literature of adaptive sparse grids and  QMC, several hierarchical path generation methods (PGMs) or transformation methods have been proposed to reduce the effective dimension. Among these transformations, we cite the Brownian bridge (Bb)  construction \cite{moskowitz1996smoothness,caflisch1997valuation,morokoff1998generating,larcher2003tractability}, the principal component analysis (PCA)  \cite{acworth1998comparison} and the linear transformation (LT) \cite{imai2004minimizing}, etc \dots 
+
+Assume that one wants to compute $\expt{g(B)}$, where $B$ is a Brownian motion with index set $[0,T]$. In most applications this is can be reasonably approximated by $\expt{\tilde{g}\left(B_{\frac{T}{N}}, \dots, B_{\frac{T N}{N}}  \right)}$, where $\tilde{g}$ is a function of the set of discrete Brownian paths.
+
+There are three classical methods for sampling from $\left(B_{\frac{T}{N}}, \dots, B_{\frac{T N}{N}}  \right)$ given a standard normal vector $Z$, namely the forward method, the Brownian bridge (Bb) construction and the principal component analysis (PCA) construction. All of these constructions may be written in the form $\left(B_{\frac{T}{N}}, \dots, B_{\frac{T N}{N}}  \right)=AZ$, where $A$ is an $N \times N$ real matrix with 
+
+\begin{equation}\label{eq:covariance_matrix_in_time}
+A A^T =\Sigma:= \left(\frac{T}{N} \min(j,k)\right)_{j,k=1}^N=\frac{T}{N} \begin{bmatrix}
+	1       & 1 & 1 & \dots & 1\\
+	1     & 2 & 2 & \dots & 2 \\
+	1     & 2& 3 & \dots &3 \\
+	\vdots    & \vdots& \vdots & \ddots &\vdots \\
+	1      & 2 & 3 & \dots &N
+\end{bmatrix}
+\PERIOD
+\end{equation}   
+For instance, the matrix $A$ corresponding to the forward method is given by 
+\begin{equation*}
+	A^{F} = \sqrt{\frac{T}{N}}  \begin{bmatrix}
+		1       & 0  & \dots & 0\\
+		1     & 1  & \dots & 0 \\
+		\vdots    & \vdots & \ddots &\vdots \\
+		1      & 1&  \dots &1
+	\end{bmatrix}
+	\PERIOD
+\end{equation*}  
+In the case of Bb construction, details about the construction are given in Section \ref{sec:Brwonian bridge construction}, and  the corresponding matrix $A$, For $N=8$ is given by 
+ \begin{equation*}
+ 	A^{\text{Bb}} = \sqrt{T}  \begin{bmatrix}
+ 		\frac{1}{8}       & 	\frac{1}{8}   & 	\frac{\sqrt{2}}{8} & 0 &\frac{2}{8}  & 0 &0 & 0\\
+ 	\frac{2}{8}       & 	\frac{2}{8}   & 	\sqrt{2}\frac{ 2}{8} & 0 &0 & 0 &0 & 0\\
+ 		\frac{3}{8}       & 	\frac{3}{8}   & 	\frac{\sqrt{2}}{8} & 0 &0 &\frac{2}{8} &0  &0 \\
+ 		 	\frac{4}{8}       & 	\frac{4}{8}   & 	0 & 0 &0 & 0 &0 & 0\\
+ 		 	\frac{5}{8}       & 	\frac{3}{8}   & 	0 & \frac{\sqrt{2}}{8} &0 &0 &\frac{2}{8} &0 \\
+ 		 		\frac{6}{8}       & 	\frac{2}{8}   & 	0 & \sqrt{2}\frac{ 2}{8}  &0 & 0 &0 & 0\\
+ 		 			\frac{7}{8}       & 	\frac{1}{8}   & 	0 & \frac{\sqrt{2}}{8} &0 &0 &0 &\frac{2}{8}  \\
+ 		 			1       & 0  & 	0 & 0 &0 &0 &0 &0 \\
+ 	
+ 	\end{bmatrix}
+ 	\PERIOD
+ \end{equation*}
+When doing PCA construction \cite{acworth1998comparison}, we have $A^{\text{PCA}}=VD$, where $\Sigma=V D^2V^T$ is the singular value decomposition of $\Sigma$. 
+
+\subsubsection{More details on Bb}
+
+Describing construction \ref{eq:BB construction}: we  first generate the final value $B_T$, then sample $B_{T/2}$ conditional
+on the values of $B_T$ and $B_0$, and proceed by progressively filling in intermediate values. Bb uses the first several coordinates of the low-discrepancy points to determine the general shape of the Brownian path, and the last few coordinates influence only the fine detail of the path. Therefore, the most important values that determine the large scale structure of Brownian motion are the first components of $\mathbf{z} = (z_1,\dots,z_N)$.  

@@ -1,0 +1,182 @@
+ \documentclass[11pt]{article}
+
+%\usepackage{setspace}
+%\documentclass[final,leqno]{siamltex}
+\usepackage{smoothing_paper}
+
+
+
+\usepackage[section]{placeins}
+\usepackage{tabularx,ragged2e,booktabs,caption}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%chiheb commands
+
+
+%%%%%%%%%%%%%%%%%
+\newcommand{\ie}{\emph{i.e.}}
+\newcommand{\eg}{\emph{e.g.}}
+\newcommand{\cf}{\emph{cf.}}
+\newcommand{\prob}[1]{\mathrm{P}\left(#1\right)}
+\newcommand{\expt}[1]{\mathrm{E}\left[#1\right]}
+\newcommand{\expth}[1]{\hat{\mathrm{E}}\left[#1\right]}
+
+
+
+\newcommand{\rset}{\mathbb{R}}
+\newcommand{\nset}{\mathbb{N}}
+\newcommand{\zset}{\mathbb{Z}}
+
+
+
+\newcommand{\PERIOD}{.}
+\newcommand{\COMMA}{,}
+\newcommand{\BIGSPACE}{\,\,\,\,\,\,\,}
+
+
+
+\newcommand{\Ordo}[1]{{\mathcal{O}}\left(#1\right)}
+\newcommand{\ordo}[1]{{o}\left(#1\right)}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% DO WE RELLY NEED THE FOLLOWING??
+
+%%  new margin
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagestyle{plain}                                                      %%
+%%%%%%%%%% EXACT 1in MARGINS %%%%%%%                                   %%
+\setlength{\textwidth}{6.5in}     %%                                   %%
+\setlength{\oddsidemargin}{0in}   %%   
+\setlength{\evensidemargin}{0in}  %%        
+\setlength{\textheight}{8.5in}    %%       
+\setlength{\topmargin}{-0.2in}    %%   
+\setlength{\headheight}{0in}      %%    
+\setlength{\headsep}{0in}         %%                   
+\setlength{\footskip}{.5in}       %%                       
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%                                   %%
+\newcommand{\required}[1]{\section*{\hfil #1\hfil}}                    %%
+\renewcommand{\refname}{\hfil References Cited\hfil}                   %%
+
+\def\SMALLSKIP{\smallskip}
+\def\MEDSKIP{\medskip}
+\def\BIGSKIP{\bigskip}
+
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\makeatletter
+\def\BState{\State\hskip-\ALG@thistlm}
+\makeatother
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{Plan of action for the numerical smoothing project} 
+
+
+
+
+%\doublespacing
+\begin{document}
+\maketitle
+
+
+
+
+
+
+
+%\pagestyle{myheadings}
+\thispagestyle{plain}
+
+\setcounter{tocdepth}{1}
+
+\section{The goal and outline of the project}
+The first goal of the project is to approximate $\expt{f(X(t))}$, using multi-index stochastic collocation(MISC) method, proposed in \cite{haji2016multi},  where 
+
+\begin{itemize}
+	\item The payoff $f:\rset^d \rightarrow \rset$ has either jumps or kinks. Possible choices of $f$ that we wanted to test are:
+	
+	\begin{itemize}
+		\item hockey-stick function, i.e., put or call payoff functions;
+		\item indicator functions (both relevant in finance (binary option,\dots) and in other applications of estimation of probabilities of certain events);
+		\item delta-functions for density estimation (and derivatives thereof for	estimation of derivatives of the density).
+	\end{itemize}
+	More specifically, $f$ should be the composition of one of the above with a smooth function. (For instance, the basket option payoff as a function of the log-prices of the underlying.)
+	\item The process $X$ is simulated via a time-stepping scheme. Possible choices that we wanted to test are
+		\begin{itemize}
+		\item The one/multi dimensional discretized Black-Scholes(BS) process where we compare
+		different ways to identify the location of the kink, such as:
+		\begin{itemize}
+			\item Exact location of the continuous problem
+			\item  Exact location of the discrete problem by root  finding of a polynomial in $y$.
+			\item Newton iteration.
+		\end{itemize}
+
+		\item A relative simple interest rate model or stochastic volatility model, for instance CIR or Heston models: In fact,  the impact of the Brownian bridge will disappear in the limit, which may make the effect of the smoothing, 	but also of the errors in the kink location difficult to identify. For 	this reason, we suggest to study a more complicated 1-dimensional 	problem next. We suggest to use a CIR process. To avoid complications at the boundary, we suggest "nice" parameter choices, such that the discretized process is very unlikely to hit the boundary (Feller
+		condition).
+		\item The multi dimensional discretized Black-Scholes(BS) process: Here, we suggest to
+		return to the Black-Scholes model, but in multi-dimensional case. In this case,	linearizing the exponential, suggest that a good variable to use for smoothing might be the sum of the final values of the Brownian motion.
+		In general, though, one should probably eventually identify the	optimal direction(s) for smoothing via the duals algorithmic	differentiation.
+	\end{itemize}
+\end{itemize}
+The desired  outcome is a paper including 
+\begin{itemize}
+		\item Theoretical results including: i) an analiticity proof for the integrand in the time stepping setting, ii) a numerical analysis of the schemes involved, such as Newton iteration, etc.
+	\item Applications that  tests the examples above.
+
+\end{itemize}
+What has beed achieved so far: 
+
+\begin{enumerate}
+	\item Numerical outputs:
+	\begin{itemize}
+	
+	 \item \textbf{Example 1}: Tests for  the basket option with the smoothing trick as in \cite{bayersmoothing}: in that example we  checked the performance of MISC without time stepping scheme and also compare the results with reference \cite{bayersmoothing}. (Done).
+	
+	
+	
+		\item 	  \textbf{Example 2}: The one dimensional binary option under discretized BS model. The results are  promising(Done).
+		
+		\item \textbf{Example 3}: The one dimensional call option under discretized BS model. The results are  promising(Done).
+		
+		\item \textbf{Example 4}: The multi dimensional basket call option under discretized BS model (Under process).
+		\item \textbf{Example 5}: The best of call option under discretized BS model and two dimensional Heston model (To-DO).
+		\end{itemize}
+	\item  Theoretical outputs:
+	\begin{itemize}
+		\item Heuristic proof of analiticity (Done).
+		\item Theoretical motivation of our work  (under process).
+		\item Discussion of the error and some numerical analysis of our scheme (to-Do).
+	\end{itemize}
+\end{enumerate}
+
+
+
+
+
+
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%References
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bibliographystyle{plain}
+\bibliography{smoothing.bib} 
+
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+ 
+ 
+
+
+\end{document}
