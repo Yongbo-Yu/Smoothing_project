@@ -1,16 +1,27 @@
 import numpy as np
-theta = np.radians(15)
-c, s = np.cos(theta), np.sin(theta)
-R1 = np.array(((1,0,0),(0, c,-s), (0, s, c)))
-print(R1) 
+d=4
+X1=(1/np.sqrt(d))*np.ones((1,d))
+A=np.eye(d,d)	
+A[0,:]=X1
+A=A.transpose()
+print A
 
-R2 = np.array((( c,-s,0),(0,1,0), (-s, 0, c)))
-print(R2) 
 
-R3= np.array((( c,-s,0), ( s, c,0),(0, 0, 1)))
-print(R3) 
 
-R=R3.dot(R2.dot(R1))
+def normalize(v):
+    return v / np.sqrt(v.dot(v))
 
-print R
+n = len(A)
 
+A[:, 0] = normalize(A[:, 0])
+
+
+for i in range(1, n):
+    Ai = A[:, i]
+    for j in range(0, i):
+        Aj = A[:, j]
+        t = Ai.dot(Aj)
+        Ai = Ai - t * Aj
+    A[:, i] = normalize(Ai)
+print A.transpose()
+# print A.dot(A.transpose())

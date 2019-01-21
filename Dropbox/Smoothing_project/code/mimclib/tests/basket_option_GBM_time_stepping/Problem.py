@@ -9,7 +9,7 @@ class Problem(object):
 # attributes
     random_gen=None;
     elapsed_time=0.0;
-    N=2
+    N=4
     S0=None     # vector of initial stock prices
     basket_d=2     # number of assets in the basket
     c= (1/float(basket_d))*np.ones(basket_d)     # weigths
@@ -37,7 +37,7 @@ class Problem(object):
         #self.rho=self.correlation()                                                  #correlation matrx
         #self.rho=np.array([[1 , 0.3,  0.3],[ 0.3,  1 , 0.3],[0.3 , 0.3 ,1] ])
         #from numpy import concatenate, zeros
-        #from scipy.linalg import toeplitz
+        from scipy.linalg import toeplitz
         #self.rho=toeplitz([1,0.8,0.8, 0.8,0.8,0.8,0.8,0.8,0.8,0.8, 0.8,0.8,0.8, 0.8,0.8,0.8,0.8,0.8,0.8,0.8])
         
         self.rho=toeplitz([1,0.3])
@@ -75,21 +75,33 @@ class Problem(object):
     def objfun(self,nelem,y):
 
         start_time=time.time();
+        beta=10
+        
          
         # step 1 # get the two partitions of coordinates \mathbf{Z}_1 and \mathbf{Z}_{-1} for y which is a vector of N \times basket_d
-        z1=y[0:-1:basket_d:] # getting \mathbf{Z}_1 
-        z__1=np.setdiff1d(y, z1) # getting \mathbf{Z}_{-1}
+        z1=y[0:-1:self.N] # getting \mathbf{Z}_1 
+        j=0
+        idx=[]
+        for i in range(0,self.basket_d*self.N,self.N):
+        	idx.append(i)
+        	j=j+1
+        
+        idxc=np.setdiff1d(range(0,self.basket_d*self.N),idx)
+        
+        z__1=y[idxc]
+        #z__1=np.setdiff1d(y, z1) # getting \mathbf{Z}_{-1}
+        
 
         # step 2: doing the rotation from  \mathbf{Z}_1  to \mathbf{Y}_1
-        A=self.rotation_matrix()
-        y1=np.dot(A,z1) # getting \mathbf{Y}_1 by rotation using matrix A (to be defined)
-        A_inv=np.transpose(A) # since A is  a rotation matrix than A^{-1}=A^T
+        self.A=self.rotation_matrix()
+        y1=np.dot(self.A,z1) # getting \mathbf{Y}_1 by rotation using matrix A (to be defined)
+        self.A_inv=np.transpose(self.A) # since A is  a rotation matrix than A^{-1}=A^T
         y__1=y1[1:]        # getting \mathbf{Y}_{-1}
 
 
 
         # step 3: computing the location of the kink
-        bar_y1=self.newtons_method(0,y__1,z__1) 
+        bar_y1=self.newtons_method(10,y__1,z__1) 
 
 
         # step 4: performing the pre-intgeration step wrt kink point
@@ -99,28 +111,29 @@ class Problem(object):
         mylist_left_y=[]
         mylist_left_z=[]
 
-        mylist_left_y.append(yknots_left_y[0])
+        mylist_left_y.append(yknots_left[0])
         mylist_left_y[1:]=[np.array(y__1[i]) for i in range(0,len(y__1))]
         mylist_left_z=[np.array(z__1[i]) for i in range(0,len(z__1))]
-        mylist_left=np.concatenate(mylist_left_y,mylist_left_z)
+        mylist_left=mylist_left_y+mylist_left_z
 
         points_left=self.cartesian(mylist_left)
             
-        # to be updated    
-        # x_l=np.asarray([self.stock_price_trajectory_1D_BS(bar_z-points_left[i,0],points_left[i,1:])[0]  for i in range(0,len(yknots_left[0]))])
-        # QoI_left= yknots_left[1].dot(self.payoff(x_l)*((1/np.sqrt(2 * np.pi)) * np.exp(-((bar_z-points_left[:,0])**2)/2)* np.exp(points_left[:,0])))
+        # to be updated   (we start with the case d=2)  
+        x_l=np.asarray([self.stock_price_trajectory_basket_BS(bar_y1-points_left[i,0],points_left[i,2:2+self.N-1], points_left[i,1],points_left[i,2+self.N-1:])[0]  for i in range(0,len(yknots_left[0]))])
+        
+        QoI_left= yknots_left[1].dot(self.payoff(x_l)*((1/np.sqrt(2 * np.pi)) * np.exp(-((bar_y1-points_left[:,0])**2)/2)* np.exp(points_left[:,0])))
 
         mylist_right_y=[]
         mylist_right_z=[]
         mylist_right_y.append(yknots_right[0])
         mylist_right_y[1:]=[np.array(y[i]) for i in range(0,len(y__1))]
         mylist_right_z=[np.array(z__1[i]) for i in range(0,len(z__1))]
-        mylist_right=np.concatenate(mylist_right_y,mylist_right_z)
+        mylist_right=mylist_right_y+mylist_right_z
         points_right=self.cartesian(mylist_right)
 
-# to be updated    
-        # x_r=np.asarray([self.stock_price_trajectory_1D_BS(points_right[i,0]+bar_z,points_right[i,1:])[0] for i in range(0,len(yknots_right[0]))])
-        # QoI_right= yknots_right[1].dot(self.payoff(x_r)*(1/np.sqrt(2 * np.pi)) * np.exp(-((points_right[:,0]+bar_z)**2)/2)* np.exp(points_right[:,0]))
+        # to be updated    (we start with the case d=2)  
+        x_r=np.asarray([self.stock_price_trajectory_basket_BS(points_right[i,0]+bar_y1,points_right[i,2+self.N-1:], points_right[i,1],points_right[i,2+self.N-1:])[0] for i in range(0,len(yknots_right[0]))])
+        QoI_right= yknots_right[1].dot(self.payoff(x_r)*(1/np.sqrt(2 * np.pi)) * np.exp(-((points_right[:,0]+bar_y1)**2)/2)* np.exp(points_right[:,0]))
 
         
         QoI=QoI_left+QoI_right
@@ -130,8 +143,33 @@ class Problem(object):
         self.elapsed_time=self.elapsed_time+elapsed_time_qoi;
         return QoI
 
+    # This function creates the desired rotation matrix A (orthonormal transformation)
+    def rotation_matrix(self):   
+        X1=(1/np.sqrt(self.basket_d))*np.ones((1,self.basket_d))
+        A=np.eye(self.basket_d,self.basket_d)   
+        A[0,:]=X1
+        A=A.transpose()
 
-    
+        def normalize(v):
+            return v / np.sqrt(v.dot(v))
+        # Gram-shmidt procedure
+        n = len(A)
+        A[:, 0] = normalize(A[:, 0])
+
+
+        for i in range(1, n):
+            Ai = A[:, i]
+            for j in range(0, i):
+                Aj = A[:, j]
+                t = Ai.dot(Aj)
+                Ai = Ai - t * Aj
+            A[:, i] = normalize(Ai)
+
+        return A.transpose()
+
+
+
+
     
     def brownian_increments(self,y1,y):
         t=np.linspace(0, self.T, self.N+1)     
@@ -157,24 +195,17 @@ class Problem(object):
             h=i_min 
         return bb    
 
-    
-    # This function creates the desired rotation matrix A
-    def rotation_matrix(self)    
-
-    return A
+  
 
 
       # This function simulates a basket BS trajectory for stock price, it plays the role of f_1 in our notes
     def stock_price_trajectory_basket_BS(self,y1,yvec_1,y2,yvec_2):
+        #building the brownian bridge increments
         bb1=self.brownian_increments(y1,yvec_1)
         bb2=self.brownian_increments(y2,yvec_2)
 
-    
-
         dW1= [bb1[0,i+1]-bb1[0,i]  for i in range(0,self.N)] 
         dW2= [bb2[0,i+1]-bb2[0,i] for i in range(0,self.N)] 
-
- 
 
         dW=np.array([dW1 ,dW2])
 
@@ -188,24 +219,17 @@ class Problem(object):
         dW1=dW[0,:]
         dW2=dW[1,:]
 
-
- 
-
         dbb1=dW1-(self.dt/np.sqrt(self.T))*y1 # brownian bridge increments dbb_i (used later for the location of the kink point)
         dbb2=dW2-(self.dt/np.sqrt(self.T))*y2 # brownian bridge increments dbb_i (used later for the location of the kink point)
         
-          
-    
-
 
         X=np.zeros((self.basket_d,self.N+1)) #here will store the BS trajectory
       
         X[:,0]=self.S0
         for n in range(1,self.N+1):
-            X[0,n]=X[0,n-1]*(1+self.sigma[0]*dW[0,n-1])
-            X[1,n]=X[1,n-1]*(1+self.sigma[1]*dW[1,n-1])
+            X[0,n]=X[0,n-1]*(1+self.sigma[0]*((self.dt/float(np.sqrt(self.T)))*(self.A_inv[0,0]*y1+ self.A_inv[0,1:].dot(y2)) +  dbb1[n-1] ))  
+            X[1,n]=X[1,n-1]*(1+self.sigma[1]*((self.dt/float(np.sqrt(self.T)))*(self.A_inv[1,0]*y1+ self.A_inv[1,1:].dot(y2)) +  dbb2[n-1] ) )  
       
-        
         return X[:,-1],dbb1,dbb2
        
 
@@ -213,58 +237,18 @@ class Problem(object):
         # this function defines the payoff function used here
     def payoff(self,x): 
        #print(x)
-       g=(self.c.dot(x)-self.K)
-   
-       if g>0:
-          return g
-       else:
-          return 0
-     
-   
-
-   # this function generates the correlation matrix rho ( think it is Ok but as I increase d the elements in the diagonal are not exactly 1, I need to check that more)
-    def correlation(self):
-        x = np.random.uniform(0.8,1,self.basket_d-1)
-        cp=[np.prod(x[:i]) for i in range(1,self.basket_d) ]
-        diag_terms=np.zeros(self.basket_d)
-        diag_terms[0]=1
-        diag_terms[1:]=[np.sqrt(1-(x[i]**2)) for i in range(0,self.basket_d-1)]
-        tau=np.eye(self.basket_d)
-        for i in range(0,self.basket_d):
-                tau[i+1:,i]=cp[:self.basket_d-1-i]
-        tau=tau.dot(np.diag(diag_terms))
-        rho=tau.dot(np.transpose(tau))
-        return rho
+       g=(x.dot(self.c)-self.K)
        
-
-
-    
-    
-
+       g[np.where(g<0)]=0
+       
+       return g
+         
 
        # Root solving procedure
- 
-    #Now we set up the methods used for newton iteration
-
-
-       #Now we set up the methods used for newton iteration
-    # def dx(self,x,yvec_1,yvec_2,j):
-    #     #print x
-    #     if j==1:
-    #         P1,dP1=self.f(x[0],yvec_1,x[1],yvec_2,1)
-    #         return np.abs(0-P1)
-    #     else:
-        
-    #         P1,dP1=self.f(x[0],yvec_1,x[1],yvec_2,2)
-    #         return np.abs(0-P1)    
-
-    def dx(self,x,yvec_1,yvec_2):
-        #print x
-      
-            P1,dP1=self.f(x[0],yvec_1,x[1],yvec_2)
-            
-       
-            return np.abs(0-P1[0])  ,  np.abs(0-P1[1]) 
+      # Now we set up the methods used for newton iteration
+    def dx(self,x,y__1,z__1):
+        P1,dP1=self.f(x,y__1,z__1)
+        return abs(0-P1)
 
 
     # def f(self,y1,yvec_1,y2,yvec_2,j):# need to check this
@@ -292,77 +276,55 @@ class Problem(object):
     
 
 
-    def f(self,y1,yvec_1,y2,yvec_2):# need to check this
-        X,dbb1,dbb2=self.stock_price_trajectory_basket_BS(y1,yvec_1,y2,yvec_2) 
-        fi=np.zeros((self.basket_d,len(dbb1)))
+    def f(self,y1,y__1,z__1):# need to check this for case d=2, N=2 and then we can extend
+       
+        y2=y__1[0] 
+        yvec_1=z__1[0:self.N-1]
+        yvec_2=z__1[self.N-1:]
+
+        X,dbb1,dbb2=self.stock_price_trajectory_basket_BS(y1,yvec_1,y2,yvec_2)
+
+        gi=np.zeros((self.basket_d,len(dbb1)))
         product=np.zeros(self.basket_d)
         summation=np.zeros(self.basket_d)
         Py=np.zeros(self.basket_d)
         dPy=np.zeros(self.basket_d)
 
-        fi[0,:]=  1+(self.sigma[0]/float(np.sqrt(self.T)))*y1*(self.dt)+self.sigma[0]*dbb1
-        fi[1,:]=  1+(self.sigma[1]/float(np.sqrt(self.T)))*y2*(self.dt)+self.sigma[1]*dbb2
+        gi[0,:]=  1+(self.sigma[0]/float(np.sqrt(self.T)))*(self.A_inv[0,0]*y1*(self.dt)+ self.A_inv[0,1:].dot(y__1)*(self.dt))+self.sigma[0]*dbb1
+        gi[1,:]=  1+(self.sigma[1]/float(np.sqrt(self.T)))*(self.A_inv[1,0]*y1*(self.dt)+ self.A_inv[1,1:].dot(y__1)*(self.dt))+self.sigma[1]*dbb2
         
-        product[0]=np.prod(fi[0,:])
-        product[1]=np.prod(fi[1,:])
 
-        Py[0]=product[0]-(self.K/(float(self.S0[0]*self.c[0]*self.basket_d)))
-        Py[1]=product[1]-(self.K/(float(self.S0[1]*self.c[1]*self.basket_d)))
+        product[0]=np.prod(gi[0,:])
+        product[1]=np.prod(gi[1,:])
 
-        summation[0]=np.sum(1/fi[0,:])
-        summation[1]=np.sum(1/fi[1,:])
+        Py=(self.S0[0]*self.c[0]*product[0]+ self.S0[1]*self.c[1]*product[1])-self.K    
+
+        summation[0]=np.sum(1/gi[0,:])
+        summation[1]=np.sum(1/gi[1,:])
 
         
-        dPy[0]= (self.sigma[0]/float(np.sqrt(self.T)))*(self.dt)*product[0]*summation[0]
-        dPy[1]=  (self.sigma[1]/float(np.sqrt(self.T)))*(self.dt)*product[1]*summation[1]
-        return Py,dPy    
+        dPy[0]= (self.S0[0]*self.c[0]* self.A_inv[0,0]*self.sigma[0]/float(np.sqrt(self.T)))*(self.dt)*product[0]*summation[0]
+        dPy[1]=  (self.S0[1]*self.c[1]* self.A_inv[1,0]*self.sigma[1]/float(np.sqrt(self.T)))*(self.dt)*product[1]*summation[1]
+
+        dP=dPy[0]+dPy[1]
+        return Py,dP    
     
 
         
-    def newtons_method(self,x0,yvec_1,yvec_2,eps=1e-10):
+    def newtons_method(self,x0,y__1,z__1,eps=1e-10):
         
-        delta1, delta2 = self.dx(x0,yvec_1,yvec_2)
+        delta= self.dx(x0,y__1,z__1)
 
-
-      
-        while (delta1 > eps) | (delta2 > eps):
+        while delta > eps:
         
-            P_value,dP=self.f(x0[0],yvec_1,x0[1],yvec_2)
-       
-            x0[0] = x0[0] - 0.1*P_value[0]/dP[0]
-            x0[1] = x0[1] - 0.1*P_value[1]/dP[1]
-
-            delta1,delta2 = self.dx(x0,yvec_1,yvec_2)
+            #(self.f(x0,y))
+            P_value,dP=self.f(x0,y__1,z__1)
+            x0 = x0 - 0.1*P_value/dP
+            delta = self.dx(x0,y__1,z__1)    
 
         return x0     
 
-    # def newtons_method(self,x0,yvec_1,yvec_2,eps=1e-5):
-        
-    #     delta1= self.dx(x0,yvec_1,yvec_2,1)
-    #     delta2= self.dx(x0,yvec_1,yvec_2,2)
-        
-      
-    #     while (delta1 > eps): 
-        
-    #         P_value,dP=self.f(x0[0],yvec_1,x0[1],yvec_2,1)
-       
-    #         x0[0] = x0[0] - 0.1*P_value/dP
-           
-    #         delta1= self.dx(x0,yvec_1,yvec_2,1)
-
-    #     while (delta2 > eps): 
-        
-    #         P_value,dP=self.f(x0[1],yvec_1,x0[1],yvec_2,2)
-       
-    #         x0[1] = x0[1] - 0.1*P_value/dP
-
-    #         delta2 = self.dx(x0 ,yvec_1,yvec_2,2)    
-
-    #     return x0   
-
-
-
-
+    
     
 
 

@@ -152,7 +152,7 @@ In the discrete case, we can show that the numerical approximation of $X^{(j)}(T
 %and precisely, we have
 \begin{align}\label{eq:discrete_rep}
 	\bar{X}^{(j)}(T)&=X_0^{(j)} \prod_{i=0}^{N-1} \left[ 1+\frac{\sigma^{(j)}}{\sqrt{T}} Z^{(j)}_1 \Delta t+ \sigma^{(j)} \Delta \widetilde{B}^{(j)}_{i}\right], \quad 1 \le j \le d \nonumber\\
-	&= \prod_{i=0}^{N-1} f_i^{(j)}(Z^{(j)}_1) , \quad 1 \le j \le d \PERIOD
+	&= X_0^{(j)} \prod_{i=0}^{N-1} f_i^{(j)}(Z^{(j)}_1) , \quad 1 \le j \le d \PERIOD
 \end{align}
 \subsubsection{Step $1$: Numerical smoothing}\label{sec:Step $1$: Numerical smoothing}
 The first step of our idea is to smoothen the problem by solving the root finding problem in one dimension after using a sub-optimal linear mapping for the coarsest factors of the Brownian increments $\mathbf{Z}_1=(Z^{(1)}_1 , \dots, Z^{(d)}_1)$. In fact, let us define for a certain $d \times d $ matrix $\mathcal{A} $, the linear mapping 
@@ -161,26 +161,26 @@ The first step of our idea is to smoothen the problem by solving the root findin
 \end{align}
 Then from \eqref{eq:discrete_rep}, we have
  \begin{align}\label{eq:discrete_rep_2}
-	\bar{X}^{(j)}(T)&= \prod_{i=0}^{N-1} f_i^{(j)}(\mathcal{A}^{-1} \mathbf{Y})_{j} , \quad 1 \le j \le d \COMMA \nonumber \\
-&=\prod_{i=0}^{N-1} g_i^{(j)}(Y_{1},\mathbf{Y}_{-1}) \quad 1 \le j \le d 
+	\bar{X}^{(j)}(T)&= X_0^{(j)} \prod_{i=0}^{N-1} f_i^{(j)}(\mathcal{A}^{-1} \mathbf{Y})_{j} , \quad 1 \le j \le d \COMMA \nonumber \\
+&=X_0^{(j)} \prod_{i=0}^{N-1} g_i^{(j)}(Y_{1},\mathbf{Y}_{-1}) \quad 1 \le j \le d 
 \end{align}
 where, by defining $\mathcal{A}^{\text{inv}}= \mathcal{A}^{-1}$, we have
 
 \begin{align}\label{eq: incremental functions}
-g_i^{(j)}(Y_1,\mathbf{Y}_{-1})&=X_0^{(j)}  \left[ 1+\frac{\sigma^{(j)}}{\sqrt{T}} \left( \sum_{i=1}^d A^{\text{inv}}_{ji} Y_i \right) \Delta t+ \sigma^{(j)} \Delta \widetilde{B}^{(j)}_{i}\right] \nonumber\\
-&=X_0^{(j)}  \left[ 1+\frac{\sigma^{(j)} \Delta t}{\sqrt{T}} A^{\text{inv}}_{j1} Y_1 +\frac{\sigma^{(j)}}{\sqrt{T}} \left( \sum_{i=2}^d A^{\text{inv}}_{ji} Y_i  \right) \Delta t+ \sigma^{(j)} \Delta \widetilde{B}^{(j)}_{i}\right] \PERIOD
+g_i^{(j)}(Y_1,\mathbf{Y}_{-1})&=  \left[ 1+\frac{\sigma^{(j)}}{\sqrt{T}} \left( \sum_{i=1}^d A^{\text{inv}}_{ji} Y_i \right) \Delta t+ \sigma^{(j)} \Delta \widetilde{B}^{(j)}_{i}\right] \nonumber\\
+&=  \left[ 1+\frac{\sigma^{(j)} \Delta t}{\sqrt{T}} A^{\text{inv}}_{j1} Y_1 +\frac{\sigma^{(j)}}{\sqrt{T}} \left( \sum_{i=2}^d A^{\text{inv}}_{ji} Y_i  \right) \Delta t+ \sigma^{(j)} \Delta \widetilde{B}^{(j)}_{i}\right] \PERIOD
 \end{align}
 Therefore, in order to determine $Y^{\ast}_1$, we need to solve
 \begin{align}
-	x=\sum_{j=1}^{d} c_j \prod_{i=0}^{N-1} g_i^{(j)}(Y^{\ast}_1(x),\mathbf{Y}_{-1} ),
+	x=\sum_{j=1}^{d} c_j X_0^{(j)}  \prod_{i=0}^{N-1} g_i^{(j)}(Y^{\ast}_1(x),\mathbf{Y}_{-1} ),
 \end{align}
 which implies that the location of the kink point for the approximate problem is equivalent to finding the roots of the polynomial $P(Y^\ast_1(K))$, given by
 \begin{align}\label{polynomial_kink_location_basket}
-	P(Y^\ast_1(K))&=\left(\sum_{j=1}^{d} c_j \prod_{i=0}^{N-1}  g_i^{(j)}(Y^{\ast}_1) \right) -K.
+	P(Y^\ast_1(K))&=\left(\sum_{j=1}^{d} c_j X_0^{(j)}  \prod_{i=0}^{N-1}  g_i^{(j)}(Y^{\ast}_1) \right) -K.
 \end{align}
 Using  \textbf{Newton iteration method}, we use the expression $P^\prime=\frac{d P}{d Y^\ast_1}$, and we can easily show that
 \begin{align}\label{polynomial_kink_location_derivative_basket}
-	P^\prime(W_1)=\sum_{j=1}^{d} c_j \frac{\sigma^{(j)} \Delta t A^{\text{inv}}_{j1}} {\sqrt{T}} \left( \prod_{i=0}^{N-1} g_i^{(j)}(Y_1) \right) \left[ \sum_{i=0}^{N-1} \frac{1}{g_i^{(j)}(Y_1)}\right].
+	P^\prime(W_1)=\sum_{j=1}^{d} c_j X_0^{(j)}  \frac{\sigma^{(j)} \Delta t A^{\text{inv}}_{j1}} {\sqrt{T}} \left( \prod_{i=0}^{N-1} g_i^{(j)}(Y_1) \right) \left[ \sum_{i=0}^{N-1} \frac{1}{g_i^{(j)}(Y_1)}\right].
 \end{align}
 
 
