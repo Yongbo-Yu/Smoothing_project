@@ -1,15 +1,24 @@
 import numpy as np
-import os
-import sys
 import time
+import scipy.stats as ss
+ 
+import random
+ 
+import matplotlib.pyplot as plt
+from matplotlib.pyplot import figure, show
+from matplotlib.ticker import MaxNLocator
+ 
+import pathos.multiprocessing as mp
+import pathos.pools as pp
 
 
-
+ 
 class Problem(object):
+ 
 # attributes
+    # attributes
     random_gen=None;
     elapsed_time=0.0;
-    N=4
     S0=None     # vector of initial stock prices
     basket_d=2     # number of assets in the basket
     c= (1/float(basket_d))*np.ones(basket_d)     # weigths
@@ -17,71 +26,54 @@ class Problem(object):
     K=None         # Strike price
     T=1.0                      # maturity
     rho=None                  #correlation matrix
-  
-    nelem=None;               # discretization
     exact=12.900784  # 2-d, sigma=0.4, S_0=K=100, T=1, r=0,rho=0.3
-
+   
+ 
+ 
 #methods
-    # this method initializes the class of basket 
-    def __init__(self,params, nested=False):
+    # this method initializes 
+    def __init__(self,Nsteps,nested=False):
         self.nested = nested
-        self.params = params
+   
         self.random_gen = None or np.random
         
         self.S0=100*np.ones(self.basket_d) 
        
         self.sigma=0.4*np.ones(self.basket_d) #vector of volatilities
-     
-        self.K= 100                        # Strike price and coeff determine if we have in/at/out the money option
-        
-              #correlation matrx
-        from scipy.linalg import toeplitz
-        self.rho=toeplitz([1,0.3])
-        # self.Sigma=np.zeros((self.basket_d,self.basket_d))
-        # for i in range(0,self.basket_d):
-        #         for j in range(i,self.basket_d):
-        #               self.Sigma[i,j]=self.sigma[i]*self.sigma[j]*self.rho[i,j]*self.T
-        # self.Sigma=self.Sigma+np.transpose(self.Sigma)-np.diag(np.diag(self.Sigma))
-       
-
-        self.dt=self.T/float(self.N) # time steps length
-        self.d=int(np.log2(self.N)) #power 2 number steps
     
-    def BeginRuns(self,ind, N):
-        self.elapsed_time=0.0
-        self.nelem = np.array(self.params.h0inv * self.params.beta**(np.array(ind)), dtype=np.uint32)
-        if self.nested:
-            self.nelem -= 1
-        assert(len(self.nelem) == self.GetDim())
-
-        return self.nelem
-
-    def EndRuns(self):
-        elapsed_time=self.elapsed_time;
-        self.elapsed_time=0.0;
-        return elapsed_time;
-
+        self.K= 100                        # Strike price and coeff determine if we have in/at/out the money option
+    
+        from scipy.linalg import toeplitz 
+        self.rho=toeplitz([1,0.3]) #correlation matrix
+        self.dt=self.T/float(Nsteps) # time steps length
+        self.d=int(np.log2(Nsteps)) #power 2 number steps
+ 
     # this computes the value of the objective function (given by  objfun) at quad points
-    def SolveFor(self, Y):
+    def SolveFor(self, Y,Nsteps):
         Y = np.array(Y)
-        goal=self.objfun(self.nelem,Y);
+        goal=self.objfun(Y,Nsteps);
         return goal
+ 
+ 
+     # objfun:  beta #number of points in the first direction
+    def objfun(self,Nsteps):
+ 
+        mean = np.zeros(self.basket_d*Nsteps)
+        covariance= np.identity(self.basket_d*Nsteps)
+        y = np.random.multivariate_normal(mean, covariance)    
 
-    # objfun
-    def objfun(self,nelem,y):
 
-        start_time=time.time();
         beta=10
         
         # step 1 # get the two partitions of coordinates \mathbf{Z}_1 and \mathbf{Z}_{-1} for y which is a vector of N \times basket_d
-        z1=y[0:-1:self.N] # getting \mathbf{Z}_1 
+        z1=y[0:-1:Nsteps] # getting \mathbf{Z}_1 
         
         idx=[]
-        for i in range(0,self.basket_d*self.N,self.N):
-        	idx.append(i)
+        for i in range(0,self.basket_d*Nsteps,Nsteps):
+            idx.append(i)
+          
         
-        
-        idxc=np.setdiff1d(range(0,self.basket_d*self.N),idx)
+        idxc=np.setdiff1d(range(0,self.basket_d*Nsteps),idx)
         
         z__1=y[idxc]
     
@@ -94,7 +86,7 @@ class Problem(object):
 
 
         # step 3: computing the location of the kink
-        bar_y1=self.newtons_method(0,y__1,z__1) 
+        bar_y1=self.newtons_method(0,y__1,z__1,Nsteps) 
 
 
         # step 4: performing the pre-intgeration step wrt kink point
@@ -112,7 +104,7 @@ class Problem(object):
         points_left=self.cartesian(mylist_left)
             
         # to be updated   (we start with the case d=2)  
-        x_l=np.asarray([self.stock_price_trajectory_basket_BS(bar_y1-points_left[i,0],points_left[i,1:self.N], points_left[i,2],points_left[i,self.N+1:])[0]  for i in range(0,len(yknots_left[0]))])
+        x_l=np.asarray([self.stock_price_trajectory_basket_BS(bar_y1-points_left[i,0],points_left[i,1:Nsteps], points_left[i,2],points_left[i,Nsteps+1:],Nsteps)[0]  for i in range(0,len(yknots_left[0]))])
         
         QoI_left= yknots_left[1].dot(self.payoff(x_l)*((1/np.sqrt(2 * np.pi)) * np.exp(-((bar_y1-points_left[:,0])**2)/2)* np.exp(points_left[:,0])))
 
@@ -125,16 +117,15 @@ class Problem(object):
         points_right=self.cartesian(mylist_right)
 
         # to be updated    (we start with the case d=2)  
-        x_r=np.asarray([self.stock_price_trajectory_basket_BS(points_right[i,0]+bar_y1,points_right[i,1:self.N], points_right[i,2],points_right[i,self.N+1:])[0] for i in range(0,len(yknots_right[0]))])
+        x_r=np.asarray([self.stock_price_trajectory_basket_BS(points_right[i,0]+bar_y1,points_right[i,1:Nsteps], points_right[i,2],points_right[i,Nsteps+1:],Nsteps)[0] for i in range(0,len(yknots_right[0]))])
         QoI_right= yknots_right[1].dot(self.payoff(x_r)*(1/np.sqrt(2 * np.pi)) * np.exp(-((points_right[:,0]+bar_y1)**2)/2)* np.exp(points_right[:,0]))
 
         
         QoI=QoI_left+QoI_right
-
-        
-        elapsed_time_qoi=time.time()-start_time;
-        self.elapsed_time=self.elapsed_time+elapsed_time_qoi;
+    
+  
         return QoI
+
 
     # This function creates the desired rotation matrix A (orthonormal transformation)
     def rotation_matrix(self):   
@@ -161,17 +152,16 @@ class Problem(object):
         return A.transpose()
 
 
-
-
-    
-    def brownian_increments(self,y1,y):
-        t=np.linspace(0, self.T, self.N+1)     
-        h=self.N
+ 
+    def brownian_increments(self,y1,y,Nsteps):
+        t=np.linspace(0, self.T, Nsteps+1)     
+        h=Nsteps
         j_max=1
-        bb= np.zeros((1,self.N+1))
+        bb= np.zeros((1,Nsteps+1))
         bb[0,h]=np.sqrt(self.T)*y1
        
         
+         
         for k in range(1,self.d+1):
             i_min=h//2
             i=i_min
@@ -187,18 +177,15 @@ class Problem(object):
             j_max=2*j_max
             h=i_min 
         return bb    
-
-  
-
-
-      
-    def stock_price_trajectory_basket_BS(self,y1,yvec_1,y2,yvec_2):
+     
+     
+    def stock_price_trajectory_basket_BS(self,y1,yvec_1,y2,yvec_2,Nsteps):
         #building the brownian bridge increments
-        bb1=self.brownian_increments(y1,yvec_1)
-        bb2=self.brownian_increments(y2,yvec_2)
+        bb1=self.brownian_increments(y1,yvec_1,Nsteps)
+        bb2=self.brownian_increments(y2,yvec_2,Nsteps)
 
-        dW1= [bb1[0,i+1]-bb1[0,i]  for i in range(0,self.N)] 
-        dW2= [bb2[0,i+1]-bb2[0,i] for i in range(0,self.N)] 
+        dW1= [bb1[0,i+1]-bb1[0,i]  for i in range(0,Nsteps)] 
+        dW2= [bb2[0,i+1]-bb2[0,i] for i in range(0,Nsteps)] 
 
         dW=np.array([dW1 ,dW2])
 
@@ -216,18 +203,18 @@ class Problem(object):
         dbb2=dW2-(self.dt/np.sqrt(self.T))*y2 # brownian bridge increments dbb_i (used later for the location of the kink point)
         
 
-        X=np.zeros((self.basket_d,self.N+1)) #here will store the BS trajectory
+        X=np.zeros((self.basket_d,Nsteps+1)) #here will store the BS trajectory
       
         X[:,0]=self.S0
-        for n in range(1,self.N+1):
+        for n in range(1,Nsteps+1):
             X[0,n]=X[0,n-1]*(1+self.sigma[0]*((self.dt/float(np.sqrt(self.T)))*(self.A_inv[0,0]*y1+ self.A_inv[0,1:].dot(y2)) +  dbb1[n-1] ))  
             X[1,n]=X[1,n-1]*(1+self.sigma[1]*((self.dt/float(np.sqrt(self.T)))*(self.A_inv[1,0]*y1+ self.A_inv[1,1:].dot(y2)) +  dbb2[n-1] ) )  
       
         return X[:,-1],dbb1,dbb2
-       
-
-
-        # this function defines the payoff function used here
+         
+         
+      
+         # this function defines the payoff function used here
     def payoff(self,x): 
        #print(x)
        g=(x.dot(self.c)-self.K)
@@ -239,43 +226,17 @@ class Problem(object):
 
        # Root solving procedure
       # Now we set up the methods used for newton iteration
-    def dx(self,x,y__1,z__1):
-        P1,dP1=self.f(x,y__1,z__1)
+    def dx(self,x,y__1,z__1,Nsteps):
+        P1,dP1=self.f(x,y__1,z__1,Nsteps)
         return abs(0-P1)
 
-
-    # def f(self,y1,yvec_1,y2,yvec_2,j):# need to check this
-    #     X,dbb1,dbb2=self.stock_price_trajectory_basket_BS(y1,yvec_1,y2,yvec_2) 
-    #     fi=np.zeros((self.basket_d,len(dbb1)))
-    #     # product=np.zeros(self.basket_d)
-    #     # summation=np.zeros(self.basket_d)
-    #     # Py=np.zeros(self.basket_d)
-    #     # dPy=np.zeros(self.basket_d)
-    #     if j==1:
-    #         fi=  1+(self.sigma[0]/float(np.sqrt(self.T)))*y1*(self.dt)+self.sigma[0]*dbb1
-    #         product=np.prod(fi)
-            
-    #         Py=product-(self.K/(float(self.S0[0]*self.c[0])))
-    #         summation=np.sum(1/fi)
-    #         dPy=  (self.sigma[0]/float(np.sqrt(self.T)))*(self.dt)*product*summation
-    #     else:    
-        
-    #         fi=  1+(self.sigma[1]/float(np.sqrt(self.T)))*y2*(self.dt)+self.sigma[1]*dbb2
-    #         product=np.prod(fi)
-    #         Py=product-(self.K/(float(self.S0[1]*self.c[1])))
-    #         summation=np.sum(1/fi)
-    #         dPy=  (self.sigma[1]/float(np.sqrt(self.T)))*(self.dt)*product*summation
-    #     return Py,dPy    
-    
-
-
-    def f(self,y1,y__1,z__1):# need to check this for case d=2, N=2 and then we can extend
+    def f(self,y1,y__1,z__1,Nsteps):# need to check this for case d=2, N=2 and then we can extend
        
         y2=y__1[0] 
-        yvec_1=z__1[0:self.N-1]
-        yvec_2=z__1[self.N-1:]
+        yvec_1=z__1[0:Nsteps-1]
+        yvec_2=z__1[Nsteps-1:]
 
-        X,dbb1,dbb2=self.stock_price_trajectory_basket_BS(y1,yvec_1,y2,yvec_2)
+        X,dbb1,dbb2=self.stock_price_trajectory_basket_BS(y1,yvec_1,y2,yvec_2,Nsteps)
 
         gi=np.zeros((self.basket_d,len(dbb1)))
         product=np.zeros(self.basket_d)
@@ -304,42 +265,36 @@ class Problem(object):
     
 
         
-    def newtons_method(self,x0,y__1,z__1,eps=1e-10):
+    def newtons_method(self,x0,y__1,z__1,Nsteps,eps=1e-10):
         
-        delta= self.dx(x0,y__1,z__1)
+        delta= self.dx(x0,y__1,z__1,Nsteps)
 
         while delta > eps:
         
             #(self.f(x0,y))
-            P_value,dP=self.f(x0,y__1,z__1)
+            P_value,dP=self.f(x0,y__1,z__1,Nsteps)
             x0 = x0 - 0.1*P_value/dP
-            delta = self.dx(x0,y__1,z__1)    
+            delta = self.dx(x0,y__1,z__1,Nsteps)    
 
         return x0     
-
-    
-    
-
-
-
 
     def cartesian(self,arrays, out=None):
         """
         Generate a cartesian product of input arrays.
-
+ 
         Parameters
         ----------
         arrays : list of array-like
             1-D arrays to form the cartesian product of.
         out : ndarray
             Array to place the cartesian product in.
-
+ 
         Returns
         -------
         out : ndarray
             2-D array of shape (M, len(arrays)) containing cartesian products
             formed of input arrays.
-
+ 
         Examples
         --------
         >>> cartesian(([1, 2, 3], [4, 5], [6, 7]))
@@ -355,16 +310,16 @@ class Problem(object):
                [3, 4, 7],
                [3, 5, 6],
                [3, 5, 7]])
-
+ 
         """
-
+ 
         arrays = [np.asarray(x) for x in arrays]
         dtype = float
-
+ 
         n = np.prod([x.size for x in arrays])
         if out is None:
             out = np.zeros([n, len(arrays)], dtype=dtype)
-
+ 
         m = n / arrays[0].size
         out[:,0] = np.repeat(arrays[0], m)
         if arrays[1:]:
@@ -372,26 +327,134 @@ class Problem(object):
             for j in xrange(1, arrays[0].size):
                 out[j*m:(j+1)*m,1:] = out[0:m,1:]
         return out               
+ 
+ 
+def weak_convergence_differences():    
+        start_time=time.time()
+        exact=    12.900784 #S_0=K=100, sigma =0.4, corr=0.3, T=1
+        marker=['>', 'v', '^', 'o', '*','+','-',':']
+        ax = figure().gca()
+        ax.xaxis.set_major_locator(MaxNLocator(integer=True))
+        # # feed parameters to the problem
+        Nsteps_arr=np.array([2,4,8,16])
+        dt_arr=1.0/(Nsteps_arr)
+        error_diff=np.zeros(3)
+        stand_diff=np.zeros(3)
+        error=np.zeros(4)
+        stand=np.zeros(4)
+        elapsed_time_qoi=np.zeros(4)
+        Ub=np.zeros(4)
+        Lb=np.zeros(4)
+        Ub_diff=np.zeros(3)
+        Lb_diff=np.zeros(3)
+        values=np.zeros((1*(10**4),4)) 
+         
+      
+        
+ 
+        num_cores = mp.cpu_count()
+   
+        for i in range(0,4):
+            print i
+            start_time=time.time()
+             
+            prb = Problem(Nsteps_arr[i]) 
+            def processInput(j):
+                return prb.objfun(Nsteps_arr[i])/float(exact)
+ 
+            
+            p =  pp.ProcessPool(num_cores)  # Processing Pool with four processors
+            
+            values[:,i]= p.map(processInput, range(((1*(10**4)))))  
 
-    def Quit(self):
-        pass
+            elapsed_time_qoi[i]=time.time()-start_time
+            print np.mean(values[:,i]*float(exact))
+            print  elapsed_time_qoi[i]
 
-    def __exit__(self, type, value, traceback):
-        pass
 
-    def __enter__(self):
-        return self
 
-    @staticmethod
-    def Init():
-        import sys #This module provides access to some variables used or maintained by the interpreter and to functions that interact strongly with the interpreter
-        count = len(sys.argv)  #sys.argv is a list in Python, which contains the command-line arguments passed to the script. With the len(sys.argv) function you can count the number of arguments. 
-        #arr = (ct.c_char_p * len(sys.argv))()
-        arr = sys.argv
 
-    @staticmethod
-    def Final():
-        pass
 
-    def GetDim(self):
-        return 0
+         
+ 
+ 
+        
+        print elapsed_time_qoi
+ 
+        error=np.abs(np.mean(values,axis=0) - 1) 
+        stand=np.std(values, axis = 0)/  float(np.sqrt(1*(10**4)))
+        Ub=np.abs(np.mean(values,axis=0) - 1)+1.96*stand
+        Lb=np.abs(np.mean(values,axis=0) - 1)-1.96*stand
+        print(error)   
+        print(stand)
+        print Lb
+        print Ub
+          
+        differences= [values[:,i]-values[:,i+1] for i in range(0,3)]
+        error_diff=np.abs(np.mean(differences,axis=1))
+        print error_diff 
+        stand_diff=np.std(differences, axis = 1)/ float(np.sqrt(1*(10**4)))
+        print stand_diff
+        Ub_diff=np.abs(np.mean(differences,axis=1))+1.96*stand_diff
+        Lb_diff=np.abs(np.mean(differences,axis=1))-1.96*stand_diff
+        print Ub_diff
+        print Lb_diff
+ 
+        
+        z= np.polyfit(np.log(dt_arr), np.log(error), 1)
+        fit=np.exp(z[0]*np.log(dt_arr))
+        print z[0]
+ 
+ 
+        z3=np.zeros(2)
+        z3[0]=1.0
+        z3[1]=np.log(error[0]*2)
+        fit3=np.exp(z3[0]*np.log(dt_arr)+z3[1])
+ 
+ 
+ 
+ 
+        z_diff= np.polyfit(np.log(dt_arr[0:3]), np.log(error_diff), 1)
+        fit_diff=np.exp(z_diff[0]*np.log(dt_arr[0:3]))
+        print z_diff[0]
+ 
+        z3diff=np.zeros(2)
+        z3diff[0]=1.0
+        z3diff[1]=np.log(error_diff[0]*2)
+        fit3diff=np.exp(z3diff[0]*np.log(dt_arr[0:3])+z3diff[1])
+         
+        fig = plt.figure()
+ 
+        plt.plot(dt_arr, error,linewidth=2.0,label='weak_error' ,linestyle = '--',marker='>', hold=True) 
+        plt.plot(dt_arr, Lb,linewidth=2.0,label='Lb' ,linestyle = '--', hold=True) 
+        plt.plot(dt_arr, Ub,linewidth=2.0,label='Ub' ,linestyle = '--', hold=True) 
+        plt.yscale('log')
+        plt.xscale('log')
+        plt.xlabel(r'$\Delta t$',fontsize=14)
+ 
+        plt.plot(dt_arr, fit,linewidth=2.0,label=r'rate= %s' % format(z[0]  , '.2f'), linestyle = '--', marker='o')
+        plt.plot(dt_arr, fit3,linewidth=2.0,label=r'rate= %s' % format(z3[0]  , '.2f'), linestyle = '--', marker='o')
+         
+         
+        plt.ylabel(r'$\mid  g(X_{\Delta t})-  g(X) \mid $',fontsize=14) 
+        plt.subplots_adjust(wspace=0.6, hspace=0.6, left=0.15, bottom=0.22, right=0.96, top=0.96)
+        plt.legend(loc='upper left')
+        plt.savefig('./results/weak_convergence_order_basket_option_2d_relative_M_10_4_beta_10.eps', format='eps', dpi=1000)  
+ 
+        fig = plt.figure()
+        plt.plot(dt_arr[0:3], error_diff,linewidth=2.0,label='weak_error' ,linestyle = '--',marker='>', hold=True) 
+        plt.plot(dt_arr[0:3], Lb_diff,linewidth=2.0,label='Lb' ,linestyle = '--', hold=True) 
+        plt.plot(dt_arr[0:3], Ub_diff,linewidth=2.0,label='Ub' ,linestyle = '--', hold=True) 
+        plt.yscale('log')
+        plt.xscale('log')
+        plt.xlabel(r'$\Delta t$',fontsize=14)
+ 
+        plt.plot(dt_arr[0:3], fit_diff,linewidth=2.0,label=r'rate= %s' % format(z_diff[0]  , '.2f'), linestyle = '--', marker='o')
+        plt.plot(dt_arr[0:3], fit3diff,linewidth=2.0,label=r'rate= %s' % format(z3diff[0]  , '.2f'), linestyle = '--', marker='o')
+        plt.ylabel(r'$\mid  g(X_{\Delta t})-  g(X_{\Delta t/2}) \mid $',fontsize=14) 
+        plt.subplots_adjust(wspace=0.6, hspace=0.6, left=0.15, bottom=0.22, right=0.96, top=0.96)
+        plt.legend(loc='upper left')
+        plt.savefig('./results/weak_convergence_order_differences_basket_option_2d_relative_M_10_4_beta_10.eps', format='eps', dpi=1000)  
+ 
+ 
+weak_convergence_differences()   
