@@ -118,7 +118,7 @@ In the following, we motivate the optimization problem \eqref{optimality_criteri
 We consider the case of one dimensional binary option, such that $g$ is given by \eqref{eq:binary_option} and  $\phi(x)=x-K$, where $K$ is the strike price.  
 \end{example} 
 \begin{example}[Call option]
-We consider the case of one dimensional call option,  $	g$ is given by \eqref{eq:call_option} and $\phi(x)=x-K$, where $K$ is the strike price. 
+We consider the case of one dimensional call option,  $g$ is given by \eqref{eq:call_option} and $\phi(x)=x-K$, where $K$ is the strike price. 
 \end{example} 
 
 \red{Add details here for the optimization problem \eqref{optimality_criterion_2} for the call and the binary examples.}
@@ -127,7 +127,7 @@ For practical purposes, we consider the basket option under multi-dimensional GB
 \begin{align}
 	g(\mathbf{X}(T))=\max\left(\sum_{j=1}^{d} c_{j} X^{(j)}(T)-K,0  \right)	\PERIOD
 \end{align}
-Precisely, we are interested in the  $d$-dimensional lognormal example where the dynamics of the stock are given by
+Precisely, we are interested in the  $d$-dimensional lognormal example where the dynamics of the stock prices are given by
 \begin{align}\label{lognormal_dynamics_basket}
 	dX^{(j)}_t=\sigma^{(j)} X^{(j)}_t dW^{(j)}_t,
 \end{align}
@@ -202,7 +202,7 @@ A general choice for $\mathcal{A}$ should in the family of rotations. However, w
 At this stage, we want to perform the pre-integrating step with respect to  $y^\ast_1$. In fact, using Fubini's theorem, we have from \eqref{eq: option price as integral_basket}
 \begin{small}
 \begin{align}\label{eq: pre_integration_step_wrt_y1_basket}
-	\expt{g(\mathbf{X}(T))}&=\int_{\rset^{d \times N}} G(z_1^{(1)}, \dots, z_N^{(1)}, \dots, z_1^{(d)},\dots,z^{(d)}_N)) \rho_{d \times N}(\mathbf{z}) dz_1^{(1)} \dots dz_N^{(1)} \dots z_1^{(d)} \dots dz^{(d)}_N \nonumber\\ 
+	\expt{g(\mathbf{X}(T))}&\approx\int_{\rset^{d \times N}} G(z_1^{(1)}, \dots, z_N^{(1)}, \dots, z_1^{(d)},\dots,z^{(d)}_N)) \rho_{d \times N}(\mathbf{z}) dz_1^{(1)} \dots dz_N^{(1)} \dots z_1^{(d)} \dots dz^{(d)}_N \nonumber\\ 
 	&=\int_{\rset^{dN-1}} \left(\int_{\rset} G(y_1,\mathbf{y}_{-1},\mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1} ) \rho_{y_1}(y_1) dy_1 \right)\rho_{d-1}(\mathbf{y}_{-1}) d\mathbf{y}_{-1} \rho_{d \times(N-1)}(\mathbf{z}_{-1}^{(1)},\dots,\mathbf{z}_{-1}^{(d)}) d\mathbf{z}_{-1}^{(1)}\dots d\mathbf{z}_{-1}^{(d)} \nonumber\\	
 	&=\int_{\rset^{dN-1}} h(\mathbf{y}_{-1},\mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1} )\rho_{d-1}(\mathbf{y}_{-1}) d\mathbf{y}_{-1}  \rho_{d\times (N-1)}(\mathbf{z}_{-1}^{(1)},\dots,\mathbf{z}_{-1}^{(d)}) d\mathbf{z}^{(1)}_{-1} \dots d\mathbf{z}^{(d)}_{-1}\COMMA \\ \nonumber
 	&=\expt{h(\mathbf{y}_{-1}, \mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1} )} \COMMA
@@ -212,7 +212,7 @@ where
 \begin{align}\label{eq:smooth_function_after_pre_integration}
  h(\mathbf{y}_{-1},\mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1})&=\int_{\rset} G(y_1,\mathbf{y}_{-1},\mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1} ) \rho_{y_1}(y_1) dy_1 \nonumber\\
  &= \int_{-\infty}^{y^\ast_1} G(y_1,\mathbf{y}_{-1},\mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1} ) \rho_{y_1}(y_1) dy_1\nonumber\\
- &+ \int_{y_1^\ast}^{+\infty} G(y_1,\mathbf{y}_{-1},\mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1} ) \rho_{y_1}(y_1) dW_1 \PERIOD
+ &+ \int_{y_1^\ast}^{+\infty} G(y_1,\mathbf{y}_{-1},\mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1} ) \rho_{y_1}(y_1) dy_1 \PERIOD
 \end{align}
 We generally do not have a closed form for $h$. Therefore, the pre-integration step should be performed numerically after solving the root finding problem using the numerical smoothing explained in Section \ref{sec:Step $1$: Numerical smoothing}.
 
