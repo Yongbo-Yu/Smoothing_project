@@ -29,7 +29,7 @@ class MyRun:
         self.prb = Problem(run.params) 
         
        
-        self.extrapolate_s_dims =self.prb.basket_d*self.prb.N #SET TO SAME AS INPUT DIMENSION
+        self.extrapolate_s_dims =self.prb.basket_d*self.prb.N-1 #SET TO SAME AS INPUT DIMENSION
         
 
         
@@ -40,7 +40,7 @@ class MyRun:
         
     ##
         # Construct MiscSampler class with the following parameters    
-        self.misc = misc.MISCSampler(d=0, fnKnots=fnKnots, min_dim=self.prb.basket_d*self.prb.N)
+        self.misc = misc.MISCSampler(d=0, fnKnots=fnKnots, min_dim=self.prb.basket_d*self.prb.N-1)
     
         
 

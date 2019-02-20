@@ -9,10 +9,11 @@ class Problem(object):
 # attributes
     random_gen=None;
     elapsed_time=0.0;
-    N=4
+    N=32
     S0=None     # vector of initial stock prices
-    basket_d=2     # number of assets in the basket
+    basket_d=2    # number of assets in the basket
     c= (1/float(basket_d))*np.ones(basket_d)     # weigths
+    
     sigma=None    # vector of volatilities
     K=None         # Strike price
     T=1.0                      # maturity
@@ -34,14 +35,20 @@ class Problem(object):
      
         self.K= 100                        # Strike price and coeff determine if we have in/at/out the money option
         
-              #correlation matrx
-        from scipy.linalg import toeplitz
+        # correltion matrix
+        from scipy.linalg import toeplitz  
         self.rho=toeplitz([1,0.3])
-        # self.Sigma=np.zeros((self.basket_d,self.basket_d))
-        # for i in range(0,self.basket_d):
-        #         for j in range(i,self.basket_d):
-        #               self.Sigma[i,j]=self.sigma[i]*self.sigma[j]*self.rho[i,j]*self.T
-        # self.Sigma=self.Sigma+np.transpose(self.Sigma)-np.diag(np.diag(self.Sigma))
+
+        # defining the transformation matrix
+        self.A=self.rotation_matrix()
+        
+        self.A_inv=np.transpose(self.A) # since A is  a rotation matrix than A^{-1}=A^T
+
+        self.Sigma=np.zeros((self.basket_d,self.basket_d))
+        for i in range(0,self.basket_d):
+                for j in range(i,self.basket_d):
+                    self.Sigma[i,j]=self.sigma[i]*self.sigma[j]*self.rho[i,j]*self.T
+        self.Sigma=self.Sigma+np.transpose(self.Sigma)-np.diag(np.diag(self.Sigma))
        
 
         self.dt=self.T/float(self.N) # time steps length
@@ -71,27 +78,29 @@ class Problem(object):
     def objfun(self,nelem,y):
 
         start_time=time.time();
-        beta=10
+        beta=64
         
+        yy=[self.basket_d*self.N]
+        yy[0]=0.0
+        yy[1:]=y    
+       
+         
         # step 1 # get the two partitions of coordinates \mathbf{Z}_1 and \mathbf{Z}_{-1} for y which is a vector of N \times basket_d
-        z1=y[0:-1:self.N] # getting \mathbf{Z}_1 
+        z1=np.array(yy[0:-1:self.N]) # getting \mathbf{Z}_1 
         
+
         idx=[]
         for i in range(0,self.basket_d*self.N,self.N):
         	idx.append(i)
         
         
         idxc=np.setdiff1d(range(0,self.basket_d*self.N),idx)
-        
-        z__1=y[idxc]
-    
+                
+        z__1=np.array(yy)[idxc]
         # step 2: doing the rotation from  \mathbf{Z}_1  to \mathbf{Y}_1
-        self.A=self.rotation_matrix()
-        y1=np.dot(self.A,z1) # getting \mathbf{Y}_1 by rotation using matrix A (to be defined)
-        self.A_inv=np.transpose(self.A) # since A is  a rotation matrix than A^{-1}=A^T
+
+        y1=np.dot(self.A,z1.transpose()) # getting \mathbf{Y}_1 by rotation using matrix A (to be defined)s
         y__1=y1[1:]        # getting \mathbf{Y}_{-1}
-
-
 
         # step 3: computing the location of the kink
         bar_y1=self.newtons_method(0,y__1,z__1) 
@@ -106,26 +115,27 @@ class Problem(object):
 
         mylist_left_y.append(yknots_left[0])
         mylist_left_y[1:]=[np.array(y__1[i]) for i in range(0,len(y__1))]
+
         mylist_left_z=[np.array(z__1[i]) for i in range(0,len(z__1))]
         mylist_left=mylist_left_y+mylist_left_z
 
         points_left=self.cartesian(mylist_left)
             
         # to be updated   (we start with the case d=2)  
-        x_l=np.asarray([self.stock_price_trajectory_basket_BS(bar_y1-points_left[i,0],points_left[i,1:self.N], points_left[i,2],points_left[i,self.N+1:])[0]  for i in range(0,len(yknots_left[0]))])
+        x_l=np.asarray([self.stock_price_trajectory_basket_BS(bar_y1-points_left[i,0],points_left[i,2:self.N+1], points_left[i,1],points_left[i,self.N+1:])[0]  for i in range(0,len(yknots_left[0]))])
         
         QoI_left= yknots_left[1].dot(self.payoff(x_l)*((1/np.sqrt(2 * np.pi)) * np.exp(-((bar_y1-points_left[:,0])**2)/2)* np.exp(points_left[:,0])))
 
         mylist_right_y=[]
         mylist_right_z=[]
         mylist_right_y.append(yknots_right[0])
-        mylist_right_y[1:]=[np.array(y[i]) for i in range(0,len(y__1))]
+        mylist_right_y[1:]=[np.array(y__1[i]) for i in range(0,len(y__1))]
         mylist_right_z=[np.array(z__1[i]) for i in range(0,len(z__1))]
         mylist_right=mylist_right_y+mylist_right_z
         points_right=self.cartesian(mylist_right)
 
         # to be updated    (we start with the case d=2)  
-        x_r=np.asarray([self.stock_price_trajectory_basket_BS(points_right[i,0]+bar_y1,points_right[i,1:self.N], points_right[i,2],points_right[i,self.N+1:])[0] for i in range(0,len(yknots_right[0]))])
+        x_r=np.asarray([self.stock_price_trajectory_basket_BS(points_right[i,0]+bar_y1,points_right[i,2:self.N+1], points_right[i,1],points_right[i,self.N+1:])[0] for i in range(0,len(yknots_right[0]))])
         QoI_right= yknots_right[1].dot(self.payoff(x_r)*(1/np.sqrt(2 * np.pi)) * np.exp(-((points_right[:,0]+bar_y1)**2)/2)* np.exp(points_right[:,0]))
 
         
@@ -148,6 +158,7 @@ class Problem(object):
         # Gram-shmidt procedure
         n = len(A)
         A[:, 0] = normalize(A[:, 0])
+
 
 
         for i in range(1, n):
@@ -191,7 +202,7 @@ class Problem(object):
   
 
 
-      
+      # This function simulates a basket BS trajectory for stock price, it plays the role of f_1 in our notes
     def stock_price_trajectory_basket_BS(self,y1,yvec_1,y2,yvec_2):
         #building the brownian bridge increments
         bb1=self.brownian_increments(y1,yvec_1)
@@ -203,7 +214,7 @@ class Problem(object):
         dW=np.array([dW1 ,dW2])
 
         # construct the correlated  brownian bridge increments
-        lower_triang_cholesky = np.linalg.cholesky(self.rho)
+        lower_triang_cholesky = np.linalg.cholesky(self.Sigma)
      
         dW=np.dot(lower_triang_cholesky,dW)  
           
@@ -222,6 +233,8 @@ class Problem(object):
         for n in range(1,self.N+1):
             X[0,n]=X[0,n-1]*(1+self.sigma[0]*((self.dt/float(np.sqrt(self.T)))*(self.A_inv[0,0]*y1+ self.A_inv[0,1:].dot(y2)) +  dbb1[n-1] ))  
             X[1,n]=X[1,n-1]*(1+self.sigma[1]*((self.dt/float(np.sqrt(self.T)))*(self.A_inv[1,0]*y1+ self.A_inv[1,1:].dot(y2)) +  dbb2[n-1] ) )  
+            #X[0,n]=X[0,n-1]*(1+self.sigma[0]*dW1[n-1])
+            #X[1,n]=X[1,n-1]*(1+self.sigma[1]*dW2[n-1])
       
         return X[:,-1],dbb1,dbb2
        
@@ -314,6 +327,7 @@ class Problem(object):
             P_value,dP=self.f(x0,y__1,z__1)
             x0 = x0 - 0.1*P_value/dP
             delta = self.dx(x0,y__1,z__1)    
+
 
         return x0     
 

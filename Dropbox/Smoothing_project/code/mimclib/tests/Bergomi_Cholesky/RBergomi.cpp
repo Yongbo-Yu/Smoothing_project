@@ -1,79 +1,11 @@
 /*
  * rBergomi.cpp
  *
- *  Created on: 26 Jan 2018 and updated on 12 Feb 2019  by Chiheb
+ *  Created on: 26 Jan 2018
  *      Author: bayerc
  */
 
-#include "rBergomi.h"
-
-RBergomiST::RBergomiST() {
-	N = 0;
-}
-
-RBergomiST::RBergomiST(double x, double HIn, double e, double r, double T,
-		double k, int NIn){
-		//std::vector<uint64_t> seed = std::vector<uint64_t>(0)) {
-	// Some safety tests/asserts?
-	N = NIn;
-	
-}
-
-RBergomiST::~RBergomiST() {
-}
-// This function should be fed to MISC
-
-double RBergomiST::updatePayoff_cholesky(Vector& Wtilde, const Vector& W1,
-		Vector& v, double eta, double H, double rho, double xi,
-		double T, double K, int N){
-	double dt = T / N;
-	double sdt = sqrt(dt);
-	scaleVector(Wtilde, pow(T, H)); // scale Wtilde for time T
-	compute_V(v, Wtilde, H, eta, xi, dt); // compute instantaneous variance v
-// now compute \int v_s ds, \int \sqrt{v_s} dW_s with W = W1
-	double Ivdt = intVdt(v, dt);
-	double IsvdW = intRootVdW(v, W1, sdt);
-// now compute the payoff by inserting properly into the BS formula
-	double BS_vol = sqrt((1.0 - rho * rho) * Ivdt);
-	double BS_spot = exp(-0.5 * rho * rho * Ivdt + rho * IsvdW);
-	return BS_call_price(BS_spot, K, 1.0, BS_vol);
-}
-
-// Note that Wtilde plays the role of the old WtildeScaled!
-void RBergomiST::compute_V(Vector& v, const Vector& Wtilde, double H, double eta, double xi,
-		double dt) {
-	v[0] = xi;
-	for (int i = 1; i < v.size(); ++i)
-		v[i] = xi
-				* exp(
-						eta * Wtilde[i - 1]
-								- 0.5 * eta * eta * pow(i * dt, 2 * H));
-}
-
-double RBergomiST::intVdt(const Vector & v, double dt) {
-	return dt * std::accumulate(v.begin(), v.end(), 0.0);
-}
-
-double RBergomiST::intRootVdW(const Vector & v, const Vector & W1, double sdt) {
-	double IsvdW = 0.0;
-	for (size_t i = 0; i < v.size(); ++i)
-		IsvdW += sqrt(v[i]) * sdt * W1[i];
-	return IsvdW;
-}
-
-
-
-double RBergomiST::pnorm(double value) {
-	return 0.5 * erfc(-value * M_SQRT1_2);
-}
-
-double RBergomiST::BS_call_price(double S0, double K, double tau, double sigma, double r) {
-	double d1 = (log(S0 / K) + (r + 0.5 * sigma * sigma) * tau)
-			/ (sigma * sqrt(tau));
-	double d2 = d1 - sigma * sqrt(tau);
-	return pnorm(d1) * S0 - pnorm(d2) * K * exp(-r * tau);
-}
-
+#include "RBergomi.h"
 
 // void mc_bayer_roughbergomi_cholesky(double S0, double eta, double H, double rho,
 // 		double xi, double K, double T, int M, int N, double* price,
@@ -127,4 +59,56 @@ double RBergomiST::BS_call_price(double S0, double K, double tau, double sigma, 
 // }
 
 
+// This function should be fed to MISC
+
+double updatePayoff_cholesky(Vector& Wtilde, const Vector& W1,
+		Vector& v, double eta, double H, double rho, double xi,
+		double T, double K, int N){
+	double dt = T / N;
+	double sdt = sqrt(dt);
+	scaleVector(Wtilde, pow(T, H)); // scale Wtilde for time T
+	compute_V(v, Wtilde, H, eta, xi, dt); // compute instantaneous variance v
+// now compute \int v_s ds, \int \sqrt{v_s} dW_s with W = W1
+	double Ivdt = intVdt(v, dt);
+	double IsvdW = intRootVdW(v, W1, sdt);
+// now compute the payoff by inserting properly into the BS formula
+	double BS_vol = sqrt((1.0 - rho * rho) * Ivdt);
+	double BS_spot = exp(-0.5 * rho * rho * Ivdt + rho * IsvdW);
+	return BS_call_price(BS_spot, K, 1.0, BS_vol);
+}
+
+// Note that Wtilde plays the role of the old WtildeScaled!
+void compute_V(Vector& v, const Vector& Wtilde, double H, double eta, double xi,
+		double dt) {
+	v[0] = xi;
+	for (int i = 1; i < v.size(); ++i)
+		v[i] = xi
+				* exp(
+						eta * Wtilde[i - 1]
+								- 0.5 * eta * eta * pow(i * dt, 2 * H));
+}
+
+double intVdt(const Vector & v, double dt) {
+	return dt * std::accumulate(v.begin(), v.end(), 0.0);
+}
+
+double intRootVdW(const Vector & v, const Vector & W1, double sdt) {
+	double IsvdW = 0.0;
+	for (int i = 0; i < v.size(); ++i)
+		IsvdW += sqrt(v[i]) * sdt * W1[i];
+	return IsvdW;
+}
+
+
+
+double pnorm(double value) {
+	return 0.5 * erfc(-value * M_SQRT1_2);
+}
+
+double BS_call_price(double S0, double K, double tau, double sigma, double r) {
+	double d1 = (log(S0 / K) + (r + 0.5 * sigma * sigma) * tau)
+			/ (sigma * sqrt(tau));
+	double d2 = d1 - sigma * sqrt(tau);
+	return pnorm(d1) * S0 - pnorm(d2) * K * exp(-r * tau);
+}
 
