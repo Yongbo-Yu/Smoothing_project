@@ -9,7 +9,7 @@ class Problem(object):
 # attributes
     random_gen=None;
     elapsed_time=0.0;
-    N=32
+    N=2
     S0=None     # vector of initial stock prices
     basket_d=2    # number of assets in the basket
     c= (1/float(basket_d))*np.ones(basket_d)     # weigths
@@ -43,7 +43,7 @@ class Problem(object):
         self.A=self.rotation_matrix()
         
         self.A_inv=np.transpose(self.A) # since A is  a rotation matrix than A^{-1}=A^T
-
+        
         self.Sigma=np.zeros((self.basket_d,self.basket_d))
         for i in range(0,self.basket_d):
                 for j in range(i,self.basket_d):
@@ -53,6 +53,13 @@ class Problem(object):
 
         self.dt=self.T/float(self.N) # time steps length
         self.d=int(np.log2(self.N)) #power 2 number steps
+
+        idx=[]
+        for i in range(0,self.basket_d*self.N,self.N):
+            idx.append(i)
+        
+        
+        self.idxc=np.setdiff1d(range(0,self.basket_d*self.N),idx)
     
     def BeginRuns(self,ind, N):
         self.elapsed_time=0.0
@@ -78,10 +85,10 @@ class Problem(object):
     def objfun(self,nelem,y):
 
         start_time=time.time();
-        beta=64
+        beta=128
         
         yy=[self.basket_d*self.N]
-        yy[0]=0.0
+        yy[0]=-1.0
         yy[1:]=y    
        
          
@@ -89,21 +96,26 @@ class Problem(object):
         z1=np.array(yy[0:-1:self.N]) # getting \mathbf{Z}_1 
         
 
-        idx=[]
-        for i in range(0,self.basket_d*self.N,self.N):
-        	idx.append(i)
-        
-        
-        idxc=np.setdiff1d(range(0,self.basket_d*self.N),idx)
+
                 
-        z__1=np.array(yy)[idxc]
+        z__1=np.array(yy)[self.idxc]
         # step 2: doing the rotation from  \mathbf{Z}_1  to \mathbf{Y}_1
 
         y1=np.dot(self.A,z1.transpose()) # getting \mathbf{Y}_1 by rotation using matrix A (to be defined)s
+        #print y1
         y__1=y1[1:]        # getting \mathbf{Y}_{-1}
 
         # step 3: computing the location of the kink
-        bar_y1=self.newtons_method(0,y__1,z__1) 
+        bar_y1=self.newtons_method(-1.0,y__1,z__1) 
+
+        y1[0]=bar_y1
+        #print y1
+        z=self.A_inv.dot(y1)
+        z1[0]=z[0]
+        y1=np.dot(self.A,z1.transpose())
+        #print y1
+
+        y__1=y1[1:]   
 
 
         # step 4: performing the pre-intgeration step wrt kink point
@@ -115,11 +127,18 @@ class Problem(object):
 
         mylist_left_y.append(yknots_left[0])
         mylist_left_y[1:]=[np.array(y__1[i]) for i in range(0,len(y__1))]
+        
+        
 
         mylist_left_z=[np.array(z__1[i]) for i in range(0,len(z__1))]
+
+       
+
         mylist_left=mylist_left_y+mylist_left_z
 
+       
         points_left=self.cartesian(mylist_left)
+       
             
         # to be updated   (we start with the case d=2)  
         x_l=np.asarray([self.stock_price_trajectory_basket_BS(bar_y1-points_left[i,0],points_left[i,2:self.N+1], points_left[i,1],points_left[i,self.N+1:])[0]  for i in range(0,len(yknots_left[0]))])
@@ -213,6 +232,8 @@ class Problem(object):
 
         dW=np.array([dW1 ,dW2])
 
+
+
         # construct the correlated  brownian bridge increments
         lower_triang_cholesky = np.linalg.cholesky(self.Sigma)
      
@@ -292,6 +313,7 @@ class Problem(object):
 
         gi=np.zeros((self.basket_d,len(dbb1)))
         product=np.zeros(self.basket_d)
+        print product
         summation=np.zeros(self.basket_d)
         Py=np.zeros(self.basket_d)
         dPy=np.zeros(self.basket_d)

@@ -57,6 +57,13 @@ class Problem(object):
                 for j in range(i,self.basket_d):
                     self.Sigma[i,j]=self.sigma[i]*self.sigma[j]*self.rho[i,j]*self.T
         self.Sigma=self.Sigma+np.transpose(self.Sigma)-np.diag(np.diag(self.Sigma))
+
+        idx=[]
+        for i in range(0,self.basket_d*Nsteps,Nsteps):
+            idx.append(i)
+        
+        
+        self.idxc=np.setdiff1d(range(0,self.basket_d*Nsteps),idx)
  
     # this computes the value of the objective function (given by  objfun) at quad points
     def SolveFor(self, Y,Nsteps):
@@ -73,11 +80,11 @@ class Problem(object):
         y = np.random.multivariate_normal(mean, covariance)    
 
 
-        beta=128
+        beta=64
         
         
         yy=[self.basket_d*Nsteps]
-        yy[0]=0.0
+        yy[0]=1.0
         yy[1:]=y    
        
          
@@ -85,14 +92,9 @@ class Problem(object):
         z1=np.array(yy[0:-1:Nsteps]) # getting \mathbf{Z}_1 
         
 
-        idx=[]
-        for i in range(0,self.basket_d*Nsteps,Nsteps):
-            idx.append(i)
         
-        
-        idxc=np.setdiff1d(range(0,self.basket_d*Nsteps),idx)
                 
-        z__1=np.array(yy)[idxc]
+        z__1=np.array(yy)[self.idxc]
         
         # step 2: doing the rotation from  \mathbf{Z}_1  to \mathbf{Y}_1
         y1=np.dot(self.A,z1) # getting \mathbf{Y}_1 by rotation using matrix A (to be defined)
@@ -101,7 +103,16 @@ class Problem(object):
 
 
         # step 3: computing the location of the kink
-        bar_y1=self.newtons_method(0,y__1,z__1,Nsteps) 
+        bar_y1=self.newtons_method(1.0,y__1,z__1,Nsteps) 
+
+        y1[0]=bar_y1
+        #print y1
+        z=self.A_inv.dot(y1)
+        z1[0]=z[0]
+        y1=np.dot(self.A,z1.transpose())
+        #print y1
+
+        y__1=y1[1:]   
 
 
         # step 4: performing the pre-intgeration step wrt kink point
@@ -203,6 +214,7 @@ class Problem(object):
         dW2= [bb2[0,i+1]-bb2[0,i] for i in range(0,Nsteps)] 
 
         dW=np.array([dW1 ,dW2])
+      
 
         # construct the correlated  brownian bridge increments
         lower_triang_cholesky = np.linalg.cholesky(self.Sigma)
