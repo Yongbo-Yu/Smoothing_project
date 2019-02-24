@@ -15,6 +15,10 @@
 #include <gsl/gsl_sf_hyperg.h>
 #include "RNorm.h"
 
+#include <vector>
+
+typedef std::vector<double> Vector;
+
 class RfBm {
 private:
 	int n;

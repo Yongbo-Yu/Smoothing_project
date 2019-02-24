@@ -67,6 +67,82 @@ except AttributeError:
     _newclass = 0
 
 
+class SwigPyIterator(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, SwigPyIterator, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, SwigPyIterator, name)
+    def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined - class is abstract")
+    __repr__ = _swig_repr
+    __swig_destroy__ = _RfBm.delete_SwigPyIterator
+    __del__ = lambda self : None;
+    def value(self): return _RfBm.SwigPyIterator_value(self)
+    def incr(self, n = 1): return _RfBm.SwigPyIterator_incr(self, n)
+    def decr(self, n = 1): return _RfBm.SwigPyIterator_decr(self, n)
+    def distance(self, *args): return _RfBm.SwigPyIterator_distance(self, *args)
+    def equal(self, *args): return _RfBm.SwigPyIterator_equal(self, *args)
+    def copy(self): return _RfBm.SwigPyIterator_copy(self)
+    def next(self): return _RfBm.SwigPyIterator_next(self)
+    def __next__(self): return _RfBm.SwigPyIterator___next__(self)
+    def previous(self): return _RfBm.SwigPyIterator_previous(self)
+    def advance(self, *args): return _RfBm.SwigPyIterator_advance(self, *args)
+    def __eq__(self, *args): return _RfBm.SwigPyIterator___eq__(self, *args)
+    def __ne__(self, *args): return _RfBm.SwigPyIterator___ne__(self, *args)
+    def __iadd__(self, *args): return _RfBm.SwigPyIterator___iadd__(self, *args)
+    def __isub__(self, *args): return _RfBm.SwigPyIterator___isub__(self, *args)
+    def __add__(self, *args): return _RfBm.SwigPyIterator___add__(self, *args)
+    def __sub__(self, *args): return _RfBm.SwigPyIterator___sub__(self, *args)
+    def __iter__(self): return self
+SwigPyIterator_swigregister = _RfBm.SwigPyIterator_swigregister
+SwigPyIterator_swigregister(SwigPyIterator)
+
+class Vector(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, Vector, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, Vector, name)
+    __repr__ = _swig_repr
+    def iterator(self): return _RfBm.Vector_iterator(self)
+    def __iter__(self): return self.iterator()
+    def __nonzero__(self): return _RfBm.Vector___nonzero__(self)
+    def __bool__(self): return _RfBm.Vector___bool__(self)
+    def __len__(self): return _RfBm.Vector___len__(self)
+    def pop(self): return _RfBm.Vector_pop(self)
+    def __getslice__(self, *args): return _RfBm.Vector___getslice__(self, *args)
+    def __setslice__(self, *args): return _RfBm.Vector___setslice__(self, *args)
+    def __delslice__(self, *args): return _RfBm.Vector___delslice__(self, *args)
+    def __delitem__(self, *args): return _RfBm.Vector___delitem__(self, *args)
+    def __getitem__(self, *args): return _RfBm.Vector___getitem__(self, *args)
+    def __setitem__(self, *args): return _RfBm.Vector___setitem__(self, *args)
+    def append(self, *args): return _RfBm.Vector_append(self, *args)
+    def empty(self): return _RfBm.Vector_empty(self)
+    def size(self): return _RfBm.Vector_size(self)
+    def clear(self): return _RfBm.Vector_clear(self)
+    def swap(self, *args): return _RfBm.Vector_swap(self, *args)
+    def get_allocator(self): return _RfBm.Vector_get_allocator(self)
+    def begin(self): return _RfBm.Vector_begin(self)
+    def end(self): return _RfBm.Vector_end(self)
+    def rbegin(self): return _RfBm.Vector_rbegin(self)
+    def rend(self): return _RfBm.Vector_rend(self)
+    def pop_back(self): return _RfBm.Vector_pop_back(self)
+    def erase(self, *args): return _RfBm.Vector_erase(self, *args)
+    def __init__(self, *args): 
+        this = _RfBm.new_Vector(*args)
+        try: self.this.append(this)
+        except: self.this = this
+    def push_back(self, *args): return _RfBm.Vector_push_back(self, *args)
+    def front(self): return _RfBm.Vector_front(self)
+    def back(self): return _RfBm.Vector_back(self)
+    def assign(self, *args): return _RfBm.Vector_assign(self, *args)
+    def resize(self, *args): return _RfBm.Vector_resize(self, *args)
+    def insert(self, *args): return _RfBm.Vector_insert(self, *args)
+    def reserve(self, *args): return _RfBm.Vector_reserve(self, *args)
+    def capacity(self): return _RfBm.Vector_capacity(self)
+    __swig_destroy__ = _RfBm.delete_Vector
+    __del__ = lambda self : None;
+Vector_swigregister = _RfBm.Vector_swigregister
+Vector_swigregister(Vector)
+
 class RfBm(_object):
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, RfBm, name, value)

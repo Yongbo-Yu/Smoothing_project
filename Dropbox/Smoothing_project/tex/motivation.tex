@@ -180,7 +180,7 @@ which implies that the location of the kink point for the approximate problem is
 \end{align}
 Using  \textbf{Newton iteration method}, we use the expression $P^\prime=\frac{d P}{d Y^\ast_1}$, and we can easily show that
 \begin{align}\label{polynomial_kink_location_derivative_basket}
-	P^\prime(W_1)=\sum_{j=1}^{d} c_j X_0^{(j)}  \frac{\sigma^{(j)} \Delta t A^{\text{inv}}_{j1}} {\sqrt{T}} \left( \prod_{i=0}^{N-1} g_i^{(j)}(Y_1) \right) \left[ \sum_{i=0}^{N-1} \frac{1}{g_i^{(j)}(Y_1)}\right].
+	P^\prime(Y^\ast_1)=\sum_{j=1}^{d} c_j X_0^{(j)}  \frac{\sigma^{(j)} \Delta t A^{\text{inv}}_{j1}} {\sqrt{T}} \left( \prod_{i=0}^{N-1} g_i^{(j)}(Y^\ast_1) \right) \left[ \sum_{i=0}^{N-1} \frac{1}{g_i^{(j)}(Y^\ast_1)}\right].
 \end{align}
 
 
@@ -196,7 +196,7 @@ which becomes hard to solve  when $d$ increases. We note that the first row of $
 \red{ Maybe choosing $\mathcal{A}$ to satisfy \eqref{transformation_optimality_criterion}   is not the right choice since rotations of $\mathbf{Z}_1$ leave the distribution, and hence the variance invariant. What is maximized as a much more complicated object, something like a variance of the component orthogonal to the kink $\Rightarrow$ Create a new hierarchy in terms of smoothness.
 }
 \begin{remark}
-A general choice for $\mathcal{A}$ should in the family of rotations. However, we think that a sufficiently good matrix $\mathcal{A}$ would be the one leading to $Y_1=\sum_{i=1}^d Z_1^{(i)}$ up to re-scaling. Therefore, the first attempt will be  to  set $\mathcal{A}$ to be a  rotation matrix, with first  row leading to $Y_1=\sum_{i=1}^d Z_1^{(i)}$ up to re-scaling, and with no constraints for the remaining rows.
+A general choice for $\mathcal{A}$ should be in the family of rotations. However, we think that a sufficiently good matrix $\mathcal{A}$ would be the one leading to $Y_1=\sum_{i=1}^d Z_1^{(i)}$ up to re-scaling. Therefore, the first attempt will be  to  set $\mathcal{A}$ to be a  rotation matrix, with first  row leading to $Y_1=\sum_{i=1}^d Z_1^{(i)}$ up to re-scaling, and with no constraints for the remaining rows. In practice, we construct $\mathcal{A}$ by fixing the first row to be $\frac{1}{\sqrt{d}} \mathbf{1}_{1 \times d}$ and the remaining rows are obtained by Gram-Schmidt procedure.
 \end{remark}
 
 \subsubsection{Step $2$: Integration}\label{sec:Step $2$: Integration}
