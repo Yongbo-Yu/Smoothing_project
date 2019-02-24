@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  16 DEC 2018 15:23
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  24 FEB 2019 11:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -282,6 +282,31 @@ Missing character: There is no i in font nullfont!
 Missing character: There is no c in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no s in font nullfont!
+Missing character: There is no , in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no u in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no d in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no g in font nullfont!
+Missing character: There is no u in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no r in font nullfont!
 Missing character: There is no . in font nullfont!
 
 Overfull \hbox (42.76393pt too wide) in paragraph at lines 12--14
@@ -299,6 +324,16 @@ Overfull \hbox (9.12497pt too wide) in paragraph at lines 12--14
  []
 
 
+Overfull \hbox (11.2917pt too wide) in paragraph at lines 12--14
+\OML/cmm/m/it/10 L[]$
+ []
+
+
+Overfull \hbox (11.2917pt too wide) in paragraph at lines 12--14
+\OML/cmm/m/it/10 L[]$
+ []
+
+
 ! LaTeX Error: Missing \begin{document}.
 
 See the LaTeX manual or LaTeX Companion for explanation.
@@ -306,7 +341,7 @@ Type  H <return>  for immediate help.
  ...                                              
                                                   
 l.15 T
-      hen, given  a $2 N$-dimensional Gaussian random input vector, $\mathbf...
+      hen, given  a $2 N \times 1$-dimensional Gaussian random input vector,...
 
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -373,8 +408,13 @@ Overfull \hbox (20.0pt too wide) in paragraph at lines 15--16
  []
 
 
-Overfull \hbox (14.12498pt too wide) in paragraph at lines 15--16
-\OT1/cmr/m/n/10 2\OML/cmm/m/it/10 N$
+Overfull \hbox (21.90279pt too wide) in paragraph at lines 15--16
+\OT1/cmr/m/n/10 2\OML/cmm/m/it/10 N \OMS/cmsy/m/n/10 ^^B
+ []
+
+
+Overfull \hbox (5.00002pt too wide) in paragraph at lines 15--16
+\OT1/cmr/m/n/10 1$
  []
 
 
@@ -383,9 +423,9 @@ Overfull \hbox (19.24991pt too wide) in paragraph at lines 15--16
  []
 
 
-Overfull \hbox (131.15675pt too wide) in paragraph at lines 15--16
+Overfull \hbox (133.96231pt too wide) in paragraph at lines 15--16
 \OT1/cmr/m/n/10 (\OML/cmm/m/it/10 X[]; [] ; X[]; X[]; [] ; X[]\OT1/cmr/m/n/10 )
-$
+[]$
  []
 
 
@@ -409,7 +449,7 @@ Type  H <return>  for immediate help.
  ...                                              
                                                   
 l.18 \mathbf{W}
-               ^{(1)}=L_3 \mathbf{X}_{N+1:2N}, \quad \widetilde{\mathbf{W}}=
+               ^{(1)}=L_1 \mathbf{X}_{1:N}, \quad \widetilde{\mathbf{W}}=
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
@@ -421,7 +461,7 @@ Type  H <return>  for immediate help.
  ...                                              
                                                   
 l.18 \mathbf{W}
-               ^{(1)}=L_3 \mathbf{X}_{N+1:2N}, \quad \widetilde{\mathbf{W}}=
+               ^{(1)}=L_1 \mathbf{X}_{1:N}, \quad \widetilde{\mathbf{W}}=
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
@@ -430,7 +470,7 @@ Missing character: There is no W in font nullfont!
 <inserted text> 
                 $
 l.18 \mathbf{W}^
-                {(1)}=L_3 \mathbf{X}_{N+1:2N}, \quad \widetilde{\mathbf{W}}=
+                {(1)}=L_1 \mathbf{X}_{1:N}, \quad \widetilde{\mathbf{W}}=
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
@@ -441,7 +481,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.25 \end{align}
+l.24 \end{align}
                 
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -450,7 +490,7 @@ or  <return>  to continue without it.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.25 \end{align}
+l.24 \end{align}
                 
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -657,7 +697,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.27 \begin{align*}
+l.26 \begin{align*}
                    
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -670,7 +710,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.28 \mathbf{W}
+l.27 \mathbf{W}
                ^{(1)}=G  \mathbf{Z}^\prime \COMMA
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -679,13 +719,13 @@ Missing character: There is no W in font nullfont!
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.28 \mathbf{W}^
+l.27 \mathbf{W}^
                 {(1)}=G  \mathbf{Z}^\prime \COMMA
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Undefined control sequence.
-l.28 \mathbf{W}^{(1)}=G  \mathbf{Z}^\prime \COMMA
+l.27 \mathbf{W}^{(1)}=G  \mathbf{Z}^\prime \COMMA
                                                  
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -700,7 +740,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.29 \end{align*}
+l.28 \end{align*}
                  
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -709,7 +749,7 @@ or  <return>  to continue without it.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.29 \end{align*}
+l.28 \end{align*}
                  
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -739,7 +779,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.31 \begin{align*}
+l.30 \begin{align*}
                    
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -752,8 +792,8 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.32  \mathbf{X}
-                _{N+1:2N}= L_3^{-1} G  \mathbf{Z}^\prime \PERIOD
+l.31  \mathbf{X}
+                _{1:N}= L_1^{-1} G  \mathbf{Z}^\prime \PERIOD
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
@@ -761,13 +801,13 @@ Missing character: There is no X in font nullfont!
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.32  \mathbf{X}_
-                 {N+1:2N}= L_3^{-1} G  \mathbf{Z}^\prime \PERIOD
+l.31  \mathbf{X}_
+                 {1:N}= L_1^{-1} G  \mathbf{Z}^\prime \PERIOD
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Undefined control sequence.
-l.32 ...2N}= L_3^{-1} G  \mathbf{Z}^\prime \PERIOD
+l.31 ...:N}= L_1^{-1} G  \mathbf{Z}^\prime \PERIOD
                                                   
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -782,7 +822,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.33 \end{align*}
+l.32 \end{align*}
                  
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -791,7 +831,7 @@ or  <return>  to continue without it.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.33 \end{align*}
+l.32 \end{align*}
                  
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -900,7 +940,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.35 \begin{align}
+l.34 \begin{align}
                   \label{eq: Construction}
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -913,7 +953,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.36 \mathbf{X}
+l.35 \mathbf{X}
                =\left(
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -923,7 +963,7 @@ Missing character: There is no = in font nullfont!
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.36 \mathbf{X}=\left
+l.35 \mathbf{X}=\left
                      (
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -935,7 +975,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.42 \end{align}
+l.41 \end{align}
                 
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -944,7 +984,7 @@ or  <return>  to continue without it.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.42 \end{align}
+l.41 \end{align}
                 
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -953,79 +993,79 @@ really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
 
-Overfull \hbox (41.29167pt too wide) in paragraph at lines 18--43
+Overfull \hbox (41.29167pt too wide) in paragraph at lines 18--42
 []$[] \OT1/cmr/m/n/10 =
  []
 
 
-Overfull \hbox (78.07912pt too wide) in paragraph at lines 18--43
+Overfull \hbox (60.86934pt too wide) in paragraph at lines 18--42
 \OML/cmm/m/it/10 L[]\OT1/cmr/bx/n/10 X[]\OML/cmm/m/it/10 ;  [] \OT1/cmr/m/n/10 
 =
  []
 
 
-Overfull \hbox (36.37497pt too wide) in paragraph at lines 18--43
+Overfull \hbox (43.50002pt too wide) in paragraph at lines 18--42
 [] \OT1/cmr/bx/n/10 X\OML/cmm/m/it/10 :$
  []
 
 
-Overfull \hbox (22.78471pt too wide) in paragraph at lines 18--43
+Overfull \hbox (22.78471pt too wide) in paragraph at lines 18--42
 \OT1/cmr/bx/n/10 W[]$
  []
 
 
-Overfull \hbox (7.86249pt too wide) in paragraph at lines 18--43
+Overfull \hbox (7.86249pt too wide) in paragraph at lines 18--42
 \OML/cmm/m/it/10 G$
  []
 
 
-Overfull \hbox (9.12497pt too wide) in paragraph at lines 18--43
+Overfull \hbox (9.12497pt too wide) in paragraph at lines 18--42
 \OML/cmm/m/it/10 N$
  []
 
 
-Overfull \hbox (9.8333pt too wide) in paragraph at lines 18--43
+Overfull \hbox (9.8333pt too wide) in paragraph at lines 18--42
 \OT1/cmr/bx/n/10 Z[]$
  []
 
 
-Overfull \hbox (21.29167pt too wide) in paragraph at lines 18--43
+Overfull \hbox (21.29167pt too wide) in paragraph at lines 18--42
 [] \OT1/cmr/m/n/10 =
  []
 
 
-Overfull \hbox (17.69579pt too wide) in paragraph at lines 18--43
+Overfull \hbox (17.69579pt too wide) in paragraph at lines 18--42
 \OML/cmm/m/it/10 G\OT1/cmr/bx/n/10 Z[]$
  []
 
 
-Overfull \hbox (41.60005pt too wide) in paragraph at lines 18--43
+Overfull \hbox (24.39027pt too wide) in paragraph at lines 18--42
 [] \OT1/cmr/m/n/10 =
  []
 
 
-Overfull \hbox (35.2375pt too wide) in paragraph at lines 18--43
+Overfull \hbox (35.2375pt too wide) in paragraph at lines 18--42
 \OML/cmm/m/it/10 L[]G\OT1/cmr/bx/n/10 Z[]$
  []
 
 
-Overfull \hbox (14.12498pt too wide) in paragraph at lines 18--43
+Overfull \hbox (14.12498pt too wide) in paragraph at lines 18--42
 \OT1/cmr/m/n/10 2\OML/cmm/m/it/10 N$
  []
 
 
-Overfull \hbox (17.58325pt too wide) in paragraph at lines 18--43
+Overfull \hbox (17.58325pt too wide) in paragraph at lines 18--42
 \OT1/cmr/bx/n/10 Z \OT1/cmr/m/n/10 =
  []
 
 
-Overfull \hbox (34.19437pt too wide) in paragraph at lines 18--43
+Overfull \hbox (34.19437pt too wide) in paragraph at lines 18--42
 \OT1/cmr/m/n/10 (\OT1/cmr/bx/n/10 Z[]\OML/cmm/m/it/10 ; \OT1/cmr/bx/n/10 Z[]\OT
 1/cmr/m/n/10 )$
  []
 
 
-Overfull \hbox (60.80139pt too wide) in paragraph at lines 18--43
+Overfull \hbox (60.80139pt too wide) in paragraph at lines 18--42
 [] \OT1/cmr/bx/n/10 Z\OML/cmm/m/it/10 :$ 
  []
 
@@ -1036,7 +1076,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.44 W
+l.43 W
       e need to make sure that $\mathbf{X}$  have Gaussian distribution as a...
 
 You're in trouble here.  Try typing  <return>  to proceed.
@@ -1115,7 +1155,7 @@ Missing character: There is no i in font nullfont!
 Missing character: There is no o in font nullfont!
 Missing character: There is no n in font nullfont!
 ! Undefined control sequence.
-l.44 ...n as an outcome of the construction \eqref
+l.43 ...n as an outcome of the construction \eqref
                                                   {eq: Construction}. Conseq...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1178,17 +1218,17 @@ Missing character: There is no l in font nullfont!
 Missing character: There is no y in font nullfont!
 Missing character: There is no . in font nullfont!
 
-Overfull \hbox (20.0pt too wide) in paragraph at lines 44--45
+Overfull \hbox (20.0pt too wide) in paragraph at lines 43--44
 []
  []
 
 
-Overfull \hbox (8.6944pt too wide) in paragraph at lines 44--45
+Overfull \hbox (8.6944pt too wide) in paragraph at lines 43--44
 \OT1/cmr/bx/n/10 X$
  []
 
 
-Overfull \hbox (17.54172pt too wide) in paragraph at lines 44--45
+Overfull \hbox (17.54172pt too wide) in paragraph at lines 43--44
 \OML/cmm/m/it/10 L[]$ 
  []
 
@@ -1199,7 +1239,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.48 \textbf{TO-DO $1$}
+l.47 \textbf{TO-DO $1$}
                        : Implement the appropriate Cholesky scheme, taking i...
 
 You're in trouble here.  Try typing  <return>  to proceed.
@@ -1340,17 +1380,17 @@ Missing character: There is no t in font nullfont!
 Missing character: There is no s in font nullfont!
 Missing character: There is no . in font nullfont!
 
-Overfull \hbox (40.4721pt too wide) in paragraph at lines 48--49
+Overfull \hbox (40.4721pt too wide) in paragraph at lines 47--48
 []\OT1/cmr/bx/n/10 TO-
  []
 
 
-Overfull \hbox (17.45824pt too wide) in paragraph at lines 48--49
+Overfull \hbox (17.45824pt too wide) in paragraph at lines 47--48
 \OT1/cmr/bx/n/10 DO
  []
 
 
-Overfull \hbox (5.00002pt too wide) in paragraph at lines 48--49
+Overfull \hbox (5.00002pt too wide) in paragraph at lines 47--48
 \OT1/cmr/m/n/10 1$
  []
 

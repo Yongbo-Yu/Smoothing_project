@@ -10,16 +10,15 @@ L_2 & L_3
 \end{array}
 \right),
 \]
-where $L_1, L_2,L_3$ are $N \times N$ matrices.
+where $L_1, L_2,L_3$ are $N \times N$ matrices, such that $L_1$ and $L_3$ are triangular.
 
-Then, given  a $2 N$-dimensional Gaussian random input vector, $\mathbf{X}=(X_1, \dots,X_N, X_{N+1}, \dots, X_{2N})$, we have
+Then, given  a $2 N \times 1$-dimensional Gaussian random input vector, $\mathbf{X}=(X_1, \dots,X_N, X_{N+1}, \dots, X_{2N})'$, we have
 
 \begin{align}
-\mathbf{W}^{(1)}=L_3 \mathbf{X}_{N+1:2N}, \quad \widetilde{\mathbf{W}}= 
+\mathbf{W}^{(1)}=L_1 \mathbf{X}_{1:N}, \quad \widetilde{\mathbf{W}}= 
 \left(
-\begin{array}{c}
-L_1 \\
-L_2 
+\begin{array}{c|c}
+L_2 & L_3 
 \end{array}
 \right) \mathbf{X}.
 \end{align}
@@ -29,19 +28,19 @@ On the other hand, let us assume that we can construct $\mathbf{W}^{(1)}$ hierar
 \end{align*}
 and consequently
 \begin{align*}
- \mathbf{X}_{N+1:2N}= L_3^{-1} G  \mathbf{Z}^\prime \PERIOD
+ \mathbf{X}_{1:N}= L_1^{-1} G  \mathbf{Z}^\prime \PERIOD
 \end{align*}
 Therefore, given a $2 N$-dimensional Gaussian random input vector, $\mathbf{Z}=(\mathbf{Z}^\prime,\mathbf{Z}^{\prime \prime})$, we define our hierarchical representation by
 \begin{align}\label{eq: Construction}
 \mathbf{X}=\left(
 \begin{array}{c|c}
-0 & I_{N} \\
-L_3^{-1} G & 0
+L_1^{-1} G & 0\\
+0 & I_{N} 
 \end{array}
 \right) \mathbf{Z}.
 \end{align}
 
-We need to make sure that $\mathbf{X}$  have Gaussian distribution as an outcome of the construction \eqref{eq: Construction}. Consequently, we need to compute carefully $L_3^{-1}$.
+We need to make sure that $\mathbf{X}$  have Gaussian distribution as an outcome of the construction \eqref{eq: Construction}. Consequently, we need to compute carefully $L_1^{-1}$.
 
 
 

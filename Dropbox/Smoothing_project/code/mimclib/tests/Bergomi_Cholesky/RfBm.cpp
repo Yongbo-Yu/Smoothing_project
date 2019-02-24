@@ -78,9 +78,9 @@ RfBm::RfBm(int nI, double HI, RNorm* rnormI) {
 	}
 }
 
-void RfBm::generate(Vector& W1, Vector& Wtilde) {
-	Vector x(2 * n);
-	(*rnorm)(x);
+void RfBm::generate(Vector x, Vector& W1, Vector& Wtilde) {
+	
+	//(*rnorm)(x);
 	for (int i = 0; i < n; ++i) {
 		W1[i] = 0.0;
 		for (int j = 0; j <= i; ++j)
@@ -93,8 +93,8 @@ void RfBm::generate(Vector& W1, Vector& Wtilde) {
 	}
 }
 
-void RfBm::operator ()(Vector& W1, Vector& Wtilde) {
-	this->generate(W1, Wtilde);
+void RfBm::operator ()(Vector x, Vector& W1, Vector& Wtilde) {
+	this->generate(x,W1, Wtilde);
 }
 
 std::vector<Vector> RfBm::GetA() const {

@@ -35,8 +35,8 @@ private:
 public:
 	RfBm();
 	RfBm(int nI, double HI, RNorm * rnormI);
-	void generate(Vector& W1, Vector& Wtilde);
-	void operator()(Vector& W1, Vector& Wtilde);
+	void generate( Vector x, Vector& W1, Vector& Wtilde);
+	void operator()(Vector x, Vector& W1, Vector& Wtilde);
 	std::vector<Vector> GetL() const {return L;}
 	std::vector<Vector> GetA() const;
 };
