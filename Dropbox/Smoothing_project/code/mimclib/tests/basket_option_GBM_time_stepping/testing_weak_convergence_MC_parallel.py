@@ -63,6 +63,7 @@ class Problem(object):
             idx.append(i)
         
         
+        
         self.idxc=np.setdiff1d(range(0,self.basket_d*Nsteps),idx)
  
     # this computes the value of the objective function (given by  objfun) at quad points

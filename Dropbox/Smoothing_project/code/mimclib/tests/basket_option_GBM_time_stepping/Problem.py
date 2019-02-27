@@ -85,18 +85,16 @@ class Problem(object):
     def objfun(self,nelem,y):
 
         start_time=time.time();
-        beta=128
+        beta=64
         
         yy=[self.basket_d*self.N]
-        yy[0]=-1.0
+        yy[0]=0.0
         yy[1:]=y    
        
          
         # step 1 # get the two partitions of coordinates \mathbf{Z}_1 and \mathbf{Z}_{-1} for y which is a vector of N \times basket_d
         z1=np.array(yy[0:-1:self.N]) # getting \mathbf{Z}_1 
         
-
-
                 
         z__1=np.array(yy)[self.idxc]
         # step 2: doing the rotation from  \mathbf{Z}_1  to \mathbf{Y}_1
@@ -106,7 +104,7 @@ class Problem(object):
         y__1=y1[1:]        # getting \mathbf{Y}_{-1}
 
         # step 3: computing the location of the kink
-        bar_y1=self.newtons_method(-1.0,y__1,z__1) 
+        bar_y1=self.newtons_method(0.0,y__1,z__1) 
 
         y1[0]=bar_y1
         #print y1
