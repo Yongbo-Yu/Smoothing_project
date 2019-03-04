@@ -221,3 +221,127 @@ We generally do not have a closed form for $h$. Therefore, the pre-integration s
 \begin{remark}
 We note that  conditions (\eqref{assump:Monotonicity condition} and \eqref{assump:Growth condition}) imply that for each $\mathbf{Y}_{-1}$, the function $G$ either has a simple  root $y_1^\ast$ or is positive for all $y_1 \in \rset$.
 \end{remark}
+
+\subsection{Results for the Basket option}
+For illustration, we start with the two dimensional basket call option  with parameters:  $S_0^{1,2}=K=100$, $\sigma_{1,2}=0.4$, $\rho=0.3$, $T=1$ $r=0$ and $c_{1,2}=1/2$, the reference value for those parameters  is  $12.90$. The matrix $\mathcal{A}$ in this case is given by $\mathcal{A} = 1/\sqrt{2} (1, 1; 1, -1)$.
+
+Our  numerical testes suggest bad behavior of the weak error with a rate that is  too small (see Figure \ref{fig:Weak_rate_two_dim_basket}). 
+\FloatBarrier
+\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.4\linewidth]{./figures/basket_call_2d_time_stepping/weak_convergence/weak_convergence_order_basket_option_2d_relative_M_10_4_beta_64}
+
+	\caption{The rate of convergence of the weak error for the two dimensional basket call option with  a number of Laguerre  quadrature points  $\beta=64$ and number of samples for MC $M=10^4$.  }
+	\label{fig:Weak_rate_two_dim_basket}
+\end{figure}
+\FloatBarrier
+
+To investigate the reason of the observed bad behavior of the weak error, we plot the smoothed integrand $I$ for different scenarios of number of time steps $N \in {4,8}$ with respect to different variables (see Figures \ref{fig:integrand_one_dim_N_4} and \ref{fig:integrand_two_dim_N_4} for $N=4$ and  Figures \ref{fig:integrand_one_dim_N_8} and \ref{fig:integrand_two_dim_N_8} for $N=8$).
+\FloatBarrier
+\begin{figure}
+	\begin{subfigure}{.4\textwidth}
+		\centering
+			\includegraphics[width=1\linewidth]{./figures/basket_call_2d_time_stepping/integrand_plotting/N_4/1d_plots/smoothed_integrand_basket_2D_N_4_z2}
+		\caption{}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+			\includegraphics[width=1\linewidth]{./figures/basket_call_2d_time_stepping/integrand_plotting/N_4/1d_plots/smoothed_integrand_basket_2D_N_4_z3}
+		\caption{}
+	\end{subfigure}\\[1ex]
+	\begin{subfigure}{.4\textwidth}
+		\centering
+			\includegraphics[width=1\linewidth]{./figures/basket_call_2d_time_stepping/integrand_plotting/N_4/1d_plots/smoothed_integrand_basket_2D_N_4_z5}
+		\caption{}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+			\includegraphics[width=1\linewidth]{./figures/basket_call_2d_time_stepping/integrand_plotting/N_4/1d_plots/smoothed_integrand_basket_2D_N_4_z6}
+		\caption{}
+		\end{subfigure}
+	\caption{The one dimensional plots for the integrand $I$ with respect to the different variables for $N=4$. a) with respect to $z_2$, b) with respect to $z_3$, c) with respect to $z_5$,  d) with respect to $z_6$.}
+	\label{fig:integrand_one_dim_N_4}
+\end{figure}
+\FloatBarrier
+
+
+\FloatBarrier
+\begin{figure}
+	\begin{subfigure}{.4\textwidth}
+		\centering
+			\includegraphics[width=1\linewidth]{./figures/basket_call_2d_time_stepping/integrand_plotting/N_4/2d_plots/z_2_3/smoothed_integrand_basket_2D_N_4_z2_3_40}
+		\caption{}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+			\includegraphics[width=1\linewidth]{./figures/basket_call_2d_time_stepping/integrand_plotting/N_4/2d_plots/z_2_5/smoothed_integrand_basket_2D_N_4_z2_5_80}
+		\caption{}
+	\end{subfigure}\\[1ex]
+	\begin{subfigure}{.4\textwidth}
+		\centering
+			\includegraphics[width=1\linewidth]{./figures/basket_call_2d_time_stepping/integrand_plotting/N_4/2d_plots/z_5_6/smoothed_integrand_basket_2D_N_4_z5_6_200}
+		\caption{}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+			\includegraphics[width=1\linewidth]{./figures/basket_call_2d_time_stepping/integrand_plotting/N_4/2d_plots/z_2_6/smoothed_integrand_basket_2D_N_4_z2_6_80}
+		\caption{}
+		\end{subfigure}
+	\caption{The two dimensional plots for the integrand $I$ with respect to the different variables for $N=4$. a) with respect to $(z_2,z_3)$, b) with respect to $(z_2,z_5)$, c) with respect to $(z_5,z_6)$,  d) with respect to $(z_2,z_6)$.}
+	\label{fig:integrand_two_dim_N_4}
+\end{figure}
+\FloatBarrier
+\FloatBarrier
+\begin{figure}
+	\begin{subfigure}{.4\textwidth}
+		\centering
+			\includegraphics[width=1\linewidth]{./figures/basket_call_2d_time_stepping/integrand_plotting/N_8/1d_plots/smoothed_integrand_basket_2D_N_8_z2}
+		\caption{}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+			\includegraphics[width=1\linewidth]{./figures/basket_call_2d_time_stepping/integrand_plotting/N_8/1d_plots/smoothed_integrand_basket_2D_N_8_z3}
+		\caption{}
+	\end{subfigure}\\[1ex]
+	\begin{subfigure}{.4\textwidth}
+		\centering
+			\includegraphics[width=1\linewidth]{./figures/basket_call_2d_time_stepping/integrand_plotting/N_8/1d_plots/smoothed_integrand_basket_2D_N_8_z9}
+		\caption{}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+			\includegraphics[width=1\linewidth]{./figures/basket_call_2d_time_stepping/integrand_plotting/N_8/1d_plots/smoothed_integrand_basket_2D_N_8_z10}
+		\caption{}
+		\end{subfigure}
+	\caption{The one dimensional plots for the integrand $I$ with respect to the different variables for $N=8$. a) with respect to $z_2$, b) with respect to $z_3$, c) with respect to $z_9$,  d) with respect to $z_10$.}
+	\label{fig:integrand_one_dim_N_8}
+\end{figure}
+\FloatBarrier
+
+
+\FloatBarrier
+\begin{figure}
+	\begin{subfigure}{.4\textwidth}
+		\centering
+			\includegraphics[width=1\linewidth]{./figures/basket_call_2d_time_stepping/integrand_plotting/N_8/2d_plots/z_2_3/smoothed_integrand_basket_2D_N_8_z2_3_40}
+		\caption{}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+			\includegraphics[width=1\linewidth]{./figures/basket_call_2d_time_stepping/integrand_plotting/N_8/2d_plots/z_2_9/smoothed_integrand_basket_2D_N_8_z2_9_80}
+		\caption{}
+	\end{subfigure}\\[1ex]
+	\begin{subfigure}{.4\textwidth}
+		\centering
+			\includegraphics[width=1\linewidth]{./figures/basket_call_2d_time_stepping/integrand_plotting/N_8/2d_plots/z_9_10/smoothed_integrand_basket_2D_N_8_z9_10_200}
+		\caption{}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+			\includegraphics[width=1\linewidth]{./figures/basket_call_2d_time_stepping/integrand_plotting/N_8/2d_plots/z_2_10/smoothed_integrand_basket_2D_N_8_z2_10_80}
+		\caption{}
+		\end{subfigure}
+	\caption{The two dimensional plots for the integrand $I$ with respect to the different variables for $N=8$. a) with respect to $(z_2,z_3)$, b) with respect to $(z_2,z_9)$, c) with respect to $(z_9,z_{10})$,  d) with respect to $(z_2,z_{10})$.}
+	\label{fig:integrand_two_dim_N_8}
+\end{figure}
+\FloatBarrier
