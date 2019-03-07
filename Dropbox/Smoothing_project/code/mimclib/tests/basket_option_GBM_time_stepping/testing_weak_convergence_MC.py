@@ -1,6 +1,6 @@
 import numpy as np
 import time
-import scipy.stats as ss
+
  
 import random
  
@@ -52,25 +52,13 @@ class Problem(object):
         self.A=self.rotation_matrix()
         self.A_inv=np.transpose(self.A) # since A is  a rotation matrix than A^{-1}=A^T
 
-        self.Sigma=np.zeros((self.basket_d,self.basket_d))
-        for i in range(0,self.basket_d):
-                for j in range(i,self.basket_d):
-                    self.Sigma[i,j]=self.sigma[i]*self.sigma[j]*self.rho[i,j]*self.T
-        self.Sigma=self.Sigma+np.transpose(self.Sigma)-np.diag(np.diag(self.Sigma))
-
         idx=[]
         for i in range(0,self.basket_d*Nsteps,Nsteps):
             idx.append(i)
         
         
         self.idxc=np.setdiff1d(range(0,self.basket_d*Nsteps),idx)
- 
-    # this computes the value of the objective function (given by  objfun) at quad points
-    def SolveFor(self, Y,Nsteps):
-        Y = np.array(Y)
-        goal=self.objfun(Y,Nsteps);
-        return goal
- 
+
  
      # objfun:  beta #number of points in the first direction
     def objfun(self,Nsteps):
@@ -103,7 +91,7 @@ class Problem(object):
 
 
         # step 3: computing the location of the kink
-        bar_y1=self.newtons_method(0.0,y__1,z__1,Nsteps) 
+        bar_y1=self.newtons_method(y1[0],y__1,z__1,z1,Nsteps) 
 
         y1[0]=bar_y1
         #print y1
@@ -295,7 +283,7 @@ class Problem(object):
     
 
         
-    def newtons_method(self,x0,y__1,z__1,Nsteps,eps=1e-10):
+    def newtons_method(self,x0,y__1,z__1,z1,Nsteps,eps=1e-10):
         
         delta= self.dx(x0,y__1,z__1,Nsteps)
 
@@ -304,12 +292,13 @@ class Problem(object):
             #(self.f(x0,y))
             P_value,dP=self.f(x0,y__1,z__1,Nsteps)
             x0 = x0 - 0.1*P_value/dP
+            y=np.array([x0,y__1])
+            z=self.A_inv.dot(y)
+            z1[0]=z[0]
+            y=np.dot(self.A,z1)
+            y__1=y[1:]
             delta = self.dx(x0,y__1,z__1,Nsteps)    
-
-            
-
-
-        return x0     
+        return x0         
 
     def cartesian(self,arrays, out=None):
         """
