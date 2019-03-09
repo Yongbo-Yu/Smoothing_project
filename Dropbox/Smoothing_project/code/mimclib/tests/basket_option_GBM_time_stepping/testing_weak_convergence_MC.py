@@ -68,7 +68,7 @@ class Problem(object):
         y = np.random.multivariate_normal(mean, covariance)    
 
 
-        beta=16
+        beta=128
         
         
         yy=[self.basket_d*Nsteps]
@@ -97,7 +97,7 @@ class Problem(object):
         #print y1
         z=self.A_inv.dot(y1)
         z1[0]=z[0]
-        y1=np.dot(self.A,z1.transpose())
+        y1=np.dot(self.A,z1)
         #print y1
 
         y__1=y1[1:]   
@@ -110,13 +110,26 @@ class Problem(object):
         mylist_left_y=[]
         mylist_left_z=[]
 
+
+
+        
+        #y11_left=np.zeros(len(yknots_left[0]))
+       # 
+        #for i in range(0,len(yknots_left[0])):
+         #   y1[0]=bar_y1-yknots_left[0][i]
+          #  z=self.A_inv.dot(y1)
+           # z1[0]=z[0]
+            #y1=np.dot(self.A,z1.transpose())
+            #y11_left[i]=y1[1:]   
+
+
         mylist_left_y.append(yknots_left[0])
         mylist_left_y[1:]=[np.array(y__1[i]) for i in range(0,len(y__1))]
         mylist_left_z=[np.array(z__1[i]) for i in range(0,len(z__1))]
         mylist_left=mylist_left_y+mylist_left_z
 
         points_left=self.cartesian(mylist_left)
-            
+        
         # to be updated   (we start with the case d=2)  
         x_l=np.asarray([self.stock_price_trajectory_basket_BS(bar_y1-points_left[i,0],points_left[i,2:Nsteps+1], points_left[i,1],points_left[i,Nsteps+1:],Nsteps)[0]  for i in range(0,len(yknots_left[0]))])
         
@@ -124,6 +137,15 @@ class Problem(object):
 
         mylist_right_y=[]
         mylist_right_z=[]
+
+       #y11_right=np.zeros(len(yknots_right[0]))
+       # for i in range(0,len(yknots_right[0])):
+        #    y1[0]=bar_y1+yknots_right[0][i]
+         #   z=self.A_inv.dot(y1)
+          #  z1[0]=z[0]
+            #y1=np.dot(self.A,z1.transpose())
+           # y11_right[i]=y1[1:]   
+
         mylist_right_y.append(yknots_right[0])
         mylist_right_y[1:]=[np.array(y__1[i]) for i in range(0,len(y__1))]
         mylist_right_z=[np.array(z__1[i]) for i in range(0,len(z__1))]
@@ -139,6 +161,7 @@ class Problem(object):
     
   
         return QoI
+
 
 
     # This function creates the desired rotation matrix A (orthonormal transformation)
@@ -194,38 +217,48 @@ class Problem(object):
      
      
     def stock_price_trajectory_basket_BS(self,y1,yvec_1,y2,yvec_2,Nsteps):
+
+        y=np.array([y1,y2])
+        z=self.A_inv.dot(y)
+
         #building the brownian bridge increments
-        bb1=self.brownian_increments(y1,yvec_1,Nsteps)
-        bb2=self.brownian_increments(y2,yvec_2,Nsteps)
+        bb1=self.brownian_increments(z[0],yvec_1,Nsteps)
+        bb2=self.brownian_increments(z[1],yvec_2,Nsteps)
 
         dW1= [bb1[0,i+1]-bb1[0,i]  for i in range(0,Nsteps)] 
         dW2= [bb2[0,i+1]-bb2[0,i] for i in range(0,Nsteps)] 
-
         dW=np.array([dW1 ,dW2])
 
-
-        # construct the correlated  brownian bridge increments
-        lower_triang_cholesky = np.linalg.cholesky(self.Sigma)
+        
+          # construct the correlated  brownian bridge increments
+        lower_triang_cholesky = np.linalg.cholesky(self.rho)
      
         dW=np.dot(lower_triang_cholesky,dW)  
-          
+
+
+       
+
+                  
     
        
         dW1=dW[0,:]
         dW2=dW[1,:]
 
-        dbb1=dW1-(self.dt/np.sqrt(self.T))*y1 # brownian bridge increments dbb_i (used later for the location of the kink point)
-        dbb2=dW2-(self.dt/np.sqrt(self.T))*y2 # brownian bridge increments dbb_i (used later for the location of the kink point)
         
+        
+         
+        dbb1=dW1-(self.dt/np.sqrt(self.T))*z[0] # brownian bridge increments dbbs_i (used later for the location of the kink point)
+        dbb2=dW2-(self.dt/np.sqrt(self.T))*z[1] # brownian bridge increments dbb_i (used later for the location of the kink point) 
+
 
         X=np.zeros((self.basket_d,Nsteps+1)) #here will store the BS trajectory
       
         X[:,0]=self.S0
         for n in range(1,Nsteps+1):
-            X[0,n]=X[0,n-1]*(1+self.sigma[0]*((self.dt/float(np.sqrt(self.T)))*(self.A_inv[0,0]*y1+ self.A_inv[0,1:].dot(y2)) +  dbb1[n-1] ))  
-            X[1,n]=X[1,n-1]*(1+self.sigma[1]*((self.dt/float(np.sqrt(self.T)))*(self.A_inv[1,0]*y1+ self.A_inv[1,1:].dot(y2)) +  dbb2[n-1] ) )  
-            #X[0,n]=X[0,n-1]*(1+self.sigma[0]*dW1[n-1])
-            #X[1,n]=X[1,n-1]*(1+self.sigma[1]*dW2[n-1])
+            #X[0,n]=X[0,n-1]*(1+self.sigma[0]*((self.dt/float(np.sqrt(self.T)))*(self.A_inv[0,0]*y1+ self.A_inv[0,1:].dot(y2)) +  dbb1[n-1] ))  
+            #X[1,n]=X[1,n-1]*(1+self.sigma[1]*((self.dt/float(np.sqrt(self.T)))*(self.A_inv[1,0]*y1+ self.A_inv[1,1:].dot(y2)) +  dbb2[n-1] ) )  
+            X[0,n]=X[0,n-1]*(1+self.sigma[0]*dW1[n-1])
+            X[1,n]=X[1,n-1]*(1+self.sigma[1]*dW2[n-1])
 
       
         return X[:,-1],dbb1,dbb2
@@ -280,6 +313,7 @@ class Problem(object):
 
         dP=dPy[0]+dPy[1]
         return Py,dP    
+    
     
 
         

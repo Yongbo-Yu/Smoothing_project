@@ -187,10 +187,11 @@ In this section, we compare the weak rates obtained for set $1$ in Table
 		\hline
 
 			Set $1$:	$H=0.07, K=1,S_0=1, T=1, \rho=-0.9, \eta=1.9,\xi_0=0.235^2$   & $\underset{(7.9e-05)}{0.0791}$  \\	
-
+			
 				Set $2$:	$H=0.02, K=1, S_0=1, T=1,\rho=-0.7, \eta=0.4,\xi_0=0.1$   & $\underset{(1.3e-04)}{0.1248}$  \\
 					Set $3$:	$H=0.02, K=0.8,S_0=1,T=1, \rho=-0.7, \eta=0.4,\xi_0=0.1$   & $\underset{(5.6e-04)}{0.2407}$  \\
 						Set $4$:	$H=0.02, K=1.2,S_0=1,T=1, \rho=-0.7, \eta=0.4,\xi_0=0.1$   & $\underset{(2.5e-04)}{0.0568}$  \\
+						Set $5$:	$H=0.43, K=1,S_0=1, T=1, \rho=-0.9, \eta=1.9,\xi_0=0.235^2$   & $\underset{(7.9e-05)}{ 0.0712}$  \\	
 	\bottomrule[1.25pt]
 	\end{tabular}
 \end{small}
@@ -228,18 +229,48 @@ In this section, we compare the weak rates obtained for set $1$ in Table
 		\label{fig:sub4}
 	\end{subfigure}
 	
-	\caption{The  convergence of the weak error $\mathcal{E}_B(N)$, using MC ($M=10^6$) with Cholesky scheme, for set $1$ parameter in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. We refer to $C_{\text{RB}}$ as $\expt{g(X)}$, and to $C_{\text{RB}}^{N}$ as  $\expt{g(X_{\Delta t})}$. The upper and lower bounds are $95\%$ confidence intervals. a) Without hierarchical representation.  b) With hierarchical representation.}
+	\caption{The  convergence of the weak error $\mathcal{E}_B(N)$, using MC ($M=10^6$) with Cholesky scheme, for set $1$ parameter in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. We refer to $C_{\text{RB}}$ as $\expt{g(X)}$, and to $C_{\text{RB}}^{N}$ as  $\expt{g(X_{\Delta t})}$. The upper and lower bounds are $95\%$ confidence intervals. a) With hierarchical representation.  b) Without hierarchical representation.}
 	\label{fig:Weak_rate_set1_set_2_without_rich}
 \end{figure}
 \FloatBarrier
 
+To investigate more the behavior observed for the Cholesky scheme, we test the case of set $5$ in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.} which is close to the Gaussian case for $H=1/2$ (see Figure \ref{fig:Weak_rate_set1_set_5_without_rich}). Surprisingly, we observed a weak convergence rate of order almost $1$. This observations confirms first that maybe the hybrid scheme is more robust, in terms of weak error, than Cholesky for the simulation of the rough Bergomi dynamics. Furthermore, we believe that the weak error in the Cholesky scheme depends on $H$, and  that the common error in both the Cholesky and Hybrid scheme is dominated by the second kind of weak error involved in  in the hybrid scheme with is of order $\Delta $ that is why we observed more robust rate for the hybrid scheme. We try in Section \ref{sec:Weak error analysis} to provide an analysis for the weak rate.
 
+\FloatBarrier
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_cholesky/weak_convergence_order_Bergomi_H_043_K_1_M_10_5_CI_relative_cholesky_hierarchical}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_cholesky/weak_convergence_order_Bergomi_H_043_K_1_M_10_5_CI_relative_cholesky_non_hierarchical}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	
+	\caption{The  convergence of the weak error $\mathcal{E}_B(N)$, using MC ($M=10^5$) with Cholesky scheme, for set $5$ parameter in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. We refer to $C_{\text{RB}}$ as $\expt{g(X)}$, and to $C_{\text{RB}}^{N}$ as  $\expt{g(X_{\Delta t})}$. The upper and lower bounds are $95\%$ confidence intervals. a) With hierarchical representation.  b) Without hierarchical representation.}
+	\label{fig:Weak_rate_set1_set_5_without_rich}
+\end{figure}
+\FloatBarrier
+
+\begin{remark}
+Our observations are in harmony with results observed in \cite{bayer2017regularity}, where it was observed that the weak error for pricing European option under the rBergomi, simulated using Cholesky scheme and for a particular choice of test function is of order $2H$ across the full range of $0<H <\frac{1}{2}$ (see Figure $3$ in \cite{bayer2017regularity}). On the other hand, I suspect  that the results reported in the Master thesis provided by Christian are reported on opposite way, that is the results reported for the hybrid scheme correspond to the Cholesky scheme (to be checked). 
+\end{remark}
+
+
+\section{Weak error analysis}\label{sec:Weak error analysis}
+
+\input{Weak_error_analysis.tex}
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %References
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%\bibliographystyle{plain}
-%\bibliography{smoothing_rBergomi.bib} 
+\bibliographystyle{plain}
+\bibliography{smoothing_rBergomi.bib} 
 
 
 

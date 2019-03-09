@@ -1,0 +1,21 @@
+In this work, we are interested in approximating $\expt{g(X_T}$, where $g$ is some smooth function and $X$ is the asset price under rBergomi dynamics such that $X_t=X_t(W^{(1)}_t,\widetilde{W}_t)$ where $W^{(1)}$ is standard Brownian motion and  $\widetilde{W}_t$ is the fractional Brownian motion as given by \eqref{eq:Volterra process}.  Then we can express the Hybrid and Cholesky scheme as the following 
+
+\begin{align}\label{eq: Hybrid approx}
+\expt{g\left(X_T\left(W^{(1)}_t,\widetilde{W}_t \right)\right)} \approx \expt{g\left(\overline{X}_N\left(\overline{W}^{(1)}_1,\dots,\overline{W}^{(1)}_N, \overline{\overline{W}}_1, \dots,\overline{\overline{W}}_N\right)\right)}:\quad \textbf{(Hybrid  scheme)}
+\end{align}
+
+
+\begin{align}\label{eq: Cholesky approx}
+\expt{g\left(X_T\left(W^{(1)}_t,\widetilde{W}_t\right)\right)} \approx \expt{g\left(\overline{X}_N\left(W^{(1)}_1,\dots,W^{(1)}_N, \widetilde{W}_1, \dots,\widetilde{W}_N\right)\right)}:\quad \textbf{(Cholesky  scheme)},
+\end{align}
+
+To simplify notation, let $\overline{\mathbf{W}^{1}}=(\overline{W}^{(1)}_1,\dots,\overline{W}^{(1)}_N)$, $\overline{\overline{\mathbf{W}}}=(\overline{\overline{W}}_1,\dots,\overline{\overline{W}}_N)$, $\mathbf{W}^{1}=(W^{(1)}_1,\dots,W^{(1)}_N)$ and $\widetilde{\mathbf{W}}=(\widetilde{W}_1,\dots,\widetilde{W}_N)$ .If we denote by $\varepsilon_{B}^{Hyb}$ and $\varepsilon_{B}^{Chol}$ the weak errors produced by the hybrid and Cholesky scheme respectively, then we can write
+\begin{small}
+\begin{align}\label{eq: Weak_error_hyb_chol}
+\varepsilon_{B}^{Hyb}&=\abs{\expt{g\left(X_T\left(W^{(1)}_t,\widetilde{W}_t\right) \right)}-\expt{g\left(\overline{X}_N\left(\overline{\mathbf{W}^{1}}, \overline{\overline{\mathbf{W}}}\right) \right)}} \nonumber\\
+&\le \abs{\expt{g\left(X_T\left(W^{(1)}_t,\widetilde{W}_t\right)\right)}-\expt{g\left(\overline{X}_N\left(\mathbf{W}^{1}, \widetilde{\mathbf{W}}\right)\right)}}+ \abs{ \expt{g\left(\overline{X}_N\left(\overline{\mathbf{W}^{1}}, \overline{\overline{\mathbf{W}}}\right)\right)}- \expt{g\left(\overline{X}_N\left(\mathbf{W}^{1}, \widetilde{\mathbf{W}}\right)\right)}}\nonumber\\
+&\le \varepsilon_{B}^{Chol}+ \abs{ \expt{g\left(\overline{X}_N\left(\overline{\mathbf{W}^{1}}, \overline{\overline{\mathbf{W}}}\right)\right)}- \expt{g\left(\overline{X}_N\left(\mathbf{W}^{1}, \widetilde{\mathbf{W}}\right)\right)}}
+\end{align}
+\end{small}
+
+\red{\textbf{To-DO:} We need to analyze both terms involved in the right hand-side of \eqref{eq: Weak_error_hyb_chol}}.

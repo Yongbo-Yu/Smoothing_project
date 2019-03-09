@@ -99,7 +99,7 @@ class Problem(object):
         #print y1
         z=self.A_inv.dot(y1)
         z1[0]=z[0]
-        y1=np.dot(self.A,z1.transpose())
+        y1=np.dot(self.A,z1)
         #print y1
 
         y__1=y1[1:]   

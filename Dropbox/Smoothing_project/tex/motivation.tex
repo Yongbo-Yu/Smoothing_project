@@ -32,9 +32,11 @@ The first aim of the work is to determine the optimal direction $\mathbf{v}$. By
 \end{align}
 where $\hat{X}$ is defined in \eqref{eq:approximate_dynamics}.
 
+\red{Maybe criterion given by \eqref{optimality_criterion_2} is not the right choice since decomposition \eqref{eq:smoothing_decomposition} should leave the distribution, and hence the variance invariant.}
+
 Going back to the SDE \eqref{eq:SDE_interest}, we have 
 \begin{equation}
-dX_i=a_i(X) dt+\sum_{j=1}^d b_{ij}(X) Z_j \frac{dt}{\sqrt{T}} +\sum_{j=1}^d b_{ij}(X) Z_j \frac{dt}{\sqrt{T}}+\sum_{j=1}^d b_{ij}(X) dB_j \PERIOD
+dX_i=a_i(X) dt +\sum_{j=1}^d b_{ij}(X) Z_j \frac{dt}{\sqrt{T}}+\sum_{j=1}^d b_{ij}(X) dB_j \PERIOD
 \end{equation}
 
 Using \eqref{eq:smoothing_decomposition_componentwise}, then we have
@@ -45,13 +47,44 @@ dX_i=\left(a_i(X)+\sum_{j=1}^d b_{ij}(X)  \frac{Z_v v_j}{\sqrt{T}}\right) dt+\le
 
 \subsubsection{First approach (Brutal)}
 
-We assume that the first term in the right-hand side of \eqref{eq:SDE_decomposition_componentwise_exapanded}  is the dominant term compared to the remaining terms (\red{We need to formulate clearly what we mean by this statement. Also I see some issues with this  assumption, since it implicitly implies from \eqref{eq:smoothing_decomposition_componentwise} that 
-$\mathbf{Z} \approx Z_v \mathbf{v}$, which is already a strong assumption about the solution $v$. As discussed with Raul, the approximation should be done in terms of the variance of $g$. I have suggest a counter-example but using local error, but Raul suggest to look at the global error term!}), and denote the approximate process $\hat{X}$, whose dynamics are given by
+\textbf{Assumption $1$:} We assume that the first term in the right-hand side of \eqref{eq:SDE_decomposition_componentwise_exapanded}  is the dominant term compared to the remaining terms.
+
+\red{We need to formulate clearly what we mean by this statement. Also I see some issues with this  assumption, since it implicitly implies from \eqref{eq:smoothing_decomposition_componentwise} that 
+$\mathbf{Z} \approx Z_v \mathbf{v}$, which is already a strong assumption about the solution $v$. As discussed with Raul, the approximation should be done in terms of the variance of $g$. I have suggest a counter-example but using local terms, but Raul suggest to look at the global terms which seems to validate the assumption $1$!}.
+
+\begin{proof}[Proof of assumption $1$]
+Let us assume from \eqref{eq:SDE_decomposition_componentwise_exapanded} that $a_i=0$, $b_{ij}=\alpha=\text{constant}$, and $g:\rset^d \rightarrow Id_{\rset}$, we try here to motivate Assumption $1$ first by looking at local terms and then by looking at global terms.
+\begin{itemize}
+\item[i)] \textit{By looking at local terms:} \eqref{eq:SDE_decomposition_componentwise_exapanded} becomes
+\begin{align*}
+dX_i= \left( \frac{dt \alpha}{\sqrt{T}} \right) \left( \sum_{j=1}^d v_j \right) Z_v + \left( \frac{dt \alpha}{\sqrt{T}} \right) \left( \sum_{j=1}^d v_j (Z_v)^\perp_j \right) +\alpha \sum_{j=1}^d dB_j,
+\end{align*}
+implying (if we neglect the correlation terms)
+\begin{align}\label{eq: variance local terms}
+\text{Var}[dX_i]\approx \underset{\Ordo{dt^2}}{\underbrace{\left( \frac{dt \alpha}{\sqrt{T}} \right)^2 \left( \sum_{j=1}^d v_j \right)^2}}  + \underset{=0}{\underbrace{\left( \frac{dt \alpha}{\sqrt{T}} \right)^2 \text{Var}\left[ \sum_{j=1}^d v_j (Z_v)^\perp_j  \right]}}+\underset{\Ordo{dt}}{\underbrace{\alpha^2  \text{Var}\left[\sum_{j=1}^d dB_j \right]}}.
+\end{align}
+Therefore from \eqref{eq: variance local terms}, it appears that the dominant term in the sense of local variance is coming from $\alpha \sum_{j=1}^d dB_j$, which makes assumption $1$ not valid!!
+\item[ii)] \textit{By looking at global terms:} Let us integrate \eqref{eq:SDE_decomposition_componentwise_exapanded} form $0$ to $T$, then we have
+\begin{align*}
+X_T-X_0 &= \left( \sqrt{T}\alpha \right) \left( \sum_{j=1}^d v_j \right) Z_v + \left( \sqrt{T} \alpha \right) \left( \sum_{j=1}^d v_j  (Z_v)^\perp_j \right)+\alpha \sum_{j=1}^d  \int_{0}^T dB_j \nonumber\\
+&= \left( \sqrt{T}\alpha \right) \left( \sum_{j=1}^d v_j \right) Z_v + \left( \sqrt{T} \alpha \right) \left( \sum_{j=1}^d v_j  (Z_v)^\perp_j \right)+\alpha \sum_{j=1}^d  \left(B_j(T)-B_j(0)\right) ,
+\end{align*}
+implying (if we neglect the correlation terms)
+
+\begin{align}\label{eq: variance global terms}
+\text{Var}[X_T-X_0] &\approx \left( \sqrt{T}\alpha \right)^2 \left( \sum_{j=1}^d v_j \right)^2  + \underset{=0}{\underbrace{\left( \sqrt{T} \alpha \right)^2  \text{Var}\left[ \sum_{j=1}^d v_j  (Z_v)^\perp_j \right]}}+ \alpha^2 \sum_{j=1}^d \text{Var} \left[B_j(T)-B_j(0)\right],\nonumber\\
+& \approx  T \alpha^2 \left( \sum_{j=1}^d v_j \right)^2  + \alpha^2 \sum_{j=1}^d \underset{=0}{\underbrace{\text{Var} \left[B_j(T)-B_j(0)\right]}},\nonumber\\
+& \approx  T \alpha^2 \left( \sum_{j=1}^d v_j \right)^2.
+\end{align}
+Therefore, we can conclude from \eqref{eq: variance global terms} that the dominant term in the sense of global variance is coming from $\sum_{j=1}^d b_{ij}(X)  \frac{Z_v v_j}{\sqrt{T}} dt$, which makes assumption $1$  valid.
+\end{itemize}
+\end{proof}
+
+Given assumption $1$ above, we denote the approximate process $\hat{X}$, whose dynamics are given by
 \begin{align}\label{eq:approximate_dynamics}
 \frac{d\hat{X}_i}{dt}=a_i(\hat{X})+\sum_{j=1}^d b_{ij}(\hat{X})  \frac{Z_v v_j}{\sqrt{T}}, \quad 1 \le i \le d \COMMA
 \end{align}
 with mean 
-
 \begin{equation*}
 \frac{d\expt{\hat{X}_i}}{dt}=\expt{a_i(\hat{X})}+\sum_{j=1}^d \expt{b_{ij}(\hat{X})  \frac{Z_v v_j}{\sqrt{T}}}, \quad 1 \le i \le d \COMMA
 \end{equation*}
@@ -61,12 +94,10 @@ and second moment
 &=2 \left(\expt{\hat{X}_i a_i(\hat{X})}+\sum_{j=1}^d \expt{ \hat{X}_i b_{ij}(\hat{X})  \frac{Z_v v_j}{\sqrt{T}}}\right), \quad 1 \le i \le d \PERIOD
 \end{align*}
 Now, let us expand $\hat{X}$ around $Z_v$, that is
-
 \begin{align}
 \hat{X}_{(Z_v)}=\hat{X}_{(0)}+\hat{X}^\prime_{(0)} Z_v+\dots
 \end{align}
-Then, we have
-
+Then, for the first moment we have
 \begin{align}\label{eq:first_moment_approximation}
 \frac{d\expt{\hat{X}_i}}{dt}&\approx \expt{a_i(\hat{X}_{(0)}+\hat{X}^\prime_{(0)} Z_v)}+\sum_{j=1}^d \expt{b_{ij}(\hat{X}_{(0)}+\hat{X}^\prime_{(0)} Z_v)  \frac{Z_v v_j}{\sqrt{T}}}, \quad 1 \le i \le d\COMMA \nonumber\\ 
 &\approx a_i(\hat{X}_{(0)})+\sum_{j=1}^d \left(\sum_{k=1}^d  b_{ij,k}^\prime(\hat{X}_{(0)}) \hat{X}_{k,(0)}^\prime\right) \frac{\expt{Z_v^2} v_j}{\sqrt{T}}, \quad 1 \le i \le d\COMMA\nonumber\\ 
@@ -76,8 +107,8 @@ Then, we have
 Similarly, if we approximate the second moment, we get for $1 \le i \le d$
 \begin{small}
 \begin{align}\label{eq:second_moment_approximation}
-\frac{d\expt{\hat{X}^2_i}}{dt}&\approx 2 \expt{\left(\hat{X}_{i,(0)}+\hat{X}^\prime_{i,(0)} Z_v \right) a_i(\hat{X}_{(0)}+\hat{X}^\prime_{(0)} Z_v)}+\sum_{j=1}^d \expt{ \left(\hat{X}_{i,(0)}+\hat{X}^\prime_{i,(0)} Z_v \right) b_{ij}(\hat{X}_{(0)}+\hat{X}^\prime_{(0)} Z_v)  \frac{Z_v v_j}{\sqrt{T}}} \COMMA \nonumber\\
-&=2 \left( \hat{X}_{i,(0)} a_i(\hat{X}_{(0)})+\hat{X}^\prime_{i,(0)}  \sum_{k=1}^d a_{i,k}^\prime(\hat{X}_{(0)})\hat{X}^\prime_{k,(0)}   + \left( \sum_{j=1}^d  \hat{X}^\prime_{i,(0)} b_{ij}(\hat{X}_{(0)})+ \hat{X}_{i,(0)}  \left(\sum_{k=1}^d \hat{X}^\prime_{k,(0)} b^\prime_{ij,k}(\hat{X}_{(0)})\right) \right) \frac{ v_j}{\sqrt{T}} \right) \PERIOD
+\frac{d\expt{\hat{X}^2_i}}{dt}&\approx 2 \left(\expt{\left(\hat{X}_{i,(0)}+\hat{X}^\prime_{i,(0)} Z_v \right) a_i(\hat{X}_{(0)}+\hat{X}^\prime_{(0)} Z_v)}+\sum_{j=1}^d \expt{ \left(\hat{X}_{i,(0)}+\hat{X}^\prime_{i,(0)} Z_v \right) b_{ij}(\hat{X}_{(0)}+\hat{X}^\prime_{(0)} Z_v)  \frac{Z_v v_j}{\sqrt{T}}} \right) \COMMA \nonumber\\
+&\approx 2 \left( \hat{X}_{i,(0)} a_i(\hat{X}_{(0)})+\hat{X}^\prime_{i,(0)}  \sum_{k=1}^d a_{i,k}^\prime(\hat{X}_{(0)})\hat{X}^\prime_{k,(0)}   + \left( \sum_{j=1}^d  \hat{X}^\prime_{i,(0)} b_{ij}(\hat{X}_{(0)})+ \hat{X}_{i,(0)}  \left(\sum_{k=1}^d \hat{X}^\prime_{k,(0)} b^\prime_{ij,k}(\hat{X}_{(0)})\right) \right) \frac{ v_j}{\sqrt{T}} \right) \PERIOD
 \end{align}
 \end{small}
 Regarding the covariance terms $E[X_i X_l]$, for $1 \le i \neq l \le d$, their dynamics can be approximated by
@@ -86,18 +117,18 @@ Regarding the covariance terms $E[X_i X_l]$, for $1 \le i \neq l \le d$, their d
 \frac{d\expt{\hat{X}_i \hat{X}_{l}}}{dt}&=\expt{\hat{X}_i \frac{d\hat{X}_l}{dt}}+ \expt{\hat{X}_l \frac{d\hat{X}_i}{dt}}\nonumber\\
 &\approx  \expt{\left(\hat{X}_{i,(0)}+\hat{X}^\prime_{i,(0)} Z_v \right) a_l(\hat{X}_{(0)}+\hat{X}^\prime_{(0)} Z_v)}+\sum_{j=1}^d \expt{ \left(\hat{X}_{i,(0)}+\hat{X}^\prime_{i,(0)} Z_v \right) b_{lj}(\hat{X}_{(0)}+\hat{X}^\prime_{(0)} Z_v)  \frac{Z_v v_j}{\sqrt{T}}}  \nonumber\\
 &+  \expt{\left(\hat{X}_{l,(0)}+\hat{X}^\prime_{l,(0)} Z_v \right) a_i(\hat{X}_{(0)}+\hat{X}^\prime_{(0)} Z_v)}+\sum_{j=1}^d \expt{ \left(\hat{X}_{l,(0)}+\hat{X}^\prime_{l,(0)} Z_v \right) b_{ij}(\hat{X}_{(0)}+\hat{X}^\prime_{(0)} Z_v)  \frac{Z_v v_j}{\sqrt{T}}}  \nonumber\\
-&=\left( \hat{X}_{i,(0)} a_l(\hat{X}_{(0)})+\hat{X}^\prime_{i,(0)}  \sum_{k=1}^d a_{l,k}^\prime(\hat{X}_{(0)})\hat{X}^\prime_{k,(0)}   + \left( \sum_{j=1}^d  \hat{X}^\prime_{i,(0)} b_{lj}(\hat{X}_{(0)})+ \hat{X}_{i,(0)}  \left(\sum_{k=1}^d \hat{X}^\prime_{k,(0)} b^\prime_{lj,k}(\hat{X}_{(0)})\right) \right) \frac{ v_j}{\sqrt{T}} \right) \nonumber\\
+&\approx \left( \hat{X}_{i,(0)} a_l(\hat{X}_{(0)})+\hat{X}^\prime_{i,(0)}  \sum_{k=1}^d a_{l,k}^\prime(\hat{X}_{(0)})\hat{X}^\prime_{k,(0)}   + \left( \sum_{j=1}^d  \hat{X}^\prime_{i,(0)} b_{lj}(\hat{X}_{(0)})+ \hat{X}_{i,(0)}  \left(\sum_{k=1}^d \hat{X}^\prime_{k,(0)} b^\prime_{lj,k}(\hat{X}_{(0)})\right) \right) \frac{ v_j}{\sqrt{T}} \right) \nonumber\\
 &+\left( \hat{X}_{l,(0)} a_i(\hat{X}_{(0)})+\hat{X}^\prime_{l,(0)}  \sum_{k=1}^d a_{i,k}^\prime(\hat{X}_{(0)})\hat{X}^\prime_{k,(0)}   + \left( \sum_{j=1}^d  \hat{X}^\prime_{l,(0)} b_{ij}(\hat{X}_{(0)})+ \hat{X}_{l,(0)}  \left(\sum_{k=1}^d \hat{X}^\prime_{k,(0)} b^\prime_{ij,k}(\hat{X}_{(0)})\right) \right) \frac{ v_j}{\sqrt{T}} \right) \PERIOD
 \end{align}
 \end{small}
-The idea then is maximize, at the final time, the smoothing effect, represented by \eqref{optimality_criterion_2}, where $\hat{X}_T \sim \mathcal{N}(\mu_T, \Sigma_T)$, such that $\mu_T, \Sigma_T$ are computed using   \eqref{eq:first_moment_approximation}, \eqref{eq:second_moment_approximation} and \eqref{eq:covariance_dynamcis_approximation}. We note that the computation of $\hat{X}^\prime$ is cheap and its evolution can be deduced from \eqref{eq:approximate_dynamics}, resulting in
+The idea then is to maximize, at the final time, the smoothing effect, represented by \eqref{optimality_criterion_2}, where $\hat{X}_T \sim \mathcal{N}(\mu_T, \Sigma_T)$, such that $\mu_T, \Sigma_T$ are computed using   \eqref{eq:first_moment_approximation}, \eqref{eq:second_moment_approximation} and \eqref{eq:covariance_dynamcis_approximation}. We note that the computation of $\hat{X}^\prime$ is cheap and its evolution can be deduced from \eqref{eq:approximate_dynamics}, resulting in
 \begin{align*}
-&\frac{d\hat{X}^\prime_i}{dt}=\sum_{k=1}^d a_{i,k}(\hat{X}) \hat{X}^\prime_k+\sum_{j=1}^d  \left(b_{ij}(\hat{X})\frac{ v_j}{\sqrt{T}}+ \sum_{k=1}^d \left(b^\prime_{ij,k}(\hat{X}) \hat{X}^\prime_k \right) \frac{Z_v v_j}{\sqrt{T}}\right), \quad  1 \le i \le d \COMMA \nonumber\\
+&\frac{d\hat{X}^\prime_i}{dt}=\sum_{k=1}^d a^\prime_{i,k}(\hat{X}) \hat{X}^\prime_k+\sum_{j=1}^d  \left(b_{ij}(\hat{X})\frac{ v_j}{\sqrt{T}}+ \sum_{k=1}^d \left(b^\prime_{ij,k}(\hat{X}) \hat{X}^\prime_k \right) \frac{Z_v v_j}{\sqrt{T}}\right), \quad  1 \le i \le d \COMMA \nonumber\\
 &\hat{X}^\prime(t=0)=0, \quad  1 \le i \le d \COMMA
 \end{align*}
 which when evaluated at $Z_v=0$ simplifies to
 \begin{align*}
-&\frac{d\hat{X}^\prime_{i,(0)}}{dt}=\sum_{k=1}^d a_{i,k}(\hat{X}_{(0)}) \hat{X}^\prime_{k,(0)}+\sum_{j=1}^d  \left(b_{ij}(\hat{X}_{(0)})\frac{ v_j}{\sqrt{T}}\right), \quad  1 \le i \le d \COMMA \nonumber\\
+&\frac{d\hat{X}^\prime_{i,(0)}}{dt}=\sum_{k=1}^d a^\prime_{i,k}(\hat{X}_{(0)}) \hat{X}^\prime_{k,(0)}+\sum_{j=1}^d  \left(b_{ij}(\hat{X}_{(0)})\frac{ v_j}{\sqrt{T}}\right), \quad  1 \le i \le d \COMMA \nonumber\\
 &\hat{X}_{(0)}^\prime(t=0)=0, \quad  1 \le i \le d \PERIOD
 \end{align*}
 In our context, we work mainly with two possible structures of payoff function $g$. In fact, for the cases of call/put options, the payoff $g$ has a kink and  will be of the form 
@@ -116,9 +147,16 @@ We introduce the notation $\mathbf{x}=(x_j,\mathbf{x}_{-j})$, where $\mathbf{x}_
 In the following, we motivate the optimization problem \eqref{optimality_criterion_2} for the call and the binary examples.
 \begin{example}[Binary option]
 We consider the case of one dimensional binary option, such that $g$ is given by \eqref{eq:binary_option} and  $\phi(x)=x-K$, where $K$ is the strike price.  
+
+In this case we have
+\begin{align*}
+\text{Var}\left[g(\widehat{X}_T)\right]= p (1-p)
+\end{align*}
+where $p= \mathbb{P}(\phi(\widehat{X}_T) \ge 0)$, and can be approximated using the normal approximation based on the moment expansion where the first and second moments are provided by  \ref{eq:first_moment_approximation} and \ref{eq:second_moment_approximation}. Then once we have an approximation of $p$, we can optimize over $v$.
+\red{Add details here for the optimization problem \eqref{optimality_criterion_2} for the call and the binary examples.}
 \end{example} 
 \begin{example}[Call option]
-We consider the case of one dimensional call option,  $g$ is given by \eqref{eq:call_option} and $\phi(x)=x-K$, where $K$ is the strike price. 
+We consider the case of one dimensional call omption,  $g$ is given by \eqref{eq:call_option} and $\phi(x)=x-K$, where $K$ is the strike price. 
 \end{example} 
 
 \red{Add details here for the optimization problem \eqref{optimality_criterion_2} for the call and the binary examples.}
