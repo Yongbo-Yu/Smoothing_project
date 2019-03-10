@@ -34,7 +34,7 @@ class Problem(object):
     xi=0.235**2;   # this will provide the set of xi parameter values 
     #x=0.1;
     # this will provide the set of H parameter values
-    #HIn[0]=0.43
+    #H=0.43
     H=0.07
     #HIn[0]=0.02
       # This will provide the set of eta paramter values
@@ -64,7 +64,7 @@ class Problem(object):
         # self.dt=self.T[0]/float(Nsteps) # time steps length
         self.d=int(np.log2(Nsteps)) #power 2 number steps
 
-        self.rnorm=RNorm(3)
+        self.rnorm=RNorm()
 
         self.rfbm= RfBm(Nsteps,self.H,self.rnorm)
         self.L=np.array(self.rfbm.GetL())  #getting the L matrix
@@ -138,7 +138,7 @@ class Problem(object):
 
 def weak_convergence_differences():    
         #exact= 0.0712073 #exact value of K=1, H=0.43_xi_0.235^2_eta_1_9_r__09
-        exact= 0.0792047  #exact value of K=1, H=0.07_xi_0.235^2_eta_1_9_r__09
+        exact= 0.0791  #exact value of K=1, H=0.07_xi_0.235^2_eta_1_9_r__09
         #exact= 0.224905759853  #exact value of K=0.8, H=0.07_xi_0.235^2_eta_1_9_r__09
         #exact= 0.00993973310944  #exact value of K=1.2, H=0.07_xi_0.235^2_eta_1_9_r__09
         #exact=0.124756301225  #exact value of K=1, H=0.02_xi_01_eta_0_4_r__07
@@ -160,7 +160,7 @@ def weak_convergence_differences():
         Lb=np.zeros(5)
         Ub_diff=np.zeros(4)
         Lb_diff=np.zeros(4)
-        values=np.zeros(((1*(10**6),5))) 
+        values=np.zeros(((4*(10**6),5))) 
         num_cores = mp.cpu_count()
         for i in range(0,5):
             print i
@@ -168,14 +168,14 @@ def weak_convergence_differences():
     
             start_time=time.time()
             prb = Problem(Nsteps_arr[i]) 
-            for j in range(1*(10**6)):
+            for j in range(4*(10**6)):
                   #Here we need to use the C++ code to compute the payoff             
                  values[j,i]=prb.objfun(Nsteps_arr[i])/float(exact)
 
 
             elapsed_time_qoi[i]=time.time()-start_time
             print  elapsed_time_qoi[i]
-            print np.mean(values[:,i],axis=0)
+            print (np.mean(values[:,i],axis=0) *0.0791)
            
 
 
@@ -188,7 +188,7 @@ def weak_convergence_differences():
         error=np.abs(np.mean(values,axis=0) - 1) 
         elapsed_time_qoi=time.time()-start_time_2+elapsed_time_qoi
 
-        stand=np.std(values, axis = 0)/  float(np.sqrt((1*(10**6))))
+        stand=np.std(values, axis = 0)/  float(np.sqrt((4*(10**6))))
         Ub=np.abs(np.mean(values,axis=0) - 1)+1.96*stand
         Lb=np.abs(np.mean(values,axis=0) - 1)-1.96*stand
 
@@ -201,7 +201,7 @@ def weak_convergence_differences():
         differences= [values[:,i]-values[:,i+1] for i in range(0,4)]
         error_diff=np.abs(np.mean(differences,axis=1))
         print error_diff 
-        stand_diff=np.std(differences, axis = 1)/ float(np.sqrt((1*(10**6))))
+        stand_diff=np.std(differences, axis = 1)/ float(np.sqrt((4*(10**6))))
         print stand_diff
         Ub_diff=np.abs(np.mean(differences,axis=1))+1.96*stand_diff
         Lb_diff=np.abs(np.mean(differences,axis=1))-1.96*stand_diff
@@ -247,7 +247,7 @@ def weak_convergence_differences():
         plt.ylabel(r'$\mid  E[g(X_{\Delta t})-  g(X)] \mid $',fontsize=14) 
         plt.subplots_adjust(wspace=0.6, hspace=0.6, left=0.15, bottom=0.22, right=0.96, top=0.96)
         plt.legend(loc='upper left')
-        plt.savefig('./results/weak_convergence_order_Bergomi_H_007_K_1_M_10_4_CI_relative_cholesky_hierarchical.eps', format='eps', dpi=1000)  
+        plt.savefig('./results/weak_convergence_order_Bergomi_H_007_K_1_M_4_10_6_CI_relative_cholesky_hierarchical.eps', format='eps', dpi=1000)  
 
         fig = plt.figure()
         plt.plot(dt_arr[0:4], error_diff,linewidth=2.0,label='weak_error' , marker='>', hold=True) 
@@ -262,7 +262,7 @@ def weak_convergence_differences():
         plt.ylabel(r'$\mid E[g(X_{\Delta t})-  g(X_{\Delta t/2})] \mid $',fontsize=14) 
         plt.subplots_adjust(wspace=0.6, hspace=0.6, left=0.15, bottom=0.22, right=0.96, top=0.96)
         plt.legend(loc='upper left')
-        plt.savefig('./results/weak_convergence_order_differences_Bergomi_H_007_K_1_M_10_4_CI_relative_cholesky_hierarchical.eps', format='eps', dpi=1000)  
+        plt.savefig('./results/weak_convergence_order_differences_Bergomi_H_007_K_1_M_4_10_6_CI_relative_cholesky_hierarchical.eps', format='eps', dpi=1000)  
 
 #weak_convergence_rate_plotting()
 weak_convergence_differences()
