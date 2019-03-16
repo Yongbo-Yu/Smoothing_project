@@ -27,6 +27,7 @@ class Problem(object):
     T=1.0                      # maturity
     rho=None                  #correlation matrix
     exact=12.900784  # 2-d, sigma=0.4, S_0=K=100, T=1, r=0,rho=0.3
+    #exact=11.447  # 2-d, sigma=0.4, S_0=K=100, T=1, r=0,rho=0.0
    
  
  
@@ -45,6 +46,7 @@ class Problem(object):
     
         from scipy.linalg import toeplitz 
         self.rho=toeplitz([1,0.3]) #correlation matrix
+        #self.rho=toeplitz([1,0.0]) #correlation matrix
         self.dt=self.T/float(Nsteps) # time steps length
         self.d=int(np.log2(Nsteps)) #power 2 number steps
 
@@ -52,13 +54,16 @@ class Problem(object):
         self.A=self.rotation_matrix()
         self.A_inv=np.transpose(self.A) # since A is  a rotation matrix than A^{-1}=A^T
 
+    
         idx=[]
         for i in range(0,self.basket_d*Nsteps,Nsteps):
             idx.append(i)
         
         
         self.idxc=np.setdiff1d(range(0,self.basket_d*Nsteps),idx)
-
+ 
+  
+ 
  
      # objfun:  beta #number of points in the first direction
     def objfun(self,Nsteps):
@@ -68,7 +73,7 @@ class Problem(object):
         y = np.random.multivariate_normal(mean, covariance)    
 
 
-        beta=128
+        beta=64
         
         
         yy=[self.basket_d*Nsteps]
@@ -97,7 +102,7 @@ class Problem(object):
         #print y1
         z=self.A_inv.dot(y1)
         z1[0]=z[0]
-        y1=np.dot(self.A,z1)
+        y1=np.dot(self.A,z1.transpose())
         #print y1
 
         y__1=y1[1:]   
@@ -280,7 +285,7 @@ class Problem(object):
     def dx(self,x,y__1,z__1,Nsteps):
         P1,dP1=self.f(x,y__1,z__1,Nsteps)
         return abs(0-P1)
-
+    
     def f(self,y1,y__1,z__1,Nsteps):# need to check this for case d=2, N=2 and then we can extend
        
         y2=y__1[0] 
@@ -314,7 +319,6 @@ class Problem(object):
         dP=dPy[0]+dPy[1]
         return Py,dP    
     
-    
 
         
     def newtons_method(self,x0,y__1,z__1,z1,Nsteps,eps=1e-10):
@@ -332,7 +336,7 @@ class Problem(object):
             y=np.dot(self.A,z1)
             y__1=y[1:]
             delta = self.dx(x0,y__1,z__1,Nsteps)    
-        return x0         
+        return x0    
 
     def cartesian(self,arrays, out=None):
         """
@@ -388,35 +392,36 @@ class Problem(object):
 def weak_convergence_differences():    
         start_time=time.time()
         exact= 12.900784 #S_0=K=100, sigma =0.4, corr=0.3, T=1
+        #exact= 11.447 #S_0=K=100, sigma =0.4, corr=0.0, T=1
         marker=['>', 'v', '^', 'o', '*','+','-',':']
         ax = figure().gca()
         ax.xaxis.set_major_locator(MaxNLocator(integer=True))
         # # feed parameters to the problem
-        Nsteps_arr=np.array([2,4,8,16,32,64])
+        Nsteps_arr=np.array([2,4,8,16,32])
         dt_arr=1.0/(Nsteps_arr)
-        error_diff=np.zeros(5)
-        stand_diff=np.zeros(5)
-        error=np.zeros(6)
-        stand=np.zeros(6)
-        elapsed_time_qoi=np.zeros(6)
-        Ub=np.zeros(6)
-        Lb=np.zeros(6)
-        Ub_diff=np.zeros(5)
-        Lb_diff=np.zeros(5)
-        values=np.zeros((1*(10**3),6)) 
+        error_diff=np.zeros(4)
+        stand_diff=np.zeros(4)
+        error=np.zeros(5)
+        stand=np.zeros(5)
+        elapsed_time_qoi=np.zeros(5)
+        Ub=np.zeros(5)
+        Lb=np.zeros(5)
+        Ub_diff=np.zeros(4)
+        Lb_diff=np.zeros(4)
+        values=np.zeros((1*(10**4),5)) 
          
       
         
  
         num_cores = mp.cpu_count()
    
-        for i in range(0,6):
+        for i in range(0,5):
             print i
             start_time=time.time()
              
             prb = Problem(Nsteps_arr[i]) 
 
-            for j in range(1*(10**3)):
+            for j in range(1*(10**4)):
                   #Here we need to use the C++ code to compute the payoff             
                  values[j,i]=prb.objfun(Nsteps_arr[i])/float(exact)
            
@@ -424,7 +429,7 @@ def weak_convergence_differences():
             
 
             elapsed_time_qoi[i]=time.time()-start_time
-            print np.mean(values[:,i]*float(exact))
+            print np.mean(values[:,i])*float(exact)
             print  elapsed_time_qoi[i]
 
 
@@ -438,7 +443,7 @@ def weak_convergence_differences():
         print elapsed_time_qoi
  
         error=np.abs(np.mean(values,axis=0) - 1) 
-        stand=np.std(values, axis = 0)/  float(np.sqrt(1*(10**3)))
+        stand=np.std(values, axis = 0)/  float(np.sqrt(1*(10**4)))
         Ub=np.abs(np.mean(values,axis=0) - 1)+1.96*stand
         Lb=np.abs(np.mean(values,axis=0) - 1)-1.96*stand
         print(error)   
@@ -446,17 +451,17 @@ def weak_convergence_differences():
         print Lb
         print Ub
           
-        differences= [values[:,i]-values[:,i+1] for i in range(0,5)]
+        differences= [values[:,i]-values[:,i+1] for i in range(0,4)]
         error_diff=np.abs(np.mean(differences,axis=1))
         print error_diff 
-        stand_diff=np.std(differences, axis = 1)/ float(np.sqrt(1*(10**3)))
+        stand_diff=np.std(differences, axis = 1)/ float(np.sqrt(1*(10**4)))
         print stand_diff
         Ub_diff=np.abs(np.mean(differences,axis=1))+1.96*stand_diff
         Lb_diff=np.abs(np.mean(differences,axis=1))-1.96*stand_diff
         print Ub_diff
         print Lb_diff
  
-        
+
         z= np.polyfit(np.log(dt_arr), np.log(error), 1)
         fit=np.exp(z[0]*np.log(dt_arr))
         print z[0]
@@ -470,14 +475,14 @@ def weak_convergence_differences():
  
  
  
-        z_diff= np.polyfit(np.log(dt_arr[0:5]), np.log(error_diff), 1)
-        fit_diff=np.exp(z_diff[0]*np.log(dt_arr[0:5]))
+        z_diff= np.polyfit(np.log(dt_arr[0:4]), np.log(error_diff), 1)
+        fit_diff=np.exp(z_diff[0]*np.log(dt_arr[0:4]))
         print z_diff[0]
  
         z3diff=np.zeros(2)
         z3diff[0]=1.0
         z3diff[1]=np.log(error_diff[0]*2)
-        fit3diff=np.exp(z3diff[0]*np.log(dt_arr[0:5])+z3diff[1])
+        fit3diff=np.exp(z3diff[0]*np.log(dt_arr[0:4])+z3diff[1])
          
         fig = plt.figure()
  
@@ -495,22 +500,22 @@ def weak_convergence_differences():
         plt.ylabel(r'$\mid  g(X_{\Delta t})-  g(X) \mid $',fontsize=14) 
         plt.subplots_adjust(wspace=0.6, hspace=0.6, left=0.15, bottom=0.22, right=0.96, top=0.96)
         plt.legend(loc='upper left')
-        plt.savefig('./results/weak_convergence_order_basket_option_2d_relative_M_10_4_beta_128.eps', format='eps', dpi=1000)  
+        plt.savefig('./results/weak_convergence_order_basket_option_2d_relative_M_1_10_4_beta_64_2.eps', format='eps', dpi=1000)  
 
         fig = plt.figure()
-        plt.plot(dt_arr[0:5], error_diff,linewidth=2.0,label='weak_error' ,linestyle = '--',marker='>', hold=True) 
-        plt.plot(dt_arr[0:5], Lb_diff,linewidth=2.0,label='Lb' ,linestyle = '--', hold=True) 
-        plt.plot(dt_arr[0:5], Ub_diff,linewidth=2.0,label='Ub' ,linestyle = '--', hold=True) 
+        plt.plot(dt_arr[0:4], error_diff,linewidth=2.0,label='weak_error' ,linestyle = '--',marker='>', hold=True) 
+        plt.plot(dt_arr[0:4], Lb_diff,linewidth=2.0,label='Lb' ,linestyle = '--', hold=True) 
+        plt.plot(dt_arr[0:4], Ub_diff,linewidth=2.0,label='Ub' ,linestyle = '--', hold=True) 
         plt.yscale('log')
         plt.xscale('log')
         plt.xlabel(r'$\Delta t$',fontsize=14)
  
-        plt.plot(dt_arr[0:5], fit_diff,linewidth=2.0,label=r'rate= %s' % format(z_diff[0]  , '.2f'), linestyle = '--', marker='o')
-        plt.plot(dt_arr[0:5], fit3diff,linewidth=2.0,label=r'rate= %s' % format(z3diff[0]  , '.2f'), linestyle = '--', marker='o')
+        plt.plot(dt_arr[0:4], fit_diff,linewidth=2.0,label=r'rate= %s' % format(z_diff[0]  , '.2f'), linestyle = '--', marker='o')
+        plt.plot(dt_arr[0:4], fit3diff,linewidth=2.0,label=r'rate= %s' % format(z3diff[0]  , '.2f'), linestyle = '--', marker='o')
         plt.ylabel(r'$\mid  g(X_{\Delta t})-  g(X_{\Delta t/2}) \mid $',fontsize=14) 
         plt.subplots_adjust(wspace=0.6, hspace=0.6, left=0.15, bottom=0.22, right=0.96, top=0.96)
         plt.legend(loc='upper left')
-        plt.savefig('./results/weak_convergence_order_differences_basket_option_2d_relative_M_10_4_beta_128.ps', format='eps', dpi=1000)  
+        plt.savefig('./results/weak_convergence_order_differences_basket_option_2d_relative_M_1_10_4_beta_64_2.ps', format='eps', dpi=1000)  
  
  
 weak_convergence_differences()   
