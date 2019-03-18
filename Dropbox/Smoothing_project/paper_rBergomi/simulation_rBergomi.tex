@@ -1,0 +1,149 @@
+
+
+One of the numerical challenges encountered in the simulation of the rBergomi dynamics  is the computation of  $\int_{0}^{T} \sqrt{v_t} dW_t^1$ and $V=\int_{0}^{T} v_t dt$ in \eqref{BS_formula_rbergomi}, mainly because of the singularity of the Volterra kernel $K^H(s,t)$ at the diagonal $s = t$. In fact,  one needs to jointly simulate two Gaussian processes $(W_t^1, \widetilde{W}^H_t: 0 \le t \le T)$, resulting in $W^1_{t_1},\dots, W^1_{t_N}$ and $\widetilde{W}^H_{t_1},\dots, \widetilde{W}^H_{t_N}$ along a given time grid $t_1 <\dots < t_N$. In the literature, there are essentially two suggested ways to achieve this:
+ \begin{enumerate}
+% 	\item[i)] \textbf{Simple Euler discretization}: Euler discretization of the integral \eqref{eq:Volterra process}, defining $\widetilde{W}^H$, together with classical simulation of increments of $W^1$. This is inefficient because the integral is singular and adaptivity may not improve the scheme since the singularity moves with time. For this method, we need an $N$-dimensional random Gaussian input vector to produce one (approximate, inaccurate) sample of $W^1_{t_1},\dots, W^1_{t_N}, \widetilde{W}^H_{t_1},\dots, \widetilde{W}_{t_N}$.
+ 	
+ 	\item[i)] \textbf{Covariance based approach (exact simulation)} \cite{bayer2016pricing,bayer2018short}: Given that $W^1_{t_1},\dots, W^1_{t_N}, \widetilde{W}^H_{t_1},\dots, \widetilde{W}_{t_N}$ together form a ($2N$)-dimensional Gaussian random vector with computable covariance matrix, $A$, one can use Cholesky decomposition of the covariance matrix to produce exact samples of $W^1_{t_1},\dots, W^1_{t_N},\widetilde{W}^H_{t_1},\dots, \widetilde{W}_{t_N}$ from $2 N$-dimensional Gaussian random vector as  input. This method is exact but slow. The simulation  requires $\Ordo{N^2}$ flops. Note that the offline cost is $\Ordo{N^3}$ flops.
+ 	
+ 	\item[ii)]  \textbf{The hybrid scheme of \cite{bennedsen2017hybrid}}: This scheme uses a different approach, which is essentially based on  Euler discretization  but crucially improved by moment
+ 	matching for the singular term in the left point rule. It is also
+ 	inexact in the sense that samples produced here do not exactly have the distribution of $W^1_{t_1},\dots, W^1_{t_N}, \widetilde{W}^H_{t_1},\dots, \widetilde{W}_{t_N}$, however they are much more accurate than samples produced from simple Euler discretization, but much faster than method $(i)$. As in method $(i)$, in this case, we need a $2 N$-dimensional Gaussian random input vector to produce one 	sample of $W^1_{t_1},\dots, W^1_{t_N}, \widetilde{W}^H_{t_1},\dots, \widetilde{W}_{t_N}$.
+ \end{enumerate}
+
+In the following, we give more details for each scheme. 
+
+
+
+\subsection{The Hybrid Scheme}
+The hybrid scheme was developed in \cite{bennedsen2017hybrid} for the simulation
+of BSS \eqref{eq:BSS} and TBSS \eqref{eq:TBSS} processes with kernel functions, that are similar to a power function near zero, i.e. $K(x)$ is similar to $x^\alpha$ for some $\alpha \in(-\frac{1}{2},\frac{1}{2})$ when $x>0$ is near zero. 
+
+In this section, we start by introducing the general idea of the hybrid scheme. Then, we illustrate how it can be used in simulating  rBergomi  dynamics.
+\subsubsection{General Idea of the Hybrid Scheme}
+Before describing the general hybrid scheme, there are two assumptions (conditions) that should be fulfilled by the kernel function $K$ in order to apply the scheme. In fact, we assume that the kernel function $K:(0,\infty)\rightarrow [0,\infty)$ satisfy the following
+\begin{enumerate}
+\item For some $\alpha \in(-\frac{1}{2},\frac{1}{2})\setminus\{0\}$,
+$$ K(x)=x^\alpha L_K(x),\quad x \in (0,1],$$
+where $L_K:(0,1] \rightarrow [0,\infty)$ is continuously differentiable, slowly varying at $0$ and bounded away from $0$. Moreover there exists a constant $C>0$ such that the derivative $L^\prime_K$ satisfies
+$$ \abs{L_K^\prime(x)} \le C \left(1+x^{-1}\right),\quad x \in (0,1].$$
+\item The function $K$ is continuously differentiable on $(0,\infty)$, with derivative $K^\prime$ that is ultimately monotonic and also satisfies $\int_{1}^ \infty K^\prime(x)^2 dx<\infty$.
+\end{enumerate}
+The hybrid scheme starts by discretizing a TBSS process $X_t$ giving by \eqref{eq:TBSS} on the grid $G_{t}^n=\{t,t-\frac{1}{n},t-\frac{2}{n},\dots\}$ for $n \in \nset$, so that we get
+\begin{align}\label{eq:hybrid_scheme_1}
+X_t \approx \sum_{k=1}^{N_n} \sigma_{t-\frac{k}{n}} \int_{t-\frac{k}{n}}^{t-\frac{k}{n}+\frac{1}{n}} K(t-s)  dW_s,
+\end{align}
+ where $N_n \in \nset$ is the truncation parameter and denotes the number of discretization steps, and we assume that $\sigma$ doesn’t vary too much (valid in the rBergomi model since $\sigma$ is constant), therefore constant in each discretization cell.
+ 
+The idea of the hybrid scheme  is to split the kernel function into two parts \ref{eq:kernel approximation_hybrid}, depending on a small parameter $\kappa$\footnote{There are different variants of the hybrid scheme depending on the value of $\kappa$ (see \cite{bennedsen2017hybrid} for more details).} 
+\begin{align}\label{eq:kernel approximation_hybrid}
+ K(t-s)\approx\begin{cases}
+              (t-s)^\alpha L_K\left(\frac{k}{n}\right), \quad t-s \in \left[\frac{k-1}{n},\frac{k}{n}\right] \setminus \{0\}&, \quad \text{if} \: k \le \kappa \\
+           K\left(\frac{b_k}{n}\right) , \quad t-s \in \left[\frac{k-1}{n},\frac{k}{n}\right] &, \quad \text{if}\:  k >\kappa,
+            \end{cases}
+\end{align}
+and then discretizing the  $X_t$ process into Wiener integrals of power functions and a Riemann sum, appearing from approximating the kernel by power functions near the origin and step functions elsewhere, resulting in \ref{eq:hybrid_scheme_2}
+\begin{align}\label{eq:hybrid_scheme_2}
+X_t \approx \sum_{k=1}^\kappa    L_K\left(\frac{k}{n}\right) \sigma_{t-\frac{k}{n}} \int_{t-\frac{k}{n}}^{t-\frac{k}{n}+\frac{1}{n}} (t-s)^\alpha   dW_s+ \sum_{k=\kappa+1}^{N_n}  L_K\left(\frac{k}{n}\right)  K\left(\frac{b_k}{n}\right) \sigma_{t-\frac{k}{n}} \int_{t-\frac{k}{n}}^{t-\frac{k}{n}+\frac{1}{n}}   dW_s \PERIOD
+\end{align}
+\begin{remark}
+$\left(b_k\right)_{k=\kappa+1}^\infty$ is a sequence of real numbers that only needs to satisfy  $b_k \in \left[k-1, k\right]\setminus \{0\}$. But there is an optimal sequence $\left(b_k^\ast\right)_{k=\kappa+1}^\infty$, that
+minimizes the asymptotic MSE (see \cite{bennedsen2017hybrid} for more details) and it is given by
+$$ b_k^\ast=\left(\frac{k^{\alpha+1}-(k-1)^{\alpha+1 }}{\alpha+1}\right)^{\frac{1}{\alpha}},\quad k \ge \kappa+1 \PERIOD$$
+\end{remark}
+
+\subsubsection{The hybrid Scheme in the rBergomi Context}
+
+In the context of the rBergomi model, we have $\sigma=1$, $\alpha=H-\frac{1}{2}$ and we can  use the hybrid scheme to simulate $\widetilde{W}^H_t$, which is  a TBSS process, with the kernel function $K^H$ given by \eqref{eq:kernel_rbergomi}. In this context, we can show that by choosing $L_{K^H}(x)=1$, we have  $K^H$ satisfy the conditions required to apply the hybrid scheme  (see \cite{bennedsen2017hybrid}) and therefore we end up with
+the following scheme on equidistant grid $\{0,\frac{1}{n},\frac{2}{n},\dots,\frac{nT}{n}\}$
+\begin{align}\label{eq:Hybrid_scheme_pre}
+\widetilde{W}^H_{\frac{i}{n}} \approx \bar{W}^H_{\frac{i}{n}}&= \sqrt{2H} \left(  \sum_{k=1}^{\min(i,\kappa)} \int_{\frac{i}{n}-\frac{k}{n}}^{\frac{i}{n}-\frac{k}{n}+\frac{1}{n}} \left(\frac{i}{n}-s\right)^\alpha dW_s+\sum_{k=\kappa+1}^{i} \left(\frac{b_k}{n}\right)^{\alpha}  \int_{\frac{i}{n}-\frac{k}{n}}^{\frac{i}{n}-\frac{k}{n}+\frac{1}{n}} dW_s \right) \COMMA
+\end{align}
+which results for $\kappa=1$  in \eqref{eq:Hybrid_scheme}.
+\begin{align}\label{eq:Hybrid_scheme}
+\widetilde{W}^H_{\frac{i}{N}} \approx \bar{W}^H_{\frac{i}{N}}&= \sqrt{2H} \left(  W^2_i+\sum_{k=2}^{i} \left(\frac{b_k}{N}\right)^{H-\frac{1}{2}} \left(W_{\frac{i-(k-1)}{N}}^1-W_{\frac{i-k}{N}}^1\right)\right)\COMMA
+\end{align}
+where $N$ is the number of time steps and 
+$$ b_k=\left(\frac{k^{H+\frac{1}{2}}-(k-1)^{H+\frac{1}{2} }}{H+\frac{1}{2}}\right)^{\frac{1}{H-\frac{1}{2}}} \PERIOD$$
+The sum in \eqref{eq:Hybrid_scheme} requires the most computational effort in the simulation. Given that \eqref{eq:Hybrid_scheme} can be seen as discrete convolution  (see \cite{bennedsen2017hybrid}), we employ the fast Fourier transform to evaluate it, which results in  $\Ordo{N \log N}$ floating point operations.
+
+We note that the variates $\bar{W}_0^{H},\bar{W}_1^{H},\dots,\bar{W}_{\frac{[Nt]}{N}}^{H}$ are  generated by sampling $[Nt]$ i.i.d draws from a $(\kappa+1)$-dimensional Gaussian distribution and computing a discrete convolution. We denote these pairs  of Gaussian random variables from now on by $(\mathbf{W}^{(1)},\mathbf{W}^{(2)})$.
+\subsection{The Exact Scheme Coupled with Hierarchical Representation }\label{sec:The Exact Scheme}
+The exact scheme is based on simulating exactly the joint covariance of $(\widetilde{W}^H,W^1)$, which is given by
+\begin{align}\label{eq:joint covariance cholesky}
+ \begin{cases}
+               \text{Var}(\widetilde{W}_t)=t^{2H}&,\quad t \ge 0\\
+                \text{Cov}(\widetilde{W}_t,\widetilde{W}_s)=t^{2H} G\left(\frac{s}{t}\right)&,\quad s>t \ge 0\\
+              \text{Cov}(\widetilde{W}_t,W^1_s)=\rho D_H \left(t^{H+\frac{1}{2}}-\left( t-\min(t,s)^{H+\frac{1}{2}} \right) \right) &,\quad s,t \ge 0\\
+              \text{Cov}(W^1_t,W^1_s)=\min(t,s)&,\quad s,t \ge 0\COMMA
+            \end{cases}
+\end{align}
+with 
+$$ D_H=\frac{\sqrt{2H}}{H+\frac{1}{2}}$$
+and G is given by \eqref{eq:correlation_tilde_W_fun} for $x \ge 1$ and $\gamma=\frac{1}{2}-H$.
+
+Different ways can be used to compute  \eqref{eq:correlation_tilde_W_fun}. For instance, in the literature we find that  in \cite{bayer2018short}
+\begin{equation}
+G_2(x)=2H \left(  \frac{1}{1-\gamma} x^{-\gamma}+\frac{\gamma}{1-\gamma}x^{-(1+\gamma)} \frac{1}{2-\gamma} {}_2F_1\left(1,1+\gamma,3-\gamma,x^{-1} \right)  \right),
+\end{equation}
+where 
+\begin{align*}
+{}_2F_1(a,b,c;z)=\frac{\Gamma(c)}{\Gamma(b) \Gamma(c-b)} \int_{0}^1 t^{b-1} (1-t)^{c-b-1} (1-tz)^{-a} dt.
+\end{align*}
+\begin{remark}
+Because the covariance matrix does not have any $0$ values, if $\rho\neq0$, the computational effort for the exact simulation is quite high and the algorithm is very slow.
+\end{remark}
+Let us denote by the matrix $A$, the computable covariance matrix of  $ \widetilde{W}^H_{t_1},\dots, \widetilde{W}_{t_N},W^1_{t_1},\dots, W^1_{t_N}$ using \eqref{eq:joint covariance cholesky}.  We can use Cholesky decomposition of $A$ to produce exact samples of $W^1_{t_1},\dots, W^1_{t_N}, \widetilde{W}^H_{t_1},\dots, \widetilde{W}_{t_N}$.
+
+In fact let us denote by $L$ the triangular matrix resulting from Cholesky decomposition such that 
+\[
+L=
+\left(
+\begin{array}{c|c}
+L_1& 0 \\
+L_2 & L_3
+\end{array}
+\right),
+\]
+where $L_1, L_2,L_3$ are $N \times N$ matrices, such that $L_1$ and $L_3$ are triangular.
+
+Then, given  a $2 N \times 1$-dimensional Gaussian random input vector, $\mathbf{X}=(X_1, \dots,X_N, X_{N+1}, \dots, X_{2N})'$, we have
+
+\begin{align}
+\mathbf{W}^{(1)}=L_1 \mathbf{X}_{1:N}, \quad \widetilde{\mathbf{W}}= 
+\left(
+\begin{array}{c|c}
+L_2 & L_3 
+\end{array}
+\right) \mathbf{X}.
+\end{align}
+On the other hand, let us assume that we can construct $\mathbf{W}^{(1)}$ hierarchically  through  Brownian bridge construction defined by the linear mapping given by the matrix $G$, then given a $ N$-dimensional Gaussian random input vector, $\mathbf{Z}^\prime$, we can write
+\begin{align*}
+\mathbf{W}^{(1)}=G  \mathbf{Z}^\prime \COMMA
+\end{align*}
+and consequently
+\begin{align*}
+ \mathbf{X}_{1:N}= L_1^{-1} G  \mathbf{Z}^\prime \PERIOD
+\end{align*}
+Therefore, given a $2 N$-dimensional Gaussian random input vector, $\mathbf{Z}=(\mathbf{Z}^\prime,\mathbf{Z}^{\prime \prime})$, we define our hierarchical representation by
+\begin{align}\label{eq: Construction}
+\mathbf{X}=\left(
+\begin{array}{c|c}
+L_1^{-1} G & 0\\
+0 & I_{N} 
+\end{array}
+\right) \mathbf{Z}.
+\end{align}
+
+As described in Section 4 in \cite{bayer2016pricing}, the exact scheme is given by the following. For $N$ number of time steps and $M$ the number of simulations,
+
+\begin{enumerate}
+\item Construct the joint covariance matrix for the Volterra process $\tilde{W}$ and the Brownian motion $W^1$ and compute its Cholesky decomposition.
+\item For each time, generate iid normal random vectors and multiply them
+by the lower-triangular matrix obtained by the Cholesky decomposition
+to get a $M \times 2 N$ matrix of paths of $\tilde{W}$ and $W^1$ with the correct joint marginals.
+\item  With these paths held in memory, we may evaluate the expectation
+under of any payoff of interest.
+\end{enumerate}
+%We need to make sure that $\mathbf{X}$  has Gaussian distribution as an outcome of the construction \eqref{eq: Construction}. Consequently, we need to compute carefully $L_1^{-1}$. Actually, I observed that $L_1=I_{N \times N}.$ Therefore,  $\mathbf{X}$  has Gaussian distribution as an outcome of the construction \eqref{eq: Construction}.
+

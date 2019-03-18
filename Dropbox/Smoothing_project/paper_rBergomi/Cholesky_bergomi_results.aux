@@ -16,49 +16,85 @@
 \gdef\HyperFirstAtBeginDocument#1{#1}
 \providecommand\HyField@AuxAddToFields[1]{}
 \providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{bayer2016pricing}
+\citation{sithi1995spectra}
+\citation{marinucci1999alternative}
+\citation{picard2011representation}
+\citation{barndorff2007ambit}
+\citation{barndorff2009brownian}
 \@writefile{toc}{\contentsline {section}{\numberline {1}Problem setting}{1}{section.1}}
 \newlabel{sec:Problem setting}{{1}{1}{Problem setting}{section.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.1}The rBergomi model}{1}{subsection.1.1}}
-\newlabel{sec:The rBergomi model}{{1.1}{1}{The rBergomi model}{subsection.1.1}{}}
-\newlabel{eq:rBergomi_model1}{{1.1}{1}{The rBergomi model}{equation.1.1}{}}
-\newlabel{eq:Volterra process}{{1.2}{1}{The rBergomi model}{equation.1.2}{}}
-\newlabel{eq:rBergomi_model}{{1.3}{2}{The rBergomi model}{equation.1.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.2}Simulation of the rBergomi model}{2}{subsection.1.2}}
-\newlabel{sec:Simulation of the rBergomi model}{{1.2}{2}{Simulation of the rBergomi model}{subsection.1.2}{}}
-\newlabel{eq:Hybrid_scheme}{{1.4}{3}{Simulation of the rBergomi model}{equation.1.4}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {2}Details of Cholesky scheme coupled with hierarchical reresentation}{3}{section.2}}
-\newlabel{sec:Details of Cholesky scheme coupled with hierarchical reresentation}{{2}{3}{Details of Cholesky scheme coupled with hierarchical reresentation}{section.2}{}}
-\newlabel{eq: Construction}{{2.2}{3}{Details of Cholesky scheme coupled with hierarchical reresentation}{equation.2.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3}Comparing Cholesky and Hybrid schemes results }{4}{section.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Weak error}{4}{subsection.3.1}}
-\@writefile{lot}{\contentsline {table}{\numberline {3.1}{\ignorespaces Reference solution, which is the approximation of the call option price under the rBergomi model, using MC with $500$ time steps and number of samples, $M=10^6$, for different parameter constellations. The numbers between parentheses correspond to the statistical errors estimates.\relax }}{4}{table.caption.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.1}The Rough Bergomi Model}{1}{subsection.1.1}}
+\newlabel{eq:rBergomi_model1}{{1.1}{1}{The Rough Bergomi Model}{equation.1.1}{}}
+\newlabel{eq:Volterra process}{{1.2}{1}{The Rough Bergomi Model}{equation.1.2}{}}
+\newlabel{eq:kernel_rbergomi}{{1.3}{1}{The Rough Bergomi Model}{equation.1.3}{}}
+\newlabel{eq:correlation_tilde_W_fun}{{1.4}{1}{The Rough Bergomi Model}{equation.1.4}{}}
+\citation{bayer2016pricing}
+\citation{bayer2018short}
+\citation{bennedsen2017hybrid}
+\newlabel{def:semi-stationary process}{{1.1}{2}{Semi-stationary process}{theorem.1.1}{}}
+\newlabel{eq:BSS}{{1.5}{2}{Semi-stationary process}{equation.1.5}{}}
+\newlabel{eq:TBSS}{{1.6}{2}{Semi-stationary process}{equation.1.6}{}}
+\newlabel{eq:rBergomi_model}{{1.7}{2}{The Rough Bergomi Model}{equation.1.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Simulation of the rBergomi Model}{2}{section.2}}
+\newlabel{sec:Simulation of the rBergomi model}{{2}{2}{Simulation of the rBergomi Model}{section.2}{}}
+\citation{bennedsen2017hybrid}
+\citation{bennedsen2017hybrid}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}The Hybrid Scheme}{3}{subsection.2.1}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.1.1}General Idea of the Hybrid Scheme}{3}{subsubsection.2.1.1}}
+\newlabel{eq:hybrid_scheme_1}{{2.1}{3}{General Idea of the Hybrid Scheme}{equation.2.1}{}}
+\citation{bennedsen2017hybrid}
+\citation{bennedsen2017hybrid}
+\citation{bennedsen2017hybrid}
+\newlabel{eq:kernel approximation_hybrid}{{2.2}{4}{General Idea of the Hybrid Scheme}{equation.2.2}{}}
+\newlabel{eq:hybrid_scheme_2}{{2.3}{4}{General Idea of the Hybrid Scheme}{equation.2.3}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.1.2}The hybrid Scheme in the rBergomi Context}{4}{subsubsection.2.1.2}}
+\newlabel{eq:Hybrid_scheme_pre}{{2.4}{4}{The hybrid Scheme in the rBergomi Context}{equation.2.4}{}}
+\newlabel{eq:Hybrid_scheme}{{2.5}{4}{The hybrid Scheme in the rBergomi Context}{equation.2.5}{}}
+\citation{bayer2018short}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}The Exact Scheme Coupled with Hierarchical Representation }{5}{subsection.2.2}}
+\newlabel{sec:The Exact Scheme}{{2.2}{5}{The Exact Scheme Coupled with Hierarchical Representation}{subsection.2.2}{}}
+\newlabel{eq:joint covariance cholesky}{{2.6}{5}{The Exact Scheme Coupled with Hierarchical Representation}{equation.2.6}{}}
+\citation{bayer2016pricing}
+\newlabel{eq: Construction}{{2.9}{6}{The Exact Scheme Coupled with Hierarchical Representation}{equation.2.9}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Weak error analysis}{6}{section.3}}
+\newlabel{sec:Weak error analysis}{{3}{6}{Weak error analysis}{section.3}{}}
+\newlabel{eq: Hybrid approx}{{3.1}{6}{Weak error analysis}{equation.3.1}{}}
+\newlabel{eq: Cholesky approx}{{3.2}{6}{Weak error analysis}{equation.3.2}{}}
+\newlabel{eq: Weak_error_hyb_chol}{{3.3}{6}{Weak error analysis}{equation.3.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Comparing Cholesky and Hybrid schemes results }{7}{section.4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Weak error}{7}{subsection.4.1}}
+\@writefile{lot}{\contentsline {table}{\numberline {4.1}{\ignorespaces Reference solution, which is the approximation of the call option price under the rBergomi model, using MC with $500$ time steps and number of samples, $M=10^6$, for different parameter constellations. The numbers between parentheses correspond to the statistical errors estimates.\relax }}{7}{table.caption.1}}
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}{{3.1}{4}{Reference solution, which is the approximation of the call option price under the rBergomi model, using MC with $500$ time steps and number of samples, $M=10^6$, for different parameter constellations. The numbers between parentheses correspond to the statistical errors estimates.\relax }{table.caption.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces The convergence of the weak error $\mathcal  {E}_B(N)$, using MC ($M=10^6$) with hierarchical hybrid scheme, for set $1$ parameter in Table \ref  {table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. We refer to $C_{\text  {RB}}$ as $\mathrm  {E}\left [g(X)\right ]$, and to $C_{\text  {RB}}^{N}$ as $\mathrm  {E}\left [g(X_{\Delta t})\right ]$. The upper and lower bounds are $95\%$ confidence intervals.\relax }}{5}{figure.caption.2}}
-\newlabel{fig:Weak_rate_set1_without_rich_hybrid}{{3.1}{5}{The convergence of the weak error $\mathcal {E}_B(N)$, using MC ($M=10^6$) with hierarchical hybrid scheme, for set $1$ parameter in Table \ref {table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. We refer to $C_{\text {RB}}$ as $\expt {g(X)}$, and to $C_{\text {RB}}^{N}$ as $\expt {g(X_{\Delta t})}$. The upper and lower bounds are $95\%$ confidence intervals.\relax }{figure.caption.2}{}}
-\newlabel{fig:sub3}{{3.2a}{5}{\relax }{figure.caption.3}{}}
-\newlabel{sub@fig:sub3}{{a}{5}{\relax }{figure.caption.3}{}}
-\newlabel{fig:sub4}{{3.2b}{5}{\relax }{figure.caption.3}{}}
-\newlabel{sub@fig:sub4}{{b}{5}{\relax }{figure.caption.3}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces The convergence of the weak error $\mathcal  {E}_B(N)$, using MC ($M=6 \times 10^6$) with Cholesky scheme, for set $1$ parameter in Table \ref  {table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. We refer to $C_{\text  {RB}}$ as $\mathrm  {E}\left [g(X)\right ]$, and to $C_{\text  {RB}}^{N}$ as $\mathrm  {E}\left [g(X_{\Delta t})\right ]$. The upper and lower bounds are $95\%$ confidence intervals. a) With hierarchical representation. b) Without hierarchical representation.\relax }}{5}{figure.caption.3}}
-\newlabel{fig:Weak_rate_set1_set_2_without_rich}{{3.2}{5}{The convergence of the weak error $\mathcal {E}_B(N)$, using MC ($M=6 \times 10^6$) with Cholesky scheme, for set $1$ parameter in Table \ref {table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. We refer to $C_{\text {RB}}$ as $\expt {g(X)}$, and to $C_{\text {RB}}^{N}$ as $\expt {g(X_{\Delta t})}$. The upper and lower bounds are $95\%$ confidence intervals. a) With hierarchical representation. b) Without hierarchical representation.\relax }{figure.caption.3}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces The convergence of the weak error $\mathcal  {E}_B(N)$, using MC ($M=6 \times 10^6$) with hierarchical Cholesky scheme, for set $2$ parameter in Table \ref  {table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. We refer to $C_{\text  {RB}}$ as $\mathrm  {E}\left [g(X)\right ]$, and to $C_{\text  {RB}}^{N}$ as $\mathrm  {E}\left [g(X_{\Delta t})\right ]$. The upper and lower bounds are $95\%$ confidence intervals.\relax }}{6}{figure.caption.4}}
-\newlabel{fig:Weak_rate_set2_without_rich_cholesky}{{3.3}{6}{The convergence of the weak error $\mathcal {E}_B(N)$, using MC ($M=6 \times 10^6$) with hierarchical Cholesky scheme, for set $2$ parameter in Table \ref {table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. We refer to $C_{\text {RB}}$ as $\expt {g(X)}$, and to $C_{\text {RB}}^{N}$ as $\expt {g(X_{\Delta t})}$. The upper and lower bounds are $95\%$ confidence intervals.\relax }{figure.caption.4}{}}
+\newlabel{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}{{4.1}{7}{Reference solution, which is the approximation of the call option price under the rBergomi model, using MC with $500$ time steps and number of samples, $M=10^6$, for different parameter constellations. The numbers between parentheses correspond to the statistical errors estimates.\relax }{table.caption.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces The convergence of the weak error $\mathcal  {E}_B(N)$, using MC ($M=10^6$) with hierarchical hybrid scheme, for set $1$ parameter in Table \ref  {table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. We refer to $C_{\text  {RB}}$ as $\mathrm  {E}\left [g(X)\right ]$, and to $C_{\text  {RB}}^{N}$ as $\mathrm  {E}\left [g(X_{\Delta t})\right ]$. The upper and lower bounds are $95\%$ confidence intervals.\relax }}{8}{figure.caption.2}}
+\newlabel{fig:Weak_rate_set1_without_rich_hybrid}{{4.1}{8}{The convergence of the weak error $\mathcal {E}_B(N)$, using MC ($M=10^6$) with hierarchical hybrid scheme, for set $1$ parameter in Table \ref {table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. We refer to $C_{\text {RB}}$ as $\expt {g(X)}$, and to $C_{\text {RB}}^{N}$ as $\expt {g(X_{\Delta t})}$. The upper and lower bounds are $95\%$ confidence intervals.\relax }{figure.caption.2}{}}
+\newlabel{fig:sub3}{{4.2a}{8}{\relax }{figure.caption.3}{}}
+\newlabel{sub@fig:sub3}{{a}{8}{\relax }{figure.caption.3}{}}
+\newlabel{fig:sub4}{{4.2b}{8}{\relax }{figure.caption.3}{}}
+\newlabel{sub@fig:sub4}{{b}{8}{\relax }{figure.caption.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces The convergence of the weak error $\mathcal  {E}_B(N)$, using MC ($M=6 \times 10^6$) with Cholesky scheme, for set $1$ parameter in Table \ref  {table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. We refer to $C_{\text  {RB}}$ as $\mathrm  {E}\left [g(X)\right ]$, and to $C_{\text  {RB}}^{N}$ as $\mathrm  {E}\left [g(X_{\Delta t})\right ]$. The upper and lower bounds are $95\%$ confidence intervals. a) With hierarchical representation. b) Without hierarchical representation.\relax }}{8}{figure.caption.3}}
+\newlabel{fig:Weak_rate_set1_set_2_without_rich}{{4.2}{8}{The convergence of the weak error $\mathcal {E}_B(N)$, using MC ($M=6 \times 10^6$) with Cholesky scheme, for set $1$ parameter in Table \ref {table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. We refer to $C_{\text {RB}}$ as $\expt {g(X)}$, and to $C_{\text {RB}}^{N}$ as $\expt {g(X_{\Delta t})}$. The upper and lower bounds are $95\%$ confidence intervals. a) With hierarchical representation. b) Without hierarchical representation.\relax }{figure.caption.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.3}{\ignorespaces The convergence of the weak error $\mathcal  {E}_B(N)$, using MC ($M=6 \times 10^6$) with hierarchical Cholesky scheme, for set $2$ parameter in Table \ref  {table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. We refer to $C_{\text  {RB}}$ as $\mathrm  {E}\left [g(X)\right ]$, and to $C_{\text  {RB}}^{N}$ as $\mathrm  {E}\left [g(X_{\Delta t})\right ]$. The upper and lower bounds are $95\%$ confidence intervals.\relax }}{9}{figure.caption.4}}
+\newlabel{fig:Weak_rate_set2_without_rich_cholesky}{{4.3}{9}{The convergence of the weak error $\mathcal {E}_B(N)$, using MC ($M=6 \times 10^6$) with hierarchical Cholesky scheme, for set $2$ parameter in Table \ref {table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. We refer to $C_{\text {RB}}$ as $\expt {g(X)}$, and to $C_{\text {RB}}^{N}$ as $\expt {g(X_{\Delta t})}$. The upper and lower bounds are $95\%$ confidence intervals.\relax }{figure.caption.4}{}}
 \citation{bayer2017regularity}
 \citation{bayer2017regularity}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces The convergence of the weak error $\mathcal  {E}_B(N)$, using MC ($M=10^5$) with Cholesky scheme, for set $5$ parameter in Table \ref  {table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. We refer to $C_{\text  {RB}}$ as $\mathrm  {E}\left [g(X)\right ]$, and to $C_{\text  {RB}}^{N}$ as $\mathrm  {E}\left [g(X_{\Delta t})\right ]$. The upper and lower bounds are $95\%$ confidence intervals. a) With hierarchical representation. b) Without hierarchical representation.\relax }}{7}{figure.caption.5}}
-\newlabel{fig:Weak_rate_set1_set_5_without_rich}{{3.4}{7}{The convergence of the weak error $\mathcal {E}_B(N)$, using MC ($M=10^5$) with Cholesky scheme, for set $5$ parameter in Table \ref {table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. We refer to $C_{\text {RB}}$ as $\expt {g(X)}$, and to $C_{\text {RB}}^{N}$ as $\expt {g(X_{\Delta t})}$. The upper and lower bounds are $95\%$ confidence intervals. a) With hierarchical representation. b) Without hierarchical representation.\relax }{figure.caption.5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Comparing the different errors and computational time for MC and MISC for the Cholesky scheme}{7}{subsection.3.2}}
-\newlabel{sec:Comparing different errors and complexity for MC and MISC_ Cholesky}{{3.2}{7}{Comparing the different errors and computational time for MC and MISC for the Cholesky scheme}{subsection.3.2}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {3.2}{\ignorespaces Total relative error of MISC, without Richardson extrapolation, with different tolerances, and MC to compute the call option prices for different numbers of time steps, where the rBergomi dynamics are simulated using Cholesky scheme. The values between parentheses correspond to the different errors contributing to the total relative error: for MISC we report the bias and quadrature errors and for MC we report the bias and the statistical errors estimates.\relax }}{8}{table.caption.6}}
-\newlabel{Total error of MISC and MC to compute Call option price of the different tolerances for different number of time steps_Cholesky. Case $K=1$, $H=0.07$, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors,linear}{{3.2}{8}{Total relative error of MISC, without Richardson extrapolation, with different tolerances, and MC to compute the call option prices for different numbers of time steps, where the rBergomi dynamics are simulated using Cholesky scheme. The values between parentheses correspond to the different errors contributing to the total relative error: for MISC we report the bias and quadrature errors and for MC we report the bias and the statistical errors estimates.\relax }{table.caption.6}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {3.3}{\ignorespaces Comparison of the computational time (in seconds) of MC and MISC, to compute the call option price of the rBergomi model, simulated using Cholesky scheme, for different numbers of time steps. The average MC CPU time is computed over $100$ runs.\relax }}{8}{table.caption.7}}
-\newlabel{Comparsion of the computational time of MC and MISC, used to compute Call option price of rBergomi model_cholesky for different number of time steps. Case $K=1, H=0.07$, linear}{{3.3}{8}{Comparison of the computational time (in seconds) of MC and MISC, to compute the call option price of the rBergomi model, simulated using Cholesky scheme, for different numbers of time steps. The average MC CPU time is computed over $100$ runs.\relax }{table.caption.7}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Weak error analysis}{8}{section.4}}
-\newlabel{sec:Weak error analysis}{{4}{8}{Weak error analysis}{section.4}{}}
-\newlabel{eq: Hybrid approx}{{4.1}{8}{Weak error analysis}{equation.4.1}{}}
-\newlabel{eq: Cholesky approx}{{4.2}{8}{Weak error analysis}{equation.4.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.4}{\ignorespaces The convergence of the weak error $\mathcal  {E}_B(N)$, using MC ($M=10^5$) with Cholesky scheme, for set $5$ parameter in Table \ref  {table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. We refer to $C_{\text  {RB}}$ as $\mathrm  {E}\left [g(X)\right ]$, and to $C_{\text  {RB}}^{N}$ as $\mathrm  {E}\left [g(X_{\Delta t})\right ]$. The upper and lower bounds are $95\%$ confidence intervals. a) With hierarchical representation. b) Without hierarchical representation.\relax }}{10}{figure.caption.5}}
+\newlabel{fig:Weak_rate_set1_set_5_without_rich}{{4.4}{10}{The convergence of the weak error $\mathcal {E}_B(N)$, using MC ($M=10^5$) with Cholesky scheme, for set $5$ parameter in Table \ref {table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. We refer to $C_{\text {RB}}$ as $\expt {g(X)}$, and to $C_{\text {RB}}^{N}$ as $\expt {g(X_{\Delta t})}$. The upper and lower bounds are $95\%$ confidence intervals. a) With hierarchical representation. b) Without hierarchical representation.\relax }{figure.caption.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Comparing the different errors and computational time for MC and MISC for the Cholesky scheme}{10}{subsection.4.2}}
+\newlabel{sec:Comparing different errors and complexity for MC and MISC_ Cholesky}{{4.2}{10}{Comparing the different errors and computational time for MC and MISC for the Cholesky scheme}{subsection.4.2}{}}
 \bibstyle{plain}
 \bibdata{smoothing_rBergomi.bib}
-\bibcite{bayer2017regularity}{1}
-\newlabel{eq: Weak_error_hyb_chol}{{4.3}{9}{Weak error analysis}{equation.4.3}{}}
+\bibcite{barndorff2007ambit}{1}
+\bibcite{barndorff2009brownian}{2}
+\bibcite{bayer2016pricing}{3}
+\bibcite{bayer2017regularity}{4}
+\bibcite{bayer2018short}{5}
+\bibcite{bennedsen2017hybrid}{6}
+\@writefile{lot}{\contentsline {table}{\numberline {4.2}{\ignorespaces Total relative error of MISC, without Richardson extrapolation, with different tolerances, and MC to compute the call option prices for different numbers of time steps, where the rBergomi dynamics are simulated using Cholesky scheme. The values between parentheses correspond to the different errors contributing to the total relative error: for MISC we report the bias and quadrature errors and for MC we report the bias and the statistical errors estimates.\relax }}{11}{table.caption.6}}
+\newlabel{Total error of MISC and MC to compute Call option price of the different tolerances for different number of time steps_Cholesky. Case $K=1$, $H=0.07$, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors,linear}{{4.2}{11}{Total relative error of MISC, without Richardson extrapolation, with different tolerances, and MC to compute the call option prices for different numbers of time steps, where the rBergomi dynamics are simulated using Cholesky scheme. The values between parentheses correspond to the different errors contributing to the total relative error: for MISC we report the bias and quadrature errors and for MC we report the bias and the statistical errors estimates.\relax }{table.caption.6}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4.3}{\ignorespaces Comparison of the computational time (in seconds) of MC and MISC, to compute the call option price of the rBergomi model, simulated using Cholesky scheme, for different numbers of time steps. The average MC CPU time is computed over $100$ runs.\relax }}{11}{table.caption.7}}
+\newlabel{Comparsion of the computational time of MC and MISC, used to compute Call option price of rBergomi model_cholesky for different number of time steps. Case $K=1, H=0.07$, linear}{{4.3}{11}{Comparison of the computational time (in seconds) of MC and MISC, to compute the call option price of the rBergomi model, simulated using Cholesky scheme, for different numbers of time steps. The average MC CPU time is computed over $100$ runs.\relax }{table.caption.7}{}}
+\bibcite{marinucci1999alternative}{7}
+\bibcite{picard2011representation}{8}
+\bibcite{sithi1995spectra}{9}

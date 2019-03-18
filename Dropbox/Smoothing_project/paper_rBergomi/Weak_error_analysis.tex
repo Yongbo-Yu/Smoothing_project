@@ -18,4 +18,12 @@ To simplify notation, let $\overline{\mathbf{W}^{1}}=(\overline{W}^{(1)}_1,\dots
 \end{align}
 \end{small}
 
-\red{\textbf{To-DO:} We need to analyze both terms involved in the right hand-side of \eqref{eq: Weak_error_hyb_chol}}.
+
+From the construction of the Cholesky scheme (See Section \ref{sec:The Exact Scheme}), we expect that the weak error is purely the discretization error, that is
+
+\begin{align*}
+\varepsilon_{B}^{Chol}=\Ordo{\Delta t},
+\end{align*}
+which was confirmed by our numerical experiments ( See Figure \ref{fig:sub4} for case Set 1  in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}). 
+
+Therefore, it remains to understand how the second term in \ref{eq: Hybrid approx} behaves with respect to $\Delta t $ and $H$.From our numerical experiments it seems that that term is also of order $\Delta t$  and its rate of convergence is independent of $H$ (see Figures \ref{fig:Weak_rate_set1_without_rich_hybrid} and \ref{fig:Weak_rate_set1_set_5_without_rich}).
