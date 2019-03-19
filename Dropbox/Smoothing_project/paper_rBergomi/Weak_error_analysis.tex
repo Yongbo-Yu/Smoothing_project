@@ -1,29 +1,28 @@
 In this work, we are interested in approximating $\expt{g(X_T}$, where $g$ is some smooth function and $X$ is the asset price under rBergomi dynamics such that $X_t=X_t(W^{(1)}_t,\widetilde{W}_t)$ where $W^{(1)}$ is standard Brownian motion and  $\widetilde{W}_t$ is the fractional Brownian motion as given by \eqref{eq:Volterra process}.  Then we can express the Hybrid and Cholesky scheme as the following 
 
 \begin{align}\label{eq: Hybrid approx}
-\expt{g\left(X_T\left(W^{(1)}_t,\widetilde{W}_t \right)\right)} \approx \expt{g\left(\overline{X}_N\left(\overline{W}^{(1)}_1,\dots,\overline{W}^{(1)}_N, \overline{\overline{W}}_1, \dots,\overline{\overline{W}}_N\right)\right)}:\quad \textbf{(Hybrid  scheme)}
+\expt{g\left(X_T\left(W^{(1)}_t,\widetilde{W}_t \right)\right)} \approx \expt{g\left(\overline{X}_N\left(W^{(1)}_1,\dots,W^{(1)}_N, \overline{\overline{W}}_1, \dots,\overline{\overline{W}}_N\right)\right)}:\quad \textbf{(Hybrid  scheme)},
 \end{align}
-
 
 \begin{align}\label{eq: Cholesky approx}
 \expt{g\left(X_T\left(W^{(1)}_t,\widetilde{W}_t\right)\right)} \approx \expt{g\left(\overline{X}_N\left(W^{(1)}_1,\dots,W^{(1)}_N, \widetilde{W}_1, \dots,\widetilde{W}_N\right)\right)}:\quad \textbf{(Cholesky  scheme)},
 \end{align}
 
-To simplify notation, let $\overline{\mathbf{W}^{1}}=(\overline{W}^{(1)}_1,\dots,\overline{W}^{(1)}_N)$, $\overline{\overline{\mathbf{W}}}=(\overline{\overline{W}}_1,\dots,\overline{\overline{W}}_N)$, $\mathbf{W}^{1}=(W^{(1)}_1,\dots,W^{(1)}_N)$ and $\widetilde{\mathbf{W}}=(\widetilde{W}_1,\dots,\widetilde{W}_N)$ .If we denote by $\varepsilon_{B}^{Hyb}$ and $\varepsilon_{B}^{Chol}$ the weak errors produced by the hybrid and Cholesky scheme respectively, then we can write
+where $\overline{\overline{W}}$ is the approximation of $\widetilde{W}$  as given by \eqref{eq:Hybrid_scheme_pre}.
+
+To simplify notation, let  $\overline{\overline{\mathbf{W}}}=(\overline{\overline{W}}_1,\dots,\overline{\overline{W}}_N)$, $\mathbf{W}^{1}=(W^{(1)}_1,\dots,W^{(1)}_N)$ and $\widetilde{\mathbf{W}}=(\widetilde{W}_1,\dots,\widetilde{W}_N)$. If we denote by $\varepsilon_{B}^{Hyb}$ and $\varepsilon_{B}^{Chol}$ the weak errors produced by the hybrid and Cholesky scheme respectively, then we can write
 \begin{small}
 \begin{align}\label{eq: Weak_error_hyb_chol}
-\varepsilon_{B}^{Hyb}&=\abs{\expt{g\left(X_T\left(W^{(1)}_t,\widetilde{W}_t\right) \right)}-\expt{g\left(\overline{X}_N\left(\overline{\mathbf{W}^{1}}, \overline{\overline{\mathbf{W}}}\right) \right)}} \nonumber\\
-&\le \abs{\expt{g\left(X_T\left(W^{(1)}_t,\widetilde{W}_t\right)\right)}-\expt{g\left(\overline{X}_N\left(\mathbf{W}^{1}, \widetilde{\mathbf{W}}\right)\right)}}+ \abs{ \expt{g\left(\overline{X}_N\left(\overline{\mathbf{W}^{1}}, \overline{\overline{\mathbf{W}}}\right)\right)}- \expt{g\left(\overline{X}_N\left(\mathbf{W}^{1}, \widetilde{\mathbf{W}}\right)\right)}}\nonumber\\
-&\le \varepsilon_{B}^{Chol}+ \abs{ \expt{g\left(\overline{X}_N\left(\overline{\mathbf{W}^{1}}, \overline{\overline{\mathbf{W}}}\right)\right)}- \expt{g\left(\overline{X}_N\left(\mathbf{W}^{1}, \widetilde{\mathbf{W}}\right)\right)}}
+\varepsilon_{B}^{Hyb}&=\abs{\expt{g\left(X_T\left(W^{(1)}_t,\widetilde{W}_t\right) \right)}-\expt{g\left(\overline{X}_N\left(\mathbf{W}^{1}, \overline{\overline{\mathbf{W}}}\right) \right)}} \nonumber\\
+&\le \abs{\expt{g\left(X_T\left(W^{(1)}_t,\widetilde{W}_t\right)\right)}-\expt{g\left(\overline{X}_N\left(\mathbf{W}^{1}, \widetilde{\mathbf{W}}\right)\right)}}+ \abs{ \expt{g\left(\overline{X}_N\left(\mathbf{W}^{1}, \overline{\overline{\mathbf{W}}}\right)\right)}- \expt{g\left(\overline{X}_N\left(\mathbf{W}^{1}, \widetilde{\mathbf{W}}\right)\right)}}\nonumber\\
+&\le \varepsilon_{B}^{Chol}+ \abs{ \expt{g\left(\overline{X}_N\left(\mathbf{W}^{1}, \overline{\overline{\mathbf{W}}}\right)\right)}- \expt{g\left(\overline{X}_N\left(\mathbf{W}^{1}, \widetilde{\mathbf{W}}\right)\right)}}
 \end{align}
 \end{small}
-
-
 From the construction of the Cholesky scheme (See Section \ref{sec:The Exact Scheme}), we expect that the weak error is purely the discretization error, that is
 
 \begin{align*}
 \varepsilon_{B}^{Chol}=\Ordo{\Delta t},
 \end{align*}
-which was confirmed by our numerical experiments ( See Figure \ref{fig:sub4} for case Set 1  in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}). 
+which was confirmed by our numerical experiments (see Figure \ref{fig:sub4} for case Set 1  in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}). 
 
-Therefore, it remains to understand how the second term in \ref{eq: Hybrid approx} behaves with respect to $\Delta t $ and $H$.From our numerical experiments it seems that that term is also of order $\Delta t$  and its rate of convergence is independent of $H$ (see Figures \ref{fig:Weak_rate_set1_without_rich_hybrid} and \ref{fig:Weak_rate_set1_set_5_without_rich}).
+Therefore, it remains to understand how the second term in \ref{eq: Weak_error_hyb_chol} behaves with respect to $\Delta t $ and $H$. This term is basically related to approximating the integral \eqref{eq:Volterra process}  by \eqref{eq:Hybrid_scheme} (From that approximation, I do not see why should we have an order of $\Ordo{\sqrt{\Delta t}}$ as claimed by the Master thesis). From our numerical experiments it seems that that term is also of order $\Delta t$  and its rate of convergence is independent of $H$ (see Figure \ref{fig:Weak_rate_set1_without_rich_hybrid}).

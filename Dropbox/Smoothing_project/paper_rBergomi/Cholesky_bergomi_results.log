@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  17 MAR 2019 11:31
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  19 MAR 2019 10:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -980,11 +980,6 @@ Missing character: There is no ˆ in font cmr10!
 Missing character: There is no ’ in font cmr10!
 
 (./simulation_rBergomi.tex
-
-LaTeX Warning: Reference `BS_formula_rbergomi' on page 2 undefined on input lin
-e 3.
-
-
 Overfull \hbox (24.17607pt too wide) in paragraph at lines 7--8
 []\OT1/cmr/bx/n/10.95 Covariance based ap-proach (ex-act sim-u-la-tion) \OT1/cm
 r/m/n/10.95 [[], []]: Given that $\OML/cmm/m/it/10.95 W[]; [] ; W[]; []; [] ; [
@@ -1011,53 +1006,49 @@ mr/bx/n/10.95 X \OT1/cmr/m/n/10.95 = (\OML/cmm/m/it/10.95 X[]; [] ; X[]; X[]; [
  []
 
 [5]) (./Weak_error_analysis.tex
-Overfull \hbox (17.32744pt too wide) in paragraph at lines 18--18
+Overfull \hbox (17.32744pt too wide) in paragraph at lines 19--19
 [] 
  []
 
 [6])
 
-LaTeX Warning: Reference `sec:Details of Cholesky scheme coupled with hierarchi
-cal reresentation' on page 7 undefined on input line 176.
+LaTeX Warning: `!h' float specifier changed to `!ht'.
 
+[7]
 Package epstopdf Info: Source file: <./figures/rBergomi_weak_error_rates/withou
 t_richardson/H_007/weak_convergence_order_Bergomi_H_007_K_1_M_4_10_6_CI_relativ
-e_hybrid_non_hierarchical_non_parallel.eps>
-(epstopdf)                    date: 2019-03-15 11:11:02
-(epstopdf)                    size: 52088 bytes
+e_hybrid_non_hierarchical_non_parallel_asymptotic.eps>
+(epstopdf)                    date: 2019-03-19 08:55:26
+(epstopdf)                    size: 51388 bytes
 (epstopdf)             Output file: <./figures/rBergomi_weak_error_rates/withou
 t_richardson/H_007/weak_convergence_order_Bergomi_H_007_K_1_M_4_10_6_CI_relativ
-e_hybrid_non_hierarchical_non_parallel-eps-converted-to.pdf>
-(epstopdf)                    date: 2019-03-17 10:54:13
-(epstopdf)                    size: 22003 bytes
+e_hybrid_non_hierarchical_non_parallel_asymptotic-eps-converted-to.pdf>
+(epstopdf)                    date: 2019-03-19 09:03:30
+(epstopdf)                    size: 21146 bytes
 (epstopdf)             Command: <repstopdf --outfile=./figures/rBergomi_weak_er
 ror_rates/without_richardson/H_007/weak_convergence_order_Bergomi_H_007_K_1_M_4
-_10_6_CI_relative_hybrid_non_hierarchical_non_parallel-eps-converted-to.pdf ./f
-igures/rBergomi_weak_error_rates/without_richardson/H_007/weak_convergence_orde
-r_Bergomi_H_007_K_1_M_4_10_6_CI_relative_hybrid_non_hierarchical_non_parallel.e
-ps>
-(epstopdf)             \includegraphics on input line 206.
+_10_6_CI_relative_hybrid_non_hierarchical_non_parallel_asymptotic-eps-converted
+-to.pdf ./figures/rBergomi_weak_error_rates/without_richardson/H_007/weak_conve
+rgence_order_Bergomi_H_007_K_1_M_4_10_6_CI_relative_hybrid_non_hierarchical_non
+_parallel_asymptotic.eps>
+(epstopdf)             \includegraphics on input line 212.
 Package epstopdf Info: Output file is already uptodate.
 
 <./figures/rBergomi_weak_error_rates/without_richardson/H_007/weak_convergence_
 order_Bergomi_H_007_K_1_M_4_10_6_CI_relative_hybrid_non_hierarchical_non_parall
-el-eps-converted-to.pdf, id=160, 578.16pt x 433.62pt>
+el_asymptotic-eps-converted-to.pdf, id=175, 578.16pt x 433.62pt>
 File: ./figures/rBergomi_weak_error_rates/without_richardson/H_007/weak_converg
 ence_order_Bergomi_H_007_K_1_M_4_10_6_CI_relative_hybrid_non_hierarchical_non_p
-arallel-eps-converted-to.pdf Graphic file (type pdf)
+arallel_asymptotic-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./figures/rBergomi_weak_error_rates/without_richardson/H_007/weak_converge
 nce_order_Bergomi_H_007_K_1_M_4_10_6_CI_relative_hybrid_non_hierarchical_non_pa
-rallel-eps-converted-to.pdf>
+rallel_asymptotic-eps-converted-to.pdf>
 Package pdftex.def Info: ./figures/rBergomi_weak_error_rates/without_richardson
 /H_007/weak_convergence_order_Bergomi_H_007_K_1_M_4_10_6_CI_relative_hybrid_non
-_hierarchical_non_parallel-eps-converted-to.pdf used on input line 206.
+_hierarchical_non_parallel_asymptotic-eps-converted-to.pdf used on input line 2
+12.
 (pdftex.def)             Requested size: 281.85585pt x 211.39055pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[7]
 Package epstopdf Info: Source file: <./figures/rBergomi_weak_error_cholesky/wea
 k_convergence_order_Bergomi_H_007_K_1_M_6_10_6_CI_relative_cholesky_hierarchica
 l.eps>
@@ -1073,11 +1064,11 @@ ror_cholesky/weak_convergence_order_Bergomi_H_007_K_1_M_6_10_6_CI_relative_chol
 esky_hierarchical-eps-converted-to.pdf ./figures/rBergomi_weak_error_cholesky/w
 eak_convergence_order_Bergomi_H_007_K_1_M_6_10_6_CI_relative_cholesky_hierarchi
 cal.eps>
-(epstopdf)             \includegraphics on input line 219.
+(epstopdf)             \includegraphics on input line 225.
 Package epstopdf Info: Output file is already uptodate.
 
 <./figures/rBergomi_weak_error_cholesky/weak_convergence_order_Bergomi_H_007_K_
-1_M_6_10_6_CI_relative_cholesky_hierarchical-eps-converted-to.pdf, id=175, 462.
+1_M_6_10_6_CI_relative_cholesky_hierarchical-eps-converted-to.pdf, id=178, 462.
 72874pt x 346.29375pt>
 File: ./figures/rBergomi_weak_error_cholesky/weak_convergence_order_Bergomi_H_0
 07_K_1_M_6_10_6_CI_relative_cholesky_hierarchical-eps-converted-to.pdf Graphic 
@@ -1087,82 +1078,47 @@ file (type pdf)
 7_K_1_M_6_10_6_CI_relative_cholesky_hierarchical-eps-converted-to.pdf>
 Package pdftex.def Info: ./figures/rBergomi_weak_error_cholesky/weak_convergenc
 e_order_Bergomi_H_007_K_1_M_6_10_6_CI_relative_cholesky_hierarchical-eps-conver
-ted-to.pdf used on input line 219.
+ted-to.pdf used on input line 225.
 (pdftex.def)             Requested size: 234.87749pt x 175.77788pt.
 Package epstopdf Info: Source file: <./figures/rBergomi_weak_error_cholesky/wea
 k_convergence_order_Bergomi_H_007_K_1_M_4_10_6_CI_relative_cholesky_non_hierarc
-hical_non_parallel.eps>
-(epstopdf)                    date: 2019-03-17 11:01:05
-(epstopdf)                    size: 52175 bytes
+hical_non_parallel_asymptotic.eps>
+(epstopdf)                    date: 2019-03-19 08:56:20
+(epstopdf)                    size: 48677 bytes
 (epstopdf)             Output file: <./figures/rBergomi_weak_error_cholesky/wea
 k_convergence_order_Bergomi_H_007_K_1_M_4_10_6_CI_relative_cholesky_non_hierarc
-hical_non_parallel-eps-converted-to.pdf>
-(epstopdf)                    date: 2019-03-17 11:01:50
-(epstopdf)                    size: 22051 bytes
+hical_non_parallel_asymptotic-eps-converted-to.pdf>
+(epstopdf)                    date: 2019-03-19 09:02:57
+(epstopdf)                    size: 21841 bytes
 (epstopdf)             Command: <repstopdf --outfile=./figures/rBergomi_weak_er
 ror_cholesky/weak_convergence_order_Bergomi_H_007_K_1_M_4_10_6_CI_relative_chol
-esky_non_hierarchical_non_parallel-eps-converted-to.pdf ./figures/rBergomi_weak
-_error_cholesky/weak_convergence_order_Bergomi_H_007_K_1_M_4_10_6_CI_relative_c
-holesky_non_hierarchical_non_parallel.eps>
-(epstopdf)             \includegraphics on input line 225.
+esky_non_hierarchical_non_parallel_asymptotic-eps-converted-to.pdf ./figures/rB
+ergomi_weak_error_cholesky/weak_convergence_order_Bergomi_H_007_K_1_M_4_10_6_CI
+_relative_cholesky_non_hierarchical_non_parallel_asymptotic.eps>
+(epstopdf)             \includegraphics on input line 231.
 Package epstopdf Info: Output file is already uptodate.
 
 <./figures/rBergomi_weak_error_cholesky/weak_convergence_order_Bergomi_H_007_K_
-1_M_4_10_6_CI_relative_cholesky_non_hierarchical_non_parallel-eps-converted-to.
-pdf, id=176, 578.16pt x 433.62pt>
+1_M_4_10_6_CI_relative_cholesky_non_hierarchical_non_parallel_asymptotic-eps-co
+nverted-to.pdf, id=179, 578.16pt x 433.62pt>
 File: ./figures/rBergomi_weak_error_cholesky/weak_convergence_order_Bergomi_H_0
-07_K_1_M_4_10_6_CI_relative_cholesky_non_hierarchical_non_parallel-eps-converte
-d-to.pdf Graphic file (type pdf)
+07_K_1_M_4_10_6_CI_relative_cholesky_non_hierarchical_non_parallel_asymptotic-e
+ps-converted-to.pdf Graphic file (type pdf)
 
 <use ./figures/rBergomi_weak_error_cholesky/weak_convergence_order_Bergomi_H_00
-7_K_1_M_4_10_6_CI_relative_cholesky_non_hierarchical_non_parallel-eps-converted
--to.pdf>
+7_K_1_M_4_10_6_CI_relative_cholesky_non_hierarchical_non_parallel_asymptotic-ep
+s-converted-to.pdf>
 Package pdftex.def Info: ./figures/rBergomi_weak_error_cholesky/weak_convergenc
 e_order_Bergomi_H_007_K_1_M_4_10_6_CI_relative_cholesky_non_hierarchical_non_pa
-rallel-eps-converted-to.pdf used on input line 225.
+rallel_asymptotic-eps-converted-to.pdf used on input line 231.
 (pdftex.def)             Requested size: 234.87749pt x 176.15768pt.
-Package epstopdf Info: Source file: <./figures/rBergomi_weak_error_cholesky/wea
-k_convergence_order_Bergomi_H_002_K_1_M_6_10_6_CI_relative_cholesky_hierarchica
-l.eps>
-(epstopdf)                    date: 2019-03-10 13:46:00
-(epstopdf)                    size: 26722 bytes
-(epstopdf)             Output file: <./figures/rBergomi_weak_error_cholesky/wea
-k_convergence_order_Bergomi_H_002_K_1_M_6_10_6_CI_relative_cholesky_hierarchica
-l-eps-converted-to.pdf>
-(epstopdf)                    date: 2019-03-10 15:16:46
-(epstopdf)                    size: 15996 bytes
-(epstopdf)             Command: <repstopdf --outfile=./figures/rBergomi_weak_er
-ror_cholesky/weak_convergence_order_Bergomi_H_002_K_1_M_6_10_6_CI_relative_chol
-esky_hierarchical-eps-converted-to.pdf ./figures/rBergomi_weak_error_cholesky/w
-eak_convergence_order_Bergomi_H_002_K_1_M_6_10_6_CI_relative_cholesky_hierarchi
-cal.eps>
-(epstopdf)             \includegraphics on input line 239.
-Package epstopdf Info: Output file is already uptodate.
-
-<./figures/rBergomi_weak_error_cholesky/weak_convergence_order_Bergomi_H_002_K_
-1_M_6_10_6_CI_relative_cholesky_hierarchical-eps-converted-to.pdf, id=179, 462.
-72874pt x 346.29375pt>
-File: ./figures/rBergomi_weak_error_cholesky/weak_convergence_order_Bergomi_H_0
-02_K_1_M_6_10_6_CI_relative_cholesky_hierarchical-eps-converted-to.pdf Graphic 
-file (type pdf)
-
-<use ./figures/rBergomi_weak_error_cholesky/weak_convergence_order_Bergomi_H_00
-2_K_1_M_6_10_6_CI_relative_cholesky_hierarchical-eps-converted-to.pdf>
-Package pdftex.def Info: ./figures/rBergomi_weak_error_cholesky/weak_convergenc
-e_order_Bergomi_H_002_K_1_M_6_10_6_CI_relative_cholesky_hierarchical-eps-conver
-ted-to.pdf used on input line 239.
-(pdftex.def)             Requested size: 281.85585pt x 210.93239pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [8 <./figures/rBergomi_weak_error_rates/without_richardson/H_007/weak_convergen
 ce_order_Bergomi_H_007_K_1_M_4_10_6_CI_relative_hybrid_non_hierarchical_non_par
-allel-eps-converted-to.pdf> <./figures/rBergomi_weak_error_cholesky/weak_conver
-gence_order_Bergomi_H_007_K_1_M_6_10_6_CI_relative_cholesky_hierarchical-eps-co
-nverted-to.pdf> <./figures/rBergomi_weak_error_cholesky/weak_convergence_order_
-Bergomi_H_007_K_1_M_4_10_6_CI_relative_cholesky_non_hierarchical_non_parallel-e
-ps-converted-to.pdf>]
+allel_asymptotic-eps-converted-to.pdf>]
 Package epstopdf Info: Source file: <./figures/rBergomi_weak_error_cholesky/wea
 k_convergence_order_Bergomi_H_043_K_1_M_10_5_CI_relative_cholesky_hierarchical.
 eps>
@@ -1178,11 +1134,11 @@ ror_cholesky/weak_convergence_order_Bergomi_H_043_K_1_M_10_5_CI_relative_choles
 ky_hierarchical-eps-converted-to.pdf ./figures/rBergomi_weak_error_cholesky/wea
 k_convergence_order_Bergomi_H_043_K_1_M_10_5_CI_relative_cholesky_hierarchical.
 eps>
-(epstopdf)             \includegraphics on input line 254.
+(epstopdf)             \includegraphics on input line 260.
 Package epstopdf Info: Output file is already uptodate.
 
 <./figures/rBergomi_weak_error_cholesky/weak_convergence_order_Bergomi_H_043_K_
-1_M_10_5_CI_relative_cholesky_hierarchical-eps-converted-to.pdf, id=314, 462.72
+1_M_10_5_CI_relative_cholesky_hierarchical-eps-converted-to.pdf, id=232, 462.72
 874pt x 346.29375pt>
 File: ./figures/rBergomi_weak_error_cholesky/weak_convergence_order_Bergomi_H_0
 43_K_1_M_10_5_CI_relative_cholesky_hierarchical-eps-converted-to.pdf Graphic fi
@@ -1192,7 +1148,7 @@ le (type pdf)
 3_K_1_M_10_5_CI_relative_cholesky_hierarchical-eps-converted-to.pdf>
 Package pdftex.def Info: ./figures/rBergomi_weak_error_cholesky/weak_convergenc
 e_order_Bergomi_H_043_K_1_M_10_5_CI_relative_cholesky_hierarchical-eps-converte
-d-to.pdf used on input line 254.
+d-to.pdf used on input line 260.
 (pdftex.def)             Requested size: 234.87749pt x 175.77788pt.
 Package epstopdf Info: Source file: <./figures/rBergomi_weak_error_cholesky/wea
 k_convergence_order_Bergomi_H_043_K_1_M_10_5_CI_relative_cholesky_non_hierarchi
@@ -1209,11 +1165,11 @@ ror_cholesky/weak_convergence_order_Bergomi_H_043_K_1_M_10_5_CI_relative_choles
 ky_non_hierarchical-eps-converted-to.pdf ./figures/rBergomi_weak_error_cholesky
 /weak_convergence_order_Bergomi_H_043_K_1_M_10_5_CI_relative_cholesky_non_hiera
 rchical.eps>
-(epstopdf)             \includegraphics on input line 259.
+(epstopdf)             \includegraphics on input line 265.
 Package epstopdf Info: Output file is already uptodate.
 
 <./figures/rBergomi_weak_error_cholesky/weak_convergence_order_Bergomi_H_043_K_
-1_M_10_5_CI_relative_cholesky_non_hierarchical-eps-converted-to.pdf, id=315, 46
+1_M_10_5_CI_relative_cholesky_non_hierarchical-eps-converted-to.pdf, id=233, 46
 2.72874pt x 346.29375pt>
 File: ./figures/rBergomi_weak_error_cholesky/weak_convergence_order_Bergomi_H_0
 43_K_1_M_10_5_CI_relative_cholesky_non_hierarchical-eps-converted-to.pdf Graphi
@@ -1223,41 +1179,36 @@ c file (type pdf)
 3_K_1_M_10_5_CI_relative_cholesky_non_hierarchical-eps-converted-to.pdf>
 Package pdftex.def Info: ./figures/rBergomi_weak_error_cholesky/weak_convergenc
 e_order_Bergomi_H_043_K_1_M_10_5_CI_relative_cholesky_non_hierarchical-eps-conv
-erted-to.pdf used on input line 259.
+erted-to.pdf used on input line 265.
 (pdftex.def)             Requested size: 234.87749pt x 175.77788pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[9 <./figures/rBergomi_weak_error_cholesky/weak_convergence_order_Bergomi_H_002
-_K_1_M_6_10_6_CI_relative_cholesky_hierarchical-eps-converted-to.pdf>]
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[10 <./figures/rBergomi_weak_error_cholesky/weak_convergence_order_Bergomi_H_04
-3_K_1_M_10_5_CI_relative_cholesky_hierarchical-eps-converted-to.pdf> <./figures
-/rBergomi_weak_error_cholesky/weak_convergence_order_Bergomi_H_043_K_1_M_10_5_C
-I_relative_cholesky_non_hierarchical-eps-converted-to.pdf>]
-(./Cholesky_bergomi_results.bbl [11]) [12]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 349.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 349.
+[9 <./figures/rBergomi_weak_error_cholesky/weak_convergence_order_Bergomi_H_007
+_K_1_M_6_10_6_CI_relative_cholesky_hierarchical-eps-converted-to.pdf> <./figure
+s/rBergomi_weak_error_cholesky/weak_convergence_order_Bergomi_H_007_K_1_M_4_10_
+6_CI_relative_cholesky_non_hierarchical_non_parallel_asymptotic-eps-converted-t
+o.pdf>] (./Cholesky_bergomi_results.bbl [10 <./figures/rBergomi_weak_error_chol
+esky/weak_convergence_order_Bergomi_H_043_K_1_M_10_5_CI_relative_cholesky_hiera
+rchical-eps-converted-to.pdf> <./figures/rBergomi_weak_error_cholesky/weak_conv
+ergence_order_Bergomi_H_043_K_1_M_10_5_CI_relative_cholesky_non_hierarchical-ep
+s-converted-to.pdf>]) [11]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 355.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 355.
  (./Cholesky_bergomi_results.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 349.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 349.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 355.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 355.
 Package rerunfilecheck Info: File `Cholesky_bergomi_results.out' has not change
 d.
 (rerunfilecheck)             Checksum: BED1113A9A9561DF93D7054BB964A952;771.
-
-
-LaTeX Warning: There were undefined references.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 349.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 355.
  ) 
 Here is how much of TeX's memory you used:
- 25515 strings out of 493014
- 439044 string characters out of 6133351
- 543118 words of memory out of 5000000
- 28506 multiletter control sequences out of 15000+600000
+ 25501 strings out of 493014
+ 437793 string characters out of 6133351
+ 541777 words of memory out of 5000000
+ 28499 multiletter control sequences out of 15000+600000
  17939 words of font info for 72 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  66i,17n,96p,3257b,561s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1282,10 +1233,10 @@ dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2016/texmf-di
 st/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2016/texmf-dist
 /fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2016/texmf-dist/
 fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Cholesky_bergomi_results.pdf (12 pages, 374984 bytes).
+Output written on Cholesky_bergomi_results.pdf (11 pages, 353137 bytes).
 PDF statistics:
- 542 PDF objects out of 1000 (max. 8388607)
- 302 compressed objects within 4 object streams
- 73 named destinations out of 1000 (max. 500000)
- 75 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 490 PDF objects out of 1000 (max. 8388607)
+ 286 compressed objects within 3 object streams
+ 67 named destinations out of 1000 (max. 500000)
+ 70 words of extra memory for PDF output out of 10000 (max. 10000000)
 

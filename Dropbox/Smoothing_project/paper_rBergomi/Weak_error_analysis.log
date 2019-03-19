@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  17 MAR 2019 11:29
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  19 MAR 2019 09:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -451,8 +451,8 @@ Overfull \hbox (180.32538pt too wide) in paragraph at lines 4--6
  []
 
 
-Overfull \hbox (84.39679pt too wide) in paragraph at lines 4--6
-[]$ 
+Overfull \hbox (87.17458pt too wide) in paragraph at lines 4--6
+[]\OML/cmm/m/it/10 ;$ 
  []
 
 
@@ -462,14 +462,14 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.8 \begin{align}
+l.7 \begin{align}
                  \label{eq: Cholesky approx}
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
 ! Undefined control sequence.
-l.9 \expt
+l.8 \expt
          {g\left(X_T\left(W^{(1)}_t,\widetilde{W}_t\right)\right)} \approx \...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -484,7 +484,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.9 \expt{g
+l.8 \expt{g
            \left(X_T\left(W^{(1)}_t,\widetilde{W}_t\right)\right)} \approx \...
 
 You're in trouble here.  Try typing  <return>  to proceed.
@@ -494,13 +494,13 @@ Missing character: There is no g in font nullfont!
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.9 \expt{g\left
+l.8 \expt{g\left
                 (X_T\left(W^{(1)}_t,\widetilde{W}_t\right)\right)} \approx \...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Extra }, or forgotten $.
-l.9 ...ft(W^{(1)}_t,\widetilde{W}_t\right)\right)}
+l.8 ...ft(W^{(1)}_t,\widetilde{W}_t\right)\right)}
                                                    \approx \expt{g\left(\ove...
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -509,7 +509,7 @@ the way to recover is to insert both the forgotten and the
 deleted material, e.g., by typing `I$}'.
 
 ! Undefined control sequence.
-l.9 ...widetilde{W}_t\right)\right)} \approx \expt
+l.8 ...widetilde{W}_t\right)\right)} \approx \expt
                                                   {g\left(\overline{X}_N\lef...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -524,8 +524,8 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.10 \end{align}
-                
+l.9 \end{align}
+               
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
@@ -533,8 +533,8 @@ or  <return>  to continue without it.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.10 \end{align}
-                
+l.9 \end{align}
+               
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
 With luck, this will get me unwedged. But if you
@@ -544,8 +544,8 @@ my insertion and my current dilemma will both disappear.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.10 \end{align}
-                
+l.9 \end{align}
+               
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
 With luck, this will get me unwedged. But if you
@@ -553,17 +553,17 @@ really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
 
-Overfull \hbox (109.67464pt too wide) in paragraph at lines 9--11
+Overfull \hbox (109.67464pt too wide) in paragraph at lines 8--10
 []$[] \OMS/cmsy/m/n/10 ^^Y
  []
 
 
-Overfull \hbox (177.54758pt too wide) in paragraph at lines 9--11
+Overfull \hbox (177.54758pt too wide) in paragraph at lines 8--10
 [] \OT1/cmr/m/n/10 :
  []
 
 
-Overfull \hbox (96.98145pt too wide) in paragraph at lines 9--11
+Overfull \hbox (96.98145pt too wide) in paragraph at lines 8--10
 []\OML/cmm/m/it/10 ;$ 
  []
 
@@ -574,8 +574,118 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.12 T
-      o simplify notation, let $\overline{\mathbf{W}^{1}}=(\overline{W}^{(1)...
+l.11 w
+      here $\overline{\overline{W}}$ is the approximation of $\widetilde{W}$...
+
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+Missing character: There is no w in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no p in font nullfont!
+Missing character: There is no p in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no x in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no f in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no g in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no v in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no b in font nullfont!
+Missing character: There is no y in font nullfont!
+! Undefined control sequence.
+l.11 ...ion of $\widetilde{W}$  as given by \eqref
+                                                  {eq:Hybrid_scheme_pre}.
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Missing character: There is no e in font nullfont!
+Missing character: There is no q in font nullfont!
+Missing character: There is no : in font nullfont!
+Missing character: There is no H in font nullfont!
+Missing character: There is no y in font nullfont!
+Missing character: There is no b in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no d in font nullfont!
+! Missing $ inserted.
+<inserted text> 
+                $
+l.11 ...detilde{W}$  as given by \eqref{eq:Hybrid_
+                                                  scheme_pre}.
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Extra }, or forgotten $.
+l.11 ...  as given by \eqref{eq:Hybrid_scheme_pre}
+                                                  .
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.12 
+     
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (20.0pt too wide) in paragraph at lines 11--12
+[]
+ []
+
+
+Overfull \hbox (10.83334pt too wide) in paragraph at lines 11--12
+[]$
+ []
+
+
+Overfull \hbox (10.83334pt too wide) in paragraph at lines 11--12
+[]$
+ []
+
+
+Overfull \hbox (49.3019pt too wide) in paragraph at lines 11--12
+[]\OML/cmm/m/it/10 cheme[]re:$ 
+ []
+
+
+! LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.13 T
+      o simplify notation, let  $\overline{\overline{\mathbf{W}}}=(\overline...
 
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -602,7 +712,6 @@ Missing character: There is no , in font nullfont!
 Missing character: There is no l in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no t in font nullfont!
-Missing character: There is no , in font nullfont!
 Missing character: There is no , in font nullfont!
 Missing character: There is no a in font nullfont!
 Missing character: There is no n in font nullfont!
@@ -706,7 +815,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.13 \begin{small}
+l.14 \begin{small}
                   
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -719,7 +828,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.14 \begin{align}
+l.15 \begin{align}
                   \label{eq: Weak_error_hyb_chol}
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -728,13 +837,13 @@ or  <return>  to continue without it.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.15 \varepsilon
+l.16 \varepsilon
                 _{B}^{Hyb}&=\abs{\expt{g\left(X_T\left(W^{(1)}_t,\widetilde{...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Misplaced alignment tab character &.
-l.15 \varepsilon_{B}^{Hyb}&
+l.16 \varepsilon_{B}^{Hyb}&
                            =\abs{\expt{g\left(X_T\left(W^{(1)}_t,\widetilde{...
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -744,7 +853,7 @@ you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
 ! Undefined control sequence.
-l.15 \varepsilon_{B}^{Hyb}&=\abs
+l.16 \varepsilon_{B}^{Hyb}&=\abs
                                 {\expt{g\left(X_T\left(W^{(1)}_t,\widetilde{...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -753,7 +862,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.15 \varepsilon_{B}^{Hyb}&=\abs{\expt
+l.16 \varepsilon_{B}^{Hyb}&=\abs{\expt
                                       {g\left(X_T\left(W^{(1)}_t,\widetilde{...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -762,73 +871,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.15 ...)}_t,\widetilde{W}_t\right) \right)}-\expt
-                                                  {g\left(\overline{X}_N\lef...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Misplaced alignment tab character &.
-<recently read> &
-                 
-l.16 &
-      \le \abs{\expt{g\left(X_T\left(W^{(1)}_t,\widetilde{W}_t\right)\right)...
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Undefined control sequence.
-l.16 &\le \abs
-              {\expt{g\left(X_T\left(W^{(1)}_t,\widetilde{W}_t\right)\right)...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.16 &\le \abs{\expt
-                    {g\left(X_T\left(W^{(1)}_t,\widetilde{W}_t\right)\right)...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.16 ...1)}_t,\widetilde{W}_t\right)\right)}-\expt
-                                                  {g\left(\overline{X}_N\lef...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.16 ...idetilde{\mathbf{W}}\right)\right)}}+ \abs
-                                                  { \expt{g\left(\overline{X...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.16 ...e{\mathbf{W}}\right)\right)}}+ \abs{ \expt
-                                                  {g\left(\overline{X}_N\lef...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.16 ...verline{\mathbf{W}}}\right)\right)}- \expt
+l.16 ...)}_t,\widetilde{W}_t\right) \right)}-\expt
                                                   {g\left(\overline{X}_N\lef...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -840,7 +883,7 @@ and I'll forget about whatever was undefined.
 <recently read> &
                  
 l.17 &
-      \le \varepsilon_{B}^{Chol}+ \abs{ \expt{g\left(\overline{X}_N\left(\ov...
+      \le \abs{\expt{g\left(X_T\left(W^{(1)}_t,\widetilde{W}_t\right)\right)...
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
 simple: Just type `I\&' now. But if some right brace
@@ -849,8 +892,8 @@ you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
 ! Undefined control sequence.
-l.17 &\le \varepsilon_{B}^{Chol}+ \abs
-                                      { \expt{g\left(\overline{X}_N\left(\ov...
+l.17 &\le \abs
+              {\expt{g\left(X_T\left(W^{(1)}_t,\widetilde{W}_t\right)\right)...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -858,8 +901,35 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.17 &\le \varepsilon_{B}^{Chol}+ \abs{ \expt
-                                             {g\left(\overline{X}_N\left(\ov...
+l.17 &\le \abs{\expt
+                    {g\left(X_T\left(W^{(1)}_t,\widetilde{W}_t\right)\right)...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.17 ...1)}_t,\widetilde{W}_t\right)\right)}-\expt
+                                                  {g\left(\overline{X}_N\lef...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.17 ...idetilde{\mathbf{W}}\right)\right)}}+ \abs
+                                                  { \expt{g\left(\overline{X...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.17 ...e{\mathbf{W}}\right)\right)}}+ \abs{ \expt
+                                                  {g\left(\overline{X}_N\lef...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -875,6 +945,45 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
+! Misplaced alignment tab character &.
+<recently read> &
+                 
+l.18 &
+      \le \varepsilon_{B}^{Chol}+ \abs{ \expt{g\left(\overline{X}_N\left(\ma...
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Undefined control sequence.
+l.18 &\le \varepsilon_{B}^{Chol}+ \abs
+                                      { \expt{g\left(\overline{X}_N\left(\ma...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.18 &\le \varepsilon_{B}^{Chol}+ \abs{ \expt
+                                             {g\left(\overline{X}_N\left(\ma...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.18 ...verline{\mathbf{W}}}\right)\right)}- \expt
+                                                  {g\left(\overline{X}_N\lef...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
 
 ! LaTeX Error: \begin{document} ended by \end{align}.
 
@@ -882,7 +991,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.18 \end{align}
+l.19 \end{align}
                 
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -891,7 +1000,7 @@ or  <return>  to continue without it.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.18 \end{align}
+l.19 \end{align}
                 
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -906,119 +1015,11 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.19 \end{small}
+l.20 \end{small}
                 
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
-
-
-Overfull \hbox (20.0pt too wide) in paragraph at lines 12--20
-[]
- []
-
-
-Overfull \hbox (27.0902pt too wide) in paragraph at lines 12--20
-[] \OT1/cmr/m/n/10 =
- []
-
-
-Overfull \hbox (73.13887pt too wide) in paragraph at lines 12--20
-\OT1/cmr/m/n/10 ([][]\OML/cmm/m/it/10 ; [] ; [][]\OT1/cmr/m/n/10 )$
- []
-
-
-Overfull \hbox (22.60406pt too wide) in paragraph at lines 12--20
-[] \OT1/cmr/m/n/10 =
- []
-
-
-Overfull \hbox (63.73741pt too wide) in paragraph at lines 12--20
-\OT1/cmr/m/n/10 ([][]\OML/cmm/m/it/10 ; [] ; [][]\OT1/cmr/m/n/10 )$
- []
-
-
-Overfull \hbox (27.0902pt too wide) in paragraph at lines 12--20
-\OT1/cmr/bx/n/10 W[] \OT1/cmr/m/n/10 =
- []
-
-
-Overfull \hbox (73.13887pt too wide) in paragraph at lines 12--20
-\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 W[]; [] ; W[]\OT1/cmr/m/n/10 )$
- []
-
-
-Overfull \hbox (22.60406pt too wide) in paragraph at lines 12--20
-[] \OT1/cmr/m/n/10 =
- []
-
-
-Overfull \hbox (60.95961pt too wide) in paragraph at lines 12--20
-\OT1/cmr/m/n/10 ([]\OML/cmm/m/it/10 ; [] ; []\OT1/cmr/m/n/10 )$
- []
-
-
-Overfull \hbox (20.07132pt too wide) in paragraph at lines 12--20
-\OML/cmm/m/it/10 "[]$
- []
-
-
-Overfull \hbox (22.58759pt too wide) in paragraph at lines 12--20
-\OML/cmm/m/it/10 "[]$
- []
-
-
-Overfull \hbox (30.62683pt too wide) in paragraph at lines 12--20
-\OML/cmm/m/it/10 "[] \OT1/cmr/m/n/10 =
- []
-
-
-Overfull \hbox (180.1688pt too wide) in paragraph at lines 12--20
-[][] 
- []
-
-
-Overfull \hbox (7.7778pt too wide) in paragraph at lines 12--20
-\OMS/cmsy/m/n/10 ^^T
- []
-
-
-Overfull \hbox (187.9466pt too wide) in paragraph at lines 12--20
-[] \OT1/cmr/m/n/10 +
- []
-
-
-Overfull \hbox (176.28702pt too wide) in paragraph at lines 12--20
-[][] 
- []
-
-
-Overfull \hbox (7.7778pt too wide) in paragraph at lines 12--20
-\OMS/cmsy/m/n/10 ^^T
- []
-
-
-Overfull \hbox (30.36539pt too wide) in paragraph at lines 12--20
-\OML/cmm/m/it/10 "[] \OT1/cmr/m/n/10 +
- []
-
-
-Overfull \hbox (176.28702pt too wide) in paragraph at lines 12--20
-[]$
- []
-
-
-! LaTeX Error: Missing \begin{document}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.22 F
-      rom the construction of the Cholesky scheme (See Section \ref{sec:The ...
-
-You're in trouble here.  Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
 
 Missing character: There is no F in font nullfont!
 Missing character: There is no r in font nullfont!
@@ -1072,7 +1073,7 @@ Missing character: There is no n in font nullfont!
 ! Undefined control sequence.
 <write> ...sec:The Exact Scheme' on page \thepage 
                                                   \space undefined\on@line .
-l.22 ...me (See Section \ref{sec:The Exact Scheme}
+l.21 ...me (See Section \ref{sec:The Exact Scheme}
                                                   ), we expect that the weak...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1082,7 +1083,7 @@ and I'll forget about whatever was undefined.
 
 
 LaTeX Warning: Reference `sec:The Exact Scheme' on page  undefined on input lin
-e 22.
+e 21.
 
 Missing character: There is no ) in font nullfont!
 Missing character: There is no , in font nullfont!
@@ -1148,12 +1149,92 @@ Missing character: There is no t in font nullfont!
 Missing character: There is no i in font nullfont!
 Missing character: There is no s in font nullfont!
 
-Overfull \hbox (20.0pt too wide) in paragraph at lines 22--23
+Overfull \hbox (20.0pt too wide) in paragraph at lines 13--22
 []
  []
 
 
-Overfull \hbox (10.86105pt too wide) in paragraph at lines 22--23
+Overfull \hbox (22.60406pt too wide) in paragraph at lines 13--22
+[] \OT1/cmr/m/n/10 =
+ []
+
+
+Overfull \hbox (63.73741pt too wide) in paragraph at lines 13--22
+\OT1/cmr/m/n/10 ([][]\OML/cmm/m/it/10 ; [] ; [][]\OT1/cmr/m/n/10 )$
+ []
+
+
+Overfull \hbox (27.0902pt too wide) in paragraph at lines 13--22
+\OT1/cmr/bx/n/10 W[] \OT1/cmr/m/n/10 =
+ []
+
+
+Overfull \hbox (73.13887pt too wide) in paragraph at lines 13--22
+\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 W[]; [] ; W[]\OT1/cmr/m/n/10 )$
+ []
+
+
+Overfull \hbox (22.60406pt too wide) in paragraph at lines 13--22
+[] \OT1/cmr/m/n/10 =
+ []
+
+
+Overfull \hbox (60.95961pt too wide) in paragraph at lines 13--22
+\OT1/cmr/m/n/10 ([]\OML/cmm/m/it/10 ; [] ; []\OT1/cmr/m/n/10 )$
+ []
+
+
+Overfull \hbox (20.07132pt too wide) in paragraph at lines 13--22
+\OML/cmm/m/it/10 "[]$
+ []
+
+
+Overfull \hbox (22.58759pt too wide) in paragraph at lines 13--22
+\OML/cmm/m/it/10 "[]$
+ []
+
+
+Overfull \hbox (30.62683pt too wide) in paragraph at lines 13--22
+\OML/cmm/m/it/10 "[] \OT1/cmr/m/n/10 =
+ []
+
+
+Overfull \hbox (180.1688pt too wide) in paragraph at lines 13--22
+[][] 
+ []
+
+
+Overfull \hbox (7.7778pt too wide) in paragraph at lines 13--22
+\OMS/cmsy/m/n/10 ^^T
+ []
+
+
+Overfull \hbox (187.9466pt too wide) in paragraph at lines 13--22
+[] \OT1/cmr/m/n/10 +
+ []
+
+
+Overfull \hbox (176.28702pt too wide) in paragraph at lines 13--22
+[][] 
+ []
+
+
+Overfull \hbox (7.7778pt too wide) in paragraph at lines 13--22
+\OMS/cmsy/m/n/10 ^^T
+ []
+
+
+Overfull \hbox (30.36539pt too wide) in paragraph at lines 13--22
+\OML/cmm/m/it/10 "[] \OT1/cmr/m/n/10 +
+ []
+
+
+Overfull \hbox (176.28702pt too wide) in paragraph at lines 13--22
+[]$
+ []
+
+
+Overfull \hbox (10.86105pt too wide) in paragraph at lines 13--22
 []
  []
 
@@ -1164,7 +1245,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.24 \begin{align*}
+l.23 \begin{align*}
                    
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -1173,7 +1254,7 @@ or  <return>  to continue without it.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.25 \varepsilon
+l.24 \varepsilon
                 _{B}^{Chol}=\Ordo{\Delta t},
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -1185,13 +1266,13 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.25 \varepsilon
+l.24 \varepsilon
                 _{B}^{Chol}=\Ordo{\Delta t},
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 ! Undefined control sequence.
-l.25 \varepsilon_{B}^{Chol}=\Ordo
+l.24 \varepsilon_{B}^{Chol}=\Ordo
                                  {\Delta t},
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1206,7 +1287,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.26 \end{align*}
+l.25 \end{align*}
                  
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -1215,7 +1296,7 @@ or  <return>  to continue without it.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.26 \end{align*}
+l.25 \end{align*}
                  
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -1266,7 +1347,7 @@ Missing character: There is no n in font nullfont!
 Missing character: There is no t in font nullfont!
 Missing character: There is no s in font nullfont!
 Missing character: There is no ( in font nullfont!
-Missing character: There is no S in font nullfont!
+Missing character: There is no s in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no F in font nullfont!
@@ -1278,7 +1359,7 @@ Missing character: There is no e in font nullfont!
 ! Undefined control sequence.
 <write> ... Reference `fig:sub4' on page \thepage 
                                                   \space undefined\on@line .
-l.27 ...al experiments ( See Figure \ref{fig:sub4}
+l.26 ...cal experiments (see Figure \ref{fig:sub4}
                                                    for case Set 1  in Table ...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1287,7 +1368,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-LaTeX Warning: Reference `fig:sub4' on page  undefined on input line 27.
+LaTeX Warning: Reference `fig:sub4' on page  undefined on input line 26.
 
 Missing character: There is no f in font nullfont!
 Missing character: There is no o in font nullfont!
@@ -1310,7 +1391,7 @@ Missing character: There is no e in font nullfont!
 ! Undefined control sequence.
 <write> ...meter constellation.' on page \thepage 
                                                   \space undefined\on@line .
-l.27 ...l, for different parameter constellation.}
+l.26 ...l, for different parameter constellation.}
                                                   ).
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1321,27 +1402,27 @@ and I'll forget about whatever was undefined.
 
 LaTeX Warning: Reference `table:Reference solution, using MC with $500$ time st
 eps, of Call option price under rBergomi model, for different parameter constel
-lation.' on page  undefined on input line 27.
+lation.' on page  undefined on input line 26.
 
 Missing character: There is no ) in font nullfont!
 Missing character: There is no . in font nullfont!
 
-Overfull \hbox (53.1431pt too wide) in paragraph at lines 25--28
+Overfull \hbox (53.1431pt too wide) in paragraph at lines 24--27
 []$\OML/cmm/m/it/10 "[] \OT1/cmr/m/n/10 =
  []
 
 
-Overfull \hbox (14.72226pt too wide) in paragraph at lines 25--28
+Overfull \hbox (14.72226pt too wide) in paragraph at lines 24--27
 []\OML/cmm/m/it/10 ;$
  []
 
 
-Overfull \hbox (10.86105pt too wide) in paragraph at lines 25--28
+Overfull \hbox (10.86105pt too wide) in paragraph at lines 24--27
 []
  []
 
 
-Overfull \hbox (10.86105pt too wide) in paragraph at lines 25--28
+Overfull \hbox (10.86105pt too wide) in paragraph at lines 24--27
 [] 
  []
 
@@ -1352,8 +1433,8 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.29 T
-      herefore, it remains to understand how the second term in \ref{eq: Hyb...
+l.28 T
+      herefore, it remains to understand how the second term in \ref{eq: Wea...
 
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -1408,9 +1489,9 @@ Missing character: There is no m in font nullfont!
 Missing character: There is no i in font nullfont!
 Missing character: There is no n in font nullfont!
 ! Undefined control sequence.
-<write> ...e `eq: Hybrid approx' on page \thepage 
+<write> ... Weak_error_hyb_chol' on page \thepage 
                                                   \space undefined\on@line .
-l.29 ...the second term in \ref{eq: Hybrid approx}
+l.28 ...cond term in \ref{eq: Weak_error_hyb_chol}
                                                    behaves with respect to $...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1419,8 +1500,8 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-LaTeX Warning: Reference `eq: Hybrid approx' on page  undefined on input line 2
-9.
+LaTeX Warning: Reference `eq: Weak_error_hyb_chol' on page  undefined on input 
+line 28.
 
 Missing character: There is no b in font nullfont!
 Missing character: There is no e in font nullfont!
@@ -1445,6 +1526,176 @@ Missing character: There is no o in font nullfont!
 Missing character: There is no a in font nullfont!
 Missing character: There is no n in font nullfont!
 Missing character: There is no d in font nullfont!
+Missing character: There is no . in font nullfont!
+Missing character: There is no T in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no b in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no y in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no d in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no p in font nullfont!
+Missing character: There is no p in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no x in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no g in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no g in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no l in font nullfont!
+! Undefined control sequence.
+l.28 ...lated to approximating the integral \eqref
+                                                  {eq:Volterra process}  by ...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Missing character: There is no e in font nullfont!
+Missing character: There is no q in font nullfont!
+Missing character: There is no : in font nullfont!
+Missing character: There is no V in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no p in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no b in font nullfont!
+Missing character: There is no y in font nullfont!
+! Undefined control sequence.
+l.28 ...ral \eqref{eq:Volterra process}  by \eqref
+                                                  {eq:Hybrid_scheme} (From t...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Missing character: There is no e in font nullfont!
+Missing character: There is no q in font nullfont!
+Missing character: There is no : in font nullfont!
+Missing character: There is no H in font nullfont!
+Missing character: There is no y in font nullfont!
+Missing character: There is no b in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no d in font nullfont!
+! Missing $ inserted.
+<inserted text> 
+                $
+l.28 ...eq:Volterra process}  by \eqref{eq:Hybrid_
+                                                  scheme} (From that approxi...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Extra }, or forgotten $.
+l.28 ...erra process}  by \eqref{eq:Hybrid_scheme}
+                                                   (From that approximation,...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+! Undefined control sequence.
+l.28 ... see why should we have an order of $\Ordo
+                                                  {\sqrt{\Delta t}}$ as clai...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.28 ...y should we have an order of $\Ordo{\sqrt{
+                                                  \Delta t}}$ as claimed by ...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Extra }, or forgotten $.
+l.28 ...e have an order of $\Ordo{\sqrt{\Delta t}}
+                                                  $ as claimed by the Master...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+Missing character: There is no a in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no d in font nullfont!
+Missing character: There is no b in font nullfont!
+Missing character: There is no y in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no M in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no ) in font nullfont!
 Missing character: There is no . in font nullfont!
 Missing character: There is no F in font nullfont!
 Missing character: There is no r in font nullfont!
@@ -1553,29 +1804,10 @@ Missing character: There is no g in font nullfont!
 Missing character: There is no u in font nullfont!
 Missing character: There is no r in font nullfont!
 Missing character: There is no e in font nullfont!
-Missing character: There is no s in font nullfont!
 ! Undefined control sequence.
 <write> ..._without_rich_hybrid' on page \thepage 
                                                   \space undefined\on@line .
-l.29 ...ef{fig:Weak_rate_set1_without_rich_hybrid}
-                                                   and \ref{fig:Weak_rate_se...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-
-LaTeX Warning: Reference `fig:Weak_rate_set1_without_rich_hybrid' on page  unde
-fined on input line 29.
-
-Missing character: There is no a in font nullfont!
-Missing character: There is no n in font nullfont!
-Missing character: There is no d in font nullfont!
-! Undefined control sequence.
-<write> ...1_set_5_without_rich' on page \thepage 
-                                                  \space undefined\on@line .
-l.29 ...ref{fig:Weak_rate_set1_set_5_without_rich}
+l.28 ...ef{fig:Weak_rate_set1_without_rich_hybrid}
                                                   ).
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1584,8 +1816,8 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-LaTeX Warning: Reference `fig:Weak_rate_set1_set_5_without_rich' on page  undef
-ined on input line 29.
+LaTeX Warning: Reference `fig:Weak_rate_set1_without_rich_hybrid' on page  unde
+fined on input line 28.
 
 Missing character: There is no ) in font nullfont!
 Missing character: There is no . in font nullfont!
@@ -1597,11 +1829,11 @@ Missing character: There is no . in font nullfont!
 
  
 Here is how much of TeX's memory you used:
- 27 strings out of 493014
- 582 string characters out of 6133351
- 59601 words of memory out of 5000000
- 3667 multiletter control sequences out of 15000+600000
+ 26 strings out of 493014
+ 549 string characters out of 6133351
+ 58601 words of memory out of 5000000
+ 3666 multiletter control sequences out of 15000+600000
  4567 words of font info for 17 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 18i,8n,16p,517b,75s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 18i,8n,16p,640b,77s stack positions out of 5000i,500n,10000p,200000b,80000s
 !  ==> Fatal error occurred, no output PDF file produced!

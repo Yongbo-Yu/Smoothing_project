@@ -173,7 +173,13 @@ The rBergomi model is non-Markovian in the instantaneous variance $v_t$, that is
 
 \subsection{Weak error}
 In this section, we compare the weak rates obtained for set $1$ in Table
-\ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. We compare three different cases: i) rBergomi simulated using Hybrid scheme with hierarchical construction (see Figure \ref{fig:Weak_rate_set1_without_rich_hybrid}), ii) rBergomi simulated using Cholesky scheme without hierarchical construction (see Figure \ref{fig:sub3}), and iii) rBergomi simulated using Cholesky scheme with hierarchical construction as in Section \ref{sec:Details of Cholesky scheme coupled with hierarchical reresentation} (see Figure \ref{fig:sub4}). From those plots, it seems to me that we have a better behavior of the hybrid scheme, in terms of weak error rate, than the Cholesky scheme (for both cases (with/without hierarchical representation)), at least in the pre-asymptotic regime, which justifies our use of Richardson extrapolation with the hybrid scheme. On the other hand, it seems that the weak error when using Cholesky scheme is smaller in magnitude compared to the one using the hybrid scheme for a fixed number of time steps $N$. Therefore, with the observed weak convergence behavior using Cholesky scheme, it is not clear to me if it makes sense to use Richardson extrapolation since the rates are too low.  We note that we observed similar behavior for sets with $H=0.02$ (see Figure \ref{fig:Weak_rate_set2_without_rich_cholesky} for weak error observed for set $2$ using Cholesky scheme).
+\ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. We compare three different cases: i) rBergomi simulated using Hybrid scheme with hierarchical construction (see Figure \ref{fig:Weak_rate_set1_without_rich_hybrid}), ii) rBergomi simulated using Cholesky scheme without hierarchical construction (see Figure \ref{fig:sub3}), and iii) rBergomi simulated using Cholesky scheme with hierarchical construction as in Section \ref{sec:The Exact Scheme} (see Figure \ref{fig:sub4}). From those plots, we have the following conclusions:
+\begin{itemize}
+\item[i)] Asymptotically, both schemes (hybrid and exact) seems to have rate  of order $\Ordo{\Delta t}$ of convergence (compare Figure \ref{fig:Weak_rate_set1_without_rich_hybrid} and Figure \ref{fig:sub4}).
+\item[ii)]  In the pre-asymptotic regime, we have a better behavior of the hybrid scheme, in terms of weak error rate, than the Cholesky scheme (for both cases (with/without hierarchical representation)), which justifies our use of Richardson extrapolation with the hybrid scheme (compare Figure \ref{fig:Weak_rate_set1_without_rich_hybrid} and Figure \ref{fig:Weak_rate_set1_set_2_without_rich}).
+\item[iii)] It seems that the weak error when using Cholesky scheme is smaller in magnitude compared to the one using the hybrid scheme for a fixed number of time steps $N$.
+\end{itemize}  
+We note that we observed similar behavior for sets with $H=0.02$.
 
 \FloatBarrier
 \begin{table}[!h]
@@ -203,9 +209,9 @@ In this section, we compare the weak rates obtained for set $1$ in Table
 \FloatBarrier
 \begin{figure}[h!]
 	\centering
-		\includegraphics[width=0.6\linewidth]{./figures/rBergomi_weak_error_rates/without_richardson/H_007/weak_convergence_order_Bergomi_H_007_K_1_M_4_10_6_CI_relative_hybrid_non_hierarchical_non_parallel}
+		\includegraphics[width=0.6\linewidth]{./figures/rBergomi_weak_error_rates/without_richardson/H_007/weak_convergence_order_Bergomi_H_007_K_1_M_4_10_6_CI_relative_hybrid_non_hierarchical_non_parallel_asymptotic}
 		
-	\caption{The  convergence of the weak error $\mathcal{E}_B(N)$, using MC ($M=10^6$) with hierarchical hybrid scheme, for set $1$ parameter in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. We refer to $C_{\text{RB}}$ as $\expt{g(X)}$, and to $C_{\text{RB}}^{N}$ as  $\expt{g(X_{\Delta t})}$. The upper and lower bounds are $95\%$ confidence intervals.}
+	\caption{The  convergence of the weak error $\mathcal{E}_B(N)$, using MC ($M=4 \times 10^6$) with hierarchical hybrid scheme, for set $1$ parameter in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. We refer to $C_{\text{RB}}$ as $\expt{g(X)}$, and to $C_{\text{RB}}^{N}$ as  $\expt{g(X_{\Delta t})}$. The upper and lower bounds are $95\%$ confidence intervals.}
 	\label{fig:Weak_rate_set1_without_rich_hybrid}
 \end{figure}
 \FloatBarrier
@@ -222,7 +228,7 @@ In this section, we compare the weak rates obtained for set $1$ in Table
 	\end{subfigure}%
 	\begin{subfigure}{.5\textwidth}
 		\centering
-		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_cholesky/weak_convergence_order_Bergomi_H_007_K_1_M_4_10_6_CI_relative_cholesky_non_hierarchical_non_parallel}
+		\includegraphics[width=1\linewidth]{./figures/rBergomi_weak_error_cholesky/weak_convergence_order_Bergomi_H_007_K_1_M_4_10_6_CI_relative_cholesky_non_hierarchical_non_parallel_asymptotic}
 		\caption{}
 		\label{fig:sub4}
 	\end{subfigure}
@@ -233,15 +239,15 @@ In this section, we compare the weak rates obtained for set $1$ in Table
 \FloatBarrier
 
 
-\FloatBarrier
-\begin{figure}[h!]
-	\centering
-		\includegraphics[width=0.6\linewidth]{./figures/rBergomi_weak_error_cholesky/weak_convergence_order_Bergomi_H_002_K_1_M_6_10_6_CI_relative_cholesky_hierarchical}
-		
-	\caption{The  convergence of the weak error $\mathcal{E}_B(N)$, using MC ($M=6 \times 10^6$) with hierarchical Cholesky scheme, for set $2$ parameter in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. We refer to $C_{\text{RB}}$ as $\expt{g(X)}$, and to $C_{\text{RB}}^{N}$ as  $\expt{g(X_{\Delta t})}$. The upper and lower bounds are $95\%$ confidence intervals.}
-	\label{fig:Weak_rate_set2_without_rich_cholesky}
-\end{figure}
-\FloatBarrier
+%\FloatBarrier
+%\begin{figure}[h!]
+%	\centering
+%		\includegraphics[width=0.6\linewidth]{./figures/rBergomi_weak_error_cholesky/weak_convergence_order_Bergomi_H_002_K_1_M_6_10_6_CI_relative_cholesky_hierarchical}
+%		
+%	\caption{The  convergence of the weak error $\mathcal{E}_B(N)$, using MC ($M=6 \times 10^6$) with hierarchical Cholesky scheme, for set $2$ parameter in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. We refer to $C_{\text{RB}}$ as $\expt{g(X)}$, and to $C_{\text{RB}}^{N}$ as  $\expt{g(X_{\Delta t})}$. The upper and lower bounds are $95\%$ confidence intervals.}
+%	\label{fig:Weak_rate_set2_without_rich_cholesky}
+%\end{figure}
+%\FloatBarrier
 
 
 To investigate more the behavior observed for the Cholesky scheme, we test the case of set $5$ in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.} which is close to the Gaussian case for $H=1/2$ (see Figure \ref{fig:Weak_rate_set1_set_5_without_rich}). We observed a weak convergence rate of order almost $1$. This observation confirms first that maybe the hybrid scheme is more robust, in terms of weak error, than Cholesky for the simulation of the rough Bergomi dynamics. Furthermore, we believe that the weak error in the Cholesky scheme depends on $H$, and  that the common error in both the Cholesky and Hybrid scheme is dominated by the second kind of weak error involved in the hybrid scheme with is of order $\Delta t $ that is why we observed more robust rate for the hybrid scheme. We try in Section \ref{sec:Weak error analysis} to provide an analysis for the weak rate.
@@ -265,65 +271,65 @@ To investigate more the behavior observed for the Cholesky scheme, we test the c
 \end{figure}
 \FloatBarrier
 
-\begin{remark}
-Our observations are in harmony with results observed in \cite{bayer2017regularity}, where it was observed that the weak error for pricing European option under the rBergomi, simulated using Cholesky scheme and for a particular choice of test function is of order $2H$ across the full range of $0<H <\frac{1}{2}$ (see Figure $3$ in \cite{bayer2017regularity}). On the other hand, I suspect  that the results reported in the Master thesis provided by Christian are reported on opposite way, that is the results reported for the hybrid scheme correspond to the Cholesky scheme (to be checked). 
-\end{remark}
+%\begin{remark}
+%Our observations are in harmony with results observed in \cite{bayer2017regularity}, where it was observed that the weak error for pricing European option under the rBergomi, simulated using Cholesky scheme and for a particular choice of test function is of order $2H$ across the full range of $0<H <\frac{1}{2}$ (see Figure $3$ in \cite{bayer2017regularity}). On the other hand, I suspect  that the results reported in the Master thesis provided by Christian are reported on opposite way, that is the results reported for the hybrid scheme correspond to the Cholesky scheme (to be checked). 
+%\end{remark}
 
 
-\subsection{Comparing the different  errors and computational time for MC and MISC for the Cholesky scheme}\label{sec:Comparing different  errors and complexity for MC and MISC_ Cholesky}
-Due to the behavior of the weak error for small values of $H$, we can not apply Richardson extrapolation. However, since the weak error when using Cholesky scheme seems to be one order smaller than the one obtained when using the hybrid scheme, we try to compare the numerical complexity of MC and MISC for the case of set $1$ parameter in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, without using Richardson extrapolation. From Tables \ref{Total error of MISC and MC to compute Call option price of the different tolerances for different number of time steps_Cholesky. Case $K=1$, $H=0.07$, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors,linear} and \ref{Comparsion of the computational time of  MC and MISC, used to compute Call option price of rBergomi model_cholesky for different number of time steps. Case $K=1, H=0.07$, linear}, we see that to get a total relative error below $1\%$, we need more than $32$ time steps for both MC and MISC, implying (given our previous results with the hybrid scheme) that using the hybrid scheme coupled with Richardson extrapolation gives better results for MC and MISC, than those obtained with Cholesky scheme.
-\FloatBarrier
-
-\begin{table}[h!]
-	\centering
-	\begin{tabular}{l*{6}{c}r}
-	\toprule[1.5pt]
-	Method & & Steps  & & &    \\
-	\hline
-		    & $2$ & $4$ & $8$  & $16$   & $32$ \\
-		\hline
-
-		MISC ($\text{TOL}_{\text{MISC}}=10^{-1}$)  & $\underset{(0.042,0.080)}{\mathbf{0.122}}$& $ \underset{(0.010,0.083)}{\mathbf{0.093}}$ & $ \underset{(0.020,0.173)}{\mathbf{0.193}}$   & $ \underset{(0.015,0.135)}{\mathbf{  0.150}}$  &$-$ \\
-
-		MISC ($\text{TOL}_{\text{MISC}}=10^{-2}$)  & $\underset{(0.042,0.080)}{\mathbf{ 0.122}}$ & $ \underset{(0.010,0.006)}{\mathbf{\red{0.016}}}$ & $\underset{(0.020,0.008)}{\mathbf{ \red{0.028}  }}$&  $ \underset{(0.015,0.014)}{\mathbf{\red{0.029}}}$ &$-$ \\
-		MISC ($\text{TOL}_{\text{MISC}}=5.10^{-3}$)  & $\underset{(0.042,0.015)}{\mathbf{ \red{0.057}}}$ & $ \underset{(0.010,0.003)}{\mathbf{0.013 }}$ & $-$&  $-$&$-$  \\
-
-				\hline
-				MC    & $\underset{(0.042,0.042)}{\mathbf{0.084}}$  & $\underset{(0.010,0.010)}{\mathbf{0.020}}$  &$\underset{(0.020,0.019)}{
-				\mathbf{0.039}}$& $\underset{(0.015,0.015)}{
-				\mathbf{0.030}}$ &$\underset{(0.009,0.008)}{
-				\mathbf{0.017}}$\\	
-		M(\# MC samples)   & $10^3$  & $3 \times 10^4$  &$4 \times 10^3$  & $6 \times 10^3$  & $2 \times 10^4$\\
-		\bottomrule[1.25pt]
-	\end{tabular}
-	\caption{Total relative error of MISC, without Richardson extrapolation, with different tolerances, and MC to compute the call option prices for different numbers of time steps, where the rBergomi dynamics are simulated using Cholesky scheme. The values between parentheses correspond to the different errors contributing to the total relative error: for MISC we report the bias and quadrature errors and for MC we report the bias and the statistical errors estimates.}
-	\label{Total error of MISC and MC to compute Call option price of the different tolerances for different number of time steps_Cholesky. Case $K=1$, $H=0.07$, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors,linear}
-\end{table}
-\FloatBarrier
-
-
-
-
-\begin{table}[htbp]
-	\centering
-	\begin{tabular}{l*{6}{c}r}
-		\toprule[1.5pt]
-	Method & & Steps  & &  &    \\
-	\hline
-	        & $2$ & $4$ & $8$  &$16$  &$32$ \\
-		\hline
-		MISC ($\text{TOL}_{\text{MISC}}=10^{-1}$)  & $0.1$ & $0.08$ & $8$  & $670$  &  $-$\\\
-		MISC ($\text{TOL}_{\text{MISC}}=10^{-2}$)  & $0.1$ & $\red{2.5}$ & $\red{15}$ &  $\red{2040}$ &  $-$\\\
-				MISC ($\text{TOL}_{\text{MISC}}=5.10^{-3}$)  & $\red{0.3}$& $10$ & $-$ &  $-$ &  $-$\\
-		\hline	
-		MC method & $0.2$  & $5.6$  & $0.8$ & $1.6$  & $22$\\
-		\bottomrule[1.25pt]	
-		\hline
-	\end{tabular}
-	\caption{Comparison of the computational time (in seconds) of  MC and MISC, to compute the call option price of the rBergomi model, simulated using Cholesky scheme, for different numbers of time steps. The average MC CPU time is computed over $100$ runs.}
-	\label{Comparsion of the computational time of  MC and MISC, used to compute Call option price of rBergomi model_cholesky for different number of time steps. Case $K=1, H=0.07$, linear}
-\end{table}
-\FloatBarrier
+%\subsection{Comparing the different  errors and computational time for MC and MISC for the Cholesky scheme}\label{sec:Comparing different  errors and complexity for MC and MISC_ Cholesky}
+%Due to the behavior of the weak error for small values of $H$, we can not apply Richardson extrapolation. However, since the weak error when using Cholesky scheme seems to be one order smaller than the one obtained when using the hybrid scheme, we try to compare the numerical complexity of MC and MISC for the case of set $1$ parameter in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, without using Richardson extrapolation. From Tables \ref{Total error of MISC and MC to compute Call option price of the different tolerances for different number of time steps_Cholesky. Case $K=1$, $H=0.07$, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors,linear} and \ref{Comparsion of the computational time of  MC and MISC, used to compute Call option price of rBergomi model_cholesky for different number of time steps. Case $K=1, H=0.07$, linear}, we see that to get a total relative error below $1\%$, we need more than $32$ time steps for both MC and MISC, implying (given our previous results with the hybrid scheme) that using the hybrid scheme coupled with Richardson extrapolation gives better results for MC and MISC, than those obtained with Cholesky scheme.
+%\FloatBarrier
+%
+%\begin{table}[h!]
+%	\centering
+%	\begin{tabular}{l*{6}{c}r}
+%	\toprule[1.5pt]
+%	Method & & Steps  & & &    \\
+%	\hline
+%		    & $2$ & $4$ & $8$  & $16$   & $32$ \\
+%		\hline
+%
+%		MISC ($\text{TOL}_{\text{MISC}}=10^{-1}$)  & $\underset{(0.042,0.080)}{\mathbf{0.122}}$& $ \underset{(0.010,0.083)}{\mathbf{0.093}}$ & $ \underset{(0.020,0.173)}{\mathbf{0.193}}$   & $ \underset{(0.015,0.135)}{\mathbf{  0.150}}$  &$-$ \\
+%
+%		MISC ($\text{TOL}_{\text{MISC}}=10^{-2}$)  & $\underset{(0.042,0.080)}{\mathbf{ 0.122}}$ & $ \underset{(0.010,0.006)}{\mathbf{\red{0.016}}}$ & $\underset{(0.020,0.008)}{\mathbf{ \red{0.028}  }}$&  $ \underset{(0.015,0.014)}{\mathbf{\red{0.029}}}$ &$-$ \\
+%		MISC ($\text{TOL}_{\text{MISC}}=5.10^{-3}$)  & $\underset{(0.042,0.015)}{\mathbf{ \red{0.057}}}$ & $ \underset{(0.010,0.003)}{\mathbf{0.013 }}$ & $-$&  $-$&$-$  \\
+%
+%				\hline
+%				MC    & $\underset{(0.042,0.042)}{\mathbf{0.084}}$  & $\underset{(0.010,0.010)}{\mathbf{0.020}}$  &$\underset{(0.020,0.019)}{
+%				\mathbf{0.039}}$& $\underset{(0.015,0.015)}{
+%				\mathbf{0.030}}$ &$\underset{(0.009,0.008)}{
+%				\mathbf{0.017}}$\\	
+%		M(\# MC samples)   & $10^3$  & $3 \times 10^4$  &$4 \times 10^3$  & $6 \times 10^3$  & $2 \times 10^4$\\
+%		\bottomrule[1.25pt]
+%	\end{tabular}
+%	\caption{Total relative error of MISC, without Richardson extrapolation, with different tolerances, and MC to compute the call option prices for different numbers of time steps, where the rBergomi dynamics are simulated using Cholesky scheme. The values between parentheses correspond to the different errors contributing to the total relative error: for MISC we report the bias and quadrature errors and for MC we report the bias and the statistical errors estimates.}
+%	\label{Total error of MISC and MC to compute Call option price of the different tolerances for different number of time steps_Cholesky. Case $K=1$, $H=0.07$, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors,linear}
+%\end{table}
+%\FloatBarrier
+%
+%
+%
+%
+%\begin{table}[htbp]
+%	\centering
+%	\begin{tabular}{l*{6}{c}r}
+%		\toprule[1.5pt]
+%	Method & & Steps  & &  &    \\
+%	\hline
+%	        & $2$ & $4$ & $8$  &$16$  &$32$ \\
+%		\hline
+%		MISC ($\text{TOL}_{\text{MISC}}=10^{-1}$)  & $0.1$ & $0.08$ & $8$  & $670$  &  $-$\\\
+%		MISC ($\text{TOL}_{\text{MISC}}=10^{-2}$)  & $0.1$ & $\red{2.5}$ & $\red{15}$ &  $\red{2040}$ &  $-$\\\
+%				MISC ($\text{TOL}_{\text{MISC}}=5.10^{-3}$)  & $\red{0.3}$& $10$ & $-$ &  $-$ &  $-$\\
+%		\hline	
+%		MC method & $0.2$  & $5.6$  & $0.8$ & $1.6$  & $22$\\
+%		\bottomrule[1.25pt]	
+%		\hline
+%	\end{tabular}
+%	\caption{Comparison of the computational time (in seconds) of  MC and MISC, to compute the call option price of the rBergomi model, simulated using Cholesky scheme, for different numbers of time steps. The average MC CPU time is computed over $100$ runs.}
+%	\label{Comparsion of the computational time of  MC and MISC, used to compute Call option price of rBergomi model_cholesky for different number of time steps. Case $K=1, H=0.07$, linear}
+%\end{table}
+%\FloatBarrier
 
 %References
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
