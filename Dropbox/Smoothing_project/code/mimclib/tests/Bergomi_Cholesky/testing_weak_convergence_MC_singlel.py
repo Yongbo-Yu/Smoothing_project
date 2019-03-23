@@ -3,23 +3,21 @@
 
 import numpy as np
 import time
-import scipy.stats as ss
+
 
 import random
 
+
 #from joblib import Parallel, delayed
 #import multiprocessing
-from numba import autojit, prange
-
 import matplotlib.pyplot as plt
 from matplotlib.pyplot import figure, show
 from matplotlib.ticker import MaxNLocator
 
 
-import fftw3
-import RBergomi
 from RBergomi import *
-import mimclib.misc as misc
+from RfBm import *
+from RNorm  import *
 
 
 import pathos.multiprocessing as mp
@@ -33,24 +31,26 @@ class Problem(object):
     
   
     # for the values of below paramters, we need to see the paper as well check with Christian 
-    x=0.235**2;   # this will provide the set of xi parameter values 
+    xi=0.235**2;   # this will provide the set of xi parameter values 
     #x=0.1;
-    HIn=Vector(1)    # this will provide the set of H parameter values
-    #HIn[0]=0.43
-    HIn[0]=0.07
+    # this will provide the set of H parameter values
+    #H=0.43
+    H=0.07
     #HIn[0]=0.02
-    e=Vector(1)    # This will provide the set of eta paramter values
-    e[0]=1.9
+      # This will provide the set of eta paramter values
+    eta=1.9
     #e[0]=0.4
-    r=Vector(1)   # this will provide the set of rho paramter values
-    r[0]=-0.9
-    #r[0]=-0.7
-    T=Vector(1)     # this will provide the set of T(time to maturity) parameter value
-    T[0]=1.0
-    k=Vector(1)     # this will provide the set of K (strike ) paramter value
-    k[0]=1.0
+     # this will provide the set of rho paramter values
+    rho=-0.9
+    #rho=-0.7
+         # this will provide the set of T(time to maturity) parameter value
+    T=1.0
+    # this will provide the set of K (strike ) paramter value
+    K=1.0
    # y1perp = Vector(N)
-    MIn=1        # number of samples M (I think we do not need this paramter here by default in our case it should be =1)
+
+   
+  
 
 
     #methods
@@ -64,30 +64,42 @@ class Problem(object):
         # self.dt=self.T[0]/float(Nsteps) # time steps length
         self.d=int(np.log2(Nsteps)) #power 2 number steps
 
+        self.rnorm=RNorm()
+
+        self.rfbm= RfBm(Nsteps,self.H,self.rnorm)
+        self.L=np.array(self.rfbm.GetL())  #getting the L matrix
+        L11=self.L[0:Nsteps]
+        
+        self.L1=L11[:,0:Nsteps]
+        self.L1_inv=np.linalg.inv(self.L1)
+
+        self.W1 = Vector(Nsteps)
+        self.Wtilde = Vector(Nsteps)  
+        self.v=Vector(Nsteps)
+    
 
      # objfun: 
     def objfun(self,Nsteps):
+        # step 1: Generate 2N Gaussian vector
         mean = np.zeros(2*Nsteps)
         covariance= np.identity(2*Nsteps)
         y = np.random.multivariate_normal(mean, covariance)
 
-        #non hierarchical
-        W1perp=y[Nsteps:]
-        #hierarchical way
-        #yperp_1=y[Nsteps+1:2*Nsteps]
-        #yperp1=y[Nsteps]
-        #bbperp=self.brownian_increments(yperp1,yperp_1,Nsteps)
-        #W1perp= [(bbperp[i+1]-bbperp[i]) *np.sqrt(Nsteps) for i in range(0,len(bbperp)-1)]
+        # step 2: Construct the hierarchical transformation: y -> X(such that X remains Gaussian), construct L1^{-1}
+        X = Vector(2*Nsteps)
+        #bb=self.brownian_increments(y[0],y[1:Nsteps],Nsteps)
+        #W= [(bb[i+1]-bb[i]) *np.sqrt(Nsteps) for i in range(0,len(bb)-1)]
+        #X[0:Nsteps]=(self.L1_inv).dot(W)   #constructing X[0:Nsteps-1]
 
-         #non hierarchical
-        W1=y[0:Nsteps]
-        #hierarchical way
-        #y_1=y[1:Nsteps]
-        #y1=y[0]
-        #bb=self.brownian_increments(y1,y_1,Nsteps)
-        #W1= [(bb[i+1]-bb[i]) *np.sqrt(Nsteps) for i in range(0,len(bb)-1)]
+        X[Nsteps:]=y[Nsteps:]   #constructing X[Nsteps:]
+        X[0:Nsteps]=y[0:Nsteps]
 
-        QoI=self.z.ComputePayoffRT_single(W1,W1perp); 
+        
+        # Step 3:  given x compute W1 and Wtilde
+        
+        self.rfbm.generate(X,self.W1, self.Wtilde); # need to adjust rfbm code
+        # Step 4:  compute price
+        QoI=updatePayoff_cholesky(self.Wtilde,self.W1,self.v,self.eta,self.H,self.rho,self.xi,self.T,self.K,Nsteps) 
         return QoI
 
 
@@ -126,50 +138,62 @@ class Problem(object):
 
 def weak_convergence_differences():    
         #exact= 0.0712073 #exact value of K=1, H=0.43_xi_0.235^2_eta_1_9_r__09
-        exact=   0.0791   #0.0792047  #exact value of K=1, H=0.07_xi_0.235^2_eta_1_9_r__09
+        exact= 0.0791  #exact value of K=1, H=0.07_xi_0.235^2_eta_1_9_r__09
         #exact= 0.224905759853  #exact value of K=0.8, H=0.07_xi_0.235^2_eta_1_9_r__09
         #exact= 0.00993973310944  #exact value of K=1.2, H=0.07_xi_0.235^2_eta_1_9_r__09
         #exact=0.124756301225  #exact value of K=1, H=0.02_xi_01_eta_0_4_r__07
         #exact=0.2407117  #exact value of K=0.8, H=0.02_xi_01_eta_0_4_r__07
+        #exact=0.0568394  #exact value of K=1.2, H=0.02_xi_01_eta_0_4_r__07
+
         marker=['>', 'v', '^', 'o', '*','+','-',':']
         ax = figure().gca()
         ax.xaxis.set_major_locator(MaxNLocator(integer=True))
         # # feed parameters to the problem
-        Nsteps_arr=np.array([256])
+        Nsteps_arr=np.array([512])
         dt_arr=1.0/(Nsteps_arr)
-        
+       
         error=np.zeros(1)
         stand=np.zeros(1)
         elapsed_time_qoi=np.zeros(1)
         Ub=np.zeros(1)
         Lb=np.zeros(1)
-       
+        
         values=np.zeros(((1*(10**6),1))) 
         num_cores = mp.cpu_count()
         for i in range(0,1):
             print i
-        
+            
+
             start_time=time.time()
 
-            prb = Problem(Nsteps_arr[i])     
-            prb.z=RBergomi.RBergomiST( prb.x,  prb.HIn, prb.e,  prb.r,  prb.T, prb.k, Nsteps_arr[i], prb.MIn) 
+           
+            prb = Problem(Nsteps_arr[i]) 
             for j in range(1*(10**6)):
-                  #Here we need to use the C++ code to compute the payoff 
-                
+                  #Here we need to use the C++ code to compute the payoff             
                 values[j,i]=prb.objfun(Nsteps_arr[i])/float(exact)
-                
+
+          
+            #def processInput(j):
+            #       #Here we need to use the C++ code to compute the payoff 
+             #   prb = Problem(Nsteps_arr[i])          
+              #  return prb.objfun(Nsteps_arr[i])/float(exact)
+
+            # # results = Parallel(n_jobs=num_cores)(delayed(processInput)(j) for j in inputs)
+            #p =  pp.ProcessPool(num_cores)  # Processing Pool with four processors
+            
+           # values[:,i]= p.map(processInput, range(((4*(10**2)))))    
 
 
             elapsed_time_qoi[i]=time.time()-start_time
             print  elapsed_time_qoi[i]
             print (np.mean(values[:,i],axis=0) *0.0791)
-           
-
-
-              
+        
+    
+        
+    
+        start_time_2=time.time()
 
        
-        start_time_2=time.time()
         error=np.abs(np.mean(values,axis=0) - 1) 
         elapsed_time_qoi=time.time()-start_time_2+elapsed_time_qoi
 
@@ -184,9 +208,9 @@ def weak_convergence_differences():
         print Ub
          
         
+
+       
+         
+
 #weak_convergence_rate_plotting()
-weak_convergence_differences() 
-    
-
-
-
+weak_convergence_differences()
