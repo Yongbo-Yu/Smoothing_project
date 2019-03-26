@@ -9,7 +9,7 @@ class Problem(object):
 # attributes
     random_gen=None;
     elapsed_time=0.0;
-    N=16
+    N=8
     S0=None     # vector of initial stock prices
     basket_d=2    # number of assets in the basket
     c= (1/float(basket_d))*np.ones(basket_d)     # weigths
@@ -80,7 +80,7 @@ class Problem(object):
     def objfun(self,nelem,y):
 
         start_time=time.time();
-        beta=32
+        beta=16
         
         
         yy=[self.basket_d*self.N]
@@ -103,7 +103,7 @@ class Problem(object):
 
 
         # step 3: computing the location of the kink
-        bar_y1=self.newtons_method(0.0,y__1,z__1,z1) 
+        bar_y1=self.newtons_method(y1[0],y__1,z__1,z1) 
 
         y1[0]=bar_y1
         #print y1
@@ -148,6 +148,7 @@ class Problem(object):
 
         
         QoI=QoI_left+QoI_right
+        QoI=QoI
         
         elapsed_time_qoi=time.time()-start_time;
         self.elapsed_time=self.elapsed_time+elapsed_time_qoi;
@@ -227,12 +228,7 @@ class Problem(object):
           # construct the correlated  brownian bridge increments
         lower_triang_cholesky = np.linalg.cholesky(self.rho)
      
-        dW=np.dot(lower_triang_cholesky,dW)  
-
-
-       
-
-                  
+        dW=np.dot(lower_triang_cholesky,dW) 
     
        
         dW1=dW[0,:]
@@ -355,9 +351,6 @@ class Problem(object):
         return x0     
 
     
-    
-
-
 
 
     def cartesian(self,arrays, out=None):

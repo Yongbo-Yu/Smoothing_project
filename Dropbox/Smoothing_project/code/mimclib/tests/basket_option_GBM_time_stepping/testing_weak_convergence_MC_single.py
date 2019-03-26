@@ -72,7 +72,7 @@ class Problem(object):
         y = np.random.multivariate_normal(mean, covariance)    
 
 
-        beta=64
+        beta=128
         
         
         yy=[self.basket_d*Nsteps]
@@ -98,12 +98,10 @@ class Problem(object):
         bar_y1=self.newtons_method(y1[0],y__1,z__1,z1,Nsteps) 
 
         y1[0]=bar_y1
-        #print y1
+        
         z=self.A_inv.dot(y1)
         z1[0]=z[0]
         y1=np.dot(self.A,z1.transpose())
-        #print y1
-
         y__1=y1[1:]   
 
 
@@ -239,11 +237,7 @@ class Problem(object):
         dW=np.dot(lower_triang_cholesky,dW)  
 
 
-       
-
-                  
     
-       
         dW1=dW[0,:]
         dW2=dW[1,:]
 
@@ -258,10 +252,10 @@ class Problem(object):
       
         X[:,0]=self.S0
         for n in range(1,Nsteps+1):
-            X[0,n]=X[0,n-1]*(1+self.sigma[0]*((self.dt/float(np.sqrt(self.T)))*(self.A_inv[0,0]*y1+ self.A_inv[0,1:].dot(y2)) +  dbb1[n-1] ))  
-            X[1,n]=X[1,n-1]*(1+self.sigma[1]*((self.dt/float(np.sqrt(self.T)))*(self.A_inv[1,0]*y1+ self.A_inv[1,1:].dot(y2)) +  dbb2[n-1] ) )  
-            #X[0,n]=X[0,n-1]*(1+self.sigma[0]*dW1[n-1])
-            #X[1,n]=X[1,n-1]*(1+self.sigma[1]*dW2[n-1])
+            #X[0,n]=X[0,n-1]*(1+self.sigma[0]*((self.dt/float(np.sqrt(self.T)))*(self.A_inv[0,0]*y1+ self.A_inv[0,1:].dot(y2)) +  dbb1[n-1] ))  
+            #X[1,n]=X[1,n-1]*(1+self.sigma[1]*((self.dt/float(np.sqrt(self.T)))*(self.A_inv[1,0]*y1+ self.A_inv[1,1:].dot(y2)) +  dbb2[n-1] ) )  
+            X[0,n]=X[0,n-1]*(1+self.sigma[0]*dW1[n-1])
+            X[1,n]=X[1,n-1]*(1+self.sigma[1]*dW2[n-1])
 
       
         return X[:,-1],dbb1,dbb2
@@ -404,7 +398,7 @@ def weak_convergence_differences():
         Ub=np.zeros(1)
         Lb=np.zeros(1)
     
-        values=np.zeros((1*(10**5),1)) 
+        values=np.zeros((1*(10**7),1)) 
          
       
         
@@ -428,7 +422,7 @@ def weak_convergence_differences():
             
             p =  pp.ProcessPool(num_cores)  # Processing Pool with four processors
             
-            values[:,i]= p.map(processInput, range(((1*(10**5)))))  
+            values[:,i]= p.map(processInput, range(((1*(10**7))))  )
 
             elapsed_time_qoi[i]=time.time()-start_time
             print np.mean(values[:,i]*float(exact))
@@ -441,7 +435,7 @@ def weak_convergence_differences():
         print elapsed_time_qoi
  
         error=np.abs(np.mean(values,axis=0) - 1) 
-        stand=np.std(values, axis = 0)/  float(np.sqrt(1*(10**5)))
+        stand=np.std(values, axis = 0)/  float(np.sqrt(1*(10**7)))
         Ub=np.abs(np.mean(values,axis=0) - 1)+1.96*stand
         Lb=np.abs(np.mean(values,axis=0) - 1)-1.96*stand
         print(error)  

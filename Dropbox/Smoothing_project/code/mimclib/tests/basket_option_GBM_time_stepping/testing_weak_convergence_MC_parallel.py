@@ -25,8 +25,8 @@ class Problem(object):
     K=None         # Strike price
     T=1.0                      # maturity
     rho=None                  #correlation matrix
-   # exact=12.900784  # 2-d, sigma=0.4, S_0=K=100, T=1, r=0,rho=0.3
-    exact=11.447  # 2-d, sigma=0.4, S_0=K=100, T=1, r=0,rho=0.0
+    exact=12.900784  # 2-d, sigma=0.4, S_0=K=100, T=1, r=0,rho=0.3
+    #exact=11.447  # 2-d, sigma=0.4, S_0=K=100, T=1, r=0,rho=0.0
    
  
  
@@ -44,8 +44,8 @@ class Problem(object):
         self.K= 100                        # Strike price and coeff determine if we have in/at/out the money option
     
         from scipy.linalg import toeplitz 
-        #self.rho=toeplitz([1,0.3]) #correlation matrix
-        self.rho=toeplitz([1,0.0]) #correlation matrix
+        self.rho=toeplitz([1,0.3]) #correlation matrix
+        #self.rho=toeplitz([1,0.0]) #correlation matrix
         self.dt=self.T/float(Nsteps) # time steps length
         self.d=int(np.log2(Nsteps)) #power 2 number steps
 
@@ -95,7 +95,7 @@ class Problem(object):
 
 
         # step 3: computing the location of the kink
-        bar_y1=self.newtons_method(0.0,y__1,z__1,z1,Nsteps) 
+        bar_y1=self.newtons_method(y1[0],y__1,z__1,z1,Nsteps) 
 
         y1[0]=bar_y1
         #print y1
@@ -389,31 +389,31 @@ class Problem(object):
  
 def weak_convergence_differences():    
         start_time=time.time()
-        #exact= 12.900784 #S_0=K=100, sigma =0.4, corr=0.3, T=1
-        exact= 11.447 #S_0=K=100, sigma =0.4, corr=0.0, T=1
+        exact= 12.900784 #S_0=K=100, sigma =0.4, corr=0.3, T=1
+       # exact= 11.447 #S_0=K=100, sigma =0.4, corr=0.0, T=1
         marker=['>', 'v', '^', 'o', '*','+','-',':']
         ax = figure().gca()
         ax.xaxis.set_major_locator(MaxNLocator(integer=True))
         # # feed parameters to the problem
-        Nsteps_arr=np.array([2,4,8,16,32])
+        Nsteps_arr=np.array([2,4,8,16,32,64,128])
         dt_arr=1.0/(Nsteps_arr)
-        error_diff=np.zeros(4)
-        stand_diff=np.zeros(4)
-        error=np.zeros(5)
-        stand=np.zeros(5)
-        elapsed_time_qoi=np.zeros(5)
-        Ub=np.zeros(4)
-        Lb=np.zeros(4)
-        Ub_diff=np.zeros(4)
-        Lb_diff=np.zeros(4)
-        values=np.zeros((1*(10**2),5)) 
+        error_diff=np.zeros(6)
+        stand_diff=np.zeros(6)
+        error=np.zeros(7)
+        stand=np.zeros(7)
+        elapsed_time_qoi=np.zeros(7)
+        Ub=np.zeros(7)
+        Lb=np.zeros(7)
+        Ub_diff=np.zeros(6)
+        Lb_diff=np.zeros(6)
+        values=np.zeros((4*(10**3),7)) 
          
       
         
  
         num_cores = mp.cpu_count()
    
-        for i in range(0,5):
+        for i in range(0,7):
             print i
             start_time=time.time()
              
@@ -424,7 +424,7 @@ def weak_convergence_differences():
             
             p =  pp.ProcessPool(num_cores)  # Processing Pool with four processors
             
-            values[:,i]= p.map(processInput, range(((1*(10**2)))))  
+            values[:,i]= p.map(processInput, range(((4*(10**3)))))  
 
             elapsed_time_qoi[i]=time.time()-start_time
             print np.mean(values[:,i]*float(exact))
@@ -441,7 +441,7 @@ def weak_convergence_differences():
         print elapsed_time_qoi
  
         error=np.abs(np.mean(values,axis=0) - 1) 
-        stand=np.std(values, axis = 0)/  float(np.sqrt(1*(10**2)))
+        stand=np.std(values, axis = 0)/  float(np.sqrt(4*(10**3)))
         Ub=np.abs(np.mean(values,axis=0) - 1)+1.96*stand
         Lb=np.abs(np.mean(values,axis=0) - 1)-1.96*stand
         print(error)  
@@ -449,10 +449,10 @@ def weak_convergence_differences():
         print Lb
         print Ub
           
-        differences= [values[:,i]-values[:,i+1] for i in range(0,4)]
+        differences= [values[:,i]-values[:,i+1] for i in range(0,6)]
         error_diff=np.abs(np.mean(differences,axis=1))
         print error_diff 
-        stand_diff=np.std(differences, axis = 1)/ float(np.sqrt(1*(10**2)))
+        stand_diff=np.std(differences, axis = 1)/ float(np.sqrt(4*(10**3)))
         print stand_diff
         Ub_diff=np.abs(np.mean(differences,axis=1))+1.96*stand_diff
         Lb_diff=np.abs(np.mean(differences,axis=1))-1.96*stand_diff
@@ -473,14 +473,14 @@ def weak_convergence_differences():
  
  
  
-        z_diff= np.polyfit(np.log(dt_arr[0:4]), np.log(error_diff), 1)
-        fit_diff=np.exp(z_diff[0]*np.log(dt_arr[0:4]))
+        z_diff= np.polyfit(np.log(dt_arr[0:6]), np.log(error_diff), 1)
+        fit_diff=np.exp(z_diff[0]*np.log(dt_arr[0:6]))
         print z_diff[0]
  
         z3diff=np.zeros(2)
         z3diff[0]=1.0
         z3diff[1]=np.log(error_diff[0]*2)
-        fit3diff=np.exp(z3diff[0]*np.log(dt_arr[0:4])+z3diff[1])
+        fit3diff=np.exp(z3diff[0]*np.log(dt_arr[0:6])+z3diff[1])
          
         fig = plt.figure()
  
@@ -498,22 +498,22 @@ def weak_convergence_differences():
         plt.ylabel(r'$\mid  g(X_{\Delta t})-  g(X) \mid $',fontsize=14) 
         plt.subplots_adjust(wspace=0.6, hspace=0.6, left=0.15, bottom=0.22, right=0.96, top=0.96)
         plt.legend(loc='upper left')
-        plt.savefig('./results/weak_convergence_order_basket_option_2d_relative_M_1_10_4_beta_64_rho_0_2.eps', format='eps', dpi=1000)  
+        plt.savefig('./results/weak_convergence_order_basket_option_2d_relative_M_4_10_3_beta_64_parallel_2.eps', format='eps', dpi=1000)  
 
         fig = plt.figure()
-        plt.plot(dt_arr[0:4], error_diff,linewidth=2.0,label='weak_error' ,linestyle = '--',marker='>', hold=True) 
-        plt.plot(dt_arr[0:4], Lb_diff,linewidth=2.0,label='Lb' ,linestyle = '--', hold=True) 
-        plt.plot(dt_arr[0:4], Ub_diff,linewidth=2.0,label='Ub' ,linestyle = '--', hold=True) 
+        plt.plot(dt_arr[0:6], error_diff,linewidth=2.0,label='weak_error' ,linestyle = '--',marker='>', hold=True) 
+        plt.plot(dt_arr[0:6], Lb_diff,linewidth=2.0,label='Lb' ,linestyle = '--', hold=True) 
+        plt.plot(dt_arr[0:6], Ub_diff,linewidth=2.0,label='Ub' ,linestyle = '--', hold=True) 
         plt.yscale('log')
         plt.xscale('log')
         plt.xlabel(r'$\Delta t$',fontsize=14)
  
-        plt.plot(dt_arr[0:4], fit_diff,linewidth=2.0,label=r'rate= %s' % format(z_diff[0]  , '.2f'), linestyle = '--', marker='o')
-        plt.plot(dt_arr[0:4], fit3diff,linewidth=2.0,label=r'rate= %s' % format(z3diff[0]  , '.2f'), linestyle = '--', marker='o')
+        plt.plot(dt_arr[0:6], fit_diff,linewidth=2.0,label=r'rate= %s' % format(z_diff[0]  , '.2f'), linestyle = '--', marker='o')
+        plt.plot(dt_arr[0:6], fit3diff,linewidth=2.0,label=r'rate= %s' % format(z3diff[0]  , '.2f'), linestyle = '--', marker='o')
         plt.ylabel(r'$\mid  g(X_{\Delta t})-  g(X_{\Delta t/2}) \mid $',fontsize=14) 
         plt.subplots_adjust(wspace=0.6, hspace=0.6, left=0.15, bottom=0.22, right=0.96, top=0.96)
         plt.legend(loc='upper left')
-        plt.savefig('./results/weak_convergence_order_differences_basket_option_2d_relative_M_1_10_4_beta_64_rho_0_2.eps', format='eps', dpi=1000)  
+        plt.savefig('./results/weak_convergence_order_differences_basket_option_2d_relative_M_4_10_3_beta_64_parallel_2.eps', format='eps', dpi=1000)  
  
  
 weak_convergence_differences()   

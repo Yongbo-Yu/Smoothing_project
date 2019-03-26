@@ -408,7 +408,7 @@ def weak_convergence_differences():
         Lb=np.zeros(5)
         Ub_diff=np.zeros(4)
         Lb_diff=np.zeros(4)
-        values=np.zeros((1*(10**4),5)) 
+        values=np.zeros((1*(10**2),5)) 
          
       
         
@@ -421,7 +421,7 @@ def weak_convergence_differences():
              
             prb = Problem(Nsteps_arr[i]) 
 
-            for j in range(1*(10**4)):
+            for j in range(1*(10**2)):
                   #Here we need to use the C++ code to compute the payoff             
                  values[j,i]=prb.objfun(Nsteps_arr[i])/float(exact)
            
@@ -443,7 +443,7 @@ def weak_convergence_differences():
         print elapsed_time_qoi
  
         error=np.abs(np.mean(values,axis=0) - 1) 
-        stand=np.std(values, axis = 0)/  float(np.sqrt(1*(10**4)))
+        stand=np.std(values, axis = 0)/  float(np.sqrt(1*(10**2)))
         Ub=np.abs(np.mean(values,axis=0) - 1)+1.96*stand
         Lb=np.abs(np.mean(values,axis=0) - 1)-1.96*stand
         print(error)   
@@ -454,7 +454,7 @@ def weak_convergence_differences():
         differences= [values[:,i]-values[:,i+1] for i in range(0,4)]
         error_diff=np.abs(np.mean(differences,axis=1))
         print error_diff 
-        stand_diff=np.std(differences, axis = 1)/ float(np.sqrt(1*(10**4)))
+        stand_diff=np.std(differences, axis = 1)/ float(np.sqrt(1*(10**2)))
         print stand_diff
         Ub_diff=np.abs(np.mean(differences,axis=1))+1.96*stand_diff
         Lb_diff=np.abs(np.mean(differences,axis=1))-1.96*stand_diff
