@@ -13,7 +13,7 @@ Through our conducted numerical experiments for each parameter set, we follow th
 where $\mathcal{E}_B(N)$ is the bias as defined in \eqref{eq:total_error} and
 $\mathcal{E}_{\text{tot}}$ is the total error. 
 \end{enumerate}
-We show  the summary of our numerical findings in Table \ref{table:Summary of our numerical results.}, which  highlights the computational gains achieved by MISC over MC method to meet a certain error tolerance, which we set approximately to $1\%$. More detailed results for each case  are provided in  Sections \dots. 
+We show  the summary of our numerical findings in Table \ref{table:Summary of our numerical results.}, which  highlights the computational gains achieved by MISC over MC method to meet a certain error tolerance, which we set approximately to $1\%$. More detailed results for each case  are provided in  Sections \ref{sec:Results for the binary option example}, \ref{sec:Results for the call option example}, \ref{sec:The basket call option  under GBM  model} and \ref{sec:The best call option  under GBM and Heston model}. 
 \FloatBarrier
 \begin{table}[!h]
 	\centering
@@ -22,12 +22,12 @@ We show  the summary of our numerical findings in Table \ref{table:Summary of ou
 	\toprule[1.5pt]
 		Example          & Level of Richardson extrapolation    &  Total relative error  & Ratio of CPU time  $\left(\text{MC}/ \text{MISC} \right)$ \\
 		\hline
-			  Single binary option (GBM) & without  &  $2 \%$&  $ 3.6$ \\	
+			  Single binary option (GBM) & without  &  $2 \%$&  $ 4$ \\	
               \hline
-            Single call option (GBM)  & without    &  $0.9\%$&  $22.4$ \\
+            Single call option (GBM)  & without    &  $0.9\%$&  $22$ \\
 %            & level $1$ &  $$ &  $$ \\		
 				 \hline
-					Basket call option (GBM)  & without    &  $$&  $$ \\	
+					2$d$-Basket call option (GBM)  & without    &  $$0.9\%$$&  $21$ \\	
 					\hline
 						Best of call option (Heston) & without  &  $$&  $$ \\	
 		\bottomrule[1.25pt]
@@ -45,10 +45,10 @@ The first two  examples that we will  test are  the single binary and  call opti
 \end{align}
 where $\{W_t, 0 \leq t \leq T\} $ is a standard one-dimensional Brownian motion. In the discrete case, the numerical approximation of $X(T)$, using $N$ time steps ($\Delta t=\frac{T}{N}$), satisfies
 \begin{align}
-	\bar{X}_T&=\Phi(\Delta t, z_1, \Delta B_0,\dots,\Delta B_{N-1}), \\ \nonumber
-	&=\Phi(\Delta t, \Psi(z_1,\dots,z_N))\COMMA
+	\bar{X}_T&=\Psi(\Delta t, z_1, \Delta B_0,\dots,\Delta B_{N-1}), \\ \nonumber
+	&=\Psi(\Delta t, \Phi(z_1,\dots,z_N))\COMMA
 \end{align}
-wehre $(z_1,\dots,z_N)$ are standard Gaussian random variables, for some path function $\Phi$ and Brownian bridge map $\Psi$. As explained in Sections \ref{sec:Discrete time, practical motivation} and \ref{sec:Details of our approach}, the first step of our approach is determining the location of irregularity (kink). In the following, we want to compare different ways for identifying the location of the kink for this model.
+wehre $(z_1,\dots,z_N)$ are standard Gaussian random variables, for some path function $\Psi$ and Brownian bridge map $\Phi$. As explained in Sections \ref{sec:Discrete time, practical motivation} and \ref{sec:Details of our approach}, the first step of our approach is determining the location of irregularity (kink). In the following, we want to compare different ways for identifying the location of the kink for this model.
 \subsubsection{Determining the kink location}\label{sec:Determining the kink location}
 \subsubsection*{Exact location of the kink for the continuous problem}
 Let us denote $y^{\ast}$ an invertible function that satisfies 
@@ -96,12 +96,12 @@ In our work, we try to  find the roots of polynomial $P(y^{\ast}(K))$, given by 
 \end{align}
 Therefore, in this case, the integrand $h(\mathbf{z}_{-1})$, as expressed in \eqref{eq:smooth_function_after_pre_integration}, is given by
 \begin{align}\label{smoothed_integrand_single_opt_1d}
-	h(\mathbf{z}_{-1})&= \int_{\rset}  g   \left( \Phi \circ \Psi(T;z_1,\mathbf{z}_{-1})\right)   \rho_1(z_1) dz_1.
+	h(\mathbf{z}_{-1})&= \int_{\rset}  g   \left( \Psi \circ \Phi(T;z_1,\mathbf{z}_{-1})\right)   \rho_1(z_1) dz_1.
 \end{align}
 We get the kink point by running Newton iteration  for root solving of the polynomial $P$ as expressed in \eqref{polynomial_kink_location} with a precision of $10^{-10}$. We  decompose the total integration domain   into sub-domains such that the integrand is smooth in the interior of each sub-domain  and such that the kink is located along the boundary of these areas. The total integral is then given as the sum of the separate integrals, \ie
 \begin{align}
-	h(\mathbf{z}_{-1}) &:=  \int_{\rset} g \left(\Phi \circ \Psi(T;z_1,\mathbf{z}_{-1})\right)   \rho_1(z_1) dz_1 \nonumber\\
-	&=\int_{-\infty}^{y^\ast} g \left( \Phi \circ \Psi(T;z_1,\mathbf{z}_{-1})\right)  \rho_d(z_1) dz_1 +\int_{y^\ast}^{\infty} g \left( \Phi \circ \Psi(T;z_1,\mathbf{z}_{-1})\right) \rho_d(z_1) dz_1,
+	h(\mathbf{z}_{-1}) &:=  \int_{\rset} g \left(\Psi \circ \Phi(T;z_1,\mathbf{z}_{-1})\right)   \rho_1(z_1) dz_1 \nonumber\\
+	&=\int_{-\infty}^{y^\ast} g \left( \Psi \circ \Phi(T;z_1,\mathbf{z}_{-1})\right)  \rho_d(z_1) dz_1 +\int_{y^\ast}^{\infty} g \left( \Psi \circ \Phi(T;z_1,\mathbf{z}_{-1})\right) \rho_d(z_1) dz_1,
 \end{align}
 where we use Gauss-Laguerre quadrature with $\beta$ points to approximate each part.
 
@@ -109,17 +109,17 @@ where we use Gauss-Laguerre quadrature with $\beta$ points to approximate each p
 
 In this case, the integrand $h(\mathbf{z}_{-1})$ is given by
 \begin{align}\label{smoothed_integrand_binary_opt_2}
-	h(\mathbf{z}_{-1})&= \int_\rset \mathbf{1}_{\Phi \circ \Psi(T;z_1,\mathbf{z}_{-1})>K}\frac{1}{\sqrt{2 \pi}} \operatorname{exp} (-z_1^2/2) dy \nonumber\\
+	h(\mathbf{z}_{-1})&= \int_\rset \mathbf{1}_{\Psi \circ \Phi(T;z_1,\mathbf{z}_{-1})>K}\frac{1}{\sqrt{2 \pi}} \operatorname{exp} (-z_1^2/2) dy \nonumber\\
 	&=  P(Y>y_{\ast}(K)),
 \end{align}
 where  $y_{\ast}(x)$, is an invertible function that satisfies 
 \begin{align}
-	\Phi \circ \Psi (T;y_{\ast}(x),\mathbf{z}_{-1})=x	 \PERIOD
+	\Psi \circ \Phi (T;y_{\ast}(x),\mathbf{z}_{-1})=x	 \PERIOD
 \end{align}
 
 We get the kink point by running Newton iteration with a precision of $10^{-10}$. The paramters that we used in our numerical experiments are: $T=1$, $\sigma=0.4$ and $S_0=K=100$. The exact value of this case is $0.42074029$.
 
-From figure \ref{fig:Weak_rate_binary}, we see that we get a weak error of order $\Delta t$ for the case without Richardson. We note that the weak errors plotted here correspond to relative errors.  The upper and lower bounds are $95\%$ confidence interval.
+From figure \ref{fig:Weak_rate_binary}, we see that we get a weak error of order $\Delta t$ for the case without Richardson extrapolation. We note that the weak errors plotted here correspond to relative errors.  The upper and lower bounds are $95\%$ confidence interval.
 
 \FloatBarrier
 \begin{figure}[h!]
@@ -137,7 +137,7 @@ From figure \ref{fig:Weak_rate_binary}, we see that we get a weak error of order
 %		\label{fig:sub4}
 %	\end{subfigure}
 	
-	\caption{The rate of convergence of the weak error for the binary option.  }
+	\caption{The rate of convergence of the weak error for the binary option, using $M=10^4$ samples for MC.}
 	\label{fig:Weak_rate_binary}
 \end{figure}
 
@@ -258,7 +258,7 @@ From figure \ref{fig:Weak_rate_binary}, we see that we get a weak error of order
 %		MISC ($TOL_{\text{MISC}}=10^{-3}$)   & $\underset{(0.04, 0.01)}{\mathbf{ 0.05}}$  & $\underset{(0.02,0.002)}{\mathbf{ 0.02}}$  & $\underset{(0.013,0.002)}{\mathbf{\red{0.015}}}$\\
 		\hline
 		MC+root finding   &   $\underset{(0.04,0.04 )}{\mathbf{0.08}}$ & $\underset{(0.02,0.02)}{\mathbf{0.04}}$ & $\underset{(0.01,0.01)}{\mathbf{0.02}}$  \\	
-			M(\# MC samples)   & $\times 10^1$  & $4 \times 10^1$  & $  10^2$ \\	
+			M(\# MC samples)   & $ 10^1$  & $4 \times 10^1$  & $  10^2$ \\	
 		\hline
 			MC     & $\underset{(0.05,0.05)}{\mathbf{0.1}}$ & $\underset{(0.025,0.025 )}{\mathbf{0.05}}$ & $\underset{(0.01,0.01 )}{\mathbf{0.02}}$  \\	
 			M(\# MC samples)   & $ 10^3$  & $8 \times 10^3$  & $ 5 \times 10^4$ \\	
@@ -502,13 +502,13 @@ From figure \ref{fig:Weak_rate_binary}, we see that we get a weak error of order
 In this case, the integrand $h(\mathbf{z}_{-1})$ is given by
 
 \begin{align}\label{smoothed_integrand_call_opt_2}
-h(\mathbf{z}_{-1})&= \int_{\rset}  \max \left(\Phi \circ \Psi(T;z_1,\mathbf{z}_{-1})-K,0\right) \frac{1}{\sqrt{2 \pi}} \operatorname{exp}(-z_1^2/2) dz_1 \PERIOD
+h(\mathbf{z}_{-1})&= \int_{\rset}  \max \left(\Psi \circ \Phi(T;z_1,\mathbf{z}_{-1})-K,0\right) \frac{1}{\sqrt{2 \pi}} \operatorname{exp}(-z_1^2/2) dz_1 \PERIOD
 \end{align}
 We get the kink point by running Newton iteration with a precision of $10^{-10}$. We  decompose the total integration domain $\rset$  into sub-domains such that the integrand is smooth in the interior of  each sub-domain and such that the kink is located along the boundary of these areas. The total integral is then given as the sum of the separate integrals, \ie
 \begin{align}
-	h(\mathbf{z}_{-1}) &:=  \int_{\rset} \max \left(\Phi \circ \Psi(T;z_1,\mathbf{z}_{-1})-K,0\right) \frac{1}{\sqrt{2 \pi}} \operatorname{exp}(-z_1^2/2) dy \\ \nonumber
-	&=\int_{-\infty}^{y^{\ast}} \max \left(\Phi \circ \Psi(T;z_1,\mathbf{z}_{-1})-K,0\right) \frac{1}{\sqrt{2 \pi}} \operatorname{exp}(-z_1^2/2) dz_1\\ \nonumber
-	&+\int_{y^{\ast}}^{\infty} \max \left(\Phi \circ \Psi(T;z_1,\mathbf{z}_{-1})-K,0\right) \frac{1}{\sqrt{2 \pi}} \operatorname{exp}(-z_1^2/2) dz_1,
+	h(\mathbf{z}_{-1}) &:=  \int_{\rset} \max \left(\Psi \circ \Phi(T;z_1,\mathbf{z}_{-1})-K,0\right) \frac{1}{\sqrt{2 \pi}} \operatorname{exp}(-z_1^2/2) dy \\ \nonumber
+	&=\int_{-\infty}^{y^{\ast}} \max \left(\Psi \circ \Phi(T;z_1,\mathbf{z}_{-1})-K,0\right) \frac{1}{\sqrt{2 \pi}} \operatorname{exp}(-z_1^2/2) dz_1\\ \nonumber
+	&+\int_{y^{\ast}}^{\infty} \max \left(\Psi \circ \Phi(T;z_1,\mathbf{z}_{-1})-K,0\right) \frac{1}{\sqrt{2 \pi}} \operatorname{exp}(-z_1^2/2) dz_1,
 \end{align}
 where we use Gauss-laguerre quadrature with $\beta$ points to get each part.
 
@@ -739,7 +739,7 @@ We can see from figure \ref{fig:Weak_rate_call_beta_32} that we get a weak error
 	\hline
            & $2$ & $4$ & $8$ & $16$  \\
 		\hline
-		MISC ($TOL_{\text{MISC}}=5.10^{-1}$)  &  $\underset{(0.021,0.001)}{\mathbf{0.022}}$ & $\underset{(0.016,0.002)}{\mathbf{0.018}}$ & $\underset{(0.009,0.0001)}{\mathbf{0.009}}$ & $\underset{(0.004,0.0004)}{\mathbf{0.004}}$  \\
+		MISC ($TOL_{\text{MISC}}=5.10^{-1}$, $\beta=32$)  &  $\underset{(0.021,0.001)}{\mathbf{0.022}}$ & $\underset{(0.016,0.002)}{\mathbf{0.018}}$ & $\underset{(0.009,0.0001)}{\mathbf{0.009}}$ & $\underset{(0.004,0.0004)}{\mathbf{0.004}}$  \\
 %		MISC ($TOL_{\text{MISC}}=10^{-1}$)  &  $\underset{(0.022,0.001)}{\mathbf{0.023}}$& $\underset{(0.016,0.002)}{\mathbf{0.018}}$ & $\underset{(0.009,0.0002)}{\mathbf{\red{0.009}}}$ & $\underset{(0.005,0.0001)}{\mathbf{\red{0.005}}}$  \\
 %		MISC ($TOL_{\text{MISC}}=5.10^{-2}$) & $\underset{(0.022,0.001)}{\mathbf{0.0223}}$ & $\underset{(0.016,0.002)}{\mathbf{0.018}}$ &  $\underset{(0.009,0.0002)}{\mathbf{0.009}}$ & $\underset{(0.005,0.0001)}{\mathbf{0.005}}$  \\
 %		MISC ($TOL_{\text{MISC}}=10^{-2}$)  &  $\underset{(0.022,0.001)}{\mathbf{0.023}}$& $\underset{(0.016,0.0003)}{\mathbf{\red{0.016}}}$ & $\underset{(0.009,0.0002)}{\mathbf{0.009}}$ &  $\underset{(0.005,0.0001)}{\mathbf{0.005}}$  \\
@@ -748,7 +748,7 @@ We can see from figure \ref{fig:Weak_rate_call_beta_32} that we get a weak error
 		\hline
 %		MC  ($M=10^5$)   &  $\mathbf{0.0266}$ & $\mathbf{0.0161}$ & $\mathbf{0.0097}$ & $\mathbf{\red{0.0048}}$  \\	
 		
-			MC +root finding  &  $\underset{(0.021,0.02)}{\mathbf{0.041}}$ & $\underset{(0.016,0.016)}{\mathbf{0.032}}$ & $\underset{(0.009,0.009)}{\mathbf{0.018}}$ & $\underset{(0.004,0.004)}{\mathbf{0.008}}$  \\
+			MC +root finding ($\beta=32$)  &  $\underset{(0.021,0.02)}{\mathbf{0.041}}$ & $\underset{(0.016,0.016)}{\mathbf{0.032}}$ & $\underset{(0.009,0.009)}{\mathbf{0.018}}$ & $\underset{(0.004,0.004)}{\mathbf{0.008}}$  \\
 			M(\# MC samples)   & $10^2 $  & $3 \times 10^2 $  & $
 			10^3$ & $4 \times 10^3$ \\	
 		\hline	
@@ -774,14 +774,14 @@ We can see from figure \ref{fig:Weak_rate_call_beta_32} that we get a weak error
 	\hline
 	         & $2$ & $4$ & $8$ & $16$ &   \\
 		\hline
-		MISC ($TOL_{\text{MISC}}=5.10^{-1}$) & $0.3$ & $3$ & $17$ & $473$  \\
+		MISC ($TOL_{\text{MISC}}=5.10^{-1}$, $\beta=32$) & $0.3$ & $3$ & $17$ & $473$  \\
 %		MISC ($TOL_{\text{MISC}}=10^{-1}$)  & $0.3$ & $3$ & $\red{58}$ & $\red{656}$  \\
 %		MISC ($TOL_{\text{MISC}}=5.10^{-2}$)   & $0.3$ & $3$ & $73$ & $731$  \\
 %		MISC ($TOL_{\text{MISC}}=10^{-2}$)  & $0.3$ & $\red{6}$ & $108$ & $1972$  \\
 %%		MISC ($TOL_{\text{MISC}}=10^{-3}$)   & $0.3$ & $28$ & $264$ & $-$  \\
 %		\hline
 %		MC method ($M=10^5, \beta=32$)    & $168$ & $216$ & $290$ & $\red{432}$  \\
-			MC method +root finding   & $3$ & $16$ & $70$ & $408$  \\
+			MC method +root finding ($\beta=32$)  & $3$ & $16$ & $70$ & $408$  \\
 				MC method & $3$ & $13$ & $76$ & $380$  \\
 %		\hline
 %		
@@ -1027,12 +1027,83 @@ We can see from figure \ref{fig:Weak_rate_call_beta_32} that we get a weak error
 %
 
 
-\subsection{The basket call option  under GBM  model}
+\subsection{The basket call option  under GBM  model}\label{sec:The basket call option  under GBM  model}
 The third example that we consider  is the multi-dimensional  basket call option under GBM. 
+\subsection{$d=2$}
+For illustration, we start with the two dimensional basket call option  with parameters:  $S_0^{1,2}=K=100$, $\sigma_{1,2}=0.4$, $\rho=0.3$, $T=1$ $r=0$ and $c_{1,2}=1/2$, the reference value for those parameters  is  $12.90$. The matrix $\mathcal{A}$ in this case is given by $\mathcal{A} = 1/\sqrt{2} (1, 1; 1, -1)$. We can see from figure \ref{fig:Weak_rate_two_dim_basket} the  weak error for the case without Richardson extrapolation.  The upper and lower bounds are $95\%$ confidence interval.
+
+\FloatBarrier
+\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.4\linewidth]{./figures/basket_call_2d_time_stepping/weak_convergence/weak_convergence_order_basket_option_2d_relative_M_10_7_beta_128}
+
+	\caption{The rate of convergence of the weak error for the two dimensional basket call option with  a number of Laguerre  quadrature points  $\beta=128$ and number of samples for MC $M=10^7$.  }
+	\label{fig:Weak_rate_two_dim_basket}
+\end{figure}
+\FloatBarrier
+
+
+\FloatBarrier
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		\toprule[1.5pt]
+	Method & & Steps  & &     \\
+	\hline
+           & $2$ & $4$ & $8$   \\
+		\hline
+		MISC   &  $\underset{(0.01,0.006)}{\mathbf{}}$ & $\underset{(0.0079,0.0055)}{\mathbf{0.0134}}$ & $\underset{(0.0043,0.0042)}{\mathbf{0.0085}}$   \\
+
+		\hline		
+			MC +root finding   &  $\underset{(0.01,0.01)}{\mathbf{0.02}}$ & $\underset{(0.0079,0.0076)}{\mathbf{0.0155}}$ & $\underset{(0.0043,0.0038)}{\mathbf{0.0081}}$  \\
+			M(\# MC samples)   & $2 \times 10^3$   &  $5 \times 10^3$ & $2 \times 10^4$  \\	
+		\hline	
+				MC   &  $\underset{(0.01,0.01)}{\mathbf{0.02}}$ & $\underset{(0.0079,0.0076)}{\mathbf{0.0155}}$ & $\underset{(0.0043,0.004)}{\mathbf{0.0083}}$   \\	
+				M(\# MC samples)   &$10^5$  & $2 \times 0.01610^5$  &  $8 \times 10^5$\\	
+		
+			\bottomrule[1.25pt]
+	\end{tabular}
+	\caption{Total relative  error of MISC, with different tolerances, and MC to compute two dimensional basket call option price for different number of time steps, without Richardson extrapolation. The values marked in red, for MISC method, correspond to the total relative errors associated with  stable quadrature errors for MISC, and will be used for complexity comparison against MC.}
+	\label{Total error of MISC and MC to compute two  dim basket  Call option price of the different tolerances for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
+\end{table}
+\FloatBarrier
 
 
 
-\subsection{The best call option  under GBM and Heston model}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		\toprule[1.5pt]
+	Method & & Steps  & &     \\
+	\hline
+	         & $2$ & $4$ & $8$    \\
+		\hline
+		MISC & $4$  & $8$ & $21$     \\
+			MC method +root finding  & $281$&  $814$&  $3888$   \\
+				MC method &   $34$& $93$ &   $ 442$ \\
+		\bottomrule[1.25pt]
+	\end{tabular}
+	\caption{Comparison of the computational time of  MC and MISC, used to compute two dimensional basket call option price  for different number of time steps, without Richardson extrapolation. The average computational time of MC is computed over $10$ runs.}
+	\label{Comparsion of the computational time of  MC and MISC, used to compute two dim basket Call option price  for different number of time steps, without Richardson extrapolation}
+\end{table}
+
+
+\FloatBarrier
+	\begin{figure}[h!]
+\centering
+\includegraphics[width=0.4\linewidth]{./figures/basket_call_2d_time_stepping/complexity_rates/error_vs_time}
+
+\caption{Complexity plot for MC and MISC for the case without Richardson extrapolation.}
+\label{fig:Complexity plot for MC and MISC , Call non rich}
+\end{figure}
+
+
+\FloatBarrier
+
+\subsection{$d=4$}
+
+\subsection{The best call option  under GBM and Heston model}\label{sec:The best call option  under GBM and Heston model}
 The fourth example that we consider is the multi-dimensional  best call option under GBM and Heston model. I am in process of formulating this but somehow we agreed that the first potential directions of smoothing for the Heston model will be the first factors related to the asset prices.
 
 

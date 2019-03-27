@@ -9,22 +9,22 @@ from matplotlib.ticker import MaxNLocator
 # case non richardson
 
 
-MC_normal_err=np.array([0.04,0.032,0.02,0.008])
+MC_normal_err=np.array([0.02, 0.0155, 0.0083])
 
 
-MC_normal_time=np.array([3,13,76,380 ])
+MC_normal_time=np.array([ 34, 93, 442])
 
 
 z_MC_normal= np.polyfit(np.log(MC_normal_err), np.log(MC_normal_time), 1)
 fit_MC_normal=np.exp(z_MC_normal[0]*np.log(MC_normal_err))
 print z_MC_normal[0]
 
-MC_err=np.array([0.041,0.032,0.018,0.008])
-MC_time=np.array([3,16,70,408])
+MC_err=np.array([0.02, 0.0155, 0.0081])
+MC_time=np.array([281,  814,  3888])
 
 
-MISC_err=np.array([ 0.022,0.018,0.009,0.005])
-MISC_time=np.array([ 0.3,3,17,473])
+MISC_err=np.array([0.016, 0.0134, 0.0085])
+MISC_time=np.array([ 4,8,21])
 
 z_MC= np.polyfit(np.log(MC_err), np.log(MC_time), 1)
 fit_MC=np.exp(z_MC[0]*np.log(MC_err))
@@ -56,14 +56,14 @@ print z_MISC[0]
 fig = plt.figure()
 
 plt.plot(MC_err,MC_time,linewidth=2.0,label='MC+root finding' , marker='>',hold=True) 
-plt.plot(MC_err, fit_MC/1000,linewidth=2.0,label=r'rate= %s' % format(z_MC[0]  , '.2f'), linestyle = '--')
+plt.plot(MC_err, fit_MC/100,linewidth=2.0,label=r'rate= %s' % format(z_MC[0]  , '.2f'), linestyle = '--')
 
 plt.plot(MC_normal_err,MC_normal_time,linewidth=2.0,label='MC' , marker='>',hold=True) 
-plt.plot(MC_normal_err, fit_MC_normal/10000,linewidth=2.0,label=r'rate= %s' % format(z_MC_normal[0]  , '.2f'), linestyle = '--')
+plt.plot(MC_normal_err, fit_MC_normal/1000,linewidth=2.0,label=r'rate= %s' % format(z_MC_normal[0]  , '.2f'), linestyle = '--')
 
 
 plt.plot(MISC_err,MISC_time,linewidth=2.0,label='MISC'  , marker='v',hold=True) 
-plt.plot(MISC_err, fit_MISC/100000000,linewidth=2.0,label=r'rate= %s' % format(z_MISC[0]  , '.2f'), linestyle = '--')
+plt.plot(MISC_err, fit_MISC/10000,linewidth=2.0,label=r'rate= %s' % format(z_MISC[0]  , '.2f'), linestyle = '--')
 
 # plt.plot(MC_rich_err,MC_rich_time,linewidth=2.0,label='MC+Rich' , marker='o',hold=True) 
 #plt.plot(MC_rich_err, fit_MC_rich*10,linewidth=2.0,label=r'rate= %s' % format(z_MC_rich[0]  , '.2f'), linestyle = '--')

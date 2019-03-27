@@ -1,4 +1,4 @@
-To motivate our approach, we start  by the continuous time representation of the problem we are addressing.
+To motivate our approach, we start  by the continuous time representation of the problem we are addressing.Then, we illustrate the spirit of our approach in the time stepping setting, for the particular case of basket option.
 \subsection{Continuous time formulation}
 
 The purpose of this work is to approximate $\expt{g(\mathbf{X}_T)}$, where $g$ is a certain payoff function and $\mathbf{X}=(X_1, \dots, X_d)$ is described by the following SDE
@@ -40,7 +40,7 @@ Going back to the SDE \eqref{eq:SDE_interest}, we have
 dX_i=a_i(X) dt +\sum_{j=1}^d b_{ij}(X) Z_j \frac{dt}{\sqrt{T}}+\sum_{j=1}^d b_{ij}(X) dB_j \PERIOD
 \end{equation}
 
-Using \eqref{eq:smoothing_decomposition_componentwise}, then we have
+Using \eqref{eq:smoothing_decomposition_componentwise} implies
 
 \begin{equation}\label{eq:SDE_decomposition_componentwise_exapanded}
 dX_i=\left(a_i(X)+\sum_{j=1}^d b_{ij}(X)  \frac{Z_v v_j}{\sqrt{T}}\right) dt+\left(\sum_{j=1}^d b_{ij}(X) \frac{(Z_v^\perp)_j}{\sqrt{T}}\right) dt +\sum_{j=1}^d b_{ij}(X) dB_j \PERIOD
@@ -50,22 +50,13 @@ dX_i=\left(a_i(X)+\sum_{j=1}^d b_{ij}(X)  \frac{Z_v v_j}{\sqrt{T}}\right) dt+\le
 
 \textbf{Assumption $1$:} We assume that the first term in the right-hand side of \eqref{eq:SDE_decomposition_componentwise_exapanded}  is the dominant term compared to the remaining terms in the sense of variance of $g$.
 
-\red{As discussed with Raul, the approximation should be done in terms of the variance of $g$. I have suggest a counter-example but using local terms, but Raul suggest to look at the global terms which seems to validate the assumption $1$!}.
+
 
 In the following, we try to motivate assumption $1$ for a simple case.
 \begin{proof}[Proof of assumption $1$]
-Let us assume from \eqref{eq:SDE_decomposition_componentwise_exapanded} that $a_i=0$, $b_{ij}=\alpha=\text{constant}$, and $g:\rset^d \rightarrow Id_{\rset}$, we try here to motivate Assumption $1$ first by looking at local terms and then by looking at global terms.
-\begin{itemize}
-\item[i)] \textit{By looking at local terms:} \eqref{eq:SDE_decomposition_componentwise_exapanded} becomes
-\begin{align*}
-dX_i= \left( \frac{dt \alpha}{\sqrt{T}} \right) \left( \sum_{j=1}^d v_j \right) Z_v + \left( \frac{dt \alpha}{\sqrt{T}} \right) \left( \sum_{j=1}^d v_j (Z_v)^\perp_j \right) +\alpha \sum_{j=1}^d dB_j,
-\end{align*}
-implying (if we neglect the correlation terms)
-\begin{align}\label{eq: variance local terms}
-\text{Var}[dX_i]\approx \underset{\Ordo{dt^2}}{\underbrace{\left( \frac{dt \alpha}{\sqrt{T}} \right)^2 \left( \sum_{j=1}^d v_j \right)^2}}  + \underset{=0}{\underbrace{\left( \frac{dt \alpha}{\sqrt{T}} \right)^2 \text{Var}\left[ \sum_{j=1}^d v_j (Z_v)^\perp_j  \right]}}+\underset{\Ordo{dt}}{\underbrace{\alpha^2  \text{Var}\left[\sum_{j=1}^d dB_j \right]}}.
-\end{align}
-Therefore from \eqref{eq: variance local terms}, it appears that the dominant term in the sense of local variance is coming from $\alpha \sum_{j=1}^d dB_j$, which makes assumption $1$ not valid!!
-\item[ii)] \textit{By looking at global terms:} Let us integrate \eqref{eq:SDE_decomposition_componentwise_exapanded} form $0$ to $T$, then we have
+Let us assume from \eqref{eq:SDE_decomposition_componentwise_exapanded} that $a_i=0$, $b_{ij}=\alpha=\text{constant}$, and $g:\rset^d \rightarrow Id_{\rset}$, we try here to motivate Assumption $1$.
+
+Let us integrate \eqref{eq:SDE_decomposition_componentwise_exapanded} form $0$ to $T$, then we have
 \begin{align*}
 X_T-X_0 &= \left( \sqrt{T}\alpha \right) \left( \sum_{j=1}^d v_j \right) Z_v + \left( \sqrt{T} \alpha \right) \left( \sum_{j=1}^d v_j  (Z_v)^\perp_j \right)+\alpha \sum_{j=1}^d  \int_{0}^T dB_j \nonumber\\
 &= \left( \sqrt{T}\alpha \right) \left( \sum_{j=1}^d v_j \right) Z_v + \left( \sqrt{T} \alpha \right) \left( \sum_{j=1}^d v_j  (Z_v)^\perp_j \right)+\alpha \sum_{j=1}^d  \left(B_j(T)-B_j(0)\right) ,
@@ -78,7 +69,6 @@ implying (if we neglect the correlation terms)
 & \approx  T \alpha^2 \left( \sum_{j=1}^d v_j \right)^2.
 \end{align}
 Therefore, we can conclude from \eqref{eq: variance global terms} that the dominant term in the sense of global variance is coming from $\sum_{j=1}^d b_{ij}(X)  \frac{Z_v v_j}{\sqrt{T}} dt$, which makes assumption $1$  valid.
-\end{itemize}
 \end{proof}
 
 Given assumption $1$ above, we denote the approximate process $\hat{X}$, whose dynamics are given by
@@ -164,6 +154,7 @@ where $\Phi(.)$ is the standard cumulative distribution function, and $\mu_T$ an
 
 Then  the next step to determine $\mathbf{v}^\ast$ is to maximize $p$  over $\mathbf{v}$.
 
+\red{The last statement maybe changed if the true quantity to maximize over $v$ is not \ref{optimality_criterion_2}.} 
 \end{example} 
 \begin{example}[Call option]
 We consider the case of one dimensional call option,  $g$ is given by \eqref{eq:call_option} and $\phi(x)=x-K$, where $K$ is the strike price. 
@@ -182,11 +173,11 @@ Precisely, we are interested in the  $d$-dimensional lognormal example where the
 where $\{W^{(1)}, \dots,W^{(d)}\}$ are correlated Brownian motions with correlations $\rho_{ij}$.
 
 
-We denote by $(Z_1^{(j)},\dots,Z_N^{(j)})$ the $N$ Gaussian independent rdvs that will be used to construct the path of the $j$-th asset $\bar{X}^{(j)}$, where $1 \le j \le d$ ($d$ denotes the number of underlyings considered in the basket). We denote  $\psi^{(j)}: (Z_1^{(j)},\dots,Z_N^{(j)}) \rightarrow (B_1^{(j)},\dots,B_N^{(j)})$ the mapping of Brownian bridge construction and by $\Psi: (\Delta t, \widetilde{B}^{(1)}_1,\dots,\widetilde{B}^{(1)}_N,\dots, \widetilde{B}^{(d)}_1,\dots,\widetilde{B}^{(d)}_N) \rightarrow \left(\bar{X}^{(1)}_T,\dots,\bar{X}^{(d)}_T \right)$, the mapping consisting of the time-stepping scheme, where $\widetilde{\mathbf{B}}$ is the correlated Brownian bridge that can be obtained from the non correlated Brownian bridge $\mathbf{B}$ through multiplication by the correlation matrix, we denote this transformation by $T: \left(B^{(1)}_1,\dots,B^{(1)}_N,\dots, B^{(d)}_1,\dots,B^{(d)}_N \right) \rightarrow \left(\widetilde{B}^{(1)}_1,\dots,\widetilde{B}^{(1)}_N,\dots, \widetilde{B}^{(d)}_1,\dots,\widetilde{B}^{(d)}_N\right)$. Then, we can express the option price as
+We denote by $(Z_1^{(j)},\dots,Z_N^{(j)})$ the $N$ Gaussian independent rdvs that will be used to construct the path of the $j$-th asset $\bar{X}^{(j)}$, where $1 \le j \le d$ ($d$ denotes the number of underlyings considered in the basket). We denote  $\psi^{(j)}: (Z_1^{(j)},\dots,Z_N^{(j)}) \rightarrow (B_1^{(j)},\dots,B_N^{(j)})$ the mapping of Brownian bridge construction and by $\Psi: (\Delta t, \widetilde{B}^{(1)}_1,\dots,\widetilde{B}^{(1)}_N,\dots, \widetilde{B}^{(d)}_1,\dots,\widetilde{B}^{(d)}_N) \rightarrow \left(\bar{X}^{(1)}_T,\dots,\bar{X}^{(d)}_T \right)$, the mapping consisting of the time-stepping scheme, where $\widetilde{\mathbf{B}}$ is the correlated Brownian bridge that can be obtained from the non correlated Brownian bridge $\mathbf{B}$ through multiplication by the correlation matrix, we denote this transformation by $\mathcal{T}: \left(B^{(1)}_1,\dots,B^{(1)}_N,\dots, B^{(d)}_1,\dots,B^{(d)}_N \right) \rightarrow \left(\widetilde{B}^{(1)}_1,\dots,\widetilde{B}^{(1)}_N,\dots, \widetilde{B}^{(d)}_1,\dots,\widetilde{B}^{(d)}_N\right)$. Then, we can express the option price as
 \begin{align}\label{eq: option price as integral_basket}
 	\expt{g(\mathbf{X}(T))}&\approx	\expt{g\left(\bar{X}_T^{(1)}, \dots,\bar{X}_T^{(d)} \right)} \nonumber\\
-	&=\expt{g\left(\Psi\circ T\right) \left(B^{(1)}_1,\dots,B^{(1)}_N,\dots, B^{(d)}_1,\dots,B^{(d)}_N \right)} \nonumber\\
-		&=\expt{g\left(\Psi \circ T \right) \left(\psi^{(1)}(Z_1^{(1)}, \dots, Z_N^{(1)}), \dots, \psi^{(d)}(Z_1^{(d)},\dots,Z^{(d)}_N)\right)} \nonumber\\
+	&=\expt{g\left(\Psi\circ \mathcal{T} \right) \left(B^{(1)}_1,\dots,B^{(1)}_N,\dots, B^{(d)}_1,\dots,B^{(d)}_N \right)} \nonumber\\
+		&=\expt{g\left(\Psi \circ \mathcal{T} \right) \left(\psi^{(1)}(Z_1^{(1)}, \dots, Z_N^{(1)}), \dots, \psi^{(d)}(Z_1^{(d)},\dots,Z^{(d)}_N)\right)} \nonumber\\
 	&=\int_{\rset^{d \times N}} G(z_1^{(1)}, \dots, z_N^{(1)}, \dots, z_1^{(d)},\dots,z^{(d)}_N)) \rho_{d \times N}(\mathbf{z}) dz_1^{(1)} \dots dz_N^{(1)} \dots z_1^{(d)} \dots dz^{(d)}_N \COMMA
 \end{align}
 where 
@@ -270,126 +261,3 @@ We generally do not have a closed form for $h$. Therefore, the pre-integration s
 We note that  conditions (\eqref{assump:Monotonicity condition} and \eqref{assump:Growth condition}) imply that for each $\mathbf{Y}_{-1}$, the function $G$ either has a simple  root $y_1^\ast$ or is positive for all $y_1 \in \rset$.
 \end{remark}
 
-\subsection{Results for the Basket option}
-For illustration, we start with the two dimensional basket call option  with parameters:  $S_0^{1,2}=K=100$, $\sigma_{1,2}=0.4$, $\rho=0.3$, $T=1$ $r=0$ and $c_{1,2}=1/2$, the reference value for those parameters  is  $12.90$. The matrix $\mathcal{A}$ in this case is given by $\mathcal{A} = 1/\sqrt{2} (1, 1; 1, -1)$.
-
-Our  numerical testes suggest bad behavior of the weak error with a rate that is  too small (see Figure \ref{fig:Weak_rate_two_dim_basket}). 
-\FloatBarrier
-\begin{figure}[h!]
-		\centering
-		\includegraphics[width=0.4\linewidth]{./figures/basket_call_2d_time_stepping/weak_convergence/weak_convergence_order_basket_option_2d_relative_M_4_10_5_beta_64_parallel_2}
-
-	\caption{The rate of convergence of the weak error for the two dimensional basket call option with  a number of Laguerre  quadrature points  $\beta=64$ and number of samples for MC $M=10^4$.  }
-	\label{fig:Weak_rate_two_dim_basket}
-\end{figure}
-\FloatBarrier
-
-To investigate the reason of the observed bad behavior of the weak error, we plot the smoothed integrand $I$ for different scenarios of number of time steps $N \in {4,8}$ with respect to different variables (see Figures \ref{fig:integrand_one_dim_N_4} and \ref{fig:integrand_two_dim_N_4} for $N=4$ and  Figures \ref{fig:integrand_one_dim_N_8} and \ref{fig:integrand_two_dim_N_8} for $N=8$).
-\FloatBarrier
-\begin{figure}
-	\begin{subfigure}{.4\textwidth}
-		\centering
-			\includegraphics[width=1\linewidth]{./figures/basket_call_2d_time_stepping/integrand_plotting/N_4/1d_plots/smoothed_integrand_basket_2D_N_4_z2}
-		\caption{}
-	\end{subfigure}%
-	\begin{subfigure}{.4\textwidth}
-		\centering
-			\includegraphics[width=1\linewidth]{./figures/basket_call_2d_time_stepping/integrand_plotting/N_4/1d_plots/smoothed_integrand_basket_2D_N_4_z3}
-		\caption{}
-	\end{subfigure}\\[1ex]
-	\begin{subfigure}{.4\textwidth}
-		\centering
-			\includegraphics[width=1\linewidth]{./figures/basket_call_2d_time_stepping/integrand_plotting/N_4/1d_plots/smoothed_integrand_basket_2D_N_4_z5}
-		\caption{}
-	\end{subfigure}%
-	\begin{subfigure}{.4\textwidth}
-		\centering
-			\includegraphics[width=1\linewidth]{./figures/basket_call_2d_time_stepping/integrand_plotting/N_4/1d_plots/smoothed_integrand_basket_2D_N_4_z6}
-		\caption{}
-		\end{subfigure}
-	\caption{The one dimensional plots for the integrand $I$ with respect to the different variables for $N=4$. a) with respect to $z_2$, b) with respect to $z_3$, c) with respect to $z_5$,  d) with respect to $z_6$.}
-	\label{fig:integrand_one_dim_N_4}
-\end{figure}
-\FloatBarrier
-
-
-\FloatBarrier
-\begin{figure}
-	\begin{subfigure}{.4\textwidth}
-		\centering
-			\includegraphics[width=1\linewidth]{./figures/basket_call_2d_time_stepping/integrand_plotting/N_4/2d_plots/z_2_3/smoothed_integrand_basket_2D_N_4_z2_3_40}
-		\caption{}
-	\end{subfigure}%
-	\begin{subfigure}{.4\textwidth}
-		\centering
-			\includegraphics[width=1\linewidth]{./figures/basket_call_2d_time_stepping/integrand_plotting/N_4/2d_plots/z_2_5/smoothed_integrand_basket_2D_N_4_z2_5_80}
-		\caption{}
-	\end{subfigure}\\[1ex]
-	\begin{subfigure}{.4\textwidth}
-		\centering
-			\includegraphics[width=1\linewidth]{./figures/basket_call_2d_time_stepping/integrand_plotting/N_4/2d_plots/z_5_6/smoothed_integrand_basket_2D_N_4_z5_6_200}
-		\caption{}
-	\end{subfigure}%
-	\begin{subfigure}{.4\textwidth}
-		\centering
-			\includegraphics[width=1\linewidth]{./figures/basket_call_2d_time_stepping/integrand_plotting/N_4/2d_plots/z_2_6/smoothed_integrand_basket_2D_N_4_z2_6_80}
-		\caption{}
-		\end{subfigure}
-	\caption{The two dimensional plots for the integrand $I$ with respect to the different variables for $N=4$. a) with respect to $(z_2,z_3)$, b) with respect to $(z_2,z_5)$, c) with respect to $(z_5,z_6)$,  d) with respect to $(z_2,z_6)$.}
-	\label{fig:integrand_two_dim_N_4}
-\end{figure}
-\FloatBarrier
-\FloatBarrier
-\begin{figure}
-	\begin{subfigure}{.4\textwidth}
-		\centering
-			\includegraphics[width=1\linewidth]{./figures/basket_call_2d_time_stepping/integrand_plotting/N_8/1d_plots/smoothed_integrand_basket_2D_N_8_z2}
-		\caption{}
-	\end{subfigure}%
-	\begin{subfigure}{.4\textwidth}
-		\centering
-			\includegraphics[width=1\linewidth]{./figures/basket_call_2d_time_stepping/integrand_plotting/N_8/1d_plots/smoothed_integrand_basket_2D_N_8_z3}
-		\caption{}
-	\end{subfigure}\\[1ex]
-	\begin{subfigure}{.4\textwidth}
-		\centering
-			\includegraphics[width=1\linewidth]{./figures/basket_call_2d_time_stepping/integrand_plotting/N_8/1d_plots/smoothed_integrand_basket_2D_N_8_z9}
-		\caption{}
-	\end{subfigure}%
-	\begin{subfigure}{.4\textwidth}
-		\centering
-			\includegraphics[width=1\linewidth]{./figures/basket_call_2d_time_stepping/integrand_plotting/N_8/1d_plots/smoothed_integrand_basket_2D_N_8_z10}
-		\caption{}
-		\end{subfigure}
-	\caption{The one dimensional plots for the integrand $I$ with respect to the different variables for $N=8$. a) with respect to $z_2$, b) with respect to $z_3$, c) with respect to $z_9$,  d) with respect to $z_10$.}
-	\label{fig:integrand_one_dim_N_8}
-\end{figure}
-\FloatBarrier
-
-
-\FloatBarrier
-\begin{figure}
-	\begin{subfigure}{.4\textwidth}
-		\centering
-			\includegraphics[width=1\linewidth]{./figures/basket_call_2d_time_stepping/integrand_plotting/N_8/2d_plots/z_2_3/smoothed_integrand_basket_2D_N_8_z2_3_40}
-		\caption{}
-	\end{subfigure}%
-	\begin{subfigure}{.4\textwidth}
-		\centering
-			\includegraphics[width=1\linewidth]{./figures/basket_call_2d_time_stepping/integrand_plotting/N_8/2d_plots/z_2_9/smoothed_integrand_basket_2D_N_8_z2_9_80}
-		\caption{}
-	\end{subfigure}\\[1ex]
-	\begin{subfigure}{.4\textwidth}
-		\centering
-			\includegraphics[width=1\linewidth]{./figures/basket_call_2d_time_stepping/integrand_plotting/N_8/2d_plots/z_9_10/smoothed_integrand_basket_2D_N_8_z9_10_200}
-		\caption{}
-	\end{subfigure}%
-	\begin{subfigure}{.4\textwidth}
-		\centering
-			\includegraphics[width=1\linewidth]{./figures/basket_call_2d_time_stepping/integrand_plotting/N_8/2d_plots/z_2_10/smoothed_integrand_basket_2D_N_8_z2_10_80}
-		\caption{}
-		\end{subfigure}
-	\caption{The two dimensional plots for the integrand $I$ with respect to the different variables for $N=8$. a) with respect to $(z_2,z_3)$, b) with respect to $(z_2,z_9)$, c) with respect to $(z_9,z_{10})$,  d) with respect to $(z_2,z_{10})$.}
-	\label{fig:integrand_two_dim_N_8}
-\end{figure}
-\FloatBarrier

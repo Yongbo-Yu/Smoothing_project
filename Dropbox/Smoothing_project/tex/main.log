@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  20 MAR 2019 10:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  27 MAR 2019 18:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -880,7 +880,12 @@ Package: booktabs 2016/04/27 v1.618033 publication quality tables
 \@lastruleclass=\count165
 \@thisrulewidth=\dimen294
 )
-(./main.aux)
+(./main.aux
+
+LaTeX Warning: Label `fig:Complexity plot for MC and MISC , Call non rich' mult
+iply defined.
+
+)
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 74.
@@ -899,8 +904,7 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 74.
 LaTeX Font Info:    ... okay on input line 74.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 74.
 LaTeX Font Info:    ... okay on input line 74.
-
-(/usr/local/texlive/2016/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+ (/usr/local/texlive/2016/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count166
 \scratchdimen=\dimen295
@@ -974,364 +978,40 @@ LaTeX Warning: No \author given.
 (./Introduction.tex [1
 
 {/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]) (./Mot
-ivation.tex [2] [3] [4]
-Overfull \hbox (61.55356pt too wide) in paragraph at lines 113--113
+ivation.tex [2] [3]
+Overfull \hbox (61.55356pt too wide) in paragraph at lines 103--103
 [] 
  []
 
-
-Overfull \hbox (62.14917pt too wide) in paragraph at lines 123--123
+[4]
+Overfull \hbox (62.14917pt too wide) in paragraph at lines 113--113
 [] 
  []
 
-[5] [6] [7]
+[5] [6]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 205.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 205.
-
-[8]
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 250.
+(hyperref)                removing `math shift' on input line 196.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 250.
+(hyperref)                removing `math shift' on input line 196.
+
+[7] [8]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 241.
 
 
-Overfull \hbox (30.77802pt too wide) in paragraph at lines 258--258
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 241.
+
+
+Overfull \hbox (30.77802pt too wide) in paragraph at lines 249--249
 [] 
  []
 
-[9]
-Package epstopdf Info: Source file: <./figures/basket_call_2d_time_stepping/wea
-k_convergence/weak_convergence_order_basket_option_2d_relative_M_4_10_5_beta_64
-_parallel_2.eps>
-(epstopdf)                    date: 2019-03-19 13:42:35
-(epstopdf)                    size: 51962 bytes
-(epstopdf)             Output file: <./figures/basket_call_2d_time_stepping/wea
-k_convergence/weak_convergence_order_basket_option_2d_relative_M_4_10_5_beta_64
-_parallel_2-eps-converted-to.pdf>
-(epstopdf)             Command: <repstopdf --outfile=./figures/basket_call_2d_t
-ime_stepping/weak_convergence/weak_convergence_order_basket_option_2d_relative_
-M_4_10_5_beta_64_parallel_2-eps-converted-to.pdf ./figures/basket_call_2d_time_
-stepping/weak_convergence/weak_convergence_order_basket_option_2d_relative_M_4_
-10_5_beta_64_parallel_2.eps>
-(epstopdf)             \includegraphics on input line 280.
-runsystem(repstopdf --outfile=./figures/basket_call_2d_time_stepping/weak_conve
-rgence/weak_convergence_order_basket_option_2d_relative_M_4_10_5_beta_64_parall
-el_2-eps-converted-to.pdf ./figures/basket_call_2d_time_stepping/weak_convergen
-ce/weak_convergence_order_basket_option_2d_relative_M_4_10_5_beta_64_parallel_2
-.eps)...executed safely (allowed).
-
-Package epstopdf Info: Result file: <./figures/basket_call_2d_time_stepping/wea
-k_convergence/weak_convergence_order_basket_option_2d_relative_M_4_10_5_beta_64
-_parallel_2-eps-converted-to.pdf>
-(epstopdf)                    date: 2019-03-20 10:27:38
-(epstopdf)                    size: 21912 bytes.
-
-<./figures/basket_call_2d_time_stepping/weak_convergence/weak_convergence_order
-_basket_option_2d_relative_M_4_10_5_beta_64_parallel_2-eps-converted-to.pdf, id
-=266, 578.16pt x 433.62pt>
-File: ./figures/basket_call_2d_time_stepping/weak_convergence/weak_convergence_
-order_basket_option_2d_relative_M_4_10_5_beta_64_parallel_2-eps-converted-to.pd
-f Graphic file (type pdf)
-
-<use ./figures/basket_call_2d_time_stepping/weak_convergence/weak_convergence_o
-rder_basket_option_2d_relative_M_4_10_5_beta_64_parallel_2-eps-converted-to.pdf
->
-Package pdftex.def Info: ./figures/basket_call_2d_time_stepping/weak_convergenc
-e/weak_convergence_order_basket_option_2d_relative_M_4_10_5_beta_64_parallel_2-
-eps-converted-to.pdf used on input line 280.
-(pdftex.def)             Requested size: 187.89912pt x 140.92482pt.
-
-<./figures/basket_call_2d_time_stepping/integrand_plotting/N_4/1d_plots/smoothe
-d_integrand_basket_2D_N_4_z2.pdf, id=271, 1011.78pt x 433.62pt>
-File: ./figures/basket_call_2d_time_stepping/integrand_plotting/N_4/1d_plots/sm
-oothed_integrand_basket_2D_N_4_z2.pdf Graphic file (type pdf)
-
-<use ./figures/basket_call_2d_time_stepping/integrand_plotting/N_4/1d_plots/smo
-othed_integrand_basket_2D_N_4_z2.pdf>
-Package pdftex.def Info: ./figures/basket_call_2d_time_stepping/integrand_plott
-ing/N_4/1d_plots/smoothed_integrand_basket_2D_N_4_z2.pdf used on input line 292
-.
-(pdftex.def)             Requested size: 187.89912pt x 80.5228pt.
-
-<./figures/basket_call_2d_time_stepping/integrand_plotting/N_4/1d_plots/smoothe
-d_integrand_basket_2D_N_4_z3.pdf, id=272, 1011.78pt x 433.62pt>
-File: ./figures/basket_call_2d_time_stepping/integrand_plotting/N_4/1d_plots/sm
-oothed_integrand_basket_2D_N_4_z3.pdf Graphic file (type pdf)
-
-<use ./figures/basket_call_2d_time_stepping/integrand_plotting/N_4/1d_plots/smo
-othed_integrand_basket_2D_N_4_z3.pdf>
-Package pdftex.def Info: ./figures/basket_call_2d_time_stepping/integrand_plott
-ing/N_4/1d_plots/smoothed_integrand_basket_2D_N_4_z3.pdf used on input line 297
-.
-(pdftex.def)             Requested size: 187.89912pt x 80.5228pt.
-
-<./figures/basket_call_2d_time_stepping/integrand_plotting/N_4/1d_plots/smoothe
-d_integrand_basket_2D_N_4_z5.pdf, id=273, 1011.78pt x 433.62pt>
-File: ./figures/basket_call_2d_time_stepping/integrand_plotting/N_4/1d_plots/sm
-oothed_integrand_basket_2D_N_4_z5.pdf Graphic file (type pdf)
-
-<use ./figures/basket_call_2d_time_stepping/integrand_plotting/N_4/1d_plots/smo
-othed_integrand_basket_2D_N_4_z5.pdf>
-Package pdftex.def Info: ./figures/basket_call_2d_time_stepping/integrand_plott
-ing/N_4/1d_plots/smoothed_integrand_basket_2D_N_4_z5.pdf used on input line 302
-.
-(pdftex.def)             Requested size: 187.89912pt x 80.5228pt.
-
-<./figures/basket_call_2d_time_stepping/integrand_plotting/N_4/1d_plots/smoothe
-d_integrand_basket_2D_N_4_z6.pdf, id=274, 1011.78pt x 433.62pt>
-File: ./figures/basket_call_2d_time_stepping/integrand_plotting/N_4/1d_plots/sm
-oothed_integrand_basket_2D_N_4_z6.pdf Graphic file (type pdf)
-
-<use ./figures/basket_call_2d_time_stepping/integrand_plotting/N_4/1d_plots/smo
-othed_integrand_basket_2D_N_4_z6.pdf>
-Package pdftex.def Info: ./figures/basket_call_2d_time_stepping/integrand_plott
-ing/N_4/1d_plots/smoothed_integrand_basket_2D_N_4_z6.pdf used on input line 307
-.
-(pdftex.def)             Requested size: 187.89912pt x 80.5228pt.
- [10 <./figures/basket_call_2d_time_stepping/weak_convergence/weak_convergence_
-order_basket_option_2d_relative_M_4_10_5_beta_64_parallel_2-eps-converted-to.pd
-f>]
-<./figures/basket_call_2d_time_stepping/integrand_plotting/N_4/2d_plots/z_2_3/s
-moothed_integrand_basket_2D_N_4_z2_3_40.pdf, id=328, 1011.78pt x 433.62pt>
-File: ./figures/basket_call_2d_time_stepping/integrand_plotting/N_4/2d_plots/z_
-2_3/smoothed_integrand_basket_2D_N_4_z2_3_40.pdf Graphic file (type pdf)
-
-<use ./figures/basket_call_2d_time_stepping/integrand_plotting/N_4/2d_plots/z_2
-_3/smoothed_integrand_basket_2D_N_4_z2_3_40.pdf>
-Package pdftex.def Info: ./figures/basket_call_2d_time_stepping/integrand_plott
-ing/N_4/2d_plots/z_2_3/smoothed_integrand_basket_2D_N_4_z2_3_40.pdf used on inp
-ut line 320.
-(pdftex.def)             Requested size: 187.89912pt x 80.5228pt.
-
-<./figures/basket_call_2d_time_stepping/integrand_plotting/N_4/2d_plots/z_2_5/s
-moothed_integrand_basket_2D_N_4_z2_5_80.pdf, id=329, 1011.78pt x 433.62pt>
-File: ./figures/basket_call_2d_time_stepping/integrand_plotting/N_4/2d_plots/z_
-2_5/smoothed_integrand_basket_2D_N_4_z2_5_80.pdf Graphic file (type pdf)
-
-<use ./figures/basket_call_2d_time_stepping/integrand_plotting/N_4/2d_plots/z_2
-_5/smoothed_integrand_basket_2D_N_4_z2_5_80.pdf>
-Package pdftex.def Info: ./figures/basket_call_2d_time_stepping/integrand_plott
-ing/N_4/2d_plots/z_2_5/smoothed_integrand_basket_2D_N_4_z2_5_80.pdf used on inp
-ut line 325.
-(pdftex.def)             Requested size: 187.89912pt x 80.5228pt.
-
-<./figures/basket_call_2d_time_stepping/integrand_plotting/N_4/2d_plots/z_5_6/s
-moothed_integrand_basket_2D_N_4_z5_6_200.pdf, id=330, 1011.78pt x 433.62pt>
-File: ./figures/basket_call_2d_time_stepping/integrand_plotting/N_4/2d_plots/z_
-5_6/smoothed_integrand_basket_2D_N_4_z5_6_200.pdf Graphic file (type pdf)
-
-<use ./figures/basket_call_2d_time_stepping/integrand_plotting/N_4/2d_plots/z_5
-_6/smoothed_integrand_basket_2D_N_4_z5_6_200.pdf>
-Package pdftex.def Info: ./figures/basket_call_2d_time_stepping/integrand_plott
-ing/N_4/2d_plots/z_5_6/smoothed_integrand_basket_2D_N_4_z5_6_200.pdf used on in
-put line 330.
-(pdftex.def)             Requested size: 187.89912pt x 80.5228pt.
-
-<./figures/basket_call_2d_time_stepping/integrand_plotting/N_4/2d_plots/z_2_6/s
-moothed_integrand_basket_2D_N_4_z2_6_80.pdf, id=331, 1011.78pt x 433.62pt>
-File: ./figures/basket_call_2d_time_stepping/integrand_plotting/N_4/2d_plots/z_
-2_6/smoothed_integrand_basket_2D_N_4_z2_6_80.pdf Graphic file (type pdf)
-
-<use ./figures/basket_call_2d_time_stepping/integrand_plotting/N_4/2d_plots/z_2
-_6/smoothed_integrand_basket_2D_N_4_z2_6_80.pdf>
-Package pdftex.def Info: ./figures/basket_call_2d_time_stepping/integrand_plott
-ing/N_4/2d_plots/z_2_6/smoothed_integrand_basket_2D_N_4_z2_6_80.pdf used on inp
-ut line 335.
-(pdftex.def)             Requested size: 187.89912pt x 80.5228pt.
- [11 <./figures/basket_call_2d_time_stepping/integrand_plotting/N_4/1d_plots/sm
-oothed_integrand_basket_2D_N_4_z2.pdf> <./figures/basket_call_2d_time_stepping/
-integrand_plotting/N_4/1d_plots/smoothed_integrand_basket_2D_N_4_z3.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/basket_call_2d_time_steppi
-ng/integrand_plotting/N_4/1d_plots/smoothed_integrand_basket_2D_N_4_z3.pdf): PD
-F inclusion: multiple pdfs with page group included in a single page
-> <./figures/basket_call_2d_time_stepping/integrand_plotting/N_4/1d_plots/smoot
-hed_integrand_basket_2D_N_4_z5.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/basket_call_2d_time_steppi
-ng/integrand_plotting/N_4/1d_plots/smoothed_integrand_basket_2D_N_4_z5.pdf): PD
-F inclusion: multiple pdfs with page group included in a single page
-> <./figures/basket_call_2d_time_stepping/integrand_plotting/N_4/1d_plots/smoot
-hed_integrand_basket_2D_N_4_z6.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/basket_call_2d_time_steppi
-ng/integrand_plotting/N_4/1d_plots/smoothed_integrand_basket_2D_N_4_z6.pdf): PD
-F inclusion: multiple pdfs with page group included in a single page
-> <./figures/basket_call_2d_time_stepping/integrand_plotting/N_4/2d_plots/z_2_3
-/smoothed_integrand_basket_2D_N_4_z2_3_40.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/basket_call_2d_time_steppi
-ng/integrand_plotting/N_4/2d_plots/z_2_3/smoothed_integrand_basket_2D_N_4_z2_3_
-40.pdf): PDF inclusion: multiple pdfs with page group included in a single page
-
-> <./figures/basket_call_2d_time_stepping/integrand_plotting/N_4/2d_plots/z_2_5
-/smoothed_integrand_basket_2D_N_4_z2_5_80.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/basket_call_2d_time_steppi
-ng/integrand_plotting/N_4/2d_plots/z_2_5/smoothed_integrand_basket_2D_N_4_z2_5_
-80.pdf): PDF inclusion: multiple pdfs with page group included in a single page
-
-> <./figures/basket_call_2d_time_stepping/integrand_plotting/N_4/2d_plots/z_5_6
-/smoothed_integrand_basket_2D_N_4_z5_6_200.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/basket_call_2d_time_steppi
-ng/integrand_plotting/N_4/2d_plots/z_5_6/smoothed_integrand_basket_2D_N_4_z5_6_
-200.pdf): PDF inclusion: multiple pdfs with page group included in a single pag
-e
-> <./figures/basket_call_2d_time_stepping/integrand_plotting/N_4/2d_plots/z_2_6
-/smoothed_integrand_basket_2D_N_4_z2_6_80.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/basket_call_2d_time_steppi
-ng/integrand_plotting/N_4/2d_plots/z_2_6/smoothed_integrand_basket_2D_N_4_z2_6_
-80.pdf): PDF inclusion: multiple pdfs with page group included in a single page
-
->]
-<./figures/basket_call_2d_time_stepping/integrand_plotting/N_8/1d_plots/smoothe
-d_integrand_basket_2D_N_8_z2.pdf, id=582, 1011.78pt x 433.62pt>
-File: ./figures/basket_call_2d_time_stepping/integrand_plotting/N_8/1d_plots/sm
-oothed_integrand_basket_2D_N_8_z2.pdf Graphic file (type pdf)
-
-<use ./figures/basket_call_2d_time_stepping/integrand_plotting/N_8/1d_plots/smo
-othed_integrand_basket_2D_N_8_z2.pdf>
-Package pdftex.def Info: ./figures/basket_call_2d_time_stepping/integrand_plott
-ing/N_8/1d_plots/smoothed_integrand_basket_2D_N_8_z2.pdf used on input line 346
-.
-(pdftex.def)             Requested size: 187.89912pt x 80.5228pt.
-
-<./figures/basket_call_2d_time_stepping/integrand_plotting/N_8/1d_plots/smoothe
-d_integrand_basket_2D_N_8_z3.pdf, id=583, 1011.78pt x 433.62pt>
-File: ./figures/basket_call_2d_time_stepping/integrand_plotting/N_8/1d_plots/sm
-oothed_integrand_basket_2D_N_8_z3.pdf Graphic file (type pdf)
-
-<use ./figures/basket_call_2d_time_stepping/integrand_plotting/N_8/1d_plots/smo
-othed_integrand_basket_2D_N_8_z3.pdf>
-Package pdftex.def Info: ./figures/basket_call_2d_time_stepping/integrand_plott
-ing/N_8/1d_plots/smoothed_integrand_basket_2D_N_8_z3.pdf used on input line 351
-.
-(pdftex.def)             Requested size: 187.89912pt x 80.5228pt.
-
-<./figures/basket_call_2d_time_stepping/integrand_plotting/N_8/1d_plots/smoothe
-d_integrand_basket_2D_N_8_z9.pdf, id=584, 1011.78pt x 433.62pt>
-File: ./figures/basket_call_2d_time_stepping/integrand_plotting/N_8/1d_plots/sm
-oothed_integrand_basket_2D_N_8_z9.pdf Graphic file (type pdf)
-
-<use ./figures/basket_call_2d_time_stepping/integrand_plotting/N_8/1d_plots/smo
-othed_integrand_basket_2D_N_8_z9.pdf>
-Package pdftex.def Info: ./figures/basket_call_2d_time_stepping/integrand_plott
-ing/N_8/1d_plots/smoothed_integrand_basket_2D_N_8_z9.pdf used on input line 356
-.
-(pdftex.def)             Requested size: 187.89912pt x 80.5228pt.
-
-<./figures/basket_call_2d_time_stepping/integrand_plotting/N_8/1d_plots/smoothe
-d_integrand_basket_2D_N_8_z10.pdf, id=585, 1011.78pt x 433.62pt>
-File: ./figures/basket_call_2d_time_stepping/integrand_plotting/N_8/1d_plots/sm
-oothed_integrand_basket_2D_N_8_z10.pdf Graphic file (type pdf)
-
-<use ./figures/basket_call_2d_time_stepping/integrand_plotting/N_8/1d_plots/smo
-othed_integrand_basket_2D_N_8_z10.pdf>
-Package pdftex.def Info: ./figures/basket_call_2d_time_stepping/integrand_plott
-ing/N_8/1d_plots/smoothed_integrand_basket_2D_N_8_z10.pdf used on input line 36
-1.
-(pdftex.def)             Requested size: 187.89912pt x 80.5228pt.
- [12 <./figures/basket_call_2d_time_stepping/integrand_plotting/N_8/1d_plots/sm
-oothed_integrand_basket_2D_N_8_z2.pdf> <./figures/basket_call_2d_time_stepping/
-integrand_plotting/N_8/1d_plots/smoothed_integrand_basket_2D_N_8_z3.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/basket_call_2d_time_steppi
-ng/integrand_plotting/N_8/1d_plots/smoothed_integrand_basket_2D_N_8_z3.pdf): PD
-F inclusion: multiple pdfs with page group included in a single page
-> <./figures/basket_call_2d_time_stepping/integrand_plotting/N_8/1d_plots/smoot
-hed_integrand_basket_2D_N_8_z9.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/basket_call_2d_time_steppi
-ng/integrand_plotting/N_8/1d_plots/smoothed_integrand_basket_2D_N_8_z9.pdf): PD
-F inclusion: multiple pdfs with page group included in a single page
-> <./figures/basket_call_2d_time_stepping/integrand_plotting/N_8/1d_plots/smoot
-hed_integrand_basket_2D_N_8_z10.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/basket_call_2d_time_steppi
-ng/integrand_plotting/N_8/1d_plots/smoothed_integrand_basket_2D_N_8_z10.pdf): P
-DF inclusion: multiple pdfs with page group included in a single page
->]
-<./figures/basket_call_2d_time_stepping/integrand_plotting/N_8/2d_plots/z_2_3/s
-moothed_integrand_basket_2D_N_8_z2_3_40.pdf, id=698, 1011.78pt x 433.62pt>
-File: ./figures/basket_call_2d_time_stepping/integrand_plotting/N_8/2d_plots/z_
-2_3/smoothed_integrand_basket_2D_N_8_z2_3_40.pdf Graphic file (type pdf)
-
-<use ./figures/basket_call_2d_time_stepping/integrand_plotting/N_8/2d_plots/z_2
-_3/smoothed_integrand_basket_2D_N_8_z2_3_40.pdf>
-Package pdftex.def Info: ./figures/basket_call_2d_time_stepping/integrand_plott
-ing/N_8/2d_plots/z_2_3/smoothed_integrand_basket_2D_N_8_z2_3_40.pdf used on inp
-ut line 374.
-(pdftex.def)             Requested size: 187.89912pt x 80.5228pt.
-
-<./figures/basket_call_2d_time_stepping/integrand_plotting/N_8/2d_plots/z_2_9/s
-moothed_integrand_basket_2D_N_8_z2_9_80.pdf, id=699, 1011.78pt x 433.62pt>
-File: ./figures/basket_call_2d_time_stepping/integrand_plotting/N_8/2d_plots/z_
-2_9/smoothed_integrand_basket_2D_N_8_z2_9_80.pdf Graphic file (type pdf)
-
-<use ./figures/basket_call_2d_time_stepping/integrand_plotting/N_8/2d_plots/z_2
-_9/smoothed_integrand_basket_2D_N_8_z2_9_80.pdf>
-Package pdftex.def Info: ./figures/basket_call_2d_time_stepping/integrand_plott
-ing/N_8/2d_plots/z_2_9/smoothed_integrand_basket_2D_N_8_z2_9_80.pdf used on inp
-ut line 379.
-(pdftex.def)             Requested size: 187.89912pt x 80.5228pt.
-
-<./figures/basket_call_2d_time_stepping/integrand_plotting/N_8/2d_plots/z_9_10/
-smoothed_integrand_basket_2D_N_8_z9_10_200.pdf, id=700, 1011.78pt x 433.62pt>
-File: ./figures/basket_call_2d_time_stepping/integrand_plotting/N_8/2d_plots/z_
-9_10/smoothed_integrand_basket_2D_N_8_z9_10_200.pdf Graphic file (type pdf)
-
-<use ./figures/basket_call_2d_time_stepping/integrand_plotting/N_8/2d_plots/z_9
-_10/smoothed_integrand_basket_2D_N_8_z9_10_200.pdf>
-Package pdftex.def Info: ./figures/basket_call_2d_time_stepping/integrand_plott
-ing/N_8/2d_plots/z_9_10/smoothed_integrand_basket_2D_N_8_z9_10_200.pdf used on 
-input line 384.
-(pdftex.def)             Requested size: 187.89912pt x 80.5228pt.
-
-<./figures/basket_call_2d_time_stepping/integrand_plotting/N_8/2d_plots/z_2_10/
-smoothed_integrand_basket_2D_N_8_z2_10_80.pdf, id=701, 1011.78pt x 433.62pt>
-File: ./figures/basket_call_2d_time_stepping/integrand_plotting/N_8/2d_plots/z_
-2_10/smoothed_integrand_basket_2D_N_8_z2_10_80.pdf Graphic file (type pdf)
-
-<use ./figures/basket_call_2d_time_stepping/integrand_plotting/N_8/2d_plots/z_2
-_10/smoothed_integrand_basket_2D_N_8_z2_10_80.pdf>
-Package pdftex.def Info: ./figures/basket_call_2d_time_stepping/integrand_plott
-ing/N_8/2d_plots/z_2_10/smoothed_integrand_basket_2D_N_8_z2_10_80.pdf used on i
-nput line 389.
-(pdftex.def)             Requested size: 187.89912pt x 80.5228pt.
- [13 <./figures/basket_call_2d_time_stepping/integrand_plotting/N_8/2d_plots/z_
-2_3/smoothed_integrand_basket_2D_N_8_z2_3_40.pdf> <./figures/basket_call_2d_tim
-e_stepping/integrand_plotting/N_8/2d_plots/z_2_9/smoothed_integrand_basket_2D_N
-_8_z2_9_80.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/basket_call_2d_time_steppi
-ng/integrand_plotting/N_8/2d_plots/z_2_9/smoothed_integrand_basket_2D_N_8_z2_9_
-80.pdf): PDF inclusion: multiple pdfs with page group included in a single page
-
-> <./figures/basket_call_2d_time_stepping/integrand_plotting/N_8/2d_plots/z_9_1
-0/smoothed_integrand_basket_2D_N_8_z9_10_200.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/basket_call_2d_time_steppi
-ng/integrand_plotting/N_8/2d_plots/z_9_10/smoothed_integrand_basket_2D_N_8_z9_1
-0_200.pdf): PDF inclusion: multiple pdfs with page group included in a single p
-age
-> <./figures/basket_call_2d_time_stepping/integrand_plotting/N_8/2d_plots/z_2_1
-0/smoothed_integrand_basket_2D_N_8_z2_10_80.pdf
-
-pdfTeX warning: /usr/texbin/pdflatex (file ./figures/basket_call_2d_time_steppi
-ng/integrand_plotting/N_8/2d_plots/z_2_10/smoothed_integrand_basket_2D_N_8_z2_1
-0_80.pdf): PDF inclusion: multiple pdfs with page group included in a single pa
-ge
->]) (./analiticity_proofs.tex
+) (./analiticity_proofs.tex [9]
 LaTeX Font Info:    Try loading font information for U+dsrom on input line 26.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/doublestroke/Udsrom.fd
@@ -1344,16 +1024,12 @@ cmr/m/n/10.95 + 1)]$. More-over, we de-fine a grid $\OMS/cmsy/m/n/10.95 D[] [][
 ]\OT1/cmr/m/n/10.95 = []$
  []
 
-[14
-
-
-
-] [15] [16]
+[10] [11] [12]
 Overfull \hbox (1.15695pt too wide) in paragraph at lines 272--272
 [] 
  []
 
-[17] [18]) (./Details_our_approach.tex [19]
+[13] [14]) (./Details_our_approach.tex [15]
 Overfull \hbox (15.29628pt too wide) in paragraph at lines 21--23
 \OT1/cmr/m/n/10.95 In our case, we have in [] a multi-variate in-te-gra-tion pr
 ob-lem with, $\OML/cmm/m/it/10.95 f \OT1/cmr/m/n/10.95 := \OML/cmm/m/it/10.95 h
@@ -1362,7 +1038,7 @@ n/10.95 y[]\OML/cmm/m/it/10.95 ; \OT1/cmr/bx/n/10.95 z[]\OML/cmm/m/it/10.95 ; [
 ] ; \OT1/cmr/bx/n/10.95 z[]\OT1/cmr/m/n/10.95 )$,
  []
 
-[20] [21]
+[16] [17]
 LaTeX Font Info:    Try loading font information for OMS+cmr on input line 110.
 
  (/usr/local/texlive/2016/texmf-dist/tex/latex/base/omscmr.fd
@@ -1371,6 +1047,7 @@ File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 110.
 
+[18]
 Overfull \hbox (49.79494pt too wide) in paragraph at lines 119--123
 \OT1/cmr/m/n/10.95 are smooth, where $[]$ de-notes the nu-mer-i-cal ap-prox-i-m
 a-tion of $\OML/cmm/m/it/10.95 h$ \OT1/cmr/m/n/10.95 based on a grid con-tain-i
@@ -1379,12 +1056,12 @@ it/10.95 ; \OT1/cmr/bx/n/10.95 z[]\OML/cmm/m/it/10.95 ; [] ; \OT1/cmr/bx/n/10.9
 5 z[]\OT1/cmr/m/n/10.95 )$.
  []
 
-[22]) (./Error_discussion.tex [23]) (./Numerical_experiments.tex [24]
-Overfull \hbox (74.53769pt too wide) in paragraph at lines 21--36
+) (./Error_discussion.tex [19]) (./Numerical_experiments.tex [20]
+Overfull \hbox (78.24251pt too wide) in paragraph at lines 21--36
  [][] 
  []
 
-[25] [26]
+[21] [22]
 Package epstopdf Info: Source file: <./figures/binary_weak_error/without_richar
 dson/weak_convergence_order_binary_option_relative_M_10_4.eps>
 (epstopdf)                    date: 2019-01-01 12:27:39
@@ -1402,7 +1079,7 @@ _order_binary_option_relative_M_10_4.eps>
 Package epstopdf Info: Output file is already uptodate.
 
 <./figures/binary_weak_error/without_richardson/weak_convergence_order_binary_o
-ption_relative_M_10_4-eps-converted-to.pdf, id=1037, 462.72874pt x 346.29375pt>
+ption_relative_M_10_4-eps-converted-to.pdf, id=464, 462.72874pt x 346.29375pt>
 File: ./figures/binary_weak_error/without_richardson/weak_convergence_order_bin
 ary_option_relative_M_10_4-eps-converted-to.pdf Graphic file (type pdf)
 
@@ -1416,7 +1093,7 @@ t line 129.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[27]
+[23]
 Package epstopdf Info: Source file: <./figures/Binary_Complexity_rates/error_vs
 _time.eps>
 (epstopdf)                    date: 2019-01-01 14:45:58
@@ -1431,8 +1108,8 @@ ror_vs_time.eps>
 (epstopdf)             \includegraphics on input line 306.
 Package epstopdf Info: Output file is already uptodate.
 
-<./figures/Binary_Complexity_rates/error_vs_time-eps-converted-to.pdf, id=1048,
- 462.72874pt x 346.29375pt>
+<./figures/Binary_Complexity_rates/error_vs_time-eps-converted-to.pdf, id=475, 
+462.72874pt x 346.29375pt>
 File: ./figures/Binary_Complexity_rates/error_vs_time-eps-converted-to.pdf Grap
 hic file (type pdf)
 
@@ -1444,7 +1121,7 @@ nverted-to.pdf used on input line 306.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[28 <./figures/binary_weak_error/without_richardson/weak_convergence_order_bina
+[24 <./figures/binary_weak_error/without_richardson/weak_convergence_order_bina
 ry_option_relative_M_10_4-eps-converted-to.pdf>]
 Package epstopdf Info: Source file: <./figures/weak_error_rates_call/Beta_32/wi
 thout_rich/weak_convergence_order_call_option_relative_M_4_10_5.eps>
@@ -1463,8 +1140,8 @@ _convergence_order_call_option_relative_M_4_10_5.eps>
 Package epstopdf Info: Output file is already uptodate.
 
 <./figures/weak_error_rates_call/Beta_32/without_rich/weak_convergence_order_ca
-ll_option_relative_M_4_10_5-eps-converted-to.pdf, id=1096, 462.72874pt x 346.29
-375pt>
+ll_option_relative_M_4_10_5-eps-converted-to.pdf, id=523, 462.72874pt x 346.293
+75pt>
 File: ./figures/weak_error_rates_call/Beta_32/without_rich/weak_convergence_ord
 er_call_option_relative_M_4_10_5-eps-converted-to.pdf Graphic file (type pdf)
 
@@ -1478,62 +1155,145 @@ n input line 590.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[29 <./figures/Binary_Complexity_rates/error_vs_time-eps-converted-to.pdf>]
+[25 <./figures/Binary_Complexity_rates/error_vs_time-eps-converted-to.pdf>]
 Package epstopdf Info: Source file: <./figures/Call_Complexity_rates/error_vs_t
 ime.eps>
-(epstopdf)                    date: 2019-01-02 11:10:30
-(epstopdf)                    size: 30432 bytes
+(epstopdf)                    date: 2019-03-27 09:51:20
+(epstopdf)                    size: 42968 bytes
 (epstopdf)             Output file: <./figures/Call_Complexity_rates/error_vs_t
 ime-eps-converted-to.pdf>
-(epstopdf)                    date: 2019-01-02 11:12:30
-(epstopdf)                    size: 17904 bytes
+(epstopdf)                    date: 2019-03-27 09:57:44
+(epstopdf)                    size: 17268 bytes
 (epstopdf)             Command: <repstopdf --outfile=./figures/Call_Complexity_
 rates/error_vs_time-eps-converted-to.pdf ./figures/Call_Complexity_rates/error_
 vs_time.eps>
 (epstopdf)             \includegraphics on input line 801.
 Package epstopdf Info: Output file is already uptodate.
 
-<./figures/Call_Complexity_rates/error_vs_time-eps-converted-to.pdf, id=1143, 4
-62.72874pt x 346.29375pt>
+<./figures/Call_Complexity_rates/error_vs_time-eps-converted-to.pdf, id=571, 57
+8.16pt x 433.62pt>
 File: ./figures/Call_Complexity_rates/error_vs_time-eps-converted-to.pdf Graphi
 c file (type pdf)
 
 <use ./figures/Call_Complexity_rates/error_vs_time-eps-converted-to.pdf>
 Package pdftex.def Info: ./figures/Call_Complexity_rates/error_vs_time-eps-conv
 erted-to.pdf used on input line 801.
-(pdftex.def)             Requested size: 187.89912pt x 140.61807pt.
+(pdftex.def)             Requested size: 187.89912pt x 140.92482pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[30 <./figures/weak_error_rates_call/Beta_32/without_rich/weak_convergence_orde
-r_call_option_relative_M_4_10_5-eps-converted-to.pdf>]) (./main.bbl
+[26 <./figures/weak_error_rates_call/Beta_32/without_rich/weak_convergence_orde
+r_call_option_relative_M_4_10_5-eps-converted-to.pdf>]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1032.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1032.
+
+Package epstopdf Info: Source file: <./figures/basket_call_2d_time_stepping/wea
+k_convergence/weak_convergence_order_basket_option_2d_relative_M_10_7_beta_128.
+eps>
+(epstopdf)                    date: 2019-03-27 14:47:51
+(epstopdf)                    size: 37293 bytes
+(epstopdf)             Output file: <./figures/basket_call_2d_time_stepping/wea
+k_convergence/weak_convergence_order_basket_option_2d_relative_M_10_7_beta_128-
+eps-converted-to.pdf>
+(epstopdf)                    date: 2019-03-27 15:42:57
+(epstopdf)                    size: 20658 bytes
+(epstopdf)             Command: <repstopdf --outfile=./figures/basket_call_2d_t
+ime_stepping/weak_convergence/weak_convergence_order_basket_option_2d_relative_
+M_10_7_beta_128-eps-converted-to.pdf ./figures/basket_call_2d_time_stepping/wea
+k_convergence/weak_convergence_order_basket_option_2d_relative_M_10_7_beta_128.
+eps>
+(epstopdf)             \includegraphics on input line 1038.
+Package epstopdf Info: Output file is already uptodate.
+
+<./figures/basket_call_2d_time_stepping/weak_convergence/weak_convergence_order
+_basket_option_2d_relative_M_10_7_beta_128-eps-converted-to.pdf, id=619, 578.16
+pt x 433.62pt>
+File: ./figures/basket_call_2d_time_stepping/weak_convergence/weak_convergence_
+order_basket_option_2d_relative_M_10_7_beta_128-eps-converted-to.pdf Graphic fi
+le (type pdf)
+
+<use ./figures/basket_call_2d_time_stepping/weak_convergence/weak_convergence_o
+rder_basket_option_2d_relative_M_10_7_beta_128-eps-converted-to.pdf>
+Package pdftex.def Info: ./figures/basket_call_2d_time_stepping/weak_convergenc
+e/weak_convergence_order_basket_option_2d_relative_M_10_7_beta_128-eps-converte
+d-to.pdf used on input line 1038.
+(pdftex.def)             Requested size: 187.89912pt x 140.92482pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[27 <./figures/Call_Complexity_rates/error_vs_time-eps-converted-to.pdf> <./fig
+ures/basket_call_2d_time_stepping/weak_convergence/weak_convergence_order_baske
+t_option_2d_relative_M_10_7_beta_128-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <./figures/basket_call_2d_time_stepping/com
+plexity_rates/error_vs_time.eps>
+(epstopdf)                    date: 2019-03-27 17:54:43
+(epstopdf)                    size: 43276 bytes
+(epstopdf)             Output file: <./figures/basket_call_2d_time_stepping/com
+plexity_rates/error_vs_time-eps-converted-to.pdf>
+(epstopdf)                    date: 2019-03-27 17:59:21
+(epstopdf)                    size: 17739 bytes
+(epstopdf)             Command: <repstopdf --outfile=./figures/basket_call_2d_t
+ime_stepping/complexity_rates/error_vs_time-eps-converted-to.pdf ./figures/bask
+et_call_2d_time_stepping/complexity_rates/error_vs_time.eps>
+(epstopdf)             \includegraphics on input line 1095.
+Package epstopdf Info: Output file is already uptodate.
+
+<./figures/basket_call_2d_time_stepping/complexity_rates/error_vs_time-eps-conv
+erted-to.pdf, id=705, 578.16pt x 433.62pt>
+File: ./figures/basket_call_2d_time_stepping/complexity_rates/error_vs_time-eps
+-converted-to.pdf Graphic file (type pdf)
+
+<use ./figures/basket_call_2d_time_stepping/complexity_rates/error_vs_time-eps-
+converted-to.pdf>
+Package pdftex.def Info: ./figures/basket_call_2d_time_stepping/complexity_rate
+s/error_vs_time-eps-converted-to.pdf used on input line 1095.
+(pdftex.def)             Requested size: 187.89912pt x 140.92482pt.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1104.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1104.
+
+[28 <./figures/basket_call_2d_time_stepping/complexity_rates/error_vs_time-eps-
+converted-to.pdf>]) (./main.bbl
 Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ä in font cmr10!
 Missing character: There is no ú in font cmr10!
 Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ä in font cmr10!
 Missing character: There is no ù in font cmr10!
- [31 <./figures/Call_Complexity_rates/error_vs_time-eps-converted-to.pdf>]) [32
-]
+ [29]) [30]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 114.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 114.
-
-(./main.aux)
+ (./main.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 114.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 114.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 78A5B651475AB7E37855D1C5D3E65FEE;5364.
+(rerunfilecheck)             Checksum: 9F7FE898A102F894F7F01C99547234A8;5295.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 114.
  ) 
 Here is how much of TeX's memory you used:
- 25859 strings out of 493014
- 450749 string characters out of 6133351
- 547927 words of memory out of 5000000
- 28687 multiletter control sequences out of 15000+600000
- 20760 words of font info for 86 fonts, out of 8000000 for 9000
+ 25766 strings out of 493014
+ 442219 string characters out of 6133351
+ 546772 words of memory out of 5000000
+ 28621 multiletter control sequences out of 15000+600000
+ 20856 words of font info for 87 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 66i,20n,96p,3267b,561s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 66i,20n,96p,3267b,462s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
 </usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx6.pfb></
@@ -1541,35 +1301,37 @@ usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></us
 r/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr
 /local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb></
 usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></u
-sr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr
-/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/l
-ocal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/loc
-al/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local
-/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/t
-exlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local/t
-exlive/2016/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib6.pfb></usr/loc
-al/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib8.pfb></usr
-/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/l
-ocal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/loc
-al/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/
-texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/tex
-live/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texliv
-e/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2
-016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2016
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2016/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2016/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2016/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2016/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2016/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2016/texmf-dis
-t/fonts/type1/public/doublestroke/dsrom10.pfb></usr/local/texlive/2016/texmf-di
-st/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2016/texm
-f-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2016/
-texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
-Output written on main.pdf (32 pages, 865814 bytes).
+sr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></us
+r/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/
+local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/lo
+cal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/loca
+l/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/
+texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/te
+xlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local/te
+xlive/2016/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib6.pfb></usr/loca
+l/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib8.pfb></usr/
+local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/lo
+cal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/loca
+l/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/
+texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/tex
+live/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texliv
+e/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2
+016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2016
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2016/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2016/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2016/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2016/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2016/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2016/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2016/texmf-dist/f
+onts/type1/public/doublestroke/dsrom10.pfb></usr/local/texlive/2016/texmf-dist/
+fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2016/texmf-d
+ist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2016/tex
+mf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
+Output written on main.pdf (30 pages, 560639 bytes).
 PDF statistics:
- 1379 PDF objects out of 1440 (max. 8388607)
- 849 compressed objects within 9 object streams
- 181 named destinations out of 1000 (max. 500000)
- 318 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 901 PDF objects out of 1000 (max. 8388607)
+ 630 compressed objects within 7 object streams
+ 178 named destinations out of 1000 (max. 500000)
+ 251 words of extra memory for PDF output out of 10000 (max. 10000000)
 
