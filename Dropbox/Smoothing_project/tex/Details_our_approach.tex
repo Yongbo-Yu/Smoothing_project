@@ -122,7 +122,7 @@ on a grid containing $R( \mathbf{y}_{-1},\mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^
 in $( \mathbf{y}_{-1},\mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1} )$. This would already be challenging in practice in the third case. Moreover, in the general situation we expect the number of solutions to increase when the discretization of the SDE gets finer.
 
 In many situations, case $2$ (which is thought to include case 1) can be
-guaranteed by monotonicity (see assumption  \eqref{assump:Monotonicity condition}) (\red{I think we need to add also the growth condition}). For instance, in the case of one-dimensional SDEs
+guaranteed by monotonicity (see assumption  \eqref{assump:Monotonicity condition}). For instance, in the case of one-dimensional SDEs
 with $z_1$ representing the terminal value of the underlying Brownian motion, this can often be seen from the SDE itself. Specifically, if each increment ``$dX$'' is increasing in $z_1$, no matter the value of $X$, then the solution $X_T$ must be increasing
 in $z_1$. This is easily seen to be true in examples such as the Black-Scholes model and the CIR process. (Strictly speaking, we have to distinguish between the continuous and discrete time solutions. In these examples, it does not matter.) On the other hand, it is also quite simple to construct counter examples, where monotonicity fails, for instance SDEs for which the ``volatility'' changes sign, such as a trigonometric function.\footnote{Actually, in every such case the simple remedy is to replace the volatility by its absolute value, which does not change the law of the solution. Hence, there does not seem to be a one-dimensional counter-example.}
 

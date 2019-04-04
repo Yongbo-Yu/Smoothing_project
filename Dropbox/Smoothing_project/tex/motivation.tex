@@ -27,13 +27,16 @@ Z_j&=Z_v v_j+ (\mathbb{P}_{\perp} \mathbf{Z})_j\nonumber \\
 &=Z_v v_j+ (Z_v^\perp)_j \PERIOD
 \end{align}
 
-The first aim of the work is to determine the optimal direction $\mathbf{v}$. By optimal direction, we mean the direction that maximizes the smoothing effect, that is the one given by
-\begin{align}\label{optimality_criterion_2}
-\underset{\underset{\mid \mid \mathbf{v}\mid \mid=1} {\mathbf{v} \in \rset^{d \times 1}}}{\operatorname{\sup}} \left(\text{Var}\left[ g(\hat{X}_T) \right] \right) \COMMA
-\end{align}
-where $\hat{X}$ is defined in \eqref{eq:approximate_dynamics}.
+The first aim of the work is to determine the optimal direction $\mathbf{v}$. By optimal direction, we mean the direction that maximizes the smoothing effect, that is something like a variance of the component orthogonal to the kink, which we find hard to formulate as for now.
 
-\red{Maybe criterion given by \eqref{optimality_criterion_2} is not the right choice since decomposition \eqref{eq:smoothing_decomposition} should leave the distribution, and hence the variance invariant. Therefore, maybe the true quantity to maximize is something like a variance of the component orthogonal to the kink. If it is the case then maybe we should re-write criterion \eqref{optimality_criterion_2}.}
+
+%the one given by
+%\begin{align}\label{optimality_criterion_2}
+%\underset{\underset{\mid \mid \mathbf{v}\mid \mid=1} {\mathbf{v} \in \rset^{d \times 1}}}{\operatorname{\sup}} \left(\text{Var}\left[ g(\hat{X}_T) \right] \right) \COMMA
+%\end{align}
+%where $\hat{X}$ is defined in \eqref{eq:approximate_dynamics}.
+
+%\red{Maybe criterion given by \eqref{optimality_criterion_2} is not the right choice since decomposition \eqref{eq:smoothing_decomposition} should leave the distribution, and hence the variance invariant. Therefore, maybe the true quantity to maximize is something like a variance of the component orthogonal to the kink. If it is the case then maybe we should re-write criterion \eqref{optimality_criterion_2}.}
 
 Going back to the SDE \eqref{eq:SDE_interest}, we have 
 \begin{equation}
@@ -225,15 +228,17 @@ Using  \textbf{Newton iteration method}, we use the expression $P^\prime=\frac{d
 
 
 \begin{remark}
-For our purposes, we suggest already that the coarsest factors of the Brownian increments are the most important ones, compared to the remaining factors. Furthermore, one may expect that in case we want to optimize over the choice of the linear mapping $\mathcal{A}$, and which direction is the most important for the kink location, one needs then to solve
-\begin{align}\label{transformation_optimality_criterion}
-\underset{\underset{\mathcal{A} \text{ is a rotation}} {\mathcal{A} \in \rset^{d \times d}}}{\operatorname{\sup}} \left( \text{Var}\left[g \left(\bar{\mathbf{X}}(T) \right)\right] \right) \COMMA
-\end{align}
-which becomes hard to solve  when $d$ increases. We note that the first row of $\mathcal{A}$ is expected to be the most important one and we can determine it using \eqref{optimality_criterion_2}.
+For our purposes, we suggest already that the coarsest factors of the Brownian increments are the most important ones, compared to the remaining factors. Furthermore, the choice of the linear mapping $\mathcal{A}$ creates a new hierarchy in terms of smoothness.
+
+%Furthermore, one may expect that in case we want to optimize over the choice of the linear mapping $\mathcal{A}$, and which direction is the most important for the kink location, one needs then to solve
+%\begin{align}\label{transformation_optimality_criterion}
+%\underset{\underset{\mathcal{A} \text{ is a rotation}} {\mathcal{A} \in \rset^{d \times d}}}{\operatorname{\sup}} \left( \text{Var}\left[g \left(\bar{\mathbf{X}}(T) \right)\right] \right) \COMMA
+%\end{align}
+%which becomes hard to solve  when $d$ increases. We note that the first row of $\mathcal{A}$ is expected to be the most important one and we can determine it using \eqref{optimality_criterion_2}.
 \end{remark}
 
-\red{ Maybe choosing $\mathcal{A}$ to satisfy \eqref{transformation_optimality_criterion}   is not the right choice since rotations of $\mathbf{Z}_1$ leave the distribution, and hence the variance invariant. What is maximized as a much more complicated object, something like a variance of the component orthogonal to the kink $\Rightarrow$ Create a new hierarchy in terms of smoothness.
-}
+%\red{ Maybe choosing $\mathcal{A}$ to satisfy \eqref{transformation_optimality_criterion}   is not the right choice since rotations of $\mathbf{Z}_1$ leave the distribution, and hence the variance invariant. What is maximized as a much more complicated object, something like a variance of the component orthogonal to the kink $\Rightarrow$ Create a new hierarchy in terms of smoothness.
+%}
 \begin{remark}
 A general choice for $\mathcal{A}$ should be in the family of rotations. However, we think that a sufficiently good matrix $\mathcal{A}$ would be the one leading to $Y_1=\sum_{i=1}^d Z_1^{(i)}$ up to re-scaling. Therefore, the first attempt will be  to  set $\mathcal{A}$ to be a  rotation matrix, with first  row leading to $Y_1=\sum_{i=1}^d Z_1^{(i)}$ up to re-scaling, and with no constraints for the remaining rows. In practice, we construct $\mathcal{A}$ by fixing the first row to be $\frac{1}{\sqrt{d}} \mathbf{1}_{1 \times d}$ and the remaining rows are obtained by Gram-Schmidt procedure.
 \end{remark}

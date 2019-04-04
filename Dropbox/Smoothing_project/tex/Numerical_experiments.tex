@@ -119,7 +119,7 @@ where  $y_{\ast}(x)$, is an invertible function that satisfies
 
 We get the kink point by running Newton iteration with a precision of $10^{-10}$. The paramters that we used in our numerical experiments are: $T=1$, $\sigma=0.4$ and $S_0=K=100$. The exact value of this case is $0.42074029$.
 
-From figure \ref{fig:Weak_rate_binary}, we see that we get a weak error of order $\Delta t$ for the case without Richardson extrapolation. We note that the weak errors plotted here correspond to relative errors.  The upper and lower bounds are $95\%$ confidence interval.
+Figure \ref{fig:Weak_rate_binary} shows the estimated   weak error  for the case without Richardson extrapolation, and we report the results for comparing MC and MISC in Tables \ref{Total error of MISC and MC to compute Binary option price of the different tolerances for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.} and \ref{Comparsion of the computational time of  MC and MISC, used to compute Binary option price  for different number of time steps, without Richardson extrapolation}, and Figure \ref{fig:Complexity plot for MC and MISC , Binary, Non rich}. Our numerical experiments show that MISC  requires approximately $25\%$ of the work of MC  to achieve a total relative error of around $2\%$.
 
 \FloatBarrier
 \begin{figure}[h!]
@@ -137,7 +137,7 @@ From figure \ref{fig:Weak_rate_binary}, we see that we get a weak error of order
 %		\label{fig:sub4}
 %	\end{subfigure}
 	
-	\caption{The rate of convergence of the weak error for the binary option, using $M=10^4$ samples for MC.}
+	\caption{The convergence of the relative weak error  $\mathcal{E}_B(N)$ defined in \ref{eq:total_error}, using MC with $M=10^4$ samples  for the binary option example. The upper and lower bounds are $95\%$ confidence intervals.}
 	\label{fig:Weak_rate_binary}
 \end{figure}
 
@@ -300,12 +300,10 @@ From figure \ref{fig:Weak_rate_binary}, we see that we get a weak error of order
 
 
 \FloatBarrier
-
-	\begin{figure}[h!]
-	\centering
-	\includegraphics[width=0.4\linewidth]{./figures/Binary_Complexity_rates/error_vs_time}
-	
-	\caption{Complexity plot for MC and MISC for the case without Richardson extrapolation.}
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.4\linewidth]{./figures/Binary_Complexity_rates/error_vs_time}
+	\caption{Computational work comparison for MISC and MC methods, for the case of binary  option. This plot shows that to achieve a relative error below $1\%$, MISC outperforms  MC method in terms of computational time}
 	\label{fig:Complexity plot for MC and MISC , Binary, Non rich}
 \end{figure}
 
@@ -498,7 +496,7 @@ From figure \ref{fig:Weak_rate_binary}, we see that we get a weak error of order
 
 
 \FloatBarrier
-\subsection{Results for the single call option example}\label{sec:Results for the call option example}
+\subsubsection{Results for the single call option example}\label{sec:Results for the call option example}
 In this case, the integrand $h(\mathbf{z}_{-1})$ is given by
 
 \begin{align}\label{smoothed_integrand_call_opt_2}
@@ -510,11 +508,11 @@ We get the kink point by running Newton iteration with a precision of $10^{-10}$
 	&=\int_{-\infty}^{y^{\ast}} \max \left(\Psi \circ \Phi(T;z_1,\mathbf{z}_{-1})-K,0\right) \frac{1}{\sqrt{2 \pi}} \operatorname{exp}(-z_1^2/2) dz_1\\ \nonumber
 	&+\int_{y^{\ast}}^{\infty} \max \left(\Psi \circ \Phi(T;z_1,\mathbf{z}_{-1})-K,0\right) \frac{1}{\sqrt{2 \pi}} \operatorname{exp}(-z_1^2/2) dz_1,
 \end{align}
-where we use Gauss-laguerre quadrature with $\beta$ points to get each part.
+where we use Gauss-Laguerre quadrature with $\beta$ points to get each part.
 
-The paramters that we used in our numerical experiments are: $T=1$, $\sigma=0.4$ and $S_0=K=100$. The exact value of this case is $15.85193755$.
+The parameters that we used in our numerical experiments are: $T=1$, $\sigma=0.4$ and $S_0=K=100$. The exact value of this case is $15.85193755$.
 
-We can see from figure \ref{fig:Weak_rate_call_beta_32} that we get a weak error of order $\Delta t$ for the case without Richardson extrapolation.  The upper and lower bounds are $95\%$ confidence interval.
+Figure \ref{fig:Weak_rate_call_beta_32} shows the estimated   weak error  for the case without Richardson extrapolation, and we report the results for comparing MC and MISC in Tables \ref{Total error of MISC and MC to compute Call option price of the different tolerances for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.} and \ref{Comparsion of the computational time of  MC and MISC, used to compute Call option price  for different number of time steps, without Richardson extrapolation}, and Figure \ref{fig:Complexity plot for MC and MISC , Call non rich}. Our numerical experiments show that MISC  requires approximately $5\%$ of the work of MC  to achieve a total relative error of around $0.9\%$.
 
 
 
@@ -598,7 +596,7 @@ We can see from figure \ref{fig:Weak_rate_call_beta_32} that we get a weak error
 %		\label{fig:sub4}
 %	\end{subfigure}
 	
-	\caption{The rate of convergence of the weak error for the call option using MC.}
+	\caption{The convergence of the relative weak error  $\mathcal{E}_B(N)$ defined in \ref{eq:total_error}, using MC with $M=4 \times 10^5$ samples  for the call option example. The upper and lower bounds are $95\%$ confidence intervals.}
 	\label{fig:Weak_rate_call_beta_32}
 \end{figure}
 
@@ -800,7 +798,7 @@ We can see from figure \ref{fig:Weak_rate_call_beta_32} that we get a weak error
 \centering
 \includegraphics[width=0.4\linewidth]{./figures/Call_Complexity_rates/error_vs_time}
 
-\caption{Complexity plot for MC and MISC for the case without Richardson extrapolation.}
+\caption{Computational work comparison for MISC and MC methods, for the case of  call option. This plot shows that to achieve a relative error below $1\%$, MISC outperforms significantly MC method in terms of computational time.}
 \label{fig:Complexity plot for MC and MISC , Call non rich}
 \end{figure}
 
@@ -1030,14 +1028,14 @@ We can see from figure \ref{fig:Weak_rate_call_beta_32} that we get a weak error
 \subsection{The basket call option  under GBM  model}\label{sec:The basket call option  under GBM  model}
 The third example that we consider  is the multi-dimensional  basket call option under GBM. 
 \subsection{$d=2$}
-For illustration, we start with the two dimensional basket call option  with parameters:  $S_0^{1,2}=K=100$, $\sigma_{1,2}=0.4$, $\rho=0.3$, $T=1$ $r=0$ and $c_{1,2}=1/2$, the reference value for those parameters  is  $12.90$. The matrix $\mathcal{A}$ in this case is given by $\mathcal{A} = 1/\sqrt{2} (1, 1; 1, -1)$. We can see from figure \ref{fig:Weak_rate_two_dim_basket} the  weak error for the case without Richardson extrapolation.  The upper and lower bounds are $95\%$ confidence interval.
+For illustration, we start with the two dimensional basket call option  with parameters:  $S_0^{1,2}=K=100$, $\sigma_{1,2}=0.4$, $\rho=0.3$, $T=1$ $r=0$ and $c_{1,2}=1/2$, the reference value for those parameters  is  $12.90$. Figure \ref{fig:Weak_rate_two_dim_basket} shows the estimated   weak error  for the case without Richardson extrapolation, and we report the results for comparing MC and MISC in Tables \ref{Total error of MISC and MC to compute two  dim basket  Call option price of the different tolerances for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.} and \ref{Comparsion of the computational time of  MC and MISC, used to compute two dim basket Call option price  for different number of time steps, without Richardson extrapolation}, and Figure \ref{fig:Complexity plot for MC and MISC , two dim basket call non rich}. Our numerical experiments show that MISC  requires approximately $5\%$ of the work of MC  to achieve a total relative error of around $0.9\%$.
 
 \FloatBarrier
 \begin{figure}[h!]
 		\centering
 		\includegraphics[width=0.4\linewidth]{./figures/basket_call_2d_time_stepping/weak_convergence/weak_convergence_order_basket_option_2d_relative_M_10_7_beta_128}
 
-	\caption{The rate of convergence of the weak error for the two dimensional basket call option with  a number of Laguerre  quadrature points  $\beta=128$ and number of samples for MC $M=10^7$.  }
+	\caption{The convergence of the relative weak error  $\mathcal{E}_B(N)$ defined in \ref{eq:total_error}, for the two dimensional basket call option with  a number of Laguerre  quadrature points  $\beta=128$ and number of samples for MC $M=10^7$. The upper and lower bounds are $95\%$ confidence intervals.}
 	\label{fig:Weak_rate_two_dim_basket}
 \end{figure}
 \FloatBarrier
@@ -1052,7 +1050,7 @@ For illustration, we start with the two dimensional basket call option  with par
 	\hline
            & $2$ & $4$ & $8$   \\
 		\hline
-		MISC   &  $\underset{(0.01,0.006)}{\mathbf{}}$ & $\underset{(0.0079,0.0055)}{\mathbf{0.0134}}$ & $\underset{(0.0043,0.0042)}{\mathbf{0.0085}}$   \\
+		MISC   &  $\underset{(0.01,0.006)}{\mathbf{0.016}}$ & $\underset{(0.0079,0.0055)}{\mathbf{0.0134}}$ & $\underset{(0.0043,0.0042)}{\mathbf{0.0085}}$   \\
 
 		\hline		
 			MC +root finding   &  $\underset{(0.01,0.01)}{\mathbf{0.02}}$ & $\underset{(0.0079,0.0076)}{\mathbf{0.0155}}$ & $\underset{(0.0043,0.0038)}{\mathbf{0.0081}}$  \\
@@ -1094,14 +1092,15 @@ For illustration, we start with the two dimensional basket call option  with par
 \centering
 \includegraphics[width=0.4\linewidth]{./figures/basket_call_2d_time_stepping/complexity_rates/error_vs_time}
 
-\caption{Complexity plot for MC and MISC for the case without Richardson extrapolation.}
-\label{fig:Complexity plot for MC and MISC , Call non rich}
+\caption{Computational work comparison for MISC and MC methods, for the case of two dimensional basket call option. This plot shows that to achieve a relative error below $1\%$, MISC outperforms significantly MC method in terms of computational time.}
+\label{fig:Complexity plot for MC and MISC , two dim basket call non rich}
 \end{figure}
 
 
 \FloatBarrier
 
 \subsection{$d=4$}
+We consider now  the four dimensional basket call option  with parameters:  $S_0^{1,2,3,4}=K=100$, $\sigma_{1,2,3,4}=0.4$, $\rho=0.3$, $T=1$ $r=0$ and $c_{1,2,3,4}=1/4$, the reference value for those parameters  is  $11.0$.
 
 \subsection{The best call option  under GBM and Heston model}\label{sec:The best call option  under GBM and Heston model}
 The fourth example that we consider is the multi-dimensional  best call option under GBM and Heston model. I am in process of formulating this but somehow we agreed that the first potential directions of smoothing for the Heston model will be the first factors related to the asset prices.

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  27 MAR 2019 18:11
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  3 APR 2019 13:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -880,12 +880,7 @@ Package: booktabs 2016/04/27 v1.618033 publication quality tables
 \@lastruleclass=\count165
 \@thisrulewidth=\dimen294
 )
-(./main.aux
-
-LaTeX Warning: Label `fig:Complexity plot for MC and MISC , Call non rich' mult
-iply defined.
-
-)
+(./main.aux)
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 74.
@@ -904,7 +899,8 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 74.
 LaTeX Font Info:    ... okay on input line 74.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 74.
 LaTeX Font Info:    ... okay on input line 74.
- (/usr/local/texlive/2016/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+
+(/usr/local/texlive/2016/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count166
 \scratchdimen=\dimen295
@@ -979,39 +975,57 @@ LaTeX Warning: No \author given.
 
 {/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]) (./Mot
 ivation.tex [2] [3]
-Overfull \hbox (61.55356pt too wide) in paragraph at lines 103--103
+Overfull \hbox (61.55356pt too wide) in paragraph at lines 106--106
+[] 
+ []
+
+
+Overfull \hbox (62.14917pt too wide) in paragraph at lines 116--116
 [] 
  []
 
 [4]
-Overfull \hbox (62.14917pt too wide) in paragraph at lines 113--113
+
+LaTeX Warning: Reference `optimality_criterion_2' on page 5 undefined on input 
+line 118.
+
+
+LaTeX Warning: Reference `optimality_criterion_2' on page 5 undefined on input 
+line 141.
+
+[5]
+
+LaTeX Warning: Reference `optimality_criterion_2' on page 6 undefined on input 
+line 160.
+
+
+LaTeX Warning: Reference `optimality_criterion_2' on page 6 undefined on input 
+line 166.
+
+[6]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 199.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 199.
+
+[7]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 246.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 246.
+
+
+Overfull \hbox (30.77802pt too wide) in paragraph at lines 254--254
 [] 
  []
 
-[5] [6]
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 196.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 196.
-
-[7] [8]
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 241.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 241.
-
-
-Overfull \hbox (30.77802pt too wide) in paragraph at lines 249--249
-[] 
- []
-
-) (./analiticity_proofs.tex [9]
+[8]) (./analiticity_proofs.tex
 LaTeX Font Info:    Try loading font information for U+dsrom on input line 26.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/doublestroke/Udsrom.fd
@@ -1024,12 +1038,12 @@ cmr/m/n/10.95 + 1)]$. More-over, we de-fine a grid $\OMS/cmsy/m/n/10.95 D[] [][
 ]\OT1/cmr/m/n/10.95 = []$
  []
 
-[10] [11] [12]
+[9] [10] [11]
 Overfull \hbox (1.15695pt too wide) in paragraph at lines 272--272
 [] 
  []
 
-[13] [14]) (./Details_our_approach.tex [15]
+[12] [13]) (./Details_our_approach.tex [14]
 Overfull \hbox (15.29628pt too wide) in paragraph at lines 21--23
 \OT1/cmr/m/n/10.95 In our case, we have in [] a multi-variate in-te-gra-tion pr
 ob-lem with, $\OML/cmm/m/it/10.95 f \OT1/cmr/m/n/10.95 := \OML/cmm/m/it/10.95 h
@@ -1038,7 +1052,7 @@ n/10.95 y[]\OML/cmm/m/it/10.95 ; \OT1/cmr/bx/n/10.95 z[]\OML/cmm/m/it/10.95 ; [
 ] ; \OT1/cmr/bx/n/10.95 z[]\OT1/cmr/m/n/10.95 )$,
  []
 
-[16] [17]
+[15] [16] [17]
 LaTeX Font Info:    Try loading font information for OMS+cmr on input line 110.
 
  (/usr/local/texlive/2016/texmf-dist/tex/latex/base/omscmr.fd
@@ -1047,7 +1061,6 @@ File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 110.
 
-[18]
 Overfull \hbox (49.79494pt too wide) in paragraph at lines 119--123
 \OT1/cmr/m/n/10.95 are smooth, where $[]$ de-notes the nu-mer-i-cal ap-prox-i-m
 a-tion of $\OML/cmm/m/it/10.95 h$ \OT1/cmr/m/n/10.95 based on a grid con-tain-i
@@ -1056,12 +1069,12 @@ it/10.95 ; \OT1/cmr/bx/n/10.95 z[]\OML/cmm/m/it/10.95 ; [] ; \OT1/cmr/bx/n/10.9
 5 z[]\OT1/cmr/m/n/10.95 )$.
  []
 
-) (./Error_discussion.tex [19]) (./Numerical_experiments.tex [20]
+) (./Error_discussion.tex [18]) (./Numerical_experiments.tex [19]
 Overfull \hbox (78.24251pt too wide) in paragraph at lines 21--36
  [][] 
  []
 
-[21] [22]
+[20] [21]
 Package epstopdf Info: Source file: <./figures/binary_weak_error/without_richar
 dson/weak_convergence_order_binary_option_relative_M_10_4.eps>
 (epstopdf)                    date: 2019-01-01 12:27:39
@@ -1079,7 +1092,7 @@ _order_binary_option_relative_M_10_4.eps>
 Package epstopdf Info: Output file is already uptodate.
 
 <./figures/binary_weak_error/without_richardson/weak_convergence_order_binary_o
-ption_relative_M_10_4-eps-converted-to.pdf, id=464, 462.72874pt x 346.29375pt>
+ption_relative_M_10_4-eps-converted-to.pdf, id=449, 462.72874pt x 346.29375pt>
 File: ./figures/binary_weak_error/without_richardson/weak_convergence_order_bin
 ary_option_relative_M_10_4-eps-converted-to.pdf Graphic file (type pdf)
 
@@ -1093,7 +1106,7 @@ t line 129.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[23]
+[22]
 Package epstopdf Info: Source file: <./figures/Binary_Complexity_rates/error_vs
 _time.eps>
 (epstopdf)                    date: 2019-01-01 14:45:58
@@ -1105,23 +1118,23 @@ _time-eps-converted-to.pdf>
 (epstopdf)             Command: <repstopdf --outfile=./figures/Binary_Complexit
 y_rates/error_vs_time-eps-converted-to.pdf ./figures/Binary_Complexity_rates/er
 ror_vs_time.eps>
-(epstopdf)             \includegraphics on input line 306.
+(epstopdf)             \includegraphics on input line 305.
 Package epstopdf Info: Output file is already uptodate.
 
-<./figures/Binary_Complexity_rates/error_vs_time-eps-converted-to.pdf, id=475, 
+<./figures/Binary_Complexity_rates/error_vs_time-eps-converted-to.pdf, id=466, 
 462.72874pt x 346.29375pt>
 File: ./figures/Binary_Complexity_rates/error_vs_time-eps-converted-to.pdf Grap
 hic file (type pdf)
 
 <use ./figures/Binary_Complexity_rates/error_vs_time-eps-converted-to.pdf>
 Package pdftex.def Info: ./figures/Binary_Complexity_rates/error_vs_time-eps-co
-nverted-to.pdf used on input line 306.
+nverted-to.pdf used on input line 305.
 (pdftex.def)             Requested size: 187.89912pt x 140.61807pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[24 <./figures/binary_weak_error/without_richardson/weak_convergence_order_bina
+[23 <./figures/binary_weak_error/without_richardson/weak_convergence_order_bina
 ry_option_relative_M_10_4-eps-converted-to.pdf>]
 Package epstopdf Info: Source file: <./figures/weak_error_rates_call/Beta_32/wi
 thout_rich/weak_convergence_order_call_option_relative_M_4_10_5.eps>
@@ -1136,11 +1149,11 @@ o.pdf>
 _call/Beta_32/without_rich/weak_convergence_order_call_option_relative_M_4_10_5
 -eps-converted-to.pdf ./figures/weak_error_rates_call/Beta_32/without_rich/weak
 _convergence_order_call_option_relative_M_4_10_5.eps>
-(epstopdf)             \includegraphics on input line 590.
+(epstopdf)             \includegraphics on input line 588.
 Package epstopdf Info: Output file is already uptodate.
 
 <./figures/weak_error_rates_call/Beta_32/without_rich/weak_convergence_order_ca
-ll_option_relative_M_4_10_5-eps-converted-to.pdf, id=523, 462.72874pt x 346.293
+ll_option_relative_M_4_10_5-eps-converted-to.pdf, id=515, 462.72874pt x 346.293
 75pt>
 File: ./figures/weak_error_rates_call/Beta_32/without_rich/weak_convergence_ord
 er_call_option_relative_M_4_10_5-eps-converted-to.pdf Graphic file (type pdf)
@@ -1149,13 +1162,13 @@ er_call_option_relative_M_4_10_5-eps-converted-to.pdf Graphic file (type pdf)
 r_call_option_relative_M_4_10_5-eps-converted-to.pdf>
 Package pdftex.def Info: ./figures/weak_error_rates_call/Beta_32/without_rich/w
 eak_convergence_order_call_option_relative_M_4_10_5-eps-converted-to.pdf used o
-n input line 590.
+n input line 588.
 (pdftex.def)             Requested size: 234.87749pt x 175.77788pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[25 <./figures/Binary_Complexity_rates/error_vs_time-eps-converted-to.pdf>]
+[24 <./figures/Binary_Complexity_rates/error_vs_time-eps-converted-to.pdf>]
 Package epstopdf Info: Source file: <./figures/Call_Complexity_rates/error_vs_t
 ime.eps>
 (epstopdf)                    date: 2019-03-27 09:51:20
@@ -1167,31 +1180,31 @@ ime-eps-converted-to.pdf>
 (epstopdf)             Command: <repstopdf --outfile=./figures/Call_Complexity_
 rates/error_vs_time-eps-converted-to.pdf ./figures/Call_Complexity_rates/error_
 vs_time.eps>
-(epstopdf)             \includegraphics on input line 801.
+(epstopdf)             \includegraphics on input line 799.
 Package epstopdf Info: Output file is already uptodate.
 
-<./figures/Call_Complexity_rates/error_vs_time-eps-converted-to.pdf, id=571, 57
+<./figures/Call_Complexity_rates/error_vs_time-eps-converted-to.pdf, id=566, 57
 8.16pt x 433.62pt>
 File: ./figures/Call_Complexity_rates/error_vs_time-eps-converted-to.pdf Graphi
 c file (type pdf)
 
 <use ./figures/Call_Complexity_rates/error_vs_time-eps-converted-to.pdf>
 Package pdftex.def Info: ./figures/Call_Complexity_rates/error_vs_time-eps-conv
-erted-to.pdf used on input line 801.
+erted-to.pdf used on input line 799.
 (pdftex.def)             Requested size: 187.89912pt x 140.92482pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[26 <./figures/weak_error_rates_call/Beta_32/without_rich/weak_convergence_orde
+[25 <./figures/weak_error_rates_call/Beta_32/without_rich/weak_convergence_orde
 r_call_option_relative_M_4_10_5-eps-converted-to.pdf>]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1032.
+(hyperref)                removing `math shift' on input line 1030.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1032.
+(hyperref)                removing `math shift' on input line 1030.
 
 Package epstopdf Info: Source file: <./figures/basket_call_2d_time_stepping/wea
 k_convergence/weak_convergence_order_basket_option_2d_relative_M_10_7_beta_128.
@@ -1208,11 +1221,11 @@ ime_stepping/weak_convergence/weak_convergence_order_basket_option_2d_relative_
 M_10_7_beta_128-eps-converted-to.pdf ./figures/basket_call_2d_time_stepping/wea
 k_convergence/weak_convergence_order_basket_option_2d_relative_M_10_7_beta_128.
 eps>
-(epstopdf)             \includegraphics on input line 1038.
+(epstopdf)             \includegraphics on input line 1036.
 Package epstopdf Info: Output file is already uptodate.
 
 <./figures/basket_call_2d_time_stepping/weak_convergence/weak_convergence_order
-_basket_option_2d_relative_M_10_7_beta_128-eps-converted-to.pdf, id=619, 578.16
+_basket_option_2d_relative_M_10_7_beta_128-eps-converted-to.pdf, id=616, 578.16
 pt x 433.62pt>
 File: ./figures/basket_call_2d_time_stepping/weak_convergence/weak_convergence_
 order_basket_option_2d_relative_M_10_7_beta_128-eps-converted-to.pdf Graphic fi
@@ -1222,13 +1235,13 @@ le (type pdf)
 rder_basket_option_2d_relative_M_10_7_beta_128-eps-converted-to.pdf>
 Package pdftex.def Info: ./figures/basket_call_2d_time_stepping/weak_convergenc
 e/weak_convergence_order_basket_option_2d_relative_M_10_7_beta_128-eps-converte
-d-to.pdf used on input line 1038.
+d-to.pdf used on input line 1036.
 (pdftex.def)             Requested size: 187.89912pt x 140.92482pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[27 <./figures/Call_Complexity_rates/error_vs_time-eps-converted-to.pdf> <./fig
+[26 <./figures/Call_Complexity_rates/error_vs_time-eps-converted-to.pdf> <./fig
 ures/basket_call_2d_time_stepping/weak_convergence/weak_convergence_order_baske
 t_option_2d_relative_M_10_7_beta_128-eps-converted-to.pdf>]
 Package epstopdf Info: Source file: <./figures/basket_call_2d_time_stepping/com
@@ -1242,29 +1255,29 @@ plexity_rates/error_vs_time-eps-converted-to.pdf>
 (epstopdf)             Command: <repstopdf --outfile=./figures/basket_call_2d_t
 ime_stepping/complexity_rates/error_vs_time-eps-converted-to.pdf ./figures/bask
 et_call_2d_time_stepping/complexity_rates/error_vs_time.eps>
-(epstopdf)             \includegraphics on input line 1095.
+(epstopdf)             \includegraphics on input line 1093.
 Package epstopdf Info: Output file is already uptodate.
 
 <./figures/basket_call_2d_time_stepping/complexity_rates/error_vs_time-eps-conv
-erted-to.pdf, id=705, 578.16pt x 433.62pt>
+erted-to.pdf, id=706, 578.16pt x 433.62pt>
 File: ./figures/basket_call_2d_time_stepping/complexity_rates/error_vs_time-eps
 -converted-to.pdf Graphic file (type pdf)
 
 <use ./figures/basket_call_2d_time_stepping/complexity_rates/error_vs_time-eps-
 converted-to.pdf>
 Package pdftex.def Info: ./figures/basket_call_2d_time_stepping/complexity_rate
-s/error_vs_time-eps-converted-to.pdf used on input line 1095.
+s/error_vs_time-eps-converted-to.pdf used on input line 1093.
 (pdftex.def)             Requested size: 187.89912pt x 140.92482pt.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1104.
+(hyperref)                removing `math shift' on input line 1102.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1104.
+(hyperref)                removing `math shift' on input line 1102.
 
-[28 <./figures/basket_call_2d_time_stepping/complexity_rates/error_vs_time-eps-
+[27 <./figures/basket_call_2d_time_stepping/complexity_rates/error_vs_time-eps-
 converted-to.pdf>]) (./main.bbl
 Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ä in font cmr10!
@@ -1272,66 +1285,65 @@ Missing character: There is no ú in font cmr10!
 Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ä in font cmr10!
 Missing character: There is no ù in font cmr10!
- [29]) [30]
+ [28]) [29]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 114.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 114.
  (./main.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 114.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 114.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 9F7FE898A102F894F7F01C99547234A8;5295.
+(rerunfilecheck)             Checksum: BD15204F7A450EB8453A007E09D5489E;5386.
 
 
-LaTeX Warning: There were multiply-defined labels.
+LaTeX Warning: There were undefined references.
 
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 114.
  ) 
 Here is how much of TeX's memory you used:
- 25766 strings out of 493014
- 442219 string characters out of 6133351
- 546772 words of memory out of 5000000
+ 25763 strings out of 493014
+ 442227 string characters out of 6133351
+ 549548 words of memory out of 5000000
  28621 multiletter control sequences out of 15000+600000
  20856 words of font info for 87 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 66i,20n,96p,3267b,462s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 66i,20n,96p,3267b,453s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
-</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx6.pfb></
-usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></us
-r/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr
-/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb></
-usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></u
-sr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></us
-r/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/
-local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/lo
-cal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/loca
-l/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/
-texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/te
-xlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local/te
-xlive/2016/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib6.pfb></usr/loca
-l/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib8.pfb></usr/
-local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/lo
-cal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/loca
-l/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/
-texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/tex
-live/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texliv
-e/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2
-016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2016
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2016/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2016/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2016/texmf
--dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2016/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2016/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2016/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2016/texmf-dist/f
-onts/type1/public/doublestroke/dsrom10.pfb></usr/local/texlive/2016/texmf-dist/
-fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2016/texmf-d
-ist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2016/tex
-mf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
-Output written on main.pdf (30 pages, 560639 bytes).
+</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></
+usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></u
+sr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb>
+</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><
+/usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></
+usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></us
+r/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/
+local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/lo
+cal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/loca
+l/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/
+texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local/
+texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib6.pfb></usr/lo
+cal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib8.pfb></us
+r/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/
+local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/lo
+cal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/loca
+l/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/t
+exlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texl
+ive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive
+/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/20
+16/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2016/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2016/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2016/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2016/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2016/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2016/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2016/texmf-dist
+/fonts/type1/public/doublestroke/dsrom10.pfb></usr/local/texlive/2016/texmf-dis
+t/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2016/texmf
+-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2016/t
+exmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
+Output written on main.pdf (29 pages, 551454 bytes).
 PDF statistics:
- 901 PDF objects out of 1000 (max. 8388607)
- 630 compressed objects within 7 object streams
- 178 named destinations out of 1000 (max. 500000)
+ 896 PDF objects out of 1000 (max. 8388607)
+ 624 compressed objects within 7 object streams
+ 175 named destinations out of 1000 (max. 500000)
  251 words of extra memory for PDF output out of 10000 (max. 10000000)
 

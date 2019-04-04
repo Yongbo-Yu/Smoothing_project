@@ -1,5 +1,5 @@
 import numpy as np
-d=4
+d=2
 X1=(1/np.sqrt(d))*np.ones((1,d))
 A=np.eye(d,d)	
 A[0,:]=X1
@@ -24,4 +24,5 @@ for i in range(1, n):
         Ai = Ai - t * Aj
     A[:, i] = normalize(Ai)
 print A.transpose()
+print A.dot(A.transpose())
 # print A.dot(A.transpose())
