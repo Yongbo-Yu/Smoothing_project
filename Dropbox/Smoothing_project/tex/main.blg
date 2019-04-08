@@ -3,48 +3,52 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: main.aux
 The style file: plain.bst
 Database file #1: smoothing.bib
+I was expecting a `,' or a `}'---line 19 of file smoothing.bib
+ :  year={2008}
+ :             moskowitz1996smoothness,
+I'm skipping whatever remains of this entry
 Warning--empty journal in bayersmoothing
 Warning--empty year in bayersmoothing
 Warning--empty publisher in caflisch1997valuation
-You've used 14 entries,
+You've used 18 entries,
             2118 wiz_defined-function locations,
-            585 strings with 6488 characters,
-and the built_in function-call counts, 4774 in all, are:
-= -- 478
-> -- 221
+            610 strings with 7153 characters,
+and the built_in function-call counts, 5943 in all, are:
+= -- 600
+> -- 261
 < -- 2
-+ -- 88
-- -- 72
-* -- 342
-:= -- 800
-add.period$ -- 43
-call.type$ -- 14
-change.case$ -- 76
++ -- 105
+- -- 84
+* -- 424
+:= -- 998
+add.period$ -- 55
+call.type$ -- 18
+change.case$ -- 94
 chr.to.int$ -- 0
-cite$ -- 17
-duplicate$ -- 176
-empty$ -- 370
-format.name$ -- 72
-if$ -- 985
+cite$ -- 21
+duplicate$ -- 219
+empty$ -- 468
+format.name$ -- 84
+if$ -- 1223
 int.to.chr$ -- 0
-int.to.str$ -- 14
-missing$ -- 16
-newline$ -- 72
-num.names$ -- 28
-pop$ -- 80
+int.to.str$ -- 18
+missing$ -- 20
+newline$ -- 92
+num.names$ -- 36
+pop$ -- 92
 preamble$ -- 1
-purify$ -- 64
+purify$ -- 78
 quote$ -- 0
-skip$ -- 116
+skip$ -- 146
 stack$ -- 0
-substring$ -- 326
-swap$ -- 27
+substring$ -- 422
+swap$ -- 31
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 52
+type$ -- 68
 warning$ -- 3
-while$ -- 50
-width$ -- 16
-write$ -- 151
-(There were 3 warnings)
+while$ -- 64
+width$ -- 20
+write$ -- 194
+(There was 1 error message)

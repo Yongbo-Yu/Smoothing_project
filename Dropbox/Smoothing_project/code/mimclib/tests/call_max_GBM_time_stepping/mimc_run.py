@@ -15,8 +15,6 @@ warnings.filterwarnings("always", category=mimclib.test.ArgumentWarning)
 
 class MyRun:
 
-    #extrapolate_s_dims =2
-   
     #Returns  work estimate of lvls    
     def workModel(self, run, lvls):
         mat = lvls.to_dense_matrix()
@@ -27,27 +25,23 @@ class MyRun:
 
     def initRun(self, run):
         self.prev_val = 0
-        self.prb = Problem(run.params,1) 
-        #self.prb.BeginRuns()
-        #self.extrapolate_s_dims = self.prb.N 
-        self.extrapolate_s_dims = 2*self.prb.N-1#SET TO SAME AS INPUT DIMENSION
+
+        self.prb = Problem(run.params) 
+        
        
+        self.extrapolate_s_dims =self.prb.basket_d*self.prb.N-1 #SET TO SAME AS INPUT DIMENSION
         
 
         
     ## PROBLEM SPECIFIC
         # fnknots  gives two arrays first one for quadrature points and the second one for weights
-        fnKnots= lambda beta: misc.knots_gaussian(misc.lev2knots_doubling(1+beta),  0, 1) # the standard deviation is coming from 
-        #the distribution of the brownian bridges increments
+        fnKnots= lambda beta: misc.knots_gaussian(misc.lev2knots_doubling(1+beta),  0, 1) # the standard gaussian
+        #fnKnots= lambda beta: np.polynomial.hermite.hermgauss(misc.lev2knots_doubling(1+beta)[0]) #when using  hermite with e^{-x^2} density)
         
     ##
-        # Construct MiscSampler class with the following parameters
-        #self.misc = misc.MISCSampler(d=0, fnKnots=fnKnots, min_dim=self.prb.N)
-        self.misc = misc.MISCSampler(d=0, fnKnots=fnKnots, min_dim=2*self.prb.N-1)
-       
-        
-
-        #feed parameters to the problem
+        # Construct MiscSampler class with the following parameters    
+        self.misc = misc.MISCSampler(d=0, fnKnots=fnKnots, min_dim=self.prb.basket_d*self.prb.N-1)
+    
         
 
         # those are the error and work contribution used to compute the profit
@@ -62,17 +56,11 @@ class MyRun:
 
     
     def mySampleQoI(self, run, inds, M):
-        # import os
-        # import psutil
-        # process = psutil.Process(os.getpid())
-        # mem = psutil.virtual_memory()
-        # print(mem)
         return self.misc.sample(inds, M, fnSample=self.solveFor_seq)
 
 
        # this defines the stochastic field used in solveAtpoints in sample in mimc, arrY: plays the role of qudrature points after transformation as in sf in solveAtpoints
     def solveFor_seq(self, alpha, arrY):
-        #print(arrY)
         output = np.zeros(len(arrY))
         self.prb.BeginRuns(alpha, np.max([len(Y) for Y in arrY]))
         for i, Y in enumerate(arrY):
@@ -105,6 +93,7 @@ class MyRun:
                                                          #lev2knots=lambda beta:misc.lev2knots_doubling(1+beta)
                                                          #my corrected version(otherwise with the previous version I get an error I need to check that)
                                                          lev2knots=lambda beta:misc.lev2knots_doubling(1+beta))
+
         #################### extrapolate error rates
         if s_fit_rates is not None:
             valid = np.nonzero(s_fit_rates > 1e-15)[0]  # rates that are negative or close to zero are not accurate.
@@ -119,16 +108,7 @@ class MyRun:
             s_err_rates = np.maximum(k_rates_stoch[k_of_N[:N]],
                                          np.min(s_fit_rates[valid]))
             s_err_rates[valid] = s_fit_rates[valid]  # The fitted rates should remain the same
-            # if k_of_N[valid]!=0:
-            
-
-            #     c = np.polyfit(np.log(1+k_of_N[valid]), s_fit_rates[valid], 1)
-            #     k_rates_stoch = c[0]*np.log(1+np.arange(0, K+1)) + c[1]
-            #     s_err_rates = np.maximum(k_rates_stoch[k_of_N[:N]],
-            #                              np.min(s_fit_rates[valid]))
-            #     s_err_rates[valid] = s_fit_rates[valid]  # The fitted rates should remain the same
-            # else:
-            #     s_err_rates = []
+          
         else:
             s_err_rates = []
 
@@ -167,17 +147,17 @@ class MyRun:
 
 if __name__ == "__main__":
     from Problem import Problem
+   
+
 
     Problem.Init()
+
     import mimclib.test
     run = MyRun()
     mimclib.test.RunStandardTest(fnSampleLvl=run.mySampleQoI,
                                  fnAddExtraArgs=run.addExtraArguments,
                                  fnInit=run.initRun)# initialize the run
     Problem.Final()
+   
 
 
-    # all_objects=muppy.get_objects()
-    # len(all_objects)
-    # sum1=summary.summarize(all_objects)  
-    # summary.print_(sum1)

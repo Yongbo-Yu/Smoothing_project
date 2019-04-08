@@ -25,4 +25,6 @@ for i in range(1, n):
     A[:, i] = normalize(Ai)
 print A.transpose()
 print A.dot(A.transpose())
+z=np.array([1,2,3,4,6])
 # print A.dot(A.transpose())
+

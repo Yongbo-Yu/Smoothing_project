@@ -1,8 +1,17 @@
 import numpy as np
 import time
-import scipy.stats as ss
+ 
+import random
+ 
+import matplotlib.pyplot as plt
+from matplotlib.pyplot import figure, show
+from matplotlib.ticker import MaxNLocator
+ 
+import pathos.multiprocessing as mp
+import pathos.pools as pp
 
 
+ 
 class Problem(object):
 
 # attributes
@@ -12,7 +21,6 @@ class Problem(object):
     K=None         # Strike price
     T=10.0                      # maturity
     sigma=None    # volatility
-    N=4    # number of time steps which will be equal to the number of brownian bridge components (we set is a power of 2)
     d=None
     dt=None
 
@@ -23,9 +31,8 @@ class Problem(object):
 
 #methods
     # this method initializes 
-    def __init__(self,params,coeff,nested=False):
+    def __init__(self,coeff,Nsteps,nested=False):
         self.nested = nested
-        self.params = params
         self.random_gen = None or np.random
         self.S0=100
         self.K= coeff*self.S0        # Strike price and coeff determine if we have in/at/out the money option
@@ -38,8 +45,8 @@ class Problem(object):
         self.v0=0.04
         
        # self.K= coeff*self.S0   
-        self.dt=self.T/float(self.N) # time steps length
-        self.d=int(np.log2(self.N)) #power 2 number steps
+        self.dt=self.T/float(Nsteps) # time steps length
+        self.d=int(np.log2(Nsteps)) #power 2 number steps
 
         # For less than 185 points
         beta=32
@@ -67,49 +74,29 @@ class Problem(object):
         self.yknots_left=self.yknots_right
         
 
-  
-
-    def BeginRuns(self,ind, N):
-        self.elapsed_time=0.0
-        self.nelem = np.array(self.params.h0inv * self.params.beta**(np.array(ind)), dtype=np.uint32)
-        if self.nested:
-            self.nelem -= 1
-        assert(len(self.nelem) == self.GetDim())
-        return self.nelem
-
-
-    def EndRuns(self):
-        elapsed_time=self.elapsed_time;
-        self.elapsed_time=0.0;
-        return elapsed_time;
-
-    # this computes the value of the objective function (given by  objfun) at quad points
-    def SolveFor(self, Y):
-        Y = np.array(Y)
-        goal=self.objfun(self.nelem,Y);
-        return goal
-
 
      # objfun:  beta #number of points in the first direction
-    def objfun(self,nelem,y):
+    def objfun(self,Nsteps):
 
-        start_time=time.time()
-
+        mean = np.zeros(2*Nsteps-1)
+        covariance= np.identity(2*Nsteps-1)
+        y = np.random.multivariate_normal(mean, covariance)   
+       
         
 
         # step 1 # get the two partitions of coordinates y_1 for the volatility path  and y_s for  the asset path  
-        y1=y[0:self.N] # this points are related to the volatility path
+        y1=y[0:Nsteps] # this points are related to the volatility path
 
-        y2=[self.N]
+        y2=[Nsteps]
         y2[0]=0.0
-        y2[1:]=y[self.N:2*self.N-1]
+        y2[1:]=y[Nsteps:2*Nsteps-1]
 
         y_s= self.rho *y1+ np.sqrt(1-self.rho**2) * y2  # this points are related to the asset path
       
         ys=y_s[1:]
         
         # step 2: computing the location of the kink
-        bar_z=self.newtons_method(y_s[0],ys,y1[0],y1[1:self.N])
+        bar_z=self.newtons_method(y_s[0],ys,y1[0],y1[1:Nsteps],Nsteps)
         
         # step 3: performing the pre-intgeration step wrt kink point
     
@@ -118,7 +105,7 @@ class Problem(object):
         mylist_left[1:]=[np.array(ys[i]) for i in range(0,len(ys))]
         points_left=self.cartesian(mylist_left)
 
-        x_l=np.asarray([self.stock_price_trajectory_1D_heston(bar_z-points_left[i,0],points_left[i,1:],y1[0],y1[1:self.N])[0]  for i in range(0,len(self.yknots_left[0]))])
+        x_l=np.asarray([self.stock_price_trajectory_1D_heston(bar_z-points_left[i,0],points_left[i,1:],y1[0],y1[1:Nsteps],Nsteps)[0]  for i in range(0,len(self.yknots_left[0]))])
         QoI_left= self.yknots_left[1].dot(self.payoff(x_l)*((1/np.sqrt(2 * np.pi)) * np.exp(-((bar_z-points_left[:,0])**2)/2)* np.exp(points_left[:,0])))
 
 
@@ -126,13 +113,11 @@ class Problem(object):
         mylist_right.append(self.yknots_right[0])
         mylist_right[1:]=[np.array(ys[i]) for i in range(0,len(ys))]
         points_right=self.cartesian(mylist_right)
-        x_r=np.asarray([self.stock_price_trajectory_1D_heston(points_right[i,0]+bar_z,points_right[i,1:],y1[0],y1[1:self.N])[0] for i in range(0,len(self.yknots_right[0]))])
+        x_r=np.asarray([self.stock_price_trajectory_1D_heston(points_right[i,0]+bar_z,points_right[i,1:],y1[0],y1[1:Nsteps],Nsteps)[0] for i in range(0,len(self.yknots_right[0]))])
         QoI_right= self.yknots_right[1].dot(self.payoff(x_r)*(1/np.sqrt(2 * np.pi)) * np.exp(-((points_right[:,0]+bar_z)**2)/2)* np.exp(points_right[:,0]))
 
         QoI=QoI_left+QoI_right
 
-        elapsed_time_qoi=time.time()-start_time;
-        self.elapsed_time=self.elapsed_time+elapsed_time_qoi
                 
         return QoI
 
@@ -144,11 +129,11 @@ class Problem(object):
     #y1: is the first direction given by W(T)/sqrt(T)/   #This function gives  the brownian motion increments built from Brownian bridge construction: # the composition of  BB and brownian_increments give us
     # the function \phi in our notes(discussion)
         
-    def brownian_increments(self,y1,y):
-        t=np.linspace(0, self.T, self.N+1)     
-        h=self.N
+    def brownian_increments(self,y1,y,Nsteps):
+        t=np.linspace(0, self.T, Nsteps+1)     
+        h=Nsteps
         j_max=1
-        bb= np.zeros((1,self.N+1))
+        bb= np.zeros((1,Nsteps+1))
         bb[0,h]=np.sqrt(self.T)*y1
        
         
@@ -171,23 +156,23 @@ class Problem(object):
     
 
     # This function simulates a 1D heston trajectory for stock price and volatility paths
-    def stock_price_trajectory_1D_heston(self,y1,y,yv1,yv):
-        bb=self.brownian_increments(y1,y)
+    def stock_price_trajectory_1D_heston(self,y1,y,yv1,yv,Nsteps):
+        bb=self.brownian_increments(y1,y,Nsteps)
         dW= [bb[i+1]-bb[i] for i in range(0,len(bb)-1)] 
         
 
-        bb_v=self.brownian_increments(yv1,yv)
+        bb_v=self.brownian_increments(yv1,yv,Nsteps)
         dW_v= [bb_v[i+1]-bb_v[i] for i in range(0,len(bb_v)-1)] 
 
         dbb=dW-(self.dt/np.sqrt(self.T))*y1 # brownian bridge increments dbb_i (used later for the location of the kink point)
 
-        X=np.zeros(self.N+1) #here will store the asset trajectory
-        V=np.zeros(self.N+1) #here will store the  volatility trajectory
+        X=np.zeros(Nsteps+1) #here will store the asset trajectory
+        V=np.zeros(Nsteps+1) #here will store the  volatility trajectory
 
         X[0]=self.S0
         V[0]=self.v0
         
-        for n in range(1,self.N+1):
+        for n in range(1,Nsteps+1):
             X[n]=X[n-1]*(1+np.sqrt(V[n-1])*dW[n-1])
             V[n]=V[n-1]- self.kappa *self.dt* max(V[n-1],0)+ self.xi *np.sqrt(max(V[n-1],0))*dW_v[n-1]+ self.kappa*self.theta*self.dt
             
@@ -209,8 +194,8 @@ class Problem(object):
         return abs(0-P1)
 
   
-    def f(self,y1,y,yv1,yv):
-        X,dbb,V=self.stock_price_trajectory_1D_BS(y1,y,yv1,yv) # right version
+    def f(self,y1,y,yv1,yv,Nsteps):
+        X,dbb,V=self.stock_price_trajectory_1D_BS(y1,y,yv1,yv,Nsteps) # right version
         fi=np.zeros((1,len(dbb1)))
         fi=1+(np.sqrt(V)/float(np.sqrt(self.T)))*y1*(self.dt)+(np.sqrt(V)*dbb
         product=np.prod(fi)
@@ -223,7 +208,7 @@ class Problem(object):
 
                     
   
-    def newtons_method(self,x0,y,yv1,yv,eps=1e-10):
+    def newtons_method(self,x0,y,yv1,yv,Nsteps,eps=1e-10):
         delta = self.dx(x0,y,yv1,yv)
         while delta > eps:
     
@@ -284,27 +269,73 @@ class Problem(object):
             for j in xrange(1, arrays[0].size):
                 out[j*m:(j+1)*m,1:] = out[0:m,1:]
         return out               
+ 
+ 
+def weak_convergence_differences():    
+        start_time=time.time()
+        exact=13.0847 #  S_0=K=100, T=10, r=0,rho=-0.9, v_0=0.04, theta=0.04, xi=1,\kapp=0.5
+        marker=['>', 'v', '^', 'o', '*','+','-',':']
+        ax = figure().gca()
+        ax.xaxis.set_major_locator(MaxNLocator(integer=True))
+        # # feed parameters to the problem
+        Nsteps_arr=np.array([2])
+        dt_arr=1.0/(Nsteps_arr)
+  
+        error=np.zeros(1)
+        stand=np.zeros(1)
+        elapsed_time_qoi=np.zeros(1)
+        Ub=np.zeros(1)
+        Lb=np.zeros(1)
+    
+        values=np.zeros((1*(10**7),1)) 
+         
+      
+        
+ 
+        num_cores = mp.cpu_count()
+   
+        for i in range(0,1):
+            print i
+            start_time=time.time()
+
+            prb = Problem(1,Nsteps_arr[i]) 
+
+            #for j in range(1*(10**4)):
+                  #Here we need to use the C++ code to compute the payoff             
+            #    values[j,i]=prb.objfun(Nsteps_arr[i])/float(exact)
+             
+            #prb = Problem(Nsteps_arr[i]) 
+            def processInput(j):
+                return prb.objfun(Nsteps_arr[i])/float(exact)
+ 
+            
+            p =  pp.ProcessPool(num_cores)  # Processing Pool with four processors
+            
+            values[:,i]= p.map(processInput, range(((1*(10**7))))  )
+
+            elapsed_time_qoi[i]=time.time()-start_time
+            print np.mean(values[:,i]*float(exact))
+            print  elapsed_time_qoi[i]
 
 
-    def Quit(self):
-        pass
-
-    def __exit__(self, type, value, traceback):
-        pass
-
-    def __enter__(self):
-        return self
-
-    @staticmethod
-    def Init():
-        import sys #This module provides access to some variables used or maintained by the interpreter and to functions that interact strongly with the interpreter
-        count = len(sys.argv)  #sys.argv is a list in Python, which contains the command-line arguments passed to the script. With the len(sys.argv) function you can count the number of arguments. 
-        #arr = (ct.c_char_p * len(sys.argv))()
-        arr = sys.argv
-
-    @staticmethod
-    def Final():
-        pass
-
-    def GetDim(self):
-        return 0
+ 
+ 
+        
+        print elapsed_time_qoi
+ 
+        error=np.abs(np.mean(values,axis=0) - 1) 
+        stand=np.std(values, axis = 0)/  float(np.sqrt(1*(10**7)))
+        Ub=np.abs(np.mean(values,axis=0) - 1)+1.96*stand
+        Lb=np.abs(np.mean(values,axis=0) - 1)-1.96*stand
+        print(error)  
+        print(stand)
+        print Lb
+        print Ub
+          
+      
+ 
+        
+        
+ 
+ 
+weak_convergence_differences()   

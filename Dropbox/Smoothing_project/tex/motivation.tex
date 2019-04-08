@@ -138,32 +138,31 @@ We introduce the notation $\mathbf{x}=(x_j,\mathbf{x}_{-j})$, where $\mathbf{x}_
 	\frac{\partial \phi}{\partial x_j}(\mathbf{x}) &>0,\: \forall \mathbf{x} \in \rset^d \: \: \textbf{(Monotonicity condition)}  \label{assump:Monotonicity condition}\\
 	\underset{x \rightarrow +\infty}{\lim} \phi(\mathbf{x})&=\underset{x \rightarrow +\infty}{\lim} \phi(x_j,\mathbf{x}_{-j})=+\infty, \: \text{or} \:\: \frac{\partial^2 \phi} {\partial x_j^2}(\mathbf{x}) \: \: \textbf{(Growth condition)}  \label{assump:Growth condition} \PERIOD
 \end{align}
-In the following, we motivate the optimization problem \eqref{optimality_criterion_2} for the call and the binary examples.
-\begin{example}[Binary option]
-We consider the case of one dimensional binary option, such that $g$ is given by \eqref{eq:binary_option} and  $\phi(x)=x-K$, where $K$ is the strike price.  
+%In the following, we motivate the optimization problem \eqref{optimality_criterion_2} for the call and the binary examples.
+%\begin{example}[Binary option]
+%We consider the case of one dimensional binary option, such that $g$ is given by \eqref{eq:binary_option} and  $\phi(x)=x-K$, where $K$ is the strike price.  
+%
+%In this case we have
+%\begin{align*}
+%\text{Var}\left[g(\widehat{X}_T)\right]= p (1-p)
+%\end{align*}
+%where $p= \mathbb{P}(\phi(\widehat{X}_T) \ge 0)$, and can be approximated using the normal approximation based on the moment expansion where the first and second moments are provided by  \eqref{eq:first_moment_approximation} and \eqref{eq:second_moment_approximation}. In fact, we have
+%
+%\begin{align*}
+%p&= \mathbb{P}\left(\phi(\widehat{X}_T) \ge 0\right)=\mathbb{P}\left(\widehat{X}_T \ge K\right) \nonumber\\
+%&=\mathbb{P}\left(\frac{\widehat{X}_T- \mu_T(\mathbf{v})}{\sqrt{\sigma_T(\mathbf{v})}} \ge \frac{K-\mu_T(\mathbf{v})}{\sqrt{\sigma_T(\mathbf{v})}} \right)=1-\mathbb{P}\left(\frac{\widehat{X}_T- \mu_T(\mathbf{v})}{\sqrt{\sigma_T(\mathbf{v})}} < \frac{K-\mu_T(\mathbf{v})}{\sqrt{\sigma_T(\mathbf{v})}} \right) \nonumber\\
+%&=1- \Phi\left(\frac{K-\mu_T(\mathbf{v})}{\sqrt{\sigma_T(\mathbf{v})}} \right),
+%\end{align*}
+%where $\Phi(.)$ is the standard cumulative distribution function, and $\mu_T$ and $\sigma_T$ are computed using \eqref{eq:first_moment_approximation} and \eqref{eq:second_moment_approximation}. 
+%
+%Then  the next step to determine $\mathbf{v}^\ast$ is to maximize $p$  over $\mathbf{v}$.
+%
+%\red{The last statement maybe changed if the true quantity to maximize over $v$ is not \ref{optimality_criterion_2}.} 
+%\end{example} 
+%\begin{example}[Call option]
+%We consider the case of one dimensional call option,  $g$ is given by \eqref{eq:call_option} and $\phi(x)=x-K$, where $K$ is the strike price. 
+%\end{example} 
 
-In this case we have
-\begin{align*}
-\text{Var}\left[g(\widehat{X}_T)\right]= p (1-p)
-\end{align*}
-where $p= \mathbb{P}(\phi(\widehat{X}_T) \ge 0)$, and can be approximated using the normal approximation based on the moment expansion where the first and second moments are provided by  \eqref{eq:first_moment_approximation} and \eqref{eq:second_moment_approximation}. In fact, we have
-
-\begin{align*}
-p&= \mathbb{P}\left(\phi(\widehat{X}_T) \ge 0\right)=\mathbb{P}\left(\widehat{X}_T \ge K\right) \nonumber\\
-&=\mathbb{P}\left(\frac{\widehat{X}_T- \mu_T(\mathbf{v})}{\sqrt{\sigma_T(\mathbf{v})}} \ge \frac{K-\mu_T(\mathbf{v})}{\sqrt{\sigma_T(\mathbf{v})}} \right)=1-\mathbb{P}\left(\frac{\widehat{X}_T- \mu_T(\mathbf{v})}{\sqrt{\sigma_T(\mathbf{v})}} < \frac{K-\mu_T(\mathbf{v})}{\sqrt{\sigma_T(\mathbf{v})}} \right) \nonumber\\
-&=1- \Phi\left(\frac{K-\mu_T(\mathbf{v})}{\sqrt{\sigma_T(\mathbf{v})}} \right),
-\end{align*}
-where $\Phi(.)$ is the standard cumulative distribution function, and $\mu_T$ and $\sigma_T$ are computed using \eqref{eq:first_moment_approximation} and \eqref{eq:second_moment_approximation}. 
-
-Then  the next step to determine $\mathbf{v}^\ast$ is to maximize $p$  over $\mathbf{v}$.
-
-\red{The last statement maybe changed if the true quantity to maximize over $v$ is not \ref{optimality_criterion_2}.} 
-\end{example} 
-\begin{example}[Call option]
-We consider the case of one dimensional call option,  $g$ is given by \eqref{eq:call_option} and $\phi(x)=x-K$, where $K$ is the strike price. 
-\end{example} 
-
-\red{Add details here for the optimization problem \eqref{optimality_criterion_2} for the call option example.}
 \subsection{Discrete time formulation}\label{sec:Discrete time, practical motivation}
 For practical purposes, we consider the basket option under multi-dimensional GBM model where the process $\mathbf{X}$ is the discretized $d$-dimensional Black-Scholes model and the payoff function $g$ is given by
 \begin{align}

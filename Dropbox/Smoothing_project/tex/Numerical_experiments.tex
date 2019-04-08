@@ -1100,12 +1100,95 @@ For illustration, we start with the two dimensional basket call option  with par
 \FloatBarrier
 
 \subsection{$d=4$}
-We consider now  the four dimensional basket call option  with parameters:  $S_0^{1,2,3,4}=K=100$, $\sigma_{1,2,3,4}=0.4$, $\rho=0.3$, $T=1$ $r=0$ and $c_{1,2,3,4}=1/4$, the reference value for those parameters  is  $11.0$.
+We consider now  the four dimensional basket call option  with parameters:  $S_0^{1,2,3,4}=K=100$, $\sigma_{1,2,3,4}=0.4$, $\rho=0.3$, $T=1$ $r=0$ and $c_{1,2,3,4}=1/4$, the reference value for those parameters  is  $11.04$. I obtained bad results for the weak rates  (see Figure  \ref{fig:Weak_rate_4_dim_basket}).
 
-\subsection{The best call option  under GBM and Heston model}\label{sec:The best call option  under GBM and Heston model}
-The fourth example that we consider is the multi-dimensional  best call option under GBM and Heston model. I am in process of formulating this but somehow we agreed that the first potential directions of smoothing for the Heston model will be the first factors related to the asset prices.
+\FloatBarrier
+\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.4\linewidth]{./figures/basket_call_4d_time_stepping/weak_convergence/weak_convergence_order_basket_option_4d_relative_M_10_6_beta_128}
+
+	\caption{The convergence of the relative weak error  $\mathcal{E}_B(N)$ defined in \ref{eq:total_error}, for the $4$-dimensional basket call option with  a number of Laguerre  quadrature points  $\beta=512$ and number of samples for MC $M=10^6$. The upper and lower bounds are $95\%$ confidence intervals.}
+	\label{fig:Weak_rate_4_dim_basket}
+\end{figure}
+\FloatBarrier
+
+This bad behavior can be due to 
+
+\begin{itemize}
+\item A bug.
+\item An issue with the way we transform the problem that cause this bad behavior.
+\end{itemize}
+
+\subsection{The call on max  option under GBM}\label{sec:The best call option  under GBM}
+The fourth example that we consider is  the European rainbow option under BBM model and in particular the call on max option whose payoff is given by
+\begin{align}\label{eq:max_call_option}
+\max\left( \max\left(S_1,\dots,S_d\right)-K,0 \right).
+\end{align}
+
+We start here by the two dimensional call on max option under the GBM model. The discretization of the assets is the same as given in  \eqref{eq:discrete_rep_2} and \eqref{eq: incremental functions}, where we use the same transformation as in Section \ref{sec:Step $1$: Numerical smoothing}. This implies that, in order to determine $Y^{\ast}_1$, we need to solve
+\begin{align}
+	x=\max\left(X_0^{(1)}  \prod_{i=0}^{N-1} g_i^{(1)}(Y^{\ast}_1(x),\mathbf{Y}_{-1}),X_0^{(2)}  \prod_{i=0}^{N-1} g_i^{(2)}(Y^{\ast}_1(x),\mathbf{Y}_{-1})\right)
+\end{align}
+
+
+For illustration, we consider the example with parameters:  $S_0^{1,2}=K=100$, $\sigma_{1,2}=0.4$, $\rho=0.3$, $T=1$, and  $r=0$, the reference value for those parameters  is  $26.40$.
 
 
 
 
+\subsection{Options under the discretized the Heston model}
+In this section, we consider  testing options under the discretized Heston model \cite{heston1993closed,broadie2006exact,kahl2006fast,andersen2007efficient} whose dynamics are given by
+\begin{align}\label{eq:dynamics Heston}
+dS_t&=\mu S_t dt+\sqrt{v_t}S_t dW_t^S= \mu S_t dt+ \rho\sqrt{v_t}S_t dW_t^v+ \sqrt{1-\rho^2} \sqrt{v_t}S_t dW_t \nonumber\\
+dv_t&=\kappa (\theta-v_t)dt+\xi \sqrt{v_t} dW_t^v\COMMA
+\end{align}
+where 
+
+\begin{itemize}
+\item $S_t$ is the price of the asset, $v_t$ the instantaneous variance, given as  a CIR process.
+\item $W_{t}^{S},W_{t}^{v}$ are correlated Wiener processes with correlation $\rho$.
+\item $\mu$  is the rate of return of the asset.
+\item $\theta$ is  the mean  variance.
+\item $\kappa$ is the rate at which $v_t$ reverts to $\theta$.
+\item $\xi$ is the volatility of the volatility, and determines the variance of $v_t$.
+\end{itemize}
+We also consider cases where the parameters fulfill the Feller condition
+\begin{align*}
+2 \kappa \theta >\xi^2,
+\end{align*}
+implying  that the process $v_t$ is strictly positive.
+
+\subsubsection{Discretization of Heston model}
+Given that the SDE for the asset path is now dependent  upon the solution of the second volatility SDE in \eqref{eq:dynamics Heston}, it is necessary to simulate the volatility process first and then utilize this "volatility path" in order to simulate the asset path. In the case of the original GBM SDE it is possible to use It\^o's Lemma to directly solve for $S_t$. However, we are unable to utilize that procedure here and must use a numerical approximation in order to obtain both paths. 
+
+Applying Forward Euler scheme to descretize \ref{eq:dynamics Heston} implies 
+\begin{align}\label{eq:FE_Heston_discrete}
+S_{t+\Delta t}&= S_t +\mu S_t \Delta t+\sqrt{v_t \Delta}S_t Z_s \nonumber\\
+v_{t+\Delta t}&=f_1(v_t)+\kappa (\theta-f_2(v_t)) \Delta t+\xi \sqrt{f_3(v_t) \Delta t} Z_v\COMMA
+\end{align}
+where $Z_s$ and $Z_v$  are two correlated standard normal variables with correlation $\rho$, such that $Z_s=\rho Z_v+\sqrt{1-\rho^2} Z_t$, and to avoid problems with negative values of $\sqrt{v_t}$, we introduce $f_1, f_2$, and $f_3$, which with different choices implies different schemes used in the literature 
+
+\FloatBarrier
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		\toprule[1.5pt]
+	Scheme &  $f_1$& $f_2$  & $f_3$     \\
+	\hline
+	full truncation scheme & $v_t$ &  $v_t^+$&$v_t^+$\\
+	Partial truncation scheme & $v_t$ &  $v_t$&$v_t^+$\\
+	The reflection scheme  &$\abs{v_t}$ & $\abs{v_t}$& $\abs{v_t}$\\
+			\bottomrule[1.25pt]
+	\end{tabular}
+	\label{Numerical schemes for CIR process}
+\end{table}
+\FloatBarrier
+where  $v_t^+=\max(0,v_t)$.
+
+The literature suggest that the Full Truncation method is the "best" option and so this is what we will utilize here. 
+
+\subsubsection{European call option  under the discretized the Heston model }
+\subsubsection{Basket call option under the discretized the Heston model }
+
+\subsubsection{Call on max option under the discretized the Heston model }
 
