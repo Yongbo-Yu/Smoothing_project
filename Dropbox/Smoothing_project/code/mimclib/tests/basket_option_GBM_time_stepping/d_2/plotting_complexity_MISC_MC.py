@@ -56,14 +56,14 @@ print z_MISC[0]
 fig = plt.figure()
 
 plt.plot(MC_err,MC_time,linewidth=2.0,label='MC+root finding' , marker='>',hold=True) 
-plt.plot(MC_err, fit_MC/100,linewidth=2.0,label=r'rate= %s' % format(z_MC[0]  , '.2f'), linestyle = '--')
+plt.plot(MC_err, fit_MC/100,linewidth=2.0,label=r'slope= %s' % format(z_MC[0]  , '.2f'), linestyle = '--')
 
 plt.plot(MC_normal_err,MC_normal_time,linewidth=2.0,label='MC' , marker='>',hold=True) 
-plt.plot(MC_normal_err, fit_MC_normal/1000,linewidth=2.0,label=r'rate= %s' % format(z_MC_normal[0]  , '.2f'), linestyle = '--')
+plt.plot(MC_normal_err, fit_MC_normal/1000,linewidth=2.0,label=r'slope= %s' % format(z_MC_normal[0]  , '.2f'), linestyle = '--')
 
 
 plt.plot(MISC_err,MISC_time,linewidth=2.0,label='MISC'  , marker='v',hold=True) 
-plt.plot(MISC_err, fit_MISC/10000,linewidth=2.0,label=r'rate= %s' % format(z_MISC[0]  , '.2f'), linestyle = '--')
+plt.plot(MISC_err, fit_MISC/10000,linewidth=2.0,label=r'slope= %s' % format(z_MISC[0]  , '.2f'), linestyle = '--')
 
 # plt.plot(MC_rich_err,MC_rich_time,linewidth=2.0,label='MC+Rich' , marker='o',hold=True) 
 #plt.plot(MC_rich_err, fit_MC_rich*10,linewidth=2.0,label=r'rate= %s' % format(z_MC_rich[0]  , '.2f'), linestyle = '--')

@@ -27,9 +27,9 @@ We show  the summary of our numerical findings in Table \ref{table:Summary of ou
             Single call option (GBM)  & without    &  $0.9\%$&  $22$ \\
 %            & level $1$ &  $$ &  $$ \\		
 				 \hline
-					2$d$-Basket call option (GBM)  & without    &  $$0.9\%$$&  $21$ \\	
+					$2d$-Basket call option (GBM)  & without    &  $$0.9\%$$&  $21$ \\	
 					\hline
-						Best of call option (Heston) & without  &  $$&  $$ \\	
+					$4d$-Basket call option (GBM)  & without    &  $$0.8\%$$&  $27$ \\	
 		\bottomrule[1.25pt]
 	\end{tabular}
 \end{small}
@@ -264,7 +264,7 @@ Figure \ref{fig:Weak_rate_binary} shows the estimated   weak error  for the case
 			M(\# MC samples)   & $ 10^3$  & $8 \times 10^3$  & $ 5 \times 10^4$ \\	
 			\bottomrule[1.25pt]
 	\end{tabular}
-	\caption{Total relative error of MISC, with different tolerances, and MC to compute binary option price for different number of time steps, without Richardson extrapolation.  The values marked in red, for MISC method, correspond to the total relative errors associated with  stable quadrature errors for MISC, and will be used for complexity comparison against MC.}
+	\caption{Total relative error of MISC, with different tolerances, and MC to compute binary option price for different number of time steps, without Richardson extrapolation. The values between parentheses correspond to the different errors contributing to the total relative error: for MISC we report the bias and quadrature errors and for MC we report the bias and the statistical errors. The number of MC samples,$ M$, is chosen to satisfy \eqref{optimal_number_samples}.}
 	\label{Total error of MISC and MC to compute Binary option price of the different tolerances for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
 \end{table}
 
@@ -755,7 +755,7 @@ Figure \ref{fig:Weak_rate_call_beta_32} shows the estimated   weak error  for th
 		
 			\bottomrule[1.25pt]
 	\end{tabular}
-	\caption{Total relative  error of MISC, with different tolerances, and MC to compute call option price for different number of time steps, without Richardson extrapolation. The values marked in red, for MISC method, correspond to the total relative errors associated with  stable quadrature errors for MISC, and will be used for complexity comparison against MC.}
+	\caption{Total relative  error of MISC, with different tolerances, and MC to compute call option price for different number of time steps, without Richardson extrapolation. The values between parentheses correspond to the different errors contributing to the total relative error: for MISC we report the bias and quadrature errors and for MC we report the bias and the statistical errors. The number of MC samples,$ M$, is chosen to satisfy \eqref{optimal_number_samples}.}
 	\label{Total error of MISC and MC to compute Call option price of the different tolerances for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
 \end{table}
 
@@ -1057,11 +1057,11 @@ For illustration, we start with the two dimensional basket call option  with par
 			M(\# MC samples)   & $2 \times 10^3$   &  $5 \times 10^3$ & $2 \times 10^4$  \\	
 		\hline	
 				MC   &  $\underset{(0.01,0.01)}{\mathbf{0.02}}$ & $\underset{(0.0079,0.0076)}{\mathbf{0.0155}}$ & $\underset{(0.0043,0.004)}{\mathbf{0.0083}}$   \\	
-				M(\# MC samples)   &$10^5$  & $2 \times 0.01610^5$  &  $8 \times 10^5$\\	
+				M(\# MC samples)   &$10^5$  & $2 \times 10^5$  &  $8 \times 10^5$\\	
 		
 			\bottomrule[1.25pt]
 	\end{tabular}
-	\caption{Total relative  error of MISC, with different tolerances, and MC to compute two dimensional basket call option price for different number of time steps, without Richardson extrapolation. The values marked in red, for MISC method, correspond to the total relative errors associated with  stable quadrature errors for MISC, and will be used for complexity comparison against MC.}
+	\caption{Total relative  error of MISC, with different tolerances, and MC to compute two dimensional basket call option price for different number of time steps, without Richardson extrapolation. The values between parentheses correspond to the different errors contributing to the total relative error: for MISC we report the bias and quadrature errors and for MC we report the bias and the statistical errors. The number of MC samples,$ M$, is chosen to satisfy \eqref{optimal_number_samples}.}
 	\label{Total error of MISC and MC to compute two  dim basket  Call option price of the different tolerances for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
 \end{table}
 \FloatBarrier
@@ -1100,24 +1100,77 @@ For illustration, we start with the two dimensional basket call option  with par
 \FloatBarrier
 
 \subsection{$d=4$}
-We consider now  the four dimensional basket call option  with parameters:  $S_0^{1,2,3,4}=K=100$, $\sigma_{1,2,3,4}=0.4$, $\rho=0.3$, $T=1$ $r=0$ and $c_{1,2,3,4}=1/4$, the reference value for those parameters  is  $11.04$. I obtained bad results for the weak rates  (see Figure  \ref{fig:Weak_rate_4_dim_basket}).
+We consider now  the four dimensional basket call option  with parameters:  $S_0^{1,2,3,4}=K=100$, $\sigma_{1,2,3,4}=0.4$, $\rho=0.3$, $T=1$ $r=0$ and $c_{1,2,3,4}=1/4$, the reference value for those parameters  is  $11.04$. Figure \ref{fig:Weak_rate_4_dim_basket} shows the estimated   weak error  for the case without Richardson extrapolation, and we report the results for comparing MC and MISC in Tables \ref{Total error of MISC and MC to compute 4 dim basket  Call option price of the different tolerances for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.} and \ref{Comparsion of the computational time of  MC and MISC, used to compute 4 dim basket Call option price  for different number of time steps, without Richardson extrapolation}, and Figure \ref{fig:Complexity plot for MC and MISC , two dim basket call non rich}.  Our numerical experiments show that MISC  requires approximately $4\%$ of the work of MC  to achieve a total relative error of around $0.8\%$.
 
 \FloatBarrier
 \begin{figure}[h!]
 		\centering
-		\includegraphics[width=0.4\linewidth]{./figures/basket_call_4d_time_stepping/weak_convergence/weak_convergence_order_basket_option_4d_relative_M_10_6_beta_128}
+		\includegraphics[width=0.4\linewidth]{./figures/basket_call_4d_time_stepping/weak_convergence/weak_convergence_order_basket_option_4d_relative_M_4_10_6_beta_256}
 
-	\caption{The convergence of the relative weak error  $\mathcal{E}_B(N)$ defined in \ref{eq:total_error}, for the $4$-dimensional basket call option with  a number of Laguerre  quadrature points  $\beta=512$ and number of samples for MC $M=10^6$. The upper and lower bounds are $95\%$ confidence intervals.}
+	\caption{The convergence of the relative weak error  $\mathcal{E}_B(N)$ defined in \ref{eq:total_error}, for the $4$-dimensional basket call option with  a number of Laguerre  quadrature points  $\beta=512$ and number of samples for MC $M=4 \times 10^6$. The upper and lower bounds are $95\%$ confidence intervals.}
 	\label{fig:Weak_rate_4_dim_basket}
 \end{figure}
 \FloatBarrier
 
-This bad behavior can be due to 
+\FloatBarrier
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		\toprule[1.5pt]
+	Method & & Steps  & &     \\
+	\hline
+           & $2$ & $4$ & $8$   \\
+		\hline
+		MISC   &  $\underset{(0.02,0.02)}{\mathbf{0.04}}$ & $\underset{(0.013,0.014)}{\mathbf{0.027}}$ & $\underset{(0.004,0.004)}{\mathbf{0.008}}$   \\
 
-\begin{itemize}
-\item A bug.
-\item An issue with the way we transform the problem that cause this bad behavior.
-\end{itemize}
+		\hline		
+			MC +root finding   &  $\underset{(0.02,0.02)}{\mathbf{0.04}}$ & $\underset{(0.013,0.012)}{\mathbf{0.025}}$ & $\underset{(0.004,0.004)}{\mathbf{0.008}}$  \\
+			M(\# MC samples)   & $10^3$   &  $3 \times 10^3$ &  $3 \times 10^4$  \\	
+		\hline	
+				MC   &  $\underset{(0.02,0.02)}{\mathbf{0.04}}$ & $\underset{(0.013,0.013)}{\mathbf{0.026}}$ & $\underset{(0.004,0.004)}{\mathbf{0.008}}$   \\	
+				M(\# MC samples)   &$2 \times 10^4$  & $7 \times 10^4 $  &  $7 \times 10^5 $ \\	
+		
+			\bottomrule[1.25pt]
+	\end{tabular}
+	\caption{Total relative  error of MISC, with different tolerances, and MC to compute $4$-dimensional basket call option price for different number of time steps, without Richardson extrapolation. The values between parentheses correspond to the different errors contributing to the total relative error: for MISC we report the bias and quadrature errors and for MC we report the bias and the statistical errors. The number of MC samples,$ M$, is chosen to satisfy \eqref{optimal_number_samples}.}
+	\label{Total error of MISC and MC to compute 4 dim basket  Call option price of the different tolerances for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
+\end{table}
+\FloatBarrier
+
+
+
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		\toprule[1.5pt]
+	Method & & Steps  & &     \\
+	\hline
+	         & $2$ & $4$ & $8$    \\
+		\hline
+		MISC & $4$  & $13$ & $22$     \\
+			MC method +root finding  & $222$&  $730$&  $10541$   \\
+				MC method &   $10$& $44$ &   $603$ \\
+		\bottomrule[1.25pt]
+	\end{tabular}
+	\caption{Comparison of the computational time of  MC and MISC, used to compute $4$-dimensional basket call option price  for different number of time steps, without Richardson extrapolation. The average computational time of MC is computed over $10$ runs.}
+	\label{Comparsion of the computational time of  MC and MISC, used to compute 4 dim basket Call option price  for different number of time steps, without Richardson extrapolation}
+\end{table}
+
+
+\FloatBarrier
+
+
+	\begin{figure}[h!]
+\centering
+\includegraphics[width=0.4\linewidth]{./figures/basket_call_4d_time_stepping/complexity_rates/error_vs_time}
+
+\caption{Computational work comparison for MISC and MC methods, for the case of $4$-dimensional basket call option. This plot shows that to achieve a relative error below $1\%$, MISC outperforms significantly MC method in terms of computational time.}
+\label{fig:Complexity plot for MC and MISC , 4 dim basket call non rich}
+\end{figure}
+
+
+\FloatBarrier
 
 \subsection{The call on max  option under GBM}\label{sec:The best call option  under GBM}
 The fourth example that we consider is  the European rainbow option under BBM model and in particular the call on max option whose payoff is given by
@@ -1163,7 +1216,7 @@ Given that the SDE for the asset path is now dependent  upon the solution of the
 
 Applying Forward Euler scheme to descretize \ref{eq:dynamics Heston} implies 
 \begin{align}\label{eq:FE_Heston_discrete}
-S_{t+\Delta t}&= S_t +\mu S_t \Delta t+\sqrt{v_t \Delta}S_t Z_s \nonumber\\
+S_{t+\Delta t}&= S_t +\mu S_t \Delta t+\sqrt{v_t \Delta t}S_t Z_s \nonumber\\
 v_{t+\Delta t}&=f_1(v_t)+\kappa (\theta-f_2(v_t)) \Delta t+\xi \sqrt{f_3(v_t) \Delta t} Z_v\COMMA
 \end{align}
 where $Z_s$ and $Z_v$  are two correlated standard normal variables with correlation $\rho$, such that $Z_s=\rho Z_v+\sqrt{1-\rho^2} Z_t$, and to avoid problems with negative values of $\sqrt{v_t}$, we introduce $f_1, f_2$, and $f_3$, which with different choices implies different schemes used in the literature 

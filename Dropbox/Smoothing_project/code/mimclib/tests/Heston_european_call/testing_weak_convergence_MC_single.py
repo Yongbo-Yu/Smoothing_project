@@ -19,12 +19,14 @@ class Problem(object):
     elapsed_time=0.0;
     S0=None     # vector of initial stock prices
     K=None         # Strike price
-    T=10.0                      # maturity
+    #T=10.0                      # maturity
+    T=1.0                      
     sigma=None    # volatility
     d=None
     dt=None
 
-    exact=13.0847 #  S_0=K=100, T=10, r=0,rho=-0.9, v_0=0.04, theta=0.04, xi=1,\kapp=0.5
+    #exact=13.0847 #  S_0=K=100, T=10, r=0,rho=-0.9, v_0=0.04, theta=0.04, xi=1,\kapp=0.5
+    exact=7.5789 #  S_0=K=100, T=1, r=0,rho=-0.9, v_0=0.04, theta=0.04, xi=0.5,\kapp=1
     yknots_right=[]
     yknots_left=[]
 
@@ -39,9 +41,12 @@ class Problem(object):
         
         self.rho=-0.9
 
-        self.kappa= 0.5
+        #self.kappa= 0.5
+        self.kappa= 5.0
         self.theta=0.04
-        self.xi=1
+
+        #self.xi=1
+        self.xi=0.5
         self.v0=0.04
         
        # self.K= coeff*self.S0   
@@ -91,9 +96,19 @@ class Problem(object):
         y2[0]=0.0
         y2[1:]=y[Nsteps:2*Nsteps-1]
 
-        y_s= self.rho *y1+ np.sqrt(1-self.rho**2) * y2  # this points are related to the asset path
+        y2=np.array(y2)
+
+
+        
       
+        y_s= self.rho *y1 + np.sqrt(1-self.rho**2) * y2  # this points are related to the asset path
+
+
+
+       
         ys=y_s[1:]
+
+        
         
         # step 2: computing the location of the kink
         bar_z=self.newtons_method(y_s[0],ys,y1[0],y1[1:Nsteps],Nsteps)
@@ -158,11 +173,12 @@ class Problem(object):
     # This function simulates a 1D heston trajectory for stock price and volatility paths
     def stock_price_trajectory_1D_heston(self,y1,y,yv1,yv,Nsteps):
         bb=self.brownian_increments(y1,y,Nsteps)
-        dW= [bb[i+1]-bb[i] for i in range(0,len(bb)-1)] 
+        
+        dW= [bb[0][i+1]-bb[0][i] for  i in range(0,Nsteps)] 
         
 
         bb_v=self.brownian_increments(yv1,yv,Nsteps)
-        dW_v= [bb_v[i+1]-bb_v[i] for i in range(0,len(bb_v)-1)] 
+        dW_v= [bb_v[0][i+1]-bb_v[0][i] for i in range(0,Nsteps)] 
 
         dbb=dW-(self.dt/np.sqrt(self.T))*y1 # brownian bridge increments dbb_i (used later for the location of the kink point)
 
@@ -173,8 +189,11 @@ class Problem(object):
         V[0]=self.v0
         
         for n in range(1,Nsteps+1):
+            
             X[n]=X[n-1]*(1+np.sqrt(V[n-1])*dW[n-1])
+            #print X[n]
             V[n]=V[n-1]- self.kappa *self.dt* max(V[n-1],0)+ self.xi *np.sqrt(max(V[n-1],0))*dW_v[n-1]+ self.kappa*self.theta*self.dt
+            #print V[n]
             
         return X[-1],dbb,V
        
@@ -189,19 +208,21 @@ class Problem(object):
     # Root solving procedure
  
     #Now we set up the methods used for newton iteration
-    def dx(self,x,y,yv1,yv):
-        P1,dP1=self.f(x,y,yv1,yv)
+    def dx(self,x,y,yv1,yv,Nsteps):
+        P1,dP1=self.f(x,y,yv1,yv,Nsteps)
         return abs(0-P1)
 
   
     def f(self,y1,y,yv1,yv,Nsteps):
-        X,dbb,V=self.stock_price_trajectory_1D_BS(y1,y,yv1,yv,Nsteps) # right version
-        fi=np.zeros((1,len(dbb1)))
-        fi=1+(np.sqrt(V)/float(np.sqrt(self.T)))*y1*(self.dt)+(np.sqrt(V)*dbb
+        X,dbb,V=self.stock_price_trajectory_1D_heston(y1,y,yv1,yv,Nsteps) # right version
+        fi=np.zeros((1,len(dbb)))
+        
+     
+        fi=1+(np.sqrt(V[0:Nsteps])/float(np.sqrt(self.T)))*y1*(self.dt)+(np.sqrt(V[0:Nsteps]))*dbb
         product=np.prod(fi)
         Py=product-(self.K/float(self.S0))
         
-        summation=np.sum(np.sqrt(V)/fi)
+        summation=np.sum(np.sqrt(V[0:Nsteps])/fi)
         dPy=(1/float(np.sqrt(self.T)))*(self.dt)*product*summation
         return Py,dPy    
         
@@ -209,12 +230,12 @@ class Problem(object):
                     
   
     def newtons_method(self,x0,y,yv1,yv,Nsteps,eps=1e-10):
-        delta = self.dx(x0,y,yv1,yv)
+        delta = self.dx(x0,y,yv1,yv,Nsteps)
         while delta > eps:
     
-            P_value,dP=self.f(x0,y,yv1,yv)
+            P_value,dP=self.f(x0,y,yv1,yv,Nsteps)
             x0 = x0 - 0.1*P_value/dP
-            delta = self.dx(x0,y,yv1,yv) 
+            delta = self.dx(x0,y,yv1,yv,Nsteps) 
         return x0     
 
 
@@ -287,7 +308,7 @@ def weak_convergence_differences():
         Ub=np.zeros(1)
         Lb=np.zeros(1)
     
-        values=np.zeros((1*(10**7),1)) 
+        values=np.zeros((1*(10**2),1)) 
          
       
         
@@ -300,9 +321,9 @@ def weak_convergence_differences():
 
             prb = Problem(1,Nsteps_arr[i]) 
 
-            #for j in range(1*(10**4)):
+            for j in range(1*(10**2)):
                   #Here we need to use the C++ code to compute the payoff             
-            #    values[j,i]=prb.objfun(Nsteps_arr[i])/float(exact)
+                values[j,i]=prb.objfun(Nsteps_arr[i])/float(exact)
              
             #prb = Problem(Nsteps_arr[i]) 
             def processInput(j):
@@ -311,7 +332,7 @@ def weak_convergence_differences():
             
             p =  pp.ProcessPool(num_cores)  # Processing Pool with four processors
             
-            values[:,i]= p.map(processInput, range(((1*(10**7))))  )
+            values[:,i]= p.map(processInput, range(((1*(10**2))))  )
 
             elapsed_time_qoi[i]=time.time()-start_time
             print np.mean(values[:,i]*float(exact))
@@ -324,7 +345,7 @@ def weak_convergence_differences():
         print elapsed_time_qoi
  
         error=np.abs(np.mean(values,axis=0) - 1) 
-        stand=np.std(values, axis = 0)/  float(np.sqrt(1*(10**7)))
+        stand=np.std(values, axis = 0)/  float(np.sqrt(1*(10**2)))
         Ub=np.abs(np.mean(values,axis=0) - 1)+1.96*stand
         Lb=np.abs(np.mean(values,axis=0) - 1)-1.96*stand
         print(error)  

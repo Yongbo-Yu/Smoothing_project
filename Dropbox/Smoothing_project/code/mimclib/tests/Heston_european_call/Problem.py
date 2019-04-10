@@ -104,7 +104,7 @@ class Problem(object):
         y2[0]=0.0
         y2[1:]=y[self.N:2*self.N-1]
 
-        y_s= self.rho *y1+ np.sqrt(1-self.rho**2) * y2  # this points are related to the asset path
+        y_s= self.rho *np.array(y1)+ np.sqrt(1-self.rho**2) * np.array(y2) 
       
         ys=y_s[1:]
         
@@ -210,9 +210,9 @@ class Problem(object):
 
   
     def f(self,y1,y,yv1,yv):
-        X,dbb,V=self.stock_price_trajectory_1D_BS(y1,y,yv1,yv) # right version
+        X,dbb,V=self.stock_price_trajectory_1D_heston(y1,y,yv1,yv) # right version
         fi=np.zeros((1,len(dbb1)))
-        fi=1+(np.sqrt(V)/float(np.sqrt(self.T)))*y1*(self.dt)+(np.sqrt(V)*dbb
+        fi=1+(np.sqrt(V)/float(np.sqrt(self.T)))*y1*(self.dt)+(np.sqrt(V))*dbb
         product=np.prod(fi)
         Py=product-(self.K/float(self.S0))
         

@@ -161,9 +161,8 @@ class Problem(object):
          
       
     def payoff(self,x): 
-       #print(x)
-       g=(x.dot(self.c)-self.K)
-       
+     
+       g=(x.dot(self.c)-self.K)   
        if g<0:
            g=0
        return g
@@ -180,7 +179,7 @@ def weak_convergence_differences():
         ax = figure().gca()
         ax.xaxis.set_major_locator(MaxNLocator(integer=True))
         # # feed parameters to the problem
-        Nsteps_arr=np.array([2])
+        Nsteps_arr=np.array([8])
         dt_arr=1.0/(Nsteps_arr)
   
         error=np.zeros(1)
@@ -189,7 +188,7 @@ def weak_convergence_differences():
         Ub=np.zeros(1)
         Lb=np.zeros(1)
     
-        values=np.zeros((1*(10**8),1)) 
+        values=np.zeros((7*(10**5),1)) 
          
       
         
@@ -202,18 +201,18 @@ def weak_convergence_differences():
 
             prb = Problem(Nsteps_arr[i]) 
 
-            #for j in range(1*(10**1)):
+            for j in range(7*(10**5)):
              #     #Here we need to use the C++ code to compute the payoff             
-              #  values[j,i]=prb.objfun(Nsteps_arr[i])/float(exact)
+                values[j,i]=prb.objfun(Nsteps_arr[i])/float(exact)
              
-            #prb = Problem(Nsteps_arr[i]) 
-            def processInput(j):
-                return prb.objfun(Nsteps_arr[i])/float(exact)
+          
+           # def processInput(j):
+            #    return prb.objfun(Nsteps_arr[i])/float(exact)
  
             
-            p =  pp.ProcessPool(num_cores)  # Processing Pool with four processors
+            #p =  pp.ProcessPool(num_cores)  # Processing Pool with four processors
             
-            values[:,i]= p.map(processInput, range(((1*(10**8))))  )
+            #values[:,i]= p.map(processInput, range(((1*(10**1))))  )
 
             elapsed_time_qoi[i]=time.time()-start_time
             print np.mean(values[:,i]*float(exact))
@@ -226,7 +225,7 @@ def weak_convergence_differences():
         print elapsed_time_qoi
  
         error=np.abs(np.mean(values,axis=0) - 1) 
-        stand=np.std(values, axis = 0)/  float(np.sqrt(1*(10**8)))
+        stand=np.std(values, axis = 0)/  float(np.sqrt(7*(10**5)))
         Ub=np.abs(np.mean(values,axis=0) - 1)+1.96*stand
         Lb=np.abs(np.mean(values,axis=0) - 1)-1.96*stand
         print(error)  

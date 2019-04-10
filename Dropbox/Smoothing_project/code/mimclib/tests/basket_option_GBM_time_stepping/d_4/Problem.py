@@ -64,26 +64,26 @@ class Problem(object):
         self.idxc=np.setdiff1d(range(0,self.basket_d*self.N),idx)
         
         # For less than 185 points
-        # beta=128
-        # self.yknots_right=np.polynomial.laguerre.laggauss(beta)
+        beta=6
+        self.yknots_right=np.polynomial.laguerre.laggauss(beta)
       
-        # # For more than 185 points
-        beta=256
-        from Parser import Parser
-        fx = open('lag_512_x.txt', 'r')
-        Element_properties_x = Parser('./lag_256_x.txt')
-        Element_properties_x.parse_file(fx.read(),'\n')
-        x=np.array([float(i) for i in Element_properties_x.element_list])
+        # For more than 185 points
+        # beta=256
+        # from Parser import Parser
+        # fx = open('lag_512_x.txt', 'r')
+        # Element_properties_x = Parser('./lag_256_x.txt')
+        # Element_properties_x.parse_file(fx.read(),'\n')
+        # x=np.array([float(i) for i in Element_properties_x.element_list])
        
-        Element_properties_x.close_file()   
-        fw = open('lag_512_w.txt', 'r')
-        Element_properties_w = Parser('./lag_256_w.txt')
-        Element_properties_w.parse_file(fw.read(),'\n')
-        w=np.array([float(i) for i in Element_properties_w.element_list])
+        # Element_properties_x.close_file()   
+        # fw = open('lag_512_w.txt', 'r')
+        # Element_properties_w = Parser('./lag_256_w.txt')
+        # Element_properties_w.parse_file(fw.read(),'\n')
+        # w=np.array([float(i) for i in Element_properties_w.element_list])
    
-        Element_properties_x.close_file()   
-        self.yknots_right.append(x[:239])
-        self.yknots_right.append(w[:239])
+        # Element_properties_x.close_file()   
+        # self.yknots_right.append(x[:239])
+        # self.yknots_right.append(w[:239])
      
        
         self.yknots_left=self.yknots_right
