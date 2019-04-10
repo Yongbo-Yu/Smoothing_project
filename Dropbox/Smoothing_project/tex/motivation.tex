@@ -27,7 +27,7 @@ Z_j&=Z_v v_j+ (\mathbb{P}_{\perp} \mathbf{Z})_j\nonumber \\
 &=Z_v v_j+ (Z_v^\perp)_j \PERIOD
 \end{align}
 
-The first aim of the work is to determine the optimal direction $\mathbf{v}$. By optimal direction, we mean the direction that maximizes the smoothing effect, that is something like a variance of the component orthogonal to the kink, which we find hard to formulate as for now.
+The first aim of the work is to determine the optimal direction $\mathbf{v}$. By optimal direction, we mean the direction that maximizes the smoothing effect, that is something like a variance of the component orthogonal to the kink. \red{We find hard to formulate as for now but we may try to come up with a better formulation}.
 
 
 %the one given by
@@ -115,7 +115,7 @@ Regarding the covariance terms $E[X_i X_l]$, for $1 \le i \neq l \le d$, their d
 &+\left( \hat{X}_{l,(0)} a_i(\hat{X}_{(0)})+\hat{X}^\prime_{l,(0)}  \sum_{k=1}^d a_{i,k}^\prime(\hat{X}_{(0)})\hat{X}^\prime_{k,(0)}   + \left( \sum_{j=1}^d  \hat{X}^\prime_{l,(0)} b_{ij}(\hat{X}_{(0)})+ \hat{X}_{l,(0)}  \left(\sum_{k=1}^d \hat{X}^\prime_{k,(0)} b^\prime_{ij,k}(\hat{X}_{(0)})\right) \right) \frac{ v_j}{\sqrt{T}} \right) \PERIOD
 \end{align}
 \end{small}
-The idea then is to maximize, at the final time, the smoothing effect, represented by \eqref{optimality_criterion_2}, where $\hat{X}_T \sim \mathcal{N}(\mu_T(\mathbf{v}), \Sigma_T(\mathbf{v}))$, such that $\mu_T, \Sigma_T$ are computed using   \eqref{eq:first_moment_approximation}, \eqref{eq:second_moment_approximation} and \eqref{eq:covariance_dynamcis_approximation}. We note that the computation of $\hat{X}^\prime$ is cheap and its evolution can be deduced from \eqref{eq:approximate_dynamics}, resulting in
+The idea then is to maximize, at the final time, the smoothing effect, where $\hat{X}_T \sim \mathcal{N}(\mu_T(\mathbf{v}), \Sigma_T(\mathbf{v}))$, such that $\mu_T, \Sigma_T$ are computed using   \eqref{eq:first_moment_approximation}, \eqref{eq:second_moment_approximation} and \eqref{eq:covariance_dynamcis_approximation}. We note that the computation of $\hat{X}^\prime$ is cheap and its evolution can be deduced from \eqref{eq:approximate_dynamics}, resulting in
 \begin{align*}
 &\frac{d\hat{X}^\prime_i}{dt}=\sum_{k=1}^d a^\prime_{i,k}(\hat{X}) \hat{X}^\prime_k+\sum_{j=1}^d  \left(b_{ij}(\hat{X})\frac{ v_j}{\sqrt{T}}+ \sum_{k=1}^d \left(b^\prime_{ij,k}(\hat{X}) \hat{X}^\prime_k \right) \frac{Z_v v_j}{\sqrt{T}}\right), \quad  1 \le i \le d \COMMA \nonumber\\
 &\hat{X}^\prime(t=0)=0, \quad  1 \le i \le d \COMMA
@@ -259,9 +259,7 @@ where
  &+ \int_{y_1^\ast}^{+\infty} G(y_1,\mathbf{y}_{-1},\mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1} ) \rho_{y_1}(y_1) dy_1 \PERIOD
 \end{align}
 We generally do not have a closed form for $h$. Therefore, the pre-integration step should be performed numerically after solving the root finding problem using the numerical smoothing explained in Section \ref{sec:Step $1$: Numerical smoothing}.
-
-
 \begin{remark}
 We note that  conditions (\eqref{assump:Monotonicity condition} and \eqref{assump:Growth condition}) imply that for each $\mathbf{Y}_{-1}$, the function $G$ either has a simple  root $y_1^\ast$ or is positive for all $y_1 \in \rset$.
 \end{remark}
-
+\red{There seems to be a certain amount of overlap between section $2$ and $3$ regarding the hierarchical representation. I will see how to make cleaner.}
