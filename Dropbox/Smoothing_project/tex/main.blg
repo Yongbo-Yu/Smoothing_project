@@ -7,48 +7,52 @@ I was expecting a `,' or a `}'---line 19 of file smoothing.bib
  :  year={2008}
  :             moskowitz1996smoothness,
 I'm skipping whatever remains of this entry
+Repeated entry---line 346 of file smoothing.bib
+ : @article{lord2010comparison
+ :                            ,
+I'm skipping whatever remains of this entry
 Warning--empty journal in bayersmoothing
 Warning--empty year in bayersmoothing
 Warning--empty publisher in caflisch1997valuation
-You've used 18 entries,
+You've used 19 entries,
             2118 wiz_defined-function locations,
-            610 strings with 7153 characters,
-and the built_in function-call counts, 5943 in all, are:
-= -- 600
-> -- 261
+            616 strings with 7311 characters,
+and the built_in function-call counts, 6309 in all, are:
+= -- 637
+> -- 279
 < -- 2
-+ -- 105
-- -- 84
-* -- 424
-:= -- 998
-add.period$ -- 55
-call.type$ -- 18
-change.case$ -- 94
++ -- 113
+- -- 90
+* -- 455
+:= -- 1059
+add.period$ -- 58
+call.type$ -- 19
+change.case$ -- 100
 chr.to.int$ -- 0
-cite$ -- 21
-duplicate$ -- 219
-empty$ -- 468
-format.name$ -- 84
-if$ -- 1223
+cite$ -- 22
+duplicate$ -- 230
+empty$ -- 495
+format.name$ -- 90
+if$ -- 1296
 int.to.chr$ -- 0
-int.to.str$ -- 18
-missing$ -- 20
-newline$ -- 92
-num.names$ -- 36
-pop$ -- 92
+int.to.str$ -- 19
+missing$ -- 21
+newline$ -- 97
+num.names$ -- 38
+pop$ -- 96
 preamble$ -- 1
-purify$ -- 78
+purify$ -- 83
 quote$ -- 0
-skip$ -- 146
+skip$ -- 153
 stack$ -- 0
-substring$ -- 422
-swap$ -- 31
+substring$ -- 453
+swap$ -- 32
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 68
+type$ -- 72
 warning$ -- 3
-while$ -- 64
-width$ -- 20
-write$ -- 194
-(There was 1 error message)
+while$ -- 68
+width$ -- 21
+write$ -- 205
+(There were 2 error messages)

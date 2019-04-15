@@ -1217,11 +1217,11 @@ where
 \item $\kappa$ is the rate at which $v_t$ reverts to $\theta$.
 \item $\xi$ is the volatility of the volatility, and determines the variance of $v_t$.
 \end{itemize}
-We also consider cases where the parameters fulfill the Feller condition
-\begin{align*}
-2 \kappa \theta >\xi^2,
-\end{align*}
-implying  that the process $v_t$ is strictly positive.
+%We also consider cases where the parameters fulfill the Feller condition
+%\begin{align*}
+%2 \kappa \theta >\xi^2,
+%\end{align*}
+%implying  that the process $v_t$ is strictly positive.
 
 \subsubsection{Discretization of Heston model}
 Given that the SDE for the asset path is now dependent  upon the solution of the second volatility SDE in \eqref{eq:dynamics Heston}, it is necessary to simulate the volatility process first and then utilize this "volatility path" in order to simulate the asset path. In the case of the original GBM SDE it is possible to use It\^o's Lemma to directly solve for $S_t$. However, we are unable to utilize that procedure here and must use a numerical approximation in order to obtain both paths. 
@@ -1229,7 +1229,8 @@ Given that the SDE for the asset path is now dependent  upon the solution of the
 Applying Forward Euler scheme to descretize \ref{eq:dynamics Heston} implies 
 \begin{align}\label{eq:FE_Heston_discrete}
 S_{t+\Delta t}&= S_t +\mu S_t \Delta t+\sqrt{v_t \Delta t}S_t Z_s \nonumber\\
-v_{t+\Delta t}&=f_1(v_t)+\kappa (\theta-f_2(v_t)) \Delta t+\xi \sqrt{f_3(v_t) \Delta t} Z_v\COMMA
+v_{t+\Delta t}&=f_1(v_t)+\kappa (\theta-f_2(v_t)) \Delta t+\xi \sqrt{f_3(v_t) \Delta t} Z_v \nonumber\\
+v_{t+\Delta t}&=f_3(v_{t+\Delta t}4) \COMMA
 \end{align}
 where $Z_s$ and $Z_v$  are two correlated standard normal variables with correlation $\rho$, such that $Z_s=\rho Z_v+\sqrt{1-\rho^2} Z_t$, and to avoid problems with negative values of $\sqrt{v_t}$, we introduce $f_1, f_2$, and $f_3$, which with different choices implies different schemes used in the literature 
 
@@ -1250,9 +1251,13 @@ where $Z_s$ and $Z_v$  are two correlated standard normal variables with correla
 \FloatBarrier
 where  $v_t^+=\max(0,v_t)$.
 
-The literature suggest that the Full Truncation method is the "best" option and so this is what we will utilize here. 
+The literature \cite{lord2010comparison} suggest that the Full Truncation method is the "best" option and so this is what we will utilize here. 
 
 \subsubsection{European call option  under the discretized the Heston model }
+
+The  first example that we test under the Heston model is the single European call option with parameters: $S_0=K=100$, $v_0=0.04$, $\mu=0$, $\kappa=5$, $\theta=0.04$, $\xi=0.1$ and $\rho=-0.9$. The reference value in this case is $7.5789$. For solving the root finding problem we follow similar approach to the one in Section \ref{sec:Determining the kink location} with substituting $\sigma$ with $\sqrt{v_i}$ in $f_i$.
+
+
 \subsubsection{Basket call option under the discretized the Heston model }
 
 \subsubsection{Call on max option under the discretized the Heston model }

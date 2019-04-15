@@ -18,7 +18,7 @@ To simplify notation, let  $\overline{\mathbf{W}}=(\overline{W}_1,\dots,\overlin
 &\le \mathcal{E}_{B}^{Chol}+ \abs{ \expt{g\left(\overline{X}_N\left(\mathbf{W}^{1}, \overline{\mathbf{W}}\right)\right)}- \expt{g\left(\overline{X}_N\left(\mathbf{W}^{1}, \widetilde{\mathbf{W}}\right)\right)}}
 \end{align}
 \end{small}
-From the construction of the Cholesky scheme (See Section \ref{sec:The Exact Scheme}), we expect that the weak error is purely the discretization error, that is
+From the construction of the Cholesky scheme, we expect that the weak error is purely the discretization error, that is
 \begin{align*}
 \mathcal{E}_{B}^{Chol}=\Ordo{\Delta t},
 \end{align*}
@@ -45,10 +45,6 @@ The second term in \eqref{eq: Weak_error_hyb_chol} is basically related to appro
 	\label{fig:Weak_rate_set1_set_2_without_rich}
 \end{figure}
 \FloatBarrier
-
-\red{
 \subsection{On the choice of the simulation scheme in our approach}\label{sec: choice of simulation scheme}
 The choice of the simulation scheme in our approach was based on the observed behavior of the weak rates. Through our numerical experiments (see Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.} for the tested examples), we observe that although the hybrid and exact schemes  converge asymptotically with weak rate of $\Ordo{\Delta t}$, the pre-asymptotic behavior of the weak rate is different for both schemes. As an illustration, from Figure \ref{fig:Weak_rate_set1_set_2_without_rich} for Set $1$ parameter in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, the hybrid scheme  has a consistent convergence behavior in the sense that it behaves in the asymptotic way basically right from the beginning, whereas the exact scheme does not. On the other
 hand, the constant  seems considerably smaller for the exact scheme. These two features  makes the hybrid scheme the optimal scheme  to work with in our context since our approach is based on hierarchical transformations involving the use of Richardson extrapolation (see Section \ref{sec:Richardson extrapolation}).
-
-}

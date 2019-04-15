@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  20 DEC 2018 13:29
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  15 APR 2019 08:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -13,7 +13,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.2 T
+l.1 T
      he rough Bergomi (rBergomi) model, introduced recently in  \cite{bayer2...
 
 You're in trouble here.  Try typing  <return>  to proceed.
@@ -75,7 +75,7 @@ Missing character: There is no [ in font nullfont!
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
                                                   \space undefined\on@line .
-l.2 ...oduced recently in  \cite{bayer2016pricing}
+l.1 ...oduced recently in  \cite{bayer2016pricing}
                                                   , is a promising rough vol...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -84,7 +84,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-LaTeX Warning: Citation `bayer2016pricing' on page  undefined on input line 2.
+LaTeX Warning: Citation `bayer2016pricing' on page  undefined on input line 1.
 
 Missing character: There is no ] in font nullfont!
 Missing character: There is no , in font nullfont!
@@ -721,6 +721,21 @@ Missing character: There is no t in font nullfont!
 Missing character: There is no u in font nullfont!
 Missing character: There is no r in font nullfont!
 Missing character: There is no e in font nullfont!
+! Undefined control sequence.
+l.1 ...ed on adaptive sparse grids quadrature \red
+                                                  {(ASGQ)}, specifically usi...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Missing character: There is no ( in font nullfont!
+Missing character: There is no A in font nullfont!
+Missing character: There is no S in font nullfont!
+Missing character: There is no G in font nullfont!
+Missing character: There is no Q in font nullfont!
+Missing character: There is no ) in font nullfont!
 Missing character: There is no , in font nullfont!
 Missing character: There is no s in font nullfont!
 Missing character: There is no p in font nullfont!
@@ -758,52 +773,14 @@ Missing character: There is no t in font nullfont!
 Missing character: There is no i in font nullfont!
 Missing character: There is no o in font nullfont!
 Missing character: There is no n in font nullfont!
-Missing character: There is no a in font nullfont!
-Missing character: There is no s in font nullfont!
-Missing character: There is no m in font nullfont!
-Missing character: There is no u in font nullfont!
-Missing character: There is no l in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no - in font nullfont!
 Missing character: There is no i in font nullfont!
 Missing character: There is no n in font nullfont!
-Missing character: There is no d in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no x in font nullfont!
-Missing character: There is no s in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no o in font nullfont!
-Missing character: There is no c in font nullfont!
-Missing character: There is no h in font nullfont!
-Missing character: There is no a in font nullfont!
-Missing character: There is no s in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no c in font nullfont!
-Missing character: There is no c in font nullfont!
-Missing character: There is no o in font nullfont!
-Missing character: There is no l in font nullfont!
-Missing character: There is no l in font nullfont!
-Missing character: There is no o in font nullfont!
-Missing character: There is no c in font nullfont!
-Missing character: There is no a in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no o in font nullfont!
-Missing character: There is no n in font nullfont!
-Missing character: There is no ( in font nullfont!
-Missing character: There is no M in font nullfont!
-Missing character: There is no I in font nullfont!
-Missing character: There is no S in font nullfont!
-Missing character: There is no C in font nullfont!
-Missing character: There is no ) in font nullfont!
 Missing character: There is no [ in font nullfont!
 \citation{haji2016multi}
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
                                                   \space undefined\on@line .
-l.2 ...tic collocation (MISC) \cite{haji2016multi}
+l.1 ...e same construction in \cite{haji2016multi}
                                                   , coupled with Brownian br...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -812,7 +789,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-LaTeX Warning: Citation `haji2016multi' on page  undefined on input line 2.
+LaTeX Warning: Citation `haji2016multi' on page  undefined on input line 1.
 
 Missing character: There is no ] in font nullfont!
 Missing character: There is no , in font nullfont!
@@ -1305,17 +1282,17 @@ Missing character: There is no e in font nullfont!
 Missing character: There is no l in font nullfont!
 Missing character: There is no . in font nullfont!
 
-Overfull \hbox (20.0pt too wide) in paragraph at lines 2--3
+Overfull \hbox (20.0pt too wide) in paragraph at lines 1--2
 []
  []
 
 
-Overfull \hbox (5.43053pt too wide) in paragraph at lines 2--3
+Overfull \hbox (5.43053pt too wide) in paragraph at lines 1--2
 []
  []
 
 
-Overfull \hbox (5.43053pt too wide) in paragraph at lines 2--3
+Overfull \hbox (5.43053pt too wide) in paragraph at lines 1--2
 []
  []
 
@@ -1326,13 +1303,13 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.4 \
+l.3 \
      
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-Overfull \hbox (20.0pt too wide) in paragraph at lines 4--5
+Overfull \hbox (20.0pt too wide) in paragraph at lines 3--4
 [] 
  []
 
@@ -1343,7 +1320,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.6 \textbf{Keywords}
+l.5 \textbf{Keywords}
                       Rough volatility, Monte Carlo, Adaptive sparse grids, ...
 
 You're in trouble here.  Try typing  <return>  to proceed.
@@ -1448,7 +1425,7 @@ Missing character: There is no o in font nullfont!
 Missing character: There is no n in font nullfont!
 Missing character: There is no . in font nullfont!
 
-Overfull \hbox (69.75113pt too wide) in paragraph at lines 6--7
+Overfull \hbox (69.75113pt too wide) in paragraph at lines 5--6
 []\OT1/cmr/bx/n/10 Keywords
  []
 
@@ -1459,7 +1436,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.8 ...bf{2010 Mathematics Subject Classification}
+l.7 ...bf{2010 Mathematics Subject Classification}
                                                    	91G60, 	91G20, 65C05, 65...
 
 You're in trouble here.  Try typing  <return>  to proceed.
@@ -1509,5 +1486,5 @@ Here is how much of TeX's memory you used:
  3652 multiletter control sequences out of 15000+600000
  3948 words of font info for 15 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 20i,2n,26p,1551b,93s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 20i,2n,26p,1520b,93s stack positions out of 5000i,500n,10000p,200000b,80000s
 !  ==> Fatal error occurred, no output PDF file produced!
