@@ -12,7 +12,7 @@ class Problem(object):
     K=None         # Strike price
     T=1.0                      # maturity
     sigma=None    # volatility
-    N=4    # number of time steps which will be equal to the number of brownian bridge components (we set is a power of 2)
+    N=8  # number of time steps which will be equal to the number of brownian bridge components (we set is a power of 2)
     d=None
     dt=None
 
@@ -46,26 +46,26 @@ class Problem(object):
         self.d=int(np.log2(self.N)) #power 2 number steps
 
         # For less than 185 points
-        #beta=32
-        #self.yknots_right=np.polynomial.laguerre.laggauss(beta)
+        beta=32
+        self.yknots_right=np.polynomial.laguerre.laggauss(beta)
       
-        # For more than 185 points
-        #beta=512
-        from Parser import Parser
-        fx = open('lag_512_x.txt', 'r')
-        Element_properties_x = Parser('./lag_512_x.txt')
-        Element_properties_x.parse_file(fx.read(),'\n')
-        x=np.array([float(i) for i in Element_properties_x.element_list])
+        # # For more than 185 points
+        # #beta=512
+        # from Parser import Parser
+        # fx = open('lag_512_x.txt', 'r')
+        # Element_properties_x = Parser('./lag_512_x.txt')
+        # Element_properties_x.parse_file(fx.read(),'\n')
+        # x=np.array([float(i) for i in Element_properties_x.element_list])
        
-        Element_properties_x.close_file()   
-        fw = open('lag_512_w.txt', 'r')
-        Element_properties_w = Parser('./lag_512_w.txt')
-        Element_properties_w.parse_file(fw.read(),'\n')
-        w=np.array([float(i) for i in Element_properties_w.element_list])
+        # Element_properties_x.close_file()   
+        # fw = open('lag_512_w.txt', 'r')
+        # Element_properties_w = Parser('./lag_512_w.txt')
+        # Element_properties_w.parse_file(fw.read(),'\n')
+        # w=np.array([float(i) for i in Element_properties_w.element_list])
    
-        Element_properties_x.close_file()   
-        self.yknots_right.append(x[:360])
-        self.yknots_right.append(w[:360])
+        # Element_properties_x.close_file()   
+        # self.yknots_right.append(x[:360])
+        # self.yknots_right.append(w[:360])
      
        
         self.yknots_left=self.yknots_right
@@ -106,7 +106,7 @@ class Problem(object):
 
         y2=[self.N]
         y2[0]=0.0
-        y2[1:]=y[self.N:2*self.N-1]
+        y2[1:]=y[self.N:]
 
         #y_s= self.rho *np.array(y1)+ np.sqrt(1-self.rho**2) * np.array(y2) 
         #ys=y_s[1:]
@@ -188,17 +188,24 @@ class Problem(object):
         dW_v= [bb_v[0,i+1]-bb_v[0,i] for i in range(0,self.N)] 
 
         # # non hierarhcical
-        # dW_v=[]
-        # dW_v.append(yv1)
-        # dW_v[1:]=[np.array(yv[i]) for i in range(0,len(yv))]
-        # dW_v=np.array(dW_v)
+        #dW_v=[]
+        #dW_v.append(yv1)
+        #dW_v[1:]=[np.array(yv[i]) for i in range(0,len(yv))]
+        #dW_v=np.array(dW_v)
         
 
         
         dW_s= self.rho *np.array(dW_v) + np.sqrt(1-self.rho**2) * np.array(dW)
-        y1s= self.rho *y1 + np.sqrt(1-self.rho**2) * yv1
-       
-        dbb_s=dW_s-(self.dt/np.sqrt(self.T))*y1s # brownian bridge increments dbb_i (used later for the location of the kink point)
+        y1s= self.rho *yv1 + np.sqrt(1-self.rho**2) * y1
+
+
+        #option1 
+        #dbb1=dW-(self.dt/np.sqrt(self.T))*y1 # brownian bridge increments dbb_i (used later for the location of the kink point)
+        #dbbv=dW_v-(self.dt/np.sqrt(self.T))*yv1 # brownian bridge increments dbb_i (used later for the location of the kink point)
+        #dbb_s= self.rho *np.array(dbbv) + np.sqrt(1-self.rho**2) * np.array(dbb1)
+        #option2
+        dbb_s=dW_s-(self.dt/np.sqrt(self.T))*y1s
+
 
 
 
@@ -237,14 +244,17 @@ class Problem(object):
         fi=np.zeros((1,len(dbb)))
         
 
-        y1s= self.rho *y1 + np.sqrt(1-self.rho**2) * yv1
-     
-        fi=1+(np.sqrt(V[0:self.N])/float(np.sqrt(self.T)))*y1s*(self.dt)+(np.sqrt(V[0:self.N]))*dbb
+        y1s= self.rho *yv1 + np.sqrt(1-self.rho**2) * y1
+        
+        fi=1+(np.sqrt(V[0:self.N])/float(np.sqrt(self.T)))*y1s*(self.dt) +(np.sqrt(V[0:self.N]))*dbb
         product=np.prod(fi)
         Py=product-(self.K/float(self.S0))
-        
+
+
         summation=np.sum(np.sqrt(V[0:self.N])/fi)
         dPy=(1/float(np.sqrt(self.T)))*(self.dt)*product*summation
+       # print dPy
+        #dPy=1.0
         return Py,dPy    
         
 

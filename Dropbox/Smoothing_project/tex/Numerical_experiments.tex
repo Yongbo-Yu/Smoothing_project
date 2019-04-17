@@ -1257,6 +1257,16 @@ The literature \cite{lord2010comparison} suggest that the Full Truncation method
 
 The  first example that we test under the Heston model is the single European call option with parameters: $S_0=K=100$, $v_0=0.04$, $\mu=0$, $\kappa=5$, $\theta=0.04$, $\xi=0.1$ and $\rho=-0.9$. The reference value in this case is $7.5789$. For solving the root finding problem we follow similar approach to the one in Section \ref{sec:Determining the kink location} with substituting $\sigma$ with $\sqrt{v_i}$ in $f_i$.
 
+Figure \ref{fig:Weak_rate_heston_single_call} shows the estimated   weak error  for the case without Richardson extrapolation.
+
+\FloatBarrier
+\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.4\linewidth]{./figures/Heston_single_call/weak_convergence/weak_convergence_order_single_call_option_heston_relative_M_4_10_6_beta_512}
+	\caption{The convergence of the relative weak error  $\mathcal{E}_B(N)$ defined in \ref{eq:total_error}, for the single call option under the Heston model with  a number of Laguerre  quadrature points  $\beta=512$ and number of samples for MC $M=4 \times 10^6$. The upper and lower bounds are $95\%$ confidence intervals.}
+	\label{fig:Weak_rate_heston_single_call}
+\end{figure}
+\FloatBarrier
 
 \subsubsection{Basket call option under the discretized the Heston model }
 
