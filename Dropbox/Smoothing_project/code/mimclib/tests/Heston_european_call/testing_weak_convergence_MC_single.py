@@ -54,27 +54,27 @@ class Problem(object):
         self.d=int(np.log2(Nsteps)) #power 2 number steps
 
         # For less than 185 points
-        beta=32
-        self.yknots_right=np.polynomial.laguerre.laggauss(beta)
+        #beta=32
+        #self.yknots_right=np.polynomial.laguerre.laggauss(beta)
       
-        # # For more than 185 points
-        # beta=256
-        # from Parser import Parser
-        # fx = open('lag_512_x.txt', 'r')
-        # Element_properties_x = Parser('./lag_256_x.txt')
-        # Element_properties_x.parse_file(fx.read(),'\n')
-        # x=np.array([float(i) for i in Element_properties_x.element_list])
+        # For more than 185 points
+        beta=512
+        from Parser import Parser
+        fx = open('lag_512_x.txt', 'r')
+        Element_properties_x = Parser('./lag_512_x.txt')
+        Element_properties_x.parse_file(fx.read(),'\n')
+        x=np.array([float(i) for i in Element_properties_x.element_list])
        
-        # Element_properties_x.close_file()   
-        # fw = open('lag__w.txt', 'r')
-        # Element_properties_w = Parser('./lag_256_w.txt')
-        # Element_properties_w.parse_file(fw.read(),'\n')
-        # w=np.array([float(i) for i in Element_properties_w.element_list])
+        Element_properties_x.close_file()   
+        fw = open('lag_512_w.txt', 'r')
+        Element_properties_w = Parser('./lag_512_w.txt')
+        Element_properties_w.parse_file(fw.read(),'\n')
+        w=np.array([float(i) for i in Element_properties_w.element_list])
    
-        # Element_properties_x.close_file()   
-        # self.yknots_right.append(x[:239])
-        # self.yknots_right.append(w[:239])
-     
+        Element_properties_x.close_file()   
+        self.yknots_right.append(x[:360])
+        self.yknots_right.append(w[:360])
+
        
         self.yknots_left=self.yknots_right
         
@@ -94,30 +94,25 @@ class Problem(object):
 
         y2=[Nsteps]
         y2[0]=0.0
-        y2[1:]=y[Nsteps:2*Nsteps-1]
+        y2[1:]=y[Nsteps:]
 
-        y2=np.array(y2)
+        y2s=y2[1:]
 
 
         
-      
-        y_s= self.rho *y1 + np.sqrt(1-self.rho**2) * y2  # this points are related to the asset path
-
-
-
-       
-        ys=y_s[1:]
+        #y_s= self.rho *y1 + np.sqrt(1-self.rho**2) * y2  # this points are related to the asset path
+        #ys=y_s[1:]
 
         
         
         # step 2: computing the location of the kink
-        bar_z=self.newtons_method(y_s[0],ys,y1[0],y1[1:Nsteps],Nsteps)
+        bar_z=self.newtons_method(y2[0],y2s,y1[0],y1[1:],Nsteps)
         
         # step 3: performing the pre-intgeration step wrt kink point
     
         mylist_left=[]
         mylist_left.append(self.yknots_left[0])
-        mylist_left[1:]=[np.array(ys[i]) for i in range(0,len(ys))]
+        mylist_left[1:]=[np.array(y2s[i]) for i in range(0,len(y2s))]
         points_left=self.cartesian(mylist_left)
 
         x_l=np.asarray([self.stock_price_trajectory_1D_heston(bar_z-points_left[i,0],points_left[i,1:],y1[0],y1[1:Nsteps],Nsteps)[0]  for i in range(0,len(self.yknots_left[0]))])
@@ -126,7 +121,7 @@ class Problem(object):
 
         mylist_right=[]
         mylist_right.append(self.yknots_right[0])
-        mylist_right[1:]=[np.array(ys[i]) for i in range(0,len(ys))]
+        mylist_right[1:]=[np.array(y2s[i]) for i in range(0,len(y2s))]
         points_right=self.cartesian(mylist_right)
         x_r=np.asarray([self.stock_price_trajectory_1D_heston(points_right[i,0]+bar_z,points_right[i,1:],y1[0],y1[1:Nsteps],Nsteps)[0] for i in range(0,len(self.yknots_right[0]))])
         QoI_right= self.yknots_right[1].dot(self.payoff(x_r)*(1/np.sqrt(2 * np.pi)) * np.exp(-((points_right[:,0]+bar_z)**2)/2)* np.exp(points_right[:,0]))
@@ -180,7 +175,11 @@ class Problem(object):
         dW_v= [bb_v[0,i+1]-bb_v[0,i] for i in range(0,Nsteps)] 
         #dW_v=np.array([yv1,yv]) # non hierarhcical
 
-        dbb=dW-(self.dt/np.sqrt(self.T))*y1 # brownian bridge increments dbb_i (used later for the location of the kink point)
+
+        dW_s= self.rho *np.array(dW_v) + np.sqrt(1-self.rho**2) * np.array(dW)
+        y1s= self.rho *yv1 + np.sqrt(1-self.rho**2) * y1
+
+        dbb_s=dW_s-(self.dt/np.sqrt(self.T))*y1s # brownian bridge increments dbb_i (used later for the location of the kink point)
 
         X=np.zeros(Nsteps+1) #here will store the asset trajectory
         V=np.zeros(Nsteps+1) #here will store the  volatility trajectory
@@ -190,12 +189,12 @@ class Problem(object):
         
         for n in range(1,Nsteps+1):
             
-            X[n]=X[n-1]*(1+np.sqrt(V[n-1])*dW[n-1])
-            #print X[n]
+            X[n]=X[n-1]*(1+np.sqrt(V[n-1])*dW_s[n-1])
+         
             V[n]=V[n-1]- self.kappa *self.dt* max(V[n-1],0)+ self.xi *np.sqrt(max(V[n-1],0))*dW_v[n-1]+ self.kappa*self.theta*self.dt
             V[n]=max(V[n],0)
             
-        return X[-1],dbb,V
+        return X[-1],dbb_s,V
        
     # this function defines the payoff function used here
     def payoff(self,x): 
@@ -217,8 +216,9 @@ class Problem(object):
         X,dbb,V=self.stock_price_trajectory_1D_heston(y1,y,yv1,yv,Nsteps) # right version
         fi=np.zeros((1,len(dbb)))
         
+        y1s= self.rho *yv1 + np.sqrt(1-self.rho**2) * y1
      
-        fi=1+(np.sqrt(V[0:Nsteps])/float(np.sqrt(self.T)))*y1*(self.dt)+(np.sqrt(V[0:Nsteps]))*dbb
+        fi=1+(np.sqrt(V[0:Nsteps])/float(np.sqrt(self.T)))*y1s*(self.dt)+(np.sqrt(V[0:Nsteps]))*dbb
         product=np.prod(fi)
         Py=product-(self.K/float(self.S0))
         
@@ -300,7 +300,7 @@ def weak_convergence_differences():
         ax = figure().gca()
         ax.xaxis.set_major_locator(MaxNLocator(integer=True))
         # # feed parameters to the problem
-        Nsteps_arr=np.array([8])
+        Nsteps_arr=np.array([16])
         dt_arr=1.0/(Nsteps_arr)
   
         error=np.zeros(1)
@@ -309,7 +309,7 @@ def weak_convergence_differences():
         Ub=np.zeros(1)
         Lb=np.zeros(1)
     
-        values=np.zeros((1*(10**5),1)) 
+        values=np.zeros((4*(10**6),1)) 
          
       
         
@@ -333,7 +333,7 @@ def weak_convergence_differences():
             
             p =  pp.ProcessPool(num_cores)  # Processing Pool with four processors
             
-            values[:,i]= p.map(processInput, range(((1*(10**5))))  )
+            values[:,i]= p.map(processInput, range(((4*(10**6))))  )
 
             elapsed_time_qoi[i]=time.time()-start_time
             print np.mean(values[:,i]*float(exact))
@@ -346,7 +346,7 @@ def weak_convergence_differences():
         print elapsed_time_qoi
  
         error=np.abs(np.mean(values,axis=0) - 1) 
-        stand=np.std(values, axis = 0)/  float(np.sqrt(1*(10**5)))
+        stand=np.std(values, axis = 0)/  float(np.sqrt(4*(10**6)))
         Ub=np.abs(np.mean(values,axis=0) - 1)+1.96*stand
         Lb=np.abs(np.mean(values,axis=0) - 1)-1.96*stand
         print(error)  

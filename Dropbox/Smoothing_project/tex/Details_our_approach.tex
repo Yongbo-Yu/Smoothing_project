@@ -1,17 +1,17 @@
-In the following, we describe our approach which can be seen as a two stage method. In the first stage, we use root finding procedure to perform the numerical smoothing described in Section \ref{sec:Step $1$: Numerical smoothing}, then in a second stage we perform the numerical integration to compute \eqref{eq: pre_integration_step_wrt_y1_basket}, described in Section \ref{sec:Step $2$: Integration}, by employing hierarchical adaptive sparse grids  quadrature, using the same construction as in MISC, proposed in \cite{haji2016multi}. Therefore, the initial integration problem that we are solving lives in $dN-1$-dimensional space, which becomes very large as either the number of time steps $N$, used in the discretization  scheme, increases, or the number the assets increase. 
+In the following, we describe our approach which can be seen as a two stage method. In the first stage, we use root finding procedure to perform the numerical smoothing described in Section \ref{sec:Step $1$: Numerical smoothing}, then in a second stage we perform the numerical integration to compute \eqref{eq: pre_integration_step_wrt_y1_basket}, described in Section \ref{sec:Step $2$: Integration}, by employing hierarchical adaptive sparse grids  quadrature, using the same construction as in  \cite{haji2016multi}. Therefore, the initial integration problem that we are solving lives in $dN-1$-dimensional space, which becomes very large as either the number of time steps $N$, used in the discretization  scheme, increases, or the number the assets increase. 
 
-We describe the  MISC method in our context in Section \ref{sec:Details of the MISC}.  To make an effective use of MISC, we  apply two transformations to overcome the issue of facing a high dimensional integrand. The first transformation consists of applying a hierarchical  path generation method, based on Brownian bridge (Bb) construction, with the aim of reducing the effective dimension as  described  in Section \ref{sec:Brwonian bridge construction}. The second transformation consists of applying Richardson extrapolation to reduce the bias, resulting in reducing  the maximum number of dimensions needed for the integration problem. Details about  Richardson extrapolation  are provided in Section \ref{sec:Richardson extrapolation}.
+We describe the  ASGQ method in our context in Section \ref{sec:Details of the ASGQ}.  To make an effective use of ASGQ, we  apply two transformations to overcome the issue of facing a high dimensional integrand. The first transformation consists of applying a hierarchical  path generation method, based on Brownian bridge (Bb) construction, with the aim of reducing the effective dimension as  described  in Section \ref{sec:Brwonian bridge construction}. The second transformation consists of applying Richardson extrapolation to reduce the bias, resulting in reducing  the maximum number of dimensions needed for the integration problem. Details about  Richardson extrapolation  are provided in Section \ref{sec:Richardson extrapolation}.
 
 Since $g$ can have a kink  or jump. Computing $h$ in \eqref{eq:smooth_function_after_pre_integration}  should be carried carefully to not deteriorate the smoothness of $h$. This can be done by applying a root finding procedure and then computing the uni-variate integral by summing the terms coming from integrating in each region where $g$ is smooth. We provide details about the root finding procedure in Section \ref{sec: Root Finding}.
 
-If we denote by $\mathcal{E}_{\text{tot}}$ the total error of approximating the  expectation in \eqref{eq: pre_integration_step_wrt_y1_basket} using the MISC estimator, $Q_N$, then we have a natural error decomposition
+If we denote by $\mathcal{E}_{\text{tot}}$ the total error of approximating the  expectation in \eqref{eq: pre_integration_step_wrt_y1_basket} using the ASGQ estimator, $Q_N$, then we have a natural error decomposition
 \begin{align}\label{eq:total_error}
 \mathcal{E}_{\text{tot}} & \le \abs{\expt{g(\mathbf{X}(T))}- \expt{h(\mathbf{y}_{-1}, \mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1} )}}+\abs{\expt{h(\mathbf{y}_{-1}, \mathbf{z}^{(1)}_{-1},\dots,\mathbf{z}^{(d)}_{-1} )}-Q_{N}}\nonumber\\
-  & \le \mathcal{E}_B(N)+ \mathcal{E}_Q(\text{TOL}_{\text{MISC}},N),
+  & \le \mathcal{E}_B(N)+ \mathcal{E}_Q(\text{TOL}_{\text{ASGQ}},N),
 \end{align}
 where  $\mathcal{E}_Q$ is the quadrature error, $\mathcal{E}_B$  is the bias.
 
-\subsection{Adaptive Sparse Grids}\label{sec:Details of the MISC}
+\subsection{Adaptive Sparse Grids}\label{sec:Details of the ASGQ}
 
 We assume that we want to approximate the expected value $\text{E}[f(Y)]$ of an analytic function $f\colon \Gamma \to \rset$ using a tensorization of quadrature formulas over $\Gamma$.
 
@@ -29,9 +29,9 @@ $$ Q^{m(\boldsymbol{\beta})}[f]= \sum_{j=1}^{\#\mathcal{T}^{m(\boldsymbol{\beta}
 where $\hat{y}_j \in \mathcal{T}^{m(\boldsymbol{\beta})}$ and $\bar{\omega}_j$ are  products of weights of the univariate quadrature rules.
 
 A direct approximation $\expt{f[\mathbf{Y}]} \approx Q^{\boldsymbol{\beta}}[f]$ is not an appropriate option  due to the well-known ``curse of dimensionality". We use  a hierarchical adaptive sparse grids\footnote{More details about sparse grids can be found in \cite{bungartz2004sparse}.} quadrature strategy, specifically using the same
-construction as MISC, and which uses  stochastic discretizations  and a classic sparsification approach to obtain an effective approximation scheme for $\expt{f}$. 
+construction as ASGQ, and which uses  stochastic discretizations  and a classic sparsification approach to obtain an effective approximation scheme for $\expt{f}$. 
 
-To be concrete, in our setting, we are left with a $dN-1$-dimensional Gaussian random input, which is chosen independently, resulting in  $dN-1$ numerical parameters for MISC, which we use as the basis of the multi-index construction. For a multi-index $\boldsymbol{\beta} = (\beta_n)_{n=1}^{dN-1} \in \mathbb{N}^{dN-1}$, we denote  by
+To be concrete, in our setting, we are left with a $dN-1$-dimensional Gaussian random input, which is chosen independently, resulting in  $dN-1$ numerical parameters for ASGQ, which we use as the basis of the multi-index construction. For a multi-index $\boldsymbol{\beta} = (\beta_n)_{n=1}^{dN-1} \in \mathbb{N}^{dN-1}$, we denote  by
 $Q_N^{\boldsymbol{\beta}}$,   the result of approximating \eqref{eq: pre_integration_step_wrt_y1_basket} with a number of quadrature points  in the $i$-th dimension equal to  $m(\beta_i)$. We further define the set of
 differences $\Delta Q_N^{\boldsymbol{\beta}}$ as follows: for a single index $1 \le i \le dN-1$,
 let
@@ -48,13 +48,13 @@ Q_N^{\boldsymbol{\beta}}$ is defined as
 \begin{equation*}
 \Delta Q_N^{\boldsymbol{\beta}} = \left( \prod_{i=1}^{dN-1} \Delta_i \right) Q_N^{\boldsymbol{\beta}}.
 \end{equation*}
-The MISC estimator used for approximating \eqref{eq: pre_integration_step_wrt_y1_basket}, and using a set of multi-indices $\mathcal{I}\subset \nset^{dN-1}$ is given by
+The ASGQ estimator used for approximating \eqref{eq: pre_integration_step_wrt_y1_basket}, and using a set of multi-indices $\mathcal{I}\subset \nset^{dN-1}$ is given by
 \begin{equation}\label{eq:MISC_quad_estimator}
 	Q_N^{\mathcal{I}} = \sum_{\boldsymbol{\beta} \in \mathcal{I}} \Delta Q_N^{\boldsymbol{\beta}}.
 \end{equation}
 The quadrature error in this  case  is given by
 \begin{equation}\label{eq:quadrature error}
-\mathcal{E}_Q(\text{TOL}_{\text{MISC}},N) =\abs{Q_N^\infty - Q_N^\mathcal{I}} \le \sum_{\ell \in \mathbb{N}^{dN-1} \setminus
+\mathcal{E}_Q(\text{TOL}_{\text{ASGQ}},N) =\abs{Q_N^\infty - Q_N^\mathcal{I}} \le \sum_{\ell \in \mathbb{N}^{dN-1} \setminus
 	\mathcal{I}} \abs{\Delta Q_N^\ell}.
 \end{equation}
 We define the work contribution, $\Delta \mathcal{W}_{\boldsymbol{\beta}}$, to be the computational cost  required to add  $\Delta Q_N^{\boldsymbol{\beta}}$ to $Q^{\mathcal{I}}_N$, and the error contribution, $\Delta E_{\boldsymbol{\beta}}$, to be  a measure of how much the quadrature error, defined in \eqref{eq:quadrature error}, would decrease once $\Delta Q_N^{\boldsymbol{\beta}}$  has been added to  $Q^{\mathcal{I}}_N$, that is 
@@ -66,17 +66,17 @@ We define the work contribution, $\Delta \mathcal{W}_{\boldsymbol{\beta}}$, to b
  \begin{equation*}
  P_{\boldsymbol{\beta}}= \frac{\abs{\Delta E_{\boldsymbol{\beta}}}}{\Delta\mathcal{W}_{\boldsymbol{\beta}}},
  \end{equation*}
-  the optimal index set  $\mathcal{I}$  for MISC  is given by 
+  the optimal index set  $\mathcal{I}$  for ASGQ  is given by 
  $\mathcal{I}=\{\boldsymbol{\beta}: P_{\boldsymbol{\beta}}	 \ge \bar{T}\}$.
  
 \begin{remark}
-The analiticity assumption, stated in the beginning of Section \ref{sec:Details of the MISC}, is crucial for the optimal performance of our proposed method. In fact, although we face the issue of the  ``curse of dimensionality" when increasing $N$, the analiticity of $f$ implies a spectral convergence for sparse grids quadrature. A discussion about the analiticity of our integrand is provided in Section \ref{sec:Analiticity Analysis}.
+The analiticity assumption, stated in the beginning of Section \ref{sec:Details of the ASGQ}, is crucial for the optimal performance of our proposed method. In fact, although we face the issue of the  ``curse of dimensionality" when increasing $N$, the analiticity of $f$ implies a spectral convergence for sparse grids quadrature. A discussion about the analiticity of our integrand is provided in Section \ref{sec:Analiticity Analysis}.
 \end{remark}  
  
 \subsection{Brownian bridge (Bb) construction}\label{sec:Brwonian bridge construction}
 In the literature of adaptive sparse grids and  QMC, several hierarchical path generation methods (PGMs) or transformation methods have been proposed to reduce the effective dimension. Among these transformations, we cite  the Brownian bridge (Bb)  construction \cite{morokoff1994quasi,moskowitz1996smoothness,caflisch1997valuation}, the principal component analysis (PCA)  \cite{acworth1998comparison} and the linear transformation (LT) \cite{imai2004minimizing}.
 
-In our context, the Brownian motion on a time discretization  can be constructed either sequentially using a standard random walk construction, or hierarchically using   other PGMs as listed above. For our purposes, to make an effective use of MISC, which benefits from anisotropy, we use the Bb construction since it produces  dimensions with different importance for MISC, contrary to a random walk procedure for which all the dimensions of the stochastic space have equal importance. In fact, Bb uses the first several coordinates of the low-discrepancy points to determine the general shape of the Brownian path, and the last few coordinates influence only the fine detail of the path. Consequently, this transformation  reduces the effective dimension  of the problem, which results in accelerating the MISC method by reducing the computational cost.
+In our context, the Brownian motion on a time discretization  can be constructed either sequentially using a standard random walk construction, or hierarchically using   other PGMs as listed above. For our purposes, to make an effective use of ASGQ, which benefits from anisotropy, we use the Bb construction since it produces  dimensions with different importance for ASGQ, contrary to a random walk procedure for which all the dimensions of the stochastic space have equal importance. In fact, Bb uses the first several coordinates of the low-discrepancy points to determine the general shape of the Brownian path, and the last few coordinates influence only the fine detail of the path. Consequently, this transformation  reduces the effective dimension  of the problem, which results in accelerating the ASGQ method by reducing the computational cost.
 
 Let us denote $\{t_i\}_{i=0}^{N}$ the grid of time steps. Then the Bb construction \cite{glasserman2004monte} consists of the following: given a past value $B_{t_i}$ and a future value $B_{t_k}$, the value $B_{t_j}$ (with $t_i < t_j < t_k$) can be generated according to 
 \begin{equation*}
@@ -85,7 +85,7 @@ B_{t_j}=(1-\rho) B_{t_i}+\rho B_{t_k}+ \sqrt{\rho (1-\rho)(k-i) \Delta t} z, \: 
 where $\rho=\frac{j-i}{k-i}$.  
 
 \subsection{Richardson extrapolation}\label{sec:Richardson extrapolation}
-Another transformation that we couple with MISC is Richardson extrapolation \cite{talay1990expansion}. In fact, applying level $K_\text{R}$ (level of extrapolation) of Richardson extrapolation  dramatically reduces the bias, and as a consequence reduces the  number of time steps $N$ needed in the coarsest level to achieve a certain error tolerance. As a consequence, Richardson extrapolation directly reduces  the total dimension of the integration problem for achieving some error tolerance.
+Another transformation that we couple with ASGQ is Richardson extrapolation \cite{talay1990expansion}. In fact, applying level $K_\text{R}$ (level of extrapolation) of Richardson extrapolation  dramatically reduces the bias, and as a consequence reduces the  number of time steps $N$ needed in the coarsest level to achieve a certain error tolerance. As a consequence, Richardson extrapolation directly reduces  the total dimension of the integration problem for achieving some error tolerance.
 
 Let us denote by $(X_t)_{0 \le t \le T}$ a certain stochastic process and by $(\hat{X}_{t_i}^h)_{0 \le  t_i \le T}$ its approximation using a suitable  scheme with a time step $h$.  Then, for sufficiently small $h$, and a suitable smooth function $f$, we assume that
 \begin{align}\label{Euler_weak_error_strenghten}

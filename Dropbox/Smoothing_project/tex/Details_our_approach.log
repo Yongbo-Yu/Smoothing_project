@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  10 APR 2019 11:06
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  19 APR 2019 13:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -306,7 +306,7 @@ t line 1.
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
                                                   \space undefined\on@line .
-l.1 ...s in MISC, proposed in \cite{haji2016multi}
+l.1 ...me construction as in  \cite{haji2016multi}
                                                   . Therefore, the initial i...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -341,14 +341,13 @@ Overfull \hbox (10.86105pt too wide) in paragraph at lines 1--2
  []
 
 
-Overfull \hbox (1675.81229pt too wide) in paragraph at lines 1--2
+Overfull \hbox (1592.838pt too wide) in paragraph at lines 1--2
 []\OML/cmm/m/it/10 ntegration[]tep[]rt[]\OT1/cmr/m/n/10 1[]\OML/cmm/m/it/10 ask
 et; describedinSection[]; byemployinghierarchicaladaptivesparsegridsquadrature;
- usingthesameconstructionasinMISC; proposedin\OT1/cmr/m/n/10 [[]]\OML/cmm/m/it/
-10 :Therefore; theinitialintegrationproblemthatwearesolvinglivesin$$\OMS/cmsy/m
-/n/10 ^^@\OML/cmm/m/it/10 dimensionalspace; whichbecomesverylargeaseitherthenum
-beroftimesteps$$; usedinthediscretizationscheme; increases; orthenumbertheasset
-sincrease:$ 
+ usingthesameconstructionasin\OT1/cmr/m/n/10 [[]]\OML/cmm/m/it/10 :Therefore; t
+heinitialintegrationproblemthatwearesolvinglivesin$$\OMS/cmsy/m/n/10 ^^@\OML/cm
+m/m/it/10 dimensionalspace; whichbecomesverylargeaseitherthenumberoftimesteps$$
+; usedinthediscretizationscheme; increases; orthenumbertheassetsincrease:$ 
  []
 
 
@@ -359,7 +358,7 @@ Type  H <return>  for immediate help.
  ...                                              
                                                   
 l.3 W
-     e describe the  MISC method in our context in Section \ref{sec:Details ...
+     e describe the  ASGQ method in our context in Section \ref{sec:Details ...
 
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -377,10 +376,10 @@ Missing character: There is no e in font nullfont!
 Missing character: There is no t in font nullfont!
 Missing character: There is no h in font nullfont!
 Missing character: There is no e in font nullfont!
-Missing character: There is no M in font nullfont!
-Missing character: There is no I in font nullfont!
+Missing character: There is no A in font nullfont!
 Missing character: There is no S in font nullfont!
-Missing character: There is no C in font nullfont!
+Missing character: There is no G in font nullfont!
+Missing character: There is no Q in font nullfont!
 Missing character: There is no m in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no t in font nullfont!
@@ -409,9 +408,9 @@ Missing character: There is no i in font nullfont!
 Missing character: There is no o in font nullfont!
 Missing character: There is no n in font nullfont!
 ! Undefined control sequence.
-<write> ...:Details of the MISC' on page \thepage 
+<write> ...:Details of the ASGQ' on page \thepage 
                                                   \space undefined\on@line .
-l.3 ...xt in Section \ref{sec:Details of the MISC}
+l.3 ...xt in Section \ref{sec:Details of the ASGQ}
                                                   .  To make an effective us...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -420,7 +419,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-LaTeX Warning: Reference `sec:Details of the MISC' on page  undefined on input 
+LaTeX Warning: Reference `sec:Details of the ASGQ' on page  undefined on input 
 line 3.
 
 Missing character: There is no . in font nullfont!
@@ -446,10 +445,10 @@ Missing character: There is no s in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no o in font nullfont!
 Missing character: There is no f in font nullfont!
-Missing character: There is no M in font nullfont!
-Missing character: There is no I in font nullfont!
+Missing character: There is no A in font nullfont!
 Missing character: There is no S in font nullfont!
-Missing character: There is no C in font nullfont!
+Missing character: There is no G in font nullfont!
+Missing character: There is no Q in font nullfont!
 Missing character: There is no , in font nullfont!
 Missing character: There is no w in font nullfont!
 Missing character: There is no e in font nullfont!
@@ -1205,7 +1204,7 @@ you left one out. Proceed, with fingers crossed.
 
 ! Extra }, or forgotten $.
 l.7 ...ref{eq: pre_integration_step_wrt_y1_basket}
-                                                   using the MISC estimator,...
+                                                   using the ASGQ estimator,...
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
 you forgot something else, as in `\hbox{$x}'. In such cases
@@ -1216,7 +1215,7 @@ Missing character: There is no Q in font nullfont!
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.7 ...rt_y1_basket} using the MISC estimator, $Q_
+l.7 ...rt_y1_basket} using the ASGQ estimator, $Q_
                                                   N$, then we have a natural...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -1361,7 +1360,7 @@ and I'll forget about whatever was undefined.
 <recently read> &
                  
 l.10   &
-         \le \mathcal{E}_B(N)+ \mathcal{E}_Q(\text{TOL}_{\text{MISC}},N),
+         \le \mathcal{E}_B(N)+ \mathcal{E}_Q(\text{TOL}_{\text{ASGQ}},N),
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
 simple: Just type `I\&' now. But if some right brace
@@ -1371,7 +1370,7 @@ might try typing `S' now just to see what is salvageable.
 
 ! Undefined control sequence.
 l.10   & \le \mathcal{E}_B(N)+ \mathcal{E}_Q(\text
-                                                  {TOL}_{\text{MISC}},N),
+                                                  {TOL}_{\text{ASGQ}},N),
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -1380,7 +1379,7 @@ and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
 l.10 ...l{E}_B(N)+ \mathcal{E}_Q(\text{TOL}_{\text
-                                                  {MISC}},N),
+                                                  {ASGQ}},N),
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -1458,9 +1457,9 @@ Overfull \hbox (15.76671pt too wide) in paragraph at lines 7--13
  []
 
 
-Overfull \hbox (243.82112pt too wide) in paragraph at lines 7--13
+Overfull \hbox (243.25449pt too wide) in paragraph at lines 7--13
 []\OML/cmm/m/it/10 ntegration[]tep[]rt[]\OT1/cmr/m/n/10 1[]\OML/cmm/m/it/10 ask
-etusingtheMISCestimator;$$[]$
+etusingtheASGQestimator;$$[]$
  []
 
 
@@ -1489,7 +1488,7 @@ Overfull \hbox (36.84137pt too wide) in paragraph at lines 7--13
  []
 
 
-Overfull \hbox (82.62799pt too wide) in paragraph at lines 7--13
+Overfull \hbox (82.47507pt too wide) in paragraph at lines 7--13
 \OMS/cmsy/m/n/10 E[]\OT1/cmr/m/n/10 ([][]\OML/cmm/m/it/10 ; N\OT1/cmr/m/n/10 )\
 OML/cmm/m/it/10 ;$
  []
@@ -1506,7 +1505,7 @@ Overfull \hbox (12.1608pt too wide) in paragraph at lines 7--13
 
 ! Undefined control sequence.
 l.14 \subsection
-                {Adaptive Sparse Grids}\label{sec:Details of the MISC}
+                {Adaptive Sparse Grids}\label{sec:Details of the ASGQ}
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -1521,7 +1520,7 @@ Type  H <return>  for immediate help.
  ...                                              
                                                   
 l.14 \subsection{A
-                  daptive Sparse Grids}\label{sec:Details of the MISC}
+                  daptive Sparse Grids}\label{sec:Details of the ASGQ}
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
@@ -3374,10 +3373,10 @@ Missing character: There is no o in font nullfont!
 Missing character: There is no n in font nullfont!
 Missing character: There is no a in font nullfont!
 Missing character: There is no s in font nullfont!
-Missing character: There is no M in font nullfont!
-Missing character: There is no I in font nullfont!
+Missing character: There is no A in font nullfont!
 Missing character: There is no S in font nullfont!
-Missing character: There is no C in font nullfont!
+Missing character: There is no G in font nullfont!
+Missing character: There is no Q in font nullfont!
 Missing character: There is no , in font nullfont!
 Missing character: There is no a in font nullfont!
 Missing character: There is no n in font nullfont!
@@ -3672,10 +3671,10 @@ Missing character: There is no s in font nullfont!
 Missing character: There is no f in font nullfont!
 Missing character: There is no o in font nullfont!
 Missing character: There is no r in font nullfont!
-Missing character: There is no M in font nullfont!
-Missing character: There is no I in font nullfont!
+Missing character: There is no A in font nullfont!
 Missing character: There is no S in font nullfont!
-Missing character: There is no C in font nullfont!
+Missing character: There is no G in font nullfont!
+Missing character: There is no Q in font nullfont!
 Missing character: There is no , in font nullfont!
 Missing character: There is no w in font nullfont!
 Missing character: There is no h in font nullfont!
@@ -4235,10 +4234,10 @@ my insertion and my current dilemma will both disappear.
 Missing character: There is no T in font nullfont!
 Missing character: There is no h in font nullfont!
 Missing character: There is no e in font nullfont!
-Missing character: There is no M in font nullfont!
-Missing character: There is no I in font nullfont!
+Missing character: There is no A in font nullfont!
 Missing character: There is no S in font nullfont!
-Missing character: There is no C in font nullfont!
+Missing character: There is no G in font nullfont!
+Missing character: There is no Q in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no s in font nullfont!
 Missing character: There is no t in font nullfont!
@@ -4269,7 +4268,7 @@ Missing character: There is no i in font nullfont!
 Missing character: There is no n in font nullfont!
 Missing character: There is no g in font nullfont!
 ! Undefined control sequence.
-l.51 ...SC estimator used for approximating \eqref
+l.51 ...GQ estimator used for approximating \eqref
                                                   {eq: pre_integration_step_...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -4524,7 +4523,7 @@ and I'll forget about whatever was undefined.
 
 \newlabel{eq:total_error}{{}{}}
 ! Undefined control sequence.
-<write> ...l{sec:Details of the MISC}{{}{\thepage 
+<write> ...l{sec:Details of the ASGQ}{{}{\thepage 
                                                   }}
 l.54 \end{equation}
                    
@@ -4534,7 +4533,7 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-\newlabel{sec:Details of the MISC}{{}{}}
+\newlabel{sec:Details of the ASGQ}{{}{}}
 ]
 Missing character: There is no T in font nullfont!
 Missing character: There is no h in font nullfont!
@@ -4576,7 +4575,7 @@ Missing character: There is no y in font nullfont!
 
 ! Undefined control sequence.
 l.57 \mathcal{E}_Q(\text
-                        {TOL}_{\text{MISC}},N) =\abs{Q_N^\infty - Q_N^\mathc...
+                        {TOL}_{\text{ASGQ}},N) =\abs{Q_N^\infty - Q_N^\mathc...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -4585,7 +4584,7 @@ and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
 l.57 \mathcal{E}_Q(\text{TOL}_{\text
-                                    {MISC}},N) =\abs{Q_N^\infty - Q_N^\mathc...
+                                    {ASGQ}},N) =\abs{Q_N^\infty - Q_N^\mathc...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -4593,7 +4592,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.57 ...cal{E}_Q(\text{TOL}_{\text{MISC}},N) =\abs
+l.57 ...cal{E}_Q(\text{TOL}_{\text{ASGQ}},N) =\abs
                                                   {Q_N^\infty - Q_N^\mathcal...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -4620,7 +4619,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-Overfull \hbox (222.7148pt too wide) detected at line 59
+Overfull \hbox (222.56187pt too wide) detected at line 59
 []\OMS/cmsy/m/n/10 E[]\OT1/cmr/m/n/10 ([][]\OML/cmm/m/it/10 ; N\OT1/cmr/m/n/10 
 ) = [] \OMS/cmsy/m/n/10 ^^T [] []\OML/cmm/m/it/10 :
  []
@@ -5239,10 +5238,10 @@ Missing character: There is no t in font nullfont!
 Missing character: There is no f in font nullfont!
 Missing character: There is no o in font nullfont!
 Missing character: There is no r in font nullfont!
-Missing character: There is no M in font nullfont!
-Missing character: There is no I in font nullfont!
+Missing character: There is no A in font nullfont!
 Missing character: There is no S in font nullfont!
-Missing character: There is no C in font nullfont!
+Missing character: There is no G in font nullfont!
+Missing character: There is no Q in font nullfont!
 Missing character: There is no i in font nullfont!
 Missing character: There is no s in font nullfont!
 Missing character: There is no g in font nullfont!
@@ -6453,10 +6452,10 @@ Missing character: There is no s in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no o in font nullfont!
 Missing character: There is no f in font nullfont!
-Missing character: There is no M in font nullfont!
-Missing character: There is no I in font nullfont!
+Missing character: There is no A in font nullfont!
 Missing character: There is no S in font nullfont!
-Missing character: There is no C in font nullfont!
+Missing character: There is no G in font nullfont!
+Missing character: There is no Q in font nullfont!
 Missing character: There is no , in font nullfont!
 Missing character: There is no w in font nullfont!
 Missing character: There is no h in font nullfont!
@@ -6559,10 +6558,10 @@ Missing character: There is no e in font nullfont!
 Missing character: There is no f in font nullfont!
 Missing character: There is no o in font nullfont!
 Missing character: There is no r in font nullfont!
-Missing character: There is no M in font nullfont!
-Missing character: There is no I in font nullfont!
+Missing character: There is no A in font nullfont!
 Missing character: There is no S in font nullfont!
-Missing character: There is no C in font nullfont!
+Missing character: There is no G in font nullfont!
+Missing character: There is no Q in font nullfont!
 Missing character: There is no , in font nullfont!
 Missing character: There is no c in font nullfont!
 Missing character: There is no o in font nullfont!
@@ -6928,10 +6927,10 @@ Missing character: There is no g in font nullfont!
 Missing character: There is no t in font nullfont!
 Missing character: There is no h in font nullfont!
 Missing character: There is no e in font nullfont!
-Missing character: There is no M in font nullfont!
-Missing character: There is no I in font nullfont!
+Missing character: There is no A in font nullfont!
 Missing character: There is no S in font nullfont!
-Missing character: There is no C in font nullfont!
+Missing character: There is no G in font nullfont!
+Missing character: There is no Q in font nullfont!
 Missing character: There is no m in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no t in font nullfont!
@@ -7376,10 +7375,10 @@ Missing character: There is no w in font nullfont!
 Missing character: There is no i in font nullfont!
 Missing character: There is no t in font nullfont!
 Missing character: There is no h in font nullfont!
-Missing character: There is no M in font nullfont!
-Missing character: There is no I in font nullfont!
+Missing character: There is no A in font nullfont!
 Missing character: There is no S in font nullfont!
-Missing character: There is no C in font nullfont!
+Missing character: There is no G in font nullfont!
+Missing character: There is no Q in font nullfont!
 Missing character: There is no i in font nullfont!
 Missing character: There is no s in font nullfont!
 Missing character: There is no R in font nullfont!
@@ -11118,10 +11117,10 @@ Overfull \hbox (9.38895pt too wide) in paragraph at lines 129--130
 
  
 Here is how much of TeX's memory you used:
- 50 strings out of 493014
- 853 string characters out of 6133351
+ 51 strings out of 493014
+ 878 string characters out of 6133351
  64601 words of memory out of 5000000
- 3687 multiletter control sequences out of 15000+600000
+ 3688 multiletter control sequences out of 15000+600000
  4913 words of font info for 18 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  19i,5n,25p,882b,170s stack positions out of 5000i,500n,10000p,200000b,80000s
