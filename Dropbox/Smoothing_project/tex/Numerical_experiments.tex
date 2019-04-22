@@ -1230,7 +1230,7 @@ Applying Forward Euler scheme to descretize \ref{eq:dynamics Heston} implies
 \begin{align}\label{eq:FE_Heston_discrete}
 S_{t+\Delta t}&= S_t +\mu S_t \Delta t+\sqrt{v_t \Delta t}S_t Z_s \nonumber\\
 v_{t+\Delta t}&=f_1(v_t)+\kappa (\theta-f_2(v_t)) \Delta t+\xi \sqrt{f_3(v_t) \Delta t} Z_v \nonumber\\
-v_{t+\Delta t}&=f_3(v_{t+\Delta t}4) \COMMA
+v_{t+\Delta t}&=f_3(v_{t+\Delta t}) \COMMA
 \end{align}
 where $Z_s$ and $Z_v$  are two correlated standard normal variables with correlation $\rho$, such that $Z_s=\rho Z_v+\sqrt{1-\rho^2} Z_t$, and to avoid problems with negative values of $\sqrt{v_t}$, we introduce $f_1, f_2$, and $f_3$, which with different choices implies different schemes used in the literature 
 
@@ -1255,7 +1255,7 @@ The literature \cite{lord2010comparison} suggest that the Full Truncation method
 
 \subsubsection{European call option  under the discretized the Heston model }
 
-The  first example that we test under the Heston model is the single European call option with parameters: $S_0=K=100$, $v_0=0.04$, $\mu=0$, $\kappa=5$, $\theta=0.04$, $\xi=0.1$ and $\rho=-0.9$. The reference value in this case is $7.5789$. For solving the root finding problem we follow similar approach to the one in Section \ref{sec:Determining the kink location} with substituting $\sigma$ with $\sqrt{v_i}$ in $f_i$.
+The  first example that we test under the Heston model is the single European call option with parameters: $S_0=K=100$, $v_0=0.04$, $\mu=0$, $\kappa=5$, $\theta=0.04$, $\xi=0.5$ and $\rho=-0.9$. The reference value in this case is $7.5789$. For solving the root finding problem we follow similar approach to the one in Section \ref{sec:Determining the kink location} with substituting $\sigma$ with $\sqrt{v_i}$ in $f_i$.
 
 Figure \ref{fig:Weak_rate_heston_single_call} shows the estimated   weak error  for the case without Richardson extrapolation.
 

@@ -27,7 +27,7 @@ class Problem(object):
     K=None         # Strike price
     T=1.0                      # maturity
     sigma=None    # volatility
-    N=4  # number of time steps which will be equal to the number of brownian bridge components (we set is a power of 2)
+    N=2  # number of time steps which will be equal to the number of brownian bridge components (we set is a power of 2)
     d=None
     dt=None
 
@@ -96,42 +96,37 @@ class Problem(object):
         return goal
 
 
-     # objfun:  beta #number of points in the first direction
-    def objfun(self,y):        
+      # objfun:  beta #number of points in the first direction
+    def objfun(self,y):    
 
         # step 1 # get the two partitions of coordinates y_1 for the volatility path  and y_s for  the asset path  
         y1=y[0:self.N] # this points are related to the volatility path
 
         y2=[self.N]
         y2[0]=0.0
-        y2[1:]=y[self.N:]
+        y2[1:]=y[self.N:2*self.N-1]
 
-        #y_s= self.rho *np.array(y1)+ np.sqrt(1-self.rho**2) * np.array(y2) 
-        #ys=y_s[1:]
-
-        y2s=y2[1:]
+        y_s= self.rho *np.array(y1)+ np.sqrt(1-self.rho**2) * np.array(y2) 
+      
+        ys=y_s[1:]
         
         # step 2: computing the location of the kink
-        #bar_z=self.newtons_method(y_s[0],ys,y1[0],y1[1:self.N])
-        bar_z=self.newtons_method(y2[0],y2s,y1[0],y1[1:self.N])
-        #bar_z=0
+        bar_z=self.newtons_method(y_s[0],ys,y1[0],y1[1:self.N])
         
         # step 3: performing the pre-intgeration step wrt kink point
     
         mylist_left=[]
         mylist_left.append(self.yknots_left[0])
-        mylist_left[1:]=[np.array(y2s[i]) for i in range(0,len(y2s))]
+        mylist_left[1:]=[np.array(ys[i]) for i in range(0,len(ys))]
         points_left=self.cartesian(mylist_left)
 
         x_l=np.asarray([self.stock_price_trajectory_1D_heston(bar_z-points_left[i,0],points_left[i,1:],y1[0],y1[1:self.N])[0]  for i in range(0,len(self.yknots_left[0]))])
-
-       
         QoI_left= self.yknots_left[1].dot(self.payoff(x_l)*((1/np.sqrt(2 * np.pi)) * np.exp(-((bar_z-points_left[:,0])**2)/2)* np.exp(points_left[:,0])))
 
 
         mylist_right=[]
         mylist_right.append(self.yknots_right[0])
-        mylist_right[1:]=[np.array(y2s[i]) for i in range(0,len(y2s))]
+        mylist_right[1:]=[np.array(ys[i]) for i in range(0,len(ys))]
         points_right=self.cartesian(mylist_right)
         x_r=np.asarray([self.stock_price_trajectory_1D_heston(points_right[i,0]+bar_z,points_right[i,1:],y1[0],y1[1:self.N])[0] for i in range(0,len(self.yknots_right[0]))])
         QoI_right= self.yknots_right[1].dot(self.payoff(x_r)*(1/np.sqrt(2 * np.pi)) * np.exp(-((points_right[:,0]+bar_z)**2)/2)* np.exp(points_right[:,0]))
@@ -140,8 +135,8 @@ class Problem(object):
                 
         return QoI
 
-    
-   # This function implements the brownian bridge construction in 1 D, the argument y here represent independent  multivariate gaussian  rdv  given by
+
+    # This function implements the brownian bridge construction in 1 D, the argument y here represent independent  multivariate gaussian  rdv  given by
     #mean = np.zeros(self.N)
     #covariance= np.identity(self.N)
     #y = np.random.multivariate_normal(mean, covariance)
@@ -178,37 +173,19 @@ class Problem(object):
     def stock_price_trajectory_1D_heston(self,y1,y,yv1,yv):
         bb=self.brownian_increments(y1,y)
         dW= [bb[0,i+1]-bb[0,i] for i in range(0,self.N)] 
-       # # # non hierarhcical
-       #  dW=[]
-       #  dW.append(y1)
-       #  dW[1:]=[np.array(y[i]) for i in range(0,len(y))]
-       #  dW=np.array(dW)*np.sqrt(self.dt)
         
-    
-        # #  hierarhcical
+        #  hierarhcical
         # bb_v=self.brownian_increments(yv1,yv)
         # dW_v= [bb_v[0,i+1]-bb_v[0,i] for i in range(0,self.N)] 
-
-        # # non hierarhcical
+       
+          # non hierarhcical
         dW_v=[]
         dW_v.append(yv1)
         dW_v[1:]=[np.array(yv[i]) for i in range(0,len(yv))]
         dW_v=np.array(dW_v)*np.sqrt(self.dt)
         
 
-        
-        dW_s= self.rho *np.array(dW_v)+ np.sqrt(1-self.rho**2) * np.array(dW)
-        y1s= self.rho *yv1 + np.sqrt(1-self.rho**2) * y1
-
-
-        #option1 
-        # dbb1=dW-(self.dt/np.sqrt(self.T))*y1 # brownian bridge increments dbb_i (used later for the location of the kink point)
-        # dbbv=dW_v*np.sqrt(self.dt) -(self.dt/np.sqrt(self.T))*yv1 # brownian bridge increments dbb_i (used later for the location of the kink point)
-        # dbb_s= self.rho *np.array(dbbv) + np.sqrt(1-self.rho**2) * np.array(dbb1)
-        # #option2
-        dbb_s=dW_s-(self.dt/np.sqrt(self.T))*y1s
-
-
+        dbb=dW-(self.dt/np.sqrt(self.T))*y1 # brownian bridge increments dbb_i (used later for the location of the kink point)
 
         X=np.zeros(self.N+1) #here will store the asset trajectory
         V=np.zeros(self.N+1) #here will store the  volatility trajectory
@@ -216,13 +193,12 @@ class Problem(object):
         X[0]=self.S0
         V[0]=self.v0
         
-        
         for n in range(1,self.N+1):
-            X[n]=X[n-1]*(1+np.sqrt(V[n-1])*dW_s[n-1])
+            X[n]=X[n-1]*(1+np.sqrt(V[n-1])*dW[n-1])
             V[n]=V[n-1]- self.kappa *self.dt* max(V[n-1],0)+ self.xi *np.sqrt(max(V[n-1],0))*dW_v[n-1]+ self.kappa*self.theta*self.dt
             V[n]=max(V[n],0)
             
-        return X[-1],dbb_s,V
+        return X[-1],dbb,V
        
     # this function defines the payoff function used here
     def payoff(self,x): 
@@ -244,18 +220,13 @@ class Problem(object):
         X,dbb,V=self.stock_price_trajectory_1D_heston(y1,y,yv1,yv) # right version
         fi=np.zeros((1,len(dbb)))
         
-
-        y1s= self.rho *yv1 + np.sqrt(1-self.rho**2) * y1
-        
-        fi=1+(np.sqrt(V[0:self.N])/float(np.sqrt(self.T)))*y1s*(self.dt) +(np.sqrt(V[0:self.N]))*dbb
+     
+        fi=1+(np.sqrt(V[0:self.N])/float(np.sqrt(self.T)))*y1*(self.dt)+(np.sqrt(V[0:self.N]))*dbb
         product=np.prod(fi)
         Py=product-(self.K/float(self.S0))
-
-
+        
         summation=np.sum(np.sqrt(V[0:self.N])/fi)
         dPy=(1/float(np.sqrt(self.T)))*(self.dt)*product*summation
-       # print dPy
-        #dPy=1.0
         return Py,dPy    
         
 
@@ -269,6 +240,7 @@ class Problem(object):
             x0 = x0 - 0.1*P_value/dP
             delta = self.dx(x0,y,yv1,yv) 
         return x0     
+
 
 
 
@@ -458,7 +430,7 @@ def first_difference_rate_plotting():
     marker=['>', 'v', '^', 'o', '*','+','>','v']
     ax = figure().gca()
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))
-    for d1 in range(0,7,1):
+    for d1 in range(0,3,1):
         print(d1)
         mylist=[]
         bias=np.zeros(5)
@@ -514,7 +486,7 @@ def first_difference_rate_plotting():
         plt.ylabel(r'$\mid \Delta E_{\mathbf{1}+k \bar{\beta}} \mid $',fontsize=14)  
      
     plt.legend(loc='upper right')
-    plt.savefig('./results/first_difference_heston_4steps_non_hierarchical.eps', format='eps', dpi=1000)
+    plt.savefig('./results/first_difference_heston_2steps_non_hierarchical_version2.eps', format='eps', dpi=1000)
 
 
 
@@ -524,7 +496,7 @@ def mixed_difference_order2_rate_plotting(d):
     marker=['>', 'v', '^', 'o', '*','+','-',':']
     ax = figure().gca()
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))
-    for k in range(0,7,1):  
+    for k in range(0,3,1):  
         if k==d:
             print('Hello')
             continue
@@ -648,7 +620,7 @@ def mixed_difference_order2_rate_plotting(d):
         plt.xlabel('k',fontsize=14)
         plt.ylabel(r'$\mid \Delta E_{\mathbf{1}+k \bar{\beta}} \mid $',fontsize=14)  
     plt.legend(loc='lower left')
-    plt.savefig('./results/mixed_difference_order2_heston_4steps_non_hierarchical.eps', format='eps', dpi=1000)       
+    plt.savefig('./results/mixed_difference_order2_heston_2steps_non_hierarchical_version2.eps', format='eps', dpi=1000)       
     
     
 

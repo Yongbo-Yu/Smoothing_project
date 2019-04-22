@@ -3,7 +3,7 @@ import time
 import scipy.stats as ss
 
 
-class Problem(object):
+class Problem_version2(object):
 
 # attributes
     random_gen=None;
@@ -12,7 +12,7 @@ class Problem(object):
     K=None         # Strike price
     T=1.0                      # maturity
     sigma=None    # volatility
-    N=8  # number of time steps which will be equal to the number of brownian bridge components (we set is a power of 2)
+    N=4   # number of time steps which will be equal to the number of brownian bridge components (we set is a power of 2)
     d=None
     dt=None
 
@@ -45,27 +45,27 @@ class Problem(object):
         self.dt=self.T/float(self.N) # time steps length
         self.d=int(np.log2(self.N)) #power 2 number steps
 
-        # For less than 185 points
-        #beta=32
-        #self.yknots_right=np.polynomial.laguerre.laggauss(beta)
+        # # For less than 185 points
+        beta=4
+        self.yknots_right=np.polynomial.laguerre.laggauss(beta)
       
-        # For more than 185 points
-        #beta=512
-        from Parser import Parser
-        fx = open('lag_512_x.txt', 'r')
-        Element_properties_x = Parser('./lag_512_x.txt')
-        Element_properties_x.parse_file(fx.read(),'\n')
-        x=np.array([float(i) for i in Element_properties_x.element_list])
+        # # # For more than 185 points
+        # beta=512
+        # from Parser import Parser
+        # fx = open('lag_512_x.txt', 'r')
+        # Element_properties_x = Parser('./lag_512_x.txt')
+        # Element_properties_x.parse_file(fx.read(),'\n')
+        # x=np.array([float(i) for i in Element_properties_x.element_list])
        
-        Element_properties_x.close_file()   
-        fw = open('lag_512_w.txt', 'r')
-        Element_properties_w = Parser('./lag_512_w.txt')
-        Element_properties_w.parse_file(fw.read(),'\n')
-        w=np.array([float(i) for i in Element_properties_w.element_list])
+        # Element_properties_x.close_file()   
+        # fw = open('lag_512_w.txt', 'r')
+        # Element_properties_w = Parser('./lag_512_w.txt')
+        # Element_properties_w.parse_file(fw.read(),'\n')
+        # w=np.array([float(i) for i in Element_properties_w.element_list])
    
-        Element_properties_x.close_file()   
-        self.yknots_right.append(x[:360])
-        self.yknots_right.append(w[:360])
+        # Element_properties_x.close_file()   
+        # self.yknots_right.append(x[:360])
+        # self.yknots_right.append(w[:360])
      
        
         self.yknots_left=self.yknots_right
@@ -106,33 +106,29 @@ class Problem(object):
 
         y2=[self.N]
         y2[0]=0.0
-        y2[1:]=y[self.N:]
+        y2[1:]=y[self.N:2*self.N-1]
 
-        #y_s= self.rho *np.array(y1)+ np.sqrt(1-self.rho**2) * np.array(y2) 
-        #ys=y_s[1:]
-
-        y2s=y2[1:]
+        y_s= self.rho *np.array(y1)+ np.sqrt(1-self.rho**2) * np.array(y2) 
+      
+        ys=y_s[1:]
         
         # step 2: computing the location of the kink
-        #bar_z=self.newtons_method(y_s[0],ys,y1[0],y1[1:self.N])
-        bar_z=self.newtons_method(y2[0],y2s,y1[0],y1[1:self.N])
+        bar_z=self.newtons_method(y_s[0],ys,y1[0],y1[1:self.N])
         
         # step 3: performing the pre-intgeration step wrt kink point
     
         mylist_left=[]
         mylist_left.append(self.yknots_left[0])
-        mylist_left[1:]=[np.array(y2s[i]) for i in range(0,len(y2s))]
+        mylist_left[1:]=[np.array(ys[i]) for i in range(0,len(ys))]
         points_left=self.cartesian(mylist_left)
 
         x_l=np.asarray([self.stock_price_trajectory_1D_heston(bar_z-points_left[i,0],points_left[i,1:],y1[0],y1[1:self.N])[0]  for i in range(0,len(self.yknots_left[0]))])
-
-       
         QoI_left= self.yknots_left[1].dot(self.payoff(x_l)*((1/np.sqrt(2 * np.pi)) * np.exp(-((bar_z-points_left[:,0])**2)/2)* np.exp(points_left[:,0])))
 
 
         mylist_right=[]
         mylist_right.append(self.yknots_right[0])
-        mylist_right[1:]=[np.array(y2s[i]) for i in range(0,len(y2s))]
+        mylist_right[1:]=[np.array(ys[i]) for i in range(0,len(ys))]
         points_right=self.cartesian(mylist_right)
         x_r=np.asarray([self.stock_price_trajectory_1D_heston(points_right[i,0]+bar_z,points_right[i,1:],y1[0],y1[1:self.N])[0] for i in range(0,len(self.yknots_right[0]))])
         QoI_right= self.yknots_right[1].dot(self.payoff(x_r)*(1/np.sqrt(2 * np.pi)) * np.exp(-((points_right[:,0]+bar_z)**2)/2)* np.exp(points_right[:,0]))
@@ -182,31 +178,18 @@ class Problem(object):
     def stock_price_trajectory_1D_heston(self,y1,y,yv1,yv):
         bb=self.brownian_increments(y1,y)
         dW= [bb[0,i+1]-bb[0,i] for i in range(0,self.N)] 
-    
+        
         #  hierarhcical
-       # bb_v=self.brownian_increments(yv1,yv)
-        #dW_v= [bb_v[0,i+1]-bb_v[0,i] for i in range(0,self.N)] 
-
-        # # non hierarhcical
+      #  bb_v=self.brownian_increments(yv1,yv)
+       # dW_v= [bb_v[0,i+1]-bb_v[0,i] for i in range(0,self.N)] 
+   
+            # # non hierarhcical
         dW_v=[]
         dW_v.append(yv1)
         dW_v[1:]=[np.array(yv[i]) for i in range(0,len(yv))]
-        dW_v=np.array(dW_v)
-        
+        dW_v=np.array(dW_v)*np.sqrt(self.dt)
 
-        
-        dW_s= self.rho *np.array(dW_v)*np.sqrt(self.dt) + np.sqrt(1-self.rho**2) * np.array(dW)
-        y1s= self.rho *yv1 + np.sqrt(1-self.rho**2) * y1
-
-
-        #option1 
-        # dbb1=dW-(self.dt/np.sqrt(self.T))*y1 # brownian bridge increments dbb_i (used later for the location of the kink point)
-        # dbbv=dW_v*np.sqrt(self.dt) -(self.dt/np.sqrt(self.T))*yv1 # brownian bridge increments dbb_i (used later for the location of the kink point)
-        # dbb_s= self.rho *np.array(dbbv) + np.sqrt(1-self.rho**2) * np.array(dbb1)
-        # #option2
-        dbb_s=dW_s-(self.dt/np.sqrt(self.T))*y1s
-
-
+        dbb=dW-(self.dt/np.sqrt(self.T))*y1 # brownian bridge increments dbb_i (used later for the location of the kink point)
 
         X=np.zeros(self.N+1) #here will store the asset trajectory
         V=np.zeros(self.N+1) #here will store the  volatility trajectory
@@ -214,13 +197,12 @@ class Problem(object):
         X[0]=self.S0
         V[0]=self.v0
         
-        
         for n in range(1,self.N+1):
-            X[n]=X[n-1]*(1+np.sqrt(V[n-1])*dW_s[n-1])
-            V[n]=np.abs(V[n-1])- self.kappa *self.dt* max(V[n-1],0)+ self.xi *np.sqrt(max(V[n-1],0))*dW_v[n-1]*np.sqrt(self.dt)+ self.kappa*self.theta*self.dt
+            X[n]=X[n-1]*(1+np.sqrt(V[n-1])*dW[n-1])
+            V[n]=V[n-1]- self.kappa *self.dt* max(V[n-1],0)+ self.xi *np.sqrt(max(V[n-1],0))*dW_v[n-1]+ self.kappa*self.theta*self.dt
             V[n]=max(V[n],0)
             
-        return X[-1],dbb_s,V
+        return X[-1],dbb,V
        
     # this function defines the payoff function used here
     def payoff(self,x): 
@@ -242,18 +224,13 @@ class Problem(object):
         X,dbb,V=self.stock_price_trajectory_1D_heston(y1,y,yv1,yv) # right version
         fi=np.zeros((1,len(dbb)))
         
-
-        y1s= self.rho *yv1 + np.sqrt(1-self.rho**2) * y1
-        
-        fi=1+(np.sqrt(V[0:self.N])/float(np.sqrt(self.T)))*y1s*(self.dt) +(np.sqrt(V[0:self.N]))*dbb
+     
+        fi=1+(np.sqrt(V[0:self.N])/float(np.sqrt(self.T)))*y1*(self.dt)+(np.sqrt(V[0:self.N]))*dbb
         product=np.prod(fi)
         Py=product-(self.K/float(self.S0))
-
-
+        
         summation=np.sum(np.sqrt(V[0:self.N])/fi)
         dPy=(1/float(np.sqrt(self.T)))*(self.dt)*product*summation
-       # print dPy
-        #dPy=1.0
         return Py,dPy    
         
 

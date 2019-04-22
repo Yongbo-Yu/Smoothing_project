@@ -166,20 +166,33 @@ class Problem(object):
 
     # This function simulates a 1D heston trajectory for stock price and volatility paths
     def stock_price_trajectory_1D_heston(self,y1,y,yv1,yv,Nsteps):
-        bb=self.brownian_increments(y1,y,Nsteps)
-      
-        dW= [bb[0,i+1]-bb[0,i] for  i in range(0,Nsteps)] 
+        bb=self.brownian_increments(y1,y)
+        dW= [bb[0,i+1]-bb[0,i] for i in range(0,Nsteps)] 
+    
+        #  hierarhcical
+       # bb_v=self.brownian_increments(yv1,yv)
+        #dW_v= [bb_v[0,i+1]-bb_v[0,i] for i in range(0,self.N)] 
+
+        # # non hierarhcical
+        dW_v=[]
+        dW_v.append(yv1)
+        dW_v[1:]=[np.array(yv[i]) for i in range(0,len(yv))]
+        dW_v=np.array(dW_v)
         
-        #hierarhcical
-        bb_v=self.brownian_increments(yv1,yv,Nsteps)
-        dW_v= [bb_v[0,i+1]-bb_v[0,i] for i in range(0,Nsteps)] 
-        #dW_v=np.array([yv1,yv]) # non hierarhcical
 
-
-        dW_s= self.rho *np.array(dW_v) + np.sqrt(1-self.rho**2) * np.array(dW)
+        
+        dW_s= self.rho *np.array(dW_v)*np.sqrt(self.dt) + np.sqrt(1-self.rho**2) * np.array(dW)
         y1s= self.rho *yv1 + np.sqrt(1-self.rho**2) * y1
 
-        dbb_s=dW_s-(self.dt/np.sqrt(self.T))*y1s # brownian bridge increments dbb_i (used later for the location of the kink point)
+
+        #option1 
+        # dbb1=dW-(self.dt/np.sqrt(self.T))*y1 # brownian bridge increments dbb_i (used later for the location of the kink point)
+        # dbbv=dW_v*np.sqrt(self.dt) -(self.dt/np.sqrt(self.T))*yv1 # brownian bridge increments dbb_i (used later for the location of the kink point)
+        # dbb_s= self.rho *np.array(dbbv) + np.sqrt(1-self.rho**2) * np.array(dbb1)
+        # #option2
+        dbb_s=dW_s-(self.dt/np.sqrt(self.T))*y1s
+
+
 
         X=np.zeros(Nsteps+1) #here will store the asset trajectory
         V=np.zeros(Nsteps+1) #here will store the  volatility trajectory
@@ -187,11 +200,10 @@ class Problem(object):
         X[0]=self.S0
         V[0]=self.v0
         
+        
         for n in range(1,Nsteps+1):
-            
             X[n]=X[n-1]*(1+np.sqrt(V[n-1])*dW_s[n-1])
-         
-            V[n]=V[n-1]- self.kappa *self.dt* max(V[n-1],0)+ self.xi *np.sqrt(max(V[n-1],0))*dW_v[n-1]+ self.kappa*self.theta*self.dt
+            V[n]=np.abs(V[n-1])- self.kappa *self.dt* max(V[n-1],0)+ self.xi *np.sqrt(max(V[n-1],0))*dW_v[n-1]*np.sqrt(self.dt)+ self.kappa*self.theta*self.dt
             V[n]=max(V[n],0)
             
         return X[-1],dbb_s,V
