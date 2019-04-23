@@ -1267,7 +1267,14 @@ Figure \ref{fig:Weak_rate_heston_single_call} shows the estimated   weak error  
 	\label{fig:Weak_rate_heston_single_call}
 \end{figure}
 \FloatBarrier
-We had some issues with the convergence of adaptive sparse grids (slow and unstable), and by investigating the first and mixed differences rates (see Figure \ref{fig:first_second_diff_Heston_call}  for the case of $N=2$ but we mention that we observed similar behavior for higher number of time steps $N$), it seems that there is an issue with dimensions related to the volatility noise which I am still working on it to detect the source of the issue and fix it to have a better behavior.
+We had some issues with the convergence of adaptive sparse grids (slow and unstable), that is why, I tested two cases:
+\begin{itemize}
+\item The first case where all coordinates (corresponding to asset and volatility noise) are constructed using hierarchical Brownian bridge. In this case, we had the worst performance (see Figure \ref{fig:first_second_diff_Heston_call}) and this is may be to the behavior of the integrand with respect  to the coordinates related to the volatility noise (see Figure \ref{fig:integrand behaviour with respect to the different coordinates_1D_hierarchical}).
+\item  In the second case, I use just hierarchical Brownian bridge for the coordinates used for the asset dynamics. I had a better behavior in terms of first and second differences behavior  (see Figure \ref{fig:first_second_diff_Heston_call_non_hierarchical}) however there are still some slow directions, which affect the speed of the adaptive sparse grids. By looking at the the behavior of the integrand with respect  to the coordinates related to the volatility noise (see Figure \ref{fig:integrand behaviour with respect to the different coordinates_1D_non_hierarchical}), we see better behavior than Figure \ref{fig:integrand behaviour with respect to the different coordinates_1D_hierarchical} but it seems from Figure \ref{fig:integrand behaviour with respect to the different coordinates_1D_non_hierarchical} that maybe using Gauss-Laguerre quadrature for those coordinates will be the optimal choice rather than Gauss-Hermite as it for now.
+\end{itemize}
+ 
+\subsubsection*{All hierarchical}
+By investigating the first and mixed differences rates (see Figure \ref{fig:first_second_diff_Heston_call}  for the case of $N=2$ but we mention that we observed similar behavior for higher number of time steps $N$), it seems that there is an issue with dimensions related to the volatility noise.
 \FloatBarrier
 \begin{figure}[h!]
 	\centering
@@ -1287,6 +1294,75 @@ We had some issues with the convergence of adaptive sparse grids (slow and unsta
 	\label{fig:first_second_diff_Heston_call}
 \end{figure}
 \FloatBarrier
+
+
+
+\FloatBarrier
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}[b]{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/Heston_single_call/integrand_plotting/hierarchical/1D/heston_2steps_hierarchical_y1}
+		\caption{}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.4\textwidth}
+		\centering
+		\includegraphics[width=1.\linewidth]{./figures/Heston_single_call/integrand_plotting/hierarchical/1D/heston_2steps_hierarchical_y2}
+		\caption{}
+	\end{subfigure}\\[1ex]
+	\begin{subfigure}{.4\textwidth}
+		\centering
+			\includegraphics[width=1.\linewidth]{./figures/Heston_single_call/integrand_plotting/hierarchical/1D/heston_2steps_hierarchical_y3}
+		\caption{}
+		\end{subfigure}%
+	\caption{The integrand behaviour with respect to the different coordinates ($(y_1,y_2)$ are used for the volatility noise (mainly $Z_v$ in \eqref{eq:FE_Heston_discrete}) and the final coordinate $y_3$ is related to $Z_t$ (used to get the noise related to the asset dynamics) :  (a) with respect to $y_1$, b) with respect to $y_2$, c) with respect to $y_3$.}
+	\label{fig:integrand behaviour with respect to the different coordinates_1D_hierarchical}
+\end{figure}
+\FloatBarrier
+\subsubsection*{Partial hierarchical}
+
+\FloatBarrier
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/Heston_single_call/mixed_rates/non_hierarchical/first_difference_heston_2steps_non_hierarchical}
+		\caption{}
+		\label{fig:sub3}
+	\end{subfigure}%
+	\begin{subfigure}{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/Heston_single_call/mixed_rates/non_hierarchical/mixed_difference_order2_heston_2steps_non_hierarchical}
+		\caption{}
+		\label{fig:sub4}
+	\end{subfigure}
+	\caption{The rate of error convergence of first and second order differences $\abs{\Delta \text{E}_{\boldsymbol{\beta}}}$, defined by \eqref{eq:Work_error_contributions}, ($\boldsymbol{\beta}=\mathbf{1}+k \bar{\boldsymbol{\beta}}$) for the example of single call option under Heston model using $N=2$ time steps. In this case, the first two dimensions are used for the volatility noise (mainly $Z_v$ in \eqref{eq:FE_Heston_discrete}) and the final coordinate is related to $Z_t$ (used to get the noise related to the asset dynamics) (a) first order differences (b) second order differences. }
+	\label{fig:first_second_diff_Heston_call_non_hierarchical}
+\end{figure}
+\FloatBarrier
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}[b]{.4\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./figures/Heston_single_call/integrand_plotting/non_hierarchical/1D/heston_2steps_non_hierarchical_y1}
+		\caption{}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.4\textwidth}
+		\centering
+		\includegraphics[width=1.\linewidth]{./figures/Heston_single_call/integrand_plotting/non_hierarchical/1D/heston_2steps_non_hierarchical_y2}
+		\caption{}
+	\end{subfigure}\\[1ex]
+	\begin{subfigure}{.4\textwidth}
+		\centering
+			\includegraphics[width=1.\linewidth]{./figures/Heston_single_call/integrand_plotting/non_hierarchical/1D/heston_2steps_non_hierarchical_y3}
+		\caption{}
+		\end{subfigure}%
+	\caption{The integrand behaviour with respect to the different coordinates ($(y_1,y_2)$ are used for the volatility noise (mainly $Z_v$ in \eqref{eq:FE_Heston_discrete}) and the final coordinate $y_3$ is related to $Z_t$ (used to get the noise related to the asset dynamics) :  (a) with respect to $y_1$, b) with respect to $y_2$, c) with respect to $y_3$.}
+	\label{fig:integrand behaviour with respect to the different coordinates_1D_non_hierarchical}
+\end{figure}
+\FloatBarrier
+
 \subsubsection{Basket call option under the discretized the Heston model }
 
 \subsubsection{Call on max option under the discretized the Heston model }

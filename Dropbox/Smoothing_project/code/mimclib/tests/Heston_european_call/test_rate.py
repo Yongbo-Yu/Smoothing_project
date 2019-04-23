@@ -27,7 +27,7 @@ class Problem(object):
     K=None         # Strike price
     T=1.0                      # maturity
     sigma=None    # volatility
-    N=4  # number of time steps which will be equal to the number of brownian bridge components (we set is a power of 2)
+    N=2  # number of time steps which will be equal to the number of brownian bridge components (we set is a power of 2)
     d=None
     dt=None
 
