@@ -12,7 +12,7 @@ class Problem(object):
     K=None         # Strike price
     T=1.0                      # maturity
     sigma=None    # volatility
-    N=8  # number of time steps which will be equal to the number of brownian bridge components (we set is a power of 2)
+    N=4 # number of time steps which will be equal to the number of brownian bridge components (we set is a power of 2)
     d=None
     dt=None
 
@@ -45,27 +45,27 @@ class Problem(object):
         self.dt=self.T/float(self.N) # time steps length
         self.d=int(np.log2(self.N)) #power 2 number steps
 
-        # For less than 185 points
-        #beta=32
-        #self.yknots_right=np.polynomial.laguerre.laggauss(beta)
+        # # For less than 185 points
+        beta=16
+        self.yknots_right=np.polynomial.laguerre.laggauss(beta)
       
-        # For more than 185 points
-        #beta=512
-        from Parser import Parser
-        fx = open('lag_512_x.txt', 'r')
-        Element_properties_x = Parser('./lag_512_x.txt')
-        Element_properties_x.parse_file(fx.read(),'\n')
-        x=np.array([float(i) for i in Element_properties_x.element_list])
+        # # For more than 185 points
+        # beta=256
+        # from Parser import Parser
+        # fx = open('lag_256_x.txt', 'r')
+        # Element_properties_x = Parser('./lag_256_x.txt')
+        # Element_properties_x.parse_file(fx.read(),'\n')
+        # x=np.array([float(i) for i in Element_properties_x.element_list])
        
-        Element_properties_x.close_file()   
-        fw = open('lag_512_w.txt', 'r')
-        Element_properties_w = Parser('./lag_512_w.txt')
-        Element_properties_w.parse_file(fw.read(),'\n')
-        w=np.array([float(i) for i in Element_properties_w.element_list])
+        # Element_properties_x.close_file()   
+        # fw = open('lag_256_w.txt', 'r')
+        # Element_properties_w = Parser('./lag_256_w.txt')
+        # Element_properties_w.parse_file(fw.read(),'\n')
+        # w=np.array([float(i) for i in Element_properties_w.element_list])
    
-        Element_properties_x.close_file()   
-        self.yknots_right.append(x[:360])
-        self.yknots_right.append(w[:360])
+        # Element_properties_x.close_file()   
+        # self.yknots_right.append(x[:235])
+        # self.yknots_right.append(w[:235])
      
        
         self.yknots_left=self.yknots_right
@@ -115,7 +115,7 @@ class Problem(object):
         
         # step 2: computing the location of the kink
         #bar_z=self.newtons_method(y_s[0],ys,y1[0],y1[1:self.N])
-        bar_z=self.newtons_method(y2[0],y2s,y1[0],y1[1:self.N])
+        bar_z=self.newtons_method(y2[0],y2s,y1[0],y1[1:])
         
         # step 3: performing the pre-intgeration step wrt kink point
     
@@ -182,9 +182,9 @@ class Problem(object):
     def stock_price_trajectory_1D_heston(self,y1,y,yv1,yv):
         bb=self.brownian_increments(y1,y)
         dW= [bb[0,i+1]-bb[0,i] for i in range(0,self.N)] 
-    
+        
         #  hierarhcical
-       # bb_v=self.brownian_increments(yv1,yv)
+        #bb_v=self.brownian_increments(yv1,yv)
         #dW_v= [bb_v[0,i+1]-bb_v[0,i] for i in range(0,self.N)] 
 
         # # non hierarhcical
@@ -200,11 +200,13 @@ class Problem(object):
 
 
         #option1 
-        # dbb1=dW-(self.dt/np.sqrt(self.T))*y1 # brownian bridge increments dbb_i (used later for the location of the kink point)
-        # dbbv=dW_v*np.sqrt(self.dt) -(self.dt/np.sqrt(self.T))*yv1 # brownian bridge increments dbb_i (used later for the location of the kink point)
-        # dbb_s= self.rho *np.array(dbbv) + np.sqrt(1-self.rho**2) * np.array(dbb1)
-        # #option2
+        #dbb1=dW-(self.dt/np.sqrt(self.T))*y1 # brownian bridge increments dbb_i (used later for the location of the kink point)
+        #dbbv=dW_v-(self.dt/np.sqrt(self.T))*yv1 # brownian bridge increments dbb_i (used later for the location of the kink point)
+        #dbb_s= self.rho *np.array(dbbv) + np.sqrt(1-self.rho**2) * np.array(dbb1)
+        #option2
         dbb_s=dW_s-(self.dt/np.sqrt(self.T))*y1s
+
+
 
 
 
@@ -214,10 +216,9 @@ class Problem(object):
         X[0]=self.S0
         V[0]=self.v0
         
-        
         for n in range(1,self.N+1):
             X[n]=X[n-1]*(1+np.sqrt(V[n-1])*dW_s[n-1])
-            V[n]=np.abs(V[n-1])- self.kappa *self.dt* max(V[n-1],0)+ self.xi *np.sqrt(max(V[n-1],0))*dW_v[n-1]*np.sqrt(self.dt)+ self.kappa*self.theta*self.dt
+            V[n]=V[n-1]- self.kappa *self.dt* max(V[n-1],0)+ self.xi *np.sqrt(max(V[n-1],0))*dW_v[n-1]*np.sqrt(self.dt)+ self.kappa*self.theta*self.dt
             V[n]=max(V[n],0)
             
         return X[-1],dbb_s,V
