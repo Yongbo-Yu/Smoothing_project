@@ -47,9 +47,11 @@ class Problem(object):
         self.K= coeff*self.S0        # Strike price and coeff determine if we have in/at/out the money option
         
         self.rho=-0.9
+           # correltion matrix
         from scipy.linalg import toeplitz  
-        self.rho1=toeplitz([1,-0.9])
-        self.lower_triang_cholesky = np.linalg.cholesky(self.rho1)
+        rho1=toeplitz([1,-0.9])
+        #self.cho_matrix = np.linalg.cholesky(rho1)
+        self.cho_matrix = np.linalg.cholesky(rho1)
 
         #self.kappa= 0.5
         self.kappa= 5.0
@@ -116,8 +118,8 @@ class Problem(object):
         
         # step 2: computing the location of the kink
         #bar_z=self.newtons_method(y_s[0],ys,y1[0],y1[1:self.N])
-        bar_z=self.newtons_method(y2[0],y2s,y1[0],y1[1:self.N])
-        #bar_z=0
+        #bar_z=self.newtons_method(y2[0],y2s,y1[0],y1[1:self.N])
+        bar_z=0
         
         # step 3: performing the pre-intgeration step wrt kink point
     
@@ -179,39 +181,41 @@ class Problem(object):
 
     # This function simulates a 1D heston trajectory for stock price and volatility paths
     def stock_price_trajectory_1D_heston(self,y1,y,yv1,yv):
-        bb=self.brownian_increments(y1,y)
-        dW1= [bb[0,i+1]-bb[0,i] for i in range(0,self.N)] 
 
-       # # # non hierarhcical
-       #  dW=[]
-       #  dW.append(y1)
-       #  dW[1:]=[np.array(y[i]) for i in range(0,len(y))]
-       #  dW=np.array(dW)*np.sqrt(self.dt)
+        # bb=self.brownian_increments(y1,y)
+        # dW1= [bb[0,i+1]-bb[0,i] for i in range(0,self.N)] 
+
+        dW1=[]
+        dW1.append(y1)
+        dW1[1:]=[np.array(y[i]) for i in range(0,len(y))]
+        dW1=np.array(dW1)*np.sqrt(self.dt)
+
+
+        #bb2=self.brownian_increments(yv1,yv)
+        #dW2= [bb2[0,i+1]-bb2[0,i] for i in range(0,self.N)] 
+
+        dW2=[]
+        dW2.append(yv1)
+        dW2[1:]=[np.array(yv[i]) for i in range(0,len(yv))]
+        dW2=np.array(dW2)*np.sqrt(self.dt)
+
+
+
+        dW=np.array([dW1,dW2])
+        dW= np.dot(self.cho_matrix,dW)
+
         
-    
-        # #  hierarhcical
-        #bb_v=self.brownian_increments(yv1,yv)
-        #dW_v= [bb_v[0,i+1]-bb_v[0,i] for i in range(0,self.N)] 
-
-        # # # non hierarhcical
-        dW_v=[]
-        dW_v.append(yv1)
-        dW_v[1:]=[np.array(yv[i]) for i in range(0,len(yv))]
-        dW_v=np.array(dW_v)*np.sqrt(self.dt)
-        
-
-
-        dW=np.array([dW1 ,dW_v])
-        
-     
-        dW=np.dot(self.lower_triang_cholesky,dW)  
-
-
         dW1=dW[0,:]
         dW2=dW[1,:]
+
+        # # # non hierarhcical
+        # dW_v=[]
+        # dW_v.append(yv1)
+        # dW_v[1:]=[np.array(yv[i]) for i in range(0,len(yv))]
+        # dW_v=np.array(dW_v)*np.sqrt(self.dt)
         
-        #dW_s= self.rho *np.array(dW_v)+ np.sqrt(1-self.rho**2) * np.array(dW)
-        #y1s= self.rho *yv1 + np.sqrt(1-self.rho**2) * y1
+        yc=np.array([y1,yv1])
+        [y1s,y1v]= np.dot(self.cho_matrix,yc)
 
 
         #option1 
@@ -219,8 +223,6 @@ class Problem(object):
         # dbbv=dW_v*np.sqrt(self.dt) -(self.dt/np.sqrt(self.T))*yv1 # brownian bridge increments dbb_i (used later for the location of the kink point)
         # dbb_s= self.rho *np.array(dbbv) + np.sqrt(1-self.rho**2) * np.array(dbb1)
         # #option2
-        y1s=np.dot(self.lower_triang_cholesky,np.array([y1,yv1]))[0]  
-
         dbb_s=dW1-(self.dt/np.sqrt(self.T))*y1s
 
 
@@ -234,12 +236,13 @@ class Problem(object):
         
         for n in range(1,self.N+1):
             X[n]=X[n-1]*(1+np.sqrt(V[n-1])*dW1[n-1])
-            V[n]=V[n-1]- self.kappa *self.dt* max(V[n-1],0)+ self.xi *np.sqrt(max(V[n-1],0))*dW2[n-1]+ self.kappa*self.theta*self.dt
-            V[n]=max(V[n],0)
+            #X[n] = X[n - 1] * np.exp((0.0- 0.5 * V[n-1]) * self.dt +   np.sqrt(V[n-1]) *dW1[n-1] )
+            V[n]=V[n-1]- self.kappa *self.dt* np.maximum(V[n-1],0)+ self.xi *np.sqrt(np.maximum(V[n-1],0))*dW2[n-1]+ self.kappa*self.theta*self.dt
+            V[n]=np.maximum(V[n],0)
             
         return X[-1],dbb_s,V
        
-    # this function defines the payoff function used here
+     # this function defines the payoff function used here
     def payoff(self,x): 
 
        g=(x-self.K)
@@ -260,7 +263,8 @@ class Problem(object):
         fi=np.zeros((1,len(dbb)))
         
 
-        y1s=np.dot(self.lower_triang_cholesky,np.array([y1,yv1]))[0]  
+        yc=np.array([y1,yv1])
+        [y1s,y1v]= np.dot(self.cho_matrix,yc)
         
         fi=1+(np.sqrt(V[0:self.N])/float(np.sqrt(self.T)))*y1s*(self.dt) +(np.sqrt(V[0:self.N]))*dbb
         product=np.prod(fi)
@@ -284,7 +288,6 @@ class Problem(object):
             x0 = x0 - 0.1*P_value/dP
             delta = self.dx(x0,y,yv1,yv) 
         return x0     
-
 
 
 

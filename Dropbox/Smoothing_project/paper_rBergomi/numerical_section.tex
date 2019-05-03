@@ -626,6 +626,11 @@ In this section, we conduct our numerical experiments for three different scenar
 %		MC    & $\underset{(0.54,3e-03)}{\mathbf{0.54}}$  & $\underset{(0.29,1e-03)}{\mathbf{0.29}}$  &$\underset{(0.15,0.01)}{
 %				\mathbf{0.16}}$ & \\	
 %		M(\# MC samples)   & $8 \times 10^6$  & $8 \times 10^6$  &$10^5$ & \\	
+\hline
+				QMC    & $\underset{(0.54,0.59)}{\mathbf{1.13}}$  & $\underset{(0.295,0.34)}{\mathbf{0.635}}$  &$\underset{(0.155,0.19)}{
+				\mathbf{0.345}}$& $\underset{(0.07,0.10)}{
+				\mathbf{0.17}}$ \\	
+		M(\# QMC samples)   & $2^3 \times 2^3= 64$  & $2^3 \times 2^4= 128$  &$2^3 \times 2^5= 256$  & $2^3 \times 2^6=512 $ \\
 				\hline
 				MC    & $\underset{(0.54,0.51)}{\mathbf{1.05}}$  & $\underset{(0.295,0.295)}{\mathbf{0.59}}$  &$\underset{(0.155,0.155)}{
 				\mathbf{0.31}}$& $\underset{(0.07,0.07)}{
@@ -658,6 +663,8 @@ In this section, we conduct our numerical experiments for three different scenar
 %	
 %		\hline
 %		MC method & $220$  & $358$  & $9$ & \\
+	\hline	
+		QMC method & $0.006$  & $0.012$  & $0.026$ & $0.064$ \\
 		\hline	
 		MC method & $0.001$  & $0.003$  & $0.02$ & $0.2$ \\
 		\bottomrule[1.25pt]	
@@ -746,6 +753,10 @@ In this section, we conduct our numerical experiments for three different scenar
 %		MC &$\underset{(0.96,0.07)}{\mathbf{1.03}}$  & $\underset{(0.07,0.01)}{\mathbf{0.08}}$ & $\underset{(0.015,0.010)}{\mathbf{0.025}}$  \\
 %		M(\# MC samples) & $3 \times 10^4$  & $2 \times 10^5$ & $4 \times 10^4$  \\
 		
+					\hline
+		
+		QMC &$\underset{(0.96,0.63)}{\mathbf{1.59}}$  & $\underset{(0.07,0.07)}{\mathbf{0.14}}$ & $\underset{(0.015,0.016)}{\mathbf{\red{0.031}}}$  \\
+		M(\# QMC samples) & $2^3 \times 2^4= 128$  & $2^3 \times 2^{10}= 8192$ & $2^3 \times 2^{13}= 65536$ \\
 				\hline
 		
 		MC &$\underset{(0.96,0.92)}{\mathbf{1.88}}$  & $\underset{(0.07,0.07)}{\mathbf{0.14}}$ & $\underset{(0.015,0.015)}{\mathbf{\red{0.03}}}$  \\
@@ -777,6 +788,8 @@ In this section, we conduct our numerical experiments for three different scenar
 %		\hline	
 %		MC  &$\red{12}$ & $\red{113}$  & $\red{130}$   \\
 
+		\hline	
+		QMC  &$0.02$ & $1$  & $\red{10}$   \\
 			\hline	
 		MC  &$0.003$ & $2$  & $\red{60}$   \\
 		
@@ -860,6 +873,10 @@ In this section, we conduct our numerical experiments for three different scenar
 %			M(\# MC samples) & $5 \times 10^4$  & $7 \times 10^5$   \\
 			
 				\hline
+		QMC   & $\underset{(0.24,0.26)}{\mathbf{0.5}}$  & $\underset{(0.006,0.008)}{\mathbf{\red{0.014}}}$    \\
+			M(\# QMC samples) & $2^3 \times 2^7=1024$  & $2^3 \times 2^{16}=524288$   \\			
+			
+				\hline
 		MC   & $\underset{(0.24,0.21)}{\mathbf{0.45}}$  & $\underset{(0.006,0.006)}{\mathbf{\red{0.012}}}$    \\
 			M(\# MC samples) & $4 \times 10^2$  & $4 \times 10^5$   \\
 		\bottomrule[1.25pt]
@@ -886,6 +903,9 @@ In this section, we conduct our numerical experiments for three different scenar
 %		\hline
 %		MC    & $ \red{  118}$  & $\red{1274}$  \\
 %		
+	\hline
+		QMC    & $ 0.2$  & $\red{110}$  \\
+		
 		\hline
 		MC    & $ 0.2$  & $\red{690}$  \\
 		
@@ -996,6 +1016,10 @@ In this section, we only conduct our numerical experiments for the case without 
 %%		%\hline
 %%%		MC    & $\underset{(0.02,5e-04)}{\mathbf{0.02}}$  &  $\underset{(0.008,5e-04)}{\mathbf{0.009}}$  & $\underset{(0.004,5e-04)}{\mathbf{0.005}}$ & $\underset{(0.001,4e-04)}{\mathbf{0.001}}$  \\	
 %%%			M(\# MC samples) 	& $5 \times 10^6$  &  $5 \times 10^6$  & $5 \times 10^6$ & $5 \times 10^6$  \\
+\hline
+				QMC    & $\underset{(0.02,0.02)}{\mathbf{0.04}}$  &  $\underset{(0.008,0.008)}{\mathbf{0.016}}$  & $\underset{(0.004,0.005)}{\mathbf{0.009}}$ & $\underset{(0.001,0.0015)}{\mathbf{\red{0.0025}}}$  \\	
+			M(\# QMC samples) 	& $2^3 \times 2^8=2048$  &  $2^3 \times 2^{10}=    8192$  & $2^3 \times 2^{11}= 16384$ & $2^3 \times 2^{13}=
+       65536$ \\
 			\hline
 				MC    & $\underset{(0.02,0.02)}{\mathbf{0.04}}$  &  $\underset{(0.008,0.008)}{\mathbf{0.016}}$  & $\underset{(0.004,0.003)}{\mathbf{0.007}}$ & $\underset{(0.001,0.001)}{\mathbf{\red{0.002}}}$  \\	
 			M(\# MC samples) 	& $4 \times 10^3$  &  $2 \times 10^4$  & $  10^5$ & $10^6$  \\
@@ -1028,11 +1052,10 @@ In this section, we only conduct our numerical experiments for the case without 
 %		
 %		$  & $  \red{260}$  & $  \red{427}$ & $ \red{766}
 %		$  \\	
+\hline
+		QMC method   & $ 0.2$  & $ 0.7$  & $ 1.6$ & $ \red{8}$  \\	
 		\hline
-		MC method   & $ 0.15
-		
-		$  & $  1.6$  & $  16.5$ & $ \red{494}
-		$  \\	
+		MC method   & $ 0.15$  & $  1.6$  & $  16.5$ & $ \red{494}$  \\	
 %		\hline
 %		Ratio of CPU time  $\left(MC/MISC \right)$ & $ \red{244}
 %		
@@ -1265,7 +1288,9 @@ In this section, we only conduct our numerical experiments for the case without 
 		\hline
 %		MC    & $\underset{(0.006,4e-04)}{\mathbf{0.006}}$  & $\underset{(0.004,4e-04)}{ \mathbf{0.004}}$  & $\underset{(0.003,4e-04)}{\mathbf{0.003}}$ & $\underset{(0.002,4e-04)}{\mathbf{0.002}}$  \\	
 %		M(\# MC samples) 	& $5 \times 10^6$  & $5 \times 10^6$  & $5 \times 10^6$ & $5 \times 10^6$  \\
-%		\hline
+		QMC    & $\underset{(0.006,0.006)}{\mathbf{0.012}}$  & $\underset{(0.004,0.0046)}{ \mathbf{0.0086}}$  & $\underset{(0.003,0.0032)}{\mathbf{0.0062}}$ & $\underset{(0.002,0.0018)}{\mathbf{\red{0.0038}}}$  \\	
+		M(\# QMC samples) 	& $2^3 \times 2^{10}= 8192$  &  $2^3 \times 2^{10}= 8192$ &  $2^3 \times 2^{11}= 16384$ & $2^3 \times 2^{12}= 32768$  \\
+	\hline
 		MC    & $\underset{(0.006,0.005)}{\mathbf{0.01}}$  & $\underset{(0.004,0.004)}{ \mathbf{0.008}}$  & $\underset{(0.003,0.003)}{\mathbf{0.006}}$ & $\underset{(0.002,0.002)}{\mathbf{\red{0.004}}}$  \\	
 		M(\# MC samples) 	& $2 \times 10^4$  & $4 \times 10^4$  & $6 \times 10^4$ & $8 \times 10^4$  \\
 		\bottomrule[1.25pt]
@@ -1296,6 +1321,9 @@ In this section, we only conduct our numerical experiments for the case without 
 %		
 %		$  & $  \red{246}$  & $  \red{461}$ & $ \red{820}
 %		$  \\	
+	\hline
+		QMC method   & $0.6$  & $ 0.7$  & $  1.6$ & $ \red{4}
+		$  \\	
 		\hline
 		MC method   & $1
 		
@@ -1414,6 +1442,10 @@ In this section, we only conduct our numerical experiments for the case without 
 %		\hline
 %		MC    & $\underset{(0.07,7e-04)}{\mathbf{0.07}}$  & $\underset{(0.03,6e-04)}{\mathbf{0.03}}$  & $\underset{(0.02,6e-04)}{\mathbf{0.02}}$ & $\underset{(0.01,6e-04)}{\mathbf{0.01}}$  \\		
 %			M(\# MC samples)   & $5 \times 10^6$  & $5 \times 10^6$  & $5 \times 10^6$ & $5 \times 10^6$  \\		
+
+			\hline
+		QMC    & $\underset{(0.07,0.065)}{\mathbf{0.135}}$  & $\underset{(0.03,0.03)}{\mathbf{0.67}}$  & $\underset{(0.02,0.024)}{\mathbf{0.044}}$ & $\underset{(0.01,0.012)}{\mathbf{\red{0.022}}}$  \\		
+			M(\# QMC samples)   & $2^3 \times 2^7=1024$  &  $2^3 \times 2^8=2048$  &  $2^3 \times 2^9=4096$ &  $2^3 \times 2^10=8192$ \\	
 			\hline
 		MC    & $\underset{(0.07,0.07)}{\mathbf{0.14}}$  & $\underset{(0.03,0.04)}{\mathbf{0.07}}$  & $\underset{(0.02,0.02)}{\mathbf{0.04}}$ & $\underset{(0.01,0.01)}{\mathbf{\red{0.02}}}$  \\		
 			M(\# MC samples)   & $6 \times 10^2$  & $2 \times 10^3$  & $8 \times 10^3$ & $2 \times 10^4$  \\		
@@ -1446,9 +1478,9 @@ In this section, we only conduct our numerical experiments for the case without 
 %		$  & $  \red{229}$  & $  \red{420}$ & $ \red{938}
 %		$  \\	
 		\hline
-		MC method   & $ 0.02
-		
-		$  & $  0.15$  & $ 1.4$ & $ \red{10}$  \\	
+		QMC method   & $ 0.08 $  & $  0.17$  & $ 0.4$ & $ \red{1}$  \\	
+		\hline
+		MC method   & $ 0.02 $  & $  0.15$  & $ 1.4$ & $ \red{10}$  \\	
 	\bottomrule[1.25pt]
 %		Ratio of CPU time  $\left(MC/MISC \right)$ & $ \red{   220}
 %		

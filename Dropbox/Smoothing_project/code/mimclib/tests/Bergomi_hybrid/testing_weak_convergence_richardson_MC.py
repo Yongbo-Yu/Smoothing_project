@@ -146,24 +146,6 @@ class Problem(object):
         return bb
 
 
-    
-
-    def Quit(self):
-        pass
-
-    def __exit__(self, type, value, traceback):
-        pass
-
-    def __enter__(self):
-        return self
-
-    @staticmethod
-    def Init():
-        import sys #This module provides access to some variables used or maintained by the interpreter and to functions that interact strongly with the interpreter
-        count = len(sys.argv)  #sys.argv is a list in Python, which contains the command-line arguments passed to the script. With the len(sys.argv) function you can count the number of arguments. 
-        #arr = (ct.c_char_p * len(sys.argv))()
-        arr = sys.argv
-
 
 
 
