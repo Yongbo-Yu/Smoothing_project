@@ -27,7 +27,7 @@ Along the numerical part below, we compare $3$ methods:
 	\begin{small}
 	\begin{tabular}{l*{4}{c}r}
 	\toprule[1.5pt]
-		Example          & Level of Richardson extrapolation    &  Total relative error  & Ratio of CPU time  $\left(\text{MC}/ \text{ASGQ} \right)$ \\
+		Example          & Level of Richardson extrapolation    &  Total relative error  & CPU time  $\left(\text{MC}/ \text{ASGQ} \right)$ \\
 		\hline
 			  Single binary option (GBM) & without  &  $2 \%$&  $ 4$ \\	
               \hline
@@ -1362,6 +1362,69 @@ By investigating the first and mixed differences rates (see Figure \ref{fig:firs
 	\label{fig:integrand behaviour with respect to the different coordinates_1D_non_hierarchical}
 \end{figure}
 \FloatBarrier
+
+\subsubsection*{Conclusion}
+We think that observing these behaviors for first and mixed differences is due to the non smooth transformation we applied to guarantee the positiveness of the CIR process, in particular the $f_2$  and $f_3$ functions used in the full truncation scheme, which somehow deteriorates the overall smoothness of the Heston process. As a remedy to this we suggest to use a different way to simulate the volatility process. In fact,  we use the idea that  any CIR process can be defined as a sum of squared Ornstein-Uhlenbeck processes. Please see below section for details.
+
+\subsubsection*{Relation between CIR process and Ornstein-Uhlenbeck process}
+It is well known that any Ornstein-Uhlenbeck (OU) process is normally distributed. Thus the sum of $n$ squared OU processes is chi-squared distributed with $n$ degrees of freedom. Let us define $\mathbf{X}$ to be a $n$-dimensional vector valued OU process with
+
+\begin{equation}\label{equivalent OU process} 
+\mathrm{d}X_t^i = \alpha X_t^i \mathrm{d}t + \beta \mathrm{d}W_t^i,
+\end{equation}
+where $\mathbf{W}$ is a $n$-dimensional vector of independent Brownian motions. 
+
+We define the process $Y_t$ as  
+\begin{equation}
+Y_t = \sum_{i = 1}^n \left( X_t^i \right)^2.
+\end{equation}
+Using the fact that
+\begin{eqnarray}
+\mathrm{d} \left( X_t^i \right)^2 & = & 2 X_t^i \mathrm{d}X_t^i + 2 \mathrm{d} \langle X^i \rangle_t\\
+& = & \left( 2 \alpha \left( X_t^i \right)^2 + \beta^2 \right) \mathrm{d}t + 2 \beta X_t^i \mathrm{d}W_t^i,
+\end{eqnarray}
+we can write
+\begin{eqnarray}
+\mathrm{d}Y_t & = & \mathrm{d} \left( \sum_{i = 1}^n \left( X_t^i \right)^2 \right)\\
+& = & \sum_{i = 1}^n \mathrm{d} \left( X_t^i \right)^2\\
+& = & \left( 2 \alpha Y_t + n \beta^2 \right) \mathrm{d}t + 2 \beta \sum_{i = 1}^n X_t^i \mathrm{d}W_t^i,
+\end{eqnarray}
+where the second step follows from the independence of the Brownian motions. Furthermore, we  note that the process
+\begin{equation}
+Z_t = \int_0^t \sum_{i = 1}^n X_u^i \mathrm{d}W_u^i
+\end{equation}
+is a martingale with quadratic variation
+\begin{eqnarray}
+\langle Z \rangle_t & = & \int_0^t \sum_{i = 1}^n \left( X_u^i \right)^2 \mathrm{d}u\\
+& = & \int_0^t Y_u \mathrm{d}u.
+\end{eqnarray}
+Consequently, by L\'evy's characterization theorem, we can show that the process
+\begin{equation}
+\widetilde{W}_t = \int_0^t \frac{1}{\sqrt{Y_u}} \sum_{i = 1}^n X_u^i \mathrm{d}W_u^i
+\end{equation}
+is a Brownian motion.
+
+Finally, we have 
+\begin{eqnarray}
+\mathrm{d}Y_t & = & \left( 2 \alpha Y_t + n \beta^2 \right) \mathrm{d}t + 2 \beta \sqrt{Y_t} \mathrm{d}\tilde{W}_t\\
+& = & \kappa \left( \theta - Y_t \right) \mathrm{d}t + \xi \sqrt{Y_t} \mathrm{d}W_t,
+\end{eqnarray}
+where $\kappa = -2 \alpha$, $\theta = -n \beta^2 / 2 \alpha$ and $\xi = 2 \beta$.
+\subsubsection*{How we can adapt the previous result to our case}
+We think that we can use the results of the previous section, and simulate the  OU process  $\mathbf{X}$, with dynamics given by \eqref{equivalent OU process} such that its parameters $(\alpha, \beta)$ are expressed in terms of  the volatility  process  parameters, that is 
+$$ \alpha=-\frac{\kappa}{2},\quad \beta=\frac{\xi}{2}, \quad n=\frac{-2 \theta \alpha}{\beta^2}=\frac{4 \theta  \kappa}{\xi^2}$$
+
+For instance, with the example parameters we are using, we end up with $\alpha=-2.5$, $\beta=0.25$ and $n=3.2$.
+
+\begin{remark}
+The previous derivation can can be generalized to cases where $n$ is not an integer by considering a time-change of a squared Bessel process (see Chapter 6 in \cite{jeanblanc2009mathematical} for details). 
+\end{remark}
+
+\begin{remark}
+Raul and I discussed the case where we consider $n=1$ and work with it, but after looking again I think this is not feasible since the identification system becomes ill-defined.
+\end{remark} 
+
+
 
 \subsubsection{Basket call option under the discretized the Heston model }
 
