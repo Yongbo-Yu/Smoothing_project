@@ -1,0 +1,278 @@
+\documentclass[ima, 20pt, portrait, plainboxedsections]{sciposter}
+
+% Packages
+\usepackage[english]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{times}
+\usepackage{amsmath,amssymb}
+\usepackage{multicol}
+\usepackage{mathtools}
+\usepackage{epstopdf}
+
+\usepackage{graphicx}
+\usepackage{algorithmic}
+
+% TEMPLATE PARAMETERS
+\setlength{\parskip}{0.002\textheight}
+\newcommand{\imsize}{0.49\columnwidth}
+\definecolor{BoxCol}{rgb}{0.4,0.4,0.4}
+\definecolor{SectionCol}{rgb}{1,1,1}
+\renewcommand{\titlesize}{\Huge}
+\renewcommand{\sectionsize}{\Large}
+\setmargins[2cm]
+
+% HEADER
+\setlength{\titlewidth}{0.5\textwidth}
+\setlength{\logowidth}{0.25\textwidth}
+
+\leftlogo[0.9]{kaust_cuq_logo_left}
+\rightlogo[0.95]{kaust_cuq_logo_right}
+%\leftlogo[0.7]{kaust}
+
+% Theorems
+\newtheorem{thm}{Theorem}[section]
+%\newtheorem{proof}[thm]{Proof}
+%\newtheorem{lemma}[thm]{Lemma}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{ex}[thm]{Example}
+\newtheorem{assu}[thm]{Assumption}
+\newtheorem{alg}[thm]{Algorithm}
+\newtheorem{defn}[thm]{Definition}
+
+% Commands
+\input{Commands}
+
+
+% POSTER CONTENT
+
+\title{Hierarchical adaptive sparse  grids for option pricing under the rough Bergomi model}
+
+%\author{Christian Bayer\thanks{
+% Weierstrass Institute for Applied Analysis and Stochastics (WIAS),
+% Berlin, Germany.}
+%        \and Chiheb Ben Hammouda\thanks{King Abdullah University of Science and Technology (KAUST), Computer, Electrical and Mathematical Sciences \& Engineering Division (CEMSE), Thuwal $23955-6900$, Saudi Arabia ({\tt chiheb.benhammouda@kaust.edu.sa}).} 
+%\and  Raul Tempone\thanks{King Abdullah University of Science and Technology (KAUST), Computer, Electrical and Mathematical Sciences \& Engineering Division (CEMSE), Thuwal $23955-6900$, Saudi Arabia ({\tt raul.tempone@kaust.edu.sa}).} \thanks{Alexander von Humboldt Professor in Mathematics for Uncertainty Quantification, RWTH Aachen University, Germany.}}
+\author{Christian Bayer, Chiheb Ben Hammouda  and Raul Tempone}
+\institute{King Abdullah University of Science and Technology (KAUST), Computer, Electrical and Mathematical Sciences \& Engineering Division (CEMSE), Saudi Arabia}
+
+
+%\email{   \{chiheb.benhammouda,  raul.tempone \}@kaust.edu.sa}
+
+\begin{document}
+
+\maketitle
+
+\begin{multicols}{3}
+
+\section*{Abstract} 
+The rough Bergomi (rBergomi) model, introduced recently in  \cite{bayer2016pricing}, is a promising rough volatility model in quantitative finance. This new model exhibits consistent results with the empirical fact of implied volatility surfaces being essentially time-invariant. This model also has  the  ability to capture the term structure of skew observed in equity markets. In the absence of analytical European option pricing methods for the model, and due to the non-Markovian nature of the fractional driver, the prevalent option is to use Monte Carlo (MC) simulation for pricing. Despite recent advances in the MC method in this context, pricing under the rBergomi model is still a time-consuming task. To overcome this issue, we design a novel,  alternative, hierarchical approach, based on adaptive sparse grids quadrature (ASGQ), specifically using the same construction in \cite{haji2016multi}, coupled with Brownian bridge construction and Richardson extrapolation. By uncovering the available regularity,  our hierarchical method demonstrates substantial computational gains with respect to the standard MC method, when reaching a sufficiently small error tolerance in the price estimates across different parameter constellations, even for very small values of the Hurst  parameter. Our work opens a new research direction in this field, i.e. to investigate the performance of  methods  other than Monte Carlo for pricing and calibrating under the rBergomi model.
+
+%-------------
+\section*{Rough volatility}
+\begin{figure}[H]
+ \begin{center}
+\includegraphics[scale=0.75]{vol_rough}
+ \end{center}
+\end{figure}
+\section*{The rough Bergomi model \cite{bayer2016pricing}}
+This model, under a pricing measure, is given by
+\begin{small}
+\begin{equation}
+\begin{small}
+\begin{cases}
+	dS_t &= \sqrt{v_t} S_t dZ_t,\\
+v_t &= \blue{\xi_0}(t) \exp\left( \blue{\eta} \widetilde{W}_t^{\blue{H}} - \frac{1}{2} \blue{\eta}^2 t^{2\blue{H}} \right),\\
+	Z_t&:=\blue{\rho}	W^1_t+ \bar{\rho}W^\perp_t \equiv \blue{\rho} W^1+\sqrt{1-\blue{\rho}^2} W^\perp,
+\end{cases}
+\end{small}
+\end{equation}
+\end{small}
+\begin{itemize}
+	\item $(W^1,W^\perp)$: two independent standard Brownian motions
+	\item $\widetilde{W}^\blue{H} $ is \red{Riemann-Liouville process},  defined by
+	\begin{align*}\label{eq:Volterra process}
+	\widetilde{W}_t^{\blue{H}} &= \int_0^t K^{\blue{H}}(t-s) dW_s^1, \quad t \ge 0, \\ 	K^{\blue{H}}(t-s) &= \sqrt{2\blue{H}} (t-s)^{\blue{H} - 1/2},\quad \forall \: 0 \le s \le t.
+	\end{align*}
+	\item $\blue{H} \in(0,1/2]$ ($H=1/2$ for Brownian motion): controls the \red{roughness} of paths, , $\blue{\rho} \in [-1,1]$  and  $\blue{\eta}>0$.
+	\item $t \mapsto \blue{\xi}_0(t)$: forward variance curve, known at time $0$.
+\end{itemize}
+\section*{Challenges}
+\begin{itemize}
+\item \textbf{Numerically:}
+	\begin{itemize}
+		\item The model is \red{non-affine} and \red{non-Markovian} $\Rightarrow$ Standard numerical methods (PDEs, characteristic functions) seem inapplicable.
+		\item The only prevalent pricing method for mere
+		\red{vanilla options} is \red{Monte Carlo} \cite{bayer2016pricing,bayer2017regularity,mccrickerd2017turbocharging}, still a \red{time consuming task}.
+		
+\item 	Discretization methods have \red{poor behavior of the strong error}, that is the convergence rate is of order of $\blue{H} \in[0,1/2]$ \cite{neuenkirch2016order} $\Rightarrow$ Variance reduction methods, such as MLMC, are inefficient for \red{very small values} of $\blue{H}$.
+	\end{itemize}
+
+\item \textbf{Theoretically:} 
+\begin{itemize}
+\item No proper weak error analysis done in the rough volatility
+context.
+\end{itemize}
+\end{itemize}
+\section*{Contributions}
+\begin{enumerate}		
+		\item We design an \red{alternative hierarchical efficient pricing method} based on:
+		\begin{enumerate}
+			\item[i)] \textbf{\red{Analytic smoothing}}  to uncover available regularity.
+			\item[ii)] Approximating the option price using \textbf{\red{ASGQ}} coupled with \textbf{\red{Brownian bridges}} and \textbf{\red{Richardson Extrapolation}}.
+		\end{enumerate} 
+	\item Our \red{hierarchical} method demonstrates \red{substantial} computational gains with respect to the standard MC method, assuming a \red{sufficiently small error tolerance} in the price estimates, even for \red{very small values of the Hurst parameter}, $\blue{H}$.		
+		\end{enumerate}
+\section*{The Hybrid Scheme \cite{bennedsen2017hybrid}}
+\begin{align*}
+	\widetilde{W}_t^{\blue{H}} &= \int_0^t K^{\blue{H}}(t-s) dW_s^1, \quad t \ge 0, \\ 	K^{\blue{H}}(t-s) &= \sqrt{2\blue{H}} (t-s)^{\blue{H} - 1/2},\quad \forall \: 0 \le s \le t. 
+	\end{align*}
+\begin{itemize}
+
+\item 	The hybrid scheme \red{discretizes} the  $\widetilde{W}^\blue{H}$ process into \red{Wiener integrals of power functions and a Riemann sum}, appearing from approximating the kernel by power functions near the origin and step functions elsewhere.
+\begin{align*}
+\widetilde{W}^H_{\frac{i}{N}} \approx \overline{W}^H_{\frac{i}{N}}&= \sqrt{2H} \left(  W^2_i+\sum_{k=2}^{i} \left(\frac{b_k}{N}\right)^{H-\frac{1}{2}} \left(W_{\frac{i-(k-1)}{N}}^1-W_{\frac{i-k}{N}}^1\right)\right)\COMMA
+\end{align*}
+where \begin{itemize}
+\item $N$ is the number of time steps 
+\item $\{W^{2}_j\}_{j=1}^N$: \red{Artificially introduced} $N$ Gaussian random variables that are used for left-rule points in the hybrid scheme.
+\item $b_k=\left(\frac{k^{H+\frac{1}{2}}-(k-1)^{H+\frac{1}{2} }}{H+\frac{1}{2}}\right)^{\frac{1}{H-\frac{1}{2}}}.$
+\end{itemize}
+\end{itemize}
+\section*{The rough Bergomi Model: Analytic Smoothing}
+We show that the call price is given by
+%
+% (using conditional log-normality)
+\begin{small}
+\begin{align}
+C_{RB}\left( T, K \right) &= E\left[ \left(S_T - K \right)^+ \right]  \nonumber\\
+&=\expt{\expt{(S_T-K)^+ \mid \sigma(W^1(t) ,t \le T)}}\nonumber \\
+&=E\left[C_{BS}\left( \blue{S_0} = \operatorname{exp}\left(\rho \int_0^T \sqrt{v_t} dW_t^1 - \frac{1}{2}
+\rho^2 \int_0^T v_t dt\right), \right. \right.\nonumber\\
+&\quad \quad \quad \left.\left.\ \blue{k} = K , \ \blue{\sigma^2} = (1-\rho^2)
+\int_0^T v_t dt \right) \right]\nonumber\\
+&\approx \int_{\rset^{2\red{N}}} C_{BS} \left(G(\mathbf{w}^{(1)},\mathbf{w}^{(2)})\right) \rho_{\red{N}}(\mathbf{w}^{(1)})  \rho_{\red{N}}(\mathbf{w}^{(2)}) d\mathbf{w}^{(1)} d\mathbf{w}^{(2)} \COMMA
+\end{align}
+\end{small}
+where 
+\begin{itemize}
+\item $C_{\text{BS}}(\blue{S_0},\blue{k},\blue{\sigma^2})$ denotes the Black-Scholes call price, for initial spot price $\blue{S_0}$, strike price $\blue{k}$, and volatility $\blue{\sigma^2}$.
+\item $\rho_{\red{N}}$: the multivariate Gaussian density, $\red{N}$: number of time steps.
+\end{itemize} 
+\section*{Sparse Grids I}
+\textbf{\blue{Goal:}} Given  $F: \rset^d \rightarrow \rset$ and a multi-index $\boldsymbol{\beta} \in \mathbb{N}^d_{+}$, \red{approximate}
+\begin{displaymath} \expt{F} \approx Q^{m(\boldsymbol{\beta})}[F], \end{displaymath} 
+where $Q^{m(\boldsymbol{\beta})}$ a Cartesian quadrature grid with $m(\beta_n)$ points along $y_n$.
+
+\textbf{\blue{Idea:}} Denote $Q^{m(\boldsymbol{\beta})}[F]=F_{\boldsymbol{\beta}}$ and introduce the \red{first difference} 
+
+\begin{equation}
+\begin{aligned}
+\Delta_i F_{\boldsymbol{\beta}} \left\{ \begin{array}{rcr}
+F_{\boldsymbol{\beta}} - F_{\boldsymbol{\beta}-e_i}, & \text{ if } \beta_i>1  \\ 
+F_{\boldsymbol{\beta}}  & \text{ if } \beta_i=1  \end{array} \right. \\
+\end{aligned}
+\end{equation}
+
+where $e_i$ denotes the $i$th $d$-dimensional unit vector, and \red{mixed difference operators}
+
+\begin{equation}
+\Delta [F_{\boldsymbol{\beta}}]= \otimes_{i = 1}^{d} \Delta_iF_{\boldsymbol{\beta}}
+\end{equation}
+\section*{Sparse Grids II}
+A quadrature estimate of $E[F]$ is
+\begin{small}
+\begin{equation}\label{eq:Quadrature_estimator}
+\mathcal{M}_{\mathcal{I_{\ell}}}[F]=\sum_{\boldsymbol{\beta} \in \mathcal{I}_{\ell}} \Delta [F_{\boldsymbol{\beta}}]\COMMA
+\end{equation}
+\end{small}
+\begin{itemize}
+\item Product approach: $\mathcal{I}_{\ell}=\{ \max\{\beta_1,\dots,\beta_d \} \le \ell;\: \boldsymbol{\beta} \in \mathbb{N}^d_{+} \} $
+\item Regular SG: $ \mathcal{I}_{\ell}=\{  \mid \boldsymbol{\beta} \mid_1 \le \ell+d-1; \: \boldsymbol{\beta} \in \mathbb{N}^d_{+} \} $
+
+		\begin{figure}
+		\centering
+		\includegraphics[scale=0.3]{sparse_grids}
+		\vspace{0.1cm}
+		\caption{Left are product grids $\Delta_{\beta_1} \otimes \Delta_{\beta_2}$ for $1 \le \beta_1, \beta_2 \le 3$. Right is the corresponding SG construction.}
+		\label{fig:vol_rough}
+	\end{figure}
+	\vspace{0.3cm}
+\item ASGQ based on same construction as in \cite{haji2016multi}: $\mathcal{I}_{\ell}=\blue{\mathcal{I}^{\text{ASGQ}}}$.
+\end{itemize}
+\section*{ASGQ in Practice}
+\begin{itemize}
+		\item The construction of \blue{$\mathcal{I}^{\text{ASGQ}}$} is done by profit thresholding
+		
+%	 the optimal index set  $\mathcal{I}^{\text{MISC}}$  is given by 
+ \begin{equation*}
+ \blue{\mathcal{I}^{\text{ASGQ}}}=\{\boldsymbol{\beta} \in \mathbb{N}^d_{+}: \blue{P_{\boldsymbol{\beta}}}	 \ge \overline{T}\}.
+ \end{equation*}
+		\item \red{A posteriori, adaptive construction}: Given an index set $\mathcal{I}_k$, compute the profits of the neighbor indices and select the most profitable one
+		
+		\begin{figure}
+		\centering
+		\includegraphics[scale=0.3]{./MISC_construction/1}
+	\end{figure}
+		\item \textbf{Profit of a hierarchical surplus} \blue{$P_{\boldsymbol{\beta}}= \frac{\abs{\Delta E_{\boldsymbol{\beta}}}}{\Delta\mathcal{W}_{\boldsymbol{\beta}}}$}.
+\item \textbf{Error contribution}:  \blue{ $\Delta E_{\boldsymbol{\beta}} = \abs{\mathcal{M}^{\mathcal{I} \cup \{\boldsymbol{\beta}\}}-\mathcal{M}^{\mathcal{I}}}$}.
+%how much the error decreases if the operator $\Delta[F_{\boldsymbol{\beta}}]$ is added to \blue{$\mathcal{M}_{\mathcal{I}}[F]$
+		\item \textbf{Work contribution}:  \blue{$ 		\Delta \mathcal{W}_{\boldsymbol{\beta}} = \text{Work}[\mathcal{M}^{\mathcal{I} \cup \{\boldsymbol{\beta}\}}]-\text{Work}[\mathcal{M}^{\mathcal{I}}]$}
+%		cost required  to add $\Delta[F_{\boldsymbol{\beta}}]$  to $\mathcal{M}_{\mathcal{I}}[F]$:
+	
+	\end{itemize}
+
+\section*{Numerical Experiments}
+\begin{table}[!h]
+\begin{tiny}
+	\centering
+
+	\begin{tabular}{l*{2}{c}r}
+%	\toprule[1.5pt]
+		Parameters            & Reference solution    \\
+
+			Set $1$:	$H=0.07, K=1,S_0=1, \rho=-0.9, \eta=1.9,\xi=0.235^2$   & $\underset{(7.9e-05)}{0.0791}$  \\	
+
+				Set $2$:	$H=0.02, K=1, S_0=1, \rho=-0.7, \eta=0.4,\xi=0.1$   & $\underset{(1.3e-04)}{0.1248}$  \\
+					Set $3$:	$H=0.02, K=0.8,S_0=1, \rho=-0.7, \eta=0.4,\xi=0.1$   & $\underset{(5.6e-04)}{0.2407}$  \\
+						Set $4$:	$H=0.02, K=1.2,S_0=1, \rho=-0.7, \eta=0.4,\xi=0.1$   & $\underset{(2.5e-04)}{0.0568}$  \\
+%	\bottomrule[1.25pt]
+	\end{tabular}
+	\vspace{0.1cm}
+	\caption{Reference solution, using MC with $500$ time steps and number of samples, $M=10^6$, of call option price under the rough Bergomi model, for different parameter constellations.  The numbers between parentheses correspond to the statistical errors estimates.}
+	\label{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}
+	\end{tiny}
+\end{table}
+
+\begin{itemize}
+\item The first set is the one that is \red{closest to the empirical findings} \cite{gatheral2014volatility,bennedsen2016decoupling}, which suggest that $\blue{H} \approx 0.1$. The choice of parameters values of $\blue{\nu}= 1.9$ and $\blue{\rho}=-0.9$ is justified by \cite{bayer2016pricing}.
+
+\item  For the remaining three sets, we wanted to test the potential of our method for a \red{very rough case}, where variance reduction methods, such as MLMC are inefficient.
+\end{itemize}
+\section*{Results}
+
+\begin{figure}[H]
+ \begin{center}
+\includegraphics[scale=1]{./rBergomi_Complexity_rates/set2/error_vs_time_set2_full_comparison_2}
+	\caption{Computational work comparison for  ASGQ and MC (with and without) Richardson extrapolation, for the case of parameter set $1$ in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. In Figure  \ref{fig:Complexity plot for  MISC for Case set $2$ parameters, comparison}, we consider relative errors.}
+	\label{fig:Complexity plot for  MISC for Case set $2$ parameters, comparison}
+ \end{center}
+\end{figure}
+
+\section*{Conclusions}
+\begin{itemize}
+\item Our proposed estimator is useful in systems with the \red{presence of slow and fast timescales (stiff systems)}.
+\item Through our numerical experiments, we obtained \red{substantial gains} with respect to both the explicit MLMC and the drift-implicit, single-level tau-leap methods. We also showed that for large values of $TOL$ the pure drift-implicit MLMC method has the same order of computational work as does the explicit MLMC tau-leap methods, which is of  \red{$\Ordo{TOL^{-2} \log(TOL)^{2}}$} \cite{Anderson_Complexity}, but with a \red{smaller constant}.
+\end{itemize}
+%-------------
+
+\section*{Acknowledgements}
+C. Bayer gratefully acknowledges support from the German Research Foundation (DFG, grant BA5484/1). This work was supported by the KAUST Office of Sponsored Research (OSR) under Award No. URF/1/2584-01-01 and the Alexander von Humboldt Foundation. C. Ben Hammouda and R. Tempone are members of the KAUST SRI Center for Uncertainty Quantification in Computational Science and Engineering. 
+
+\footnotesize
+\bibliographystyle{abbrv}
+\bibliography{smoothing_rBergomi}
+
+\end{multicols}
+\end{document}
+ 

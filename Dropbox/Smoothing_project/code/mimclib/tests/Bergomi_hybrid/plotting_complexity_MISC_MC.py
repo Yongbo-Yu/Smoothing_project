@@ -344,30 +344,30 @@ fig = plt.figure()
 
 plt.plot(MC_err,MC_time,linewidth=2.0,label='MC' , marker='>',hold=True) 
 #plt.plot(MC_err_extrapol, fit_MC*0.00001,linewidth=2.0,label=r'slope= %s' % format(z_MC[0]  , '.2f'), linestyle = '--', color = 'b')
-plt.plot(MC_err_extrapol, fit_MC*0.0001,linewidth=1.0,label=r'slope= %s' % format(z_MC[0] , '.2f'), linestyle = '--', color = 'b')
+plt.plot(MC_err_extrapol, fit_MC*0.001,linewidth=1.0,label=r'slope= %s' % format(z_MC[0] , '.2f'), linestyle = '--', color = 'b')
 
 plt.plot(MISC_err,MISC_time,linewidth=2.0,label='ASGQ'  , marker='*',hold=True,color='r') 
-plt.plot(MISC_err, fit_MISC*0.0001,linewidth=2.0,label=r'slope= %s' % format(z_MISC[0]   , '.2f'), linestyle = '--', color='r')
+#plt.plot(MISC_err, fit_MISC*0.0001,linewidth=2.0,label=r'slope= %s' % format(z_MISC[0]   , '.2f'), linestyle = '--', color='r')
 
 plt.plot(QMC_err,QMC_time,linewidth=2.0,label='QMC'  , marker='o',hold=True,color='g') 
-plt.plot(QMC_err, fit_QMC*0.01,linewidth=2.0,label=r'slope= %s' % format(z_QMC[0]   , '.2f'), linestyle = '--', color='g')
+#plt.plot(QMC_err, fit_QMC*0.01,linewidth=2.0,label=r'slope= %s' % format(z_QMC[0]   , '.2f'), linestyle = '--', color='g')
 
-# plt.plot(MC_rich_err,MC_rich_time,linewidth=2.0,label='MC+Rich(level 1)' , marker='>',hold=True, color='g') 
-# plt.plot(MC_rich_err_extrapol, fit_MC_rich*0.02,linewidth=1.0,label=r'slope= %s' % format(z_MC_rich[0]  , '.2f'), linestyle = '--', color='black')
+plt.plot(MC_rich_err,MC_rich_time,linewidth=2.0,label='MC+Rich(level 1)' , marker='>',hold=True, color='c') 
+plt.plot(MC_rich_err_extrapol, fit_MC_rich*0.01,linewidth=1.0,label=r'slope= %s' % format(z_MC_rich[0]  , '.2f'), linestyle = '--', color='c')
 
-# plt.plot(MISC_rich_err,MISC_rich_time,linewidth=2.0,label='ASGQ+Rich(level 1)'  , marker='*',hold=True, color='g') 
+plt.plot(MISC_rich_err,MISC_rich_time,linewidth=2.0,label='ASGQ+Rich(level 1)'  , marker='*',hold=True, color='m') 
 # #plt.plot(MISC_rich_err, fit_MISC_rich*0.01,linewidth=2.0,label=r'slope= %s' % format(z_MISC_rich[0]  , '.2f'), linestyle = '--',color='m')
 
-# plt.plot(QMC_rich_err,QMC_rich_time,linewidth=2.0,label='QMC+Rich(level 1)'  , marker='o',hold=True, color='g') 
+plt.plot(QMC_rich_err,QMC_rich_time,linewidth=2.0,label='QMC+Rich(level 1)'  , marker='o',hold=True, color='k') 
 # plt.plot(QMC_rich_err, fit_QMC_rich*0.1,linewidth=2.0,label=r'slope= %s' % format(z_QMC_rich[0]  , '.2f'), linestyle = '--',color='aquamarine')
 
-# plt.plot(MC_rich_2_err,MC_rich_2_time,linewidth=2.0,label='MC+Rich(level 2)' , marker='>',hold=True,color='brown') 
-# plt.plot(MC_rich_2_err_extrapol, fit_MC_rich_2*0.03,linewidth=1.0,label=r'slope= %s' % format(z_MC_rich_2[0]  , '.2f'), linestyle = '--',color='black')
+plt.plot(MC_rich_2_err,MC_rich_2_time,linewidth=2.0,label='MC+Rich(level 2)' , marker='>',hold=True,color='brown') 
+plt.plot(MC_rich_2_err_extrapol, fit_MC_rich_2*0.03,linewidth=1.0,label=r'slope= %s' % format(z_MC_rich_2[0]  , '.2f'), linestyle = '--',color='brown')
 
-# plt.plot(MISC_rich_2_err,MISC_rich_2_time,linewidth=2.0,label='ASGQ+Rich(level 2)'  , marker='*',hold=True,color='brown' ) 
+plt.plot(MISC_rich_2_err,MISC_rich_2_time,linewidth=2.0,label='ASGQ+Rich(level 2)'  , marker='*',hold=True,color='pink' ) 
 
-# plt.plot(QMC_rich_2_err,QMC_rich_2_time,linewidth=2.0,label='QMC+Rich(level 2)'  , marker='o',hold=True,color='brown' )
-# plt.plot(QMC_rich_2_err, fit_QMC_rich_2*0.1,linewidth=1.0,label=r'slope= %s' % format(z_MISC_rich_2[0]  , '.2f'), linestyle = '--',color='aquamarine')
+plt.plot(QMC_rich_2_err,QMC_rich_2_time,linewidth=2.0,label='QMC+Rich(level 2)'  , marker='o',hold=True,color='grey' )
+#plt.plot(QMC_rich_2_err, fit_QMC_rich_2*0.1,linewidth=1.0,label=r'slope= %s' % format(z_MISC_rich_2[0]  , '.2f'), linestyle = '--',color='grey')
 
 plt.yscale('log')
 plt.xscale('log')
@@ -375,5 +375,5 @@ plt.xlabel('Error',fontsize=14)
 
 plt.ylabel('CPU time',fontsize=14) 
 #plt.subplots_adjust(wspace=0.6, hspace=0.6, left=0.15, bottom=0.22, right=0.96, top=0.96)
-plt.legend(loc='upper right', fontsize=8.5)
-plt.savefig('./results/error_vs_time_set5_full_comparison.eps', format='eps', dpi=1000)  
+plt.legend(loc='lower left', fontsize=9.5)
+plt.savefig('./results/error_vs_time_set2_full_comparison.eps', format='eps', dpi=1000)  

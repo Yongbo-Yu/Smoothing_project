@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  3 MAY 2019 20:07
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  9 MAY 2019 10:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -975,21 +975,12 @@ you forgot something else, as in `\hbox{$x}'. In such cases
 the way to recover is to insert both the forgotten and the
 deleted material, e.g., by typing `I$}'.
 
-! Undefined control sequence.
-l.20 ...rbergomi_2} is based on  hierarchical \red
-                                                  {ASGQ}, using the same con...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
 \citation{haji2016multi}
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
                                                   \space undefined\on@line .
 l.20 ... same construction in \cite{haji2016multi}
-                                                  . We describe the  \red{AS...
+                                                  . We describe the ASGQ  me...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -998,15 +989,6 @@ and I'll forget about whatever was undefined.
 
 
 LaTeX Warning: Citation `haji2016multi' on page  undefined on input line 20.
-
-! Undefined control sequence.
-l.20 ...cite{haji2016multi}. We describe the  \red
-                                                  {ASGQ}  method in our cont...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
 <write> ...:Details of the MISC' on page \thepage 
@@ -1022,15 +1004,6 @@ and I'll forget about whatever was undefined.
 
 LaTeX Warning: Reference `sec:Details of the MISC' on page  undefined on input 
 line 20.
-
-! Undefined control sequence.
-l.20 ...SC}.  To make an effective use of the \red
-                                                  {ASGQ method}, we  first a...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
 <write> ... bridge construction' on page \thepage 
@@ -1077,17 +1050,17 @@ Overfull \hbox (20.0pt too wide) in paragraph at lines 20--21
 
 
 Overfull \hbox (3454.31445pt too wide) in paragraph at lines 20--21
-[]\OML/cmm/m/it/10 ormula[]bergomi[]isbasedonhierarchical[]; usingthesameconstr
-uctionin\OT1/cmr/m/n/10 [[]]\OML/cmm/m/it/10 :Wedescribethe[]methodinourcontext
-inSection[]:Tomakeaneffectiveuseofthe[]; wefirstapplytwotransformationstooverco
-metheissueoffacingahighdimensionalintegrandduetothediscretizationschemeusedfors
-imulatingtherBergomidynamics:Thefirsttransformationconsistsofapplyingahierarchi
-calpathgenerationmethod; basedonBrownianbridge\OT1/cmr/m/n/10 (\OML/cmm/m/it/10
- Bb\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 construction; withtheaimofreducingtheeffec
-tivedimensionasdescribedinSection[]:ThesecondtransformationconsistsofapplyingRi
-chardsonextrapolationtoreducethebias; resultinginreducingthemaximumnumberofdime
-nsionsneededfortheintegrationproblem:DetailsaboutRichardsonextrapolationareprov
-idedinSection[]:$ 
+[]\OML/cmm/m/it/10 ormula[]bergomi[]isbasedonhierarchicalASGQ; usingthesamecons
+tructionin\OT1/cmr/m/n/10 [[]]\OML/cmm/m/it/10 :WedescribetheASGQmethodinourcon
+textinSection[]:TomakeaneffectiveuseoftheASGQmethod; wefirstapplytwotransformat
+ionstoovercometheissueoffacingahighdimensionalintegrandduetothediscretizationsc
+hemeusedforsimulatingtherBergomidynamics:Thefirsttransformationconsistsofapplyi
+ngahierarchicalpathgenerationmethod; basedonBrownianbridge\OT1/cmr/m/n/10 (\OML
+/cmm/m/it/10 Bb\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 construction; withtheaimofredu
+cingtheeffectivedimensionasdescribedinSection[]:Thesecondtransformationconsists
+ofapplyingRichardsonextrapolationtoreducethebias; resultinginreducingthemaximum
+numberofdimensionsneededfortheintegrationproblem:DetailsaboutRichardsonextrapol
+ationareprovidedinSection[]:$ 
  []
 
 Missing character: There is no I in font nullfont!
@@ -1176,27 +1149,18 @@ you left one out. Proceed, with fingers crossed.
 
 ! Extra }, or forgotten $.
 l.22 ...expectation in \eqref{BS_formula_rbergomi}
-                                                   using the \red{ASGQ} esti...
+                                                   using the ASGQ estimator,...
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
 you forgot something else, as in `\hbox{$x}'. In such cases
 the way to recover is to insert both the forgotten and the
 deleted material, e.g., by typing `I$}'.
 
-! Undefined control sequence.
-l.22 ...\eqref{BS_formula_rbergomi} using the \red
-                                                  {ASGQ} estimator, $Q_N$, t...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
 Missing character: There is no Q in font nullfont!
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.22 ...rgomi} using the \red{ASGQ} estimator, $Q_
+l.22 ...la_rbergomi} using the ASGQ estimator, $Q_
                                                   N$, then we have a natural...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -1416,18 +1380,9 @@ Missing character: There is no a in font nullfont!
 Missing character: There is no s in font nullfont!
 Missing character: There is no , in font nullfont!
 ! Undefined control sequence.
-l.26 ... error, $\mathcal{E}_B$  is the bias, \red
-                                                  {$\text{TOL}_{\text{ASGQ}}...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
 <recently read> \text 
                       
-l.26 ... $\mathcal{E}_B$  is the bias, \red{$\text
+l.26 ...rror, $\mathcal{E}_B$  is the bias, $\text
                                                   {TOL}_{\text{ASGQ}}$ is a ...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1436,7 +1391,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.26 ...}_B$  is the bias, \red{$\text{TOL}_{\text
+l.26 ...cal{E}_B$  is the bias, $\text{TOL}_{\text
                                                   {ASGQ}}$ is a user selecte...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1486,7 +1441,7 @@ Missing character: There is no a in font nullfont!
 Missing character: There is no n in font nullfont!
 Missing character: There is no d in font nullfont!
 ! Undefined control sequence.
-l.26 ... tolerance for ASGQ method}, and $C_{\text
+l.26 ...d tolerance for ASGQ method, and $C_{\text
                                                   {RB}}^N$ is the biased pri...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1588,7 +1543,7 @@ Overfull \hbox (15.76671pt too wide) in paragraph at lines 22--27
 
 
 Overfull \hbox (200.67241pt too wide) in paragraph at lines 22--27
-[]\OML/cmm/m/it/10 ormula[]bergomiusingthe[]estimator;$$[]$
+[]\OML/cmm/m/it/10 ormula[]bergomiusingtheASGQestimator;$$[]$
  []
 
 
@@ -1649,16 +1604,7 @@ Overfull \hbox (85.42227pt too wide) in paragraph at lines 22--27
 
 ! Undefined control sequence.
 l.28 \subsection
-                {\red{Adaptive sparse grids quadrature (ASGD)}}\label{sec:De...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.28 \subsection{\red
-                     {Adaptive sparse grids quadrature (ASGD)}}\label{sec:De...
+                {Adaptive sparse grids quadrature (ASGD)}\label{sec:Details ...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -3341,15 +3287,6 @@ Missing character: There is no i in font nullfont!
 Missing character: There is no c in font nullfont!
 Missing character: There is no a in font nullfont!
 Missing character: There is no l in font nullfont!
-! Undefined control sequence.
-l.44 ...mensionality". We use  a hierarchical \red
-                                                  {ASGQ}\footnote{More detai...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
 Missing character: There is no A in font nullfont!
 Missing character: There is no S in font nullfont!
 Missing character: There is no G in font nullfont!
@@ -3799,15 +3736,6 @@ Missing character: There is no s in font nullfont!
 Missing character: There is no f in font nullfont!
 Missing character: There is no o in font nullfont!
 Missing character: There is no r in font nullfont!
-! Undefined control sequence.
-l.47 ...ing in  $2N$ numerical parameters for \red
-                                                  {ASGQ}, which we use as th...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
 Missing character: There is no A in font nullfont!
 Missing character: There is no S in font nullfont!
 Missing character: There is no G in font nullfont!
@@ -4543,16 +4471,7 @@ Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
 ! Undefined control sequence.
-l.76  \red
-          {The ASGQ} estimator used for approximating \eqref{BS_formula_rber...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.76 ...Q} estimator used for approximating \eqref
+l.76 ...GQ estimator used for approximating \eqref
                                                   {BS_formula_rbergomi_2}, a...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -4784,8 +4703,8 @@ Overfull \hbox (150.04349pt too wide) in paragraph at lines 47--77
 
 
 Overfull \hbox (462.84073pt too wide) in paragraph at lines 47--77
-[][] \OT1/cmr/m/n/10 ^^A\OML/cmm/m/it/10 Q[]:[]estimatorusedforapproximating[];
- andusingasetofmulti \OMS/cmsy/m/n/10 ^^@
+[][] \OT1/cmr/m/n/10 ^^A\OML/cmm/m/it/10 Q[]:TheASGQestimatorusedforapproximati
+ng[]; andusingasetofmulti \OMS/cmsy/m/n/10 ^^@
  []
 
 
@@ -5605,15 +5524,6 @@ Missing character: There is no t in font nullfont!
 Missing character: There is no f in font nullfont!
 Missing character: There is no o in font nullfont!
 Missing character: There is no r in font nullfont!
-! Undefined control sequence.
-l.94 ...ptimal index set  $\mathcal{I}$  for  \red
-                                                  {our ASGQ} is given by
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
 Missing character: There is no o in font nullfont!
 Missing character: There is no u in font nullfont!
 Missing character: There is no r in font nullfont!
@@ -5729,15 +5639,6 @@ Missing character: There is no n in font nullfont!
 Missing character: There is no t in font nullfont!
 Missing character: There is no h in font nullfont!
 Missing character: There is no e in font nullfont!
-! Undefined control sequence.
-l.97 ...ldsymbol{\beta})$, is flexible in the \red
-                                                  {ASGQ} algorithm and can b...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
 Missing character: There is no A in font nullfont!
 Missing character: There is no S in font nullfont!
 Missing character: There is no G in font nullfont!
@@ -5953,14 +5854,152 @@ Missing character: There is no e in font nullfont!
                                                   \space undefined\on@line .
 l.97 ...l, for different parameter constellation.}
                                                   . For the remaining parame...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+LaTeX Warning: Reference `table:Reference solution, using MC with $500$ time st
+eps, of Call option price under rBergomi model, for different parameter constel
+lation.' on page  undefined on input line 97.
+
+Missing character: There is no . in font nullfont!
+Missing character: There is no F in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no g in font nullfont!
+Missing character: There is no p in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no T in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no b in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no e in font nullfont!
+! Undefined control sequence.
+<write> ...meter constellation.' on page \thepage 
+                                                  \space undefined\on@line .
+l.97 ...l, for different parameter constellation.}
+                                                  , we used a geometric hier...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+LaTeX Warning: Reference `table:Reference solution, using MC with $500$ time st
+eps, of Call option price under rBergomi model, for different parameter constel
+lation.' on page  undefined on input line 97.
+
+Missing character: There is no , in font nullfont!
+Missing character: There is no w in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no u in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no d in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no g in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no y in font nullfont!
+Missing character: There is no : in font nullfont!
+Missing character: There is no . in font nullfont!
+
+! LaTeX Error: \begin{document} ended by \end{remark}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.98 \end{remark}
+                 
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: Environment remark undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.99 \begin{remark}
+                   
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+Missing character: There is no A in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no p in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no z in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no d in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no [ in font nullfont!
+\citation{haji2016multi}
+! Undefined control sequence.
+<write> ...: Citation `\@citeb ' on page \thepage 
+                                                  \space undefined\on@line .
+l.100 As emphasized in \cite{haji2016multi}
+                                           , one important requirement to ge...
 (That makes 100 errors; please try again.) 
 Here is how much of TeX's memory you used:
- 38 strings out of 493014
- 733 string characters out of 6133351
+ 39 strings out of 493014
+ 742 string characters out of 6133351
  64601 words of memory out of 5000000
- 3676 multiletter control sequences out of 15000+600000
+ 3677 multiletter control sequences out of 15000+600000
  4567 words of font info for 17 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 18i,5n,21p,1079b,168s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 18i,5n,21p,1060b,168s stack positions out of 5000i,500n,10000p,200000b,80000s
 
 !  ==> Fatal error occurred, no output PDF file produced!
