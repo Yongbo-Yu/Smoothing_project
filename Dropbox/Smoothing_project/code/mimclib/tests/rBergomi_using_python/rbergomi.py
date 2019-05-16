@@ -30,7 +30,7 @@ class rBergomi(object):
         covariance structure.
         """
         rng = np.random.multivariate_normal
-        print (self.N, self.s)
+        #print (self.N, self.s)
         return rng(self.e, self.c, (self.N, self.s))
 
 

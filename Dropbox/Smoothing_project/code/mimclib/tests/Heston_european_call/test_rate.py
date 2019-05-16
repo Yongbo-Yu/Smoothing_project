@@ -27,7 +27,7 @@ class Problem(object):
     K=None         # Strike price
     T=1.0                      # maturity
     sigma=None    # volatility
-    N=2  # number of time steps which will be equal to the number of brownian bridge components (we set is a power of 2)
+    N=4  # number of time steps which will be equal to the number of brownian bridge components (we set is a power of 2)
     d=None
     dt=None
 
@@ -47,9 +47,6 @@ class Problem(object):
         self.K= coeff*self.S0        # Strike price and coeff determine if we have in/at/out the money option
         
         self.rho=-0.9
-        from scipy.linalg import toeplitz  
-        self.rho1=toeplitz([1,-0.9])
-        self.lower_triang_cholesky = np.linalg.cholesky(self.rho1)
 
         #self.kappa= 0.5
         self.kappa= 5.0
@@ -180,8 +177,7 @@ class Problem(object):
     # This function simulates a 1D heston trajectory for stock price and volatility paths
     def stock_price_trajectory_1D_heston(self,y1,y,yv1,yv):
         bb=self.brownian_increments(y1,y)
-        dW1= [bb[0,i+1]-bb[0,i] for i in range(0,self.N)] 
-
+        dW= [bb[0,i+1]-bb[0,i] for i in range(0,self.N)] 
        # # # non hierarhcical
        #  dW=[]
        #  dW.append(y1)
@@ -190,28 +186,19 @@ class Problem(object):
         
     
         # #  hierarhcical
-        #bb_v=self.brownian_increments(yv1,yv)
-        #dW_v= [bb_v[0,i+1]-bb_v[0,i] for i in range(0,self.N)] 
+        # bb_v=self.brownian_increments(yv1,yv)
+        # dW_v= [bb_v[0,i+1]-bb_v[0,i] for i in range(0,self.N)] 
 
-        # # # non hierarhcical
+        # # non hierarhcical
         dW_v=[]
         dW_v.append(yv1)
         dW_v[1:]=[np.array(yv[i]) for i in range(0,len(yv))]
         dW_v=np.array(dW_v)*np.sqrt(self.dt)
         
 
-
-        dW=np.array([dW1 ,dW_v])
         
-     
-        dW=np.dot(self.lower_triang_cholesky,dW)  
-
-
-        dW1=dW[0,:]
-        dW2=dW[1,:]
-        
-        #dW_s= self.rho *np.array(dW_v)+ np.sqrt(1-self.rho**2) * np.array(dW)
-        #y1s= self.rho *yv1 + np.sqrt(1-self.rho**2) * y1
+        dW_s= self.rho *np.array(dW_v)+ np.sqrt(1-self.rho**2) * np.array(dW)
+        y1s= self.rho *yv1 + np.sqrt(1-self.rho**2) * y1
 
 
         #option1 
@@ -219,9 +206,7 @@ class Problem(object):
         # dbbv=dW_v*np.sqrt(self.dt) -(self.dt/np.sqrt(self.T))*yv1 # brownian bridge increments dbb_i (used later for the location of the kink point)
         # dbb_s= self.rho *np.array(dbbv) + np.sqrt(1-self.rho**2) * np.array(dbb1)
         # #option2
-        y1s=np.dot(self.lower_triang_cholesky,np.array([y1,yv1]))[0]  
-
-        dbb_s=dW1-(self.dt/np.sqrt(self.T))*y1s
+        dbb_s=dW_s-(self.dt/np.sqrt(self.T))*y1s
 
 
 
@@ -233,8 +218,8 @@ class Problem(object):
         
         
         for n in range(1,self.N+1):
-            X[n]=X[n-1]*(1+np.sqrt(V[n-1])*dW1[n-1])
-            V[n]=V[n-1]- self.kappa *self.dt* max(V[n-1],0)+ self.xi *np.sqrt(max(V[n-1],0))*dW2[n-1]+ self.kappa*self.theta*self.dt
+            X[n]=X[n-1]*(1+np.sqrt(V[n-1])*dW_s[n-1])
+            V[n]=V[n-1]- self.kappa *self.dt* max(V[n-1],0)+ self.xi *np.sqrt(max(V[n-1],0))*dW_v[n-1]+ self.kappa*self.theta*self.dt
             V[n]=max(V[n],0)
             
         return X[-1],dbb_s,V
@@ -260,7 +245,7 @@ class Problem(object):
         fi=np.zeros((1,len(dbb)))
         
 
-        y1s=np.dot(self.lower_triang_cholesky,np.array([y1,yv1]))[0]  
+        y1s= self.rho *yv1 + np.sqrt(1-self.rho**2) * y1
         
         fi=1+(np.sqrt(V[0:self.N])/float(np.sqrt(self.T)))*y1s*(self.dt) +(np.sqrt(V[0:self.N]))*dbb
         product=np.prod(fi)
@@ -473,7 +458,7 @@ def first_difference_rate_plotting():
     marker=['>', 'v', '^', 'o', '*','+','>','v']
     ax = figure().gca()
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))
-    for d1 in range(0,3,1):
+    for d1 in range(0,7,1):
         print(d1)
         mylist=[]
         bias=np.zeros(5)
@@ -529,7 +514,7 @@ def first_difference_rate_plotting():
         plt.ylabel(r'$\mid \Delta E_{\mathbf{1}+k \bar{\beta}} \mid $',fontsize=14)  
      
     plt.legend(loc='upper right')
-    plt.savefig('./results/first_difference_heston_2steps_hierarchical.eps', format='eps', dpi=1000)
+    plt.savefig('./results/first_difference_heston_4steps_non_hierarchical.eps', format='eps', dpi=1000)
 
 
 
@@ -539,7 +524,7 @@ def mixed_difference_order2_rate_plotting(d):
     marker=['>', 'v', '^', 'o', '*','+','-',':']
     ax = figure().gca()
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))
-    for k in range(0,3,1):  
+    for k in range(0,7,1):  
         if k==d:
             print('Hello')
             continue
@@ -663,7 +648,7 @@ def mixed_difference_order2_rate_plotting(d):
         plt.xlabel('k',fontsize=14)
         plt.ylabel(r'$\mid \Delta E_{\mathbf{1}+k \bar{\beta}} \mid $',fontsize=14)  
     plt.legend(loc='lower left')
-    plt.savefig('./results/mixed_difference_order2_heston_2steps_hierarchical.eps', format='eps', dpi=1000)       
+    plt.savefig('./results/mixed_difference_order2_heston_4steps_non_hierarchical.eps', format='eps', dpi=1000)       
     
     
 
