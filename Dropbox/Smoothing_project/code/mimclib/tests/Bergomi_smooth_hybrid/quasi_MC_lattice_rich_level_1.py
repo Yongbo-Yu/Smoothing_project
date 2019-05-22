@@ -169,7 +169,7 @@ def weak_convergence_differences():
         ax = figure().gca()
         ax.xaxis.set_major_locator(MaxNLocator(integer=True))
         # # feed parameters to the problem
-        Nsteps_arr=np.array([4])
+        Nsteps_arr=np.array([8])
         dt_arr=1.0/(Nsteps_arr)
         
         error=np.zeros(1)
@@ -179,7 +179,7 @@ def weak_convergence_differences():
         Lb=np.zeros(1)
 
         nprev = 0
-        m=10
+        m=18
         N = 2**m
         
     

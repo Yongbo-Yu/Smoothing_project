@@ -1,8 +1,4 @@
 #!/usr/bin/env python
-import matplotlib.pyplot as plt
-import numpy as np
-
-# In this file, we plot the weak convergence rate for MC without Richardson extrapolation without doing the partial change of measure
 
 
 import numpy as np
@@ -28,22 +24,22 @@ class Problem(object):
     
   
     # for the values of below paramters, we need to see the paper as well check with Christian 
-    x=0.235**2;   # this will provide the set of xi parameter values 
-    #x=0.1;
+    #x=0.235**2;   # this will provide the set of xi parameter values 
+    x=0.1;
     HIn=Vector(1)    # this will provide the set of H parameter values
     #HIn[0]=0.43
-    HIn[0]=0.07
-    #HIn[0]=0.02
+    #HIn[0]=0.07
+    HIn[0]=0.02
     e=Vector(1)    # This will provide the set of eta paramter values
-    e[0]=1.9
-    #e[0]=0.4
+    #e[0]=1.9
+    e[0]=0.4
     r=Vector(1)   # this will provide the set of rho paramter values
-    r[0]=-0.9
-    #r[0]=-0.7
+    #r[0]=-0.9
+    r[0]=-0.7
     T=Vector(1)     # this will provide the set of T(time to maturity) parameter value
     T[0]=1.0
     k=Vector(1)     # this will provide the set of K (strike ) paramter value
-    k[0]=1.0
+    k[0]=1.2
    # y1perp = Vector(N)
     MIn=1        # number of samples M (I think we do not need this paramter here by default in our case it should be =1)
 
@@ -74,7 +70,7 @@ class Problem(object):
        
         W1=y[0:Nsteps]
         W2=y[Nsteps:2*Nsteps]
-        W3=y[Nsteps:2*Nsteps]
+        W3=y[2*Nsteps:3*Nsteps]
         QoI=self.z.ComputePayoffRT_single(W1,W2,W3)
         return QoI
 
@@ -84,14 +80,15 @@ class Problem(object):
 
 def weak_convergence_differences():    
         #exact= 0.0712073 #exact value of K=1, H=0.43_xi_0.235^2_eta_1_9_r__09
-        exact=   0.0791   #0.0792047  #exact value of K=1, H=0.07_xi_0.235^2_eta_1_9_r__09
+        #exact=   0.0791   #0.0792047  #exact value of K=1, H=0.07_xi_0.235^2_eta_1_9_r__09
         #exact= 0.224905759853  #exact value of K=0.8, H=0.07_xi_0.235^2_eta_1_9_r__09
         #exact= 0.00993973310944  #exact value of K=1.2, H=0.07_xi_0.235^2_eta_1_9_r__09
         #exact=0.124756301225  #exact value of K=1, H=0.02_xi_01_eta_0_4_r__07
-        #exact=0.2407117  #exact value of K=0.8, H=0.02_xi_01_eta_0_4_r__07
+       #exact=0.2407117  #exact value of K=0.8, H=0.02_xi_01_eta_0_4_r__07
+        exact=0.0568  #exact value of K=1.2, H=0.02_xi_01_eta_0_4_r__07
         
         # # feed parameters to the problem
-        Nsteps_arr=np.array([32])
+        Nsteps_arr=np.array([16])
         dt_arr=1.0/(Nsteps_arr)
         
         error=np.zeros(1)
@@ -101,7 +98,7 @@ def weak_convergence_differences():
         Lb=np.zeros(1)
 
         nprev = 0
-        m=10
+        m=15
         N = 2**m
         
     
