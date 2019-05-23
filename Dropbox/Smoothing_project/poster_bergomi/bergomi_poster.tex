@@ -9,6 +9,12 @@
 \usepackage{mathtools}
 \usepackage{epstopdf}
 
+
+
+
+\usepackage[section]{placeins}
+\usepackage{booktabs}
+
 \usepackage{graphicx}
 \usepackage{algorithmic}
 
@@ -43,10 +49,23 @@
 % Commands
 \input{Commands}
 
+\newcommand{\subcaption}[1]% %1 = text
+{\refstepcounter{subfig}%
+	\par\vskip\abovecaptionskip
+	\centerline{\textbf{(\alph{subfig})} #1}%
+	\vskip\belowcaptionskip\par}
+
+% create subfigure environment
+\def\subfigure{\let\oldcaption=\caption
+	\let\caption=\subcaption
+	\minipage}
+\def\endsubfigure{\endminipage
+	\let\caption=\oldcaption}
+
 
 % POSTER CONTENT
 
-\title{Hierarchical adaptive sparse  grids for option pricing under the rough Bergomi model}
+\title{Hierarchical adaptive sparse  grids and Quasi Monte Carlo for option pricing under the rough Bergomi model}
 
 %\author{Christian Bayer\thanks{
 % Weierstrass Institute for Applied Analysis and Stochastics (WIAS),
@@ -66,8 +85,7 @@
 \begin{multicols}{3}
 
 \section*{Abstract} 
-The rough Bergomi (rBergomi) model, introduced recently in  \cite{bayer2016pricing}, is a promising rough volatility model in quantitative finance. This new model exhibits consistent results with the empirical fact of implied volatility surfaces being essentially time-invariant. This model also has  the  ability to capture the term structure of skew observed in equity markets. In the absence of analytical European option pricing methods for the model, and due to the non-Markovian nature of the fractional driver, the prevalent option is to use Monte Carlo (MC) simulation for pricing. Despite recent advances in the MC method in this context, pricing under the rBergomi model is still a time-consuming task. To overcome this issue, we design a novel,  alternative, hierarchical approach, based on adaptive sparse grids quadrature (ASGQ), specifically using the same construction in \cite{haji2016multi}, coupled with Brownian bridge construction and Richardson extrapolation. By uncovering the available regularity,  our hierarchical method demonstrates substantial computational gains with respect to the standard MC method, when reaching a sufficiently small error tolerance in the price estimates across different parameter constellations, even for very small values of the Hurst  parameter. Our work opens a new research direction in this field, i.e. to investigate the performance of  methods  other than Monte Carlo for pricing and calibrating under the rBergomi model.
-
+The rough Bergomi (rBergomi) model, introduced recently in  \cite{bayer2016pricing}, is a promising rough volatility model in quantitative finance. This new model exhibits consistent results with the empirical fact of implied volatility surfaces being essentially time-invariant. This model also has  the  ability to capture the term structure of skew observed in equity markets. In the absence of analytical European option pricing methods for the model, and due to the non-Markovian nature of the fractional driver, the prevalent option is to use Monte Carlo (MC) simulation for pricing. Despite recent advances in the MC method in this context, \red{pricing under the rBergomi model is still a time-consuming task}. To overcome this issue, \red{we design a novel,  alternative, hierarchical approach, based on i) adaptive sparse grids quadrature (ASGQ), specifically using the same construction in \cite{haji2016multi}, and ii) Quasi Monte Carlo (QMC). Both techniques are coupled with Brownian bridge construction and Richardson extrapolation}. \red{By uncovering the available regularity,  our hierarchical methods demonstrates substantial computational gains with respect to the standard MC method}, when reaching a sufficiently small error tolerance in the price estimates across different parameter constellations, even for very small values of the Hurst  parameter. Our work opens a new research direction in this field, i.e. to investigate the performance of  methods  other than Monte Carlo for pricing and calibrating under the rBergomi model.
 %-------------
 \section*{Rough volatility}
 \begin{figure}[H]
@@ -103,7 +121,7 @@ v_t &= \blue{\xi_0}(t) \exp\left( \blue{\eta} \widetilde{W}_t^{\blue{H}} - \frac
 	\begin{itemize}
 		\item The model is \red{non-affine} and \red{non-Markovian} $\Rightarrow$ Standard numerical methods (PDEs, characteristic functions) seem inapplicable.
 		\item The only prevalent pricing method for mere
-		\red{vanilla options} is \red{Monte Carlo} \cite{bayer2016pricing,bayer2017regularity,mccrickerd2017turbocharging}, still a \red{time consuming task}.
+		\red{vanilla options} is \red{Monte Carlo} \cite{bayer2016pricing,bayer2017regularity,mccrickerd2018turbocharging}, still a \red{time consuming task}.
 		
 \item 	Discretization methods have \red{poor behavior of the strong error}, that is the convergence rate is of order of $\blue{H} \in[0,1/2]$ \cite{neuenkirch2016order} $\Rightarrow$ Variance reduction methods, such as MLMC, are inefficient for \red{very small values} of $\blue{H}$.
 	\end{itemize}
@@ -118,11 +136,30 @@ context.
 \begin{enumerate}		
 		\item We design an \red{alternative hierarchical efficient pricing method} based on:
 		\begin{enumerate}
-			\item[i)] \textbf{\red{Analytic smoothing}}  to uncover available regularity.
-			\item[ii)] Approximating the option price using \textbf{\red{ASGQ}} coupled with \textbf{\red{Brownian bridges}} and \textbf{\red{Richardson Extrapolation}}.
+			\item[i)] \red{Analytic smoothing}  to uncover available regularity.
+			\item[ii)] Approximating the option price using a \red{deterministic quadrature method (ASGQ and QMC)} coupled with \red{Brownian bridges} and \red{Richardson Extrapolation}.
 		\end{enumerate} 
-	\item Our \red{hierarchical} method demonstrates \red{substantial} computational gains with respect to the standard MC method, assuming a \red{sufficiently small error tolerance} in the price estimates, even for \red{very small values of the Hurst parameter}, $\blue{H}$.		
+	\item Our \red{hierarchical} methods demonstrate \red{substantial} computational gains with respect to the standard MC method, assuming a \red{sufficiently small error tolerance} in the price estimates, even for \red{very small values of the Hurst parameter}, $\blue{H}$.		
 		\end{enumerate}
+\section*{On the choice of the simulation scheme}
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./rBergomi_weak_error_rates/without_richardson/H_007/weak_convergence_order_Bergomi_H_007_K_1_M_4_10_6_CI_relative_hybrid_non_hierarchical_non_parallel_asymptotic}
+		\caption{}
+		\label{fig:set1_weak_rate_hybrid}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{./rBergomi_weak_error_cholesky/weak_convergence_order_Bergomi_H_007_K_1_M_4_10_6_CI_relative_cholesky_non_hierarchical_non_parallel_asymptotic}
+		\caption{}
+		\label{fig:set1_weak_rate_exact}
+	\end{subfigure}
+	\caption{The convergence of the weak error $\mathcal{E}_B$, using MC with $6 \times 10^6$ samples, for \red{Set $1$ parameter in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}}. The upper and lower bounds are $95\%$ confidence intervals. a) With \red{the hybrid scheme}  b) With \red{the exact scheme}.}
+	\label{fig:Weak_rate_set1_set_2_without_rich_hyb+chol}
+\end{figure}
+	
 \section*{The Hybrid Scheme \cite{bennedsen2017hybrid}}
 \begin{align*}
 	\widetilde{W}_t^{\blue{H}} &= \int_0^t K^{\blue{H}}(t-s) dW_s^1, \quad t \ge 0, \\ 	K^{\blue{H}}(t-s) &= \sqrt{2\blue{H}} (t-s)^{\blue{H} - 1/2},\quad \forall \: 0 \le s \le t. 
@@ -159,27 +196,27 @@ where
 \item $C_{\text{BS}}(\blue{S_0},\blue{k},\blue{\sigma^2})$ denotes the Black-Scholes call price, for initial spot price $\blue{S_0}$, strike price $\blue{k}$, and volatility $\blue{\sigma^2}$.
 \item $\rho_{\red{N}}$: the multivariate Gaussian density, $\red{N}$: number of time steps.
 \end{itemize} 
-\section*{Sparse Grids I}
-\textbf{\blue{Goal:}} Given  $F: \rset^d \rightarrow \rset$ and a multi-index $\boldsymbol{\beta} \in \mathbb{N}^d_{+}$, \red{approximate}
-\begin{displaymath} \expt{F} \approx Q^{m(\boldsymbol{\beta})}[F], \end{displaymath} 
-where $Q^{m(\boldsymbol{\beta})}$ a Cartesian quadrature grid with $m(\beta_n)$ points along $y_n$.
-
-\textbf{\blue{Idea:}} Denote $Q^{m(\boldsymbol{\beta})}[F]=F_{\boldsymbol{\beta}}$ and introduce the \red{first difference} 
-
-\begin{equation}
-\begin{aligned}
-\Delta_i F_{\boldsymbol{\beta}} \left\{ \begin{array}{rcr}
-F_{\boldsymbol{\beta}} - F_{\boldsymbol{\beta}-e_i}, & \text{ if } \beta_i>1  \\ 
-F_{\boldsymbol{\beta}}  & \text{ if } \beta_i=1  \end{array} \right. \\
-\end{aligned}
-\end{equation}
-
-where $e_i$ denotes the $i$th $d$-dimensional unit vector, and \red{mixed difference operators}
-
-\begin{equation}
-\Delta [F_{\boldsymbol{\beta}}]= \otimes_{i = 1}^{d} \Delta_iF_{\boldsymbol{\beta}}
-\end{equation}
-\section*{Sparse Grids II}
+%\section*{Sparse Grids I}
+%\textbf{\blue{Goal:}} Given  $F: \rset^d \rightarrow \rset$ and a multi-index $\boldsymbol{\beta} \in \mathbb{N}^d_{+}$, \red{approximate}
+%\begin{displaymath} \expt{F} \approx Q^{m(\boldsymbol{\beta})}[F], \end{displaymath} 
+%where $Q^{m(\boldsymbol{\beta})}$ a Cartesian quadrature grid with $m(\beta_n)$ points along $y_n$.
+%
+%\textbf{\blue{Idea:}} Denote $Q^{m(\boldsymbol{\beta})}[F]=F_{\boldsymbol{\beta}}$ and introduce the \red{first difference} 
+%
+%\begin{equation}
+%\begin{aligned}
+%\Delta_i F_{\boldsymbol{\beta}} \left\{ \begin{array}{rcr}
+%F_{\boldsymbol{\beta}} - F_{\boldsymbol{\beta}-e_i}, & \text{ if } \beta_i>1  \\ 
+%F_{\boldsymbol{\beta}}  & \text{ if } \beta_i=1  \end{array} \right. \\
+%\end{aligned}
+%\end{equation}
+%
+%where $e_i$ denotes the $i$th $d$-dimensional unit vector, and \red{mixed difference operators}
+%
+%\begin{equation}
+%\Delta [F_{\boldsymbol{\beta}}]= \otimes_{i = 1}^{d} \Delta_iF_{\boldsymbol{\beta}}
+%\end{equation}
+\section*{Sparse Grids}
 A quadrature estimate of $E[F]$ is
 \begin{small}
 \begin{equation}\label{eq:Quadrature_estimator}
@@ -192,7 +229,7 @@ A quadrature estimate of $E[F]$ is
 
 		\begin{figure}
 		\centering
-		\includegraphics[scale=0.3]{sparse_grids}
+		\includegraphics[scale=0.5]{sparse_grids}
 		\vspace{0.1cm}
 		\caption{Left are product grids $\Delta_{\beta_1} \otimes \Delta_{\beta_2}$ for $1 \le \beta_1, \beta_2 \le 3$. Right is the corresponding SG construction.}
 		\label{fig:vol_rough}
@@ -204,66 +241,136 @@ A quadrature estimate of $E[F]$ is
 \begin{itemize}
 		\item The construction of \blue{$\mathcal{I}^{\text{ASGQ}}$} is done by profit thresholding
 		
-%	 the optimal index set  $\mathcal{I}^{\text{MISC}}$  is given by 
  \begin{equation*}
  \blue{\mathcal{I}^{\text{ASGQ}}}=\{\boldsymbol{\beta} \in \mathbb{N}^d_{+}: \blue{P_{\boldsymbol{\beta}}}	 \ge \overline{T}\}.
  \end{equation*}
+ 	\item \textbf{Profit of a hierarchical surplus} \blue{$P_{\boldsymbol{\beta}}= \frac{\abs{\Delta E_{\boldsymbol{\beta}}}}{\Delta\mathcal{W}_{\boldsymbol{\beta}}}$}.
+ \item \textbf{Error contribution}:  \blue{ $\Delta E_{\boldsymbol{\beta}} = \abs{\mathcal{M}^{\mathcal{I} \cup \{\boldsymbol{\beta}\}}-\mathcal{M}^{\mathcal{I}}}$}.
+ %how much the error decreases if the operator $\Delta[F_{\boldsymbol{\beta}}]$ is added to \blue{$\mathcal{M}_{\mathcal{I}}[F]$
+ \item \textbf{Work contribution}:  \blue{$ 		\Delta \mathcal{W}_{\boldsymbol{\beta}} = \text{Work}[\mathcal{M}^{\mathcal{I} \cup \{\boldsymbol{\beta}\}}]-\text{Work}[\mathcal{M}^{\mathcal{I}}]$}
 		\item \red{A posteriori, adaptive construction}: Given an index set $\mathcal{I}_k$, compute the profits of the neighbor indices and select the most profitable one
-		
-		\begin{figure}
+
+\begin{figure}
+	\centering
+	\begin{subfigure}{0.32\textwidth}
 		\centering
-		\includegraphics[scale=0.3]{./MISC_construction/1}
-	\end{figure}
-		\item \textbf{Profit of a hierarchical surplus} \blue{$P_{\boldsymbol{\beta}}= \frac{\abs{\Delta E_{\boldsymbol{\beta}}}}{\Delta\mathcal{W}_{\boldsymbol{\beta}}}$}.
-\item \textbf{Error contribution}:  \blue{ $\Delta E_{\boldsymbol{\beta}} = \abs{\mathcal{M}^{\mathcal{I} \cup \{\boldsymbol{\beta}\}}-\mathcal{M}^{\mathcal{I}}}$}.
-%how much the error decreases if the operator $\Delta[F_{\boldsymbol{\beta}}]$ is added to \blue{$\mathcal{M}_{\mathcal{I}}[F]$
-		\item \textbf{Work contribution}:  \blue{$ 		\Delta \mathcal{W}_{\boldsymbol{\beta}} = \text{Work}[\mathcal{M}^{\mathcal{I} \cup \{\boldsymbol{\beta}\}}]-\text{Work}[\mathcal{M}^{\mathcal{I}}]$}
-%		cost required  to add $\Delta[F_{\boldsymbol{\beta}}]$  to $\mathcal{M}_{\mathcal{I}}[F]$:
-	
+		\includegraphics[width=0.9\textwidth]{./MISC_construction/1}
+		\caption{}
+	\end{subfigure}\hfil
+	\begin{subfigure}{0.32\textwidth}
+		\centering
+		\includegraphics[width=0.9\textwidth]{./MISC_construction/2}
+		\caption{}
+	\end{subfigure}\hfil
+	\begin{subfigure}{0.32\textwidth}
+		\centering
+		\includegraphics[width=0.9\textwidth]{./MISC_construction/3}
+		\caption{}
+	\end{subfigure}\hfil
+	\medskip
+\begin{subfigure}{0.32\textwidth}
+	\centering
+	\includegraphics[width=0.9\textwidth]{./MISC_construction/4}
+	\caption{}
+\end{subfigure}\hfil
+\begin{subfigure}{0.32\textwidth}
+	\centering
+	\includegraphics[width=0.9\textwidth]{./MISC_construction/5}
+	\caption{}
+\end{subfigure}\hfil
+\begin{subfigure}{0.32\textwidth}
+	\centering
+	\includegraphics[width=0.9\textwidth]{./MISC_construction/6}
+	\caption{}
+\end{subfigure}%
+	\caption{Construction of the index set for ASGQ method}
+\end{figure}
+
+
 	\end{itemize}
 
 \section*{Numerical Experiments}
 \begin{table}[!h]
-\begin{tiny}
+\begin{small}
 	\centering
-
+\caption{Reference solution, using MC with $500$ time steps and number of samples, $M=4 \times 10^6$, of call option price under the rough Bergomi model, for different parameter constellations.  The numbers between parentheses correspond to the statistical errors estimates.}
+\label{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}
 	\begin{tabular}{l*{2}{c}r}
-%	\toprule[1.5pt]
-		Parameters            & Reference solution    \\
-
+	\toprule[1.5pt]
+		\textbf{Parameters}            & \textbf{Reference solution}    \\
+	\hline
 			Set $1$:	$H=0.07, K=1,S_0=1, \rho=-0.9, \eta=1.9,\xi=0.235^2$   & $\underset{(7.9e-05)}{0.0791}$  \\	
 
 				Set $2$:	$H=0.02, K=1, S_0=1, \rho=-0.7, \eta=0.4,\xi=0.1$   & $\underset{(1.3e-04)}{0.1248}$  \\
-					Set $3$:	$H=0.02, K=0.8,S_0=1, \rho=-0.7, \eta=0.4,\xi=0.1$   & $\underset{(5.6e-04)}{0.2407}$  \\
-						Set $4$:	$H=0.02, K=1.2,S_0=1, \rho=-0.7, \eta=0.4,\xi=0.1$   & $\underset{(2.5e-04)}{0.0568}$  \\
-%	\bottomrule[1.25pt]
+					Set $3$:	$H=0.02, K=0.8,S_0=1,T=1, \rho=-0.7, \eta=0.4,\xi_0=0.1$   & $\underset{(1.8e-04)}{0.2412}$  \\
+				Set $4$:	$H=0.02, K=1.2,S_0=1,T=1, \rho=-0.7, \eta=0.4,\xi_0=0.1$   & $\underset{(8.0e-05)}{0.0570}$  \\
+	\bottomrule[1.25pt]
 	\end{tabular}
-	\vspace{0.1cm}
-	\caption{Reference solution, using MC with $500$ time steps and number of samples, $M=10^6$, of call option price under the rough Bergomi model, for different parameter constellations.  The numbers between parentheses correspond to the statistical errors estimates.}
-	\label{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}
-	\end{tiny}
+	\end{small}
 \end{table}
 
 \begin{itemize}
-\item The first set is the one that is \red{closest to the empirical findings} \cite{gatheral2014volatility,bennedsen2016decoupling}, which suggest that $\blue{H} \approx 0.1$. The choice of parameters values of $\blue{\nu}= 1.9$ and $\blue{\rho}=-0.9$ is justified by \cite{bayer2016pricing}.
+\item The first set is the one that is \red{closest to the empirical findings} \cite{gatheral2018volatility,bennedsen2016decoupling}, which suggest that $\blue{H} \approx 0.1$. The choice of parameters values of $\blue{\nu}= 1.9$ and $\blue{\rho}=-0.9$ is justified by \cite{bayer2016pricing}.
 
 \item  For the remaining three sets, we wanted to test the potential of our method for a \red{very rough case}, where variance reduction methods, such as MLMC are inefficient.
 \end{itemize}
-\section*{Results}
+\section*{Results I}
+\begin{table}[!h]
+	\centering
+	\caption{Summary of relative errors and computational gains, achieved by the different methods. In this table, we highlight the computational gains achieved by ASGQ and QMC over MC method to meet a certain error tolerance. We note that the ratios are computed \red{for the best configuration with Richardson extrapolation for each method}.}
+	\begin{small}
+		\begin{tabular}{l*{4}{c}r}
+			\toprule[1.5pt]
+			\textbf{Parameter set}              &  \textbf{Total relative error}  & \textbf{CPU time ratio $\left(\text{MC}/ \text{ASGQ} \right)$} & \textbf{CPU time ratio  $\left(\text{MC}/ \text{QMC} \right)$}\\
+			\hline
+			Set $1$  &  $1\%$&  $ 15$ &  $10$\\	
+			
+			\hline
+		Set $2$    &  $0.2\%$&  $21.5$ &  $73.2$\\		
+			\hline
+		Set $3$   &  $0.4\%$&  $26.7$ &  $21.3$\\	
+			\hline
+		Set $4$ &  $2\%$&  $5$ &  $10$\\	
+			\bottomrule[1.25pt]
+		\end{tabular}
+	\end{small}
+	\label{table:Summary of our numerical results.}
 
-\begin{figure}[H]
- \begin{center}
-\includegraphics[scale=1]{./rBergomi_Complexity_rates/set2/error_vs_time_set2_full_comparison_2}
-	\caption{Computational work comparison for  ASGQ and MC (with and without) Richardson extrapolation, for the case of parameter set $1$ in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. In Figure  \ref{fig:Complexity plot for  MISC for Case set $2$ parameters, comparison}, we consider relative errors.}
-	\label{fig:Complexity plot for  MISC for Case set $2$ parameters, comparison}
- \end{center}
+\end{table}
+\section*{Results II}
+
+\begin{figure}
+	\centering
+	\begin{subfigure}{0.45\textwidth}
+		\centering
+		\includegraphics[width=0.9\textwidth]{./rBergomi_Complexity_rates/set2/error_vs_time_set2_MC_comparison}
+		\caption{}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\centering
+		\includegraphics[width=0.9\textwidth]{./rBergomi_Complexity_rates/set2/error_vs_time_set2_QMC_comparison}
+		\caption{}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\centering
+		\includegraphics[width=0.9\textwidth]{./rBergomi_Complexity_rates/set2/error_vs_time_set2_MISC_comparison}
+		\caption{}
+	\end{subfigure}%%
+	\caption{Comparing the numerical complexity of the different  methods with the different configurations in terms of the level of Richardson extrapolation,  for the case of \red{parameter set $1$ in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}}. a) \red{MC methods}. b) \red{QMC methods}. d) \red{ASGQ methods}. }
+	\label{fig: Comparing the numerical complexity of the different  methods with the different configurations}
+\end{figure}
+\section*{Results III}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.6\linewidth]{./rBergomi_Complexity_rates/set2/error_vs_time_set2_full_comparison}
+	\caption{Computational work comparison for the different methods \red{with the best configurations concluded from Figure \ref{fig: Comparing the numerical complexity of the different  methods with the different configurations}}, for the case of \red{parameter set $1$ in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}}. This plot shows that to achieve a relative error below $1\%$, ASGQ coupled with level $2$ of Richardson extrapolation and QMC coupled with level $1$ of  Richardson extrapolation have the same performance. Furthermore, they outperform significantly MC method coupled with level $1$ of Richardson extrapolation.}	\label{fig:Complexity plot for  MISC for Case set $2$ parameters, comparison}
 \end{figure}
 
-\section*{Conclusions}
-\begin{itemize}
-\item Our proposed estimator is useful in systems with the \red{presence of slow and fast timescales (stiff systems)}.
-\item Through our numerical experiments, we obtained \red{substantial gains} with respect to both the explicit MLMC and the drift-implicit, single-level tau-leap methods. We also showed that for large values of $TOL$ the pure drift-implicit MLMC method has the same order of computational work as does the explicit MLMC tau-leap methods, which is of  \red{$\Ordo{TOL^{-2} \log(TOL)^{2}}$} \cite{Anderson_Complexity}, but with a \red{smaller constant}.
-\end{itemize}
+%\section*{Conclusions}
+%\begin{itemize}
+%\item 
+%\end{itemize}
 %-------------
 
 \section*{Acknowledgements}

@@ -17,7 +17,7 @@ where $G$  maps  $2N$ independent standard Gaussian random inputs to the paramet
 \end{equation*} 
 Therefore, the initial integration problem that we are solving lives in $2N$-dimensional space, which becomes very large as the number of time steps $N$, used in the hybrid scheme, increases.
 
-Our approach of approximating the expectation in \eqref{BS_formula_rbergomi_2} is based on  hierarchical ASGQ, using the same construction in \cite{haji2016multi}. We describe the ASGQ  method in our context in Section \ref{sec:Details of the MISC}.  To make an effective use of the ASGQ method, we  first apply two transformations to overcome the issue of facing a high dimensional integrand due to the discretization scheme used for simulating the rBergomi dynamics. The first transformation consists of applying a hierarchical  path generation method, based on Brownian bridge (Bb) construction, with the aim of reducing the effective dimension as  described  in Section \ref{sec:Brwonian bridge construction}. The second transformation consists of applying Richardson extrapolation to reduce the bias, resulting in reducing  the maximum number of dimensions needed for the integration problem. Details about  Richardson extrapolation  are provided in Section \ref{sec:Richardson extrapolation}.
+Our approach of approximating the expectation in \eqref{BS_formula_rbergomi_2} is based on \red{a hierarchical deterministic quadratures, namely  i) ASGQ using the same construction in \cite{haji2016multi} and ii) QMC based on lattice rules}. We describe the ASGQ  method in our context in Section \ref{sec:Details of the MISC} and \red{in Section \ref{sec:Quasi Monte Carlo (QMC)}, we provide details on the implented QMC method}.  \red{To make an effective use of either ASGQ or QMC methods}, we   apply two transformations to overcome the issue of facing a high dimensional integrand due to the discretization scheme used for simulating the rBergomi dynamics. The first transformation consists of applying a hierarchical  path generation method, based on Brownian bridge (Bb) construction, with the aim of reducing the effective dimension as  described  in Section \ref{sec:Brwonian bridge construction}. The second transformation consists of applying Richardson extrapolation to reduce the bias, resulting in reducing  the maximum number of dimensions needed for the integration problem. Details about  Richardson extrapolation  are provided in Section \ref{sec:Richardson extrapolation}.
 
 If we denote by $\mathcal{E}_{\text{tot}}$ the total error of approximating the  expectation in \eqref{BS_formula_rbergomi} using the ASGQ estimator, $Q_N$, then we have a natural error decomposition
 \begin{align}\label{eq:total_error}
@@ -25,7 +25,14 @@ If we denote by $\mathcal{E}_{\text{tot}}$ the total error of approximating the 
 \end{align}
 where  $\mathcal{E}_Q$ is the quadrature error, $\mathcal{E}_B$  is the bias, $\text{TOL}_{\text{ASGQ}}$ is a user selected tolerance for ASGQ method, and $C_{\text{RB}}^N$ is the biased price computed with $N$ time steps as given by \eqref{BS_formula_rbergomi_2}.
 
-\subsection{Adaptive sparse grids quadrature (ASGD)}\label{sec:Details of the MISC}
+\red{On the other hand, the total error of approximating the  expectation in \eqref{BS_formula_rbergomi} using the QMC or MC estimator, $Q^{\text{MC(QMC)}}_N$ can be bounded by
+
+\begin{align}\label{eq:total_error}
+	\mathcal{E}_{\text{tot}} & \le \abs{C_{\text{RB}}-C_{\text{RB}}^N}+\abs{C_{\text{RB}}^N-Q^{\text{MC (QMC)}}_N} \le \mathcal{E}_B(N)+ \mathcal{E}_{S}(M,N),
+\end{align}
+where  $\mathcal{E}_S$ is the statistical error\footnote{The statistical error estimate of MC or QMC is  $C_{\alpha} \frac{\sigma_M}{\sqrt{M}}$, where $M$ is the number of samples and $C_{\alpha}=1.96$ for $95\%$ confidence interval.}, $M$ is the number of samples used for MC or QMC method
+}.
+\subsection{Adaptive sparse grids quadrature (ASGQ)}\label{sec:Details of the MISC}
 
 We assume that we want to approximate the expected value $\text{E}[f(Y)]$ of an analytic function $f\colon \Gamma \to \rset$ using a tensorization of quadrature formulas over $\Gamma$.
 
@@ -87,12 +94,52 @@ We define the work contribution, $\Delta \mathcal{W}_{\boldsymbol{\beta}}$, to b
 \Delta \mathcal{W}_{\boldsymbol{\beta}} &= \text{Work}[Q^{\mathcal{I} \cup \{\boldsymbol{\beta}\}}_N]-\text{Work}[Q^{\mathcal{I}}_N] \nonumber\\
 \Delta E_{\boldsymbol{\beta}} &= \abs{Q^{\mathcal{I} \cup \{\boldsymbol{\beta}\}}_N-Q^{\mathcal{I}}_N}.
 \end{align}
- The  construction of the optimal  $\mathcal{I}$ will be done by profit thresholding, that is, for a certain threshold value $\bar{T}$, and a profit of a hierarchical surplus defined by
+ The  construction of the optimal  $\mathcal{I}$ is done by profit thresholding (see Figure \ref{fig:Construction of the index set for ASGQ method} for illustration), that is, for a certain threshold value $\bar{T}$, and a profit of a hierarchical surplus defined by
  \begin{equation*}
  P_{\boldsymbol{\beta}}= \frac{\abs{\Delta E_{\boldsymbol{\beta}}}}{\Delta\mathcal{W}_{\boldsymbol{\beta}}},
  \end{equation*}
   where the optimal index set  $\mathcal{I}$  for our ASGQ is given by 
  $\mathcal{I}=\{\boldsymbol{\beta}: P_{\boldsymbol{\beta}}	 \ge \bar{T}\}$.
+ 
+ \FloatBarrier
+ \begin{figure}[htb]
+ 	\centering % <-- added
+ 	\begin{subfigure}{0.25\textwidth}
+ 		\includegraphics[width=\linewidth]{./figures/MISC_construction/1}
+ 		\caption{}
+ 		\label{fig:1}
+ 	\end{subfigure}\hfil % <-- added
+ 	\begin{subfigure}{0.25\textwidth}
+ 		\includegraphics[width=\linewidth]{./figures/MISC_construction/2}
+ 		\caption{}
+ 		\label{fig:2}
+ 	\end{subfigure}\hfil % <-- added
+ 	\begin{subfigure}{0.25\textwidth}
+ 		\includegraphics[width=\linewidth]{./figures/MISC_construction/3}
+ 		\caption{}
+ 		\label{fig:3}
+ 	\end{subfigure}
+ 	
+ 	\medskip
+ 	\begin{subfigure}{0.25\textwidth}
+ 		\includegraphics[width=\linewidth]{./figures/MISC_construction/4}
+ 		\caption{}
+ 		\label{fig:4}
+ 	\end{subfigure}\hfil % <-- added
+ 	\begin{subfigure}{0.25\textwidth}
+ 		\includegraphics[width=\linewidth]{./figures/MISC_construction/5}
+ 		\caption{}
+ 		\label{fig:5}
+ 	\end{subfigure}\hfil % <-- added
+ 	\begin{subfigure}{0.25\textwidth}
+ 		\includegraphics[width=\linewidth]{./figures/MISC_construction/6}
+ 		\caption{}
+ 		\label{fig:6}
+ 	\end{subfigure}
+ 	\caption{Construction of the index set for ASGQ method}
+ 	\label{fig:Construction of the index set for ASGQ method}
+ \end{figure}
+\FloatBarrier
 \begin{remark}
 	The choice of the hierarchy of quadrature points, $m(\boldsymbol{\beta})$, is flexible in the ASGQ algorithm and can be fixed by the user, depending on the convergence properties of the problem at hand. For instance, for the sake of reproducibility, in our numerical experiments we used a linear hierarchy: $m(\beta)=4 (\beta-1)+1,\: 1 \le \beta $, for results of parameter set $1$ in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. For the remaining parameter sets in Table  \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, we used a geometric hierarchy: $m(\beta)=2^{\beta-1}+1, \:1 \le \beta $.
 \end{remark} 
@@ -152,15 +199,16 @@ The analiticity assumption, stated in the beginning of Section \ref{sec:Details 
 %\end{remark}
 
 
-\subsubsection{ASGQ error estimate}
+\red{\subsubsection{ASGQ error estimate}
 \input{MISC_error_estimate}
+}
 
 \subsection{Quasi Monte Carlo (QMC)}\label{sec:Quasi Monte Carlo (QMC)}
 \input{QMC.tex}
 \subsection{Brownian bridge construction}\label{sec:Brwonian bridge construction}
 In the literature of ASGQ and  QMC, several hierarchical path generation methods (PGMs) or transformation methods have been proposed to reduce the effective dimension. Among these transformations, we cite  the Brownian bridge (Bb)  construction \cite{morokoff1994quasi,moskowitz1996smoothness,caflisch1997valuation}, the principal component analysis (PCA)  \cite{acworth1998comparison} and the linear transformation (LT) \cite{imai2004minimizing}.
 
-In our context, the Brownian motion on a time discretization  can be constructed either sequentially using a standard random walk construction, or hierarchically using   other PGMs as listed above. For our purposes, to make an effective use of ASGQ, which benefits from anisotropy, we use the Bb construction since it produces  dimensions with different importance, contrary to a random walk procedure for which all the dimensions of the stochastic space have equal importance. In fact, Bb uses the first several coordinates of the low-discrepancy points to determine the general shape of the Brownian path, and the last few coordinates influence only the fine detail of the path. Consequently, this transformation  reduces the effective dimension  of the problem, which results in accelerating the ASGQ method by reducing the computational cost.
+In our context, the Brownian motion on a time discretization  can be constructed either sequentially using a standard random walk construction, or hierarchically using   other PGMs as listed above. For our purposes, \red{to make an effective use of ASGQ or QMC methods}, which benefit from anisotropy, we use the Bb construction since it produces  dimensions with different importance, contrary to a random walk procedure for which all the dimensions of the stochastic space have equal importance. In fact, Bb uses the first several coordinates of the low-discrepancy points to determine the general shape of the Brownian path, and the last few coordinates influence only the fine detail of the path. Consequently, this transformation  reduces the effective dimension  of the problem, \red{which results in accelerating the ASGQ and QMC methods} by reducing the computational cost.
 
 Let us denote $\{t_i\}_{i=0}^{N}$ the grid of time steps. Then the Bb construction \cite{glasserman2004monte} consists of the following: given a past value $B_{t_i}$ and a future value $B_{t_k}$, the value $B_{t_j}$ (with $t_i < t_j < t_k$) can be generated according to 
 \begin{equation*}

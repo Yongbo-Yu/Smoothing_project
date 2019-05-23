@@ -18,17 +18,17 @@ r[0]=-0.7
 t=Vector(1)
 t[0]=1.0
 k=Vector(1)
-k[0]=1.2
+k[0]=1.0
 NIn=500
 MIn=1
 
 start=time.time()
 z=RBergomi.RBergomiST( x,  HIn, e,  r,  t, k,  NIn, MIn)
 
-a=np.zeros((1*(10**5)))
+a=np.zeros((8*(10**6)))
 W1 = Vector(NIn)
 W2 = Vector(NIn)
-for m in range(0,(1*(10**5))):
+for m in range(0,(8*(10**6))):
 	for i in range(0,NIn):
 		W1[i] = (np.random.normal(loc=0.0, scale=1.0))
 		W2[i] = np.random.normal(loc=0.0, scale=1.0)
@@ -41,5 +41,5 @@ elapsed_time_qoi=time.time()-start;
 print ('Time')
 print  (elapsed_time_qoi)    
 print ('Stat Error')
-stand=np.std(a, axis = 0)/np.sqrt((1*(10**5)))
+stand=np.std(a, axis = 0)/np.sqrt((8*(10**6)))
 print(stand)
