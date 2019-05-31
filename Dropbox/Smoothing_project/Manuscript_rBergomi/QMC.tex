@@ -1,0 +1,18 @@
+\red{A second type of deterministic quadrature that we test in this work is the QMC method. Specifically, we use the lattice rules family of QMC \cite{sloan1985lattice,cools2008belgian,nuyens2014construction}.  The main input for the lattice rule is one integer vector with $d$ component ($d$ dimension of the integration problem).
+
+In fact, given an integer vector $z = (z_1,\dots, z_d)$ known as \textit{the generating vector}, a (rank-$1$) lattice rule with $n$ points takes the form
+
+\begin{equation}
+Q_n(f):=\frac{1}{n}\sum_{k=0}^{n-1} f \left( \frac{kz \: \text{mod}\: n}{n}\right).
+\end{equation}
+The quality of the lattice rule depends on the choice of the generating vector. Due to the modulo operation, it suffices to consider the values from $1$ up to $n-1$, leaving out $0$ which is clearly a bad choice. Furthermore, we restrict the values to those relatively prime to $n$, to ensure that every one-dimensional projection of the $n$ points yields $n$ distinct values. Thus, we write $\mathbf{z} \in \mathbb{U}_n^d$, with $\mathbb{U}_n:=\{z \in \zset: 1 \le z \le n-1\: \text{and gcd}(z,n)=1\}$. For practical purposes,  we choose $n$  to be a power of $2$. The total number of possible choices for the generating vector is then  $(n/2)^d$. 
+
+To get an unbiased approximation of the integral, we use  a randomly shifted lattice rule, which also allows us to obtain a practical error estimate in the same way as the MC method. It works as follows. We generate $q$ independent random shifts $\Delta^{(i)}$ for $i=0,\dots,q-1$ from the uniform distribution on $[0,1]^d$ . For the same fixed lattice generating vector $z$, we compute the $q$ different shifted lattice rule approximations and denote
+them by $Q^{(i )}_n(f)$ for $i=0,\dots,q-1$.We then take the average
+\begin{align}
+\overline{Q}_{n,q}(f)=\frac{1}{q} \sum_{i=0}^{q-1}Q^{(i )}_n(f)=\frac{1}{q}\sum_{i=0}^{q-1}\left(\frac{1}{n}\sum_{k=0}^{n-1} f \left( \frac{kz+\Delta^{(i)}  \: \text{mod}\: n}{n}\right)  \right)
+\end{align}
+as our final approximation to the integral.
+
+We note that since we are dealing with Gaussian randomness and with integrals in infinite support, we use the inverse of the standard normal cumulative distribution function as a pre-transformation to map the problem to $[0,1]$ and then use QMC. Furthermore, in our numerical test, we use a pre-made point generators using latticeseq\_b2.py in python from   \url{https://people.cs.kuleuven.be/~dirk.nuyens/qmc-generators/}.
+}

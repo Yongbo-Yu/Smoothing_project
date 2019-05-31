@@ -1,0 +1,365 @@
+\section{Numerical comparison between MISC and MC}
+\subsection{Case of set $1$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}}\label{appendix:Case of set 1 parameters}
+
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$  \\
+		\hline
+%		MISC ($TOL_{\text{MISC}}=5.10^{-1}$)  & $\underset{0.0062}{\mathbf{  0.0868}}$ & $\underset{ 0.0040}{\mathbf{0.0563}}$ & $\underset{ 0.0040}{\mathbf{0.0563}}$ & $\underset{0.0014}{\mathbf{0.0197}}$  \\
+		MISC ($TOL_{\text{MISC}}=10^{-1}$)  & $\underset{0.0062}{\mathbf{  0.0868}}$ & $\underset{ 0.0040}{\mathbf{0.0563}}$& $\underset{0.0049}{\mathbf{0.0681}}$ & $\underset{0.0035
+		}{\mathbf{0.0492}}$  \\
+%		MISC ($TOL_{\text{MISC}}=5.10^{-2}$)  &$\underset{0.0062}{\mathbf{  0.0868}}$ & $\underset{0.0042}{\mathbf{0.0591}}$ & $\underset{0.0021}{\mathbf{0.0288
+%		}}$ & $\underset{0.0057}{\mathbf{0.0800}}$  \\
+		MISC ($TOL_{\text{MISC}}=10^{-2}$)  & $\underset{ 0.0001
+		}{\mathbf{\red{  0.0017}}}$ & $\underset{ 0.0023}{\mathbf{ 0.0324}}$ & $\underset{0.0016
+		}{\mathbf{0.0218
+		}}$ & $\underset{0.0005}{\mathbf{\red{0.0070}}}$  \\
+		MISC ($TOL_{\text{MISC}}=10^{-3}$)  & $\underset{ 0.0001
+		}{\mathbf{  0.0017}}$ & $\underset{1.0e-05
+		}{\mathbf{ \red{1.4e-04
+		}}}$ & $\underset{3.5e-04
+		}{\mathbf{  0.0049
+		}}$ & $\underset{0.0005}{\mathbf{ 0.0070}}$  \\
+%		MISC ($TOL_{\text{MISC}}=5.10^{-4}$)  & $\underset{ 0.0001
+%		}{\mathbf{  0.0017}}$ & $\underset{1.0e-05
+%		}{\mathbf{ 1.4e-04
+%		}}$ & $\underset{1.5e-04
+%		}{\mathbf{    0.0021
+%		}}$ & $\underset{-}{\mathbf{-}}$  \\
+		MISC ($TOL_{\text{MISC}}=10^{-4}$)  & $\underset{ 0.0001
+		}{\mathbf{  0.0017}}$ & $\underset{1.0e-05
+		}{\mathbf{ 1.4e-04
+		}}$ & $\underset{(  4.9e-05)
+		}{\mathbf{\red{6.9e-04}
+		}}$ & $\underset{-}{\mathbf{-}}$  \\
+		\hline
+	\end{tabular}
+	\caption{Quadrature error of MISC,  with different tolerances, to compute call option price for different number of time steps. Case  set $1$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors. The values marked in red correspond to stable quadrature errors for MISC, and will be used for complexity comparison against MC.}
+	\label{Quadrature error of MISC to compute Call option price of the different tolerances for different number of time steps. Case  set $1$ parameters, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
+\end{table}
+
+
+
+\begin{table}[!h]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $1-2$ & $2-4$ & $4-8$  \\
+		\hline
+%		MISC ($TOL_{\text{MISC}}=5.10^{-1}$)  & $\underset{(  0.0120)}{\mathbf{   0.1685}}$ & $\underset{(0.0031)}{\mathbf{0.0435}}$ & $\underset{(0.0014
+%			)}{\mathbf{ 0.0197}}$  \\
+		MISC ($TOL_{\text{MISC}}=10^{-1}$)  & $\underset{(  0.0120)}{\mathbf{   0.1685}}$ & $\underset{(0.0031)}{\mathbf{0.0435}}$ & $\underset{(0.0064)}{\mathbf{0.0899}}$  \\
+%		MISC ($TOL_{\text{MISC}}=5.10^{-2}$)  & $\underset{(  0.0120)}{\mathbf{   0.1685}}$ & $\underset{(0.0079)}{\mathbf{0.1109}}$ & $\underset{(0.0052)}{\mathbf{0.0730}}$   \\
+		MISC ($TOL_{\text{MISC}}=10^{-2}$)  & $\underset{(7e-07)}{\mathbf{1e-05}}$ &    $\underset{(0.0029)}{\mathbf{0.0407}}$ & $\underset{(0.0024  )}{\mathbf{0.0337}}$  \\
+		MISC ($TOL_{\text{MISC}}=10^{-3}$)  & $\underset{(0.0013)}{\mathbf{
+				\red{0.0183}}}$ &    $\underset{(0.0014
+			)}{\mathbf{\red{0.0197}}}$ & $\underset{(0.0001)}{\mathbf{ \red{0.0014}
+		}}$   \\
+		
+%		MISC ($TOL_{\text{MISC}}=10^{-4}$)  & $\underset{(0.0013)}{\mathbf{
+%				0.0183}}$ &    $\underset{(0.0011
+%			
+%			)}{\mathbf{0.0154}}$   \\
+		\hline
+	\end{tabular}
+	\caption{Quadrature error of MISC, with different tolerances,  to compute call option price  for different number of time steps. Case set $1$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, with Richardson extrapolation(level $1$). The numbers between parentheses are the corresponding absolute errors. The values marked in red correspond to stable quadrature errors for MISC, and will be used for complexity comparison against MC.}
+	\label{Quadrature error of MISC to compute Call option price of the different tolerances for different number of time steps. Case set $1$ parameters, with Richardson extrapolation(level $1$). The numbers between parentheses are the corresponding absolute errors.}
+\end{table}
+
+
+
+
+
+\begin{table}[!h]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $1-2-4$ & $2-4-8$  \\
+		\hline
+%		MISC ($TOL_{\text{MISC}}=5.10^{-1}$)  & $\underset{(     0.0017)}{\mathbf{    0.0239}}$ & $\underset{(0.0009)}{\mathbf{0.0126}}$ \\
+		MISC ($TOL_{\text{MISC}}=10^{-1}$)  & $\underset{(   0.0041)}{\mathbf{  0.0576}}$ & $\underset{(0.0037)}{\mathbf{0.0520}}$  \\
+%		MISC ($TOl=5.10^{-2}$)  & $\underset{(  0.0125)}{\mathbf{   0.1755}}$ & $\underset{(0.0072)}{\mathbf{0.1011}}$   \\
+		MISC ($TOL_{\text{MISC}}=10^{-2}$)  & $\underset{(0.0031)}{\mathbf{0.0435}}$ &    $\underset{(0.0019)}{\mathbf{0.0267}}$   \\
+		
+		MISC ($TOL_{\text{MISC}}=5.10^{-3}$)  & $\underset{(0.0012)}{\mathbf{
+				\red{0.0169}}}$ &    $\underset{(0.0002
+			)}{\mathbf{\red{ 0.0028}}}$ \\
+%		MISC ($TOL_{\text{MISC}}=10^{-3}$)  & $\underset{(1.0e-05
+%			)}{\mathbf{
+%				1.4e-04}}$ &    $\underset{(0.0002
+%			)}{\mathbf{ 0.0028}}$ \\
+%		
+%		MISC ($TOL_{\text{MISC}}=10^{-4}$)  & $\underset{(1.0e-05
+%			)}{\mathbf{
+%				1.4e-04}}$&    $\underset{(-
+%			
+%			)}{\mathbf{-}}$   \\
+		\hline
+	\end{tabular}
+	\caption{Quadrature error of MISC, with different tolerances, to compute call option price for different number of time steps. Case set $1$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, with Richardson extrapolation(level $2$). The numbers between parentheses are the corresponding absolute errors. The values marked in red correspond to stable quadrature errors for MISC, and will be used for complexity comparison against MC.}
+	\label{Quadrature error of MISC to compute Call option price of the different tolerances for different number of time steps. Case set $1$ parameters, with Richardson extrapolation(level $2$). The numbers between parentheses are the corresponding absolute errors.}
+\end{table}
+
+
+\FloatBarrier
+
+
+\subsection{Case of set $2$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.} }
+\label{appendix:Case of set $2$ parameters_linear}
+
+
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $2$ & $4$ & $8$ \\
+		\hline
+%		MISC ($TOL_{\text{MISC}}=5.10^{-1}$)  & $\underset{(     0.0121)}{\mathbf{
+%				0.1525}}$ & $\underset{(    0.0097)}{\mathbf{      0.1231
+%		}}$ & $\underset{(   0.0107)}{\mathbf{0.1353
+%		}}$ \\
+		MISC ($TOL_{\text{MISC}}=10^{-1}$)  & $\underset{(     0.0121)}{\mathbf{
+				0.1525}}$ & $\underset{(    0.0097)}{\mathbf{      0.1231
+		}}$ & $\underset{( 0.0123
+			
+			)}{\mathbf{    0.1555}}$   \\
+%		MISC ($TOL_{\text{MISC}}=5.10^{-2}$)  &$\underset{(     0.0121)}{\mathbf{
+%				0.1525}}$& $\underset{(     0.0134
+%			)}{\mathbf{  
+%				0.1686}}$ & $\underset{(   0.0065)}{\mathbf{ 0.0823}}$  \\
+		MISC ($TOL_{\text{MISC}}=10^{-2}$)  & $\underset{(    0.0099
+			)}{\mathbf{     0.1247
+		}}$ & $\underset{(   5.0e-05)}{\mathbf{\red{  6.3e-04}
+		}}$ & $\underset{(0.0004)}{\mathbf{\red{0.0053}}}$  \\
+		MISC ($TOL_{\text{MISC}}=10^{-3}$)        & $\underset{(    
+			0.0023)}{\mathbf{0.0288}}$  &$\underset{(   5.0e-05)}{\mathbf{  6.3e-04
+		}}$ & $\underset{(0.0004)}{\mathbf{0.0053}}$  \\
+		MISC ($TOL_{\text{MISC}}=10^{-4}$)        & $\underset{(2.0e-05)}{\mathbf{  \red{ 2.5e-04}}} $ &$\underset{(   5.0e-05)}{\mathbf{ 6.3e-04
+		}}$ &  $-$ \\	
+		
+		\hline
+	\end{tabular}
+	\caption{Quadrature error of MISC, with different tolerances, to compute call option price  for different number of time steps. Case  set $2$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors. The values marked in red correspond to stable quadrature errors for MISC, and will be used for complexity comparison against MC.}
+	\label{Quadrature error of MISC to compute Call option price of the different tolerances for different number of time steps. Case  set $2$ parameters, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors,linear}
+\end{table}
+
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $1-2$ & $2-4$ & $4-8$ \\
+		\hline
+%		MISC ($TOL_{\text{MISC}}=5.10^{-1}$)  & $\underset{ 0.0292}{\mathbf{
+%				0.3687}}$ & $\underset{ 0.0090}{\mathbf{    0.1136}}$ & $\underset{    0.0117
+%		}{\mathbf{
+%				0.1477
+%		}}$ \\
+		MISC ($TOL_{\text{MISC}}=10^{-1}$)  & $\underset{ 0.0292}{\mathbf{
+				0.3687}}$ & $\underset{ 0.0090}{\mathbf{    0.1136}}$ & $\underset{  0.0102}{\mathbf{  0.1288
+		}}$   \\
+		MISC ($TOL_{\text{MISC}}=5.10^{-2}$)  & $\underset{ 0.0292}{\mathbf{
+				0.3687}}$& $\underset{  0.0130}{\mathbf{
+				0.1641
+		}}$ & $\underset{0.0008}{\mathbf{\red{0.0101}}}$  \\
+		MISC ($TOL_{\text{MISC}}=10^{-2}$)  & $\underset{   0.0096
+		}{\mathbf{    0.1212
+		}}$ & $\underset{0.0008}{\mathbf{
+				\red{0.0101}}}$ & $\underset{0.0008 }{\mathbf{
+				0.0101}}$  \\
+		MISC ($TOL_{\text{MISC}}=10^{-3}$)  & $\underset{     0.0055
+		}{\mathbf{ \red{    0.0694}
+		}}$ & $\underset{0.0008}{\mathbf{
+				0.0101}}$ & $\underset{-}{\mathbf{-}}$   \\
+		
+%		MISC ($TOL_{\text{MISC}}=10^{-4}$)  & $\underset{  0.0051}{\mathbf{    0.0644		}}$ & $\underset{-}{\mathbf{-}}$ & $\underset{-}{\mathbf{-}}$   \\
+%		
+		\hline
+	\end{tabular}
+	\caption{Quadrature error of MISC, with different tolerances,   to compute call option price for different number of time steps. Case set $2$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, with Richardson extrapolation(level $1$). The numbers between parentheses are the corresponding absolute errors. The values marked in red correspond to stable quadrature errors for MISC, and will be used for complexity comparison against MC.}
+	\label{Quadrature error of MISC to compute Call option price of the different tolerances for different number of time steps. Case set $2$ parameters, with Richardson extrapolation(level $1$). The numbers between parentheses are the corresponding absolute errors,linear}
+\end{table}
+
+
+
+\begin{table}[!h]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $1-2-4$ & $2-4-8$  \\
+		\hline
+%		MISC ($TOL_{\text{MISC}}=5.10^{-1}$)  & $\underset{(    0.0014)}{\mathbf{  0.0177}}$ & $\underset{(0.0123)}{\mathbf{0.1553}}$ \\
+		MISC ($TOL_{\text{MISC}}=10^{-1}$)  & $\underset{(    0.0014)}{\mathbf{  0.0177}}$ & $\underset{(  0.0085)}{\mathbf{0.1073}}$  \\
+		MISC ($TOL_{\text{MISC}}=5.10^{-2}$)  & $\underset{(  0.0200)}{\mathbf{  0.2525}}$ & $\underset{(0.0004)}{\mathbf{\red{0.0038}}}$   \\
+		MISC ($TOL_{\text{MISC}}=10^{-2}$)  & $\underset{(0.0022)}{\mathbf{\red{0.0278}}}$ &     $\underset{(0.0004)}{\mathbf{0.0038}}$  \\
+		
+%		MISC ($TOL_{\text{MISC}}=5.10^{-3}$)  & $\underset{(0.0022)}{\mathbf{0.0278}}$&    $\underset{(-
+%			)}{\mathbf{-}}$ \\
+%		MISC ($TOL_{\text{MISC}}=10^{-3}$)  & $\underset{(0.0007
+%			)}{\mathbf{
+%				0.0088}}$ &    $\underset{(-
+%			)}{\mathbf{ -}}$ \\
+%		
+		
+		\hline
+	\end{tabular}
+	\caption{Quadrature error of MISC, with different tolerances, to compute Call option price   for different number of time steps. Case set $2$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, with Richardson extrapolation(level $2$). The numbers between parentheses are the corresponding absolute errors. The values marked in red correspond to stable quadrature errors for MISC, and will be used for complexity comparison against MC.}
+	\label{Quadrature error of MISC to compute Call option price of the different tolerances for different number of time steps. Case set $2$ parameters, with Richardson extrapolation(level $2$). The numbers between parentheses are the corresponding absolute errors,linear}
+\end{table}
+
+
+
+\FloatBarrier
+
+\subsection{Case of set $3$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}}\label{appendix:Case of set 3 parameters}
+
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$  \\
+		\hline
+%		MISC ($TOL_{\text{MISC}}=5.10^{-1}$)  & $\underset{(   0.0011)}{\mathbf{  0.0088}}$ & $\underset{(
+%			0.0018)}{\mathbf{ 0.0144}}$ & $\underset{( 0.0022)}{\mathbf{0.0176}}$ & $\underset{(  0.0022)}{\mathbf{ 0.0176}}$  \\
+		MISC ($TOL_{\text{MISC}}=10^{-1}$)  & $\underset{(   0.0011)}{\mathbf{  0.0088}}$ & $\underset{(
+			0.0018)}{\mathbf{ 0.0144}}$& $\underset{( 0.0022)}{\mathbf{0.0176}}$  & $\underset{(  0.0020)}{\mathbf{ 0.0160}}$   \\
+%		MISC ($TOL_{\text{MISC}}=5.10^{-2}$)  &$\underset{(   0.0011)}{\mathbf{  0.0088}}$ & $\underset{(
+%			0.0018)}{\mathbf{ 0.0144}}$ & $\underset{( 0.0022)}{\mathbf{0.0176}}$  & $\underset{(0.0008)}{\mathbf{0.0064}}$  \\
+		MISC ($TOL_{\text{MISC}}=10^{-2}$)  & $\underset{(   0.0011)}{\mathbf{  0.0088}}$ & $\underset{(0.0011
+			)}{\mathbf{ 0.0088
+		}}$ & $\underset{(0.0005)}{\mathbf{ 0.0040
+		}}$ & $\underset{0.0001}{\mathbf{\red{0.0008}}}$  \\
+		MISC ($TOL_{\text{MISC}}=10^{-3}$)  & $\underset{( 0.0002)}{\mathbf{    0.0016}}$ & $\underset{(0.0002
+			)}{\mathbf{ 0.0016
+		}}$ & $\underset{0.0001}{\mathbf{\red{0.0008}}}$ & $\underset{0.00005}{\mathbf{0.0004}}$ \\
+		MISC ($TOL_{\text{MISC}}=10^{-4}$)  & $\underset{( 0.0001)}{\mathbf{    \red{0.0008}}}$ & $\underset{0.0001}{\mathbf{\red{0.0008}}}$& $\underset{0.0001}{\mathbf{0.0008}}$ & $\underset{-}{\mathbf{-}}$  \\
+		
+%		MISC ($TOL_{\text{MISC}}=10^{-5}$)  & $\underset{( 0.0001)}{\mathbf{    0.0008}}$ & $\underset{0.0001}{\mathbf{0.0008}}$& $\underset{0.0001}{\mathbf{0.0008}}$ & $\underset{-}{\mathbf{-}}$  \\
+%		
+		\hline
+		
+	\end{tabular}
+	\caption{Quadrature error of MISC, with different tolerances,  to compute call option price  for different number of time steps. Case  set $3$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors. The values marked in red correspond to stable quadrature errors for MISC, and will be used for complexity comparison against MC.}
+	\label{Quadrature error of MISC to compute Call option price of the different tolerances for different number of time steps. Case  set $3$ parameters, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
+\end{table}
+
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $1-2$ & $2-4$ & $4-8$ & $8-16$  \\
+		\hline
+%		MISC ($TOL_{\text{MISC}}=5.10^{-1}$)  & $\underset{(0.0023)}{\mathbf{    0.0184
+%		}}$  & $\underset{( 0.0031)}{\mathbf{ 0.0248}}$  & $\underset{(   0.0027)}{\mathbf{  0.0216}}$  & $\underset{(
+%			0.0025
+%			)}{\mathbf{  0.0200}}$  \\ 
+		MISC ($TOL_{\text{MISC}}=10^{-1}$) & $\underset{(0.0023)}{\mathbf{    0.0184
+		}}$  & $\underset{( 0.0031)}{\mathbf{ 0.0248}}$   & $\underset{(   0.0027)}{\mathbf{  0.0216}}$ & $\underset{(  0.0022)}{\mathbf{  0.0176}}$  \\ 
+%		MISC ($TOL_{\text{MISC}}=5.10^{-2}$)  &  $\underset{(0.0023)}{\mathbf{    0.0184
+%		}}$ & $\underset{( 0.0031)}{\mathbf{ 0.0248}}$   & $\underset{(   0.0027)}{\mathbf{  0.0216}}$  & $\underset{(  0.0008)}{\mathbf{  
+%				0.0064}}$  \\ 
+		MISC ($TOL_{\text{MISC}}=10^{-2}$)   & $\underset{(    0.0017
+			)}{\mathbf{  0.0136}}$  & $\underset{(
+			0.0021)}{\mathbf{   0.0168}}$  & $\underset{(0.0004)}{\mathbf{   0.0032
+		}}$  & $\underset{(0.0001)}{\mathbf{\red{0.0008}}}$  \\ 
+		MISC ($TOL_{\text{MISC}}=10^{-3}$)  & $\underset{(0.0001)}{\mathbf{\red{0.0008}}}$  & $\underset{(0.0006)}{\mathbf{  \red{0.0032}}}$   & $\underset{(0.0002)}{\mathbf{    \red{0.0016}}}$  &  $\underset{(0.0001)}{\mathbf{0.0008}}$  \\ 
+		
+%		MISC ($TOL_{\text{MISC}}=10^{-4}$)  & $\underset{(0.0001)}{\mathbf{0.0008}}$  & $\underset{(0.0006)}{\mathbf{ 0.0032}}$   & $\underset{(0.0002)}{\mathbf{   0.0016}}$ & $\underset{(-)}{\mathbf{-}}$  \\
+%		
+%		MISC ($TOL_{\text{MISC}}=10^{-5}$)    &  $\underset{(0.0001)}{\mathbf{0.0008}}$ & $\underset{(0.0006)}{\mathbf{  0.0032}}$   & $\underset{(0.0002)}{\mathbf{    0.0016}}$ & $\underset{(-)}{\mathbf{-}}$  \\
+		
+		\hline
+	\end{tabular}
+	\caption{Quadrature error of MISC, with different tolerances, to compute Call option price  for different number of time steps. Case set $3$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, with Richardson extrapolation(level $1$). The numbers between parentheses are the corresponding absolute errors. The values marked in red correspond to stable quadrature errors for MISC, and will be used for complexity comparison against MC.}
+	\label{Quadrature error of MISC to compute Call option price of the different tolerances for different number of time steps. Case set $3$ parameters, with Richardson extrapolation(level $1$). The numbers between parentheses are the corresponding absolute errors.}
+\end{table}
+
+
+
+
+\FloatBarrier
+\subsection{Case of set $4$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}}\label{appendix:Case of set 4 parameters}
+
+
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$  \\
+		\hline
+%		MISC ($TOL_{\text{MISC}}=5.10^{-1}$)  & $\underset{(   0.0007)}{\mathbf{   0.0029}}$ & $\underset{(
+%			
+%			0.0013)}{\mathbf{     0.0054}}$ & $\underset{( 
+%			0.0011)}{\mathbf{   0.0046}}$ & $\underset{(      0.0017)}{\mathbf{     0.0071
+%		}}$  \\
+		MISC ($TOL_{\text{MISC}}=10^{-1}$)  & $\underset{(   0.0007)}{\mathbf{   0.0029}}$ & $\underset{(
+			
+			0.0013)}{\mathbf{     0.0054}}$& $\underset{( 
+			0.0011)}{\mathbf{   0.0046}}$  & $\underset{(    0.0016)}{\mathbf{     0.0066
+		}}$   \\
+%		MISC ($TOL_{\text{MISC}}=5.10^{-2}$)  &$\underset{(   0.0007)}{\mathbf{   0.0029}}$ & $\underset{(
+%			
+%			0.0013)}{\mathbf{     0.0054}}$ & $\underset{( 
+%			0.0011)}{\mathbf{   0.0046}}$  & $\underset{(0.0008)}{\mathbf{
+%				0.0033}}$  \\
+		MISC ($TOL_{\text{MISC}}=10^{-2}$)  & $\underset{(   0.0007)}{\mathbf{   0.0029}}$ &$\underset{(
+			
+			0.0013)}{\mathbf{     0.0054}}$ & $\underset{(0.0005)}{\mathbf{    0.0021
+		}}$ &  $\underset{2.0e-05}{\mathbf{\red{8.3e-05}}}$  \\
+		MISC ($TOL_{\text{MISC}}=10^{-3}$)  & $\underset{(   0.0007)}{\mathbf{   0.0029}}$ & $\underset{(0.0005
+			)}{\mathbf{ 
+				0.0021
+		}}$ & $\underset{3.0e-05}{\mathbf{\red{1.2e-04}}}$ &  $\underset{2.0e-05}{\mathbf{8.3e-05}}$  \\
+		MISC ($TOL_{\text{MISC}}=10^{-4}$)  & $\underset{( 0.0001)}{\mathbf{    \red{0.0004}}}$ & $\underset{5.0e-05}{\mathbf{\red{2.1e-04}}}$& $\underset{3.0e-05}{\mathbf{1.2e-04}}$ & $\underset{-}{\mathbf{-}}$  \\
+		
+%		MISC ($TOL_{\text{MISC}}=10^{-5}$)  & $\underset{( 0.0001)}{\mathbf{   0.0004}}$ & $\underset{5.0e-05}{\mathbf{2.1e-04}}$& $\underset{3.0e-05}{\mathbf{1.2e-04}}$& $\underset{-}{\mathbf{-}}$  \\
+		
+		\hline
+		
+	\end{tabular}
+	\caption{Quadrature error of MISC, with different tolerances,  to compute call option price for different number of time steps. Case  set $4$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors. The values marked in red correspond to stable quadrature errors for MISC, and will be used for complexity comparison against MC.}
+	\label{Quadrature error of MISC to compute Call option price of the different tolerances for different number of time steps. Case  set $4$ parameters, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
+\end{table}
+
+
+
+\FloatBarrier
+\subsection{Case of set $5$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}}\label{appendix:Case of set 5 parameters}
+
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l*{6}{c}r}
+		Method \textbackslash  Steps            & $2$ & $4$ & $8$ & $16$  \\
+		\hline
+%		MISC ($TOL_{\text{MISC}}=5.10^{-1}$)  & $\underset{(  0.0015
+%			)}{\mathbf{     0.0264}}$ & $\underset{(    0.0023
+%			)}{\mathbf{         0.0406}}$ & $\underset{(    0.0028)}{\mathbf{      0.0491
+%		}}$ & $\underset{(      
+%			0.0030)}{\mathbf{     0.0524
+%		}}$  \\
+		MISC ($TOL_{\text{MISC}}=10^{-1}$)  & $\underset{(  0.0015
+			)}{\mathbf{     0.0264}}$& $\underset{(    0.0023
+			)}{\mathbf{         0.0406}}$& $\underset{(    0.0028)}{\mathbf{      0.0491
+		}}$  & $\underset{(      
+			0.0030)}{\mathbf{     0.0524
+		}}$   \\
+%		MISC ($TOL_{\text{MISC}}=5.10^{-2}$)  &$\underset{(  0.0015
+%			)}{\mathbf{     0.0264}}$ & $\underset{(    0.0023
+%			)}{\mathbf{         0.0406}}$ & $\underset{(    0.0028)}{\mathbf{      0.0491
+%		}}$ & $\underset{(  0.0019)}{\mathbf{
+%				0.0331
+%		}}$  \\
+		MISC ($TOL_{\text{MISC}}=10^{-2}$)  & $\underset{(  0.0015
+			)}{\mathbf{     0.0264}}$ &$\underset{(    0.0023
+			)}{\mathbf{         0.0406}}$ & $\underset{(0.0005)}{\mathbf{    0.0021
+		}}$ &  $\underset{0.0004}{\mathbf{    0.0065}}$  \\
+		MISC ($TOL_{\text{MISC}}=10^{-3}$)  & $\underset{(      3.0e-05)}{\mathbf{    \red{5.3e-04}}}$ & $\underset{2.0e-05}{\mathbf{\red{3.5e-04}}}$& $\underset{1.9e-05}{\mathbf{\red{3.3e-04}}}$ &  $\underset{3.0e-05}{\mathbf{\red{5.3e-04}}}$  \\
+%		MISC ($TOL_{\text{MISC}}=10^{-4}$)  & $\underset{(      3.0e-05)}{\mathbf{    5.3e-04}}$ & $\underset{2.0e-05}{\mathbf{3.5e-04}}$& $\underset{1.9e-05}{\mathbf{3.3e-04}}$ & $\underset{-}{\mathbf{-}}$  \\
+%		
+%		MISC ($TOL_{\text{MISC}}=10^{-5}$)  & $\underset{(      3.0e-05)}{\mathbf{    5.3e-04}}$ & $\underset{2.0e-05}{\mathbf{3.5e-04}}$& $\underset{1.9e-05}{\mathbf{3.3e-04}}$& $\underset{-}{\mathbf{-}}$  \\
+%		
+		\hline
+		
+	\end{tabular}
+	\caption{Quadrature error of MISC, with  different tolerances,  to compute call option price  for different number of time steps. Case  set $5$ parameters in table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors. The values marked in red correspond to stable quadrature errors for MISC, and will be used for complexity comparison against MC.}
+	\label{Quadrature error of MISC to compute Call option price of the different tolerances for different number of time steps. Case  set $5$ parameters, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.}
+\end{table}
