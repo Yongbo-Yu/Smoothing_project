@@ -7,49 +7,49 @@ from matplotlib.ticker import MaxNLocator
 
 
 # # # # # #Case for parameter set 5, non rich
-# MC_err=np.array([ 0.035,0.016,0.007,0.002])
-# MC_time=4*np.array([  0.15,1.6,16.5,494])
+ # MC_err=np.array([ 0.035,0.016,0.007,0.002])
+ # MC_time=4*np.array([  0.15,1.6,16.5,494])
 
-# MC_err_extrapol=np.array([ 0.035,0.016,0.007,0.002,0.001])
+ # MC_err_extrapol=np.array([ 0.035,0.016,0.007,0.002,0.001])
 
-# z_MC= np.polyfit(np.log(MC_err), np.log(MC_time), 1)
-# fit_MC=np.exp(z_MC[0]*np.log(MC_err_extrapol))
-# print z_MC[0]
+ # z_MC= np.polyfit(np.log(MC_err), np.log(MC_time), 1)
+ # fit_MC=np.exp(z_MC[0]*np.log(MC_err_extrapol))
+ # print z_MC[0]
 
-# MISC_err=np.array([0.03,0.017,0.009,0.001 ])
-# MISC_time=np.array([ 0.1,0.5,3,92])
+ # MISC_err=np.array([0.03,0.017,0.009,0.001 ])
+ # MISC_time=np.array([ 0.1,0.5,3,92])
 
-# z_MISC= np.polyfit(np.log(MISC_err), np.log(MISC_time), 1)
-# fit_MISC=np.exp(z_MISC[0]*np.log(MISC_err))
-# print z_MISC[0]
+ # z_MISC= np.polyfit(np.log(MISC_err), np.log(MISC_time), 1)
+ # fit_MISC=np.exp(z_MISC[0]*np.log(MISC_err))
+ # print z_MISC[0]
 
 
 
-# QMC_err=np.array([0.04,   0.017 ,  0.008 ,0.002 ])
-# QMC_time=np.array([ 0.3, 0.7 , 3.25, 27])
+ # QMC_err=np.array([0.04,   0.017 ,  0.008 ,0.002 ])
+ # QMC_time=np.array([ 0.3, 0.7 , 3.25, 27])
 
-# z_QMC= np.polyfit(np.log(QMC_err), np.log(QMC_time), 1)
-# fit_QMC=np.exp(z_QMC[0]*np.log(QMC_err))
-# print z_QMC[0]
+ # z_QMC= np.polyfit(np.log(QMC_err), np.log(QMC_time), 1)
+ # fit_QMC=np.exp(z_QMC[0]*np.log(QMC_err))
+ # print z_QMC[0]
 
 
 # QMC_err_non_smooth=np.array([0.036,   0.0175 ,  0.009 ,0.0024 ])
 # QMC_time_non_smooth=np.array([ 0.9, 1.8 , 7, 55])
-
+#
 # z_QMC_non_smooth= np.polyfit(np.log(QMC_err_non_smooth), np.log(QMC_time_non_smooth), 1)
 # fit_QMC_non_smooth=np.exp(z_QMC_non_smooth[0]*np.log(QMC_err_non_smooth))
 # print z_QMC_non_smooth[0]
 # # # #Case for parameter set 5, with rich
 # MC_rich_err=np.array([ 0.006,0.0025,0.0013 ])
 # MC_rich_time=np.array([45, 438,2240  ])
-
+#
 # z_MC_rich= np.polyfit(np.log(MC_rich_err), np.log(MC_rich_time), 1)
 # fit_MC_rich=np.exp(z_MC_rich[0]*np.log(MC_rich_err))
 # print z_MC_rich[0]
-
+#
 # MISC_rich_err=np.array([0.027,0.004,0.002 ])
 # MISC_rich_time=np.array([ 0.15,10,112])
-
+#
 # z_MISC_rich= np.polyfit(np.log(MISC_rich_err), np.log(MISC_rich_time), 1)
 # fit_MISC_rich=np.exp(z_MISC_rich[0]*np.log(MISC_rich_err))
 # print z_MISC_rich[0]
@@ -220,13 +220,13 @@ from matplotlib.ticker import MaxNLocator
 ##############################################################################
 # # # #Case for parameter set 7, non rich
 
-MC_err=np.array([0.14,0.07,0.04,0.02])       	
-	
+MC_err=np.array([0.14,0.07,0.04,0.02])           
+   
 MC_time=4*np.array([ 0.02,0.15,1.4,10])  
 
 
-#MC_err_extrapol=np.array([0.14,0.07,0.04,0.02])       	
-		
+#MC_err_extrapol=np.array([0.14,0.07,0.04,0.02])           
+       
 
 z_MC= np.polyfit(np.log(MC_err), np.log(MC_time), 1)
 fit_MC=np.exp(z_MC[0]*np.log(MC_err))
@@ -247,12 +247,12 @@ z_QMC= np.polyfit(np.log(QMC_err), np.log(QMC_time), 1)
 fit_QMC=np.exp(z_QMC[0]*np.log(QMC_err))
 print z_QMC[0]
 
-QMC_err_non_smooth=np.array([0.145,   0.055 ,  0.038 ,0.021 ])
-QMC_time_non_smooth=np.array([ 0.45, 1.8 , 3.6, 8])
+# QMC_err_non_smooth=np.array([0.145,   0.055 ,  0.038 ,0.021 ])
+# QMC_time_non_smooth=np.array([ 0.45, 1.8 , 3.6, 8])
 
-z_QMC_non_smooth= np.polyfit(np.log(QMC_err_non_smooth), np.log(QMC_time_non_smooth), 1)
-fit_QMC_non_smooth=np.exp(z_QMC_non_smooth[0]*np.log(QMC_err_non_smooth))
-print z_QMC_non_smooth[0]
+# z_QMC_non_smooth= np.polyfit(np.log(QMC_err_non_smooth), np.log(QMC_time_non_smooth), 1)
+# fit_QMC_non_smooth=np.exp(z_QMC_non_smooth[0]*np.log(QMC_err_non_smooth))
+# print z_QMC_non_smooth[0]
 
 
 ##############################################################################
@@ -369,11 +369,11 @@ plt.plot(MC_err, fit_MC*0.00001,linewidth=2.0,label=r'slope= %s' % format(z_MC[0
 plt.plot(MISC_err,MISC_time,linewidth=2.0,label='ASGQ'  , marker='*',hold=True,color='r') 
 plt.plot(MISC_err, fit_MISC*0.00001,linewidth=2.0,label=r'slope= %s' % format(z_MISC[0]   , '.2f'), linestyle = '--', color='r')
 
-plt.plot(QMC_err,QMC_time,linewidth=2.0,label='QMC+smooth'  , marker='o',hold=True,color='g') 
+plt.plot(QMC_err,QMC_time,linewidth=2.0,label='QMC'  , marker='o',hold=True,color='g')
 plt.plot(QMC_err, fit_QMC*0.01,linewidth=2.0,label=r'slope= %s' % format(z_QMC[0]   , '.2f'), linestyle = '--', color='g')
 
-plt.plot(QMC_err_non_smooth,QMC_time_non_smooth,linewidth=2.0,label='QMC+non smooth'  , marker='o',hold=True,color='m') 
-plt.plot(QMC_err_non_smooth, fit_QMC_non_smooth*0.05,linewidth=2.0,label=r'slope= %s' % format(z_QMC_non_smooth[0]   , '.2f'), linestyle = '--', color='m')
+#plt.plot(QMC_err_non_smooth,QMC_time_non_smooth,linewidth=2.0,label='QMC+non smooth'  , marker='o',hold=True,color='m')
+#plt.plot(QMC_err_non_smooth, fit_QMC_non_smooth*0.05,linewidth=2.0,label=r'slope= %s' % format(z_QMC_non_smooth[0]   , '.2f'), linestyle = '--', color='m')
 
 
 #plt.plot(MC_rich_err,MC_rich_time,linewidth=2.0,label='MC+Rich(level 1)' , marker='>',hold=True, color='b') 

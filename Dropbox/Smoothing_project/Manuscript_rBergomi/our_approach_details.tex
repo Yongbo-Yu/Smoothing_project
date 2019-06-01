@@ -17,7 +17,7 @@ where $G$  maps  $2N$ independent standard Gaussian random inputs to the paramet
 \end{equation*} 
 Therefore, the initial integration problem that we are solving lives in $2N$-dimensional space, which becomes very large as the number of time steps $N$, used in the hybrid scheme, increases.
 
-Our approach of approximating the expectation in \eqref{BS_formula_rbergomi_2} is based on \red{a hierarchical deterministic quadratures, namely  i) ASGQ using the same construction in \cite{haji2016multi} and ii) QMC based on lattice rules}. We describe the ASGQ  method in our context in Section \ref{sec:Details of the MISC} and \red{in Section \ref{sec:Quasi Monte Carlo (QMC)}, we provide details on the implented QMC method}.  \red{To make an effective use of either ASGQ or QMC methods}, we   apply two transformations to overcome the issue of facing a high dimensional integrand due to the discretization scheme used for simulating the rBergomi dynamics. The first transformation consists of applying a hierarchical  path generation method, based on Brownian bridge (Bb) construction, with the aim of reducing the effective dimension as  described  in Section \ref{sec:Brwonian bridge construction}. The second transformation consists of applying Richardson extrapolation to reduce the bias, resulting in reducing  the maximum number of dimensions needed for the integration problem. Details about  Richardson extrapolation  are provided in Section \ref{sec:Richardson extrapolation}.
+Our approach of approximating the expectation in \eqref{BS_formula_rbergomi_2} is based on \red{hierarchical deterministic quadratures, namely  i) ASGQ using the same construction in \cite{haji2016multi} and ii) randomized QMC based on lattice rules}. We describe the ASGQ  method in our context in Section \ref{sec:Details of the MISC} and \red{in Section \ref{sec:Quasi Monte Carlo (QMC)}, we provide details on the implented QMC method}.  \red{To make an effective use of either ASGQ or QMC methods}, we   apply two transformations to overcome the issue of facing a high dimensional integrand due to the discretization scheme used for simulating the rBergomi dynamics. The first transformation consists of applying a hierarchical  path generation method, based on Brownian bridge (Bb) construction, with the aim of reducing the effective dimension as  described  in Section \ref{sec:Brwonian bridge construction}. The second transformation consists of applying Richardson extrapolation to reduce the bias, resulting in reducing  the maximum number of dimensions needed for the integration problem. Details about  Richardson extrapolation  are provided in Section \ref{sec:Richardson extrapolation}.
 
 If we denote by $\mathcal{E}_{\text{tot}}$ the total error of approximating the  expectation in \eqref{BS_formula_rbergomi} using the ASGQ estimator, $Q_N$, then we have a natural error decomposition
 \begin{align}\label{eq:total_error}
@@ -25,13 +25,12 @@ If we denote by $\mathcal{E}_{\text{tot}}$ the total error of approximating the 
 \end{align}
 where  $\mathcal{E}_Q$ is the quadrature error, $\mathcal{E}_B$  is the bias, $\text{TOL}_{\text{ASGQ}}$ is a user selected tolerance for ASGQ method, and $C_{\text{RB}}^N$ is the biased price computed with $N$ time steps as given by \eqref{BS_formula_rbergomi_2}.
 
-\red{On the other hand, the total error of approximating the  expectation in \eqref{BS_formula_rbergomi} using the QMC or MC estimator, $Q^{\text{MC(QMC)}}_N$ can be bounded by
+\red{On the other hand, the total error of approximating the  expectation in \eqref{BS_formula_rbergomi} using the randomized QMC or MC estimator, $Q^{\text{MC(QMC)}}_N$ can be bounded by
 
 \begin{align}\label{eq:total_error}
 	\mathcal{E}_{\text{tot}} & \le \abs{C_{\text{RB}}-C_{\text{RB}}^N}+\abs{C_{\text{RB}}^N-Q^{\text{MC (QMC)}}_N} \le \mathcal{E}_B(N)+ \mathcal{E}_{S}(M,N),
 \end{align}
-where  $\mathcal{E}_S$ is the statistical error\footnote{The statistical error estimate of MC or QMC is  $C_{\alpha} \frac{\sigma_M}{\sqrt{M}}$, where $M$ is the number of samples and $C_{\alpha}=1.96$ for $95\%$ confidence interval.}, $M$ is the number of samples used for MC or QMC method
-}.
+where  $\mathcal{E}_S$ is the statistical error\footnote{The statistical error estimate of MC or randomized QMC is  $C_{\alpha} \frac{\sigma_M}{\sqrt{M}}$, where $M$ is the number of samples and $C_{\alpha}=1.96$ for $95\%$ confidence interval.}, $M$ is the number of samples used for MC or randomized QMC method.}
 \subsection{Adaptive sparse grids quadrature (ASGQ)}\label{sec:Details of the MISC}
 
 We assume that we want to approximate the expected value $\text{E}[f(Y)]$ of an analytic function $f\colon \Gamma \to \rset$ using a tensorization of quadrature formulas over $\Gamma$.
@@ -91,55 +90,55 @@ The quadrature error in this  case  is given by
 \end{equation}
 We define the work contribution, $\Delta \mathcal{W}_{\boldsymbol{\beta}}$, to be the computational cost  required to add  $\Delta Q_N^{\boldsymbol{\beta}}$ to $Q^{\mathcal{I}}_N$, and the error contribution, $\Delta E_{\boldsymbol{\beta}}$, to be  a measure of how much the quadrature error, defined in \eqref{eq:quadrature error}, would decrease once $\Delta Q_N^{\boldsymbol{\beta}}$  has been added to  $Q^{\mathcal{I}}_N$, that is 
 \begin{align}\label{eq:Work_error_contributions}
-\Delta \mathcal{W}_{\boldsymbol{\beta}} &= \text{Work}[Q^{\mathcal{I} \cup \{\boldsymbol{\beta}\}}_N]-\text{Work}[Q^{\mathcal{I}}_N] \nonumber\\
+\Delta \mathcal{W}_{\boldsymbol{\beta}} &= \text{Work}[Q^{\mathcal{I} \cup \{\boldsymbol{\beta}\}}_N]-\text{Work}[Q^{\mathcal{I}}_N]\\
 \Delta E_{\boldsymbol{\beta}} &= \abs{Q^{\mathcal{I} \cup \{\boldsymbol{\beta}\}}_N-Q^{\mathcal{I}}_N}.
 \end{align}
  The  construction of the optimal  $\mathcal{I}$ is done by profit thresholding (see Figure \ref{fig:Construction of the index set for ASGQ method} for illustration), that is, for a certain threshold value $\bar{T}$, and a profit of a hierarchical surplus defined by
  \begin{equation*}
  P_{\boldsymbol{\beta}}= \frac{\abs{\Delta E_{\boldsymbol{\beta}}}}{\Delta\mathcal{W}_{\boldsymbol{\beta}}},
  \end{equation*}
-  where the optimal index set  $\mathcal{I}$  for our ASGQ is given by 
+\red{the optimal index set  $\mathcal{I}$  for our ASGQ is given by 
  $\mathcal{I}=\{\boldsymbol{\beta}: P_{\boldsymbol{\beta}}	 \ge \bar{T}\}$.
  
  \FloatBarrier
  \begin{figure}[htb]
  	\centering % <-- added
- 	\begin{subfigure}{0.25\textwidth}
+ 	\begin{subfigure}{0.165\textwidth}
  		\includegraphics[width=\linewidth]{./figures/MISC_construction/1}
  		\caption{}
  		\label{fig:1}
  	\end{subfigure}\hfil % <-- added
- 	\begin{subfigure}{0.25\textwidth}
+ 	\begin{subfigure}{0.165\textwidth}
  		\includegraphics[width=\linewidth]{./figures/MISC_construction/2}
  		\caption{}
  		\label{fig:2}
  	\end{subfigure}\hfil % <-- added
- 	\begin{subfigure}{0.25\textwidth}
+ 	\begin{subfigure}{0.165\textwidth}
  		\includegraphics[width=\linewidth]{./figures/MISC_construction/3}
  		\caption{}
  		\label{fig:3}
  	\end{subfigure}
- 	
  	\medskip
- 	\begin{subfigure}{0.25\textwidth}
+ 	\begin{subfigure}{0.165\textwidth}
  		\includegraphics[width=\linewidth]{./figures/MISC_construction/4}
  		\caption{}
  		\label{fig:4}
  	\end{subfigure}\hfil % <-- added
- 	\begin{subfigure}{0.25\textwidth}
+ 	\begin{subfigure}{0.165\textwidth}
  		\includegraphics[width=\linewidth]{./figures/MISC_construction/5}
  		\caption{}
  		\label{fig:5}
  	\end{subfigure}\hfil % <-- added
- 	\begin{subfigure}{0.25\textwidth}
+ 	\begin{subfigure}{0.165\textwidth}
  		\includegraphics[width=\linewidth]{./figures/MISC_construction/6}
  		\caption{}
  		\label{fig:6}
  	\end{subfigure}
- 	\caption{Construction of the index set for ASGQ method}
+ 	\caption{\red{Construction of the index set for ASGQ method. A posteriori, adaptive construction: Given an index set $\mathcal{I}_k$, compute the profits of the neighbor indices and select the most profitable one.}}
  	\label{fig:Construction of the index set for ASGQ method}
  \end{figure}
 \FloatBarrier
+}
 \begin{remark}
 	The choice of the hierarchy of quadrature points, $m(\boldsymbol{\beta})$, is flexible in the ASGQ algorithm and can be fixed by the user, depending on the convergence properties of the problem at hand. For instance, for the sake of reproducibility, in our numerical experiments we used a linear hierarchy: $m(\beta)=4 (\beta-1)+1,\: 1 \le \beta $, for results of parameter set $1$ in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. For the remaining parameter sets in Table  \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, we used a geometric hierarchy: $m(\beta)=2^{\beta-1}+1, \:1 \le \beta $.
 \end{remark} 
@@ -199,9 +198,9 @@ The analiticity assumption, stated in the beginning of Section \ref{sec:Details 
 %\end{remark}
 
 
-\red{\subsubsection{ASGQ error estimate}
-\input{MISC_error_estimate}
-}
+%\red{\subsubsection{ASGQ error estimate}
+%\input{MISC_error_estimate}
+%}
 
 \subsection{Quasi Monte Carlo (QMC)}\label{sec:Quasi Monte Carlo (QMC)}
 \input{QMC.tex}
@@ -235,7 +234,7 @@ where $\rho=\frac{j-i}{k-i}$.
 
 
 \subsection{Richardson extrapolation}\label{sec:Richardson extrapolation}
-Another transformation that we couple with the ASGQ is Richardson extrapolation \cite{talay1990expansion}. In fact, applying level $K_\text{R}$ (level of extrapolation) of Richardson extrapolation  dramatically reduces the bias, and as a consequence reduces the  number of time steps $N$ needed in the coarsest level to achieve a certain error tolerance. As a consequence, Richardson extrapolation directly reduces  the total dimension of the integration problem for achieving some error tolerance.
+Another transformation that we couple with the \red{ASGQ and QMC methods} is Richardson extrapolation \cite{talay1990expansion}. In fact, applying level $K_\text{R}$ (level of extrapolation) of Richardson extrapolation  dramatically reduces the bias, and as a consequence reduces the  number of time steps $N$ needed in the coarsest level to achieve a certain error tolerance. As a consequence, Richardson extrapolation directly reduces  the total dimension of the integration problem for achieving some error tolerance.
 
 Let us denote by $(X_t)_{0 \le t \le T}$ a certain stochastic process and by $(\hat{X}_{t_i}^h)_{0 \le  t_i \le T}$ its approximation using a suitable  scheme with a time step $h$.  Then, for sufficiently small $h$, and a suitable smooth function $f$, we assume that
 \begin{align}\label{Euler_weak_error_strenghten}
