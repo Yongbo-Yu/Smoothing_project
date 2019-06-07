@@ -1,0 +1,14 @@
+function [f]=mybergomi_function(x),
+    x=0.235^2;
+HIn= 0.07;
+e=1.9;
+r=-0.9;
+t=1.0;
+k=1.0;
+NIn=8;
+MIn=1;
+z=RBergomi( x,  HIn, e,  r,  t, k,  NIn, MIn);
+    f=zeros(2,1);
+    f(1)=1.0./(1.0+0.8*sum(exp(x)));
+    f(2)=1.0./(0.5+0.01*sum(exp(x)));
+end

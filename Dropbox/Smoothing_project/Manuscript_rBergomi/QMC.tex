@@ -1,4 +1,4 @@
-\red{A second type of deterministic quadrature that we test in this work is the randomiozed QMC method. Specifically, we use the lattice rules family of QMC \cite{sloan1985lattice,cools2008belgian,nuyens2014construction}.  The main input for the lattice rule is one integer vector with $d$ component ($d$ dimension of the integration problem).
+A second type of deterministic quadrature that we test in this work is the randomiozed QMC method. Specifically, we use the lattice rules family of QMC \cite{sloan1985lattice,cools2008belgian,nuyens2014construction}.  The main input for the lattice rule is one integer vector with $d$ component ($d$ dimension of the integration problem).
 
 In fact, given an integer vector $z = (z_1,\dots, z_d)$ known as \textit{the generating vector}, a (rank-$1$) lattice rule with $n$ points takes the form
 
@@ -14,4 +14,4 @@ them by $Q^{(i )}_n(f)$ for $i=0,\dots,q-1$.We then take the average
 \end{align}
 as our final approximation to the integral and the total number of samples of the randomized QMC method is $M^{\text{QMC}}=q \times n$.
 
-We note that since we are dealing with Gaussian randomness and with integrals in infinite support, we use the inverse of the standard normal cumulative distribution function as a pre-transformation to map the problem to $[0,1]$ and then use the randomized QMC. Furthermore, in our numerical test, we use a pre-made point generators using latticeseq\_b2.py in python from   \url{https://people.cs.kuleuven.be/~dirk.nuyens/qmc-generators/}.}
+We note that since we are dealing with Gaussian randomness and with integrals in infinite support, we use the inverse of the standard normal cumulative distribution function as a pre-transformation to map the problem to $[0,1]$ and then use the randomized QMC. Furthermore, in our numerical test, we use a pre-made point generators using latticeseq\_b2.py in python from   \url{https://people.cs.kuleuven.be/~dirk.nuyens/qmc-generators/}.

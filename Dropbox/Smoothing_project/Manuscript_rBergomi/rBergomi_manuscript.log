@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  31 MAY 2019 23:35
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  5 JUN 2019 20:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -882,9 +882,6 @@ Package: booktabs 2016/04/27 v1.618033 publication quality tables
 )
 (./rBergomi_manuscript.aux
 
-LaTeX Warning: Label `eq:total_error' multiply defined.
-
-
 LaTeX Warning: Label `fig:sub3' multiply defined.
 
 
@@ -1035,12 +1032,12 @@ Overfull \hbox (12.65475pt too wide) in paragraph at lines 68--68
 Package epstopdf Info: Source file: <./figures/rBergomi_weak_error_rates/withou
 t_richardson/H_007/weak_convergence_order_Bergomi_H_007_K_1_M_4_10_6_CI_relativ
 e_hybrid_non_hierarchical_non_parallel_asymptotic.eps>
-(epstopdf)                    date: 2019-03-19 08:55:26
+(epstopdf)                    date: 2019-03-19 01:55:26
 (epstopdf)                    size: 51388 bytes
 (epstopdf)             Output file: <./figures/rBergomi_weak_error_rates/withou
 t_richardson/H_007/weak_convergence_order_Bergomi_H_007_K_1_M_4_10_6_CI_relativ
 e_hybrid_non_hierarchical_non_parallel_asymptotic-eps-converted-to.pdf>
-(epstopdf)                    date: 2019-03-19 09:03:30
+(epstopdf)                    date: 2019-03-19 02:03:30
 (epstopdf)                    size: 21146 bytes
 (epstopdf)             Command: <repstopdf --outfile=./figures/rBergomi_weak_er
 ror_rates/without_richardson/H_007/weak_convergence_order_Bergomi_H_007_K_1_M_4
@@ -1048,7 +1045,7 @@ _10_6_CI_relative_hybrid_non_hierarchical_non_parallel_asymptotic-eps-converted
 -to.pdf ./figures/rBergomi_weak_error_rates/without_richardson/H_007/weak_conve
 rgence_order_Bergomi_H_007_K_1_M_4_10_6_CI_relative_hybrid_non_hierarchical_non
 _parallel_asymptotic.eps>
-(epstopdf)             \includegraphics on input line 118.
+(epstopdf)             \includegraphics on input line 104.
 Package epstopdf Info: Output file is already uptodate.
 
 <./figures/rBergomi_weak_error_rates/without_richardson/H_007/weak_convergence_
@@ -1064,24 +1061,24 @@ rallel_asymptotic-eps-converted-to.pdf>
 Package pdftex.def Info: ./figures/rBergomi_weak_error_rates/without_richardson
 /H_007/weak_convergence_order_Bergomi_H_007_K_1_M_4_10_6_CI_relative_hybrid_non
 _hierarchical_non_parallel_asymptotic-eps-converted-to.pdf used on input line 1
-18.
+04.
 (pdftex.def)             Requested size: 187.89912pt x 140.92482pt.
 Package epstopdf Info: Source file: <./figures/rBergomi_weak_error_cholesky/wea
 k_convergence_order_Bergomi_H_007_K_1_M_4_10_6_CI_relative_cholesky_non_hierarc
 hical_non_parallel_asymptotic.eps>
-(epstopdf)                    date: 2019-03-19 08:56:20
+(epstopdf)                    date: 2019-03-19 01:56:20
 (epstopdf)                    size: 48677 bytes
 (epstopdf)             Output file: <./figures/rBergomi_weak_error_cholesky/wea
 k_convergence_order_Bergomi_H_007_K_1_M_4_10_6_CI_relative_cholesky_non_hierarc
 hical_non_parallel_asymptotic-eps-converted-to.pdf>
-(epstopdf)                    date: 2019-03-19 09:02:57
+(epstopdf)                    date: 2019-03-19 02:02:57
 (epstopdf)                    size: 21841 bytes
 (epstopdf)             Command: <repstopdf --outfile=./figures/rBergomi_weak_er
 ror_cholesky/weak_convergence_order_Bergomi_H_007_K_1_M_4_10_6_CI_relative_chol
 esky_non_hierarchical_non_parallel_asymptotic-eps-converted-to.pdf ./figures/rB
 ergomi_weak_error_cholesky/weak_convergence_order_Bergomi_H_007_K_1_M_4_10_6_CI
 _relative_cholesky_non_hierarchical_non_parallel_asymptotic.eps>
-(epstopdf)             \includegraphics on input line 118.
+(epstopdf)             \includegraphics on input line 110.
 Package epstopdf Info: Output file is already uptodate.
 
 <./figures/rBergomi_weak_error_cholesky/weak_convergence_order_Bergomi_H_007_K_
@@ -1096,28 +1093,29 @@ ps-converted-to.pdf Graphic file (type pdf)
 s-converted-to.pdf>
 Package pdftex.def Info: ./figures/rBergomi_weak_error_cholesky/weak_convergenc
 e_order_Bergomi_H_007_K_1_M_4_10_6_CI_relative_cholesky_non_hierarchical_non_pa
-rallel_asymptotic-eps-converted-to.pdf used on input line 118.
+rallel_asymptotic-eps-converted-to.pdf used on input line 110.
 (pdftex.def)             Requested size: 187.89912pt x 140.92482pt.
- [6 <./figures/rBergomi_weak_error_rates/without_richardson/H_007/weak_converge
-nce_order_Bergomi_H_007_K_1_M_4_10_6_CI_relative_hybrid_non_hierarchical_non_pa
-rallel_asymptotic-eps-converted-to.pdf> <./figures/rBergomi_weak_error_cholesky
-/weak_convergence_order_Bergomi_H_007_K_1_M_4_10_6_CI_relative_cholesky_non_hie
-rarchical_non_parallel_asymptotic-eps-converted-to.pdf>]
-Overfull \hbox (10.86884pt too wide) in paragraph at lines 125--125
+
+Overfull \hbox (10.86884pt too wide) in paragraph at lines 124--124
 [] 
  []
 
-) (./Weak_error_analysis.tex
-Overfull \hbox (11.78268pt too wide) in paragraph at lines 19--19
+[6 <./figures/rBergomi_weak_error_rates/without_richardson/H_007/weak_convergen
+ce_order_Bergomi_H_007_K_1_M_4_10_6_CI_relative_hybrid_non_hierarchical_non_par
+allel_asymptotic-eps-converted-to.pdf> <./figures/rBergomi_weak_error_cholesky/
+weak_convergence_order_Bergomi_H_007_K_1_M_4_10_6_CI_relative_cholesky_non_hier
+archical_non_parallel_asymptotic-eps-converted-to.pdf>])
+(./Weak_error_analysis.tex
+Overfull \hbox (2.22202pt too wide) in paragraph at lines 7--7
 [] 
  []
 
-[7])
 
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@ifnextchar' on input line 122.
+Overfull \hbox (30.51395pt too wide) in paragraph at lines 19--19
+[] 
+ []
 
-(./our_approach_details.tex
+[7]) (./our_approach_details.tex
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 3.
 
@@ -1131,7 +1129,7 @@ File: ./figures/MISC_construction/1.png Graphic file (type png)
 
 <use ./figures/MISC_construction/1.png>
 Package pdftex.def Info: ./figures/MISC_construction/1.png used on input line 1
-41.
+06.
 (pdftex.def)             Requested size: 77.50641pt x 86.63657pt.
 
 <./figures/MISC_construction/2.png, id=364, 296.10625pt x 330.23375pt>
@@ -1139,7 +1137,7 @@ File: ./figures/MISC_construction/2.png Graphic file (type png)
 
 <use ./figures/MISC_construction/2.png>
 Package pdftex.def Info: ./figures/MISC_construction/2.png used on input line 1
-41.
+11.
 (pdftex.def)             Requested size: 77.50641pt x 86.43822pt.
 
 <./figures/MISC_construction/3.png, id=365, 303.1325pt x 333.245pt>
@@ -1147,7 +1145,7 @@ File: ./figures/MISC_construction/3.png Graphic file (type png)
 
 <use ./figures/MISC_construction/3.png>
 Package pdftex.def Info: ./figures/MISC_construction/3.png used on input line 1
-41.
+16.
 (pdftex.def)             Requested size: 77.50641pt x 85.20262pt.
 
 <./figures/MISC_construction/4.png, id=366, 310.15875pt x 334.24875pt>
@@ -1155,7 +1153,7 @@ File: ./figures/MISC_construction/4.png Graphic file (type png)
 
 <use ./figures/MISC_construction/4.png>
 Package pdftex.def Info: ./figures/MISC_construction/4.png used on input line 1
-41.
+22.
 (pdftex.def)             Requested size: 77.50641pt x 83.52628pt.
 
 <./figures/MISC_construction/5.png, id=367, 309.155pt x 330.23375pt>
@@ -1163,7 +1161,7 @@ File: ./figures/MISC_construction/5.png Graphic file (type png)
 
 <use ./figures/MISC_construction/5.png>
 Package pdftex.def Info: ./figures/MISC_construction/5.png used on input line 1
-41.
+27.
 (pdftex.def)             Requested size: 77.50641pt x 82.79001pt.
 
 <./figures/MISC_construction/6.png, id=368, 312.16624pt x 330.23375pt>
@@ -1171,7 +1169,7 @@ File: ./figures/MISC_construction/6.png Graphic file (type png)
 
 <use ./figures/MISC_construction/6.png>
 Package pdftex.def Info: ./figures/MISC_construction/6.png used on input line 1
-41.
+32.
 (pdftex.def)             Requested size: 77.50641pt x 81.98882pt.
  [11 <./figures/MISC_construction/1.png> <./figures/MISC_construction/2.png> <.
 /figures/MISC_construction/3.png> <./figures/MISC_construction/4.png> <./figure
@@ -1179,19 +1177,19 @@ s/MISC_construction/5.png> <./figures/MISC_construction/6.png>]
 Package epstopdf Info: Source file: <./figures/rBergomi_mixed_error_rates/witho
 ut_change_measure/N_4/H_002/first_difference_rbergomi_4steps_H_002_K_1_totally_
 hierarch_with_rate_W1.eps>
-(epstopdf)                    date: 2018-12-17 22:41:29
+(epstopdf)                    date: 2018-12-17 14:41:29
 (epstopdf)                    size: 33216 bytes
 (epstopdf)             Output file: <./figures/rBergomi_mixed_error_rates/witho
 ut_change_measure/N_4/H_002/first_difference_rbergomi_4steps_H_002_K_1_totally_
 hierarch_with_rate_W1-eps-converted-to.pdf>
-(epstopdf)                    date: 2018-12-17 22:42:52
+(epstopdf)                    date: 2018-12-17 14:42:52
 (epstopdf)                    size: 18415 bytes
 (epstopdf)             Command: <repstopdf --outfile=./figures/rBergomi_mixed_e
 rror_rates/without_change_measure/N_4/H_002/first_difference_rbergomi_4steps_H_
 002_K_1_totally_hierarch_with_rate_W1-eps-converted-to.pdf ./figures/rBergomi_m
 ixed_error_rates/without_change_measure/N_4/H_002/first_difference_rbergomi_4st
 eps_H_002_K_1_totally_hierarch_with_rate_W1.eps>
-(epstopdf)             \includegraphics on input line 153.
+(epstopdf)             \includegraphics on input line 152.
 Package epstopdf Info: Output file is already uptodate.
 
 <./figures/rBergomi_mixed_error_rates/without_change_measure/N_4/H_002/first_di
@@ -1206,24 +1204,24 @@ t_difference_rbergomi_4steps_H_002_K_1_totally_hierarch_with_rate_W1-eps-conver
 ted-to.pdf>
 Package pdftex.def Info: ./figures/rBergomi_mixed_error_rates/without_change_me
 asure/N_4/H_002/first_difference_rbergomi_4steps_H_002_K_1_totally_hierarch_wit
-h_rate_W1-eps-converted-to.pdf used on input line 153.
+h_rate_W1-eps-converted-to.pdf used on input line 152.
 (pdftex.def)             Requested size: 187.89912pt x 140.61807pt.
 Package epstopdf Info: Source file: <./figures/rBergomi_mixed_error_rates/witho
 ut_change_measure/N_4/H_002/first_difference_rbergomi_4steps_H_002_K_1_totally_
 hierarch_with_rate_W2.eps>
-(epstopdf)                    date: 2018-12-17 22:41:55
+(epstopdf)                    date: 2018-12-17 14:41:55
 (epstopdf)                    size: 32626 bytes
 (epstopdf)             Output file: <./figures/rBergomi_mixed_error_rates/witho
 ut_change_measure/N_4/H_002/first_difference_rbergomi_4steps_H_002_K_1_totally_
 hierarch_with_rate_W2-eps-converted-to.pdf>
-(epstopdf)                    date: 2018-12-17 22:42:53
+(epstopdf)                    date: 2018-12-17 14:42:53
 (epstopdf)                    size: 18412 bytes
 (epstopdf)             Command: <repstopdf --outfile=./figures/rBergomi_mixed_e
 rror_rates/without_change_measure/N_4/H_002/first_difference_rbergomi_4steps_H_
 002_K_1_totally_hierarch_with_rate_W2-eps-converted-to.pdf ./figures/rBergomi_m
 ixed_error_rates/without_change_measure/N_4/H_002/first_difference_rbergomi_4st
 eps_H_002_K_1_totally_hierarch_with_rate_W2.eps>
-(epstopdf)             \includegraphics on input line 159.
+(epstopdf)             \includegraphics on input line 158.
 Package epstopdf Info: Output file is already uptodate.
 
 <./figures/rBergomi_mixed_error_rates/without_change_measure/N_4/H_002/first_di
@@ -1238,24 +1236,24 @@ t_difference_rbergomi_4steps_H_002_K_1_totally_hierarch_with_rate_W2-eps-conver
 ted-to.pdf>
 Package pdftex.def Info: ./figures/rBergomi_mixed_error_rates/without_change_me
 asure/N_4/H_002/first_difference_rbergomi_4steps_H_002_K_1_totally_hierarch_wit
-h_rate_W2-eps-converted-to.pdf used on input line 159.
+h_rate_W2-eps-converted-to.pdf used on input line 158.
 (pdftex.def)             Requested size: 187.89912pt x 140.61807pt.
 Package epstopdf Info: Source file: <./figures/rBergomi_mixed_error_rates/witho
 ut_change_measure/N_4/H_002/mixed_difference_order2_rbergomi_4steps_H_002_K_1_t
 otally_hierarch_with_rate_W1.eps>
-(epstopdf)                    date: 2018-12-17 22:41:34
+(epstopdf)                    date: 2018-12-17 14:41:34
 (epstopdf)                    size: 29282 bytes
 (epstopdf)             Output file: <./figures/rBergomi_mixed_error_rates/witho
 ut_change_measure/N_4/H_002/mixed_difference_order2_rbergomi_4steps_H_002_K_1_t
 otally_hierarch_with_rate_W1-eps-converted-to.pdf>
-(epstopdf)                    date: 2018-12-17 22:42:53
+(epstopdf)                    date: 2018-12-17 14:42:53
 (epstopdf)                    size: 18085 bytes
 (epstopdf)             Command: <repstopdf --outfile=./figures/rBergomi_mixed_e
 rror_rates/without_change_measure/N_4/H_002/mixed_difference_order2_rbergomi_4s
 teps_H_002_K_1_totally_hierarch_with_rate_W1-eps-converted-to.pdf ./figures/rBe
 rgomi_mixed_error_rates/without_change_measure/N_4/H_002/mixed_difference_order
 2_rbergomi_4steps_H_002_K_1_totally_hierarch_with_rate_W1.eps>
-(epstopdf)             \includegraphics on input line 175.
+(epstopdf)             \includegraphics on input line 174.
 Package epstopdf Info: Output file is already uptodate.
 
 <./figures/rBergomi_mixed_error_rates/without_change_measure/N_4/H_002/mixed_di
@@ -1270,24 +1268,24 @@ d_difference_order2_rbergomi_4steps_H_002_K_1_totally_hierarch_with_rate_W1-eps
 -converted-to.pdf>
 Package pdftex.def Info: ./figures/rBergomi_mixed_error_rates/without_change_me
 asure/N_4/H_002/mixed_difference_order2_rbergomi_4steps_H_002_K_1_totally_hiera
-rch_with_rate_W1-eps-converted-to.pdf used on input line 175.
+rch_with_rate_W1-eps-converted-to.pdf used on input line 174.
 (pdftex.def)             Requested size: 187.89912pt x 140.61807pt.
 Package epstopdf Info: Source file: <./figures/rBergomi_mixed_error_rates/witho
 ut_change_measure/N_4/H_002/mixed_difference_order2_rbergomi_4steps_H_002_K_1_t
 otally_hierarch_with_rate_W2.eps>
-(epstopdf)                    date: 2018-12-17 22:41:35
+(epstopdf)                    date: 2018-12-17 14:41:35
 (epstopdf)                    size: 32117 bytes
 (epstopdf)             Output file: <./figures/rBergomi_mixed_error_rates/witho
 ut_change_measure/N_4/H_002/mixed_difference_order2_rbergomi_4steps_H_002_K_1_t
 otally_hierarch_with_rate_W2-eps-converted-to.pdf>
-(epstopdf)                    date: 2018-12-17 22:42:54
+(epstopdf)                    date: 2018-12-17 14:42:54
 (epstopdf)                    size: 18301 bytes
 (epstopdf)             Command: <repstopdf --outfile=./figures/rBergomi_mixed_e
 rror_rates/without_change_measure/N_4/H_002/mixed_difference_order2_rbergomi_4s
 teps_H_002_K_1_totally_hierarch_with_rate_W2-eps-converted-to.pdf ./figures/rBe
 rgomi_mixed_error_rates/without_change_measure/N_4/H_002/mixed_difference_order
 2_rbergomi_4steps_H_002_K_1_totally_hierarch_with_rate_W2.eps>
-(epstopdf)             \includegraphics on input line 181.
+(epstopdf)             \includegraphics on input line 180.
 Package epstopdf Info: Output file is already uptodate.
 
 <./figures/rBergomi_mixed_error_rates/without_change_measure/N_4/H_002/mixed_di
@@ -1302,7 +1300,7 @@ d_difference_order2_rbergomi_4steps_H_002_K_1_totally_hierarch_with_rate_W2-eps
 -converted-to.pdf>
 Package pdftex.def Info: ./figures/rBergomi_mixed_error_rates/without_change_me
 asure/N_4/H_002/mixed_difference_order2_rbergomi_4steps_H_002_K_1_totally_hiera
-rch_with_rate_W2-eps-converted-to.pdf used on input line 181.
+rch_with_rate_W2-eps-converted-to.pdf used on input line 180.
 (pdftex.def)             Requested size: 187.89912pt x 140.61807pt.
  (./QMC.tex [12 <./figures/rBergomi_mixed_error_rates/without_change_measure/N_
 4/H_002/first_difference_rbergomi_4steps_H_002_K_1_totally_hierarch_with_rate_W
@@ -1317,12 +1315,12 @@ cal_section.tex [14]
 Package epstopdf Info: Source file: <./figures/rBergomi_weak_error_rates/withou
 t_richardson/H_007/weak_convergence_order_Bergomi_H_007_K_1_M_10_6_CI_relative.
 eps>
-(epstopdf)                    date: 2018-10-27 11:15:27
+(epstopdf)                    date: 2018-10-27 04:15:27
 (epstopdf)                    size: 25054 bytes
 (epstopdf)             Output file: <./figures/rBergomi_weak_error_rates/withou
 t_richardson/H_007/weak_convergence_order_Bergomi_H_007_K_1_M_10_6_CI_relative-
 eps-converted-to.pdf>
-(epstopdf)                    date: 2018-10-27 11:21:10
+(epstopdf)                    date: 2018-10-27 04:21:10
 (epstopdf)                    size: 15123 bytes
 (epstopdf)             Command: <repstopdf --outfile=./figures/rBergomi_weak_er
 ror_rates/without_richardson/H_007/weak_convergence_order_Bergomi_H_007_K_1_M_1
@@ -1369,11 +1367,11 @@ gures/rBergomi_weak_error_rates/with_richardson/H_007/weak_convergence_order_Be
 rgomi_H_007_K_1_richardson_relative_M_10_6.pdf>]
 Package epstopdf Info: Source file: <./figures/rBergomi_Complexity_rates/set2/e
 rror_vs_time_set2_MC_comparison.eps>
-(epstopdf)                    date: 2019-05-15 11:00:22
+(epstopdf)                    date: 2019-05-15 04:00:22
 (epstopdf)                    size: 27993 bytes
 (epstopdf)             Output file: <./figures/rBergomi_Complexity_rates/set2/e
 rror_vs_time_set2_MC_comparison-eps-converted-to.pdf>
-(epstopdf)                    date: 2019-05-22 14:47:06
+(epstopdf)                    date: 2019-05-22 07:47:06
 (epstopdf)                    size: 17749 bytes
 (epstopdf)             Command: <repstopdf --outfile=./figures/rBergomi_Complex
 ity_rates/set2/error_vs_time_set2_MC_comparison-eps-converted-to.pdf ./figures/
@@ -1393,11 +1391,11 @@ _set2_MC_comparison-eps-converted-to.pdf used on input line 539.
 (pdftex.def)             Requested size: 155.02pt x 116.01044pt.
 Package epstopdf Info: Source file: <./figures/rBergomi_Complexity_rates/set2/e
 rror_vs_time_set2_QMC_comparison.eps>
-(epstopdf)                    date: 2019-05-21 15:42:10
+(epstopdf)                    date: 2019-05-21 08:42:10
 (epstopdf)                    size: 41143 bytes
 (epstopdf)             Output file: <./figures/rBergomi_Complexity_rates/set2/e
 rror_vs_time_set2_QMC_comparison-eps-converted-to.pdf>
-(epstopdf)                    date: 2019-05-22 14:47:07
+(epstopdf)                    date: 2019-05-22 07:47:07
 (epstopdf)                    size: 22738 bytes
 (epstopdf)             Command: <repstopdf --outfile=./figures/rBergomi_Complex
 ity_rates/set2/error_vs_time_set2_QMC_comparison-eps-converted-to.pdf ./figures
@@ -1417,11 +1415,11 @@ _set2_QMC_comparison-eps-converted-to.pdf used on input line 544.
 (pdftex.def)             Requested size: 155.02pt x 116.01044pt.
 Package epstopdf Info: Source file: <./figures/rBergomi_Complexity_rates/set2/e
 rror_vs_time_set2_MISC_comparison.eps>
-(epstopdf)                    date: 2019-05-15 16:44:05
+(epstopdf)                    date: 2019-05-15 09:44:05
 (epstopdf)                    size: 44069 bytes
 (epstopdf)             Output file: <./figures/rBergomi_Complexity_rates/set2/e
 rror_vs_time_set2_MISC_comparison-eps-converted-to.pdf>
-(epstopdf)                    date: 2019-05-22 14:47:08
+(epstopdf)                    date: 2019-05-22 07:47:08
 (epstopdf)                    size: 22518 bytes
 (epstopdf)             Command: <repstopdf --outfile=./figures/rBergomi_Complex
 ity_rates/set2/error_vs_time_set2_MISC_comparison-eps-converted-to.pdf ./figure
@@ -1445,11 +1443,11 @@ set2_QMC_comparison-eps-converted-to.pdf> <./figures/rBergomi_Complexity_rates/
 set2/error_vs_time_set2_MISC_comparison-eps-converted-to.pdf>]
 Package epstopdf Info: Source file: <./figures/rBergomi_Complexity_rates/set2/e
 rror_vs_time_set2_full_comparison.eps>
-(epstopdf)                    date: 2019-05-21 15:46:56
+(epstopdf)                    date: 2019-05-21 08:46:56
 (epstopdf)                    size: 44931 bytes
 (epstopdf)             Output file: <./figures/rBergomi_Complexity_rates/set2/e
 rror_vs_time_set2_full_comparison-eps-converted-to.pdf>
-(epstopdf)                    date: 2019-05-22 14:28:56
+(epstopdf)                    date: 2019-05-22 07:28:56
 (epstopdf)                    size: 21739 bytes
 (epstopdf)             Command: <repstopdf --outfile=./figures/rBergomi_Complex
 ity_rates/set2/error_vs_time_set2_full_comparison-eps-converted-to.pdf ./figure
@@ -1469,11 +1467,11 @@ _set2_full_comparison-eps-converted-to.pdf used on input line 563.
 (pdftex.def)             Requested size: 234.87749pt x 175.77788pt.
 Package epstopdf Info: Source file: <./figures/rBergomi_Complexity_rates/set5/e
 rror_vs_time_set5_full_comparison.eps>
-(epstopdf)                    date: 2019-05-31 22:19:14
+(epstopdf)                    date: 2019-05-31 15:19:14
 (epstopdf)                    size: 35303 bytes
 (epstopdf)             Output file: <./figures/rBergomi_Complexity_rates/set5/e
 rror_vs_time_set5_full_comparison-eps-converted-to.pdf>
-(epstopdf)                    date: 2019-05-31 22:20:40
+(epstopdf)                    date: 2019-05-31 15:20:40
 (epstopdf)                    size: 19993 bytes
 (epstopdf)             Command: <repstopdf --outfile=./figures/rBergomi_Complex
 ity_rates/set5/error_vs_time_set5_full_comparison-eps-converted-to.pdf ./figure
@@ -1499,11 +1497,11 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 n-eps-converted-to.pdf>]
 Package epstopdf Info: Source file: <./figures/rBergomi_Complexity_rates/set6/e
 rror_vs_time_set6_full_comparison.eps>
-(epstopdf)                    date: 2019-05-31 22:33:49
+(epstopdf)                    date: 2019-05-31 15:33:49
 (epstopdf)                    size: 33676 bytes
 (epstopdf)             Output file: <./figures/rBergomi_Complexity_rates/set6/e
 rror_vs_time_set6_full_comparison-eps-converted-to.pdf>
-(epstopdf)                    date: 2019-05-31 22:35:00
+(epstopdf)                    date: 2019-05-31 15:35:00
 (epstopdf)                    size: 20263 bytes
 (epstopdf)             Command: <repstopdf --outfile=./figures/rBergomi_Complex
 ity_rates/set6/error_vs_time_set6_full_comparison-eps-converted-to.pdf ./figure
@@ -1526,11 +1524,11 @@ on-eps-converted-to.pdf> <./figures/rBergomi_Complexity_rates/set6/error_vs_tim
 e_set6_full_comparison-eps-converted-to.pdf>]
 Package epstopdf Info: Source file: <./figures/rBergomi_Complexity_rates/set7/e
 rror_vs_time_set7_full_comparison.eps>
-(epstopdf)                    date: 2019-05-31 22:48:18
+(epstopdf)                    date: 2019-05-31 15:48:18
 (epstopdf)                    size: 33455 bytes
 (epstopdf)             Output file: <./figures/rBergomi_Complexity_rates/set7/e
 rror_vs_time_set7_full_comparison-eps-converted-to.pdf>
-(epstopdf)                    date: 2019-05-31 22:49:51
+(epstopdf)                    date: 2019-05-31 15:49:51
 (epstopdf)                    size: 19630 bytes
 (epstopdf)             Command: <repstopdf --outfile=./figures/rBergomi_Complex
 ity_rates/set7/error_vs_time_set7_full_comparison-eps-converted-to.pdf ./figure
@@ -1550,11 +1548,11 @@ _set7_full_comparison-eps-converted-to.pdf used on input line 607.
 (pdftex.def)             Requested size: 234.87749pt x 175.77788pt.
 ) (./Conclusion.tex [20 <./figures/rBergomi_Complexity_rates/set7/error_vs_time
 _set7_full_comparison-eps-converted-to.pdf>])
-(./rBergomi_manuscript.bbl
+(./rBergomi_manuscript.bbl [21]
 Missing character: There is no â in font cmr10!
 Missing character: There is no € in font cmr10!
 Missing character: There is no “ in font cmr10!
- [21] [22]) (./appendix.tex
+ [22]) (./appendix.tex
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 2.
@@ -1603,27 +1601,27 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [26]) [27]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 178.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 178.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 175.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 175.
  (./rBergomi_manuscript.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 178.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 178.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 175.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 175.
 Package rerunfilecheck Info: File `rBergomi_manuscript.out' has not changed.
-(rerunfilecheck)             Checksum: BFF8CA5B5D7E342DC692C3CFCE90C8E7;1970.
+(rerunfilecheck)             Checksum: ACABACAD7153233CA2CE034C423B7723;1955.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 178.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 175.
  ) 
 Here is how much of TeX's memory you used:
  25815 strings out of 493014
- 450748 string characters out of 6133351
- 552412 words of memory out of 5000000
+ 450757 string characters out of 6133351
+ 552410 words of memory out of 5000000
  28685 multiletter control sequences out of 15000+600000
  21670 words of font info for 86 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 66i,14n,96p,3252b,617s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 66i,14n,96p,3252b,561s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
 </usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></
@@ -1653,10 +1651,10 @@ st/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2016/texmf-dis
 t/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2016/texmf-dist
 /fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/local/texlive/2016/texmf-dist/f
 onts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on rBergomi_manuscript.pdf (27 pages, 728885 bytes).
+Output written on rBergomi_manuscript.pdf (27 pages, 728928 bytes).
 PDF statistics:
- 1230 PDF objects out of 1440 (max. 8388607)
- 654 compressed objects within 7 object streams
+ 1232 PDF objects out of 1440 (max. 8388607)
+ 656 compressed objects within 7 object streams
  141 named destinations out of 1000 (max. 500000)
  198 words of extra memory for PDF output out of 10000 (max. 10000000)
 

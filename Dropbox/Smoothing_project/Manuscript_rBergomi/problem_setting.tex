@@ -78,7 +78,7 @@ where $C_{\text{BS}}(S_0,k,\sigma^2)$ denotes the Black-Scholes call price, for 
 %\end{align*} 
 %and by using the same procedure as in \cite{romano1997contingent} we obtain \eqref{BS_formula_rbergomi}.
 
-We point out that the analytical smoothing, based on conditioning, performed in \eqref{BS_formula_rbergomi} enables us to uncover the available regularity, and hence  get a smooth, analytic integrand inside the expectation. Therefore, applying \red{a deterministic quadrature techniques such as ASGQ or QMC} becomes an adequate option for computing the call price as we will investigate later. A similar conditioning was used in \cite{mccrickerd2018turbocharging} but for variance reduction purposes only.
+We point out that the analytical smoothing, based on conditioning, performed in \eqref{BS_formula_rbergomi} enables us to uncover the available regularity, and hence  get a smooth, analytic integrand inside the expectation. Therefore, applying a deterministic quadrature technique such as ASGQ or QMC becomes an adequate option for computing the call price as we will investigate later. A similar conditioning was used in \cite{mccrickerd2018turbocharging} but for variance reduction purposes only.
 
 \subsection{Simulation of the rBergomi model}\label{sec:Simulation of the rBergomi model}
 
@@ -93,7 +93,7 @@ One of the numerical challenges encountered in the simulation of the rBergomi dy
  	inexact in the sense that samples produced here do not exactly have the distribution of $W^1_{t_1},\dots, W^1_{t_N}, \widetilde{W}^H_{t_1},\dots, \widetilde{W}_{t_N}$, however they are much more accurate than samples produced from simple Euler discretization, but much faster than method $(i)$. As in method $(i)$, in this case, we need a $2 N$-dimensional Gaussian random input vector to produce one 	sample of $W^1_{t_1},\dots, W^1_{t_N}, \widetilde{W}^H_{t_1},\dots, \widetilde{W}_{t_N}$.
  \end{enumerate} 
 
-\red{\subsubsection{On the choice of the simulation scheme in our approach}\label{sec: choice of simulation scheme}
+\subsubsection{On the choice of the simulation scheme in our approach}\label{sec: choice of simulation scheme}
 The choice of the simulation scheme in our approach was based on the observed behavior of the weak rates. Through our numerical experiments (see Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.} for the tested examples), we observe that although the hybrid and exact schemes  converge asymptotically with weak rate of $\Ordo{\Delta t}$, the pre-asymptotic behavior of the weak rate is different for both schemes. As an illustration, from Figure \ref{fig:Weak_rate_set1_set_2_without_rich_hyb+chol} for Set $1$ parameter in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, the hybrid scheme  has a consistent convergence behavior in the sense that it behaves in the asymptotic way basically right from the beginning, whereas the exact scheme does not. On the other
 hand, the constant  seems considerably smaller for the exact scheme. These two features  make the hybrid scheme the optimal scheme  to work with in our context since our approach is based on hierarchical transformations involving the use of Richardson extrapolation (see Section \ref{sec:Richardson extrapolation}).
 \FloatBarrier
@@ -115,10 +115,9 @@ hand, the constant  seems considerably smaller for the exact scheme. These two f
 	\label{fig:Weak_rate_set1_set_2_without_rich_hyb+chol}
 \end{figure}
 \FloatBarrier
-}
 
-\red{\subsubsection{The hybrid scheme}\label{sec: The hybrid scheme}
-As motivated in Section  \ref{sec: choice of simulation scheme}, in this work, we use the hybrid scheme which},  on equidistant grid $\{0,\frac{1}{N},\frac{2}{N},\dots,\frac{NT}{N}\}$, is given by 
+\subsubsection{The hybrid scheme}\label{sec: The hybrid scheme}
+As motivated in Section  \ref{sec: choice of simulation scheme}, in this work, we use the hybrid scheme which,  on equidistant grid $\{0,\frac{1}{N},\frac{2}{N},\dots,\frac{NT}{N}\}$, is given by 
 the following,
 \begin{align}\label{eq:Hybrid_scheme_pre}
 \widetilde{W}^H_{\frac{i}{N}} \approx \bar{W}^H_{\frac{i}{N}}&= \sqrt{2H} \left(  \sum_{k=1}^{\min(i,\kappa)} \int_{\frac{i}{N}-\frac{k}{N}}^{\frac{i}{N}-\frac{k}{N}+\frac{1}{N}} \left(\frac{i}{N}-s\right)^{H - 1/2} dW^1_s+\sum_{k=\kappa+1}^{i} \left(\frac{b_k}{N}\right)^{H - 1/2}  \int_{\frac{i}{N}-\frac{k}{N}}^{\frac{i}{N}-\frac{k}{N}+\frac{1}{N}} dW^1_s \right) \COMMA
