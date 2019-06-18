@@ -1,0 +1,34 @@
+Without loss of generality, we can assume that the integration domain  can
+be divided into two parts $\Omega_1$, and $\Omega_2$ such that the integrand $f$ is smooth and positive in $\Omega_1$ whereas $f(\mathbf{x}) = 0$ in $\Omega_2$. Therefore,
+\begin{equation}
+I f := \int_{\Omega_1} f(\mathbf{x}) d \mathbf{x}
+\end{equation}
+This situation may arise when the integrand is non-differentiable or noncontinuous along the boundary between $\Omega_1$ and $\Omega_2$. For these problems, kinks and jumps can efficiently be identified by a one-dimensional root finding. Then, the kinks and jumps can
+be transformed to the boundary of integration domain such that they no longer deteriorate the performance of the numerical methods. In fact, we  compute the zeros of the integrand  with respect to  the last dimension. In this dimension, then, e.g., Newton's method or bisection can be used to identify the point which separates $\Omega_1$ and $\Omega_2$. In our project, we use Newton 's iteration solver.
+
+
+\subsection{Description of the Domain Decomposition and Suitable Transformation}\label{sec:Description of the Domain Decomposition and Suitable Transformation}
+The payoff function is not smooth due to
+the nature of the option. In fact, the holder would not exercise
+the option if a purchase or sale of the underlying asset would lead to a loss. As a result, the discontinuity of the payoff function carries over to the integrand. In this case, The integrand shows a kink  or even a jump with respect to a  manifold. Since some
+(mixed) derivatives are not bounded at these manifolds, the smoothness requirements for the sparse grid method are clearly not fulfilled any more.
+
+The first step consists of identifying the areas 
+of discontinuity or non-differentiability. Then, we decompose the total integration domain $\Omega$ into sub-domains $\Omega_i,\: i=1,\dots,n$ such that the integrand is smooth in the interior of 
+$\Omega_i$ and such that all kinks and jumps are
+located along the boundary of these areas.  This procedure results in integrating several smooth functions, instead of one discontinuous function. The total integral is then given
+as the sum of the separate integrals, \ie
+\begin{align}
+	I f := \int_{\Omega} f(\mathbf{x}) d \mathbf{x}=\sum_{i=1}^{n}	\int_{\Omega_i} f(\mathbf{x}) d \mathbf{x}
+\end{align}
+In this way, the fast convergence of SG can
+be regained whereas the costs only increase by a constant (the number of terms in
+the sum), provided the cost required for the decomposition is sufficiently small such that it can be neglected.
+
+In general, such a decomposition is even more expensive than to integrate the function. Nevertheless, for some problem classes, the areas of discontinuity have a particular simple form, which allows to decompose the integration domain with
+costs that are much smaller than the benefit which results from the decomposition.  In this work, we consider those cases.
+
+In the literature, there two classes that have been tackled. In the first one, we have the information that the kinks are  part of the integration domain where the integrand is zero and can thus be identified by root finding as proposed in \cite{gerstner2007sparse}.
+
+In the second class, we have the information that the discontinuities are located on hyperplanes, which allows a decomposition first into polyhedrons and then into
+orthants as discussed in \cite{gerstner2008valuation}. In this work, we start by the first  class of problems.

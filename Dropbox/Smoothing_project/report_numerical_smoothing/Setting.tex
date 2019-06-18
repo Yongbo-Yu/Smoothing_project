@@ -1,0 +1,19 @@
+%In the context of option pricing, we aim at approximating the option price, $E[g(\mathbf{X}(t))]$,  where $g:\mathbb{R}^d  \rightarrow \mathbb{R}$ is the payoff function  and where  the process of the asset prices $\mathbf{X} \in \mathbb{R}^d$ solves 
+%\begin{align*}
+%	\mathbf{X}(t)=\mathbf{X}(0)+ \int_{0}^{t} a(s,\mathbf{X}(s)) ds + \sum_{\ell=1}^{\ell_0} \int_{0}^{t} b^{\ell}(s,\mathbf{X}(s)) dW^{\ell}(s)
+%\end{align*}
+%Let us denote  by $\Phi: (\mathbf{z}_1,\dots,\mathbf{z}_N) \rightarrow \bar{\mathbf{X}}_T$, the mapping consisting of the time-stepping scheme, where $\{\mathbf{z}_i\}_{i=1}^N$ are independent $d$-dimensional Gaussian random vectors, and $N$ is the number of time steps. Without loss of Generality, we assume that $\Phi$ may include pre-processing transformations to reduce the effective dimension. We also assume that $d=1$ and the extension to higher dimension is trivial.
+%
+%In this setting, we are interetsed in the basic problem of approximating
+%\begin{align}\label{eq:multivariate integral}
+%E[g(\mathbf{X}(T))] &\approx E[g(\bar{\mathbf{X}}_T)] \nonumber\\
+%&=\int_{\rset^N}g \circ \Phi(\mathbf{z})	d \mathbf{z}= \int_{-\infty}^{\infty} \dots \int_{-\infty}^{\infty} g \circ \Phi(z_1,\dots,z_N) \rho_d(\mathbf{z}) dz_1,\dots,dz_N \nonumber\\
+%&=I_N (g \circ \Phi) \COMMA
+%\end{align}
+%with
+%\begin{equation*}\label{eq: multivariate gaussian distribution}
+%\rho_N(\mathbf{z})=\frac{1}{(2 \pi)^{N/2}} e^{-\frac{1}{2} \mathbf{z}^T \mathbf{z}} \PERIOD
+%\end{equation*} 
+%where $\rho$ is a continuous and strictly positive probability density function on $\rset$ and $g$ is a real-valued function integrable with respect to $\rho_N$.
+ 
+

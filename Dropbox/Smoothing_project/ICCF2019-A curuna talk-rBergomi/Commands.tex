@@ -1,0 +1,162 @@
+\newcommand{\ceil}[1]{\lceil {#1} \rceil}
+\newcommand{\seqof}[3]{(#1)_{#2}^{#3}}
+\newcommand{\name}{\text{SSI-TL}}
+\newcommand{\nameexp}{\text{explicit-TL}}
+\newcommand{\ssa}{\text{SSA}}
+\newcommand{\hyb}{\text{Hyb}}
+\newcommand{\MNRM}{\text{MNRM}}
+\newcommand{\TL}{\text{TL}}
+\newcommand{\ML}{\text{ML}}
+\newcommand{\Li}{L^{\text{int}}}
+\newcommand{\Ls}{L_c^{\text{exp}}}
+\newcommand{\Lc}{L_c^{\text{imp}}}
+
+
+%\newcommand{\NSSA}{N_{\ssa}}
+\newcommand{\NSSAKone}{N_{\ssa,K1}}
+\newcommand{\NSSAKtwo}{N_{\ssa,K1'}}
+
+%\newcommand{\NMNRMKone}{N_{\MNRM,K1}}
+%\newcommand{\NMNRMKtwo}{N_{\MNRM,K2}}
+%\newcommand{\NMNRMKoneC}{N_{\MNRM,K1}^{(c)}}
+%\newcommand{\NMNRMKtwoC}{N_{\MNRM,K2}^{(c)}}
+
+\newcommand{\NMNRMKone}{N_{K1}}
+\newcommand{\NMNRMKtwo}{N_{K2}}
+\newcommand{\NMNRMKoneC}{N_{K1}^{(c)}}
+\newcommand{\NMNRMKtwoC}{N_{K2}^{(c)}}
+
+\newcommand{\NMNRM}{N_{\MNRM}}
+\newcommand{\NMNRMC}{N_{\MNRM}^{(c)}}
+%\newcommand{\NMNRMP}{N_{{\MNRM}^*}}
+
+\newcommand{\NSSAP}{N_{{\ssa}^*}}
+\newcommand{\NTL}{N_{\TL}}
+\newcommand{\NTLP}{N_{{\TL}^*}}
+\newcommand{\NTLC}{N_{\TL}^{(c)}}
+%\newcommand{\NTLF}{\dbar N_{\TL}}
+
+\newcommand{\EE}{\mathcal{E}}
+
+\newcommand{\WE}{\EE_I}
+\newcommand{\WEC}[1]{\EE_{I,#1}}
+\newcommand{\WEH}[1]{\hat \EE_{I,#1}}
+\newcommand{\WSSA}{\text{Cost}_{\ssa}}
+\newcommand{\WHYB}{\text{Cost}_{\hyb}}
+
+
+\newcommand{\avg}[2]{\mathcal{A}\left(#1;#2\right)}
+%\newcommand{\SD}[2]{\mathcal{S}(#1;#2)}
+\newcommand{\svar}[2]{\mathcal{S}^2\left(#1;#2\right)}
+
+\newcommand{\dbar}[1]{\Bar{\Bar{#1}}}
+
+\newcommand{\ie}{\emph{i.e.}}
+\newcommand{\eg}{\emph{e.g.}}
+\newcommand{\cf}{\emph{cf.}}
+\newcommand{\ud}{\mathrm{d}}
+\newcommand{\prob}[1]{\mathrm{P}\left(#1\right)}
+\newcommand{\expt}[1]{\mathrm{E}\left[#1\right]}
+\newcommand{\expth}[1]{\hat{\mathrm{E}}\left[#1\right]}
+
+\newcommand{\var}[1]{\mathrm{Var}\left[#1\right]}
+\newcommand{\cov}[2]{\mathrm{Cov}\left[#1, #2\right]}
+\newcommand{\norm}[1]{\left\|#1\right\|}
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\rset}{\mathbb{R}}
+\newcommand{\nset}{\mathbb{N}}
+\newcommand{\zset}{\mathbb{Z}}
+\newcommand{\JAC}{\mathbb{J}}
+\newcommand{\one}{\mathbf{1}}
+\newcommand{\poisson}[1]{\mathcal{P}\left(#1\right)}
+\newcommand{\normal}[1]{\mathcal{N}\left(#1\right)}
+\newcommand{\binomial}[1]{\mathcal{B}\left(#1\right)}
+\newcommand{\Ordo}[1]{{\mathcal{O}}\left(#1\right)}
+\newcommand{\OrdoP}[1]{{\mathcal{O}_P}\left(#1\right)}
+\newcommand{\ordo}[1]{{o}\left(#1\right)}
+\newcommand{\abstr}[1]{\begin{abstract}#1\end{abstract}}
+\newcommand{\thx}[1]{\thanks{#1}}
+\newcommand{\red}[1]{{\color{red}#1}}
+\newcommand{\blue}[1]{{\color{blue}#1}}
+\newcommand{\green}[1]{{\color{green}#1}}
+
+
+\newcommand{\latt}{\mbox{$\zset_+^d$}}
+
+
+%Alvaro's notations
+
+\newcommand{\indicator}[1]{\mathbf{1}_{#1}} 
+
+\newcommand{\PERIOD}{.}
+\newcommand{\COMMA}{,}
+
+% Removed this command since it does not work properly with spacing
+%\newcommand{\ChB}{{Chernoff bound }}
+\newcommand{\LP}{\left(}
+\newcommand{\RP}{\right)}
+
+\newcommand{\LPe}{\left.}
+\newcommand{\RPe}{\right.}
+
+%\newcommand{\SEP}{\biggm|}
+\newcommand{\SEP}{\, \big| \,}
+\newcommand{\BX}{\bar X(t)}
+\newcommand{\BXi}{\bar X_i(t)}
+\newcommand{\BXitau}{\bar X_i(t{+}\tau)}
+
+\newcommand{\sj}{\sum_{j=1}^J}
+
+\newcommand{\Qi}{Q_i(t,\tau_i)}
+\newcommand{\lji}{a_j(\bar X(t))\tau_i}
+\newcommand{\Yj}{Y_j\left( a_j(\bar X(t))\tau_i \right)}
+\newcommand{\ldi}{\log(\delta_i)}
+\newcommand{\taui}{\tau_i(s)}
+\newcommand{\DEN}[1]{- a_0 \LP \bar X(t) \RP +  \sj a_j(\bar X(t))e^{-#1\, \nu_{ji}}}
+\newcommand{\aj}{ a_j(\bar X(t))}
+
+\newcommand{\anu}{\sj \aj \nu_{ji}}
+%\newcommand{\anu2}{\sj \aj (\nu_{ji})^2}
+\newcommand{\tsi}{\tilde{s}_i}
+\newcommand{\hs}{\hat{s}}
+%\newcommand{\tti1}{\tilde{t}_{i,1}} 
+\newcommand{\az}{a_0(\bar X(t))}
+\newcommand{\dnux}{\delta_i^{\,\nu_{ji}/{\BXi}}}
+
+\newcommand{\bj}{b_{ji}(\bar X(t))}
+\newcommand{\mE}[1]{\mathcal{E}_{#1}}
+\newcommand{\mV}[1]{\mathcal{V}_{#1}}
+\newcommand{\hmV}[1]{\hat{\mathcal{V}}_{#1}}
+
+\newcommand{\orden}{\alpha}
+
+%Pedro's notations
+\newcommand{\X}[1]{\bar X(t_{#1})}
+\newcommand{\ti}[1]{t_{#1}}
+%\newcommand{\iff}{\Leftrightarrow}
+
+\newcommand{\algorithmfootnote}[2][\footnotesize]{%
+  \let\old@algocf@finish\@algocf@finish% Store algorithm finish macro
+  \def\@algocf@finish{\old@algocf@finish% Update finish macro to insert "footnote"
+    \leavevmode\rlap{\begin{minipage}{\linewidth}
+    #1#2
+    \end{minipage}}%
+  }%
+}
+%new command for switch case algo
+% New definitions
+%\algnewcommand\algorithmicswitch{\textbf{switch}}
+%\algnewcommand\algorithmiccase{\textbf{case}}
+%\algnewcommand\algorithmicassert{\texttt{assert}}
+%\algnewcommand\Assert[1]{\State \algorithmicassert(#1)}%
+%
+%% New "environments"
+%\algdef{SE}[SWITCH]{Switch}{EndSwitch}[1]{\algorithmicswitch\ #1\ \algorithmicdo}{\algorithmicend\ \algorithmicswitch}%
+%\algdef{SE}[CASE]{Case}{EndCase}[1]{\algorithmiccase\ #1}{\algorithmicend\ \algorithmiccase}%
+%\algtext*{EndSwitch}%
+%\algtext*{EndCase}%
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main_new"
+%%% End: 

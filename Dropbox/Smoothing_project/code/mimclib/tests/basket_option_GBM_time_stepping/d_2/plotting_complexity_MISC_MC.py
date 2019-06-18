@@ -62,7 +62,7 @@ plt.plot(MC_normal_err,MC_normal_time,linewidth=2.0,label='MC' , marker='>',hold
 plt.plot(MC_normal_err, fit_MC_normal/1000,linewidth=2.0,label=r'slope= %s' % format(z_MC_normal[0]  , '.2f'), linestyle = '--')
 
 
-plt.plot(MISC_err,MISC_time,linewidth=2.0,label='MISC'  , marker='v',hold=True) 
+plt.plot(MISC_err,MISC_time,linewidth=2.0,label='ASGQ'  , marker='v',hold=True) 
 plt.plot(MISC_err, fit_MISC/10000,linewidth=2.0,label=r'slope= %s' % format(z_MISC[0]  , '.2f'), linestyle = '--')
 
 # plt.plot(MC_rich_err,MC_rich_time,linewidth=2.0,label='MC+Rich' , marker='o',hold=True) 
@@ -77,5 +77,5 @@ plt.xlabel('Error',fontsize=14)
 
 plt.ylabel('CPU time',fontsize=14) 
 plt.subplots_adjust(wspace=0.6, hspace=0.6, left=0.15, bottom=0.22, right=0.96, top=0.96)
-plt.legend(loc='lower left')
+plt.legend(loc='upper right',fontsize=8)
 plt.savefig('./results/error_vs_time.eps', format='eps', dpi=1000)  

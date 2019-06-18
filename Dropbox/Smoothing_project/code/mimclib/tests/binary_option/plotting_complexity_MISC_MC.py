@@ -77,7 +77,7 @@ plt.plot(MC_err, fit_MC/1000,linewidth=2.0,label=r'rate= %s' % format(z_MC[0]  ,
 plt.plot(MC_normal_err,MC_normal_time,linewidth=2.0,label='MC' , marker='>',hold=True) 
 plt.plot(MC_normal_err, fit_MC_normal/1000,linewidth=2.0,label=r'rate= %s' % format(z_MC_normal[0]  , '.2f'), linestyle = '--')
 
-plt.plot(MISC_err,MISC_time,linewidth=2.0,label='MISC'  , marker='v',hold=True) 
+plt.plot(MISC_err,MISC_time,linewidth=2.0,label='ASGQ'  , marker='v',hold=True) 
 plt.plot(MISC_err, fit_MISC/100,linewidth=2.0,label=r'rate= %s' % format(z_MISC[0]  , '.2f'), linestyle = '--')
 
 
