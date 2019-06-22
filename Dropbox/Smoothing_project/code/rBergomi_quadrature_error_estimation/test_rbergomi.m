@@ -139,9 +139,9 @@ for k=1:1:K,
     % collect interpolation error vector
    %rel_interp_error_1=mean(abs(Y_true(:,qoi_choice)-Y_out(:,qoi_choice)))/mean(abs(Y_true(:,qoi_choice)));
    %as was done by Joakim
-    %rel_interp_error_1=mean(abs(Y_true(:,qoi_choice)-Y_out(:,qoi_choice)));
+    rel_interp_error_1=mean(abs(Y_true(:,qoi_choice)-Y_out(:,qoi_choice)));
      %without normalization 
-    rel_interp_error_1=mean(abs(Y_true(:,qoi_choice)-Q_out(:,qoi_choice)));    %we just use the mean for
+    %rel_interp_error_1=mean(abs(Y_true(:,qoi_choice)-Q_out(:,qoi_choice)));    %we just use the mean for
     % the difference between the the function evaluation and the SG
     % solution 
     Error_I=[Error_I,rel_interp_error_1];

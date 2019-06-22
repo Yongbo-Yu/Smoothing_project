@@ -1,8 +1,8 @@
-#this code implements the plain MC without numerical smoothing and root finding
-
 import numpy as np
 import time
+
 import random
+
 import pathos.multiprocessing as mp
 import pathos.pools as pp
 
@@ -19,13 +19,8 @@ class Problem(object):
     sigma=None    # volatility
     d=None
     dt=None
-    # #set 1 
-    # exact=6.332542 #  S_0=K=100, T=1, r=0,rho=-0.9, v_0=0.04, theta=0.0025, xi=0.1,\kapp=1    (n=1)
 
-     #set 2
-    #exact=6.773125 #  set1 S_0=K=100, T=1, r=0,rho=-0.9, v_0=0.04, theta=   0.0125, xi=0.1,\kapp=1  (n=5)
-      #set 3
-    exact=6.445535 #  S_0=K=100, T=1, r=0,rho=-0.9, v_0=0.04, theta=0.005, xi=0.1,\kapp=1    (n=2)
+    exact=6.332542 #  S_0=K=100, T=1, r=0,rho=-0.9, v_0=0.04, theta=0.0025, xi=0.1,\kapp=1  
     yknots_right=[]
     yknots_left=[]
 
@@ -37,22 +32,13 @@ class Problem(object):
         self.random_gen = None or np.random
         self.S0=100
         self.K= coeff*self.S0        # Strike price and coeff determine if we have in/at/out the money option
+        
         self.rho=-0.9 
-
-        # #set 1
-        # self.kappa= 1.0
-        # self.xi=0.1
-        # self.v0=0.04
-        # self.theta=(self.xi**2)/(4*self.kappa)
-
-        #set2
         self.kappa= 1.0
         self.xi=0.1
         self.v0=0.04
-        self.theta=(2*(self.xi**2))/(4*self.kappa)
+        self.theta=(self.xi**2)/(4*self.kappa)
 
-
-        self.dt=self.T/float(Nsteps) # time steps length
         self.d=int(np.log2(Nsteps)) #power 2 number steps
 
     # this computes the value of the objective function (given by  objfun) at quad points
@@ -65,21 +51,42 @@ class Problem(object):
      # objfun:  beta #number of points in the first direction
     def objfun(self,Nsteps):
 
-        mean = np.zeros(2*Nsteps)
-        covariance= np.identity(2*Nsteps)
+        mean = np.zeros(4*Nsteps)
+        covariance= np.identity(4*Nsteps)
         y = np.random.multivariate_normal(mean, covariance)    
 
-        y1=y[0:Nsteps] # this points are related to the volatility path
 
-        y2=[Nsteps]
-        y2[0]=y[Nsteps]
-        y2[1:]=y[Nsteps+1:]
+          #Richardson level
+        n=1
+        d = np.array( [[0] * (n + 1)] * (n + 1), float )   
+
+
+        y1f=y[0:2*Nsteps] # this points are related to the volatility path
+
+        y2f=[2*Nsteps]
+        y2f[0]=y[2*Nsteps]
+        y2f[1:]=y[2*Nsteps+1:]
         
-        X=self.stock_price_trajectory_1D_heston(y2[0],y2[1:],y1[0],y1[1:Nsteps],Nsteps)
-    
-            
-        QoI= self.payoff(X)
+        X_f=self.stock_price_trajectory_1D_heston(y2f[0],y2f[1:],y1f[0],y1f[1:2*Nsteps],2*Nsteps)        
+        QoI_f= self.payoff(X_f)
+
+        d[1,0] =QoI_f
+
+
+        y1c=y1f[0:Nsteps] # this points are related to the volatility path
+
+        y2c=[Nsteps]
+        y2c[0]=y2f[0]
+        y2c[1:]=y2f[1:Nsteps]
         
+        X_c=self.stock_price_trajectory_1D_heston(y2c[0],y2c[1:],y1c[0],y1c[1:Nsteps],Nsteps)        
+        QoI_c= self.payoff(X_c)
+
+        d[0,0] =QoI_c
+
+        d[1,1] = 2*d[1,0] - d[0,0]
+        
+        QoI=d[1,1]
         return QoI
 
     def brownian_increments(self,y1,y,Nsteps):
@@ -88,8 +95,8 @@ class Problem(object):
         j_max=1
         bb= np.zeros((1,Nsteps+1))
         bb[0,h]=np.sqrt(self.T)*y1
-              
-        for k in range(1,self.d+1):
+        ds=int(np.log2(Nsteps)) #power 2 number steps      
+        for k in range(1,ds+1):
             i_min=h//2
             i=i_min
             l=0
@@ -109,6 +116,8 @@ class Problem(object):
 
     # This function simulates a 1D heston trajectory for stock price and volatility paths
     def stock_price_trajectory_1D_heston(self,y1,y,yv1,yv,Nsteps):
+
+        dt=self.T/float(Nsteps)
          #  hierarhcical
         bb=self.brownian_increments(y1,y,Nsteps)
         dW= [bb[0,i+1]-bb[0,i] for i in range(0,Nsteps)] 
@@ -148,10 +157,11 @@ class Problem(object):
         
         for n in range(1,Nsteps+1):
             X[n]=X[n-1]*(1+np.sqrt(V[n-1])*dW_s[n-1])
-            V[n]=V[n-1]- self.kappa *self.dt* max(V[n-1],0)+ self.xi *np.sqrt(max(V[n-1],0))*dW_v[n-1]*np.sqrt(self.dt)+ self.kappa*self.theta*self.dt
+            V[n]=np.abs(V[n-1])- self.kappa *dt* max(V[n-1],0)+ self.xi *np.sqrt(max(V[n-1],0))*dW_v[n-1]*np.sqrt(dt)+ self.kappa*self.theta*dt
             V[n]=max(V[n],0)
             
         return X[-1]
+        
         
         
      
@@ -173,20 +183,11 @@ class Problem(object):
 
 def weak_convergence_differences():    
         start_time=time.time()
-        # #set1
-        # exact=6.332542 #  S_0=K=100, T=1, r=0,rho=-0.9, v_0=0.04, theta=0.0025, xi=0.1,\kapp=1
-
-        #set2
-        #exact=6.773125 #  set1 S_0=K=100, T=1, r=0,rho=-0.9, v_0=0.04, theta=   0.0125, xi=0.1,\kapp=1 
-
-        #set3
-        exact=6.445535 #  S_0=K=100, T=1, r=0,rho=-0.9, v_0=0.04, theta=0.005, xi=0.1,\kapp=1 
-
-
+        exact=6.332542 #  S_0=K=100, T=1, r=0,rho=-0.9, v_0=0.04, theta=0.0025, xi=0.1,\kapp=1
         marker=['>', 'v', '^', 'o', '*','+','-',':']
         
         # # feed parameters to the problem
-        Nsteps_arr=np.array([32])
+        Nsteps_arr=np.array([4])
         dt_arr=1.0/(Nsteps_arr)
     
         elapsed_time_qoi=np.zeros(1)
@@ -196,14 +197,14 @@ def weak_convergence_differences():
         Lb=np.zeros(1)
         num_cores = mp.cpu_count()
    
-        values=np.zeros((2*(10**7),1)) 
+        values=np.zeros((1*(10**8),1)) 
         for i in range(0,1):
             print i
             start_time=time.time()
             prb = Problem(1,Nsteps_arr[i]) 
-        #     for j in range(2*(10**5)):
+            # for j in range(3*(10**5)):
               
-        #         values[j,i]=prb.objfun(Nsteps_arr[i])/float(exact)
+            #     values[j,i]=prb.objfun(Nsteps_arr[i])/float(exact)
 
 
             
@@ -214,7 +215,7 @@ def weak_convergence_differences():
             
             p =  pp.ProcessPool(num_cores)  # Processing Pool with four processors
             
-            values[:,i]= p.map(processInput, range(((2*(10**7))))  )    
+            values[:,i]= p.map(processInput, range(((1*(10**8))))  )    
 
             elapsed_time_qoi[i]=time.time()-start_time
           
@@ -224,7 +225,7 @@ def weak_convergence_differences():
         print elapsed_time_qoi
 
         error=np.abs(np.mean(values,axis=0) - 1) 
-        stand=np.std(values, axis = 0)/  float(np.sqrt(2*(10**7)))
+        stand=np.std(values, axis = 0)/  float(np.sqrt(1*(10**8)))
         Ub=np.abs(np.mean(values,axis=0) - 1)+1.96*stand
         Lb=np.abs(np.mean(values,axis=0) - 1)-1.96*stand
         print(error)   

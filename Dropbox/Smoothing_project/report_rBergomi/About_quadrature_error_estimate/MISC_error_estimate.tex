@@ -1,9 +1,8 @@
 As discussed, potential ways of estimating the quadrature error are presented below.
-\subsection{First way}
-\red{ I want to check with you: does your code use a similar approach to the first way, right?}
+\subsection{First way: Similar to the one implemented by Joakim}
+I think this way is almost similar to the one implemented by Joakim. He may correct me if I missed some things.
 
 In our case, once we fix $N$, we define from \eqref{BS_formula_rbergomi_2}
-
 \begin{equation*}
 F^N=C_{\text{BS}}(G(\mathbf{W}^{(1)},\mathbf{W}^{(2)})) \PERIOD
 \end{equation*}
@@ -13,7 +12,7 @@ we consider a sequence of univariate Lagrangian interpolant operators in each di
 U^{m(\beta_n)}:C^0(\rset) \rightarrow \mathbb{P}^{m(\beta_n)-1}(\rset), \quad U^{m(\beta_n)}[F^N](y_n)= \sum_{j=1}^{m(\beta_n)} \left( f(y^j_n) \prod_{k=1;k \neq j}^{m(\beta_n)} \frac{y_n-y_n^k}{y_n^j-y_n^k}\right) \PERIOD
 \end{equation*}
 The $2N$-variate Lagrangian interpolant can then be built by a tensorization of univariate interpolants: denote by $C^0(\rset^{2N})$ the space of real-valued $2N$-variate continuous functions over $\rset^{2N}$ and by $\mathbb{P}^{\mathbf{q}}(\rset^{2N}) = \otimes_{n=1}^{2N} \mathbb{P}^{\mathbf{q}_n}(\rset)$ the subspace of polynomials of degree at most $q_n$ over $\rset$, with $\mathbf{q}=(q_1,\dots,q_{2N})\in  \nset^{2N}$, and consider a multi-index $\boldsymbol{\beta} \in \nset^{2N}_+$ assigning the interpolation level in each direction, $y_n$, then  the multivariate interpolant can then be written as
-$$U^{m(\boldsymbol{\beta})}: C^0(\rset^{2N}) \rightarrow \mathbb{P}^{m(\boldsymbol{\beta})-1}(\rset^{2N}) ,\quad  U^{m(\boldsymbol{\beta})}[F^N](\mathbf{y})= \bigotimes_{n = 1}^{2N} U^{m(\beta_n)} [F^N](\mathbf{y}) \COMMA $$
+$$U^{m(\boldsymbol{\beta})}: C^0(\rset^{2N}) \rightarrow \mathbb{P}^{m(\boldsymbol{\beta})-1}(\rset^{2N}) ,\quad  U^{m(\boldsymbol{\beta})}[F^N](\mathbf{y})= \bigotimes_{n = 1}^{2N} U^{m(\beta_n)} [F^N](\mathbf{y}) \PERIOD $$
 Given this construction, we can define the ASGQ interpolant  for approximating $F^N$, using a set of multi indices $\mathcal{I} \in \nset^{2N}$ as
 \begin{equation}
 I^{\mathcal{I}}[F^N]= \sum_{\boldsymbol{\beta} \in \mathcal{I}} \Delta U_N^{\boldsymbol{\beta}} \COMMA
@@ -36,9 +35,9 @@ We define the interpolation error induced by ASGQ as
 \begin{equation}
 e_{N}= F^N-I^{\mathcal{I}}[F^N] \PERIOD
 \end{equation}
-One can have a bound on the interpolation error of ASGQ, $e_{N}$, by tensorizing one dimensional error estimates, and  then simply integrate that bound to get the ASGQ  error, $\mathcal{E}_Q(\text{TOL}_{\text{ASGQ}},N)$, defined in \eqref{eq:total_error_ASGQ}. However, we think that this will  not lead to a sharp error estimate for ASGQ. Another strategy for estimating the ASGQ  error, is to estimate $\expt{e_N}$ using MC by sampling directly $e_N$. Finally,  one can learn the error curve as a way to reduce the extra burden that comes from estimating the ASGQ error.
+One can have a bound on the interpolation error of ASGQ, $e_{N}$, by tensorizing one dimensional error estimates, and  then simply integrate that bound to get the ASGQ  error, $\mathcal{E}_Q(\text{TOL}_{\text{ASGQ}},N)$, defined in \eqref{eq:total_error_ASGQ}. However, we think that this will  not lead to a sharp error estimate for ASGQ. Another strategy for estimating the ASGQ  error, is to estimate $\expt{e_N}$ using MC by sampling directly $e_N$ (what I think Jaokim code is doing actually) .
 
-If we define $Y=F^N+(Q_N^{\mathcal{I}}-I^{\mathcal{I}}[F^N])$ (where $Q_N^{\mathcal{I}}$ is the ASGQ  estimator, defined in \eqref{eq:MISC_quad_estimator}), then we have
+If we define $Y=F^N+(Q_N^{\mathcal{I}}-I^{\mathcal{I}}[F^N])$ (where $Q_N^{\mathcal{I}}$ is the ASGQ  estimator), then we have
 \begin{align}\label{eq:Control_variate}
 \expt{Y}&=\expt{F^N}\nonumber\\
 Var[Y]&=Var[e_N]< Var[\mathcal{A}_{\text{MC}}]\COMMA
@@ -47,6 +46,18 @@ where $\mathcal{A}_{\text{MC}}$ is the MC estimator for $\expt{F^N}$.
 
 \eqref{eq:Control_variate} shows that ASGQ can be seen as a control variate for MC estimator and consequently as a powerful variance reduction tool.
 
-This way of estimating the quadrature error comes with the disadvantage of exciting the strong error which has a poor behavior in our context resulting maybe to having a non-sharp error estimate. Therefore, we suggest to use a second option as detailed in the following.
+This way of estimating the quadrature error comes with the disadvantage of exciting the strong error which has a poor behavior in our context resulting maybe to having a non-sharp error estimate. In fact, by the central limit theorem, we expect that
+\begin{align}\label{eq:CLT_interpol_errror}
+\abs{\expt{e_N}}&=\abs{\int \underbrace{F^N-I^{\mathcal{I}}[F^N](y)}_{Y(y)} dy}\nonumber\\
+&\approx \frac{C_\alpha}{\sqrt{M}} \sqrt{\text{Var(Y)}}\PERIOD
+\end{align}
+In our context of the rBergomi model we know that the strong error is of order $H$, that is we expect to have $\text{Var(Y)}=\Ordo{h^H}$ ($h$ is the mesh size and $H$ is the Hurst parameter which is of order $\approx 0.1$. As a consequence, it may be that using this way will not provide a sharp enough error estimate for the quadrature error!
+
 \subsection{Second way}
 To avoid exciting the strong error when estimating the quadrature error and just act on the weak error, we can use a second way that is inspired of randomized QMC. In fact, we suggest to use a randomized version of ASGQ where the randomization involves randomized rotation and scaling for quadrature rules since we deal with unbounded domains and Hermite quadrature rule. Although this comes with the advantage of just acting on the weak error, it has the issue of reducing anisotropy which is a main feature for a good performance of ASGQ.
+
+We can formulate this more in case the first way fail!
+
+\subsection{Third way}
+One can learn the error curve as a way to reduce the extra burden that comes
+from estimating the ASGQ error but this not yet formulated yet. I will try to formulate it if the two previous options fail!

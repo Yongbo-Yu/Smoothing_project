@@ -37,20 +37,21 @@ print z_MISC[0]
 
 #case with richardson
 
-# MC_rich_err=np.array([0.0364,0.0113, 0.0030,0.0008])
-# MC_rich_time=np.array([ 194, 394,516, 725])
-# MISC_rich_err=np.array([ 0.0357,0.0109,0.0025,0.0006])
-# MISC_rich_time=np.array([ 0.3,4,56,713])
+MC_normal_rich_err=np.array([0.131, 0.0123])
+MC_rich_time=np.array([ 1, 145])
+
+MISC_rich_err=np.array([ 0.038, 0.0142])
+MISC_rich_time=np.array([4.5, 48.5])
 
 
-# # z_MC_rich= np.polyfit(np.log(MC_rich_err), np.log(MC_rich_time), 1)
-# # fit_MC_rich=np.exp(z_MC_rich[0]*np.log(MC_rich_err))
-# # print z_MC_rich[0]
+z_MC_normal_rich= np.polyfit(np.log(MC_normal_rich_err), np.log(MC_rich_time), 1)
+fit_MC_normal_rich=np.exp(z_MC_normal_rich[0]*np.log(MC_normal_rich_err))
+print z_MC_normal_rich[0]
 
 
-# z_MISC_rich= np.polyfit(np.log(MISC_rich_err), np.log(MISC_rich_time), 1)
-# fit_MISC_rich=np.exp(z_MISC_rich[0]*np.log(MISC_rich_err))
-# print z_MISC_rich[0]
+z_MISC_rich= np.polyfit(np.log(MISC_rich_err), np.log(MISC_rich_time), 1)
+fit_MISC_rich=np.exp(z_MISC_rich[0]*np.log(MISC_rich_err))
+print z_MISC_rich[0]
 
 
 fig = plt.figure()
@@ -58,17 +59,18 @@ fig = plt.figure()
 # plt.plot(MC_err,MC_time,linewidth=2.0,label='MC+root finding' , marker='>',hold=True) 
 # plt.plot(MC_err, fit_MC/100,linewidth=2.0,label=r'slope= %s' % format(z_MC[0]  , '.2f'), linestyle = '--')
 
-plt.plot(MC_normal_err,MC_normal_time,linewidth=2.0,label='MC' , marker='>',hold=True) 
-plt.plot(MC_normal_err, fit_MC_normal/1000,linewidth=2.0,label=r'slope= %s' % format(z_MC_normal[0]  , '.2f'), linestyle = '--')
+plt.plot(MC_normal_err,MC_normal_time,linewidth=2.0,label='MC' , marker='>',hold=True,color='b') 
+plt.plot(MC_normal_err, fit_MC_normal/100,linewidth=2.0,label=r'slope= %s' % format(z_MC_normal[0]  , '.2f'), linestyle = '--',color='b')
 
 
-plt.plot(MISC_err,MISC_time,linewidth=2.0,label='ASGQ'  , marker='v',hold=True) 
-plt.plot(MISC_err, fit_MISC,linewidth=2.0,label=r'slope= %s' % format(z_MISC[0]  , '.2f'), linestyle = '--')
+plt.plot(MISC_err,MISC_time,linewidth=2.0,label='ASGQ'  , marker='v',hold=True, color='r') 
+plt.plot(MISC_err, fit_MISC,linewidth=2.0,label=r'slope= %s' % format(z_MISC[0]  , '.2f'), linestyle = '--',color='r')
 
-# plt.plot(MC_rich_err,MC_rich_time,linewidth=2.0,label='MC+Rich' , marker='o',hold=True) 
-#plt.plot(MC_rich_err, fit_MC_rich*10,linewidth=2.0,label=r'rate= %s' % format(z_MC_rich[0]  , '.2f'), linestyle = '--')
-# plt.plot(MISC_rich_err,MISC_rich_time,linewidth=2.0,label='MISC+Rich'  , marker='*',hold=True) 
-# plt.plot(MISC_rich_err, fit_MISC_rich*10,linewidth=2.0,label=r'rate= %s' % format(z_MISC_rich[0]  , '.2f'), linestyle = '--')
+plt.plot(MC_normal_rich_err,MC_rich_time,linewidth=2.0,label='MC+Rich' , marker='o',hold=True, color='g') 
+#plt.plot(MC_normal_rich_err, fit_MC_normal_rich/100,linewidth=2.0,label=r'slope= %s' % format(z_MC_normal_rich[0]  , '.2f'), linestyle = '--',color='g')
+
+plt.plot(MISC_rich_err,MISC_rich_time,linewidth=2.0,label='ASGQ+Rich'  , marker='*',hold=True,color='k') 
+#plt.plot(MISC_rich_err, fit_MISC_rich/1000,linewidth=2.0,label=r'slope= %s' % format(z_MISC_rich[0]  , '.2f'), linestyle = '--',color='k')
 
 
 plt.yscale('log')

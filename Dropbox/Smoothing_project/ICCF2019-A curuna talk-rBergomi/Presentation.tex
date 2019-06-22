@@ -229,7 +229,7 @@
 	\end{beamercolorbox}%
 }
 \renewcommand*{\inserttotalframenumber}{\pageref{lastframe}}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%
@@ -467,28 +467,28 @@ where $\blue{\bar{d}}$ depends on $\blue{d}$ and $\blue{N}$.
 
 
 
-\begin{frame}[plain, shrink=4]\frametitle{\centerline{Hybrid scheme \cite{bennedsen2017hybrid}}}
-\begin{small}
-\begin{align*}
-	\widetilde{W}_t^{\blue{H}} &= \int_0^t K^{\blue{H}}(t-s) dW_s^1, \quad t \ge 0, \\ 	K^{\blue{H}}(t-s) &= \sqrt{2\blue{H}} (t-s)^{\blue{H} - 1/2},\quad \forall \: 0 \le s \le t. 
-	\end{align*}
-	\end{small}
-\begin{itemize}
-\item 	The hybrid scheme \red{discretizes} the  $\widetilde{W}^\blue{H}$ process into \red{Wiener integrals of power functions and a Riemann sum}, appearing from approximating the kernel by power functions near the origin and step functions elsewhere.
-\begin{small}
-\begin{align*}
-\widetilde{W}^H_{\frac{i}{N}} \approx \overline{W}^H_{\frac{i}{N}}&= \sqrt{2H} \left(  W^2_i+\sum_{k=2}^{i} \left(\frac{b_k}{N}\right)^{H-\frac{1}{2}} \left(W_{\frac{i-(k-1)}{N}}^1-W_{\frac{i-k}{N}}^1\right)\right)\COMMA
-\end{align*}
-\end{small}
-\begin{itemize}
-\item $N$ is the number of time steps 
-\item $\{W^{2}_j\}_{j=1}^N$: \red{Artificially introduced} $N$ Gaussian random variables that are used for left-rule points in the hybrid scheme.
-\item $b_k=\left(\frac{k^{H+\frac{1}{2}}-(k-1)^{H+\frac{1}{2} }}{H+\frac{1}{2}}\right)^{\frac{1}{H-\frac{1}{2}}}.$
-\end{itemize}
-\end{itemize}
-\end{frame}
-
-
+%\begin{frame}[plain, shrink=4]\frametitle{\centerline{Hybrid scheme \cite{bennedsen2017hybrid}}}
+%\begin{small}
+%\begin{align*}
+%	\widetilde{W}_t^{\blue{H}} &= \int_0^t K^{\blue{H}}(t-s) dW_s^1, \quad t \ge 0, \\ 	K^{\blue{H}}(t-s) &= \sqrt{2\blue{H}} (t-s)^{\blue{H} - 1/2},\quad \forall \: 0 \le s \le t. 
+%	\end{align*}
+%	\end{small}
+%\begin{itemize}
+%\item 	The hybrid scheme \red{discretizes} the  $\widetilde{W}^\blue{H}$ process into \red{Wiener integrals of power functions and a Riemann sum}, appearing from approximating the kernel by power functions near the origin and step functions elsewhere.
+%\begin{small}
+%\begin{align*}
+%\widetilde{W}^H_{\frac{i}{N}} \approx \overline{W}^H_{\frac{i}{N}}&= \sqrt{2H} \left(  W^2_i+\sum_{k=2}^{i} \left(\frac{b_k}{N}\right)^{H-\frac{1}{2}} \left(W_{\frac{i-(k-1)}{N}}^1-W_{\frac{i-k}{N}}^1\right)\right)\COMMA
+%\end{align*}
+%\end{small}
+%\begin{itemize}
+%\item $N$ is the number of time steps 
+%\item $\{W^{2}_j\}_{j=1}^N$: \red{Artificially introduced} $N$ Gaussian random variables that are used for left-rule points in the hybrid scheme.
+%\item $b_k=\left(\frac{k^{H+\frac{1}{2}}-(k-1)^{H+\frac{1}{2} }}{H+\frac{1}{2}}\right)^{\frac{1}{H-\frac{1}{2}}}.$
+%\end{itemize}
+%\end{itemize}
+%\end{frame}
+%
+%
 
 
 
@@ -859,7 +859,7 @@ where  $\mathcal{E}_Q$ is the quadrature error, $\green{\mathcal{E}_B}$  is the 
 	\caption{ In this table, we highlight the computational gains achieved by ASGQ and QMC over MC method to meet a certain error tolerance. We note that the ratios are computed \red{for the best configuration with Richardson extrapolation for each method}.}
 		\begin{tabular}{l*{4}{c}r}
 			\toprule[1.5pt]
-			\textbf{Parameter set}              &  \textbf{Relative error}  & \textbf{CPU time ratio $\left(\text{MC}/ \text{ASGQ} \right)$} & \textbf{CPU time ratio  $\left(\text{MC}/ \text{QMC} \right)$}\\
+			\textbf{Parameters}              &  \textbf{Relative error}  & \textbf{CPU time ratio $\left(\text{MC}/ \text{ASGQ} \right)$} & \textbf{CPU time ratio  $\left(\text{MC}/ \text{QMC} \right)$}\\
 			\hline
 			Set $1$  &  $1\%$&  $ 15$ &  $10$\\	
 			
@@ -875,31 +875,39 @@ where  $\mathcal{E}_Q$ is the quadrature error, $\green{\mathcal{E}_B}$  is the 
 		\end{tiny}
 \end{table}
 \end{frame}
-\begin{frame}[plain]\frametitle{\centerline{Complexity of the different  methods}}
 
-%\\ \centerline{with the Different Configurations}}
- 
+\begin{frame}[plain]\frametitle{\centerline{Complexity of the MC method}
+\centerline{with different configurations }}
 \begin{figure}
-	\centering
-	\begin{subfigure}{0.495\textwidth}
 		\centering
-		\includegraphics[width=0.6\textwidth]{./rBergomi_Complexity_rates/set2/error_vs_time_set2_MC_comparison}
-		\caption{}
-	\end{subfigure}
-	\begin{subfigure}{0.495\textwidth}
-		\centering
-		\includegraphics[width=0.6\textwidth]{./rBergomi_Complexity_rates/set2/error_vs_time_set2_QMC_comparison}
-		\caption{}
-	\end{subfigure}
-	\begin{subfigure}{0.5\textwidth}
-		\centering
-		\includegraphics[width=0.6\textwidth]{./rBergomi_Complexity_rates/set2/error_vs_time_set2_MISC_comparison}
-		\caption{}
-	\end{subfigure}%%
-	\caption{Numerical complexity of the different  methods with the different configurations in terms of  Richardson extrapolation 's level.  Case of \red{parameter set $1$ in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}}. a) \red{MC methods}. b) \red{QMC methods}. d) \red{ASGQ methods}. }
-	\label{fig: Comparing the numerical complexity of the different  methods with the different configurations}
+		\includegraphics[width=0.7\textwidth]{./rBergomi_Complexity_rates/set2/error_vs_time_set2_MC_comparison}
+	\caption{Numerical complexity of the MC  method with the different configurations in terms of  Richardson extrapolation 's level.  Case of \red{parameter set $1$ in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}}. }
+	\label{fig: Comparing the numerical complexity of the MC  method with the different configurations}
 \end{figure}
 \end{frame}
+
+
+\begin{frame}[plain]\frametitle{\centerline{Complexity of the QMC method}
+\centerline{with different configurations }}
+\begin{figure}
+		\centering
+		\includegraphics[width=0.7\textwidth]{./rBergomi_Complexity_rates/set2/error_vs_time_set2_QMC_comparison}
+	\caption{Numerical complexity of the QMC  method with the different configurations in terms of  Richardson extrapolation 's level.  Case of \red{parameter set $1$ in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}}. }
+	\label{fig: Comparing the numerical complexity of the QMC  method with the different configurations}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}[plain]\frametitle{\centerline{Complexity of the ASGQ method}
+\centerline{with different configurations }}
+\begin{figure}
+		\centering
+		\includegraphics[width=0.7\textwidth]{./rBergomi_Complexity_rates/set2/error_vs_time_set2_MISC_comparison}
+	\caption{Numerical complexity of the QMC  method with the different configurations in terms of  Richardson extrapolation 's level.  Case of \red{parameter set $1$ in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}}. }
+	\label{fig: Comparing the numerical complexity of the ASGQ  method with the different configurations}
+\end{figure}
+\end{frame}
+
 
 
 \begin{frame}[plain]\frametitle{\centerline{Complexity of the different methods}\\
@@ -907,7 +915,7 @@ where  $\mathcal{E}_Q$ is the quadrature error, $\green{\mathcal{E}_B}$  is the 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.6\linewidth]{./rBergomi_Complexity_rates/set2/error_vs_time_set2_full_comparison}
-	\caption{Computational work comparison for the different methods \red{with the best configurations concluded from Figure \ref{fig: Comparing the numerical complexity of the different  methods with the different configurations}}, for the case of \red{parameter set $1$ in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}}.}	\label{fig:Complexity plot for  MISC for Case set $2$ parameters, comparison}
+	\caption{Computational work comparison for the different methods \red{with the best configurations concluded from Figures \ref{fig: Comparing the numerical complexity of the MC  method with the different configurations}, \ref{fig: Comparing the numerical complexity of the QMC  method with the different configurations} and \ref{fig: Comparing the numerical complexity of the ASGQ  method with the different configurations}}, for the case of \red{parameter set $1$ in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}}.}	\label{fig:Complexity plot for  MISC for Case set $2$ parameters, comparison}
 \end{figure}
 \end{frame}
 
@@ -941,176 +949,18 @@ where  $\mathcal{E}_Q$ is the quadrature error, $\green{\mathcal{E}_B}$  is the 
 %\medskip
 %\section{References}
 
-\begin{frame}[plain,noframenumbering,allowframebreaks]
+\begin{frame}[plain,allowframebreaks]
 	\frametitle{References}
-	\raggedright
-	\nocite{*}
-	\bibliographystyle{apalike}
+%	\raggedright
+%	\nocite{*}
+\tiny \bibliographystyle{apalike}
 	\bibliography{smoothing_rBergomi}
 \end{frame}
 
 
 
 
-%\begin{frame}[plain,shrink=10]
-%	\frametitle{\centerline{The Stochastic Simulation Algorithm (SSA) }\\
-%		\centerline{\cite{gillespie_ssa}}}
-%	
-%	
-%	\begin{enumerate}
-%		\item Initialize $\mathbf{x} \leftarrow \mathbf{x}_0$ (The initial number of molecules of each species)  and $ t \leftarrow 0$.
-%		\item  In state $\mathbf{x}$ at time t, compute $(a_j(\mathbf{x}))_{j=1}^{J}$ and the sum
-%		$a_0(\mathbf{x}) = \sum_{j=1}^{J}a_j (\mathbf{x})$.
-%		
-%		\item Generate two independent  uniform $(0,1)$ random number $r_1$ and $r_2$.
-%		
-%		\item Set (equivalent to generating an \red{exponential RV} with parameter $a_0$.)
-%		\begin{align*}
-%		\tau=\frac{1}{a_0} \operatorname{ln}(1/r_1)
-%		\end{align*}
-%		
-%		
-%		\red{Caveat}:  $\expt{\tau \mid \mathbf{X}(t)=\mathbf{x}}=\LP a_0(\mathbf{x})\RP^{-1}$ \red{could be very small}.
-%		
-%		\item Find $j \in \{1,\dots, J\}$  such that
-%		\begin{align}
-%		a_0^{-1} \sum_{k=1}^{j-1} a_j <r_2 \leq a_0^{-1}\sum_{k=1}^{j} a_j
-%		\end{align}
-%		which is equivalent  to choosing from reactions $\{1,\dots,J \}$ with the $j^{th}$ reaction having probability mass function $ \LP a_j (\mathbf{x})/a_0(\mathbf{x})\RP_{j=1}^{J}$.
-%		
-%		\item Update: $t \leftarrow  t + \tau$  and $ \mathbf{x} \leftarrow  \mathbf{x}+\boldsymbol{\nu}_{j}$.
-%		\item Record $(t, \mathbf{x})$. Return to step $2$ if $t < T$, otherwise end the
-%		simulation.
-%		
-%	\end{enumerate}
-%\end{frame}
-%
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%\begin{frame}[plain,shrink=10]
-%	\frametitle{\centerline{The Explicit-TL Method }\\
-%		\centerline{\cite{gillespie_tau_leap,Aparicio_tau_leap}}}
-%	\vspace{0.2cm}
-%	We obtain the explicit-TL method (kind of forward Euler approximation): Given $ \mathbf{Z}^{\text{exp}} (t)=  \mathbf{z} \in \zset_+^d$,
-%	\begin{equation*}\label{approx}
-%	\mathbf{Z}^{exp} (t+\tau) =\mathbf{z}+\sum_{j=1}^{J} \mathcal{P}_{j} \LP \underbrace{a_{j}(\mathbf{z}) \tau}_{\lambda_j} \RP \boldsymbol{\nu}_{j} \COMMA
-%	\end{equation*}
-%	$\mathcal{P}_j (\lambda_j ) $ are independent Poisson random variables with rate $\lambda_j$.
-%	
-%	\red{Caveat}:  The explicit-TL is not adequate when dealing with \red{stiff problems} ( $\text{\color{red}  Numerical stability} \color{black} \Rightarrow \color{blue} \tau^{exp}_{threshold} \ll 1 \color{black} .$)
-%\end{frame}
-%
-%\begin{frame}[plain]
-%	
-%	\frametitle{\centerline{Split Step Implicit Tau-Leap (SSI-TL) Method I} \\
-%		\centerline{\cite{Chiheb_ML_implicit}}}
-%	\vspace{0.2cm}
-%	The  \red{\nameexp} scheme, where $\mathbf{z}=\mathbf{Z}^{exp} (t)$,  can be rewritten as follows:
-%	\begin{align}\label{explicit2}
-%	\mathbf{Z}^{exp} (t+\tau) &=\mathbf{z}+\sum_{j=1}^{J} \mathcal{P}_{j} \LP a_{j}(\mathbf{z}) \tau \RP \boldsymbol{\nu}_{j} \nonumber\\
-%	&=\mathbf{z}+\sum_{j=1}^{J} \LP \mathcal{P}_{j} \LP a_{j}(\mathbf{z}) \tau \RP - a_{j}(\mathbf{z}) \tau + a_{j}(\mathbf{z}) \tau \RP  \boldsymbol{\nu}_{j} \nonumber\\
-%	&=  \mathbf{z}+ \underbrace{ \sum_{j=1}^{J} a_{j}(\mathbf{z})  \tau  \boldsymbol{\nu}_{j}}_\text{\color{blue}drift} \color{black} + \underbrace{\sum_{j=1}^{J} \LP \mathcal{P}_{j} \LP a_{j}(\mathbf{z}) \tau \RP - a_{j}(\mathbf{z}) \tau \RP  \boldsymbol{\nu}_{j}}_\text{\color{red}zero-mean noise}\PERIOD
-%	\end{align}
-%	
-%	%Let us denote the second and third quantities in the right-hand side of (\ref{explicit2}) by the drift and the zero-mean noise, respectively.
-%\end{frame}
-%
-%
-%\begin{frame}[plain]
-%	\frametitle{\centerline{Split Step Implicit Tau-Leap (SSI-TL) Method II}}
-%	\vspace{0.2cm}
-%	The idea of \red{\name}  method is to take only the drift part as implicit while the noise part is left explicit. Let us define
-%	$\mathbf{z}=\mathbf{Z}^{imp} (t)$ and define 
-%	$\mathbf{Z}^{imp} (t+\tau)$ through the following  two steps:
-%	\begin{align}\label{partial_implicit}
-%	\mathbf{y} &= \mathbf{z}+\sum_{j=1}^{J}  a_{j} \LP \mathbf{y}\RP    \tau \boldsymbol{\nu}_{j}\text{ (\blue {Drift-Implicit step})}\\\nonumber
-%	\mathbf{Z}^{imp} (t+\tau) &=  \mathbf{y} + \sum_{j=1}^{J} \LP \mathcal{P}_{j}(a_{j}(\mathbf{y}) \tau)-  a_{j}(\mathbf{y})\tau\RP   \boldsymbol{\nu}_{j}\\
-%	\nonumber
-%	&=  \mathbf{z} + \sum_{j=1}^{J}  \mathcal{P}_{j}(a_{j}(\mathbf{y}) \tau)   \boldsymbol{\nu}_{j}\text{ (\red {Tau-leap step})}\end{align}
-%\end{frame}
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%
-%
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%\section{Multilevel Hybrid SSI-TL}
-%%\frame{\tableofcontents[currentsection]}
-%%\addtocounter{framenumber}{-1}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%
-%
-%
-%\begin{frame}[plain,shrink=10]
-%	
-%	\frametitle{\centerline{Multilevel Hybrid SSI-TL I} \\
-%		\centerline{\cite{Chiheb_ML_implicit}}}
-%	\vspace{0.2cm}
-%	Our multilevel hybrid SSI-TL  estimator is defined as:
-%	
-%	\begin{equation}\label{MLMCest_hybrid}
-%	\hat{Q}:= \hat{Q}_{\red \Lc}+\sum\limits_{\ell=\red{\Lc}+1}^{\blue{\Li}-1} \hat{Q}_{\ell}+ \hat{Q}_{\blue \Li} +\sum\limits_{\ell=\blue{\Li}+1}^{\green L} \hat{Q}_{\ell}\COMMA
-%	\end{equation}
-%	
-%	where 
-%	\begin{align}\label{estimators_hybrid}
-%	\begin{cases} 
-%	\hat{Q}_{\red \Lc}:= \frac{1}{N_{i,\red \Lc}} \sum\limits_{n=1}^{N_{i,\red \Lc}} g(\mathbf{Z}^{imp}_{\red \Lc,[n]}(T)) \\ 
-%	\hat{Q}_{\ell}:= \frac{1}{N_{ii,\ell}} \sum\limits_{n_{\ell}=1}^{N_{ii,\ell}}  \LP g(\mathbf{Z}^{imp}_{\ell,[n_{\ell}]}(T))-g(\mathbf{Z}^{imp}_{\ell-1,[n_{\ell}]}(T)) \RP, \: \:  \red{\Lc}+1 \leq \ell \leq  \blue{\Li}-1  \\
-%	\hat{Q}_{\blue{\Li}}:= \frac{1}{N_{ie,\blue{\Li}}} \sum\limits_{n=1}^{N_{ie,\blue \Li}}  \LP g(\mathbf{Z}^{exp}_{\blue \Li,[n]}(T))-g(\mathbf{Z}^{imp}_{\blue{\Li}-1,[n]}(T)) \RP \\
-%	\hat{Q}_{\ell}:= \frac{1}{N_{ee,\ell}} \sum\limits_{n_{\ell}=1}^{N_{ee,\ell}}  \LP g(\mathbf{Z}^{exp}_{\ell,[n_{\ell}]}(T))-g(\mathbf{Z}^{exp}_{\ell-1,[n_{\ell}]}(T)) \RP  , \: \:  \blue{\Li}+1 \leq \ell \leq  \green L  \PERIOD \\
-%	\end{cases}
-%	\end{align}
-%\end{frame}
-%
-%
-%\begin{frame}[plain,shrink=10]
-%	\frametitle{\centerline{ Coupling (Idea)}\\
-%		\centerline{\cite{Kurtz_coupling,Anderson2012} }}
-%	\begin{itemize}
-%		\item To couple two Poisson random variables, $\mathcal{P}_{1}(\lambda_{1} )$, $\mathcal{P}_{2}(\lambda_{2} )$, with rates $\lambda_{1}$ and $\lambda_{2}$, respectively, we define $ \color{blue} \lambda^{\star} \color{black}:=\operatorname{min} \{ \lambda_{1} ,\lambda_{2} \}$ and we consider the decomposition
-%		\begin{align*}
-%		\begin{cases} 
-%		\mathcal{P}_{1} (\lambda_{1}):= \color{blue} \mathcal{Q}(\lambda^{\star})+ \color{black} \mathcal{Q}_{1}(\lambda_{1}-\color{blue} \lambda^{\star} \color{black}) \\ 
-%		\mathcal{P}_{2} (\lambda_{2}):= \color{blue} \mathcal{Q}(\lambda^{\star}) \color{black}+ \mathcal{Q}_{2}(\lambda_{2}-\color{blue} \lambda^{\star} \color{black})
-%		\end{cases}
-%		\end{align*}
-%		where $\mathcal{Q}(\color{blue} \lambda^{\star} \color{black})$, $\mathcal{Q}_{1}(\lambda_{1}-\color{blue} \lambda^{\star} \color{black})$ and $\mathcal{Q}_{2}(\lambda_{2}-\color{blue} \lambda^{\star} \color{black})$ are three independent Poisson random variables.
-%		\item We have small variance between the coupled processes
-%		\begin{small}
-%			\begin{align*}
-%			\var{\mathcal{P}_{1} (\lambda_{1})-\mathcal{P}_{2} (\lambda_{2})} &=\var{ \Big[ \mathcal{Q}_{1}(\lambda_{1}-\color{blue} \lambda^{\star} \color{black})-\mathcal{Q}_{2}(\lambda_{2}-\color{blue} \lambda^{\star} \color{black})\Big]} \\
-%			&= \mid \lambda_{1} -\lambda_{2} \mid.
-%			\end{align*}
-%		\end{small}
-%	\end{itemize}
-%	\red{Observe}: If $\mathcal{P}_{1} (\lambda_{1})$ and $\mathcal{P}_{2} (\lambda_{2})$ are independent, then, we have a
-%	larger variance $\var{\mathcal{P}_{1} (\lambda_{1})- \mathcal{P}_{2} (\lambda_{2})}=\lambda_{1}+\lambda_{2}.$
-%\end{frame}
-%
-%
-%
-%\begin{frame}[plain,shrink=10]
-%	\frametitle{\centerline{Multilevel Hybrid SSI-TL II}}
-%	\vspace{2cm}
-%	
-%	\begin{equation}\label{MLMCest_hybrid}
-%	\hat{Q}:= \hat{Q}_{\red \Lc}+\sum\limits_{\ell=\red{\Lc}+1}^{\blue{\Li}-1} \hat{Q}_{\ell}+ \hat{Q}_{\blue \Li} +\sum\limits_{\ell=\blue{\Li}+1}^{\green L} \hat{Q}_{\ell}\COMMA
-%	\end{equation}
-%	
-%	\begin{enumerate}
-%		\item $\red \Lc$, the coarsest discretization level.
-%		\item $\blue \Li$, the interface level.
-%		\item $\green L$, the finest discretization level.
-%		\item $\mathbf{N} := \{N_{i,\red \Lc}, \{N_{ii,\ell}\}_{\ell=\red{\Lc}+1}^{\blue{\Li}-1},N_{ie,\blue{\Li}},\{ N_{ee,\ell}\}_{\ell=\blue{\Li}+1}^{\green L}\}$, the number of samples per level.
-%	\end{enumerate}
-%	
-%	
-%	
-%\end{frame}
+
 
 
 

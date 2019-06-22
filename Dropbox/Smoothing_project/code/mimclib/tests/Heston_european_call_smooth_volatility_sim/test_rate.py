@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
 
-# In this file, we plot the first and second differences for the  Heston single call integrand  without Richardson extrapolation 
 
+# In this file, we plot the first and second differences for the  Heston single call integrand  using sum of squared OU processes (n=1)
 
 #modules used
 

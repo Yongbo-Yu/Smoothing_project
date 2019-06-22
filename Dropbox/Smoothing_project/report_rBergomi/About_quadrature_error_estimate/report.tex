@@ -89,18 +89,23 @@
 
 \section{Problem setting}\label{sec:Problem setting}
 \input{problem_setting}
-
-%
-% 
-\section{Details of our hierarchical methods}\label{sec:Details our approach and error bounds}
+ 
+\section{Quantity of interest and error bounds}\label{sec:Quantity of interest and error bounds }
 \input{our_approach_details}
+
+\section{ASGQ error estimate}\label{sec:MISC error estimate}
+\input{MISC_error_estimate}
 
 \section{Numerical experiments of estimating quadrature error}\label{sec:Numerical tests}
 In this section, I show the obtained quadrature estimates for one of my examples for $N=2,4,8$ where $N$ is the number of time steps.  Looking at Figure \ref{fig:Quadrature and interpolation error estimation for 3 different cases of number of time steps}, I have some questions  that are not clear to me:
 \begin{itemize}
-\item I did not get why the quadrature error is kind of constant and then it decays so fast for very large number of collocation points. Is it normal to observe such behavior? Also, this behavior is less weird when taking $N=8$.
+\item $\mathbf{Q}_1$: I did not get why the quadrature error is kind of constant and then it decays so fast for very large number of collocation points. Is it normal to observe such behavior? Also, this behavior is less weird when taking $N=8$.
 
-\item  Why the interpolation error seems to be constant?
+ $\mathbf{A}_1$: This behavior as per Raul is not weird so It maybe that with few points we already rich an accuracy that remains constant ans as we have larger number of quadrature points we see this sharp decay, meaning the accuracy changes a lot for high number of quadrature points!
+
+\item  $\mathbf{Q}_2$: Why the interpolation error seems to be constant?
+
+ $\mathbf{A}_2$: This maybe due to the fact that the statistical error is already dominating the bias  as explained by \eqref{eq:CLT_interpol_errror}! so we do not see what really happens for the bias term
 
 \item Does it seem that using the interpolation error as a bound for the quadrature error is not that good?
 \end{itemize}
@@ -124,16 +129,11 @@ In this section, I show the obtained quadrature estimates for one of my examples
 		\caption{}
 		\label{fig:3}
 	\end{subfigure}
-	\caption{Quadrature and interpolation error estimation for 3 different cases of number of time steps: a) $N=2$, b) $N=4$,  c) $N=8$}
+	\caption{Quadrature (computed as the difference between the quadrature solution and a reference solution computed with very high number of quadrature points),   and interpolation error  (as explained in the first way of Section \ref{sec:MISC error estimate}) for $3$ different cases of number of time steps: a) $N=2$, b) $N=4$,  c) $N=8$}
 	\label{fig:Quadrature and interpolation error estimation for 3 different cases of number of time steps}
 \end{figure}
 \FloatBarrier
 
-\section{ASGQ error estimate}\label{sec:MISC error estimate}
-\input{MISC_error_estimate}
-
-% \section{Numerical experiments}\label{sec:Numerical tests}
-%\input{numerical_section}
 
 
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
