@@ -12,8 +12,8 @@ Bayer, C., Friz, P.~K., Gassiat, P., Martin, J., and Stemper, B. (2017).
 
 \bibitem[Bayer et~al., 2018]{bayer2018hierarchical}
 Bayer, C., Hammouda, C.~B., and Tempone, R. (2018).
-\newblock Hierarchical adaptive sparse grids for option pricing under the rough
-  bergomi model.
+\newblock Hierarchical adaptive sparse grids and quasi monte carlo for option
+  pricing under the rough bergomi model.
 \newblock {\em arXiv preprint arXiv:1812.08533}.
 
 \bibitem[Bennedsen et~al., 2016]{bennedsen2016decoupling}
@@ -26,6 +26,11 @@ Bennedsen, M., Lunde, A., and Pakkanen, M.~S. (2017).
 \newblock Hybrid scheme for {B}rownian semistationary processes.
 \newblock {\em Finance and Stochastics}, 21(4):931--965.
 
+\bibitem[Bungartz and Griebel, 2004]{bungartz2004sparse}
+Bungartz, H.-J. and Griebel, M. (2004).
+\newblock Sparse grids.
+\newblock {\em Acta numerica}, 13:147--269.
+
 \bibitem[Gatheral et~al., 2018]{gatheral2018volatility}
 Gatheral, J., Jaisson, T., and Rosenbaum, M. (2018).
 \newblock Volatility is rough.
@@ -36,12 +41,16 @@ Glasserman, P. (2004).
 \newblock {\em Monte {C}arlo methods in financial engineering}.
 \newblock Springer, New York.
 
+\bibitem[Haji-Ali et~al., 2016]{haji2016multi}
+Haji-Ali, A.-L., Nobile, F., Tamellini, L., and Tempone, R. (2016).
+\newblock Multi-index stochastic collocation for random pdes.
+\newblock {\em Computer Methods in Applied Mechanics and Engineering},
+  306:95--122.
+
 \bibitem[McCrickerd and Pakkanen, 2018]{mccrickerd2018turbocharging}
 McCrickerd, R. and Pakkanen, M.~S. (2018).
 \newblock Turbocharging {M}onte {C}arlo pricing for the rough {B}ergomi model.
 \newblock {\em Quantitative Finance}, pages 1--10.
-
-
 
 \bibitem[Neuenkirch and Shalaiko, 2016]{neuenkirch2016order}
 Neuenkirch, A. and Shalaiko, T. (2016).
@@ -63,6 +72,5 @@ Romano, M. and Touzi, N. (1997).
 Sloan, I.~H. (1985).
 \newblock Lattice methods for multiple integration.
 \newblock {\em Journal of Computational and Applied Mathematics}, 12:131--143.
-
 
 \end{thebibliography}

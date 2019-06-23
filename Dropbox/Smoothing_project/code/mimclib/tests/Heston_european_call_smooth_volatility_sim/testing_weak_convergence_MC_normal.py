@@ -19,13 +19,13 @@ class Problem(object):
     sigma=None    # volatility
     d=None
     dt=None
-    # #set 1 
-    # exact=6.332542 #  S_0=K=100, T=1, r=0,rho=-0.9, v_0=0.04, theta=0.0025, xi=0.1,\kapp=1    (n=1)
+    #set 1 
+    exact=6.332542 #  S_0=K=100, T=1, r=0,rho=-0.9, v_0=0.04, theta=0.0025, xi=0.1,\kapp=1    (n=1)
 
      #set 2
     #exact=6.773125 #  set1 S_0=K=100, T=1, r=0,rho=-0.9, v_0=0.04, theta=   0.0125, xi=0.1,\kapp=1  (n=5)
-      #set 3
-    exact=6.445535 #  S_0=K=100, T=1, r=0,rho=-0.9, v_0=0.04, theta=0.005, xi=0.1,\kapp=1    (n=2)
+    #   #set 3
+    # exact=6.445535 #  S_0=K=100, T=1, r=0,rho=-0.9, v_0=0.04, theta=0.005, xi=0.1,\kapp=1    (n=2)
     yknots_right=[]
     yknots_left=[]
 
@@ -49,7 +49,7 @@ class Problem(object):
         self.kappa= 1.0
         self.xi=0.1
         self.v0=0.04
-        self.theta=(2*(self.xi**2))/(4*self.kappa)
+        self.theta=(1*(self.xi**2))/(4*self.kappa)
 
 
         self.dt=self.T/float(Nsteps) # time steps length
@@ -148,7 +148,7 @@ class Problem(object):
         
         for n in range(1,Nsteps+1):
             X[n]=X[n-1]*(1+np.sqrt(V[n-1])*dW_s[n-1])
-            V[n]=V[n-1]- self.kappa *self.dt* max(V[n-1],0)+ self.xi *np.sqrt(max(V[n-1],0))*dW_v[n-1]*np.sqrt(self.dt)+ self.kappa*self.theta*self.dt
+            V[n]=V[n-1]- self.kappa *self.dt* max(V[n-1],0)+ self.xi *np.sqrt(max(V[n-1],0))*dW_v[n-1]+ self.kappa*self.theta*self.dt
             V[n]=max(V[n],0)
             
         return X[-1]
@@ -173,20 +173,20 @@ class Problem(object):
 
 def weak_convergence_differences():    
         start_time=time.time()
-        # #set1
-        # exact=6.332542 #  S_0=K=100, T=1, r=0,rho=-0.9, v_0=0.04, theta=0.0025, xi=0.1,\kapp=1
+        #set1
+        exact=6.332542 #  S_0=K=100, T=1, r=0,rho=-0.9, v_0=0.04, theta=0.0025, xi=0.1,\kapp=1
 
         #set2
         #exact=6.773125 #  set1 S_0=K=100, T=1, r=0,rho=-0.9, v_0=0.04, theta=   0.0125, xi=0.1,\kapp=1 
 
-        #set3
-        exact=6.445535 #  S_0=K=100, T=1, r=0,rho=-0.9, v_0=0.04, theta=0.005, xi=0.1,\kapp=1 
+        # #set3
+        # exact=6.445535 #  S_0=K=100, T=1, r=0,rho=-0.9, v_0=0.04, theta=0.005, xi=0.1,\kapp=1 
 
 
         marker=['>', 'v', '^', 'o', '*','+','-',':']
         
         # # feed parameters to the problem
-        Nsteps_arr=np.array([32])
+        Nsteps_arr=np.array([16])
         dt_arr=1.0/(Nsteps_arr)
     
         elapsed_time_qoi=np.zeros(1)
@@ -196,7 +196,7 @@ def weak_convergence_differences():
         Lb=np.zeros(1)
         num_cores = mp.cpu_count()
    
-        values=np.zeros((2*(10**7),1)) 
+        values=np.zeros((4*(10**8),1)) 
         for i in range(0,1):
             print i
             start_time=time.time()
@@ -214,7 +214,7 @@ def weak_convergence_differences():
             
             p =  pp.ProcessPool(num_cores)  # Processing Pool with four processors
             
-            values[:,i]= p.map(processInput, range(((2*(10**7))))  )    
+            values[:,i]= p.map(processInput, range(((4*(10**8))))  )    
 
             elapsed_time_qoi[i]=time.time()-start_time
           
@@ -224,7 +224,7 @@ def weak_convergence_differences():
         print elapsed_time_qoi
 
         error=np.abs(np.mean(values,axis=0) - 1) 
-        stand=np.std(values, axis = 0)/  float(np.sqrt(2*(10**7)))
+        stand=np.std(values, axis = 0)/  float(np.sqrt(4*(10**8)))
         Ub=np.abs(np.mean(values,axis=0) - 1)+1.96*stand
         Lb=np.abs(np.mean(values,axis=0) - 1)-1.96*stand
         print(error)   

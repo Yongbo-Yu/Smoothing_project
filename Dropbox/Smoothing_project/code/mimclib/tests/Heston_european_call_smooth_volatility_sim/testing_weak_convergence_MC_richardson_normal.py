@@ -157,7 +157,7 @@ class Problem(object):
         
         for n in range(1,Nsteps+1):
             X[n]=X[n-1]*(1+np.sqrt(V[n-1])*dW_s[n-1])
-            V[n]=np.abs(V[n-1])- self.kappa *dt* max(V[n-1],0)+ self.xi *np.sqrt(max(V[n-1],0))*dW_v[n-1]*np.sqrt(dt)+ self.kappa*self.theta*dt
+            V[n]=V[n-1]- self.kappa *dt* max(V[n-1],0)+ self.xi *np.sqrt(max(V[n-1],0))*dW_v[n-1]+ self.kappa*self.theta*dt
             V[n]=max(V[n],0)
             
         return X[-1]
@@ -187,7 +187,7 @@ def weak_convergence_differences():
         marker=['>', 'v', '^', 'o', '*','+','-',':']
         
         # # feed parameters to the problem
-        Nsteps_arr=np.array([4])
+        Nsteps_arr=np.array([1])
         dt_arr=1.0/(Nsteps_arr)
     
         elapsed_time_qoi=np.zeros(1)
@@ -197,7 +197,7 @@ def weak_convergence_differences():
         Lb=np.zeros(1)
         num_cores = mp.cpu_count()
    
-        values=np.zeros((1*(10**8),1)) 
+        values=np.zeros((1*(10**7),1)) 
         for i in range(0,1):
             print i
             start_time=time.time()
@@ -215,7 +215,7 @@ def weak_convergence_differences():
             
             p =  pp.ProcessPool(num_cores)  # Processing Pool with four processors
             
-            values[:,i]= p.map(processInput, range(((1*(10**8))))  )    
+            values[:,i]= p.map(processInput, range(((1*(10**7))))  )    
 
             elapsed_time_qoi[i]=time.time()-start_time
           
@@ -225,7 +225,7 @@ def weak_convergence_differences():
         print elapsed_time_qoi
 
         error=np.abs(np.mean(values,axis=0) - 1) 
-        stand=np.std(values, axis = 0)/  float(np.sqrt(1*(10**8)))
+        stand=np.std(values, axis = 0)/  float(np.sqrt(1*(10**7)))
         Ub=np.abs(np.mean(values,axis=0) - 1)+1.96*stand
         Lb=np.abs(np.mean(values,axis=0) - 1)-1.96*stand
         print(error)   

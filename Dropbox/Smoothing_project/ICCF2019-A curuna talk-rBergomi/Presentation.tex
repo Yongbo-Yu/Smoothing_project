@@ -358,7 +358,7 @@ v_t &= \blue{\xi_0}(t) \exp\left( \blue{\eta} \widetilde{W}_t^{\blue{H}} - \frac
 	\begin{align*}
 	\widetilde{W}_t^{\blue{H}} &= \int_0^t K^{\blue{H}}(t-s) dW_s^1, \quad t \ge 0, \\ 	K^{\blue{H}}(t-s) &= \sqrt{2\blue{H}} (t-s)^{\blue{H} - 1/2},\quad \forall \: 0 \le s \le t.
 	\end{align*}
-	\item $\blue{H} \in(0,1/2]$ ($H=1/2$ for Brownian motion): controls the \red{roughness} of paths, , $\blue{\rho} \in [-1,1]$  and  $\blue{\eta}>0$.
+	\item $\blue{H} \in(0,1/2]$ ($H=1/2$ for Brownian motion): controls the \red{roughness} of paths,  $\blue{\rho} \in [-1,1]$  and  $\blue{\eta}>0$.
 	\item $t \mapsto \blue{\xi}_0(t)$: forward variance curve, known at time $0$.
 \end{itemize}
 \end{frame}
@@ -395,17 +395,15 @@ context.
  
 		\item \blue{Issue $2$:} The payoff function \blue{$g$} is typically \red{not smooth} $\Rightarrow$ \red{low regularity}$\Rightarrow$  slow convergence of deterministic quadrature methods.
 	\end{itemize}
-{\fontencoding{U}\fontfamily{futs}\selectfont\char 66\relax} \red{Curse of dimensionality:} An integration error of order $\red{\varepsilon}$ requires $M$ function evaluations
-\begin{equation*}
-M \ge c_{\red{\varepsilon}} \blue{\bar{d}}^{-c \log \red{\varepsilon}}\COMMA
-\end{equation*}
-where $\blue{\bar{d}}$ depends on $\blue{d}$ and $\blue{N}$.
+{\fontencoding{U}\fontfamily{futs}\selectfont\char 66\relax} \red{Curse of dimensionality:} An exponential growth of the work (number of function evaluations) in terms of the
+dimension of the integration problem. 
+
 
 \end{frame}
 
 
 
-\begin{frame}[plain]\frametitle{\centerline{Methodology }}
+\begin{frame}[plain]\frametitle{\centerline{Methodology \cite{bayer2018hierarchical}}}
 
  We design a \red{hierarchical efficient pricing method} based on
 		\begin{enumerate}
@@ -415,15 +413,16 @@ where $\blue{\bar{d}}$ depends on $\blue{d}$ and $\blue{N}$.
 			\item \textbf{Adaptive sparse grids quadrature (ASGQ)}.
 			\item \textbf{Quasi Monte Carlo (QMC)}.
 			\end{itemize}			  
-			\item Coupling our methods with \red{hierarchical transformations} $\Rightarrow$ \red{Reduce the dimension} of the problem.
+			\item Coupling our methods with \red{hierarchical representations} $\Rightarrow$ \red{Reduce the dimension} of the problem.
 			\begin{itemize}
-			\item \textbf{Brownian bridges} as a path generation method.
-			\item \textbf{Richardson Extrapolation} $\Rightarrow$ Faster convergence of the weak error  $\Rightarrow $ $\searrow$ number of time steps (smaller dimension).
-			\end{itemize} 
+			\item \textbf{Brownian bridges} as a Wiener path generation method.
+			\item \textbf{Richardson Extrapolation} (\red{Condition: weak error of order $1$)} 
+		$\quad\Rightarrow$ Faster convergence of the weak error  $\Rightarrow $ $\searrow$ number of time steps (smaller dimension).
+		\end{itemize}
 		\end{enumerate} 
 	
 \end{frame}		
-
+	
 
 \begin{frame}[plain]\frametitle{\centerline{Simulation of the rough Bergomi dynamics}}
 \textbf{\blue{Goal:}} Simulate jointly $(W_t^1, \widetilde{W}^H_t: 0 \le t \le T)$, resulting in $W^1_{t_1},\dots, W_{t_N}$ and $\widetilde{W}^H_{t_1},\dots, \widetilde{W}^H_{t_N}$ along a given grid $t_1 <\dots < t_N$ 
@@ -432,12 +431,14 @@ where $\blue{\bar{d}}$ depends on $\blue{d}$ and $\blue{N}$.
 	\item  \textbf{Covariance based approach} \cite{bayer2016pricing}
 	\begin{itemize}
 	\item  Based on Cholesky decomposition of the covariance matrix  of the ($2N$)-dimensional Gaussian random vector  $W^1_{t_1},\dots, W^1_{t_N}, \widetilde{W}^H_{t_1},\dots, \widetilde{W}_{t_N}$.
-	\item  \red{Exact method  but slow}.
+	\item  \red{Exact method  but slow} 
+	\item At least \red{$\Ordo{N^2}$}.
 \end{itemize}	
 	\item  \textbf{The hybrid scheme} \cite{bennedsen2017hybrid} 
 	\begin{itemize}
 	\item Based on  \red{Euler discretization}  but crucially \red{improved by moment matching} for the singular term in the left point rule.
 	\item  \red{Accurate scheme that is much faster} than the  Covariance based approach.
+	\item \red{$\Ordo{N}$} up to logarithmic factors that depend on the desired error.
 \end{itemize}	
 	\end{enumerate}
 \end{frame}
@@ -446,7 +447,7 @@ where $\blue{\bar{d}}$ depends on $\blue{d}$ and $\blue{N}$.
 
 \begin{frame}[plain]\frametitle{\centerline{On the choice of the simulation scheme}}
 \begin{figure}[h!]
-\caption{The convergence of the weak error $\mathcal{E}_B$, using MC with $6 \times 10^6$ samples, for \red{Set $1$ parameter in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}}. The upper and lower bounds are $95\%$ confidence intervals. a) With \red{the hybrid scheme}  b) With \red{the exact scheme}.}
+\caption{The convergence of the weak error $\mathcal{E}_B$, using MC with $6 \times 10^6$ samples, for example parameters: \red{$H=0.07,\: K=1,S_0=1,\: T=1,\: \rho=-0.9,$} \red{$\eta=1.9,\: \xi_0=0.0552$}. The upper and lower bounds are $95\%$ confidence intervals. a) With \red{the hybrid scheme}  b) With \red{the exact scheme}.}
 	\centering
 	\begin{subfigure}{.52\textwidth}
 		\centering
@@ -496,7 +497,7 @@ where $\blue{\bar{d}}$ depends on $\blue{d}$ and $\blue{N}$.
 \frame[plain,noframenumbering]{\tableofcontents[currentsection,currentsubsection]}
 
 
-\begin{frame}[plain,shrink=5]\frametitle{\centerline{Analytic smoothing}}
+\begin{frame}[plain,shrink=5]\frametitle{\centerline{Conditional expectation for analytic smoothing}}
 \begin{small}
 \begin{align}\label{BS_formula_rbergomi}
 C_{RB}\left( T, K \right) &= E\left[ \left(S_T - K \right)^+ \right]  \nonumber\\
@@ -534,24 +535,27 @@ C_{RB}\left( T, K \right) &= E\left[ \left(S_T - K \right)^+ \right]  \nonumber\
 	\item \textbf{Quadrature based on product approaches} 
 	\begin{itemize}
 	\item $\red{\varepsilon(M)}=\Ordo{\red{M}^{-\blue{r}/\blue{d}}}$
-	 \item $(+)$ profits from regularity, faster than QMC if $\blue{r}>\blue{d}$, $(-)$ highly sensitive to $\blue{d}$.
+	 \item $(+)$ profits from regularity, $(-)$ highly sensitive to $\blue{d}$.
 	\end{itemize}
 	\item \red{\textbf{Sparse grids quadrature (SGQ)}}
 	\begin{itemize}
 	\item  $\red{\varepsilon(M)}=\Ordo{\red{M}^{-\blue{s}} \log(\red{M})^{(\blue{d}-1)(\blue{s}+1)}}$
-	\item 	 $(+)$ profits from regularity, faster than QMC if $\blue{s}>1$, less sensitive to $\blue{d}$.
+	\item 	 $(+)$ profits from regularity, less sensitive to $\blue{d}$.
 \end{itemize}	
 \end{itemize}	 
 	
 $\red{\varepsilon}$: prescribed accuracy,  $\red{M}$: the amount of
-work,  $\blue{d}$: dimension of problem, $\blue{r, s}$: smoothness indices (bounded mixed (total) derivatives up to order $\blue{s(r)}$).
+work,  $\blue{d}$: dimension of problem, $\blue{r, s}$: smoothness indices. 
+%(bounded mixed (total) derivatives up to order $\blue{s(r)}$).
+
+\red{{\fontencoding{U}\fontfamily{futs}\selectfont\char 66\relax}} In our context, $\blue{d=2N}$ where $\blue{N}$ is the number of time steps used for simulating the rough Bergomi dynamics.
 \end{frame}
 
 
 
 
 \begin{frame}[plain]	
-	\frametitle{\centerline{Sparse grids I}}
+	\frametitle{\centerline{Sparse grids I \cite{bungartz2004sparse} }}
 
 \textbf{\blue{Goal:}} Given  $F: \rset^d \rightarrow \rset$ and a multi-index $\boldsymbol{\beta} \in \mathbb{N}^d_{+}$, \red{approximate}
 \begin{displaymath} \expt{F} \approx Q^{m(\boldsymbol{\beta})}[F], \end{displaymath} 
@@ -578,7 +582,7 @@ where $e_i$ denotes the $i$th $d$-dimensional unit vector, and \red{mixed differ
 
 
 \begin{frame}[plain,shrink=4]	
-	\frametitle{\centerline{Sparse grids II}}
+	\frametitle{\centerline{Sparse grids II \cite{bungartz2004sparse}}}
 	\vspace{0.3cm}
  A quadrature estimate of $E[F]$ is
 \begin{small}
@@ -617,7 +621,7 @@ where $e_i$ denotes the $i$th $d$-dimensional unit vector, and \red{mixed differ
 		\begin{figure}
 		\centering
 		\includegraphics[scale=0.3]{./MISC_construction/1}
-		\caption{\red{A posteriori, adaptive construction}: Given an index set $\mathcal{I}_k$, compute the profits of the neighbor indices and select the most profitable one}
+		\caption{\red{A posteriori, adaptive construction} as in \cite{haji2016multi}: Given an index set $\mathcal{I}_k$, compute the profits of the neighbor indices and select the most profitable one}
 	\end{figure}
 		\end{itemize}
 		
@@ -638,7 +642,7 @@ where $e_i$ denotes the $i$th $d$-dimensional unit vector, and \red{mixed differ
 		\begin{figure}
 		\centering
 		\includegraphics[scale=0.3]{./MISC_construction/2}
-		\caption{\red{A posteriori, adaptive construction}: Given an index set $\mathcal{I}_k$, compute the profits of the neighbor indices and select the most profitable one.}
+		\caption{\red{A posteriori, adaptive construction} as in \cite{haji2016multi}: Given an index set $\mathcal{I}_k$, compute the profits of the neighbor indices and select the most profitable one.}
 	\end{figure}
 			\end{itemize}
 \end{frame}
@@ -654,11 +658,11 @@ where $e_i$ denotes the $i$th $d$-dimensional unit vector, and \red{mixed differ
  \item \textbf{Profit of a hierarchical surplus} \blue{$P_{\boldsymbol{\beta}}= \frac{\abs{\Delta E_{\boldsymbol{\beta}}}}{\Delta\mathcal{W}_{\boldsymbol{\beta}}}$}.
 \item \textbf{Error contribution}:  \blue{ $\Delta E_{\boldsymbol{\beta}} = \abs{\mathcal{M}^{\mathcal{I} \cup \{\boldsymbol{\beta}\}}-\mathcal{M}^{\mathcal{I}}}$}.
 %how much the error decreases if the operator $\Delta[F_{\boldsymbol{\beta}}]$ is added to \blue{$\mathcal{M}_{\mathcal{I}}[F]$
-		\item \textbf{Work contribution}:  \blue{$ 		\Delta \mathcal{W}_{\boldsymbol{\beta}} = \text{Work}[\mathcal{M}^{\mathcal{I} \cup \{\boldsymbol{\beta}\}}]-\text{Work}[\mathcal{M}^{\mathcal{I}}]$}.
+		\item \textbf{Work contribution}:  \blue{$\Delta \mathcal{W}_{\boldsymbol{\beta}} = \text{Work}[\mathcal{M}^{\mathcal{I} \cup \{\boldsymbol{\beta}\}}]-\text{Work}[\mathcal{M}^{\mathcal{I}}]$}.
 		\begin{figure}
 		\centering
 		\includegraphics[scale=0.3]{./MISC_construction/3}
-		\caption{\red{A posteriori, adaptive construction}: Given an index set $\mathcal{I}_k$, compute the profits of the neighbor indices and select the most profitable one.}
+		\caption{\red{A posteriori, adaptive construction} as in \cite{haji2016multi}: Given an index set $\mathcal{I}_k$, compute the profits of the neighbor indices and select the most profitable one.}
 	\end{figure}
 	\end{itemize}
 \end{frame}
@@ -677,7 +681,7 @@ where $e_i$ denotes the $i$th $d$-dimensional unit vector, and \red{mixed differ
 		\begin{figure}
 		\centering
 		\includegraphics[scale=0.3]{./MISC_construction/4}
-		\caption{\red{A posteriori, adaptive construction}: Given an index set $\mathcal{I}_k$, compute the profits of the neighbor indices and select the most profitable one.}
+		\caption{\red{A posteriori, adaptive construction} as in \cite{haji2016multi}: Given an index set $\mathcal{I}_k$, compute the profits of the neighbor indices and select the most profitable one.}
 	\end{figure}
 	\end{itemize}
 \end{frame}
@@ -697,7 +701,7 @@ where $e_i$ denotes the $i$th $d$-dimensional unit vector, and \red{mixed differ
 		\begin{figure}
 		\centering
 		\includegraphics[scale=0.3]{./MISC_construction/5}
-		\caption{\red{A posteriori, adaptive construction}: Given an index set $\mathcal{I}_k$, compute the profits of the neighbor indices and select the most profitable one.}
+		\caption{\red{A posteriori, adaptive construction} as in \cite{haji2016multi}: Given an index set $\mathcal{I}_k$, compute the profits of the neighbor indices and select the most profitable one.}
 	\end{figure}
 			
 	\end{itemize}
@@ -718,7 +722,7 @@ where $e_i$ denotes the $i$th $d$-dimensional unit vector, and \red{mixed differ
 		\begin{figure}
 		\centering
 		\includegraphics[scale=0.3]{./MISC_construction/6}
-		\caption{\red{A posteriori, adaptive construction}: Given an index set $\mathcal{I}_k$, compute the profits of the neighbor indices and select the most profitable one.}
+		\caption{\red{A posteriori, adaptive construction} as in \cite{haji2016multi}: Given an index set $\mathcal{I}_k$, compute the profits of the neighbor indices and select the most profitable one.}
 	\end{figure}
 
 	
@@ -740,7 +744,7 @@ where $e_i$ denotes the $i$th $d$-dimensional unit vector, and \red{mixed differ
 		\begin{figure}
 		\centering
 		\includegraphics[scale=0.3]{./MISC_construction/7}
-		\caption{ \red{A posteriori, adaptive construction}: Given an index set $\mathcal{I}_k$, compute the profits of the neighbor indices and select the most profitable one.}
+		\caption{ \red{A posteriori, adaptive construction} as in \cite{haji2016multi}: Given an index set $\mathcal{I}_k$, compute the profits of the neighbor indices and select the most profitable one.}
 	\end{figure}
 	\end{itemize}
 \end{frame}
@@ -772,7 +776,7 @@ where $\{\Delta^{(i)}\}_{i=1}^q$: independent random shifts, and $M^{\text{QMC}}
 
 
 
-\begin{frame}[plain,shrink=8]\frametitle{\centerline{Path generation methods} }  
+\begin{frame}[plain,shrink=8]\frametitle{\centerline{Wiener path generation methods} }  
 $\{t_i\}_{i=0}^{N}$: Grid of time steps, $\{B_{t_i}\}_{i=0}^{N}$: Brownian motion increments 
 		\begin{itemize}
 			\item \textbf{\red{Random Walk}}
@@ -786,9 +790,9 @@ $\{t_i\}_{i=0}^{N}$: Grid of time steps, $\{B_{t_i}\}_{i=0}^{N}$: Brownian motio
 			\item \textbf{\red{Hierarchical Brownian Bridge}} \cite{glasserman2004monte}
 			\begin{itemize}
 				\item Given a past value $B_{t_i}$ and a future value $B_{t_k}$, the value $B_{t_j}$ (with $t_i < t_j < t_k$) can be generated according to ($\rho=\frac{j-i}{k-i}$)
-				\begin{equation}\label{eq: Brownian Bridge construction}
+				\begin{equation*}\label{eq: Brownian Bridge construction}
 				B_{t_j}=(1-\rho) B_{t_i}+\rho B_{t_k}+ \sqrt{\rho (1-\rho)(k-i) \Delta t} z_j, \: z_j \sim \mathcal{N}(0,1) \PERIOD
-				\end{equation}
+				\end{equation*}
 					\item The most important values (determine the large scale structure of Brownian motion) are the first components of $\mathbf{z} = (z_1,\dots,z_N)$.
 					\item $\searrow$ the \red{effective dimension} ($\#$ important dimensions) and $\nearrow$  \red{anisotropy} between different directions $\Rightarrow$ \red{Faster} ASGQ and QMC convergence.
 			\end{itemize} 
@@ -836,7 +840,7 @@ where  $\mathcal{E}_Q$ is the quadrature error, $\green{\mathcal{E}_B}$  is the 
 		\textbf{Parameters}            & \textbf{Reference solution}    \\
 	\hline
 		
-		Set $1$:	$H=0.07, K=1,S_0=1, T=1, \rho=-0.9, \eta=1.9,\xi_0=0.235^2$   & $\underset{(5.6e-05)}{0.0791}$  \\	
+		Set $1$:	$H=0.07, K=1,S_0=1, T=1, \rho=-0.9, \eta=1.9,\xi_0=  0.0552$   & $\underset{(5.6e-05)}{0.0791}$  \\	
 		
 		Set $2$:	$H=0.02, K=1, S_0=1, T=1,\rho=-0.7, \eta=0.4,\xi_0=0.1$   & $\underset{(9.0e-05)}{0.1246}$  \\
 		Set $3$:	$H=0.02, K=0.8,S_0=1,T=1, \rho=-0.7, \eta=0.4,\xi_0=0.1$   & $\underset{(5.4e-05)}{0.2412}$  \\
@@ -847,7 +851,7 @@ where  $\mathcal{E}_Q$ is the quadrature error, $\green{\mathcal{E}_B}$  is the 
 \end{table}
 
 \begin{itemize}
-\item The first set is the  \red{closest to the empirical findings} \cite{gatheral2018volatility,bennedsen2016decoupling}, suggesting that $\blue{H} \approx 0.1$. The choice of values $\blue{\nu}= 1.9$ and $\blue{\rho}=-0.9$ is justified by \cite{bayer2016pricing}.
+\item Set $1$ is the  \red{closest to the empirical findings} \cite{gatheral2018volatility,bennedsen2016decoupling}, suggesting that $\blue{H} \approx 0.1$. The choice of values $\blue{\nu}= 1.9$ and $\blue{\rho}=-0.9$ is justified by \cite{bayer2016pricing}.
 
 \item  For the remaining three sets, we wanted to test the potential of our method for a \red{very rough case}, where variance reduction methods are inefficient.
 \end{itemize}
@@ -876,48 +880,49 @@ where  $\mathcal{E}_Q$ is the quadrature error, $\green{\mathcal{E}_B}$  is the 
 \end{table}
 \end{frame}
 
-\begin{frame}[plain]\frametitle{\centerline{Complexity of the MC method}
+\begin{frame}[plain]\frametitle{\centerline{Computational work of the MC method}
 \centerline{with different configurations }}
 \begin{figure}
 		\centering
 		\includegraphics[width=0.7\textwidth]{./rBergomi_Complexity_rates/set2/error_vs_time_set2_MC_comparison}
-	\caption{Numerical complexity of the MC  method with the different configurations in terms of  Richardson extrapolation 's level.  Case of \red{parameter set $1$ in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}}. }
+	\caption{Computational work of the MC  method with the different configurations in terms of  Richardson extrapolation 's level.  Case of \red{parameter set $1$ in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}}. }
 	\label{fig: Comparing the numerical complexity of the MC  method with the different configurations}
 \end{figure}
 \end{frame}
 
 
-\begin{frame}[plain]\frametitle{\centerline{Complexity of the QMC method}
+\begin{frame}[plain]\frametitle{\centerline{Computational work of the QMC method}
 \centerline{with different configurations }}
 \begin{figure}
 		\centering
 		\includegraphics[width=0.7\textwidth]{./rBergomi_Complexity_rates/set2/error_vs_time_set2_QMC_comparison}
-	\caption{Numerical complexity of the QMC  method with the different configurations in terms of  Richardson extrapolation 's level.  Case of \red{parameter set $1$ in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}}. }
+	\caption{Computational work of the QMC  method with the different configurations in terms of  Richardson extrapolation 's level.  Case of \red{parameter set $1$ in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}}. }
 	\label{fig: Comparing the numerical complexity of the QMC  method with the different configurations}
 \end{figure}
 \end{frame}
 
 
-\begin{frame}[plain]\frametitle{\centerline{Complexity of the ASGQ method}
+\begin{frame}[plain]\frametitle{\centerline{Computational work of the ASGQ method}
 \centerline{with different configurations }}
 \begin{figure}
 		\centering
 		\includegraphics[width=0.7\textwidth]{./rBergomi_Complexity_rates/set2/error_vs_time_set2_MISC_comparison}
-	\caption{Numerical complexity of the QMC  method with the different configurations in terms of  Richardson extrapolation 's level.  Case of \red{parameter set $1$ in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}}. }
+	\caption{Computational work of the ASGQ  method with the different configurations in terms of  Richardson extrapolation 's level.  Case of \red{parameter set $1$ in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}}. }
 	\label{fig: Comparing the numerical complexity of the ASGQ  method with the different configurations}
 \end{figure}
 \end{frame}
 
 
-
-\begin{frame}[plain]\frametitle{\centerline{Complexity of the different methods}\\
+\begin{frame}[plain]\frametitle{\centerline{Computational work of the different methods}
 \centerline{with their best configurations}}
-\begin{figure}[h!]
-	\centering
-	\includegraphics[width=0.6\linewidth]{./rBergomi_Complexity_rates/set2/error_vs_time_set2_full_comparison}
-	\caption{Computational work comparison for the different methods \red{with the best configurations concluded from Figures \ref{fig: Comparing the numerical complexity of the MC  method with the different configurations}, \ref{fig: Comparing the numerical complexity of the QMC  method with the different configurations} and \ref{fig: Comparing the numerical complexity of the ASGQ  method with the different configurations}}, for the case of \red{parameter set $1$ in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}}.}	\label{fig:Complexity plot for  MISC for Case set $2$ parameters, comparison}
+\begin{figure}
+		\centering
+		\includegraphics[width=0.72\linewidth]{./rBergomi_Complexity_rates/set2/error_vs_time_set2_full_comparison}
+	\caption{Computational work comparison of the different methods \red{with the best configurations}, for the case of \red{parameter set $1$ in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}}.}
+\label{fig:Complexity plot for  MISC for Case set $2$ parameters, comparison}
 \end{figure}
 \end{frame}
+
 
 
 
@@ -927,9 +932,15 @@ where  $\mathcal{E}_Q$ is the quadrature error, $\green{\mathcal{E}_B}$  is the 
 
 \begin{frame}[plain]\frametitle{\centerline{Conclusions}}
 \begin{itemize}
-\item Proposed novel, \red{fast option pricers, based on hierarchical deterministic quadrature methods}, for options whose underlyings follow \red{the rBergomi model}.
+\item Proposed  novel \red{fast option pricers}, for options whose underlyings follow \red{the rBergomi model}, based on
+
+\begin{itemize}
+\item  Conditional expectations for \red{numerical smoothing}. 
+\item  \red{hierarchical deterministic quadrature methods}.
+\end{itemize}
+
 \item Given a sufficiently small relative error tolerance, our proposed methods demonstrate \red{substantial computational gains over the standard MC method}, for different parameter constellations.
-\item Accelerating our novel methods can be achieved by using  more optimal hierarchical path generation method than Brownian bridge construction, such as PCA or LT transformations.
+\item Accelerating our novel methods can be achieved by using better QMC or ASGQ methods.
 \end{itemize}
 \end{frame}
 
