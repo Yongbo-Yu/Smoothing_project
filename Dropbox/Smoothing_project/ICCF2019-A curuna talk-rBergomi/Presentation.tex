@@ -7,6 +7,7 @@
 \usefonttheme{serif}
 
 
+
 %\usepackage{multibox,fancybox}
 \usepackage{epsfig}
 \usepackage{graphicx,color}
@@ -70,7 +71,7 @@
 \usetheme{Boadilla}
 
 
-
+\setbeamertemplate{caption}{\insertcaption}
 
 %\usefonttheme{Serif}
 
@@ -253,12 +254,12 @@
       \column{.3\linewidth}
       \centering
       Christian Bayer \\    \begin{figure}[!htb]
-							\includegraphics[scale=0.18]{WIAS}
+							\includegraphics[scale=0.2]{WIAS}
  							\end{figure}
       \column{.3\linewidth}
       \centering
      Ra\'ul Tempone	 \\ \begin{figure}[!htb]
-							\includegraphics[scale=0.16]{RWTH}
+							\includegraphics[scale=0.25]{rwth}
  							\end{figure}
     \end{columns}
  }
@@ -368,7 +369,7 @@ v_t &= \blue{\xi_0}(t) \exp\left( \blue{\eta} \widetilde{W}_t^{\blue{H}} - \frac
 	\begin{itemize}
 		\item The model is \red{non-affine} and \red{non-Markovian} $\Rightarrow$ Standard numerical methods (PDEs, characteristic functions) seem \red{inapplicable}.
 		\item The only prevalent pricing method for mere
-		\red{vanilla options} is \red{Monte Carlo (MC)} \cite{bayer2016pricing,bayer2017regularity,mccrickerd2018turbocharging}: still a \red{time consuming task}.
+		\red{vanilla options} is \red{Monte Carlo (MC)} \cite   {bayer2016pricing,mccrickerd2018turbocharging}: still a \red{time consuming task}.
 		
 \item 	Discretization methods have \red{poor behavior of the strong error}, that is the convergence rate is of order of $\blue{H} \in[0,1/2]$ \cite{neuenkirch2016order} $\Rightarrow$ Variance reduction methods, such as \red{multilevel Monte Carlo (MLMC)}, are inefficient for \red{very small values} of $\blue{H}$.
 	\end{itemize}
@@ -593,15 +594,16 @@ where $e_i$ denotes the $i$th $d$-dimensional unit vector, and \red{mixed differ
 \begin{itemize}
 \item \red{Product approach}: $\mathcal{I}_{\ell}=\{ \max\{\beta_1,\dots,\beta_d \} \le \ell;\: \boldsymbol{\beta} \in \mathbb{N}^d_{+} \} $
 \item \red{Regular SG}: $ \mathcal{I}_{\ell}=\{  \mid \boldsymbol{\beta} \mid_1 \le \ell+d-1; \: \boldsymbol{\beta} \in \mathbb{N}^d_{+} \} $
+ \begin{figure}
+      \begin{columns}
+        \column{.5\linewidth}
+        \includegraphics[scale=0.4]{sparse_grids}
+        \column{.4\linewidth}
+        \caption{Left are product grids $\Delta_{\beta_1} \otimes \Delta_{\beta_2}$ for $1 \le \beta_1, \beta_2 \le 3$. Right is the corresponding SG construction.}
+        \label{fig:example right}
+      \end{columns}
+    \end{figure}
 
-		\begin{figure}
-		\centering
-		\includegraphics[scale=0.3]{sparse_grids}
-%		\vspace{0.1cm}
-		\caption{Left are product grids $\Delta_{\beta_1} \otimes \Delta_{\beta_2}$ for $1 \le \beta_1, \beta_2 \le 3$. Right is the corresponding SG construction.}
-		\label{fig:vol_rough}
-	\end{figure}
-	\vspace{0.5cm}
 \item \red{ASGQ}: $\mathcal{I}_{\ell}=\blue{\mathcal{I}^{\text{ASGQ}}}$.
 \end{itemize}
 \end{frame}
@@ -618,11 +620,16 @@ where $e_i$ denotes the $i$th $d$-dimensional unit vector, and \red{mixed differ
 \item \textbf{Error contribution}:  \blue{ $\Delta E_{\boldsymbol{\beta}} = \abs{\mathcal{M}^{\mathcal{I} \cup \{\boldsymbol{\beta}\}}-\mathcal{M}^{\mathcal{I}}}$}.
 %how much the error decreases if the operator $\Delta[F_{\boldsymbol{\beta}}]$ is added to \blue{$\mathcal{M}_{\mathcal{I}}[F]$
 		\item \textbf{Work contribution}:  \blue{$ 		\Delta \mathcal{W}_{\boldsymbol{\beta}} = \text{Work}[\mathcal{M}^{\mathcal{I} \cup \{\boldsymbol{\beta}\}}]-\text{Work}[\mathcal{M}^{\mathcal{I}}]$}.	
-		\begin{figure}
-		\centering
-		\includegraphics[scale=0.3]{./MISC_construction/1}
-		\caption{\red{A posteriori, adaptive construction} as in \cite{haji2016multi}: Given an index set $\mathcal{I}_k$, compute the profits of the neighbor indices and select the most profitable one}
-	\end{figure}
+		 \begin{figure}
+      \begin{columns}
+        \column{.5\linewidth}
+        \includegraphics[scale=0.6]{./MISC_construction/1}
+        \column{.4\linewidth}
+        \caption{\red{A posteriori, adaptive construction} as in \cite{haji2016multi}: Given an index set $\mathcal{I}_k$, compute the profits of the neighbor indices and select the most profitable one}
+        \label{fig:example right}
+      \end{columns}
+    \end{figure}
+
 		\end{itemize}
 		
 \end{frame}
@@ -639,11 +646,15 @@ where $e_i$ denotes the $i$th $d$-dimensional unit vector, and \red{mixed differ
 \item \textbf{Error contribution}:  \blue{ $\Delta E_{\boldsymbol{\beta}} = \abs{\mathcal{M}^{\mathcal{I} \cup \{\boldsymbol{\beta}\}}-\mathcal{M}^{\mathcal{I}}}$}.
 %how much the error decreases if the operator $\Delta[F_{\boldsymbol{\beta}}]$ is added to \blue{$\mathcal{M}_{\mathcal{I}}[F]$
 		\item \textbf{Work contribution}:  \blue{$ 		\Delta \mathcal{W}_{\boldsymbol{\beta}} = \text{Work}[\mathcal{M}^{\mathcal{I} \cup \{\boldsymbol{\beta}\}}]-\text{Work}[\mathcal{M}^{\mathcal{I}}]$}.	
-		\begin{figure}
-		\centering
-		\includegraphics[scale=0.3]{./MISC_construction/2}
-		\caption{\red{A posteriori, adaptive construction} as in \cite{haji2016multi}: Given an index set $\mathcal{I}_k$, compute the profits of the neighbor indices and select the most profitable one.}
-	\end{figure}
+		 \begin{figure}
+      \begin{columns}
+        \column{.5\linewidth}
+        \includegraphics[scale=0.6]{./MISC_construction/2}
+        \column{.4\linewidth}
+        \caption{\red{A posteriori, adaptive construction} as in \cite{haji2016multi}: Given an index set $\mathcal{I}_k$, compute the profits of the neighbor indices and select the most profitable one}
+        \label{fig:example right}
+      \end{columns}
+    \end{figure}
 			\end{itemize}
 \end{frame}
 
@@ -659,11 +670,15 @@ where $e_i$ denotes the $i$th $d$-dimensional unit vector, and \red{mixed differ
 \item \textbf{Error contribution}:  \blue{ $\Delta E_{\boldsymbol{\beta}} = \abs{\mathcal{M}^{\mathcal{I} \cup \{\boldsymbol{\beta}\}}-\mathcal{M}^{\mathcal{I}}}$}.
 %how much the error decreases if the operator $\Delta[F_{\boldsymbol{\beta}}]$ is added to \blue{$\mathcal{M}_{\mathcal{I}}[F]$
 		\item \textbf{Work contribution}:  \blue{$\Delta \mathcal{W}_{\boldsymbol{\beta}} = \text{Work}[\mathcal{M}^{\mathcal{I} \cup \{\boldsymbol{\beta}\}}]-\text{Work}[\mathcal{M}^{\mathcal{I}}]$}.
-		\begin{figure}
-		\centering
-		\includegraphics[scale=0.3]{./MISC_construction/3}
-		\caption{\red{A posteriori, adaptive construction} as in \cite{haji2016multi}: Given an index set $\mathcal{I}_k$, compute the profits of the neighbor indices and select the most profitable one.}
-	\end{figure}
+			 \begin{figure}
+      \begin{columns}
+        \column{.5\linewidth}
+        \includegraphics[scale=0.6]{./MISC_construction/3}
+        \column{.4\linewidth}
+        \caption{\red{A posteriori, adaptive construction} as in \cite{haji2016multi}: Given an index set $\mathcal{I}_k$, compute the profits of the neighbor indices and select the most profitable one}
+        \label{fig:example right}
+      \end{columns}
+    \end{figure}
 	\end{itemize}
 \end{frame}
 \begin{frame}[plain,shrink=2,noframenumbering]	
@@ -678,11 +693,15 @@ where $e_i$ denotes the $i$th $d$-dimensional unit vector, and \red{mixed differ
 \item \textbf{Error contribution}:  \blue{ $\Delta E_{\boldsymbol{\beta}} = \abs{\mathcal{M}^{\mathcal{I} \cup \{\boldsymbol{\beta}\}}-\mathcal{M}^{\mathcal{I}}}$}.
 %how much the error decreases if the operator $\Delta[F_{\boldsymbol{\beta}}]$ is added to \blue{$\mathcal{M}_{\mathcal{I}}[F]$
 		\item \textbf{Work contribution}:  \blue{$ 		\Delta \mathcal{W}_{\boldsymbol{\beta}} = \text{Work}[\mathcal{M}^{\mathcal{I} \cup \{\boldsymbol{\beta}\}}]-\text{Work}[\mathcal{M}^{\mathcal{I}}]$}.
-		\begin{figure}
-		\centering
-		\includegraphics[scale=0.3]{./MISC_construction/4}
-		\caption{\red{A posteriori, adaptive construction} as in \cite{haji2016multi}: Given an index set $\mathcal{I}_k$, compute the profits of the neighbor indices and select the most profitable one.}
-	\end{figure}
+			 \begin{figure}
+      \begin{columns}
+        \column{.5\linewidth}
+        \includegraphics[scale=0.6]{./MISC_construction/4}
+        \column{.4\linewidth}
+        \caption{\red{A posteriori, adaptive construction} as in \cite{haji2016multi}: Given an index set $\mathcal{I}_k$, compute the profits of the neighbor indices and select the most profitable one}
+        \label{fig:example right}
+      \end{columns}
+    \end{figure}
 	\end{itemize}
 \end{frame}
 
@@ -698,11 +717,15 @@ where $e_i$ denotes the $i$th $d$-dimensional unit vector, and \red{mixed differ
 \item \textbf{Error contribution}:  \blue{ $\Delta E_{\boldsymbol{\beta}} = \abs{\mathcal{M}^{\mathcal{I} \cup \{\boldsymbol{\beta}\}}-\mathcal{M}^{\mathcal{I}}}$}.
 %how much the error decreases if the operator $\Delta[F_{\boldsymbol{\beta}}]$ is added to \blue{$\mathcal{M}_{\mathcal{I}}[F]$
 		\item \textbf{Work contribution}:  \blue{$ 		\Delta \mathcal{W}_{\boldsymbol{\beta}} = \text{Work}[\mathcal{M}^{\mathcal{I} \cup \{\boldsymbol{\beta}\}}]-\text{Work}[\mathcal{M}^{\mathcal{I}}]$}.
-		\begin{figure}
-		\centering
-		\includegraphics[scale=0.3]{./MISC_construction/5}
-		\caption{\red{A posteriori, adaptive construction} as in \cite{haji2016multi}: Given an index set $\mathcal{I}_k$, compute the profits of the neighbor indices and select the most profitable one.}
-	\end{figure}
+			 \begin{figure}
+      \begin{columns}
+        \column{.5\linewidth}
+        \includegraphics[scale=0.6]{./MISC_construction/5}
+        \column{.4\linewidth}
+        \caption{\red{A posteriori, adaptive construction} as in \cite{haji2016multi}: Given an index set $\mathcal{I}_k$, compute the profits of the neighbor indices and select the most profitable one}
+        \label{fig:example right}
+      \end{columns}
+    \end{figure}
 			
 	\end{itemize}
 \end{frame}
@@ -719,11 +742,15 @@ where $e_i$ denotes the $i$th $d$-dimensional unit vector, and \red{mixed differ
 \item \textbf{Error contribution}:  \blue{ $\Delta E_{\boldsymbol{\beta}} = \abs{\mathcal{M}^{\mathcal{I} \cup \{\boldsymbol{\beta}\}}-\mathcal{M}^{\mathcal{I}}}$}.
 %how much the error decreases if the operator $\Delta[F_{\boldsymbol{\beta}}]$ is added to \blue{$\mathcal{M}_{\mathcal{I}}[F]$
 		\item \textbf{Work contribution}:  \blue{$ 		\Delta \mathcal{W}_{\boldsymbol{\beta}} = \text{Work}[\mathcal{M}^{\mathcal{I} \cup \{\boldsymbol{\beta}\}}]-\text{Work}[\mathcal{M}^{\mathcal{I}}]$}.	
-		\begin{figure}
-		\centering
-		\includegraphics[scale=0.3]{./MISC_construction/6}
-		\caption{\red{A posteriori, adaptive construction} as in \cite{haji2016multi}: Given an index set $\mathcal{I}_k$, compute the profits of the neighbor indices and select the most profitable one.}
-	\end{figure}
+		 \begin{figure}
+      \begin{columns}
+        \column{.5\linewidth}
+        \includegraphics[scale=0.6]{./MISC_construction/6}
+        \column{.4\linewidth}
+        \caption{\red{A posteriori, adaptive construction} as in \cite{haji2016multi}: Given an index set $\mathcal{I}_k$, compute the profits of the neighbor indices and select the most profitable one}
+        \label{fig:example right}
+      \end{columns}
+    \end{figure}
 
 	
 	\end{itemize}
@@ -741,11 +768,15 @@ where $e_i$ denotes the $i$th $d$-dimensional unit vector, and \red{mixed differ
 \item \textbf{Error contribution}:  \blue{ $\Delta E_{\boldsymbol{\beta}} = \abs{\mathcal{M}^{\mathcal{I} \cup \{\boldsymbol{\beta}\}}-\mathcal{M}^{\mathcal{I}}}$}.
 %how much the error decreases if the operator $\Delta[F_{\boldsymbol{\beta}}]$ is added to \blue{$\mathcal{M}_{\mathcal{I}}[F]$
 		\item \textbf{Work contribution}:  \blue{$ 		\Delta \mathcal{W}_{\boldsymbol{\beta}} = \text{Work}[\mathcal{M}^{\mathcal{I} \cup \{\boldsymbol{\beta}\}}]-\text{Work}[\mathcal{M}^{\mathcal{I}}]$}.	
-		\begin{figure}
-		\centering
-		\includegraphics[scale=0.3]{./MISC_construction/7}
-		\caption{ \red{A posteriori, adaptive construction} as in \cite{haji2016multi}: Given an index set $\mathcal{I}_k$, compute the profits of the neighbor indices and select the most profitable one.}
-	\end{figure}
+			 \begin{figure}
+      \begin{columns}
+        \column{.5\linewidth}
+        \includegraphics[scale=0.6]{./MISC_construction/7}
+        \column{.4\linewidth}
+        \caption{\red{A posteriori, adaptive construction} as in \cite{haji2016multi}: Given an index set $\mathcal{I}_k$, compute the profits of the neighbor indices and select the most profitable one}
+        \label{fig:example right}
+      \end{columns}
+    \end{figure}
 	\end{itemize}
 \end{frame}
 
@@ -787,7 +818,7 @@ $\{t_i\}_{i=0}^{N}$: Grid of time steps, $\{B_{t_i}\}_{i=0}^{N}$: Brownian motio
 				\end{equation*}
 				\item All components of $\mathbf{z} = (z_1,\dots,z_N)$ have the same scale of importance: \red{isotropic}.
 			\end{itemize}
-			\item \textbf{\red{Hierarchical Brownian Bridge}} \cite{glasserman2004monte}
+			\item \textbf{\red{Hierarchical Brownian Bridge}} 
 			\begin{itemize}
 				\item Given a past value $B_{t_i}$ and a future value $B_{t_k}$, the value $B_{t_j}$ (with $t_i < t_j < t_k$) can be generated according to ($\rho=\frac{j-i}{k-i}$)
 				\begin{equation*}\label{eq: Brownian Bridge construction}
@@ -828,42 +859,41 @@ where  $\mathcal{E}_Q$ is the quadrature error, $\green{\mathcal{E}_B}$  is the 
 
 
 
-\begin{frame}[plain]\frametitle{\centerline{Numerical experiments}}
-\vspace{0.1cm}
+\begin{frame}[plain,shrink=8]\frametitle{\centerline{Numerical experiments}}
+\vspace{0.3cm}
 \begin{table}[!h]
-\begin{tiny}
+\begin{small}
 	\centering
-\caption{Reference solution (using MC with $500$ time steps and number of samples, $M=8 \times 10^6$) of call option price under the rough Bergomi model, for different parameter constellations.  The numbers between parentheses correspond to the statistical errors estimates.}
+\caption{Reference solution (\red{using MC with $500$ time steps and number of samples, $M=8 \times 10^6$}) of call option price under the rough Bergomi model, for different parameter constellations.  The numbers between parentheses correspond to the statistical errors estimates.}
 \label{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}
 	\begin{tabular}{l*{2}{c}r}
 	\toprule[1.5pt]
 		\textbf{Parameters}            & \textbf{Reference solution}    \\
 	\hline
 		
-		Set $1$:	$H=0.07, K=1,S_0=1, T=1, \rho=-0.9, \eta=1.9,\xi_0=  0.0552$   & $\underset{(5.6e-05)}{0.0791}$  \\	
+			$H=0.07, K=1,S_0=1, T=1, \rho=-0.9, \eta=1.9,\xi_0=  0.0552$   & $\underset{(5.6e-05)}{0.0791}$  \\	
 		
-		Set $2$:	$H=0.02, K=1, S_0=1, T=1,\rho=-0.7, \eta=0.4,\xi_0=0.1$   & $\underset{(9.0e-05)}{0.1246}$  \\
-		Set $3$:	$H=0.02, K=0.8,S_0=1,T=1, \rho=-0.7, \eta=0.4,\xi_0=0.1$   & $\underset{(5.4e-05)}{0.2412}$  \\
-		Set $4$:	$H=0.02, K=1.2,S_0=1,T=1, \rho=-0.7, \eta=0.4,\xi_0=0.1$   & $\underset{(8.0e-05)}{0.0570}$  \\
+		$H=0.02, K=1, S_0=1, T=1,\rho=-0.7, \eta=0.4,\xi_0=0.1$   & $\underset{(9.0e-05)}{0.1246}$  \\
+		$H=0.02, K=0.8,S_0=1,T=1, \rho=-0.7, \eta=0.4,\xi_0=0.1$   & $\underset{(5.4e-05)}{0.2412}$  \\
+		$H=0.02, K=1.2,S_0=1,T=1, \rho=-0.7, \eta=0.4,\xi_0=0.1$   & $\underset{(8.0e-05)}{0.0570}$  \\
 	\bottomrule[1.25pt]
 	\end{tabular}
-	\end{tiny}
+	\end{small}
 \end{table}
 
 \begin{itemize}
-\item Set $1$ is the  \red{closest to the empirical findings} \cite{gatheral2018volatility,bennedsen2016decoupling}, suggesting that $\blue{H} \approx 0.1$. The choice of values $\blue{\nu}= 1.9$ and $\blue{\rho}=-0.9$ is justified by \cite{bayer2016pricing}.
+\item Set $1$ is the  \red{closest to the empirical findings} \cite{gatheral2018volatility}, suggesting that $\blue{H} \approx 0.1$. The choice $\blue{\nu}= 1.9$ and $\blue{\rho}=-0.9$ is justified by \cite{bayer2016pricing}.
 
-\item  For the remaining three sets, we wanted to test the potential of our method for a \red{very rough case}, where variance reduction methods are inefficient.
+\item  For the remaining three sets, we test the potential of our method for a \red{very rough case}, where variance reduction methods are inefficient.
 \end{itemize}
 \end{frame}
 \begin{frame}[plain]\frametitle{\centerline{Relative errors and computational gains}}
 \begin{table}[!h]
-	\begin{tiny}
 	\centering
-	\caption{ In this table, we highlight the computational gains achieved by ASGQ and QMC over MC method to meet a certain error tolerance. We note that the ratios are computed \red{for the best configuration with Richardson extrapolation for each method}.}
+	\caption{ In this table, we highlight the computational gains achieved by ASGQ and QMC over MC method to meet a certain error tolerance. We note that the ratios are computed \red{for the best configuration with Richardson extrapolation for each method}. The ratios $\left(\text{MC}/ \text{ASGQ} \right)$ and $\left(\text{MC}/ \text{QMC} \right)$ are referred to  \red{CPU time ratios}.}
 		\begin{tabular}{l*{4}{c}r}
 			\toprule[1.5pt]
-			\textbf{Parameters}              &  \textbf{Relative error}  & \textbf{CPU time ratio $\left(\text{MC}/ \text{ASGQ} \right)$} & \textbf{CPU time ratio  $\left(\text{MC}/ \text{QMC} \right)$}\\
+			\textbf{Parameters}              &  \textbf{Relative error}  & \textbf{ $\left(\text{MC}/ \text{ASGQ} \right)$} & \textbf{$\left(\text{MC}/ \text{QMC} \right)$}\\
 			\hline
 			Set $1$  &  $1\%$&  $ 15$ &  $10$\\	
 			
@@ -876,7 +906,6 @@ where  $\mathcal{E}_Q$ is the quadrature error, $\green{\mathcal{E}_B}$  is the 
 			\bottomrule[1.25pt]
 		\end{tabular}
 	\label{table:Summary of our numerical results.}
-		\end{tiny}
 \end{table}
 \end{frame}
 
@@ -932,7 +961,7 @@ where  $\mathcal{E}_Q$ is the quadrature error, $\green{\mathcal{E}_B}$  is the 
 
 \begin{frame}[plain]\frametitle{\centerline{Conclusions}}
 \begin{itemize}
-\item Proposed  novel \red{fast option pricers}, for options whose underlyings follow \red{the rBergomi model}, based on
+\item Proposed  novel \red{fast option pricers}, for options whose underlyings follow \red{the rough Bergomi model}, based on
 
 \begin{itemize}
 \item  Conditional expectations for \red{numerical smoothing}. 
@@ -964,9 +993,11 @@ where  $\mathcal{E}_Q$ is the quadrature error, $\green{\mathcal{E}_B}$  is the 
 	\frametitle{References}
 %	\raggedright
 %	\nocite{*}
-\tiny \bibliographystyle{apalike}
+\small \bibliographystyle{apalike}
 	\bibliography{smoothing_rBergomi}
 \end{frame}
+
+
 
 
 

@@ -51,7 +51,7 @@ This way of estimating the quadrature error comes with the disadvantage of excit
 \abs{\expt{e_N}}&=\abs{\int \underbrace{F^N-I^{\mathcal{I}}[F^N](y)}_{Y(y)} dy}\nonumber\\
 &\approx \frac{C_\alpha}{\sqrt{M}} \sqrt{\text{Var(Y)}}\PERIOD
 \end{align}
-In our context of the rBergomi model we know that the strong error is of order $H$, that is we expect to have $\text{Var(Y)}=\Ordo{h^H}$ ($h$ is the mesh size and $H$ is the Hurst parameter which is of order $\approx 0.1$. As a consequence, it may be that using this way will not provide a sharp enough error estimate for the quadrature error!
+In our context of the rBergomi model we know that the strong error is of order $H$, that is we expect to have $\text{Var(Y)}=\Ordo{h^H}$ ($h$ is the mesh size and $H$ is the Hurst parameter which is of order $\approx 0.1$). As a consequence, it may be that using this way will not provide a sharp enough error estimate for the quadrature error!
 
 \subsection{Second way}
 To avoid exciting the strong error when estimating the quadrature error and just act on the weak error, we can use a second way that is inspired of randomized QMC. In fact, we suggest to use a randomized version of ASGQ where the randomization involves randomized rotation and scaling for quadrature rules since we deal with unbounded domains and Hermite quadrature rule. Although this comes with the advantage of just acting on the weak error, it has the issue of reducing anisotropy which is a main feature for a good performance of ASGQ.
@@ -61,3 +61,6 @@ We can formulate this more in case the first way fail!
 \subsection{Third way}
 One can learn the error curve as a way to reduce the extra burden that comes
 from estimating the ASGQ error but this not yet formulated yet. I will try to formulate it if the two previous options fail!
+
+\subsection{Fourth way (still need to be more formulated!)}
+As discussed with Raul, one potential way is to exploit the differentiability of the rBergomi system with respect to $H$ and then what we can do is compute the option prices and error estimates in the smooth region (basically corresponding to large values of $H$) and then extrapolate the option price as well the error estimates to the challenging region that we are interested in (which corresponds to the one with small values of $H$). 
