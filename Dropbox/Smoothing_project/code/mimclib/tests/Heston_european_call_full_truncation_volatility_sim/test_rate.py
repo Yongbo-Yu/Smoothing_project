@@ -27,12 +27,16 @@ class Problem(object):
     K=None         # Strike price
     T=1.0                      # maturity
     sigma=None    # volatility
-    N=4  # number of time steps which will be equal to the number of brownian bridge components (we set is a power of 2)
+    N=4 # number of time steps which will be equal to the number of brownian bridge components (we set is a power of 2)
     d=None
     dt=None
 
-    exact=6.332542 #  S_0=K=100, T=1, r=0,rho=-0.9, v_0=0.04, theta=0.0025, xi=0.1,\kapp=1  
-    #exact=7.5789 #  S_0=K=100, T=1, r=0,rho=-0.9, v_0=0.04, theta=0.04, xi=0.5,\kapp=5 (satisfies Feller condition)
+    #exact=6.332542 #  S_0=K=100, T=1, r=0,rho=-0.9, v_0=0.04, theta=0.0025, xi=0.1,\kapp=1   set2
+    #exact=6.445535 #  S_0=K=100, T=1, r=0,rho=-0.9, v_0=0.04, theta=0.005, xi=0.1,\kapp=1  set3
+    #exact=10.86117 #  S_0=K=100, T=1, r=0,rho=-0.3, v_0=0.09, theta=0.09, xi=1,\kapp=2.7778 set 4
+    exact=4.403384 #  S_0=K=100, T=1, r=0,rho=-0.9, v_0=0.04, theta=0.04, xi=1,\kapp=0.5 set 5
+  
+
     yknots_right=[]
     yknots_left=[]
 
@@ -61,13 +65,14 @@ class Problem(object):
         #set 2
         self.rho=-0.9
     
-        self.kappa= 1.0
+        self.kappa= 0.5
     
-        self.xi=0.1
+        self.xi=1.0
     
         self.v0=0.04
+        self.theta=0.04
 
-        self.theta=(self.xi**2)/(4*self.kappa)
+        #self.theta=(2*(self.xi**2))/(4*self.kappa)
         
        # self.K= coeff*self.S0   
         self.dt=self.T/float(self.N) # time steps length
@@ -526,8 +531,8 @@ def first_difference_rate_plotting():
         plt.xlabel('k',fontsize=14)
         plt.ylabel(r'$\mid \Delta E_{\mathbf{1}+k \bar{\beta}} \mid $',fontsize=14)  
      
-    plt.legend(loc='upper right')
-    plt.savefig('./results/first_difference_heston_4steps_hierarchical_2.eps', format='eps', dpi=1000)
+    plt.legend(loc='lower left',fontsize=10 )
+    plt.savefig('./results/first_difference_heston_4steps_hierarchical.eps', format='eps', dpi=1000)
 
 
 
@@ -661,7 +666,7 @@ def mixed_difference_order2_rate_plotting(d):
         plt.xlabel('k',fontsize=14)
         plt.ylabel(r'$\mid \Delta E_{\mathbf{1}+k \bar{\beta}} \mid $',fontsize=14)  
     plt.legend(loc='lower left')
-    plt.savefig('./results/mixed_difference_order2_heston_4steps_hierarchical_2.eps', format='eps', dpi=1000)       
+    plt.savefig('./results/mixed_difference_order2_heston_4steps_hierarchical.eps', format='eps', dpi=1000)       
     
     
 

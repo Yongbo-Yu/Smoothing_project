@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 
-
-
 # In this file, we plot the first and second differences for the  Heston single call integrand  using sum of squared OU processes (n=1)
 
 #modules used
@@ -32,6 +30,9 @@ class Problem(object):
     dt=None
 
     exact=6.332542 #  S_0=K=100, T=1, r=0,rho=-0.9, v_0=0.04, theta=0.0025, xi=0.1,\kapp=1 
+    #exact=10.86117 #  S_0=K=100, T=1, r=0,rho=-0.3, v_0=0.09, theta=0.09, xi=1,\kapp=2.7778; n=1 ;   set 4
+#
+
     yknots_right=[]
     yknots_left=[]
 
@@ -45,15 +46,15 @@ class Problem(object):
         self.S0=100
         self.K= coeff*self.S0        # Strike price and coeff determine if we have in/at/out the money option
         
-        self.rho=-0.9
+        self.rho=-0.3
 
         
-        self.kappa= 1.0
+        self.kappa= 2.7778
         
 
-        self.xi=0.1
+        self.xi=1.0
         #self.xi=0.5
-        self.v0=0.04
+        self.v0=0.09
 
 
 
@@ -520,7 +521,7 @@ def first_difference_rate_plotting():
         plt.ylabel(r'$\mid \Delta E_{\mathbf{1}+k \bar{\beta}} \mid $',fontsize=14)  
      
     plt.legend(loc='lower left')
-    plt.savefig('./results/first_difference_heston_4steps_spot_hierarchical_2.eps', format='eps', dpi=1000)
+    plt.savefig('./results/first_difference_heston_4steps_spot_hierarchical.eps', format='eps', dpi=1000)
 
 
 
@@ -654,7 +655,7 @@ def mixed_difference_order2_rate_plotting(d):
         plt.xlabel('k',fontsize=14)
         plt.ylabel(r'$\mid \Delta E_{\mathbf{1}+k \bar{\beta}} \mid $',fontsize=14)  
     plt.legend(loc='lower left')
-    plt.savefig('./results/mixed_difference_order2_heston_4steps_hierarchical_2.eps', format='eps', dpi=1000)       
+    plt.savefig('./results/mixed_difference_order2_heston_4steps_hierarchical.eps', format='eps', dpi=1000)       
     
     
 
