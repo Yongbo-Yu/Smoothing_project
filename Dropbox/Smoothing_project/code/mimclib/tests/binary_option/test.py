@@ -12,8 +12,8 @@ def binary_call_payoff(K, S_T):
 
 # parameters
 S = 100.0 # asset price
-v = 0.4 # vol of 40%
-r = 0.00 # rate of 1%
+v = 0.2 # vol of 40%
+r = 0.05 # rate of 1%
 maturity = 1.0
 K = 100.0 # ATM strike
 simulations = 50000
@@ -35,6 +35,6 @@ print 'Price: %.8f' % option_price
 #Where N is the cumulative normal distribution function, and d2 is given by the standard Black Scholes formula.
 from scipy.stats import norm
 from math import exp, log, sqrt
-S, K, v, r, T = 100.0, 100.0, 0.4, 0.00, 1.0
+S, K, v, r, T = 100.0, 100.0, 0.2, 0.05, 1.0
 d2 = (log(S/K) + (r - 0.5 * v**2) * T) / v*sqrt(T)
 print exp(-r * T) * norm.cdf(d2)

@@ -29,8 +29,8 @@ class Problem(object):
     d=None
     dt=None
 
-    exact=6.332542 #  S_0=K=100, T=1, r=0,rho=-0.9, v_0=0.04, theta=0.0025, xi=0.1,\kapp=1 
-    #exact=10.86117 #  S_0=K=100, T=1, r=0,rho=-0.3, v_0=0.09, theta=0.09, xi=1,\kapp=2.7778; n=1 ;   set 4
+    #exact=6.332542 #  S_0=K=100, T=1, r=0,rho=-0.9, v_0=0.04, theta=0.0025, xi=0.1,\kapp=1 
+    exact=10.86117 #  S_0=K=100, T=1, r=0,rho=-0.3, v_0=0.09, theta=0.09, xi=1,\kapp=2.7778; n=1 ;   set 4
 #
 
     yknots_right=[]
@@ -55,10 +55,11 @@ class Problem(object):
         self.xi=1.0
         #self.xi=0.5
         self.v0=0.09
+        self.theta=0.09
 
 
 
-        self.theta=(self.xi**2)/(4*self.kappa)
+        #self.theta=(self.xi**2)/(4*self.kappa)
         
         # paramters for the bessel process
         self.beta=self.xi/float(2)

@@ -113,7 +113,7 @@
     </bcf:option>
     <bcf:option type="singlevalued">
       <bcf:key>singletitle</bcf:key>
-      <bcf:value>1</bcf:value>
+      <bcf:value>0</bcf:value>
     </bcf:option>
     <bcf:option type="singlevalued">
       <bcf:key>sortalphaothers</bcf:key>
@@ -133,7 +133,7 @@
     </bcf:option>
     <bcf:option type="singlevalued">
       <bcf:key>uniquename</bcf:key>
-      <bcf:value>1</bcf:value>
+      <bcf:value>0</bcf:value>
     </bcf:option>
     <bcf:option type="singlevalued">
       <bcf:key>uniqueprimaryauthor</bcf:key>
@@ -145,7 +145,7 @@
     </bcf:option>
     <bcf:option type="singlevalued">
       <bcf:key>useprefix</bcf:key>
-      <bcf:value>1</bcf:value>
+      <bcf:value>0</bcf:value>
     </bcf:option>
     <bcf:option type="singlevalued">
       <bcf:key>useafterword</bcf:key>
@@ -258,6 +258,7 @@
     <bcf:option datatype="string">citereset</bcf:option>
     <bcf:option datatype="string">backrefstyle</bcf:option>
     <bcf:option datatype="string">arxiv</bcf:option>
+    <bcf:option datatype="string">citepages</bcf:option>
     <bcf:option datatype="boolean">useafterword</bcf:option>
     <bcf:option datatype="boolean">useannotator</bcf:option>
     <bcf:option datatype="boolean">useauthor</bcf:option>
@@ -325,15 +326,6 @@
     <bcf:option datatype="boolean">eprint</bcf:option>
     <bcf:option datatype="boolean">related</bcf:option>
     <bcf:option datatype="boolean">dashed</bcf:option>
-    <bcf:option datatype="boolean">annotation</bcf:option>
-    <bcf:option datatype="boolean">noremoteinfo</bcf:option>
-    <bcf:option datatype="boolean">showmedium</bcf:option>
-    <bcf:option datatype="boolean">guessmedium</bcf:option>
-    <bcf:option datatype="boolean">firstlonghand</bcf:option>
-    <bcf:option datatype="boolean">nofullfootnote</bcf:option>
-    <bcf:option datatype="boolean">mancitepar</bcf:option>
-    <bcf:option datatype="boolean">footnoterulestrict</bcf:option>
-    <bcf:option datatype="boolean">mladraft</bcf:option>
     <bcf:option datatype="integer">mincrossrefs</bcf:option>
     <bcf:option datatype="integer">minxrefs</bcf:option>
     <bcf:option datatype="integer">maxnames</bcf:option>
@@ -435,10 +427,6 @@
     <bcf:option datatype="boolean">skipbiblist</bcf:option>
     <bcf:option datatype="boolean">skiplab</bcf:option>
     <bcf:option datatype="boolean">dataonly</bcf:option>
-    <bcf:option datatype="boolean">totalnames</bcf:option>
-    <bcf:option datatype="boolean">uniquetranslator</bcf:option>
-    <bcf:option datatype="boolean">noremoteinfo</bcf:option>
-    <bcf:option datatype="boolean">nodate</bcf:option>
     <bcf:option datatype="integer">maxnames</bcf:option>
     <bcf:option datatype="integer">minnames</bcf:option>
     <bcf:option datatype="integer">maxbibnames</bcf:option>
@@ -2106,6 +2094,7 @@
   <!-- CITATION DATA -->
   <!-- SECTION 0 -->
   <bcf:bibdata section="0">
+    <bcf:datasource type="file" datatype="bibtex">smoothing_rBergomi.bib</bcf:datasource>
   </bcf:bibdata>
   <bcf:section number="0">
     <bcf:citekey order="1">gatheral2018volatility</bcf:citekey>
@@ -2117,8 +2106,8 @@
     <bcf:citekey order="6">bayer2018hierarchical</bcf:citekey>
     <bcf:citekey order="7">bayer2016pricing</bcf:citekey>
     <bcf:citekey order="8">bennedsen2017hybrid</bcf:citekey>
-    <bcf:citekey order="9">bungartz2004sparse</bcf:citekey>
-    <bcf:citekey order="10">bungartz2004sparse</bcf:citekey>
+    <bcf:citekey order="9">haji2016multi</bcf:citekey>
+    <bcf:citekey order="10">haji2016multi</bcf:citekey>
     <bcf:citekey order="11">haji2016multi</bcf:citekey>
     <bcf:citekey order="12">haji2016multi</bcf:citekey>
     <bcf:citekey order="13">haji2016multi</bcf:citekey>
@@ -2129,14 +2118,10 @@
     <bcf:citekey order="18">haji2016multi</bcf:citekey>
     <bcf:citekey order="19">haji2016multi</bcf:citekey>
     <bcf:citekey order="20">haji2016multi</bcf:citekey>
-    <bcf:citekey order="21">haji2016multi</bcf:citekey>
-    <bcf:citekey order="22">haji2016multi</bcf:citekey>
-    <bcf:citekey order="23">haji2016multi</bcf:citekey>
-    <bcf:citekey order="24">haji2016multi</bcf:citekey>
-    <bcf:citekey order="25">sloan1985lattice</bcf:citekey>
-    <bcf:citekey order="25">nuyens2014construction</bcf:citekey>
-    <bcf:citekey order="26">gatheral2018volatility</bcf:citekey>
-    <bcf:citekey order="27">bayer2016pricing</bcf:citekey>
-    <bcf:citekey order="0">*</bcf:citekey>
+    <bcf:citekey order="21">sloan1985lattice</bcf:citekey>
+    <bcf:citekey order="21">nuyens2014construction</bcf:citekey>
+    <bcf:citekey order="22">talay1990expansion</bcf:citekey>
+    <bcf:citekey order="23">gatheral2018volatility</bcf:citekey>
+    <bcf:citekey order="24">bayer2016pricing</bcf:citekey>
   </bcf:section>
 </bcf:controlfile>

@@ -25,7 +25,8 @@ class Problem(object):
     d=None
     dt=None
 
-    exact=6.332542 #  S_0=K=100, T=1, r=0,rho=-0.9, v_0=0.04, theta=0.0025, xi=0.1,\kapp=1   (n=1)
+    # exact=6.332542 #  S_0=K=100, T=1, r=0,rho=-0.9, v_0=0.04, theta=0.0025, xi=0.1,\kapp=1   (n=1)
+    exact=6.445535 #  S_0=K=100, T=1, r=0,rho=-0.9, v_0=0.04, theta=0.005, xi=0.1,\kapp=1
     yknots_right=[]
     yknots_left=[]
 
@@ -42,7 +43,7 @@ class Problem(object):
         self.kappa= 1.0
         self.xi=0.1
         self.v0=0.04
-        self.theta=(1*(self.xi**2))/(4*self.kappa)
+        self.theta=(2*(self.xi**2))/(4*self.kappa)
         
        # self.K= coeff*self.S0   
         self.dt=self.T/float(Nsteps) # time steps length
@@ -72,6 +73,9 @@ class Problem(object):
 
        
         self.yknots_left=self.yknots_right
+
+        self.exp_kappa=np.exp(-self.kappa*self.dt)
+        self.exp_2_kappa=np.exp(-2*self.kappa*self.dt)
         
 
 
@@ -157,18 +161,25 @@ class Problem(object):
 
     # This function simulates a 1D heston trajectory for stock price and volatility paths
     def stock_price_trajectory_1D_heston(self,y1,y,yv1,yv,Nsteps):
-        bb=self.brownian_increments(y1,y,Nsteps)
-        dW= [bb[0,i+1]-bb[0,i] for i in range(0,Nsteps)] 
-    
-        #  hierarhcical
-        bb_v=self.brownian_increments(yv1,yv,Nsteps)
-        dW_v= [bb_v[0,i+1]-bb_v[0,i] for i in range(0,Nsteps)] 
+        # bb=self.brownian_increments(y1,y,Nsteps)
+        # dW= [bb[0,i+1]-bb[0,i] for i in range(0,Nsteps)] 
 
-        # # # non hierarhcical
-        # dW_v=[]
-        # dW_v.append(yv1)
-        # dW_v[1:]=[np.array(yv[i]) for i in range(0,len(yv))]
-        # dW_v=np.array(dW_v)
+          # # non hierarhcical
+        dW=[]
+        dW.append(y1)
+        dW[1:]=[np.array(y[i]) for i in range(0,len(y))]
+        dW=np.array(dW)*np.sqrt(self.dt)
+        
+    
+        # #  hierarhcical
+        # bb_v=self.brownian_increments(yv1,yv,Nsteps)
+        # dW_v= [bb_v[0,i+1]-bb_v[0,i] for i in range(0,Nsteps)] 
+
+        # # non hierarhcical
+        dW_v=[]
+        dW_v.append(yv1)
+        dW_v[1:]=[np.array(yv[i]) for i in range(0,len(yv))]
+        dW_v=np.array(dW_v)*np.sqrt(self.dt)
         
 
         
@@ -196,9 +207,8 @@ class Problem(object):
         
         for n in range(1,Nsteps+1):
             X[n]=X[n-1]*(1+np.sqrt(V[n-1])*dW_s[n-1])
-            Gamma_sqaure[n-1]=(1/self.dt)*np.log2(1+ (0.5 * (self.xi**2)*(1/self.kappa)* V[n-1]*(1-np.exp(-2*self.kappa*self.dt)))/ (np.exp(-self.kappa*self.dt)*V[n-1]+self.theta*(1-np.exp(-self.kappa*self.dt)))**2)
-
-            V[n]=(np.exp(-self.kappa*self.dt)*V[n-1] +self.theta*(1-np.exp(-self.kappa*self.dt)))*np.exp(-0.5*Gamma_sqaure[n-1]*self.dt+np.sqrt(Gamma_sqaure[n-1])*dW_v[n-1] )
+            Gamma_sqaure[n-1]=(1/self.dt)*np.log2(1+ (0.5 * (self.xi**2)*(1/self.kappa)* V[n-1]*(1-self.exp_2_kappa))/ (self.exp_kappa*V[n-1]+self.theta*(1-self.exp_kappa)**2))
+            V[n]=(self.exp_kappa*V[n-1] +self.theta*(1-self.exp_kappa))*np.exp(-0.5*Gamma_sqaure[n-1]*self.dt+np.sqrt(Gamma_sqaure[n-1])*dW_v[n-1] )
             
         return X[-1],dbb_s,V,y1s
        
@@ -299,7 +309,8 @@ class Problem(object):
  
 def weak_convergence_differences():    
         start_time=time.time()
-        exact=6.332542 #  S_0=K=100, T=1, r=0,rho=-0.9, v_0=0.04, theta=0.0025, xi=0.1,\kapp=1   (n=1)
+        #exact=6.332542 #  S_0=K=100, T=1, r=0,rho=-0.9, v_0=0.04, theta=0.0025, xi=0.1,\kapp=1   (n=1)
+        exact=6.445535 #  S_0=K=100, T=1, r=0,rho=-0.9, v_0=0.04, theta=0.005, xi=0.1,\kapp=1
         marker=['>', 'v', '^', 'o', '*','+','-',':']
         ax = figure().gca()
         ax.xaxis.set_major_locator(MaxNLocator(integer=True))
@@ -313,7 +324,7 @@ def weak_convergence_differences():
         Ub=np.zeros(1)
         Lb=np.zeros(1)
     
-        values=np.zeros((2*(10**6),1)) 
+        values=np.zeros((1*(10**7),1)) 
          
       
         
@@ -337,7 +348,7 @@ def weak_convergence_differences():
             
             p =  pp.ProcessPool(num_cores)  # Processing Pool with four processors
             
-            values[:,i]= p.map(processInput, range(((2*(10**6))))  )
+            values[:,i]= p.map(processInput, range(((1*(10**7))))  )
 
             elapsed_time_qoi[i]=time.time()-start_time
             print np.mean(values[:,i]*float(exact))
@@ -350,7 +361,7 @@ def weak_convergence_differences():
         print elapsed_time_qoi
  
         error=np.abs(np.mean(values,axis=0) - 1) 
-        stand=np.std(values, axis = 0)/  float(np.sqrt(2*(10**6)))
+        stand=np.std(values, axis = 0)/  float(np.sqrt(1*(10**7)))
         Ub=np.abs(np.mean(values,axis=0) - 1)+1.96*stand
         Lb=np.abs(np.mean(values,axis=0) - 1)-1.96*stand
         print(error)  
@@ -364,4 +375,9 @@ def weak_convergence_differences():
         
  
  
-weak_convergence_differences()   
+weak_convergence_differences()         
+
+
+
+
+

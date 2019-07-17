@@ -1,60 +1,420 @@
-\begin{thebibliography}{}
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 2.7 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated as
+% required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
 
-\bibitem[Bayer et~al., 2016]{bayer2016pricing}
-Bayer, C., Friz, P., and Gatheral, J. (2016).
-\newblock Pricing under rough volatility.
-\newblock {\em Quantitative Finance}, 16(6):887--904.
+\sortlist[entry]{nty/global/}
+  \entry{bayer2016pricing}{article}{}
+    \name{author}{3}{}{%
+      {{hash=BC}{%
+         family={Bayer},
+         family_i={B\bibinitperiod},
+         given={Christian},
+         given_i={C\bibinitperiod},
+      }}%
+      {{hash=FP}{%
+         family={Friz},
+         family_i={F\bibinitperiod},
+         given={Peter},
+         given_i={P\bibinitperiod},
+      }}%
+      {{hash=GJ}{%
+         family={Gatheral},
+         family_i={G\bibinitperiod},
+         given={Jim},
+         given_i={J\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Taylor \& Francis}%
+    }
+    \strng{namehash}{BCFPGJ1}
+    \strng{fullhash}{BCFPGJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2016}
+    \field{sortinit}{B}
+    \field{sortinithash}{B}
+    \field{number}{6}
+    \field{pages}{887\bibrangedash 904}
+    \field{title}{Pricing under rough volatility}
+    \field{volume}{16}
+    \field{journaltitle}{Quantitative Finance}
+    \field{year}{2016}
+  \endentry
 
-\bibitem[Bayer et~al., 2018]{bayer2018hierarchical}
-Bayer, C., Hammouda, C.~B., and Tempone, R. (2018).
-\newblock Hierarchical adaptive sparse grids and quasi monte carlo for option
-  pricing under the rough bergomi model.
-\newblock {\em arXiv preprint arXiv:1812.08533}.
+  \entry{bayer2018hierarchical}{article}{}
+    \name{author}{3}{}{%
+      {{hash=BC}{%
+         family={Bayer},
+         family_i={B\bibinitperiod},
+         given={Christian},
+         given_i={C\bibinitperiod},
+      }}%
+      {{hash=HCB}{%
+         family={Hammouda},
+         family_i={H\bibinitperiod},
+         given={Chiheb\bibnamedelima Ben},
+         given_i={C\bibinitperiod\bibinitdelim B\bibinitperiod},
+      }}%
+      {{hash=TR}{%
+         family={Tempone},
+         family_i={T\bibinitperiod},
+         given={Raul},
+         given_i={R\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{BCHCBTR1}
+    \strng{fullhash}{BCHCBTR1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2018}
+    \field{sortinit}{B}
+    \field{sortinithash}{B}
+    \field{title}{Hierarchical adaptive sparse grids and quasi Monte Carlo for
+  option pricing under the rough Bergomi model}
+    \field{journaltitle}{arXiv preprint arXiv:1812.08533}
+    \field{year}{2018}
+  \endentry
 
-\bibitem[Bennedsen et~al., 2017]{bennedsen2017hybrid}
-Bennedsen, M., Lunde, A., and Pakkanen, M.~S. (2017).
-\newblock Hybrid scheme for {B}rownian semistationary processes.
-\newblock {\em Finance and Stochastics}, 21(4):931--965.
+  \entry{bennedsen2017hybrid}{article}{}
+    \name{author}{3}{}{%
+      {{hash=BM}{%
+         family={Bennedsen},
+         family_i={B\bibinitperiod},
+         given={Mikkel},
+         given_i={M\bibinitperiod},
+      }}%
+      {{hash=LA}{%
+         family={Lunde},
+         family_i={L\bibinitperiod},
+         given={Asger},
+         given_i={A\bibinitperiod},
+      }}%
+      {{hash=PMS}{%
+         family={Pakkanen},
+         family_i={P\bibinitperiod},
+         given={Mikko\bibnamedelima S},
+         given_i={M\bibinitperiod\bibinitdelim S\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{BMLAPMS1}
+    \strng{fullhash}{BMLAPMS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2017}
+    \field{sortinit}{B}
+    \field{sortinithash}{B}
+    \field{number}{4}
+    \field{pages}{931\bibrangedash 965}
+    \field{title}{Hybrid scheme for {B}rownian semistationary processes}
+    \field{volume}{21}
+    \field{journaltitle}{Finance and Stochastics}
+    \field{year}{2017}
+  \endentry
 
-\bibitem[Bungartz and Griebel, 2004]{bungartz2004sparse}
-Bungartz, H.-J. and Griebel, M. (2004).
-\newblock Sparse grids.
-\newblock {\em Acta numerica}, 13:147--269.
+  \entry{bungartz2004sparse}{article}{}
+    \name{author}{2}{}{%
+      {{hash=BHJ}{%
+         family={Bungartz},
+         family_i={B\bibinitperiod},
+         given={Hans-Joachim},
+         given_i={H\bibinitperiod-J\bibinitperiod},
+      }}%
+      {{hash=GM}{%
+         family={Griebel},
+         family_i={G\bibinitperiod},
+         given={Michael},
+         given_i={M\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Cambridge University Press}%
+    }
+    \strng{namehash}{BHJGM1}
+    \strng{fullhash}{BHJGM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2004}
+    \field{sortinit}{B}
+    \field{sortinithash}{B}
+    \field{pages}{147\bibrangedash 269}
+    \field{title}{Sparse grids}
+    \field{volume}{13}
+    \field{journaltitle}{Acta numerica}
+    \field{year}{2004}
+  \endentry
 
-\bibitem[Gatheral et~al., 2018]{gatheral2018volatility}
-Gatheral, J., Jaisson, T., and Rosenbaum, M. (2018).
-\newblock Volatility is rough.
-\newblock {\em Quantitative Finance}, 18(6):933--949.
+  \entry{gatheral2018volatility}{article}{}
+    \name{author}{3}{}{%
+      {{hash=GJ}{%
+         family={Gatheral},
+         family_i={G\bibinitperiod},
+         given={Jim},
+         given_i={J\bibinitperiod},
+      }}%
+      {{hash=JT}{%
+         family={Jaisson},
+         family_i={J\bibinitperiod},
+         given={Thibault},
+         given_i={T\bibinitperiod},
+      }}%
+      {{hash=RM}{%
+         family={Rosenbaum},
+         family_i={R\bibinitperiod},
+         given={Mathieu},
+         given_i={M\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Taylor \& Francis}%
+    }
+    \strng{namehash}{GJJTRM1}
+    \strng{fullhash}{GJJTRM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2018}
+    \field{sortinit}{G}
+    \field{sortinithash}{G}
+    \field{number}{6}
+    \field{pages}{933\bibrangedash 949}
+    \field{title}{Volatility is rough}
+    \field{volume}{18}
+    \field{journaltitle}{Quantitative Finance}
+    \field{year}{2018}
+  \endentry
 
-\bibitem[Haji-Ali et~al., 2016]{haji2016multi}
-Haji-Ali, A.-L., Nobile, F., Tamellini, L., and Tempone, R. (2016).
-\newblock Multi-index stochastic collocation for random pdes.
-\newblock {\em Computer Methods in Applied Mechanics and Engineering}.
+  \entry{haji2016multi}{article}{}
+    \name{author}{4}{}{%
+      {{hash=HAAL}{%
+         family={Haji-Ali},
+         family_i={H\bibinitperiod-A\bibinitperiod},
+         given={Abdul-Lateef},
+         given_i={A\bibinitperiod-L\bibinitperiod},
+      }}%
+      {{hash=NF}{%
+         family={Nobile},
+         family_i={N\bibinitperiod},
+         given={Fabio},
+         given_i={F\bibinitperiod},
+      }}%
+      {{hash=TL}{%
+         family={Tamellini},
+         family_i={T\bibinitperiod},
+         given={Lorenzo},
+         given_i={L\bibinitperiod},
+      }}%
+      {{hash=TR}{%
+         family={Tempone},
+         family_i={T\bibinitperiod},
+         given={Raul},
+         given_i={R\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Elsevier}%
+    }
+    \strng{namehash}{HAAL+1}
+    \strng{fullhash}{HAALNFTLTR1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2016}
+    \field{sortinit}{H}
+    \field{sortinithash}{H}
+    \field{title}{Multi-index stochastic collocation for random PDEs}
+    \field{journaltitle}{Computer Methods in Applied Mechanics and Engineering}
+    \field{year}{2016}
+  \endentry
 
-\bibitem[McCrickerd and Pakkanen, 2018]{mccrickerd2018turbocharging}
-McCrickerd, R. and Pakkanen, M.~S. (2018).
-\newblock Turbocharging {M}onte {C}arlo pricing for the rough {B}ergomi model.
-\newblock {\em Quantitative Finance}, pages 1--10.
+  \entry{mccrickerd2018turbocharging}{article}{}
+    \name{author}{2}{}{%
+      {{hash=MR}{%
+         family={McCrickerd},
+         family_i={M\bibinitperiod},
+         given={Ryan},
+         given_i={R\bibinitperiod},
+      }}%
+      {{hash=PMS}{%
+         family={Pakkanen},
+         family_i={P\bibinitperiod},
+         given={Mikko\bibnamedelima S},
+         given_i={M\bibinitperiod\bibinitdelim S\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Taylor \& Francis}%
+    }
+    \strng{namehash}{MRPMS1}
+    \strng{fullhash}{MRPMS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2018}
+    \field{sortinit}{M}
+    \field{sortinithash}{M}
+    \field{pages}{1\bibrangedash 10}
+    \field{title}{Turbocharging {M}onte {C}arlo pricing for the rough {B}ergomi
+  model}
+    \field{journaltitle}{Quantitative Finance}
+    \field{year}{2018}
+  \endentry
 
-\bibitem[Neuenkirch and Shalaiko, 2016]{neuenkirch2016order}
-Neuenkirch, A. and Shalaiko, T. (2016).
-\newblock The order barrier for strong approximation of rough volatility
-  models.
-\newblock {\em arXiv preprint arXiv:1606.03854}.
+  \entry{neuenkirch2016order}{article}{}
+    \name{author}{2}{}{%
+      {{hash=NA}{%
+         family={Neuenkirch},
+         family_i={N\bibinitperiod},
+         given={Andreas},
+         given_i={A\bibinitperiod},
+      }}%
+      {{hash=ST}{%
+         family={Shalaiko},
+         family_i={S\bibinitperiod},
+         given={Taras},
+         given_i={T\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{NAST1}
+    \strng{fullhash}{NAST1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2016}
+    \field{sortinit}{N}
+    \field{sortinithash}{N}
+    \field{title}{The Order Barrier for Strong Approximation of Rough
+  Volatility Models}
+    \field{journaltitle}{arXiv preprint arXiv:1606.03854}
+    \field{year}{2016}
+  \endentry
 
-\bibitem[Nuyens, 2014]{nuyens2014construction}
-Nuyens, D. (2014).
-\newblock The construction of good lattice rules and polynomial lattice rules.
+  \entry{nuyens2014construction}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=ND}{%
+         family={Nuyens},
+         family_i={N\bibinitperiod},
+         given={Dirk},
+         given_i={D\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{ND1}
+    \strng{fullhash}{ND1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2014}
+    \field{sortinit}{N}
+    \field{sortinithash}{N}
+    \field{title}{The construction of good lattice rules and polynomial lattice
+  rules.}
+    \field{year}{2014}
+  \endentry
 
-\bibitem[Romano and Touzi, 1997]{romano1997contingent}
-Romano, M. and Touzi, N. (1997).
-\newblock Contingent claims and market completeness in a stochastic volatility
-  model.
-\newblock {\em Mathematical Finance}, 7(4):399--412.
+  \entry{romano1997contingent}{article}{}
+    \name{author}{2}{}{%
+      {{hash=RM}{%
+         family={Romano},
+         family_i={R\bibinitperiod},
+         given={Marc},
+         given_i={M\bibinitperiod},
+      }}%
+      {{hash=TN}{%
+         family={Touzi},
+         family_i={T\bibinitperiod},
+         given={Nizar},
+         given_i={N\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Wiley Online Library}%
+    }
+    \strng{namehash}{RMTN1}
+    \strng{fullhash}{RMTN1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{1997}
+    \field{sortinit}{R}
+    \field{sortinithash}{R}
+    \field{number}{4}
+    \field{pages}{399\bibrangedash 412}
+    \field{title}{Contingent claims and market completeness in a stochastic
+  volatility model}
+    \field{volume}{7}
+    \field{journaltitle}{Mathematical Finance}
+    \field{year}{1997}
+  \endentry
 
-\bibitem[Sloan, 1985]{sloan1985lattice}
-Sloan, I.~H. (1985).
-\newblock Lattice methods for multiple integration.
-\newblock {\em Journal of Computational and Applied Mathematics}, 12:131--143.
+  \entry{sloan1985lattice}{article}{}
+    \name{author}{1}{}{%
+      {{hash=SIH}{%
+         family={Sloan},
+         family_i={S\bibinitperiod},
+         given={Ian\bibnamedelima H},
+         given_i={I\bibinitperiod\bibinitdelim H\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {North-Holland}%
+    }
+    \strng{namehash}{SIH1}
+    \strng{fullhash}{SIH1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{1985}
+    \field{sortinit}{S}
+    \field{sortinithash}{S}
+    \field{pages}{131\bibrangedash 143}
+    \field{title}{Lattice methods for multiple integration}
+    \field{volume}{12}
+    \field{journaltitle}{Journal of Computational and Applied Mathematics}
+    \field{year}{1985}
+  \endentry
 
-\end{thebibliography}
+  \entry{talay1990expansion}{article}{}
+    \name{author}{2}{}{%
+      {{hash=TD}{%
+         family={Talay},
+         family_i={T\bibinitperiod},
+         given={Denis},
+         given_i={D\bibinitperiod},
+      }}%
+      {{hash=TL}{%
+         family={Tubaro},
+         family_i={T\bibinitperiod},
+         given={Luciano},
+         given_i={L\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Taylor \& Francis}%
+    }
+    \strng{namehash}{TDTL1}
+    \strng{fullhash}{TDTL1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{1990}
+    \field{sortinit}{T}
+    \field{sortinithash}{T}
+    \field{number}{4}
+    \field{pages}{483\bibrangedash 509}
+    \field{title}{Expansion of the global error for numerical schemes solving
+  stochastic differential equations}
+    \field{volume}{8}
+    \field{journaltitle}{Stochastic analysis and applications}
+    \field{year}{1990}
+  \endentry
+\endsortlist
+\endinput

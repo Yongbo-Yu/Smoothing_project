@@ -6,6 +6,11 @@
 \usepackage{amssymb}
 \usefonttheme{serif}
 
+\usepackage{MnSymbol,wasysym}
+
+\usepackage[backend=bibtex,citestyle=authoryear]{biblatex}
+\addbibresource{smoothing_rBergomi}
+%\bibliography{} 
 
 
 %\usepackage{multibox,fancybox}
@@ -313,11 +318,11 @@ Computational Finance (ICCF2019), A Coru\~na\\
 \begin{frame}[plain,noframenumbering]
   \maketitle
 \end{frame}
-
-\begin{frame}[plain,noframenumbering]
-	\frametitle{\centerline{Outline}}
-	 \tableofcontents
-\end{frame}
+%
+%\begin{frame}[plain,noframenumbering]
+%	\frametitle{\centerline{Outline}}
+%	 \tableofcontents
+%\end{frame}
 
 
 
@@ -332,7 +337,7 @@ Computational Finance (ICCF2019), A Coru\~na\\
 
 
 
-\begin{frame}[plain]\frametitle{\centerline{Rough volatility \cite{gatheral2018volatility}}}
+\begin{frame}[plain]\frametitle{\centerline{Rough volatility \footnote{\fullcite{gatheral2018volatility}}}}
 		\begin{figure}
 		\centering
 		\includegraphics[scale=0.4]{vol_rough}
@@ -344,14 +349,18 @@ Computational Finance (ICCF2019), A Coru\~na\\
 
 
 
-\begin{frame}[plain]\frametitle{\centerline{The rough Bergomi model \cite{bayer2016pricing}}}
+\begin{frame}[plain]\frametitle{\centerline{The rough Bergomi model \footnote{\fullcite{bayer2016pricing}}}}
+\vspace{0.2cm}
 This model, under a pricing measure, is given by
+
 \begin{equation}
+\begin{small}
 \begin{cases}
 	dS_t &= \sqrt{v_t} S_t dZ_t,\\
 v_t &= \blue{\xi_0}(t) \exp\left( \blue{\eta} \widetilde{W}_t^{\blue{H}} - \frac{1}{2} \blue{\eta}^2 t^{2\blue{H}} \right),\\
 	Z_t&:=\blue{\rho}	W^1_t+ \bar{\rho}W^\perp_t \equiv \blue{\rho} W^1+\sqrt{1-\blue{\rho}^2} W^\perp,
 \end{cases}
+\end{small}
 \end{equation}
 \begin{itemize}
 	\item $(W^1,W^\perp)$: two independent standard Brownian motions
@@ -359,7 +368,7 @@ v_t &= \blue{\xi_0}(t) \exp\left( \blue{\eta} \widetilde{W}_t^{\blue{H}} - \frac
 	\begin{align*}
 	\widetilde{W}_t^{\blue{H}} &= \int_0^t K^{\blue{H}}(t-s) dW_s^1, \quad t \ge 0, \\ 	K^{\blue{H}}(t-s) &= \sqrt{2\blue{H}} (t-s)^{\blue{H} - 1/2},\quad \forall \: 0 \le s \le t.
 	\end{align*}
-	\item $\blue{H} \in(0,1/2]$ ($H=1/2$ for Brownian motion): controls the \red{roughness} of paths,  $\blue{\rho} \in [-1,1]$  and  $\blue{\eta}>0$.
+	\item $\blue{H} \in(0,1/2]$ controls the \red{roughness} of paths,  $\blue{\rho} \in [-1,1]$  and  $\blue{\eta}>0$.
 	\item $t \mapsto \blue{\xi}_0(t)$: forward variance curve, known at time $0$.
 \end{itemize}
 \end{frame}
@@ -367,11 +376,11 @@ v_t &= \blue{\xi_0}(t) \exp\left( \blue{\eta} \widetilde{W}_t^{\blue{H}} - \frac
 \begin{itemize}
 \item \textbf{Numerically:}
 	\begin{itemize}
-		\item The model is \red{non-affine} and \red{non-Markovian} $\Rightarrow$ Standard numerical methods (PDEs, characteristic functions) seem \red{inapplicable}.
+		\item The model is \red{non-Markovian} and   \red{non-affine} $\Rightarrow$ Standard numerical methods (PDEs, characteristic functions) seem \red{inapplicable}.
 		\item The only prevalent pricing method for mere
-		\red{vanilla options} is \red{Monte Carlo (MC)} \cite   {bayer2016pricing,mccrickerd2018turbocharging}: still a \red{time consuming task}.
+		\red{vanilla options} is \red{Monte Carlo (MC)} \parencite{bayer2016pricing,mccrickerd2018turbocharging} \frownie{} still  \red{computationally expensive task}.
 		
-\item 	Discretization methods have \red{poor behavior of the strong error}, that is the convergence rate is of order of $\blue{H} \in[0,1/2]$ \cite{neuenkirch2016order} $\Rightarrow$ Variance reduction methods, such as \red{multilevel Monte Carlo (MLMC)}, are inefficient for \red{very small values} of $\blue{H}$.
+\item 	Discretization methods have  a \red{poor behavior of the strong error} (strong convergence rate  of order $\blue{H} \in[0,1/2]$) \parencite{neuenkirch2016order} $\Rightarrow$ Variance reduction methods, such as \red{multilevel Monte Carlo (MLMC)}, are inefficient for \red{very small values} of $\blue{H}$.
 	\end{itemize}
 
 \item \textbf{Theoretically:} 
@@ -392,9 +401,9 @@ context.
 
 	\begin{itemize}
 		\item \blue{Issue $1$:}
-		Time-discretization of the rough Bergomi process (large $\blue{N}$ (number of time steps))  $\Rightarrow$ \blue{$S$}  takes values in a high-dimensional space  $\Rightarrow$ \red{Curse of dimensionality} when using numerical integration methods. 
+		Time-discretization of the rough Bergomi process (large $\blue{N}$ (number of time steps))  $\Rightarrow$ \blue{$S$}  takes values in a high-dimensional space  $\Rightarrow$  \frownie{}  \red{Curse of dimensionality} when using numerical integration methods. 
  
-		\item \blue{Issue $2$:} The payoff function \blue{$g$} is typically \red{not smooth} $\Rightarrow$ \red{low regularity}$\Rightarrow$  slow convergence of deterministic quadrature methods.
+		\item \blue{Issue $2$:} The payoff function \blue{$g$} is typically \red{not smooth} $\Rightarrow$ \red{low regularity}$\Rightarrow$  \frownie{}   slow convergence of deterministic quadrature methods.
 	\end{itemize}
 {\fontencoding{U}\fontfamily{futs}\selectfont\char 66\relax} \red{Curse of dimensionality:} An exponential growth of the work (number of function evaluations) in terms of the
 dimension of the integration problem. 
@@ -404,21 +413,21 @@ dimension of the integration problem.
 
 
 
-\begin{frame}[plain]\frametitle{\centerline{Methodology \cite{bayer2018hierarchical}}}
+\begin{frame}[plain]\frametitle{\centerline{Methodology \footnote{\fullcite{bayer2018hierarchical}}}}
 
- We design a \red{hierarchical efficient pricing method} based on
+ We design  \red{efficient hierarchical  pricing methods} based on
 		\begin{enumerate}
-			\item \red{Analytic smoothing}  to uncover available regularity (inspired by \cite{romano1997contingent} in the context of stochastic volatility models).
+			\item \red{Analytic smoothing}  to uncover available regularity (inspired by \parencite{romano1997contingent} in the context of stochastic volatility models).
 			\item Approximating the option price using  \red{deterministic quadrature  methods} 
 			\begin{itemize}
 			\item \textbf{Adaptive sparse grids quadrature (ASGQ)}.
 			\item \textbf{Quasi Monte Carlo (QMC)}.
 			\end{itemize}			  
-			\item Coupling our methods with \red{hierarchical representations} $\Rightarrow$ \red{Reduce the dimension} of the problem.
+			\item Coupling our methods with \red{hierarchical representations}
 			\begin{itemize}
-			\item \textbf{Brownian bridges} as a Wiener path generation method.
+			\item \textbf{Brownian bridges} as a Wiener path generation method  $\Rightarrow$  \red{ $\searrow$ the effective dimension} of the problem.
 			\item \textbf{Richardson Extrapolation} (\red{Condition: weak error of order $1$)} 
-		$\quad\Rightarrow$ Faster convergence of the weak error  $\Rightarrow $ $\searrow$ number of time steps (smaller dimension).
+		$\quad\Rightarrow$ Faster convergence of the weak error  $\Rightarrow $ $\searrow$ number of time steps \red{(smaller dimension)}.
 		\end{itemize}
 		\end{enumerate} 
 	
@@ -429,13 +438,13 @@ dimension of the integration problem.
 \textbf{\blue{Goal:}} Simulate jointly $(W_t^1, \widetilde{W}^H_t: 0 \le t \le T)$, resulting in $W^1_{t_1},\dots, W_{t_N}$ and $\widetilde{W}^H_{t_1},\dots, \widetilde{W}^H_{t_N}$ along a given grid $t_1 <\dots < t_N$ 
 \begin{enumerate}
 	
-	\item  \textbf{Covariance based approach} \cite{bayer2016pricing}
+	\item  \textbf{Covariance based approach} \parencite{bayer2016pricing}
 	\begin{itemize}
 	\item  Based on Cholesky decomposition of the covariance matrix  of the ($2N$)-dimensional Gaussian random vector  $W^1_{t_1},\dots, W^1_{t_N}, \widetilde{W}^H_{t_1},\dots, \widetilde{W}_{t_N}$.
 	\item  \red{Exact method  but slow} 
 	\item At least \red{$\Ordo{N^2}$}.
 \end{itemize}	
-	\item  \textbf{The hybrid scheme} \cite{bennedsen2017hybrid} 
+	\item  \textbf{The hybrid scheme} \parencite{bennedsen2017hybrid} 
 	\begin{itemize}
 	\item Based on  \red{Euler discretization}  but crucially \red{improved by moment matching} for the singular term in the left point rule.
 	\item  \red{Accurate scheme that is much faster} than the  Covariance based approach.
@@ -519,51 +528,55 @@ C_{RB}\left( T, K \right) &= E\left[ \left(S_T - K \right)^+ \right]  \nonumber\
 \end{frame}
 
 
-\begin{frame}[plain,shrink=1]	
-	\frametitle{\centerline{ Numerical integration methods}}
-
-	\begin{itemize}
-	\item \textbf{Plain Monte Carlo (MC)}
-	\begin{itemize}
-	\item $\red{\varepsilon(M)}=\Ordo{\red{M}^{-1/2}}$ 
-	\item $(+)$ insensitive to $\blue{d}$, $(-)$ slow convergence,  no profit from regularity.
-\end{itemize}	  
-	\item \textbf{\red{Classical Quasi-Monte Carlo (QMC)}}
-	\begin{itemize}
-	\item $\red{\varepsilon(M)}=\Ordo{\red{M}^{-1}\log(\red{M})^{\blue{d}-1}}$ 
-	\item  $(+)$ better convergence, $(-)$ sensitive to $\blue{d}$, no profit from regularity.
-\end{itemize}	  
-	\item \textbf{Quadrature based on product approaches} 
-	\begin{itemize}
-	\item $\red{\varepsilon(M)}=\Ordo{\red{M}^{-\blue{r}/\blue{d}}}$
-	 \item $(+)$ profits from regularity, $(-)$ highly sensitive to $\blue{d}$.
-	\end{itemize}
-	\item \red{\textbf{Sparse grids quadrature (SGQ)}}
-	\begin{itemize}
-	\item  $\red{\varepsilon(M)}=\Ordo{\red{M}^{-\blue{s}} \log(\red{M})^{(\blue{d}-1)(\blue{s}+1)}}$
-	\item 	 $(+)$ profits from regularity, less sensitive to $\blue{d}$.
-\end{itemize}	
-\end{itemize}	 
-	
-$\red{\varepsilon}$: prescribed accuracy,  $\red{M}$: the amount of
-work,  $\blue{d}$: dimension of problem, $\blue{r, s}$: smoothness indices. 
-%(bounded mixed (total) derivatives up to order $\blue{s(r)}$).
-
-\red{{\fontencoding{U}\fontfamily{futs}\selectfont\char 66\relax}} In our context, $\blue{d=2N}$ where $\blue{N}$ is the number of time steps used for simulating the rough Bergomi dynamics.
-\end{frame}
+%\begin{frame}[plain,shrink=1]	
+%	\frametitle{\centerline{ Numerical integration methods}}
+%
+%	\begin{itemize}
+%	\item \textbf{Plain Monte Carlo (MC)}
+%	\begin{itemize}
+%	\item $\red{\varepsilon(M)}=\Ordo{\red{M}^{-1/2}}$ 
+%	\item $(+)$ insensitive to $\blue{d}$, $(-)$ slow convergence,  no profit from regularity.
+%\end{itemize}	  
+%	\item \textbf{\red{Classical Quasi-Monte Carlo (QMC)}}
+%	\begin{itemize}
+%	\item $\red{\varepsilon(M)}=\Ordo{\red{M}^{-1}\log(\red{M})^{\blue{d}-1}}$ 
+%	\item  $(+)$ better convergence, $(-)$ sensitive to $\blue{d}$, no profit from regularity.
+%\end{itemize}	  
+%	\item \textbf{Quadrature based on product approaches} 
+%	\begin{itemize}
+%	\item $\red{\varepsilon(M)}=\Ordo{\red{M}^{-\blue{r}/\blue{d}}}$
+%	 \item $(+)$ profits from regularity, $(-)$ highly sensitive to $\blue{d}$.
+%	\end{itemize}
+%	\item \red{\textbf{Sparse grids quadrature (SGQ)}}
+%	\begin{itemize}
+%	\item  $\red{\varepsilon(M)}=\Ordo{\red{M}^{-\blue{s}} \log(\red{M})^{(\blue{d}-1)(\blue{s}+1)}}$
+%	\item 	 $(+)$ profits from regularity, less sensitive to $\blue{d}$.
+%\end{itemize}	
+%\end{itemize}	 
+%	
+%$\red{\varepsilon}$: prescribed accuracy,  $\red{M}$: the amount of
+%work,  $\blue{d}$: dimension of problem, $\blue{r, s}$: smoothness indices. 
+%%(bounded mixed (total) derivatives up to order $\blue{s(r)}$).
+%
+%\red{{\fontencoding{U}\fontfamily{futs}\selectfont\char 66\relax}} In our context, $\blue{d=2N}$ where $\blue{N}$ is the number of time steps used for simulating the rough Bergomi dynamics.
+%\end{frame}
 
 
 
 
 \begin{frame}[plain]	
-	\frametitle{\centerline{Sparse grids I \cite{bungartz2004sparse} }}
-
-\textbf{\blue{Goal:}} Given  $F: \rset^d \rightarrow \rset$ and a multi-index $\boldsymbol{\beta} \in \mathbb{N}^d_{+}$, \red{approximate}
-\begin{displaymath} \expt{F} \approx Q^{m(\boldsymbol{\beta})}[F], \end{displaymath} 
-where $Q^{m(\boldsymbol{\beta})}$ a Cartesian quadrature grid with $m(\beta_n)$ points along $y_n$.
+	\frametitle{\centerline{Sparse grids I}}
+\vspace{0.3cm}
 
 
-\textbf{\blue{Idea:}} Denote $Q^{m(\boldsymbol{\beta})}[F]=F_{\boldsymbol{\beta}}$ and introduce the \red{first difference operator} 
+\textbf{\blue{Notation:}} 
+\begin{itemize}
+\item Given  $F: \rset^d \rightarrow \rset$ and a multi-index $\boldsymbol{\beta} \in \mathbb{N}^d_{+}$.
+\item   $F_{\boldsymbol{\beta}}:=Q^{m(\boldsymbol{\beta})}[F]$ a quadrature operator based on a   \red{Cartesian quadrature grid} ($m(\beta_n)$ points along $y_n$).
+
+\red{{\fontencoding{U}\fontfamily{futs}\selectfont\char 66\relax}} Approximating  $E[F]$ with  $F_{\boldsymbol{\beta}} $ is not an appropriate option due to the well-known \red{curse of dimensionality}.
+
+\item  The \red{first-order difference operators} 
 
 \begin{equation*}
 \begin{aligned}
@@ -573,39 +586,45 @@ F_{\boldsymbol{\beta}}  & \text{ if } \beta_i=1  \end{array} \right. \\
 \end{aligned}
 \end{equation*}
 
-where $e_i$ denotes the $i$th $d$-dimensional unit vector, and \red{mixed difference operators}
+where $e_i$ denotes the $i$th $d$-dimensional unit vector
+\item The  \red{mixed (first-order tensor) difference operators}
 
 \begin{equation*}
 \Delta [F_{\boldsymbol{\beta}}]= \otimes_{i = 1}^{d} \Delta_iF_{\boldsymbol{\beta}}
 \end{equation*}
+\end{itemize}
+\textbf{\blue{Idea:}}  A quadrature estimate of $E[F]$ is
+\begin{small}
+\begin{equation}\label{eq:Quadrature_estimator}
+\mathcal{M}_{\blue{\mathcal{I_{\ell}}}}[F]=\sum_{\boldsymbol{\beta} \in  \blue{\mathcal{I_{\ell}}}} \Delta [F_{\boldsymbol{\beta}}]\COMMA
+\end{equation}
+\end{small}
 
 \end{frame}
 
 
-\begin{frame}[plain,shrink=4]	
-	\frametitle{\centerline{Sparse grids II \cite{bungartz2004sparse}}}
+\begin{frame}[plain]	
+	\frametitle{\centerline{Sparse grids II}}
 	\vspace{0.3cm}
- A quadrature estimate of $E[F]$ is
-\begin{small}
-\begin{equation}\label{eq:Quadrature_estimator}
-\mathcal{M}_{\mathcal{I_{\ell}}}[F]=\sum_{\boldsymbol{\beta} \in \mathcal{I}_{\ell}} \Delta [F_{\boldsymbol{\beta}}]\COMMA
-\end{equation}
-\end{small}
+	
+	\begin{equation*}
+E[F] \approx \mathcal{M}_{\blue{\mathcal{I_{\ell}}}}[F]=\sum_{\boldsymbol{\beta} \in  \blue{\mathcal{I_{\ell}}}} \Delta [F_{\boldsymbol{\beta}}]\COMMA
+\end{equation*} 
 \begin{itemize}
-\item \red{Product approach}: $\mathcal{I}_{\ell}=\{ \max\{\beta_1,\dots,\beta_d \} \le \ell;\: \boldsymbol{\beta} \in \mathbb{N}^d_{+} \} $
-\item \red{Regular SG}: $ \mathcal{I}_{\ell}=\{  \mid \boldsymbol{\beta} \mid_1 \le \ell+d-1; \: \boldsymbol{\beta} \in \mathbb{N}^d_{+} \} $
+\item \red{Product approach}: $\blue{\mathcal{I_{\ell}}}=\{ \mid \boldsymbol{\beta} \mid_{\infty}\le \ell;\: \boldsymbol{\beta} \in \mathbb{N}^d_{+} \} $
+\item \red{Regular sparse grids\footnote{\fullcite{bungartz2004sparse}}}: $ \blue{\mathcal{I_{\ell}}}=\{  \mid \boldsymbol{\beta} \mid_1 \le \ell+d-1; \: \boldsymbol{\beta} \in \mathbb{N}^d_{+} \} $
+
+\item \red{Adaptive sparse grids quadrature (ASGQ)}: $\blue{\mathcal{I_{\ell}}}=\blue{\mathcal{I}^{\text{ASGQ}}}$ (Next slides).
+\end{itemize}
  \begin{figure}
       \begin{columns}
         \column{.5\linewidth}
-        \includegraphics[scale=0.4]{sparse_grids}
-        \column{.4\linewidth}
+        \includegraphics[scale=0.35]{sparse_grids}
+        \column{.35\linewidth}
         \caption{Left are product grids $\Delta_{\beta_1} \otimes \Delta_{\beta_2}$ for $1 \le \beta_1, \beta_2 \le 3$. Right is the corresponding SG construction.}
         \label{fig:example right}
       \end{columns}
     \end{figure}
-
-\item \red{ASGQ}: $\mathcal{I}_{\ell}=\blue{\mathcal{I}^{\text{ASGQ}}}$.
-\end{itemize}
 \end{frame}
 
 \begin{frame}[plain,shrink=2]	
@@ -625,7 +644,7 @@ where $e_i$ denotes the $i$th $d$-dimensional unit vector, and \red{mixed differ
         \column{.5\linewidth}
         \includegraphics[scale=0.6]{./MISC_construction/1}
         \column{.4\linewidth}
-        \caption{\red{A posteriori, adaptive construction} as in \cite{haji2016multi}: Given an index set $\mathcal{I}_k$, compute the profits of the neighbor indices and select the most profitable one}
+        \caption{\red{A posteriori, adaptive construction} as in \parencite{haji2016multi}: Given an index set $\mathcal{I}_k$, compute the profits of the neighbor indices and select the most profitable one}
         \label{fig:example right}
       \end{columns}
     \end{figure}
@@ -651,7 +670,7 @@ where $e_i$ denotes the $i$th $d$-dimensional unit vector, and \red{mixed differ
         \column{.5\linewidth}
         \includegraphics[scale=0.6]{./MISC_construction/2}
         \column{.4\linewidth}
-        \caption{\red{A posteriori, adaptive construction} as in \cite{haji2016multi}: Given an index set $\mathcal{I}_k$, compute the profits of the neighbor indices and select the most profitable one}
+        \caption{\red{A posteriori, adaptive construction} as in \parencite{haji2016multi}: Given an index set $\mathcal{I}_k$, compute the profits of the neighbor indices and select the most profitable one}
         \label{fig:example right}
       \end{columns}
     \end{figure}
@@ -675,7 +694,7 @@ where $e_i$ denotes the $i$th $d$-dimensional unit vector, and \red{mixed differ
         \column{.5\linewidth}
         \includegraphics[scale=0.6]{./MISC_construction/3}
         \column{.4\linewidth}
-        \caption{\red{A posteriori, adaptive construction} as in \cite{haji2016multi}: Given an index set $\mathcal{I}_k$, compute the profits of the neighbor indices and select the most profitable one}
+        \caption{\red{A posteriori, adaptive construction} as in \parencite{haji2016multi}: Given an index set $\mathcal{I}_k$, compute the profits of the neighbor indices and select the most profitable one}
         \label{fig:example right}
       \end{columns}
     \end{figure}
@@ -698,7 +717,7 @@ where $e_i$ denotes the $i$th $d$-dimensional unit vector, and \red{mixed differ
         \column{.5\linewidth}
         \includegraphics[scale=0.6]{./MISC_construction/4}
         \column{.4\linewidth}
-        \caption{\red{A posteriori, adaptive construction} as in \cite{haji2016multi}: Given an index set $\mathcal{I}_k$, compute the profits of the neighbor indices and select the most profitable one}
+        \caption{\red{A posteriori, adaptive construction} as in \parencite{haji2016multi}: Given an index set $\mathcal{I}_k$, compute the profits of the neighbor indices and select the most profitable one}
         \label{fig:example right}
       \end{columns}
     \end{figure}
@@ -722,7 +741,7 @@ where $e_i$ denotes the $i$th $d$-dimensional unit vector, and \red{mixed differ
         \column{.5\linewidth}
         \includegraphics[scale=0.6]{./MISC_construction/5}
         \column{.4\linewidth}
-        \caption{\red{A posteriori, adaptive construction} as in \cite{haji2016multi}: Given an index set $\mathcal{I}_k$, compute the profits of the neighbor indices and select the most profitable one}
+        \caption{\red{A posteriori, adaptive construction} as in \parencite{haji2016multi}: Given an index set $\mathcal{I}_k$, compute the profits of the neighbor indices and select the most profitable one}
         \label{fig:example right}
       \end{columns}
     \end{figure}
@@ -747,7 +766,7 @@ where $e_i$ denotes the $i$th $d$-dimensional unit vector, and \red{mixed differ
         \column{.5\linewidth}
         \includegraphics[scale=0.6]{./MISC_construction/6}
         \column{.4\linewidth}
-        \caption{\red{A posteriori, adaptive construction} as in \cite{haji2016multi}: Given an index set $\mathcal{I}_k$, compute the profits of the neighbor indices and select the most profitable one}
+        \caption{\red{A posteriori, adaptive construction} as in \parencite{haji2016multi}: Given an index set $\mathcal{I}_k$, compute the profits of the neighbor indices and select the most profitable one}
         \label{fig:example right}
       \end{columns}
     \end{figure}
@@ -756,35 +775,35 @@ where $e_i$ denotes the $i$th $d$-dimensional unit vector, and \red{mixed differ
 	\end{itemize}
 \end{frame}
 
-\begin{frame}[plain,shrink=2,noframenumbering]	
-	\frametitle{\centerline{ ASGQ in practice }}
-	\vspace{0.2cm}
-	\begin{itemize}
-		\item The construction of \blue{$\mathcal{I}^{\text{ASGQ}}$} is done by \red{profit thresholding}
- \begin{equation*}
- \blue{\mathcal{I}^{\text{ASGQ}}}=\{\boldsymbol{\beta} \in \mathbb{N}^d_{+}: \blue{P_{\boldsymbol{\beta}}}	 \ge \overline{T}\}.
- \end{equation*}
- \item \textbf{Profit of a hierarchical surplus} \blue{$P_{\boldsymbol{\beta}}= \frac{\abs{\Delta E_{\boldsymbol{\beta}}}}{\Delta\mathcal{W}_{\boldsymbol{\beta}}}$}.
-\item \textbf{Error contribution}:  \blue{ $\Delta E_{\boldsymbol{\beta}} = \abs{\mathcal{M}^{\mathcal{I} \cup \{\boldsymbol{\beta}\}}-\mathcal{M}^{\mathcal{I}}}$}.
-%how much the error decreases if the operator $\Delta[F_{\boldsymbol{\beta}}]$ is added to \blue{$\mathcal{M}_{\mathcal{I}}[F]$
-		\item \textbf{Work contribution}:  \blue{$ 		\Delta \mathcal{W}_{\boldsymbol{\beta}} = \text{Work}[\mathcal{M}^{\mathcal{I} \cup \{\boldsymbol{\beta}\}}]-\text{Work}[\mathcal{M}^{\mathcal{I}}]$}.	
-			 \begin{figure}
-      \begin{columns}
-        \column{.5\linewidth}
-        \includegraphics[scale=0.6]{./MISC_construction/7}
-        \column{.4\linewidth}
-        \caption{\red{A posteriori, adaptive construction} as in \cite{haji2016multi}: Given an index set $\mathcal{I}_k$, compute the profits of the neighbor indices and select the most profitable one}
-        \label{fig:example right}
-      \end{columns}
-    \end{figure}
-	\end{itemize}
-\end{frame}
+%\begin{frame}[plain,shrink=2,noframenumbering]	
+%	\frametitle{\centerline{ ASGQ in practice }}
+%	\vspace{0.2cm}
+%	\begin{itemize}
+%		\item The construction of \blue{$\mathcal{I}^{\text{ASGQ}}$} is done by \red{profit thresholding}
+% \begin{equation*}
+% \blue{\mathcal{I}^{\text{ASGQ}}}=\{\boldsymbol{\beta} \in \mathbb{N}^d_{+}: \blue{P_{\boldsymbol{\beta}}}	 \ge \overline{T}\}.
+% \end{equation*}
+% \item \textbf{Profit of a hierarchical surplus} \blue{$P_{\boldsymbol{\beta}}= \frac{\abs{\Delta E_{\boldsymbol{\beta}}}}{\Delta\mathcal{W}_{\boldsymbol{\beta}}}$}.
+%\item \textbf{Error contribution}:  \blue{ $\Delta E_{\boldsymbol{\beta}} = \abs{\mathcal{M}^{\mathcal{I} \cup \{\boldsymbol{\beta}\}}-\mathcal{M}^{\mathcal{I}}}$}.
+%%how much the error decreases if the operator $\Delta[F_{\boldsymbol{\beta}}]$ is added to \blue{$\mathcal{M}_{\mathcal{I}}[F]$
+%		\item \textbf{Work contribution}:  \blue{$ 		\Delta \mathcal{W}_{\boldsymbol{\beta}} = \text{Work}[\mathcal{M}^{\mathcal{I} \cup \{\boldsymbol{\beta}\}}]-\text{Work}[\mathcal{M}^{\mathcal{I}}]$}.	
+%			 \begin{figure}
+%      \begin{columns}
+%        \column{.5\linewidth}
+%        \includegraphics[scale=0.6]{./MISC_construction/7}
+%        \column{.4\linewidth}
+%        \caption{\red{A posteriori, adaptive construction} as in \cite{haji2016multi}: Given an index set $\mathcal{I}_k$, compute the profits of the neighbor indices and select the most profitable one}
+%        \label{fig:example right}
+%      \end{columns}
+%    \end{figure}
+%	\end{itemize}
+%\end{frame}
 
 
 \begin{frame}[plain, shrink=4]\frametitle{\centerline{Randomized QMC} }  
 \begin{itemize}
 
-\item \red{A (rank-$1$) lattice rule} \cite{sloan1985lattice,nuyens2014construction} with $n$ points 
+\item \red{A (rank-$1$) lattice rule} \parencite{sloan1985lattice,nuyens2014construction} with $n$ points 
 \begin{equation*}
 Q_n(f):=\frac{1}{n}\sum_{k=0}^{n-1} f \left( \frac{kz \: \text{mod}\: n}{n}\right),
 \end{equation*}
@@ -800,7 +819,7 @@ where $\{\Delta^{(i)}\}_{i=1}^q$: independent random shifts, and $M^{\text{QMC}}
 \item  Unbiased approximation of the integral.
 \item  Practical error estimate.
 \end{itemize}
-\item We use a pre-made point generators using latticeseq\_b2.py from   \url{https://people.cs.kuleuven.be/~dirk.nuyens/qmc-generators/}.
+%\item We use a pre-made point generators using latticeseq\_b2.py from   \url{https://people.cs.kuleuven.be/~dirk.nuyens/qmc-generators/}.
 \end{itemize}
 
 \end{frame}
@@ -825,33 +844,39 @@ $\{t_i\}_{i=0}^{N}$: Grid of time steps, $\{B_{t_i}\}_{i=0}^{N}$: Brownian motio
 				B_{t_j}=(1-\rho) B_{t_i}+\rho B_{t_k}+ \sqrt{\rho (1-\rho)(k-i) \Delta t} z_j, \: z_j \sim \mathcal{N}(0,1) \PERIOD
 				\end{equation*}
 					\item The most important values (determine the large scale structure of Brownian motion) are the first components of $\mathbf{z} = (z_1,\dots,z_N)$.
-					\item $\searrow$ the \red{effective dimension} ($\#$ important dimensions) and $\nearrow$  \red{anisotropy} between different directions $\Rightarrow$ \red{Faster} ASGQ and QMC convergence.
+					\item $\searrow$ the \red{effective dimension} ($\#$ important dimensions) by $\nearrow$  \red{anisotropy} between different directions $\Rightarrow$ \red{Faster} ASGQ and QMC convergence.
 			\end{itemize} 
 		
 	\end{itemize}
 \end{frame}
 
 
-\begin{frame}[plain, shrink=2]\frametitle{\centerline{Error comparison}}
+
+\begin{frame}[plain, shrink=10]\frametitle{\centerline{Richardson Extrapolation \parencite{talay1990expansion}}}
 \vspace{0.2cm}
-$\red{\mathcal{E}_{\text{tot}}}$: the total error of approximating the  expectation in \eqref{BS_formula_rbergomi}.
+
+\textbf{\blue{Motivation}}
 \begin{itemize}
-	\item When using ASGQ estimator, $Q_N$
-	\begin{align*}
-	\red{\mathcal{E}_{\text{tot}}} & \le \abs{C_{\text{RB}}-C_{\text{RB}}^N}+\abs{C_{\text{RB}}^N-Q_{N}} \le \green{\mathcal{E}_B(N)}+ \blue{\mathcal{E}_Q(\text{TOL}_{\text{ASGQ}},N)},
-	\end{align*}
-where  $\mathcal{E}_Q$ is the quadrature error, $\green{\mathcal{E}_B}$  is the bias, $\blue{\text{TOL}_{\text{ASGQ}}}$ is a user selected tolerance for ASGQ method.
-\item When using randomized QMC or MC estimator,   $Q^{\text{MC (QMC)}}_N$
-		\begin{align*}
-	\red{\mathcal{E}_{\text{tot}}} & \le \abs{C_{\text{RB}}-C_{\text{RB}}^N}+\abs{C_{\text{RB}}^N-Q^{\text{MC (QMC)}}_N} \le \green{\mathcal{E}_B(N)}+ \blue{\mathcal{E}_{S}(M,N)},
-	\end{align*}
-	where  $\blue{\mathcal{E}_S}$ is the statistical error, $\blue{M}$ is the number of samples used for MC or randomized QMC method.
-	\item $\blue{M^{\text{QMC}}}$ and $\blue{M^{\text{MC}}}$, are chosen so that $\blue{\mathcal{E}_{S,\text{QMC}}(M^{\text{QMC}})}$ and  \blue{$\mathcal{E}_{S,\text{MC}}(M^{\text{MC}})$} satisfy
-	\begin{align*}
-	\blue{\mathcal{E}_{S,\text{QMC}}(M^{\text{QMC}})}=\blue{\mathcal{E}_{S,\text{MC}}(M^{\text{MC}})}= \green{\mathcal{E}_B(N)}=\frac{\red{\mathcal{E}_{\text{tot}}}}{2}\PERIOD
-	\end{align*}
-\end{itemize}
+\item $(X_t)_{0 \le t \le T}$ a certain stochastic process,  $(\widehat{X}_{t_i}^h)_{0 \le  t_i \le T}$ its approximation using a suitable  scheme with a time step $h$. 
+\item For sufficiently small $h$, and a suitable smooth function $f$, assume 
+\begin{align*}
+	\expt{f(\widehat{X}_T^h)}= \expt{f(X_T)} + c h +\Ordo{h^2} \PERIOD
+\end{align*}
+$$\Rightarrow 2 \expt{f(\widehat{X}_T^{2h})}- \expt{f(\widehat{X}_T^{h})} =\expt{f(X_T)} + \Ordo{h^2} .$$
+\end{itemize} 
+\textbf{\blue{General Formulation}}
+
+ $\{h_J=h_0 2^{-J}\}_{J\ge 0}$:  \red{grid sizes}, $K_\text{R}$:  \red{level of  Richardson extrapolation}, $I(J,K_\text{R})$: \red{approximation of $\expt{f(X_T)}$ by terms up to level $K_\text{R}$} 
+\begin{small}
+\begin{align}
+I(J,K_\text{R})=\frac{2^{K_\text{R}}I(J,K_\text{R}-1)-I(J-1,K_\text{R}-1)}{2^{K_\text{R}}-1},\quad J=1,2,\dots, K_\text{R}=1,2,\dots
+\end{align}
+\end{small}
+\textbf{\blue{Advantage}}
+
+Applying level $K_\text{R}$ of Richardson extrapolation  \red{dramatically reduces the bias} $\Rightarrow \searrow$ \red{the  number of time steps $N$ needed}  to achieve a certain error tolerance $\Rightarrow \searrow$  \red{the total dimension} of the integration problem.
 \end{frame}
+
 
 
 \section{Numerical Experiments and Results}
@@ -882,27 +907,50 @@ where  $\mathcal{E}_Q$ is the quadrature error, $\green{\mathcal{E}_B}$  is the 
 \end{table}
 
 \begin{itemize}
-\item Set $1$ is the  \red{closest to the empirical findings} \cite{gatheral2018volatility}, suggesting that $\blue{H} \approx 0.1$. The choice $\blue{\nu}= 1.9$ and $\blue{\rho}=-0.9$ is justified by \cite{bayer2016pricing}.
+\item Set $1$ is the  \red{closest to the empirical findings} \parencite{gatheral2018volatility}, suggesting that $\blue{H} \approx 0.1$. The choice $\blue{\nu}= 1.9$ and $\blue{\rho}=-0.9$ is justified by \parencite{bayer2016pricing}.
 
 \item  For the remaining three sets, we test the potential of our method for a \red{very rough case}, where variance reduction methods are inefficient.
 \end{itemize}
 \end{frame}
+
+
+\begin{frame}[plain, shrink=2]\frametitle{\centerline{Error comparison}}
+\vspace{0.2cm}
+$\red{\mathcal{E}_{\text{tot}}}$: the total error of approximating the  expectation in \eqref{BS_formula_rbergomi}.
+\begin{itemize}
+	\item When using ASGQ estimator, $Q_N$
+	\begin{align*}
+	\red{\mathcal{E}_{\text{tot}}} & \le \abs{C_{\text{RB}}-C_{\text{RB}}^N}+\abs{C_{\text{RB}}^N-Q_{N}} \le \green{\mathcal{E}_B(N)}+ \blue{\mathcal{E}_Q(\text{TOL}_{\text{ASGQ}},N)},
+	\end{align*}
+where  $\mathcal{E}_Q$ is the quadrature error, $\green{\mathcal{E}_B}$  is the bias, $\blue{\text{TOL}_{\text{ASGQ}}}$ is a user selected tolerance for ASGQ method.
+\item When using randomized QMC or MC estimator,   $Q^{\text{MC (QMC)}}_N$
+		\begin{align*}
+	\red{\mathcal{E}_{\text{tot}}} & \le \abs{C_{\text{RB}}-C_{\text{RB}}^N}+\abs{C_{\text{RB}}^N-Q^{\text{MC (QMC)}}_N} \le \green{\mathcal{E}_B(N)}+ \blue{\mathcal{E}_{S}(M,N)},
+	\end{align*}
+	where  $\blue{\mathcal{E}_S}$ is the statistical error, $\blue{M}$ is the number of samples used for MC or randomized QMC method.
+	\item $\blue{M^{\text{QMC}}}$ and $\blue{M^{\text{MC}}}$, are chosen so that $\blue{\mathcal{E}_{S,\text{QMC}}(M^{\text{QMC}})}$ and  \blue{$\mathcal{E}_{S,\text{MC}}(M^{\text{MC}})$} satisfy
+	\begin{align*}
+	\blue{\mathcal{E}_{S,\text{QMC}}(M^{\text{QMC}})}=\blue{\mathcal{E}_{S,\text{MC}}(M^{\text{MC}})}= \green{\mathcal{E}_B(N)}=\frac{\red{\mathcal{E}_{\text{tot}}}}{2}\PERIOD
+	\end{align*}
+\end{itemize}
+\end{frame}
+
 \begin{frame}[plain]\frametitle{\centerline{Relative errors and computational gains}}
 \begin{table}[!h]
 	\centering
-	\caption{ In this table, we highlight the computational gains achieved by ASGQ and QMC over MC method to meet a certain error tolerance. We note that the ratios are computed \red{for the best configuration with Richardson extrapolation for each method}. The ratios $\left(\text{MC}/ \text{ASGQ} \right)$ and $\left(\text{MC}/ \text{QMC} \right)$ are referred to  \red{CPU time ratios}.}
+	\caption{ In this table, we highlight the computational gains achieved by ASGQ and QMC over MC method to meet a certain error tolerance. We note that the ratios are computed \red{for the best configuration with Richardson extrapolation for each method}. The ratios $\left(\text{ASGQ}/ \text{MC} \right)$ and $\left(\text{QMC}/ \text{MC} \right)$ are referred to  \red{CPU time ratios}.}
 		\begin{tabular}{l*{4}{c}r}
 			\toprule[1.5pt]
-			\textbf{Parameters}              &  \textbf{Relative error}  & \textbf{ $\left(\text{MC}/ \text{ASGQ} \right)$} & \textbf{$\left(\text{MC}/ \text{QMC} \right)$}\\
+			\textbf{Parameters}              &  \textbf{Relative error}  & \textbf{ $\left(\text{ASGQ}/ \text{MC} \right)$} & \textbf{$\left(\text{QMC}/ \text{MC} \right)$}\\
 			\hline
-			Set $1$  &  $1\%$&  $ 15$ &  $10$\\	
+			Set $1$  &  $1\%$&  $ 7\%$ &  $10\%$\\	
 			
 			\hline
-		Set $2$    &  $0.2\%$&  $21.5$ &  $73.2$\\		
+		Set $2$    &  $0.2\%$&  $5\%$ &  $1\%$\\		
 			\hline
-		Set $3$   &  $0.4\%$&  $26.7$ &  $21.3$\\	
+		Set $3$   &  $0.4\%$&  $4\%$ &  $5\%$\\	
 			\hline
-		Set $4$ &  $2\%$&  $5$ &  $10$\\	
+		Set $4$ &  $2\%$&  $20\%$ &  $10\%$\\	
 			\bottomrule[1.25pt]
 		\end{tabular}
 	\label{table:Summary of our numerical results.}
@@ -965,15 +1013,47 @@ where  $\mathcal{E}_Q$ is the quadrature error, $\green{\mathcal{E}_B}$  is the 
 
 \begin{itemize}
 \item  Conditional expectations for \red{numerical smoothing}. 
-\item  \red{hierarchical deterministic quadrature methods}.
+\item  \red{Hierarchical deterministic quadrature methods}.
 \end{itemize}
 
 \item Given a sufficiently small relative error tolerance, our proposed methods demonstrate \red{substantial computational gains over the standard MC method}, for different parameter constellations.
+
+$\Rightarrow$  \red{Huge cost reduction} when \red{calibrating} under the rough Bergomi model.
 \item Accelerating our novel methods can be achieved by using better QMC or ASGQ methods.
+%\item More details can be found in  \citefull{bayer2018hierarchical}.
+
+\item More details can be found in 
+
+\fullcite{bayer2018hierarchical}.
 \end{itemize}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\medskip
+%\section{References}
+
+%\begin{frame}[plain,allowframebreaks]
+%	\frametitle{References}
+%%	\raggedright
+%%	\nocite{*}
+%\small \bibliographystyle{apalike}
+%	\bibliography{smoothing_rBergomi}
+%\end{frame}
+
+\begin{frame}[plain,allowframebreaks]
+	\frametitle{References}
+\printbibliography
+\end{frame}
+
+
+
 
 
 %\section*{}
@@ -982,25 +1062,6 @@ where  $\mathcal{E}_Q$ is the quadrature error, $\green{\mathcal{E}_B}$  is the 
 		Thank you for your attention
 	\end{center}
 \end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%\medskip
-%\section{References}
-
-\begin{frame}[plain,allowframebreaks]
-	\frametitle{References}
-%	\raggedright
-%	\nocite{*}
-\small \bibliographystyle{apalike}
-	\bibliography{smoothing_rBergomi}
-\end{frame}
-
-
-
-
-
 
 
 
