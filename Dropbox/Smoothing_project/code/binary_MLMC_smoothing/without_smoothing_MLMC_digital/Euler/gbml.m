@@ -20,7 +20,8 @@ global S0 K T r sig option
 S0  = 100;   % initial asset value
 K   = 100;   % strike
 T   = 1;     % maturity
-r   = 0.05;  % risk-free interest rate
+% r   = 0.05;  % risk-free interest rate
+r   = 0.0;  % risk-free interest rate
 sig = 0.2;   % volatility
 
 %

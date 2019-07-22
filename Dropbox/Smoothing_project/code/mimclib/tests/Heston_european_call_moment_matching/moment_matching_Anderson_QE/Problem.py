@@ -1,7 +1,7 @@
 import numpy as np
 import time
 import scipy.stats as ss
-
+from scipy.stats import norm
 
 class Problem(object):
 
@@ -12,14 +12,13 @@ class Problem(object):
     K=None         # Strike price
     T=1.0                      # maturity
     sigma=None    # volatility
-    N=16 # number of time steps which will be equal to the number of brownian bridge components (we set is a power of 2)
+    N=4 # number of time steps which will be equal to the number of brownian bridge components (we set is a power of 2)
     d=None
     dt=None
 
     #exact=6.332542 #  S_0=K=100, T=1, r=0,rho=-0.9, v_0=0.04, theta=0.0025, xi=0.1,\kapp=1   (n=1)
     #exact=6.445535 #  S_0=K=100, T=1, r=0,rho=-0.9, v_0=0.04, theta=0.005, xi=0.1,\kapp=1  (n=2)
     exact=10.86117 #  S_0=K=100, T=1, r=0,rho=-0.3, v_0=0.09, theta=0.09, xi=1,\kapp=2.7778 set 4
-    #exact=4.403384 #  S_0=K=100, T=1, r=0,rho=-0.9, v_0=0.04, theta=0.04, xi=1,\kapp=0.5 set 5
     yknots_right=[]
     yknots_left=[]
 
@@ -33,7 +32,7 @@ class Problem(object):
         self.S0=100
         self.K= coeff*self.S0        # Strike price and coeff determine if we have in/at/out the money option
         
-        self.rho=-0.3
+        self.rho=-0.3 
         self.kappa= 2.7778
         self.xi=1.0
         self.v0=0.09
@@ -69,8 +68,9 @@ class Problem(object):
        
         self.yknots_left=self.yknots_right
 
+      
         self.exp_kappa=np.exp(-self.kappa*self.dt)
-        self.exp_2_kappa=np.exp(-2*self.kappa*self.dt)
+        self.U_v= np.random.uniform(0,1,self.N)
         
 
   
@@ -102,8 +102,7 @@ class Problem(object):
         start_time=time.time()
 
         
-
-        # step 1 # get the two partitions of coordinates y_1 for the volatility path  and y_s for  the asset path  
+# step 1 # get the two partitions of coordinates y_1 for the volatility path  and y_s for  the asset path  
         y1=y[0:self.N] # this points are related to the volatility path
 
         y2=[self.N]
@@ -118,6 +117,7 @@ class Problem(object):
         # step 2: computing the location of the kink
         #bar_z=self.newtons_method(y_s[0],ys,y1[0],y1[1:self.N])
         bar_z=self.newtons_method(y2[0],y2s,y1[0],y1[1:self.N])
+        #bar_z=0
         
         # step 3: performing the pre-intgeration step wrt kink point
     
@@ -182,53 +182,52 @@ class Problem(object):
 
     # This function simulates a 1D heston trajectory for stock price and volatility paths
     def stock_price_trajectory_1D_heston(self,y1,y,yv1,yv):
-        # dW=[]
-        # dW.append(y1)
-        # dW[1:]=[np.array(y[i]) for i in range(0,len(y))]
-        # dW=np.array(dW)*np.sqrt(self.dt)
-        
-         # #  hierarhcical
         bb=self.brownian_increments(y1,y)
         dW= [bb[0,i+1]-bb[0,i] for i in range(0,self.N)] 
-
+    
         # #  hierarhcical
         bb_v=self.brownian_increments(yv1,yv)
         dW_v= [bb_v[0,i+1]-bb_v[0,i] for i in range(0,self.N)] 
 
-        # # # non hierarhcical
-        # dW_v=[]
-        # dW_v.append(yv1)
-        # dW_v[1:]=[np.array(yv[i]) for i in range(0,len(yv))]
-        # dW_v=np.array(dW_v)*np.sqrt(self.dt)
-        
-
-        
         dW_s= self.rho *np.array(dW_v)+ np.sqrt(1-self.rho**2) * np.array(dW)
         y1s= self.rho *yv1 + np.sqrt(1-self.rho**2) * y1
 
-
-        #option1 
-        # dbb1=dW-(self.dt/np.sqrt(self.T))*y1 # brownian bridge increments dbb_i (used later for the location of the kink point)
-        # dbbv=dW_v*np.sqrt(self.dt) -(self.dt/np.sqrt(self.T))*yv1 # brownian bridge increments dbb_i (used later for the location of the kink point)
-        # dbb_s= self.rho *np.array(dbbv) + np.sqrt(1-self.rho**2) * np.array(dbb1)
         # #option2
         dbb_s=dW_s-(self.dt/np.sqrt(self.T))*y1s
 
-
-
         X=np.zeros(self.N+1) #here will store the asset trajectory
         V=np.zeros(self.N+1) #here will store the  volatility trajectory
-        Gamma_sqaure=np.zeros(self.N+1)
-        
+
+        phi_c=1.5
+
         X[0]=self.S0
         V[0]=self.v0
-
         
         
         for n in range(1,self.N+1):
             X[n]=X[n-1]*(1+np.sqrt(V[n-1])*dW_s[n-1])
-            Gamma_sqaure[n-1]=(1/self.dt)*np.log2(1+ (0.5 * (self.xi**2)*(1/self.kappa)* V[n-1]*(1-self.exp_2_kappa))/ (self.exp_kappa*V[n-1]+self.theta*(1-self.exp_kappa)**2))
-            V[n]=(self.exp_kappa*V[n-1] +self.theta*(1-self.exp_kappa))*np.exp(-0.5*Gamma_sqaure[n-1]*self.dt+np.sqrt(Gamma_sqaure[n-1])*dW_v[n-1] )
+              #compute m and s^2 from equations (17) and (18) in Anderson 2007
+            m=self.theta+(V[n-1]-self.theta)* self.exp_kappa
+            s_square=((V[n-1]* (self.xi**2)* self.exp_kappa)/(self.kappa))*(1-self.exp_kappa)+((1-self.exp_kappa)**2)*((self.theta*(self.xi**2))/(2*self.kappa))
+            phi=s_square/(m**2)
+            if phi <=phi_c:
+                #Compute a and b from equations (28) and (27) in Anderson 2007
+                b_square=(2/phi)-1+np.sqrt(2/phi)*np.sqrt((2/phi)-1)
+                a=m/(1+b_square)
+            
+                Z_v=norm.ppf(self.U_v[n-1],0,1)
+
+                V[n]=a*((np.sqrt(b_square)+Z_v)**2)
+            else:   
+                #Compute beta and p according to equations (30) and (29) in Anderson 2007
+                p=(phi-1)/(phi+1)
+                beta=(1-p)/m
+                if  0<=self.U_v[n-1]<=p:
+                    V[n]=0
+                else:
+                    V[n]=(1/beta)*np.log2((1-p)/(1-self.U_v[n-1]))
+
+
             
         return X[-1],dbb_s,V,y1s
        

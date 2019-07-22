@@ -1223,14 +1223,16 @@ where
 %\end{align*}
 %implying  that the process $v_t$ is strictly positive.
 
-\subsubsection{Discretization of Heston model with a non smooth transformations for the volatility process}\label{sec:Discretization of Heston model with a non smooth transformations for the volatility process}
-Given that the SDE for the asset path is now dependent  upon the solution of the second volatility SDE in \eqref{eq:dynamics Heston}, it is necessary to simulate the volatility process first and then utilize this "volatility path" in order to simulate the asset path. In the case of the original GBM SDE it is possible to use It\^o's Lemma to directly solve for $S_t$. However, we are unable to utilize that procedure here and must use a numerical approximation in order to obtain both paths. Furthermore,  to avoid  problems with negative values of the volatility process $v_t$, many non smooth transformations  were introduced in the literature (see \cite{lord2010comparison}). We introduce $f_1, f_2$, and $f_3$, which with different choices implies different schemes, and   apply Forward Euler scheme to descretize \ref{eq:dynamics Heston}  results in
+%\subsection{Schemes to simulate the Heston dynamics}\label{sec:Schemes to simulate the Heston dynamics}
+Given that the SDE for the asset path is now dependent  upon the solution of the second volatility SDE in \eqref{eq:dynamics Heston}, it is necessary to simulate the volatility process first and then utilize this "volatility path" in order to simulate the asset path. In the case of the original GBM SDE it is possible to use It\^o's Lemma to directly solve for $S_t$. However, we are unable to utilize that procedure here and must use a numerical approximation in order to obtain both paths. In the following, we try to give an overview of the methods that we can use in our context. These methods mainly differs by the way it simulates the volatility process to ensure its positiveness.
+\subsubsection{Fixed Euler scheme}\label{sec:Discretization of Heston model with a non smooth transformations for the volatility process}
+In this context, one can use Forward Euler scheme to simulate the Heston model, and to avoid  problems with negative values of the volatility process $v_t$, many fixes  were introduced in the literature (see \cite{lord2010comparison}). We introduce $f_1, f_2$, and $f_3$, which with different choices implies different schemes, and   apply Forward Euler scheme to discretize \ref{eq:dynamics Heston}  results in
 \begin{align}\label{eq:FE_Heston_discrete}
-S_{t+\Delta t}&= S_t +\mu S_t \Delta t+\sqrt{v_t \Delta t}S_t Z_s \nonumber\\
-v_{t+\Delta t}&=f_1(v_t)+\kappa (\theta-f_2(v_t)) \Delta t+\xi \sqrt{f_3(v_t) \Delta t} Z_v \nonumber\\
-v_{t+\Delta t}&=f_3(v_{t+\Delta t}) \COMMA
+\hat{S}_{t+\Delta t}&= \hat{S}_t +\mu \hat{S}_t \Delta t+\sqrt{\hat{V}_t \Delta t} \hat{S}_t Z_s \nonumber\\
+\hat{V}_{t+\Delta t}&=f_1(\hat{V}_t)+\kappa (\theta-f_2(\hat{V}_t)) \Delta t+\xi \sqrt{f_3(\hat{V}_t) \Delta t} Z_V \nonumber\\
+\hat{V}_{t+\Delta t}&=f_3(\hat{V}_{t+\Delta t}) \COMMA
 \end{align}
-where $Z_s$ and $Z_v$  are two correlated standard normal variables with correlation $\rho$, such that $Z_s=\rho Z_v+\sqrt{1-\rho^2} Z_t$. 
+where $Z_s$ and $Z_V$  are two correlated standard normal variables with correlation $\rho$, such that $Z_s=\rho Z_V+\sqrt{1-\rho^2} Z_t$. 
 
 \FloatBarrier
 \begin{table}[h!]
@@ -1239,21 +1241,86 @@ where $Z_s$ and $Z_v$  are two correlated standard normal variables with correla
 		\toprule[1.5pt]
 	Scheme &  $f_1$& $f_2$  & $f_3$     \\
 	\hline
-	full truncation scheme & $v_t$ &  $v_t^+$&$v_t^+$\\
-	Partial truncation scheme & $v_t$ &  $v_t$&$v_t^+$\\
-	The reflection scheme  &$\abs{v_t}$ & $\abs{v_t}$& $\abs{v_t}$\\
+	full truncation scheme & $\hat{V}_t$ &  $\hat{V}_t^+$&$\hat{V}_t^+$\\
+	Partial truncation scheme & $\hat{V}_t$ &  $\hat{V}_t$&$\hat{V}_t^+$\\
+	The reflection scheme  &$\abs{\hat{V}_t}$ & $\abs{\hat{V}_t}$& $\abs{\hat{V}_t}$\\
 			\bottomrule[1.25pt]
 	\end{tabular}
 	\label{Numerical schemes for CIR process}
 \end{table}
 \FloatBarrier
-where  $v_t^+=\max(0,v_t)$.
+where  $\hat{V}_t^+=\max(0,\hat{V}_t)$.
 
-\cite{lord2010comparison} suggest that the Full Truncation method is the "best" option in terms of weak error convergence. Therefore,  we use this scheme for this approach. 
+\cite{lord2010comparison} suggest that the Full Truncation method is the optimal option in terms of weak error convergence and robustness with respect to the parameters of the model. Therefore,  we use this scheme for this approach. 
+
+\subsubsection{Euler schemes with moment matching}\label{sec:Euler schemes with moment matching}
+We consider two moment matching Euler schemes that were suggested by Andersen and Brotherton-Ratcliffe \cite{andersen2005extended} (we call it ABR scheme) and by Anderson in \cite{andersen2007efficient} (we choose the QE method that was reported to have the optimal results). 
+\subsubsection*{The ABR method}\label{sec:The ABR method}
+The ABR method is suggested in \cite{andersen2005extended}, where the
+variance $v$ is assumed to be locally lognormal, where the parameters are determined such that the first two moments of the discretization coincide with the theoretical moments, that is 
+\begin{align}\label{eq: vol_moment_matching}
+\hat{V}(t+\Delta t)&= \left(e^{-\kappa \Delta t}  \hat{V}(t) + \left( 1-e^{-\kappa \Delta t}\right) \theta  \right) e^{-\frac{1}{2} \Gamma(t)^2 \Delta t+\Gamma(t) \Delta W_v(t)}\nonumber\\
+\Gamma(t)^2 &=\Delta t^{-1} \log \left(  1+ \frac{\frac{1}{2}\xi^2 \kappa^{-1} \hat{V}(t) (1-e^{-2 \kappa \Delta t})}{\left( e^{-\kappa \Delta t} \hat{V}(t) +(1-e^{- \kappa \Delta t}) \theta \right)^2 }\right)
+\end{align}
+As reported in \cite{lord2010comparison}, the scheme, being very easy to implement, is much more effective than many of the Euler fixes, however, it was reported that it has a bad weak error behavior that is not robust with parameters values, which is something that we need to check in our setting!
+\subsubsection*{The QE method}\label{sec:The QE method}
+On the other hand, and using the same idea of moment matching, Anderson in\cite{andersen2007efficient}, suggested  more discretisations for the Heston model similar to \eqref{eq: vol_moment_matching} and taking the shape of the Heston density function into
+account.  These schemes have negligible bias, at the cost of a more complex implementation than  the one introduced by \cite{andersen2005extended}. As reported by \cite{andersen2007efficient}, the QE method is the optimal scheme to use and it follows the following algorithm.
+\begin{enumerate}
+\item Select some arbitrary level $\Psi_c \in [1,2]$.
+\item  Given $\hat{V}(t)$, compute $m$ and $s^2$ given by
+\begin{align*}
+m &=\expt{V(t+\Delta t) \mid V(t)=\hat{V}(t)}=\theta+(\hat{v}(t)-\theta) e^{-\kappa \Delta t} \\
+s^2 &= \text{Var}\left[V(t+\Delta t) \mid V(t)=\hat{V}(t)\right]=\frac{\hat{V}(t) \xi^2 e^{-\kappa \Delta t}}{\kappa} (1-e^{-\kappa \Delta t}) +\frac{\theta \xi^2}{2 \kappa} (1-e^{-\kappa \Delta t})^2.
+\end{align*}
+\item Compute $\Psi=s^2/m^2$.
+\item Draw a uniform random number $U_V$.
+\item If $\Psi\le \Psi_c$
+\begin{enumerate}
+\item[i)] Compute $a$ and $b$ given by
+\begin{align*}
+b^2&=2 \Psi^{-1}-1+\sqrt{2 \Psi^{-1}}\sqrt{2 \Psi^{-1}-1}\\
+a&=\frac{m}{1+b^2}
+\end{align*}
+\item[ii)] Compute $Z_V=\Phi^{-1}(U_V)$, where $\Phi^{-1}$ is the inverse cumulative
+Gaussian distribution function.
+\item[iii)] Set $\hat{V}(t+\Delta t)=a(b+Z_V^2)^2$.
+\end{enumerate}
+\item Otherwise, if $\Psi >\Psi_c$
+
+\begin{enumerate}
+\item[i)] Compute $p$ and $\beta$ according to 
+\begin{align*}
+p&=\frac{\Psi-1}{\Psi-1}\\
+\beta&=\frac{1-p}{m}
+\end{align*}
+\item[ii)] Set $\hat{V}(t+\Delta t)=h^{-1}(U_V; p,\beta)$, where $h^{-1}$ is given by
+
+ \[
+    h^{-1}(u; p,\beta)=\left\{
+                \begin{array}{ll}
+                  0, \quad  0 \le u \le p\\
+                   \beta^{-1} \log\left(\frac{1-p}{1-u}\right), \quad  p< u \le 1
+                \end{array}
+              \right.
+  \]
+\end{enumerate}
+\end{enumerate}
+
+Compared to ABR scheme, the QE scheme may have a better weak error behavior with the disadvantage of being more costly. Furthermore, the QE algorithm uses two different distributions to model the volatility depending on the initial value of the volatility!
+\subsubsection{Kahl-Jackel Scheme}
+\cite{kahl2006fast} suggested discretizing the volatility process using an implicit Milstein scheme, coupled with their “IJK” discretization for the stock process. Specifically, they propose the scheme
+\begin{align}
+\log(\hat{X}(t+\Delta t))&=\log(\hat{X}(t))-\frac{\Delta t}{4} \left(\hat{V}(t+\Delta t)+ \hat{V}(t) \right) +\rho \sqrt{\hat{V}(t)} Z_V \sqrt{\Delta t}  \nonumber\\
+& +\frac{1}{2} \left(\sqrt{\hat{V}(t+\Delta t)}+ \sqrt{\hat{V}(t)} \right) \left(Z_x \sqrt{\Delta t}- \rho Z_V \sqrt{\Delta t}  \right) +\frac{\xi}{2} \rho  \Delta t (Z_V^2-1) \nonumber\\
+ \hat{V}(t+\Delta t)&=\frac{\hat{V}(t)+\theta \kappa \Delta t+\xi \sqrt{\hat{V}(t)} Z_V \sqrt{\Delta t} +\frac{\xi^2}{4} \Delta t (Z_V^2-1) }{1+ \kappa \Delta t }
+\end{align}
+
+It is easy to check that this discretization scheme will result in positive paths for the $V$ process if $4 \kappa \theta >\xi^2$ (which is rarely satisfied in practice). Unfortunately \cite{kahl2006fast} does not provide a solution for this problem, but it seems reasonable to use a truncation scheme similar to those presented in Section \ref{sec:Discretization of Heston model with a non smooth transformations for the volatility process}.  Therefore, we do not test this scheme in our numerical experiments since we think that it will have similar issues that we observed for the full truncation scheme presented in Section \ref{sec:Discretization of Heston model with a non smooth transformations for the volatility process}. Furthermore, it was shown that the convergence of the weak rate of the IJK-IMM scheme  somewhat erratic, especially for cases  $4 \kappa \theta \le \xi^2$.
 
 \subsubsection{Discretization of Heston model with the volatility process Simulated using the sum of  Ornstein-Uhlenbeck (Bessel) processes}\label{sec:Discretization of Heston model with the volatility process Simulated using the sum of  Ornstein-Uhlenbeck (Bessel) processes}
 
-Since we are using ASGQ which is very sensitive to the smoothness of the integrand. We found numerically (see section \ref{sec:Comparison between the two approaches of simulating the volatlity process}) that using a non smooth transformation to ensure the positiveness of the volatility process deteriorates the performance of the ASGQ. An alternative way to guarantee the positiveness of the volatility process is to simulate it as  the sum of  Ornstein-Uhlenbeck (Bessel) processes.
+Since we are using ASGQ which is very sensitive to the smoothness of the integrand. We found numerically (see section \ref{sec:On the choice of the simulation scheme of the Heston model}) that using a non smooth transformation to ensure the positiveness of the volatility process deteriorates the performance of the ASGQ. An alternative way to guarantee the positiveness of the volatility process is to simulate it as  the sum of  Ornstein-Uhlenbeck (Bessel) processes.
 
 In fact, it is well known that any Ornstein-Uhlenbeck (OU) process is normally distributed. Thus, the sum of $n$ squared OU processes is chi-squared distributed with $n$ degrees of freedom, where $n \in \nset$. Let us define $\mathbf{X}$ to be a $n$-dimensional vector valued OU process with
 \begin{equation}\label{equivalent OU process} 
@@ -1305,54 +1372,187 @@ $$ \alpha=-\frac{\kappa}{2},\quad \beta=\frac{\xi}{2}, \quad n=\frac{-2 \theta \
 The previous derivation can can be generalized to cases where $n$ is not an integer by considering a time-change of a squared Bessel process (see Chapter 6 in \cite{jeanblanc2009mathematical} for details). 
 \end{remark}
 
-\subsubsection{Comparison between the two approaches of simulating the volatility process ($n=1$)}\label{sec:Comparison between the two approaches of simulating the volatlity process}
-In this section, we try to compare  the two approaches, discussed  in Sections \ref{sec:Discretization of Heston model with a non smooth transformations for the volatility process} and \ref{sec:Discretization of Heston model with the volatility process Simulated using the sum of  Ornstein-Uhlenbeck (Bessel) processes}, to simulate the volatility process. The comparison is done in terms of mixed differences convergence rates which, as pointed out in \cite{haji2016multi}, are a key determinant for the optimal performance of ASGQ.
+\subsubsection{On the choice of the simulation scheme of the Heston model}\label{sec:On the choice of the simulation scheme of the Heston model}
+In this section, we try to determine the optimal  scheme for simulating the Heston model defined in \ref{eq:dynamics Heston}.  In the literature  \cite{andersen2007efficient, lord2010comparison,alfonsi2010high}, more focus was on designing schemes that i) ensures the positiveness  of the volatility process and ii) has a good weak error behavior. In our setting, an optimal scheme is defined through two properties: i) the behavior of mixed rates which is an important feature for an  optimal performance of ASGQ, and  ii) the behavior of the weak error in order to apply Richardson extrapolation when it is needed. 
+\subsubsection{Comparison in terms of mixed differences rates}
+In this section, we try to compare  the four  approaches of simulating Heston dynamics, which are : i) the full truncation scheme discussed in Section \ref{sec:Discretization of Heston model with a non smooth transformations for the volatility process},  ii) the ABR scheme discussed in Section \ref{sec:The ABR method},  ii) the QE scheme discussed in Section \ref{sec:The QE method}, and iv) the smooth scheme bases on sum of square of OU processes discussed in Section \ref{sec:Discretization of Heston model with the volatility process Simulated using the sum of  Ornstein-Uhlenbeck (Bessel) processes}. The comparison is done in terms of mixed differences convergence (defined in \eqref{eq:Work_error_contributions}) rates  which, as pointed out in \cite{haji2016multi}, are a key determinant for the optimal performance of ASGQ.
+\begin{align}\label{eq:Work_error_contributions}
+\Delta E_{\boldsymbol{\beta}} &= \abs{Q^{\mathcal{I} \cup \{\boldsymbol{\beta}\}}_N-Q^{\mathcal{I}}_N}.
+\end{align}
+For comparison, we use basically four sets of examples  given in table \ref{table:Reference solution, for different parameter constellations.}. The first two sets of parameters we used we test two different cases where the first case corresponds to $n=1$ and the second one corresponds to $n=2$. On the other hand, for the two remaining sets we used similar parameters tested in \cite{lord2010comparison}, where the set $3$  stems from Broadie and Kaya \cite{broadie2006exact}, and is the hardest of all examples. The example of set $4$ parameters  stems from Andersen \cite{andersen2007efficient}, where it is used to represent the market for long-dated FX options.  We also point out that only the second set of parameters  satisfies the Feller condition, that is $4 \kappa \theta > \xi^2$.
 
-For comparison, we use an example of the single European call option under Heston model whose parameters result in $n=1$ (using a  single OU process for simulating the volatility process in approach given by Section \ref{sec:Discretization of Heston model with the volatility process Simulated using the sum of  Ornstein-Uhlenbeck (Bessel) processes}). For instance we tested the example with  that  parameters: $S_0=K=100$, $v_0=0.04$, $\mu=0$,  $\rho=-0.9$, $\kappa=1$, $\xi=0.1$, $\theta=\frac{\xi^2}{4 \kappa}=0.0025$. The reference value in this case is $6.3325$ (computed using Premia with cf\_call\_heston method as explained in \cite{heston1993closed}). For solving the root finding problem we follow similar approach to the one in Section \ref{sec:Determining the kink location} with substituting $\sigma$ with $\sqrt{v_i}$ in $f_i$, and we used $\beta=32$ for all cases.
+\FloatBarrier
+\begin{table}[!h]
+	\centering
+	\begin{small}
+	\begin{tabular}{l*{2}{c}r}
+	\toprule[1.5pt]
+		Parameters            & Reference solution    \\
+		\hline
 
-Figures \ref{fig:first_diff_Heston_call_N_2} and \ref{fig:first_diff_Heston_call_N_4} show that there is a great advantage in using the smooth approach rather than the full truncation scheme, which clearly have poorer first differences convergence rates than the ones obtained using the smooth transformation, implying that using the  approach introduced in Section \ref{sec:Discretization of Heston model with the volatility process Simulated using the sum of  Ornstein-Uhlenbeck (Bessel) processes} is the optimal choice for the use of ASGQ. Therefore, in the following examples, we simulate the volatility process in the context  of Heston model using the approach introduced in Section \ref{sec:Discretization of Heston model with the volatility process Simulated using the sum of  Ornstein-Uhlenbeck (Bessel) processes}. We mention that we observed similar behavior as illustrated by figures \ref{fig:first_diff_Heston_call_N_2} and \ref{fig:first_diff_Heston_call_N_4} for higher number of time steps $N$.
+			Set $1$:	 $S_0=K=100$, $v_0=0.04$, $\mu=0$,  $\rho=-0.9$, $\kappa=1$, $\xi=0.1$, $\theta=\frac{\xi^2}{4 \kappa}=0.0025$, $(n=1)$.  & $6.332542$  \\	
+				Set $2$: $S_0=K=100$, $v_0=0.04$, $\mu=0$,  $\rho=-0.9$, $\kappa=1$, $\xi=0.1$, $\theta=\frac{\xi^2}{4 \kappa}=0.005$, $(n=2)$.  & $6.445535$  \\	
+					Set $3$:	$S_0=K=100$, $v_0=0.09$, $\mu=0$,  $\rho=-0.3$, $\kappa=2.7778$, $\xi=1$, $\theta=\frac{\xi^2}{4 \kappa}=0.09$, $(n=1)$.  & $10.86117$   \\
+						Set $4$:	$S_0=K=100$, $v_0=0.04$, $\mu=0$,  $\rho=-0.9$, $\kappa=0.5$, $\xi=1$, $\theta=0.04$.  & $4.403384$\\
+	\bottomrule[1.25pt]
+	\end{tabular}
+\end{small}
+	\caption{Reference solution using Premia with cf\_call\_heston method as explained in \cite{heston1993closed}, for different parameter constellations. By $n$ we refer to the number of OU processes for simulating the volatility process in approach given by Section \ref{sec:Discretization of Heston model with the volatility process Simulated using the sum of  Ornstein-Uhlenbeck (Bessel) processes}}
+	\label{table:Reference solution, for different parameter constellations.}
+\end{table}
+\FloatBarrier
+
+In our numerical experiments, we only observed differences of mixed differences rates related to volatility coordinates, which is expected since we use basically schemes that only differ by the way it simulates the volatility process. Figures \ref{fig:first_diff_Heston_call_N_4_set2}, \ref{fig:first_diff_Heston_call_N_4_set3}, \ref{fig:first_diff_Heston_call_N_4_set4} and \ref{fig:first_diff_Heston_call_N_4_set5} show a comparison of first differences rates related to volatility coordinates for the different schemes and for the different examples. From this Figures, we have the following conclusions
+\begin{enumerate}
+\item In all examples, the full truncation scheme is the worst scheme to use in terms of first differences rates.
+\item The scheme based on the sum of square of OU processes have a good performance for the first two sets. However, we observed a very bad performance for the example of Set $3$ parameters!  This can be explained by the fact that when simulating the OU process (given by \eqref{equivalent OU process}) using Forward Euler scheme, we have the discretized Euler scheme with $N$ time steps given by
+\begin{align*}
+X_N=(1+\alpha \Delta t)^N X_0+\beta \sum_{m=1}^N (1+\alpha \Delta t)^{N-m} \Delta W_n
+\end{align*}
+implying 
+
+\begin{align}
+Var[X_N]=\beta^2  \sum_{m=1}^N (1+\alpha \Delta t)^{2(N-m)} \Delta t.
+\end{align}
+For instance, for set $1$ and $2$, we have $\beta=0.05$ and $\alpha=-0.5$ implying $Var[X_4]=1.8 \times 10^{-3}$, and for the case of set $3$, we have $\beta=0.5$ and $\alpha\approx-1.4$ implying $Var[X_4]\approx   10^{-1}$, meaning that the variability of the stochastic term for small values of number of times steps is very big resulting in very noisy paths around the mean, and therefore a very bad performance for the mixed differences as was observed.  In Figure \ref{fig:paths of process $X$ simulated using forward Euler}, we show an illustration for this by comparing paths of the process $X$ given by \eqref{equivalent OU process} for both sets of parameters $1$ and $3$ in Table \ref{table:Reference solution, for different parameter constellations.}. 
+
+\FloatBarrier
+\begin{figure}[htb]
+	\centering % <-- added
+	\begin{subfigure}{0.4\textwidth}
+		\includegraphics[width=\linewidth]{./figures/Heston_single_call_smooth_vol/paths_trajectory/paths_smooth_vol_scheme_set1_N4_X}
+		\caption{}
+		\label{fig:1}
+	\end{subfigure}\hfil %% <-- added
+	\begin{subfigure}{0.4\textwidth}
+		\includegraphics[width=\linewidth]{./figures/Heston_single_call_smooth_vol/paths_trajectory/paths_smooth_vol_scheme_set3_N4_X}
+		\caption{}
+		\label{fig:2}
+	\end{subfigure}\hfil %% <-- added
+	\caption{$100$ paths of process $X$ given by \eqref{equivalent OU process} simulated using forward Euler. (a) Case of set $1$ parameters in Table \ref{table:Reference solution, for different parameter constellations.}, (b) Case of set $3$ parameters in Table \ref{table:Reference solution, for different parameter constellations.}.}
+	\label{fig:paths of process $X$ simulated using forward Euler}	
+\end{figure}
+\FloatBarrier
+
+\item  Both schemes based on moment matching (ABR and QE schemes) have the best performance in terms of mixed rates convergence and also they show robust behavior with respect to all examples with almost similar performance
+\end{enumerate}
  
+ \subsubsection*{Mixed differences for the case of Set 1 parameters}
 \FloatBarrier
-\begin{figure}[h!]
-	\centering
-	\begin{subfigure}{.4\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{./figures/Heston_single_call_full_truncation_vol/mixed_rates/set2/N_2/first_difference_heston_2steps_hierarchical_2}
+\begin{figure}[htb]
+	\centering % <-- added
+	\begin{subfigure}{0.4\textwidth}
+		\includegraphics[width=\linewidth]{./figures/Heston_single_call_full_truncation_vol/mixed_rates/set2/N_4/first_difference_heston_4steps_hierarchical_2}
 		\caption{}
-		\label{fig:sub3}
-	\end{subfigure}%
-	\begin{subfigure}{.4\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{./figures/Heston_single_call_smooth_vol/mixed_rates/set2/N_2/first_difference_heston_2steps_hierarchical_2}
+		\label{fig:1}
+	\end{subfigure}\hfil %% <-- added
+	\begin{subfigure}{0.4\textwidth}
+		\includegraphics[width=\linewidth]{./figures/Heston_single_call_ABR_moment_matching/mixed_rates/set2/N_4/first_difference_heston_4steps_hierarchical}
 		\caption{}
-		\label{fig:sub4}
+		\label{fig:2}
+	\end{subfigure}\hfil %% <-- added
+	\begin{subfigure}{0.4\textwidth}
+		\includegraphics[width=\linewidth]{./figures/Heston_single_call_QE_moment_matching/mixed_rates/set2/N_4/first_difference_heston_4steps_hierarchical}
+		\caption{}
+		\label{fig:3}
 	\end{subfigure}
-	\caption{The rate of error convergence of first order differences $\abs{\Delta \text{E}_{\boldsymbol{\beta}}}$, defined by \eqref{eq:Work_error_contributions}, ($\boldsymbol{\beta}=\mathbf{1}+k \bar{\boldsymbol{\beta}}$) for the example of single call option under Heston model using $N=2$ time steps. In this case, the first  dimension is used for the volatility noise (mainly $Z_v$ in \eqref{eq:FE_Heston_discrete}) and the final coordinate is related to $Z_t$ (used to get the noise related to the asset dynamics) (a) using full truncation as in Section \ref{sec:Discretization of Heston model with a non smooth transformations for the volatility process} (b) using the smooth transformation as in Section \ref{sec:Discretization of Heston model with the volatility process Simulated using the sum of  Ornstein-Uhlenbeck (Bessel) processes}. }
-	\label{fig:first_diff_Heston_call_N_2}
+		\begin{subfigure}{0.4\textwidth}
+		\includegraphics[width=\linewidth]{./figures/Heston_single_call_smooth_vol/mixed_rates/set2/N_4/first_difference_heston_4steps_spot_hierarchical_2}
+		\caption{}
+		\label{fig:4}
+	\end{subfigure}
+	\caption{The rate of error convergence of first order differences $\abs{\Delta \text{E}_{\boldsymbol{\beta}}}$, defined by \eqref{eq:Work_error_contributions}, ($\boldsymbol{\beta}=\mathbf{1}+k \bar{\boldsymbol{\beta}}$) for the example of single call option under Heston model, with parameters given by Set $1$ in Table \ref{table:Reference solution, for different parameter constellations.},  using $N=4$ time steps. In this case, we just show  the first  $4$ dimensions which are used for the volatility noise (mainly $dW_v$ in \eqref{eq:dynamics Heston}). (a) using full truncation as in Section \ref{sec:Discretization of Heston model with a non smooth transformations for the volatility process}, (b) using the ABR scheme as in Section \ref{sec:The ABR method}, (c) using the QE scheme as in Section \ref{sec:The QE method}, (d) using the smooth transformation as in Section \ref{sec:Discretization of Heston model with the volatility process Simulated using the sum of  Ornstein-Uhlenbeck (Bessel) processes}.}
+	\label{fig:first_diff_Heston_call_N_4_set2}	
 \end{figure}
 \FloatBarrier
 
+
+\subsubsection*{Mixed differences for the case of Set 2 parameters}
+
 \FloatBarrier
-\begin{figure}[h!]
-	\centering
-	\begin{subfigure}{.4\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{./figures/Heston_single_call_full_truncation_vol/mixed_rates/set2/N_4/first_difference_heston_4steps_hierarchical_2}
+\begin{figure}[htb]
+	\centering % <-- added
+	\begin{subfigure}{0.4\textwidth}
+		\includegraphics[width=\linewidth]{./figures/Heston_single_call_full_truncation_vol/mixed_rates/set3/N_4/first_difference_heston_4steps_hierarchical}
 		\caption{}
-		\label{fig:sub3}
-	\end{subfigure}%
-	\begin{subfigure}{.4\textwidth}
-		\centering
-		\includegraphics[width=1\linewidth]{./figures/Heston_single_call_smooth_vol/mixed_rates/set2/N_4/first_difference_heston_4steps_hierarchical_2}
+		\label{fig:1}
+	\end{subfigure}\hfil % <-- added
+	\begin{subfigure}{0.4\textwidth}
+		\includegraphics[width=\linewidth]{./figures/Heston_single_call_ABR_moment_matching/mixed_rates/set3/N_4/first_difference_heston_4steps_hierarchical}
 		\caption{}
-		\label{fig:sub4}
+		\label{fig:2}
+	\end{subfigure}\hfil % <-- added
+	\begin{subfigure}{0.4\textwidth}
+		\includegraphics[width=\linewidth]{./figures/Heston_single_call_QE_moment_matching/mixed_rates/set3/N_4/first_difference_heston_4steps_hierarchical}
+		\caption{}
+		\label{fig:3}
 	\end{subfigure}
-	\caption{The rate of error convergence of first order differences $\abs{\Delta \text{E}_{\boldsymbol{\beta}}}$, defined by \eqref{eq:Work_error_contributions}, ($\boldsymbol{\beta}=\mathbf{1}+k \bar{\boldsymbol{\beta}}$) for the example of single call option under Heston model using $N=4$ time steps. In this case, we just show  the first  $4$ dimensions which are used for the volatility noise (mainly $Z_v$ in \eqref{eq:FE_Heston_discrete}). (a) using full truncation as in Section \ref{sec:Discretization of Heston model with a non smooth transformations for the volatility process} (b) using the smooth transformation as in Section \ref{sec:Discretization of Heston model with the volatility process Simulated using the sum of  Ornstein-Uhlenbeck (Bessel) processes}. }
-	\label{fig:first_diff_Heston_call_N_4}
+		\begin{subfigure}{0.4\textwidth}
+		\includegraphics[width=\linewidth]{./figures/Heston_single_call_smooth_vol/mixed_rates/set3/N_2/first_difference_heston_2steps_spot_hierarchical}
+		\caption{}
+		\label{fig:4}
+	\end{subfigure}
+	\caption{The rate of error convergence of first order differences $\abs{\Delta \text{E}_{\boldsymbol{\beta}}}$, defined by \eqref{eq:Work_error_contributions}, ($\boldsymbol{\beta}=\mathbf{1}+k \bar{\boldsymbol{\beta}}$) for the example of single call option under Heston model, with parameters given by Set $2$ in Table \ref{table:Reference solution, for different parameter constellations.}, using $N=4$ time steps. In this case, we just show  the first  $4$ dimensions which are used for the volatility noise (mainly $dW_v$ in \eqref{eq:dynamics Heston}). (a) using full truncation as in Section \ref{sec:Discretization of Heston model with a non smooth transformations for the volatility process}, (b) using the ABR scheme as in Section \ref{sec:The ABR method}, (c) using the QE scheme as in Section \ref{sec:The QE method}, (d) using the smooth transformation as in Section \ref{sec:Discretization of Heston model with the volatility process Simulated using the sum of  Ornstein-Uhlenbeck (Bessel) processes}, here $N=2$.}
+	\label{fig:first_diff_Heston_call_N_4_set3}	
 \end{figure}
 \FloatBarrier
+\subsubsection*{Mixed differences for the case of Set 3 parameters}
 
+\FloatBarrier
+\begin{figure}[htb]
+	\centering % <-- added
+	\begin{subfigure}{0.4\textwidth}
+		\includegraphics[width=\linewidth]{./figures/Heston_single_call_full_truncation_vol/mixed_rates/set4/N_4/first_difference_heston_4steps_hierarchical}
+		\caption{}
+		\label{fig:1}
+	\end{subfigure}\hfil % <-- added
+	\begin{subfigure}{0.4\textwidth}
+		\includegraphics[width=\linewidth]{./figures/Heston_single_call_ABR_moment_matching/mixed_rates/set4/N_4/first_difference_heston_4steps_hierarchical}
+		\caption{}
+		\label{fig:2}
+	\end{subfigure}\hfil % <-- added
+	\begin{subfigure}{0.4\textwidth}
+		\includegraphics[width=\linewidth]{./figures/Heston_single_call_QE_moment_matching/mixed_rates/set4/N_4/first_difference_heston_4steps_hierarchical}
+		\caption{}
+		\label{fig:3}
+	\end{subfigure}
+		\begin{subfigure}{0.4\textwidth}
+		\includegraphics[width=\linewidth]{./figures/Heston_single_call_smooth_vol/mixed_rates/set4/N_4/first_difference_heston_4steps_spot_hierarchical}
+		\caption{}
+		\label{fig:4}
+	\end{subfigure}
+	\caption{The rate of error convergence of first order differences $\abs{\Delta \text{E}_{\boldsymbol{\beta}}}$, defined by \eqref{eq:Work_error_contributions}, ($\boldsymbol{\beta}=\mathbf{1}+k \bar{\boldsymbol{\beta}}$) for the example of single call option under Heston model, with parameters given by Set $3$ in Table \ref{table:Reference solution, for different parameter constellations.}, using $N=4$ time steps. In this case, we just show  the first  $4$ dimensions which are used for the volatility noise (mainly $dW_v$ in \eqref{eq:dynamics Heston}). (a) using full truncation as in Section \ref{sec:Discretization of Heston model with a non smooth transformations for the volatility process}, (b) using the ABR scheme as in Section \ref{sec:The ABR method}, (c) using the QE scheme as in Section \ref{sec:The QE method}, (d) using the smooth transformation as in Section \ref{sec:Discretization of Heston model with the volatility process Simulated using the sum of  Ornstein-Uhlenbeck (Bessel) processes}.}
+	\label{fig:first_diff_Heston_call_N_4_set4}	
+\end{figure}
+\FloatBarrier
   
+\subsubsection*{Mixed differences for the case of Set 4 parameters}
+
+\FloatBarrier
+\begin{figure}[htb]
+	\centering % <-- added
+	\begin{subfigure}{0.4\textwidth}
+		\includegraphics[width=\linewidth]{./figures/Heston_single_call_full_truncation_vol/mixed_rates/set5/N_4/first_difference_heston_4steps_hierarchical}
+		\caption{}
+		\label{fig:1}
+	\end{subfigure}\hfil % <-- added
+	\begin{subfigure}{0.4\textwidth}
+		\includegraphics[width=\linewidth]{./figures/Heston_single_call_ABR_moment_matching/mixed_rates/set5/N_4/first_difference_heston_4steps_hierarchical}
+		\caption{}
+		\label{fig:2}
+	\end{subfigure}\hfil % <-- added
+		\begin{subfigure}{0.4\textwidth}
+		\includegraphics[width=\linewidth]{./figures/Heston_single_call_QE_moment_matching/mixed_rates/set5/N_4/first_difference_heston_4steps_hierarchical}
+		\caption{}
+		\label{fig:3}
+	\end{subfigure}
+	\caption{The rate of error convergence of first order differences $\abs{\Delta \text{E}_{\boldsymbol{\beta}}}$, defined by \eqref{eq:Work_error_contributions}, ($\boldsymbol{\beta}=\mathbf{1}+k \bar{\boldsymbol{\beta}}$) for the example of single call option under Heston model, with parameters given by Set $4$ in Table \ref{table:Reference solution, for different parameter constellations.}, using $N=4$ time steps. In this case, we just show  the first  $4$ dimensions which are used for the volatility noise (mainly $dW_v$ in \eqref{eq:dynamics Heston}).(a) using full truncation as in Section \ref{sec:Discretization of Heston model with a non smooth transformations for the volatility process}, (b) using the ABR scheme as in Section \ref{sec:The ABR method}, (c) using the QE scheme as in Section \ref{sec:The QE method}.}
+	\label{fig:first_diff_Heston_call_N_4_set5}	
+\end{figure}
+\FloatBarrier
+
+\subsubsection{Comparison in terms of  the weak error behavior (under process)}
+
 \subsubsection{European call option  under the discretized  Heston model ($n=1$) }
 
 We consider now  the European call option  under the discretized  Heston model  with parameters:  $S_0=K=100$, $v_0=0.04$, $\mu=0$,  $\rho=-0.9$, $\kappa=1$, $\xi=0.1$, $\theta=\frac{\xi^2}{4 \kappa}=0.0025$, and $n=1$ (that is we just use one OU process to simulate the volatility). The reference value for those parameters  is  $6.3325$ (computed using Premia with cf\_call\_heston method as explained in \cite{heston1993closed}). Figure \ref{fig:Weak_rate_call_heston_smooth_vol} shows the estimated   weak error  for the case without Richardson extrapolation, and we report the results for comparing MC (we used the Full truncation scheme to simulate the volatility) and ASGQ (we used the smooth approach in Section \ref{sec:Discretization of Heston model with the volatility process Simulated using the sum of  Ornstein-Uhlenbeck (Bessel) processes} to simulate the volatility) in Tables \ref{Total error of MISC and MC to compute European call option price under discretized Heston model of the different tolerances for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.} and \ref{Comparsion of the computational time of  MC and MISC, used to compute European call option price under discretized Heston model for different number of time steps, without Richardson extrapolation} for the case without Richardson extrapolation, and  Tables \ref{Total relative  error of ASGQ  to compute European call option price under discretized Heston model for different number of time steps, with level $1$ of Richardson extrapolation. The values between parentheses correspond to the different errors contributing to the total relative error: for ASGQ we report the bias and quadrature errors.} and \ref{table:The computational time of  ASGQ, used to compute European call option price under discretized Heston model for different number of time steps, with level $1$ Richardson extrapolation.} for the case of level $1$ Richardson extrapolation. We also compare the performance of the two methods for different configurations in  Figure \ref{fig:Complexity plot for MC and MISC , European call option price under discretized Heston model}.  Our numerical experiments show that Richardson extrapolation improved the performance of both ASGQ and MC, and that for achieving a relative error around $1.4\%$, ASGQ  coupled with level $1$ of Richardson extrapolation is the optimal method, and  requires approximately $33\%$ of the work of MC  coupled with level $1$ of Richardson extrapolation. 
@@ -1461,9 +1661,3 @@ We consider now  the European call option  under the discretized  Heston model  
 \caption{Computational work comparison for ASGQ and MC methods, for the case of European call option price under discretized Heston model. This plot shows that to achieve a relative error around $1.4\%$, using level $1$ of Richardson extrapolation is the optimal configuration for both methods, and that ASGQ coupled with level $1$ of Richardson extrapolation  outperforms  MC coupled with level $1$ of Richardson extrapolation  method in terms of computational time.}
 \label{fig:Complexity plot for MC and MISC , European call option price under discretized Heston model}
 \end{figure}
-
-
-%\subsubsection{Basket call option under the discretized the Heston model }
-%
-%\subsubsection{Call on max option under the discretized the Heston model }
-

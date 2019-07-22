@@ -20,7 +20,8 @@ global S0 K T r sig option
 S0  = 100;   % initial asset value
 K   = 100;   % strike
 T   = 1;     % maturity
-r   = 0.05;  % risk-free interest rate
+% r   = 0.05;  % risk-free interest rate
+r   = 0.00;  % risk-free interest rate
 sig = 0.2;   % volatility
 
 %
@@ -31,7 +32,7 @@ nvert = 3;      % plotting option (1 for slides, 2 for papers, 3 for full set)
 M     = 2;      % refinement cost factor (2^gamma in general MLMC Thm)
 
 N     = 100000; % samples for convergence tests
-L     = 5;      % levels for convergence tests 
+L     = 8;      % levels for convergence tests 
 
 N0    = 1000;   % initial number of samples on first 3 MLMC levels
 Eps   = [ 0.005 0.01 0.02 0.05 0.1 ];  % desired accuracies for MLMC calcs
@@ -62,7 +63,7 @@ global S0 K T r sig option
 
 M  = 2;
 
-nf = 2*M^l;
+nf = M^l;
 nc = nf/M;
 
 hf = T/nf;
@@ -86,11 +87,11 @@ for N1 = 1:10000:N
   elseif (option==2)
     if (l>0)
       [Pf,Pc] = smooth_digital_price_coupled_path(nc,N2);  
-       Pc = exp(-r*T)*10*0.5*Pc;
-       Pf = exp(-r*T)*10*0.5*Pf;
+       Pc = exp(-r*T)*10*Pc;
+       Pf = exp(-r*T)*10*Pf;
     else
         Pf=smooth_digital_price_single_path(nf,N2);
-        Pf = exp(-r*T)*10*0.5*Pf;
+        Pf = exp(-r*T)*10*Pf;
     end
   end
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  15 JUL 2019 09:49
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  22 JUL 2019 11:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -882,16 +882,85 @@ Package: booktabs 2016/04/27 v1.618033 publication quality tables
 )
 (./main.aux
 
-LaTeX Warning: Label `fig:sub3' multiply defined.
+LaTeX Warning: Label `eq:Work_error_contributions' multiply defined.
 
 
-LaTeX Warning: Label `sub@fig:sub3' multiply defined.
+LaTeX Warning: Label `fig:1' multiply defined.
 
 
-LaTeX Warning: Label `fig:sub4' multiply defined.
+LaTeX Warning: Label `sub@fig:1' multiply defined.
 
 
-LaTeX Warning: Label `sub@fig:sub4' multiply defined.
+LaTeX Warning: Label `fig:2' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:2' multiply defined.
+
+
+LaTeX Warning: Label `fig:1' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:1' multiply defined.
+
+
+LaTeX Warning: Label `fig:2' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:2' multiply defined.
+
+
+LaTeX Warning: Label `fig:3' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:3' multiply defined.
+
+
+LaTeX Warning: Label `fig:4' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:4' multiply defined.
+
+
+LaTeX Warning: Label `fig:1' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:1' multiply defined.
+
+
+LaTeX Warning: Label `fig:2' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:2' multiply defined.
+
+
+LaTeX Warning: Label `fig:3' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:3' multiply defined.
+
+
+LaTeX Warning: Label `fig:4' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:4' multiply defined.
+
+
+LaTeX Warning: Label `fig:1' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:1' multiply defined.
+
+
+LaTeX Warning: Label `fig:2' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:2' multiply defined.
+
+
+LaTeX Warning: Label `fig:3' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:3' multiply defined.
 
 )
 \openout1 = `main.aux'.
@@ -1071,12 +1140,12 @@ Overfull \hbox (42.61745pt too wide) in paragraph at lines 28--43
 [20] [21]
 Package epstopdf Info: Source file: <./figures/binary_weak_error/without_richar
 dson/weak_convergence_order_binary_option_relative_M_10_4.eps>
-(epstopdf)                    date: 2019-01-01 12:27:39
+(epstopdf)                    date: 2019-01-01 10:27:39
 (epstopdf)                    size: 26700 bytes
 (epstopdf)             Output file: <./figures/binary_weak_error/without_richar
 dson/weak_convergence_order_binary_option_relative_M_10_4-eps-converted-to.pdf>
 
-(epstopdf)                    date: 2019-01-01 12:29:36
+(epstopdf)                    date: 2019-01-01 10:29:36
 (epstopdf)                    size: 17666 bytes
 (epstopdf)             Command: <repstopdf --outfile=./figures/binary_weak_erro
 r/without_richardson/weak_convergence_order_binary_option_relative_M_10_4-eps-c
@@ -1086,7 +1155,7 @@ _order_binary_option_relative_M_10_4.eps>
 Package epstopdf Info: Output file is already uptodate.
 
 <./figures/binary_weak_error/without_richardson/weak_convergence_order_binary_o
-ption_relative_M_10_4-eps-converted-to.pdf, id=458, 462.72874pt x 346.29375pt>
+ption_relative_M_10_4-eps-converted-to.pdf, id=486, 462.72874pt x 346.29375pt>
 File: ./figures/binary_weak_error/without_richardson/weak_convergence_order_bin
 ary_option_relative_M_10_4-eps-converted-to.pdf Graphic file (type pdf)
 
@@ -1103,11 +1172,11 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 [22]
 Package epstopdf Info: Source file: <./figures/Binary_Complexity_rates/error_vs
 _time.eps>
-(epstopdf)                    date: 2019-06-15 08:50:18
+(epstopdf)                    date: 2019-06-15 07:50:18
 (epstopdf)                    size: 29516 bytes
 (epstopdf)             Output file: <./figures/Binary_Complexity_rates/error_vs
 _time-eps-converted-to.pdf>
-(epstopdf)                    date: 2019-06-15 08:59:21
+(epstopdf)                    date: 2019-06-15 07:59:21
 (epstopdf)                    size: 18687 bytes
 (epstopdf)             Command: <repstopdf --outfile=./figures/Binary_Complexit
 y_rates/error_vs_time-eps-converted-to.pdf ./figures/Binary_Complexity_rates/er
@@ -1115,7 +1184,7 @@ ror_vs_time.eps>
 (epstopdf)             \includegraphics on input line 314.
 Package epstopdf Info: Output file is already uptodate.
 
-<./figures/Binary_Complexity_rates/error_vs_time-eps-converted-to.pdf, id=476, 
+<./figures/Binary_Complexity_rates/error_vs_time-eps-converted-to.pdf, id=504, 
 462.72874pt x 346.29375pt>
 File: ./figures/Binary_Complexity_rates/error_vs_time-eps-converted-to.pdf Grap
 hic file (type pdf)
@@ -1132,12 +1201,12 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 ry_option_relative_M_10_4-eps-converted-to.pdf>]
 Package epstopdf Info: Source file: <./figures/weak_error_rates_call/Beta_32/wi
 thout_rich/weak_convergence_order_call_option_relative_M_4_10_5.eps>
-(epstopdf)                    date: 2019-01-01 20:18:13
+(epstopdf)                    date: 2019-01-01 18:18:13
 (epstopdf)                    size: 29228 bytes
 (epstopdf)             Output file: <./figures/weak_error_rates_call/Beta_32/wi
 thout_rich/weak_convergence_order_call_option_relative_M_4_10_5-eps-converted-t
 o.pdf>
-(epstopdf)                    date: 2019-01-01 20:20:55
+(epstopdf)                    date: 2019-01-01 18:20:55
 (epstopdf)                    size: 19109 bytes
 (epstopdf)             Command: <repstopdf --outfile=./figures/weak_error_rates
 _call/Beta_32/without_rich/weak_convergence_order_call_option_relative_M_4_10_5
@@ -1147,7 +1216,7 @@ _convergence_order_call_option_relative_M_4_10_5.eps>
 Package epstopdf Info: Output file is already uptodate.
 
 <./figures/weak_error_rates_call/Beta_32/without_rich/weak_convergence_order_ca
-ll_option_relative_M_4_10_5-eps-converted-to.pdf, id=525, 462.72874pt x 346.293
+ll_option_relative_M_4_10_5-eps-converted-to.pdf, id=553, 462.72874pt x 346.293
 75pt>
 File: ./figures/weak_error_rates_call/Beta_32/without_rich/weak_convergence_ord
 er_call_option_relative_M_4_10_5-eps-converted-to.pdf Graphic file (type pdf)
@@ -1165,11 +1234,11 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 [24 <./figures/Binary_Complexity_rates/error_vs_time-eps-converted-to.pdf>]
 Package epstopdf Info: Source file: <./figures/Call_Complexity_rates/error_vs_t
 ime.eps>
-(epstopdf)                    date: 2019-06-15 08:46:36
+(epstopdf)                    date: 2019-06-15 07:46:36
 (epstopdf)                    size: 31550 bytes
 (epstopdf)             Output file: <./figures/Call_Complexity_rates/error_vs_t
 ime-eps-converted-to.pdf>
-(epstopdf)                    date: 2019-06-15 08:49:03
+(epstopdf)                    date: 2019-06-15 07:49:03
 (epstopdf)                    size: 19021 bytes
 (epstopdf)             Command: <repstopdf --outfile=./figures/Call_Complexity_
 rates/error_vs_time-eps-converted-to.pdf ./figures/Call_Complexity_rates/error_
@@ -1177,7 +1246,7 @@ vs_time.eps>
 (epstopdf)             \includegraphics on input line 811.
 Package epstopdf Info: Output file is already uptodate.
 
-<./figures/Call_Complexity_rates/error_vs_time-eps-converted-to.pdf, id=580, 46
+<./figures/Call_Complexity_rates/error_vs_time-eps-converted-to.pdf, id=608, 46
 2.72874pt x 346.29375pt>
 File: ./figures/Call_Complexity_rates/error_vs_time-eps-converted-to.pdf Graphi
 c file (type pdf)
@@ -1203,12 +1272,12 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package epstopdf Info: Source file: <./figures/basket_call_2d_time_stepping/wea
 k_convergence/weak_convergence_order_basket_option_2d_relative_M_10_7_beta_128.
 eps>
-(epstopdf)                    date: 2019-04-09 16:52:00
+(epstopdf)                    date: 2019-04-09 15:52:00
 (epstopdf)                    size: 38387 bytes
 (epstopdf)             Output file: <./figures/basket_call_2d_time_stepping/wea
 k_convergence/weak_convergence_order_basket_option_2d_relative_M_10_7_beta_128-
 eps-converted-to.pdf>
-(epstopdf)                    date: 2019-04-09 17:07:48
+(epstopdf)                    date: 2019-04-09 16:07:48
 (epstopdf)                    size: 21761 bytes
 (epstopdf)             Command: <repstopdf --outfile=./figures/basket_call_2d_t
 ime_stepping/weak_convergence/weak_convergence_order_basket_option_2d_relative_
@@ -1219,7 +1288,7 @@ eps>
 Package epstopdf Info: Output file is already uptodate.
 
 <./figures/basket_call_2d_time_stepping/weak_convergence/weak_convergence_order
-_basket_option_2d_relative_M_10_7_beta_128-eps-converted-to.pdf, id=630, 578.16
+_basket_option_2d_relative_M_10_7_beta_128-eps-converted-to.pdf, id=659, 578.16
 pt x 433.62pt>
 File: ./figures/basket_call_2d_time_stepping/weak_convergence/weak_convergence_
 order_basket_option_2d_relative_M_10_7_beta_128-eps-converted-to.pdf Graphic fi
@@ -1240,11 +1309,11 @@ ures/basket_call_2d_time_stepping/weak_convergence/weak_convergence_order_baske
 t_option_2d_relative_M_10_7_beta_128-eps-converted-to.pdf>]
 Package epstopdf Info: Source file: <./figures/basket_call_2d_time_stepping/com
 plexity_rates/error_vs_time.eps>
-(epstopdf)                    date: 2019-06-15 08:55:17
+(epstopdf)                    date: 2019-06-15 07:55:17
 (epstopdf)                    size: 32269 bytes
 (epstopdf)             Output file: <./figures/basket_call_2d_time_stepping/com
 plexity_rates/error_vs_time-eps-converted-to.pdf>
-(epstopdf)                    date: 2019-06-15 09:04:04
+(epstopdf)                    date: 2019-06-15 08:04:04
 (epstopdf)                    size: 21142 bytes
 (epstopdf)             Command: <repstopdf --outfile=./figures/basket_call_2d_t
 ime_stepping/complexity_rates/error_vs_time-eps-converted-to.pdf ./figures/bask
@@ -1253,7 +1322,7 @@ et_call_2d_time_stepping/complexity_rates/error_vs_time.eps>
 Package epstopdf Info: Output file is already uptodate.
 
 <./figures/basket_call_2d_time_stepping/complexity_rates/error_vs_time-eps-conv
-erted-to.pdf, id=730, 462.72874pt x 346.29375pt>
+erted-to.pdf, id=758, 462.72874pt x 346.29375pt>
 File: ./figures/basket_call_2d_time_stepping/complexity_rates/error_vs_time-eps
 -converted-to.pdf Graphic file (type pdf)
 
@@ -1276,12 +1345,12 @@ converted-to.pdf>]
 Package epstopdf Info: Source file: <./figures/basket_call_4d_time_stepping/wea
 k_convergence/weak_convergence_order_basket_option_4d_relative_M_4_10_6_beta_25
 6.eps>
-(epstopdf)                    date: 2019-04-09 20:06:46
+(epstopdf)                    date: 2019-04-09 19:06:46
 (epstopdf)                    size: 42161 bytes
 (epstopdf)             Output file: <./figures/basket_call_4d_time_stepping/wea
 k_convergence/weak_convergence_order_basket_option_4d_relative_M_4_10_6_beta_25
 6-eps-converted-to.pdf>
-(epstopdf)                    date: 2019-04-09 20:26:13
+(epstopdf)                    date: 2019-04-09 19:26:13
 (epstopdf)                    size: 22246 bytes
 (epstopdf)             Command: <repstopdf --outfile=./figures/basket_call_4d_t
 ime_stepping/weak_convergence/weak_convergence_order_basket_option_4d_relative_
@@ -1292,7 +1361,7 @@ eak_convergence/weak_convergence_order_basket_option_4d_relative_M_4_10_6_beta_
 Package epstopdf Info: Output file is already uptodate.
 
 <./figures/basket_call_4d_time_stepping/weak_convergence/weak_convergence_order
-_basket_option_4d_relative_M_4_10_6_beta_256-eps-converted-to.pdf, id=784, 578.
+_basket_option_4d_relative_M_4_10_6_beta_256-eps-converted-to.pdf, id=812, 578.
 16pt x 433.62pt>
 File: ./figures/basket_call_4d_time_stepping/weak_convergence/weak_convergence_
 order_basket_option_4d_relative_M_4_10_6_beta_256-eps-converted-to.pdf Graphic 
@@ -1312,11 +1381,11 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 rder_basket_option_4d_relative_M_4_10_6_beta_256-eps-converted-to.pdf>]
 Package epstopdf Info: Source file: <./figures/basket_call_4d_time_stepping/com
 plexity_rates/error_vs_time.eps>
-(epstopdf)                    date: 2019-06-15 08:57:37
+(epstopdf)                    date: 2019-06-15 07:57:37
 (epstopdf)                    size: 33798 bytes
 (epstopdf)             Output file: <./figures/basket_call_4d_time_stepping/com
 plexity_rates/error_vs_time-eps-converted-to.pdf>
-(epstopdf)                    date: 2019-06-15 08:59:22
+(epstopdf)                    date: 2019-06-15 07:59:22
 (epstopdf)                    size: 21369 bytes
 (epstopdf)             Command: <repstopdf --outfile=./figures/basket_call_4d_t
 ime_stepping/complexity_rates/error_vs_time-eps-converted-to.pdf ./figures/bask
@@ -1325,7 +1394,7 @@ et_call_4d_time_stepping/complexity_rates/error_vs_time.eps>
 Package epstopdf Info: Output file is already uptodate.
 
 <./figures/basket_call_4d_time_stepping/complexity_rates/error_vs_time-eps-conv
-erted-to.pdf, id=843, 462.72874pt x 346.29375pt>
+erted-to.pdf, id=871, 462.72874pt x 346.29375pt>
 File: ./figures/basket_call_4d_time_stepping/complexity_rates/error_vs_time-eps
 -converted-to.pdf Graphic file (type pdf)
 
@@ -1335,80 +1404,94 @@ Package pdftex.def Info: ./figures/basket_call_4d_time_stepping/complexity_rate
 s/error_vs_time-eps-converted-to.pdf used on input line 1178.
 (pdftex.def)             Requested size: 187.89912pt x 140.61807pt.
  [29 <./figures/basket_call_4d_time_stepping/complexity_rates/error_vs_time-eps
--converted-to.pdf>] [30]
+-converted-to.pdf>] [30] [31]
+Missing character: There is no ‚ in font cmr10!
+Missing character: There is no Ä in font cmr10!
+Missing character: There is no ú in font cmr10!
+Missing character: There is no ‚ in font cmr10!
+Missing character: There is no Ä in font cmr10!
+Missing character: There is no ù in font cmr10!
+ [32] [33]
+Overfull \hbox (37.18343pt too wide) in paragraph at lines 1388--1400
+ [][] 
+ []
 
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1308.
 
+LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1308.
-
-[31]
-Package epstopdf Info: Source file: <./figures/Heston_single_call_full_truncati
-on_vol/mixed_rates/set2/N_2/first_difference_heston_2steps_hierarchical_2.eps>
-(epstopdf)                    date: 2019-06-13 17:14:10
-(epstopdf)                    size: 32897 bytes
-(epstopdf)             Output file: <./figures/Heston_single_call_full_truncati
-on_vol/mixed_rates/set2/N_2/first_difference_heston_2steps_hierarchical_2-eps-c
-onverted-to.pdf>
-(epstopdf)                    date: 2019-06-30 15:37:28
-(epstopdf)                    size: 20452 bytes
+[34]
+Package epstopdf Info: Source file: <./figures/Heston_single_call_smooth_vol/pa
+ths_trajectory/paths_smooth_vol_scheme_set1_N4_X.eps>
+(epstopdf)                    date: 2019-07-21 22:09:17
+(epstopdf)                    size: 28559 bytes
+(epstopdf)             Output file: <./figures/Heston_single_call_smooth_vol/pa
+ths_trajectory/paths_smooth_vol_scheme_set1_N4_X-eps-converted-to.pdf>
+(epstopdf)                    date: 2019-07-22 09:37:09
+(epstopdf)                    size: 9651 bytes
 (epstopdf)             Command: <repstopdf --outfile=./figures/Heston_single_ca
-ll_full_truncation_vol/mixed_rates/set2/N_2/first_difference_heston_2steps_hier
-archical_2-eps-converted-to.pdf ./figures/Heston_single_call_full_truncation_vo
-l/mixed_rates/set2/N_2/first_difference_heston_2steps_hierarchical_2.eps>
-(epstopdf)             \includegraphics on input line 1320.
+ll_smooth_vol/paths_trajectory/paths_smooth_vol_scheme_set1_N4_X-eps-converted-
+to.pdf ./figures/Heston_single_call_smooth_vol/paths_trajectory/paths_smooth_vo
+l_scheme_set1_N4_X.eps>
+(epstopdf)             \includegraphics on input line 1423.
 Package epstopdf Info: Output file is already uptodate.
 
-<./figures/Heston_single_call_full_truncation_vol/mixed_rates/set2/N_2/first_di
-fference_heston_2steps_hierarchical_2-eps-converted-to.pdf, id=948, 462.72874pt
- x 346.29375pt>
-File: ./figures/Heston_single_call_full_truncation_vol/mixed_rates/set2/N_2/fir
-st_difference_heston_2steps_hierarchical_2-eps-converted-to.pdf Graphic file (t
-ype pdf)
+<./figures/Heston_single_call_smooth_vol/paths_trajectory/paths_smooth_vol_sche
+me_set1_N4_X-eps-converted-to.pdf, id=1028, 462.72874pt x 346.29375pt>
+File: ./figures/Heston_single_call_smooth_vol/paths_trajectory/paths_smooth_vol
+_scheme_set1_N4_X-eps-converted-to.pdf Graphic file (type pdf)
 
-<use ./figures/Heston_single_call_full_truncation_vol/mixed_rates/set2/N_2/firs
-t_difference_heston_2steps_hierarchical_2-eps-converted-to.pdf>
-Package pdftex.def Info: ./figures/Heston_single_call_full_truncation_vol/mixed
-_rates/set2/N_2/first_difference_heston_2steps_hierarchical_2-eps-converted-to.
-pdf used on input line 1320.
+<use ./figures/Heston_single_call_smooth_vol/paths_trajectory/paths_smooth_vol_
+scheme_set1_N4_X-eps-converted-to.pdf>
+Package pdftex.def Info: ./figures/Heston_single_call_smooth_vol/paths_trajecto
+ry/paths_smooth_vol_scheme_set1_N4_X-eps-converted-to.pdf used on input line 14
+23.
 (pdftex.def)             Requested size: 187.89912pt x 140.61807pt.
+Package epstopdf Info: Source file: <./figures/Heston_single_call_smooth_vol/pa
+ths_trajectory/paths_smooth_vol_scheme_set3_N4_X.eps>
+(epstopdf)                    date: 2019-07-21 22:06:53
+(epstopdf)                    size: 30075 bytes
+(epstopdf)             Output file: <./figures/Heston_single_call_smooth_vol/pa
+ths_trajectory/paths_smooth_vol_scheme_set3_N4_X-eps-converted-to.pdf>
+(epstopdf)                    date: 2019-07-22 09:37:15
+(epstopdf)                    size: 10547 bytes
+(epstopdf)             Command: <repstopdf --outfile=./figures/Heston_single_ca
+ll_smooth_vol/paths_trajectory/paths_smooth_vol_scheme_set3_N4_X-eps-converted-
+to.pdf ./figures/Heston_single_call_smooth_vol/paths_trajectory/paths_smooth_vo
+l_scheme_set3_N4_X.eps>
+(epstopdf)             \includegraphics on input line 1428.
+Package epstopdf Info: Output file is already uptodate.
 
+<./figures/Heston_single_call_smooth_vol/paths_trajectory/paths_smooth_vol_sche
+me_set3_N4_X-eps-converted-to.pdf, id=1029, 462.72874pt x 346.29375pt>
+File: ./figures/Heston_single_call_smooth_vol/paths_trajectory/paths_smooth_vol
+_scheme_set3_N4_X-eps-converted-to.pdf Graphic file (type pdf)
 
-! LaTeX Error: File `./figures/Heston_single_call_smooth_vol/mixed_rates/set2/N
-_2/first_difference_heston_2steps_hierarchical_2' not found.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1326 ...difference_heston_2steps_hierarchical_2}
-                                                  
-I could not locate the file with any of these extensions:
-.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPEG,.JBIG2,.JB2,.eps
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
+<use ./figures/Heston_single_call_smooth_vol/paths_trajectory/paths_smooth_vol_
+scheme_set3_N4_X-eps-converted-to.pdf>
+Package pdftex.def Info: ./figures/Heston_single_call_smooth_vol/paths_trajecto
+ry/paths_smooth_vol_scheme_set3_N4_X-eps-converted-to.pdf used on input line 14
+28.
+(pdftex.def)             Requested size: 187.89912pt x 140.61807pt.
+ [35]
 Package epstopdf Info: Source file: <./figures/Heston_single_call_full_truncati
 on_vol/mixed_rates/set2/N_4/first_difference_heston_4steps_hierarchical_2.eps>
-(epstopdf)                    date: 2019-06-13 17:54:18
+(epstopdf)                    date: 2019-06-13 16:54:18
 (epstopdf)                    size: 45331 bytes
 (epstopdf)             Output file: <./figures/Heston_single_call_full_truncati
 on_vol/mixed_rates/set2/N_4/first_difference_heston_4steps_hierarchical_2-eps-c
 onverted-to.pdf>
-(epstopdf)                    date: 2019-06-30 15:37:29
+(epstopdf)                    date: 2019-06-30 14:37:29
 (epstopdf)                    size: 21274 bytes
 (epstopdf)             Command: <repstopdf --outfile=./figures/Heston_single_ca
 ll_full_truncation_vol/mixed_rates/set2/N_4/first_difference_heston_4steps_hier
 archical_2-eps-converted-to.pdf ./figures/Heston_single_call_full_truncation_vo
 l/mixed_rates/set2/N_4/first_difference_heston_4steps_hierarchical_2.eps>
-(epstopdf)             \includegraphics on input line 1340.
+(epstopdf)             \includegraphics on input line 1445.
 Package epstopdf Info: Output file is already uptodate.
 
 <./figures/Heston_single_call_full_truncation_vol/mixed_rates/set2/N_4/first_di
-fference_heston_4steps_hierarchical_2-eps-converted-to.pdf, id=957, 462.72874pt
- x 346.29375pt>
+fference_heston_4steps_hierarchical_2-eps-converted-to.pdf, id=1048, 462.72874p
+t x 346.29375pt>
 File: ./figures/Heston_single_call_full_truncation_vol/mixed_rates/set2/N_4/fir
 st_difference_heston_4steps_hierarchical_2-eps-converted-to.pdf Graphic file (t
 ype pdf)
@@ -1417,58 +1500,473 @@ ype pdf)
 t_difference_heston_4steps_hierarchical_2-eps-converted-to.pdf>
 Package pdftex.def Info: ./figures/Heston_single_call_full_truncation_vol/mixed
 _rates/set2/N_4/first_difference_heston_4steps_hierarchical_2-eps-converted-to.
-pdf used on input line 1340.
+pdf used on input line 1445.
 (pdftex.def)             Requested size: 187.89912pt x 140.61807pt.
+Package epstopdf Info: Source file: <./figures/Heston_single_call_ABR_moment_ma
+tching/mixed_rates/set2/N_4/first_difference_heston_4steps_hierarchical.eps>
+(epstopdf)                    date: 2019-06-29 12:53:48
+(epstopdf)                    size: 37020 bytes
+(epstopdf)             Output file: <./figures/Heston_single_call_ABR_moment_ma
+tching/mixed_rates/set2/N_4/first_difference_heston_4steps_hierarchical-eps-con
+verted-to.pdf>
+(epstopdf)                    date: 2019-06-30 15:12:08
+(epstopdf)                    size: 21507 bytes
+(epstopdf)             Command: <repstopdf --outfile=./figures/Heston_single_ca
+ll_ABR_moment_matching/mixed_rates/set2/N_4/first_difference_heston_4steps_hier
+archical-eps-converted-to.pdf ./figures/Heston_single_call_ABR_moment_matching/
+mixed_rates/set2/N_4/first_difference_heston_4steps_hierarchical.eps>
+(epstopdf)             \includegraphics on input line 1450.
+Package epstopdf Info: Output file is already uptodate.
 
+<./figures/Heston_single_call_ABR_moment_matching/mixed_rates/set2/N_4/first_di
+fference_heston_4steps_hierarchical-eps-converted-to.pdf, id=1049, 462.72874pt 
+x 346.29375pt>
+File: ./figures/Heston_single_call_ABR_moment_matching/mixed_rates/set2/N_4/fir
+st_difference_heston_4steps_hierarchical-eps-converted-to.pdf Graphic file (typ
+e pdf)
 
-! LaTeX Error: File `./figures/Heston_single_call_smooth_vol/mixed_rates/set2/N
-_4/first_difference_heston_4steps_hierarchical_2' not found.
+<use ./figures/Heston_single_call_ABR_moment_matching/mixed_rates/set2/N_4/firs
+t_difference_heston_4steps_hierarchical-eps-converted-to.pdf>
+Package pdftex.def Info: ./figures/Heston_single_call_ABR_moment_matching/mixed
+_rates/set2/N_4/first_difference_heston_4steps_hierarchical-eps-converted-to.pd
+f used on input line 1450.
+(pdftex.def)             Requested size: 187.89912pt x 140.61807pt.
+Package epstopdf Info: Source file: <./figures/Heston_single_call_QE_moment_mat
+ching/mixed_rates/set2/N_4/first_difference_heston_4steps_hierarchical.eps>
+(epstopdf)                    date: 2019-07-01 14:35:38
+(epstopdf)                    size: 36316 bytes
+(epstopdf)             Output file: <./figures/Heston_single_call_QE_moment_mat
+ching/mixed_rates/set2/N_4/first_difference_heston_4steps_hierarchical-eps-conv
+erted-to.pdf>
+(epstopdf)                    date: 2019-07-02 09:44:09
+(epstopdf)                    size: 20807 bytes
+(epstopdf)             Command: <repstopdf --outfile=./figures/Heston_single_ca
+ll_QE_moment_matching/mixed_rates/set2/N_4/first_difference_heston_4steps_hiera
+rchical-eps-converted-to.pdf ./figures/Heston_single_call_QE_moment_matching/mi
+xed_rates/set2/N_4/first_difference_heston_4steps_hierarchical.eps>
+(epstopdf)             \includegraphics on input line 1455.
+Package epstopdf Info: Output file is already uptodate.
 
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1346 ...difference_heston_4steps_hierarchical_2}
-                                                  
-I could not locate the file with any of these extensions:
-.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPEG,.JBIG2,.JB2,.eps
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
+<./figures/Heston_single_call_QE_moment_matching/mixed_rates/set2/N_4/first_dif
+ference_heston_4steps_hierarchical-eps-converted-to.pdf, id=1050, 462.72874pt x
+ 346.29375pt>
+File: ./figures/Heston_single_call_QE_moment_matching/mixed_rates/set2/N_4/firs
+t_difference_heston_4steps_hierarchical-eps-converted-to.pdf Graphic file (type
+ pdf)
 
+<use ./figures/Heston_single_call_QE_moment_matching/mixed_rates/set2/N_4/first
+_difference_heston_4steps_hierarchical-eps-converted-to.pdf>
+Package pdftex.def Info: ./figures/Heston_single_call_QE_moment_matching/mixed_
+rates/set2/N_4/first_difference_heston_4steps_hierarchical-eps-converted-to.pdf
+ used on input line 1455.
+(pdftex.def)             Requested size: 187.89912pt x 140.61807pt.
+Package epstopdf Info: Source file: <./figures/Heston_single_call_smooth_vol/mi
+xed_rates/set2/N_4/first_difference_heston_4steps_spot_hierarchical_2.eps>
+(epstopdf)                    date: 2019-06-13 15:21:40
+(epstopdf)                    size: 38035 bytes
+(epstopdf)             Output file: <./figures/Heston_single_call_smooth_vol/mi
+xed_rates/set2/N_4/first_difference_heston_4steps_spot_hierarchical_2-eps-conve
+rted-to.pdf>
+(epstopdf)                    date: 2019-06-30 15:12:09
+(epstopdf)                    size: 21598 bytes
+(epstopdf)             Command: <repstopdf --outfile=./figures/Heston_single_ca
+ll_smooth_vol/mixed_rates/set2/N_4/first_difference_heston_4steps_spot_hierarch
+ical_2-eps-converted-to.pdf ./figures/Heston_single_call_smooth_vol/mixed_rates
+/set2/N_4/first_difference_heston_4steps_spot_hierarchical_2.eps>
+(epstopdf)             \includegraphics on input line 1460.
+Package epstopdf Info: Output file is already uptodate.
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
+<./figures/Heston_single_call_smooth_vol/mixed_rates/set2/N_4/first_difference_
+heston_4steps_spot_hierarchical_2-eps-converted-to.pdf, id=1051, 462.72874pt x 
+346.29375pt>
+File: ./figures/Heston_single_call_smooth_vol/mixed_rates/set2/N_4/first_differ
+ence_heston_4steps_spot_hierarchical_2-eps-converted-to.pdf Graphic file (type 
+pdf)
 
-[32 <./figures/Heston_single_call_full_truncation_vol/mixed_rates/set2/N_2/firs
-t_difference_heston_2steps_hierarchical_2-eps-converted-to.pdf>]
+<use ./figures/Heston_single_call_smooth_vol/mixed_rates/set2/N_4/first_differe
+nce_heston_4steps_spot_hierarchical_2-eps-converted-to.pdf>
+Package pdftex.def Info: ./figures/Heston_single_call_smooth_vol/mixed_rates/se
+t2/N_4/first_difference_heston_4steps_spot_hierarchical_2-eps-converted-to.pdf 
+used on input line 1460.
+(pdftex.def)             Requested size: 187.89912pt x 140.61807pt.
+ [36 <./figures/Heston_single_call_smooth_vol/paths_trajectory/paths_smooth_vol
+_scheme_set1_N4_X-eps-converted-to.pdf> <./figures/Heston_single_call_smooth_vo
+l/paths_trajectory/paths_smooth_vol_scheme_set3_N4_X-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <./figures/Heston_single_call_full_truncati
+on_vol/mixed_rates/set3/N_4/first_difference_heston_4steps_hierarchical.eps>
+(epstopdf)                    date: 2019-06-29 18:00:32
+(epstopdf)                    size: 44683 bytes
+(epstopdf)             Output file: <./figures/Heston_single_call_full_truncati
+on_vol/mixed_rates/set3/N_4/first_difference_heston_4steps_hierarchical-eps-con
+verted-to.pdf>
+(epstopdf)                    date: 2019-06-30 15:14:16
+(epstopdf)                    size: 21032 bytes
+(epstopdf)             Command: <repstopdf --outfile=./figures/Heston_single_ca
+ll_full_truncation_vol/mixed_rates/set3/N_4/first_difference_heston_4steps_hier
+archical-eps-converted-to.pdf ./figures/Heston_single_call_full_truncation_vol/
+mixed_rates/set3/N_4/first_difference_heston_4steps_hierarchical.eps>
+(epstopdf)             \includegraphics on input line 1476.
+Package epstopdf Info: Output file is already uptodate.
+
+<./figures/Heston_single_call_full_truncation_vol/mixed_rates/set3/N_4/first_di
+fference_heston_4steps_hierarchical-eps-converted-to.pdf, id=1104, 462.72874pt 
+x 346.29375pt>
+File: ./figures/Heston_single_call_full_truncation_vol/mixed_rates/set3/N_4/fir
+st_difference_heston_4steps_hierarchical-eps-converted-to.pdf Graphic file (typ
+e pdf)
+
+<use ./figures/Heston_single_call_full_truncation_vol/mixed_rates/set3/N_4/firs
+t_difference_heston_4steps_hierarchical-eps-converted-to.pdf>
+Package pdftex.def Info: ./figures/Heston_single_call_full_truncation_vol/mixed
+_rates/set3/N_4/first_difference_heston_4steps_hierarchical-eps-converted-to.pd
+f used on input line 1476.
+(pdftex.def)             Requested size: 187.89912pt x 140.61807pt.
+Package epstopdf Info: Source file: <./figures/Heston_single_call_ABR_moment_ma
+tching/mixed_rates/set3/N_4/first_difference_heston_4steps_hierarchical.eps>
+(epstopdf)                    date: 2019-06-29 14:17:46
+(epstopdf)                    size: 37018 bytes
+(epstopdf)             Output file: <./figures/Heston_single_call_ABR_moment_ma
+tching/mixed_rates/set3/N_4/first_difference_heston_4steps_hierarchical-eps-con
+verted-to.pdf>
+(epstopdf)                    date: 2019-06-30 15:13:22
+(epstopdf)                    size: 21438 bytes
+(epstopdf)             Command: <repstopdf --outfile=./figures/Heston_single_ca
+ll_ABR_moment_matching/mixed_rates/set3/N_4/first_difference_heston_4steps_hier
+archical-eps-converted-to.pdf ./figures/Heston_single_call_ABR_moment_matching/
+mixed_rates/set3/N_4/first_difference_heston_4steps_hierarchical.eps>
+(epstopdf)             \includegraphics on input line 1481.
+Package epstopdf Info: Output file is already uptodate.
+
+<./figures/Heston_single_call_ABR_moment_matching/mixed_rates/set3/N_4/first_di
+fference_heston_4steps_hierarchical-eps-converted-to.pdf, id=1105, 462.72874pt 
+x 346.29375pt>
+File: ./figures/Heston_single_call_ABR_moment_matching/mixed_rates/set3/N_4/fir
+st_difference_heston_4steps_hierarchical-eps-converted-to.pdf Graphic file (typ
+e pdf)
+
+<use ./figures/Heston_single_call_ABR_moment_matching/mixed_rates/set3/N_4/firs
+t_difference_heston_4steps_hierarchical-eps-converted-to.pdf>
+Package pdftex.def Info: ./figures/Heston_single_call_ABR_moment_matching/mixed
+_rates/set3/N_4/first_difference_heston_4steps_hierarchical-eps-converted-to.pd
+f used on input line 1481.
+(pdftex.def)             Requested size: 187.89912pt x 140.61807pt.
+Package epstopdf Info: Source file: <./figures/Heston_single_call_QE_moment_mat
+ching/mixed_rates/set3/N_4/first_difference_heston_4steps_hierarchical.eps>
+(epstopdf)                    date: 2019-07-01 14:52:09
+(epstopdf)                    size: 36310 bytes
+(epstopdf)             Output file: <./figures/Heston_single_call_QE_moment_mat
+ching/mixed_rates/set3/N_4/first_difference_heston_4steps_hierarchical-eps-conv
+erted-to.pdf>
+(epstopdf)                    date: 2019-07-02 09:45:09
+(epstopdf)                    size: 20793 bytes
+(epstopdf)             Command: <repstopdf --outfile=./figures/Heston_single_ca
+ll_QE_moment_matching/mixed_rates/set3/N_4/first_difference_heston_4steps_hiera
+rchical-eps-converted-to.pdf ./figures/Heston_single_call_QE_moment_matching/mi
+xed_rates/set3/N_4/first_difference_heston_4steps_hierarchical.eps>
+(epstopdf)             \includegraphics on input line 1486.
+Package epstopdf Info: Output file is already uptodate.
+
+<./figures/Heston_single_call_QE_moment_matching/mixed_rates/set3/N_4/first_dif
+ference_heston_4steps_hierarchical-eps-converted-to.pdf, id=1106, 462.72874pt x
+ 346.29375pt>
+File: ./figures/Heston_single_call_QE_moment_matching/mixed_rates/set3/N_4/firs
+t_difference_heston_4steps_hierarchical-eps-converted-to.pdf Graphic file (type
+ pdf)
+
+<use ./figures/Heston_single_call_QE_moment_matching/mixed_rates/set3/N_4/first
+_difference_heston_4steps_hierarchical-eps-converted-to.pdf>
+Package pdftex.def Info: ./figures/Heston_single_call_QE_moment_matching/mixed_
+rates/set3/N_4/first_difference_heston_4steps_hierarchical-eps-converted-to.pdf
+ used on input line 1486.
+(pdftex.def)             Requested size: 187.89912pt x 140.61807pt.
+Package epstopdf Info: Source file: <./figures/Heston_single_call_smooth_vol/mi
+xed_rates/set3/N_2/first_difference_heston_2steps_spot_hierarchical.eps>
+(epstopdf)                    date: 2019-06-30 12:58:11
+(epstopdf)                    size: 40800 bytes
+(epstopdf)             Output file: <./figures/Heston_single_call_smooth_vol/mi
+xed_rates/set3/N_2/first_difference_heston_2steps_spot_hierarchical-eps-convert
+ed-to.pdf>
+(epstopdf)                    date: 2019-06-30 15:16:14
+(epstopdf)                    size: 21156 bytes
+(epstopdf)             Command: <repstopdf --outfile=./figures/Heston_single_ca
+ll_smooth_vol/mixed_rates/set3/N_2/first_difference_heston_2steps_spot_hierarch
+ical-eps-converted-to.pdf ./figures/Heston_single_call_smooth_vol/mixed_rates/s
+et3/N_2/first_difference_heston_2steps_spot_hierarchical.eps>
+(epstopdf)             \includegraphics on input line 1491.
+Package epstopdf Info: Output file is already uptodate.
+
+<./figures/Heston_single_call_smooth_vol/mixed_rates/set3/N_2/first_difference_
+heston_2steps_spot_hierarchical-eps-converted-to.pdf, id=1107, 462.72874pt x 34
+6.29375pt>
+File: ./figures/Heston_single_call_smooth_vol/mixed_rates/set3/N_2/first_differ
+ence_heston_2steps_spot_hierarchical-eps-converted-to.pdf Graphic file (type pd
+f)
+
+<use ./figures/Heston_single_call_smooth_vol/mixed_rates/set3/N_2/first_differe
+nce_heston_2steps_spot_hierarchical-eps-converted-to.pdf>
+Package pdftex.def Info: ./figures/Heston_single_call_smooth_vol/mixed_rates/se
+t3/N_2/first_difference_heston_2steps_spot_hierarchical-eps-converted-to.pdf us
+ed on input line 1491.
+(pdftex.def)             Requested size: 187.89912pt x 140.61807pt.
+ [37 <./figures/Heston_single_call_full_truncation_vol/mixed_rates/set2/N_4/fir
+st_difference_heston_4steps_hierarchical_2-eps-converted-to.pdf> <./figures/Hes
+ton_single_call_ABR_moment_matching/mixed_rates/set2/N_4/first_difference_hesto
+n_4steps_hierarchical-eps-converted-to.pdf> <./figures/Heston_single_call_QE_mo
+ment_matching/mixed_rates/set2/N_4/first_difference_heston_4steps_hierarchical-
+eps-converted-to.pdf> <./figures/Heston_single_call_smooth_vol/mixed_rates/set2
+/N_4/first_difference_heston_4steps_spot_hierarchical_2-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <./figures/Heston_single_call_full_truncati
+on_vol/mixed_rates/set4/N_4/first_difference_heston_4steps_hierarchical.eps>
+(epstopdf)                    date: 2019-06-29 18:12:47
+(epstopdf)                    size: 38623 bytes
+(epstopdf)             Output file: <./figures/Heston_single_call_full_truncati
+on_vol/mixed_rates/set4/N_4/first_difference_heston_4steps_hierarchical-eps-con
+verted-to.pdf>
+(epstopdf)                    date: 2019-06-30 15:15:03
+(epstopdf)                    size: 21002 bytes
+(epstopdf)             Command: <repstopdf --outfile=./figures/Heston_single_ca
+ll_full_truncation_vol/mixed_rates/set4/N_4/first_difference_heston_4steps_hier
+archical-eps-converted-to.pdf ./figures/Heston_single_call_full_truncation_vol/
+mixed_rates/set4/N_4/first_difference_heston_4steps_hierarchical.eps>
+(epstopdf)             \includegraphics on input line 1505.
+Package epstopdf Info: Output file is already uptodate.
+
+<./figures/Heston_single_call_full_truncation_vol/mixed_rates/set4/N_4/first_di
+fference_heston_4steps_hierarchical-eps-converted-to.pdf, id=1298, 462.72874pt 
+x 346.29375pt>
+File: ./figures/Heston_single_call_full_truncation_vol/mixed_rates/set4/N_4/fir
+st_difference_heston_4steps_hierarchical-eps-converted-to.pdf Graphic file (typ
+e pdf)
+
+<use ./figures/Heston_single_call_full_truncation_vol/mixed_rates/set4/N_4/firs
+t_difference_heston_4steps_hierarchical-eps-converted-to.pdf>
+Package pdftex.def Info: ./figures/Heston_single_call_full_truncation_vol/mixed
+_rates/set4/N_4/first_difference_heston_4steps_hierarchical-eps-converted-to.pd
+f used on input line 1505.
+(pdftex.def)             Requested size: 187.89912pt x 140.61807pt.
+Package epstopdf Info: Source file: <./figures/Heston_single_call_ABR_moment_ma
+tching/mixed_rates/set4/N_4/first_difference_heston_4steps_hierarchical.eps>
+(epstopdf)                    date: 2019-06-29 14:44:58
+(epstopdf)                    size: 37671 bytes
+(epstopdf)             Output file: <./figures/Heston_single_call_ABR_moment_ma
+tching/mixed_rates/set4/N_4/first_difference_heston_4steps_hierarchical-eps-con
+verted-to.pdf>
+(epstopdf)                    date: 2019-06-30 15:13:24
+(epstopdf)                    size: 20763 bytes
+(epstopdf)             Command: <repstopdf --outfile=./figures/Heston_single_ca
+ll_ABR_moment_matching/mixed_rates/set4/N_4/first_difference_heston_4steps_hier
+archical-eps-converted-to.pdf ./figures/Heston_single_call_ABR_moment_matching/
+mixed_rates/set4/N_4/first_difference_heston_4steps_hierarchical.eps>
+(epstopdf)             \includegraphics on input line 1510.
+Package epstopdf Info: Output file is already uptodate.
+
+<./figures/Heston_single_call_ABR_moment_matching/mixed_rates/set4/N_4/first_di
+fference_heston_4steps_hierarchical-eps-converted-to.pdf, id=1299, 462.72874pt 
+x 346.29375pt>
+File: ./figures/Heston_single_call_ABR_moment_matching/mixed_rates/set4/N_4/fir
+st_difference_heston_4steps_hierarchical-eps-converted-to.pdf Graphic file (typ
+e pdf)
+
+<use ./figures/Heston_single_call_ABR_moment_matching/mixed_rates/set4/N_4/firs
+t_difference_heston_4steps_hierarchical-eps-converted-to.pdf>
+Package pdftex.def Info: ./figures/Heston_single_call_ABR_moment_matching/mixed
+_rates/set4/N_4/first_difference_heston_4steps_hierarchical-eps-converted-to.pd
+f used on input line 1510.
+(pdftex.def)             Requested size: 187.89912pt x 140.61807pt.
+Package epstopdf Info: Source file: <./figures/Heston_single_call_QE_moment_mat
+ching/mixed_rates/set4/N_4/first_difference_heston_4steps_hierarchical.eps>
+(epstopdf)                    date: 2019-07-01 15:27:27
+(epstopdf)                    size: 38156 bytes
+(epstopdf)             Output file: <./figures/Heston_single_call_QE_moment_mat
+ching/mixed_rates/set4/N_4/first_difference_heston_4steps_hierarchical-eps-conv
+erted-to.pdf>
+(epstopdf)                    date: 2019-07-02 09:44:11
+(epstopdf)                    size: 21496 bytes
+(epstopdf)             Command: <repstopdf --outfile=./figures/Heston_single_ca
+ll_QE_moment_matching/mixed_rates/set4/N_4/first_difference_heston_4steps_hiera
+rchical-eps-converted-to.pdf ./figures/Heston_single_call_QE_moment_matching/mi
+xed_rates/set4/N_4/first_difference_heston_4steps_hierarchical.eps>
+(epstopdf)             \includegraphics on input line 1515.
+Package epstopdf Info: Output file is already uptodate.
+
+<./figures/Heston_single_call_QE_moment_matching/mixed_rates/set4/N_4/first_dif
+ference_heston_4steps_hierarchical-eps-converted-to.pdf, id=1300, 462.72874pt x
+ 346.29375pt>
+File: ./figures/Heston_single_call_QE_moment_matching/mixed_rates/set4/N_4/firs
+t_difference_heston_4steps_hierarchical-eps-converted-to.pdf Graphic file (type
+ pdf)
+
+<use ./figures/Heston_single_call_QE_moment_matching/mixed_rates/set4/N_4/first
+_difference_heston_4steps_hierarchical-eps-converted-to.pdf>
+Package pdftex.def Info: ./figures/Heston_single_call_QE_moment_matching/mixed_
+rates/set4/N_4/first_difference_heston_4steps_hierarchical-eps-converted-to.pdf
+ used on input line 1515.
+(pdftex.def)             Requested size: 187.89912pt x 140.61807pt.
+Package epstopdf Info: Source file: <./figures/Heston_single_call_smooth_vol/mi
+xed_rates/set4/N_4/first_difference_heston_4steps_spot_hierarchical.eps>
+(epstopdf)                    date: 2019-06-30 11:11:45
+(epstopdf)                    size: 41675 bytes
+(epstopdf)             Output file: <./figures/Heston_single_call_smooth_vol/mi
+xed_rates/set4/N_4/first_difference_heston_4steps_spot_hierarchical-eps-convert
+ed-to.pdf>
+(epstopdf)                    date: 2019-06-30 15:14:41
+(epstopdf)                    size: 20977 bytes
+(epstopdf)             Command: <repstopdf --outfile=./figures/Heston_single_ca
+ll_smooth_vol/mixed_rates/set4/N_4/first_difference_heston_4steps_spot_hierarch
+ical-eps-converted-to.pdf ./figures/Heston_single_call_smooth_vol/mixed_rates/s
+et4/N_4/first_difference_heston_4steps_spot_hierarchical.eps>
+(epstopdf)             \includegraphics on input line 1520.
+Package epstopdf Info: Output file is already uptodate.
+
+<./figures/Heston_single_call_smooth_vol/mixed_rates/set4/N_4/first_difference_
+heston_4steps_spot_hierarchical-eps-converted-to.pdf, id=1301, 462.72874pt x 34
+6.29375pt>
+File: ./figures/Heston_single_call_smooth_vol/mixed_rates/set4/N_4/first_differ
+ence_heston_4steps_spot_hierarchical-eps-converted-to.pdf Graphic file (type pd
+f)
+
+<use ./figures/Heston_single_call_smooth_vol/mixed_rates/set4/N_4/first_differe
+nce_heston_4steps_spot_hierarchical-eps-converted-to.pdf>
+Package pdftex.def Info: ./figures/Heston_single_call_smooth_vol/mixed_rates/se
+t4/N_4/first_difference_heston_4steps_spot_hierarchical-eps-converted-to.pdf us
+ed on input line 1520.
+(pdftex.def)             Requested size: 187.89912pt x 140.61807pt.
+ [38 <./figures/Heston_single_call_full_truncation_vol/mixed_rates/set3/N_4/fir
+st_difference_heston_4steps_hierarchical-eps-converted-to.pdf> <./figures/Hesto
+n_single_call_ABR_moment_matching/mixed_rates/set3/N_4/first_difference_heston_
+4steps_hierarchical-eps-converted-to.pdf> <./figures/Heston_single_call_QE_mome
+nt_matching/mixed_rates/set3/N_4/first_difference_heston_4steps_hierarchical-ep
+s-converted-to.pdf> <./figures/Heston_single_call_smooth_vol/mixed_rates/set3/N
+_2/first_difference_heston_2steps_spot_hierarchical-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <./figures/Heston_single_call_full_truncati
+on_vol/mixed_rates/set5/N_4/first_difference_heston_4steps_hierarchical.eps>
+(epstopdf)                    date: 2019-06-29 19:02:05
+(epstopdf)                    size: 42383 bytes
+(epstopdf)             Output file: <./figures/Heston_single_call_full_truncati
+on_vol/mixed_rates/set5/N_4/first_difference_heston_4steps_hierarchical-eps-con
+verted-to.pdf>
+(epstopdf)                    date: 2019-06-30 15:17:50
+(epstopdf)                    size: 21590 bytes
+(epstopdf)             Command: <repstopdf --outfile=./figures/Heston_single_ca
+ll_full_truncation_vol/mixed_rates/set5/N_4/first_difference_heston_4steps_hier
+archical-eps-converted-to.pdf ./figures/Heston_single_call_full_truncation_vol/
+mixed_rates/set5/N_4/first_difference_heston_4steps_hierarchical.eps>
+(epstopdf)             \includegraphics on input line 1535.
+Package epstopdf Info: Output file is already uptodate.
+
+<./figures/Heston_single_call_full_truncation_vol/mixed_rates/set5/N_4/first_di
+fference_heston_4steps_hierarchical-eps-converted-to.pdf, id=1491, 462.72874pt 
+x 346.29375pt>
+File: ./figures/Heston_single_call_full_truncation_vol/mixed_rates/set5/N_4/fir
+st_difference_heston_4steps_hierarchical-eps-converted-to.pdf Graphic file (typ
+e pdf)
+
+<use ./figures/Heston_single_call_full_truncation_vol/mixed_rates/set5/N_4/firs
+t_difference_heston_4steps_hierarchical-eps-converted-to.pdf>
+Package pdftex.def Info: ./figures/Heston_single_call_full_truncation_vol/mixed
+_rates/set5/N_4/first_difference_heston_4steps_hierarchical-eps-converted-to.pd
+f used on input line 1535.
+(pdftex.def)             Requested size: 187.89912pt x 140.61807pt.
+Package epstopdf Info: Source file: <./figures/Heston_single_call_ABR_moment_ma
+tching/mixed_rates/set5/N_4/first_difference_heston_4steps_hierarchical.eps>
+(epstopdf)                    date: 2019-06-29 16:01:36
+(epstopdf)                    size: 35467 bytes
+(epstopdf)             Output file: <./figures/Heston_single_call_ABR_moment_ma
+tching/mixed_rates/set5/N_4/first_difference_heston_4steps_hierarchical-eps-con
+verted-to.pdf>
+(epstopdf)                    date: 2019-06-30 15:17:51
+(epstopdf)                    size: 20644 bytes
+(epstopdf)             Command: <repstopdf --outfile=./figures/Heston_single_ca
+ll_ABR_moment_matching/mixed_rates/set5/N_4/first_difference_heston_4steps_hier
+archical-eps-converted-to.pdf ./figures/Heston_single_call_ABR_moment_matching/
+mixed_rates/set5/N_4/first_difference_heston_4steps_hierarchical.eps>
+(epstopdf)             \includegraphics on input line 1540.
+Package epstopdf Info: Output file is already uptodate.
+
+<./figures/Heston_single_call_ABR_moment_matching/mixed_rates/set5/N_4/first_di
+fference_heston_4steps_hierarchical-eps-converted-to.pdf, id=1492, 462.72874pt 
+x 346.29375pt>
+File: ./figures/Heston_single_call_ABR_moment_matching/mixed_rates/set5/N_4/fir
+st_difference_heston_4steps_hierarchical-eps-converted-to.pdf Graphic file (typ
+e pdf)
+
+<use ./figures/Heston_single_call_ABR_moment_matching/mixed_rates/set5/N_4/firs
+t_difference_heston_4steps_hierarchical-eps-converted-to.pdf>
+Package pdftex.def Info: ./figures/Heston_single_call_ABR_moment_matching/mixed
+_rates/set5/N_4/first_difference_heston_4steps_hierarchical-eps-converted-to.pd
+f used on input line 1540.
+(pdftex.def)             Requested size: 187.89912pt x 140.61807pt.
+Package epstopdf Info: Source file: <./figures/Heston_single_call_QE_moment_mat
+ching/mixed_rates/set5/N_4/first_difference_heston_4steps_hierarchical.eps>
+(epstopdf)                    date: 2019-07-01 15:58:43
+(epstopdf)                    size: 36312 bytes
+(epstopdf)             Output file: <./figures/Heston_single_call_QE_moment_mat
+ching/mixed_rates/set5/N_4/first_difference_heston_4steps_hierarchical-eps-conv
+erted-to.pdf>
+(epstopdf)                    date: 2019-07-02 09:54:50
+(epstopdf)                    size: 20810 bytes
+(epstopdf)             Command: <repstopdf --outfile=./figures/Heston_single_ca
+ll_QE_moment_matching/mixed_rates/set5/N_4/first_difference_heston_4steps_hiera
+rchical-eps-converted-to.pdf ./figures/Heston_single_call_QE_moment_matching/mi
+xed_rates/set5/N_4/first_difference_heston_4steps_hierarchical.eps>
+(epstopdf)             \includegraphics on input line 1545.
+Package epstopdf Info: Output file is already uptodate.
+
+<./figures/Heston_single_call_QE_moment_matching/mixed_rates/set5/N_4/first_dif
+ference_heston_4steps_hierarchical-eps-converted-to.pdf, id=1493, 462.72874pt x
+ 346.29375pt>
+File: ./figures/Heston_single_call_QE_moment_matching/mixed_rates/set5/N_4/firs
+t_difference_heston_4steps_hierarchical-eps-converted-to.pdf Graphic file (type
+ pdf)
+
+<use ./figures/Heston_single_call_QE_moment_matching/mixed_rates/set5/N_4/first
+_difference_heston_4steps_hierarchical-eps-converted-to.pdf>
+Package pdftex.def Info: ./figures/Heston_single_call_QE_moment_matching/mixed_
+rates/set5/N_4/first_difference_heston_4steps_hierarchical-eps-converted-to.pdf
+ used on input line 1545.
+(pdftex.def)             Requested size: 187.89912pt x 140.61807pt.
+ [39 <./figures/Heston_single_call_full_truncation_vol/mixed_rates/set4/N_4/fir
+st_difference_heston_4steps_hierarchical-eps-converted-to.pdf> <./figures/Hesto
+n_single_call_ABR_moment_matching/mixed_rates/set4/N_4/first_difference_heston_
+4steps_hierarchical-eps-converted-to.pdf> <./figures/Heston_single_call_QE_mome
+nt_matching/mixed_rates/set4/N_4/first_difference_heston_4steps_hierarchical-ep
+s-converted-to.pdf> <./figures/Heston_single_call_smooth_vol/mixed_rates/set4/N
+_4/first_difference_heston_4steps_spot_hierarchical-eps-converted-to.pdf>]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1356.
+(hyperref)                removing `math shift' on input line 1556.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1356.
+(hyperref)                removing `math shift' on input line 1556.
 
+[40 <./figures/Heston_single_call_full_truncation_vol/mixed_rates/set5/N_4/firs
+t_difference_heston_4steps_hierarchical-eps-converted-to.pdf> <./figures/Heston
+_single_call_ABR_moment_matching/mixed_rates/set5/N_4/first_difference_heston_4
+steps_hierarchical-eps-converted-to.pdf> <./figures/Heston_single_call_QE_momen
+t_matching/mixed_rates/set5/N_4/first_difference_heston_4steps_hierarchical-eps
+-converted-to.pdf>]
 Package epstopdf Info: Source file: <./figures/Heston_single_call_smooth_vol/we
 ak_convergence/weak_convergence_order_single_call_option_heston_relative_M_4_10
 _6_beta_512_smooth_scheme.eps>
-(epstopdf)                    date: 2019-06-16 13:55:28
+(epstopdf)                    date: 2019-06-16 12:55:28
 (epstopdf)                    size: 25689 bytes
 (epstopdf)             Output file: <./figures/Heston_single_call_smooth_vol/we
 ak_convergence/weak_convergence_order_single_call_option_heston_relative_M_4_10
 _6_beta_512_smooth_scheme-eps-converted-to.pdf>
-(epstopdf)                    date: 2019-06-16 13:59:28
+(epstopdf)                    date: 2019-06-16 12:59:28
 (epstopdf)                    size: 17077 bytes
 (epstopdf)             Command: <repstopdf --outfile=./figures/Heston_single_ca
 ll_smooth_vol/weak_convergence/weak_convergence_order_single_call_option_heston
 _relative_M_4_10_6_beta_512_smooth_scheme-eps-converted-to.pdf ./figures/Heston
 _single_call_smooth_vol/weak_convergence/weak_convergence_order_single_call_opt
 ion_heston_relative_M_4_10_6_beta_512_smooth_scheme.eps>
-(epstopdf)             \includegraphics on input line 1364.
+(epstopdf)             \includegraphics on input line 1564.
 Package epstopdf Info: Output file is already uptodate.
 
 <./figures/Heston_single_call_smooth_vol/weak_convergence/weak_convergence_orde
 r_single_call_option_heston_relative_M_4_10_6_beta_512_smooth_scheme-eps-conver
-ted-to.pdf, id=1023, 462.72874pt x 346.29375pt>
+ted-to.pdf, id=1824, 462.72874pt x 346.29375pt>
 File: ./figures/Heston_single_call_smooth_vol/weak_convergence/weak_convergence
 _order_single_call_option_heston_relative_M_4_10_6_beta_512_smooth_scheme-eps-c
 onverted-to.pdf Graphic file (type pdf)
@@ -1478,111 +1976,177 @@ order_single_call_option_heston_relative_M_4_10_6_beta_512_smooth_scheme-eps-co
 nverted-to.pdf>
 Package pdftex.def Info: ./figures/Heston_single_call_smooth_vol/weak_convergen
 ce/weak_convergence_order_single_call_option_heston_relative_M_4_10_6_beta_512_
-smooth_scheme-eps-converted-to.pdf used on input line 1364.
+smooth_scheme-eps-converted-to.pdf used on input line 1564.
 (pdftex.def)             Requested size: 234.87749pt x 175.77788pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[33 <./figures/Heston_single_call_full_truncation_vol/mixed_rates/set2/N_4/firs
-t_difference_heston_4steps_hierarchical_2-eps-converted-to.pdf>]
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[34 <./figures/Heston_single_call_smooth_vol/weak_convergence/weak_convergence_
+[41 <./figures/Heston_single_call_smooth_vol/weak_convergence/weak_convergence_
 order_single_call_option_heston_relative_M_4_10_6_beta_512_smooth_scheme-eps-co
 nverted-to.pdf>]
 Package epstopdf Info: Source file: <./figures/Heston_single_call_smooth_vol/co
 mplexity_rates/error_vs_time.eps>
-(epstopdf)                    date: 2019-06-21 12:21:17
+(epstopdf)                    date: 2019-06-21 11:21:17
 (epstopdf)                    size: 32044 bytes
 (epstopdf)             Output file: <./figures/Heston_single_call_smooth_vol/co
 mplexity_rates/error_vs_time-eps-converted-to.pdf>
-(epstopdf)                    date: 2019-06-21 12:23:07
+(epstopdf)                    date: 2019-06-21 11:23:07
 (epstopdf)                    size: 19514 bytes
 (epstopdf)             Command: <repstopdf --outfile=./figures/Heston_single_ca
 ll_smooth_vol/complexity_rates/error_vs_time-eps-converted-to.pdf ./figures/Hes
 ton_single_call_smooth_vol/complexity_rates/error_vs_time.eps>
-(epstopdf)             \includegraphics on input line 1459.
+(epstopdf)             \includegraphics on input line 1659.
 Package epstopdf Info: Output file is already uptodate.
 
 <./figures/Heston_single_call_smooth_vol/complexity_rates/error_vs_time-eps-con
-verted-to.pdf, id=1125, 462.72874pt x 346.29375pt>
+verted-to.pdf, id=1874, 462.72874pt x 346.29375pt>
 File: ./figures/Heston_single_call_smooth_vol/complexity_rates/error_vs_time-ep
 s-converted-to.pdf Graphic file (type pdf)
 
 <use ./figures/Heston_single_call_smooth_vol/complexity_rates/error_vs_time-eps
 -converted-to.pdf>
 Package pdftex.def Info: ./figures/Heston_single_call_smooth_vol/complexity_rat
-es/error_vs_time-eps-converted-to.pdf used on input line 1459.
+es/error_vs_time-eps-converted-to.pdf used on input line 1659.
 (pdftex.def)             Requested size: 234.87749pt x 175.77788pt.
-) (./main.bbl [35 <./figures/Heston_single_call_smooth_vol/complexity_rates/err
-or_vs_time-eps-converted-to.pdf>]
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+) [42] (./Numerical_experiments_MLMC.tex [43 <./figures/Heston_single_call_smoo
+th_vol/complexity_rates/error_vs_time-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <./figures/MLMC_binary_opt/euler_digital_wi
+thout_smoothing.eps>
+(epstopdf)                    date: 2019-07-17 12:30:09
+(epstopdf)                    size: 68277 bytes
+(epstopdf)             Output file: <./figures/MLMC_binary_opt/euler_digital_wi
+thout_smoothing-eps-converted-to.pdf>
+(epstopdf)                    date: 2019-07-19 21:16:56
+(epstopdf)                    size: 15570 bytes
+(epstopdf)             Command: <repstopdf --outfile=./figures/MLMC_binary_opt/
+euler_digital_without_smoothing-eps-converted-to.pdf ./figures/MLMC_binary_opt/
+euler_digital_without_smoothing.eps>
+(epstopdf)             \includegraphics on input line 15.
+Package epstopdf Info: Output file is already uptodate.
+
+<./figures/MLMC_binary_opt/euler_digital_without_smoothing-eps-converted-to.pdf
+, id=1938, 1445.4pt x 852.18375pt>
+File: ./figures/MLMC_binary_opt/euler_digital_without_smoothing-eps-converted-t
+o.pdf Graphic file (type pdf)
+
+<use ./figures/MLMC_binary_opt/euler_digital_without_smoothing-eps-converted-to
+.pdf>
+Package pdftex.def Info: ./figures/MLMC_binary_opt/euler_digital_without_smooth
+ing-eps-converted-to.pdf used on input line 15.
+(pdftex.def)             Requested size: 469.75499pt x 276.95644pt.
+Package epstopdf Info: Source file: <./figures/MLMC_binary_opt/digital_option_w
+ith_smoothing_L_0_2_steps.eps>
+(epstopdf)                    date: 2019-07-17 12:28:28
+(epstopdf)                    size: 61038 bytes
+(epstopdf)             Output file: <./figures/MLMC_binary_opt/digital_option_w
+ith_smoothing_L_0_2_steps-eps-converted-to.pdf>
+(epstopdf)                    date: 2019-07-19 21:16:56
+(epstopdf)                    size: 15179 bytes
+(epstopdf)             Command: <repstopdf --outfile=./figures/MLMC_binary_opt/
+digital_option_with_smoothing_L_0_2_steps-eps-converted-to.pdf ./figures/MLMC_b
+inary_opt/digital_option_with_smoothing_L_0_2_steps.eps>
+(epstopdf)             \includegraphics on input line 26.
+Package epstopdf Info: Output file is already uptodate.
+
+<./figures/MLMC_binary_opt/digital_option_with_smoothing_L_0_2_steps-eps-conver
+ted-to.pdf, id=1939, 562.1pt x 768.8725pt>
+File: ./figures/MLMC_binary_opt/digital_option_with_smoothing_L_0_2_steps-eps-c
+onverted-to.pdf Graphic file (type pdf)
+
+<use ./figures/MLMC_binary_opt/digital_option_with_smoothing_L_0_2_steps-eps-co
+nverted-to.pdf>
+Package pdftex.def Info: ./figures/MLMC_binary_opt/digital_option_with_smoothin
+g_L_0_2_steps-eps-converted-to.pdf used on input line 26.
+(pdftex.def)             Requested size: 328.82706pt x 449.78273pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[44 <./figures/MLMC_binary_opt/euler_digital_without_smoothing-eps-converted-to
+.pdf>]) (./main.bbl [45 <./figures/MLMC_binary_opt/digital_option_with_smoothin
+g_L_0_2_steps-eps-converted-to.pdf>]
 Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ä in font cmr10!
 Missing character: There is no ú in font cmr10!
 Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ä in font cmr10!
 Missing character: There is no ù in font cmr10!
- [36]) [37]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 114.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 114.
+ [46]) [47]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 116.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 116.
  (./main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 114.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 114.
-Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: F739BBFBC9A6D65A8719791373AF8674;7613.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 116.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 116.
 
+
+Package rerunfilecheck Warning: File `main.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `main.out':
+(rerunfilecheck)             Before: DE4D642B76BE6AA315C86EE8C17F0B74;9209
+(rerunfilecheck)             After:  FB59C8885C120D493F762767F3E0F1BE;9237.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 114.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 116.
  ) 
 Here is how much of TeX's memory you used:
- 25884 strings out of 493014
- 449280 string characters out of 6133351
- 557846 words of memory out of 5000000
- 28690 multiletter control sequences out of 15000+600000
+ 26051 strings out of 493014
+ 460530 string characters out of 6133351
+ 561496 words of memory out of 5000000
+ 28785 multiletter control sequences out of 15000+600000
  20856 words of font info for 87 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 66i,20n,96p,3267b,561s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
-></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
-</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></
-usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></u
-sr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb>
-</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><
-/usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></
-usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></us
-r/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/
-local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/lo
-cal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/loca
-l/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/
-texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local/
-texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib6.pfb></usr/lo
-cal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib8.pfb></us
-r/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/
-local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/lo
-cal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/loca
-l/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/t
-exlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texl
-ive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive
-/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/20
-16/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2016/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2016/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2016/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2016/texmf
--dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2016/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2016/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2016/texmf-dist
-/fonts/type1/public/doublestroke/dsrom10.pfb></usr/local/texlive/2016/texmf-dis
-t/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2016/texmf
--dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2016/t
-exmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
-Output written on main.pdf (37 pages, 681652 bytes).
+ 66i,20n,96p,3267b,686s stack positions out of 5000i,500n,10000p,200000b,80000s
+pdfTeX warning (dest): name{section.9} has been referenced but does not exist
+, replaced by a fixed one
+
+pdfTeX warning (dest): name{section.8} has been referenced but does not exist, 
+replaced by a fixed one
+
+</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><
+/usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></
+usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></us
+r/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr
+/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb></
+usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></u
+sr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></us
+r/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/
+local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/lo
+cal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/loca
+l/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/
+texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/te
+xlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local/te
+xlive/2016/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib6.pfb></usr/loca
+l/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib8.pfb></usr/
+local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/lo
+cal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/loca
+l/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/
+texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/tex
+live/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texliv
+e/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2
+016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2016
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2016/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2016/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2016/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2016/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2016/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2016/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2016/texmf-dist/f
+onts/type1/public/doublestroke/dsrom10.pfb></usr/local/texlive/2016/texmf-dist/
+fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2016/texmf-d
+ist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2016/tex
+mf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
+Output written on main.pdf (47 pages, 965857 bytes).
 PDF statistics:
- 1331 PDF objects out of 1440 (max. 8388607)
- 808 compressed objects within 9 object streams
- 215 named destinations out of 1000 (max. 500000)
- 313 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 2133 PDF objects out of 2487 (max. 8388607)
+ 1113 compressed objects within 12 object streams
+ 264 named destinations out of 1000 (max. 500000)
+ 454 words of extra memory for PDF output out of 10000 (max. 10000000)
 
