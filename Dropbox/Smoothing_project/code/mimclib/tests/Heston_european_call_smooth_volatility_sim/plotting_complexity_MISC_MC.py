@@ -37,11 +37,11 @@ print z_MISC[0]
 
 #case with richardson
 
-MC_normal_rich_err=np.array([0.131, 0.0123])
-MC_rich_time=np.array([ 1, 145])
+MC_normal_rich_err=np.array([0.131, 0.0123,0.0031])
+MC_rich_time=np.array([ 1, 145,2764])
 
-MISC_rich_err=np.array([ 0.038, 0.0142])
-MISC_rich_time=np.array([4.5, 48.5])
+MISC_rich_err=np.array([ 0.038, 0.0142,0.0032])
+MISC_rich_time=np.array([4.5, 48.5, 864])
 
 
 z_MC_normal_rich= np.polyfit(np.log(MC_normal_rich_err), np.log(MC_rich_time), 1)

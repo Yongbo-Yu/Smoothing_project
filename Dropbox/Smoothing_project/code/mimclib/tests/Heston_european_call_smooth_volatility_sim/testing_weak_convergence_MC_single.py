@@ -23,7 +23,8 @@ class Problem(object):
     d=None
     dt=None
 
-    exact=6.332542 #  S_0=K=100, T=1, r=0,rho=-0.9, v_0=0.04, theta=0.0025, xi=0.1,\kapp=1  
+    #exact=6.332542 #  S_0=K=100, T=1, r=0,rho=-0.9, v_0=0.04, theta=0.0025, xi=0.1,\kapp=1  
+    exact=6.445535 #  S_0=K=100, T=1, r=0,rho=-0.9, v_0=0.04, theta=0.005, xi=0.1,\kapp=1  (n=2)
     yknots_right=[]
     yknots_left=[]
 
@@ -40,7 +41,7 @@ class Problem(object):
         self.kappa= 1.0
         self.xi=0.1
         self.v0=0.04
-        self.theta=(self.xi**2)/(4*self.kappa)
+        self.theta=(2*self.xi**2)/(4*self.kappa)
         
         # paramters for the bessel process
         self.beta=self.xi/float(2)
@@ -51,26 +52,26 @@ class Problem(object):
         self.d=int(np.log2(Nsteps)) #power 2 number steps
 
         # For less than 185 points
-        #beta=32
-        #self.yknots_right=np.polynomial.laguerre.laggauss(beta)
+        beta=128
+        self.yknots_right=np.polynomial.laguerre.laggauss(beta)
       
-        # For more than 185 points
-        beta=512
-        from Parser import Parser
-        fx = open('lag_512_x.txt', 'r')
-        Element_properties_x = Parser('./lag_512_x.txt')
-        Element_properties_x.parse_file(fx.read(),'\n')
-        x=np.array([float(i) for i in Element_properties_x.element_list])
+        # # For more than 185 points
+        # beta=512
+        # from Parser import Parser
+        # fx = open('lag_512_x.txt', 'r')
+        # Element_properties_x = Parser('./lag_512_x.txt')
+        # Element_properties_x.parse_file(fx.read(),'\n')
+        # x=np.array([float(i) for i in Element_properties_x.element_list])
        
-        Element_properties_x.close_file()   
-        fw = open('lag_512_w.txt', 'r')
-        Element_properties_w = Parser('./lag_512_w.txt')
-        Element_properties_w.parse_file(fw.read(),'\n')
-        w=np.array([float(i) for i in Element_properties_w.element_list])
+        # Element_properties_x.close_file()   
+        # fw = open('lag_512_w.txt', 'r')
+        # Element_properties_w = Parser('./lag_512_w.txt')
+        # Element_properties_w.parse_file(fw.read(),'\n')
+        # w=np.array([float(i) for i in Element_properties_w.element_list])
    
-        Element_properties_x.close_file()   
-        self.yknots_right.append(x[:360])
-        self.yknots_right.append(w[:360])
+        # Element_properties_x.close_file()   
+        # self.yknots_right.append(x[:360])
+        # self.yknots_right.append(w[:360])
 
        
         self.yknots_left=self.yknots_right
@@ -306,11 +307,12 @@ class Problem(object):
 def weak_convergence_differences():    
         start_time=time.time()
    
-        exact=6.332542 #  S_0=K=100, T=1, r=0,rho=-0.9, v_0=0.04, theta=0.0025, xi=0.1,\kapp=1 
+        # exact=6.332542 #  S_0=K=100, T=1, r=0,rho=-0.9, v_0=0.04, theta=0.0025, xi=0.1,\kapp=1 
+        exact=6.445535 #  S_0=K=100, T=1, r=0,rho=-0.9, v_0=0.04, theta=0.005, xi=0.1,\kapp=1  (n=2)
 
       
         # # feed parameters to the problem
-        Nsteps_arr=np.array([16])
+        Nsteps_arr=np.array([2])
         dt_arr=1.0/(Nsteps_arr)
   
         error=np.zeros(1)

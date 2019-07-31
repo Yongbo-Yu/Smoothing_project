@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  19 APR 2019 13:38
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  25 JUL 2019 10:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -5451,9 +5451,9 @@ Missing character: There is no i in font nullfont!
 Missing character: There is no o in font nullfont!
 Missing character: There is no n in font nullfont!
 ! Undefined control sequence.
-<write> ...:Details of the MISC' on page \thepage 
+<write> ...:Details of the ASGQ' on page \thepage 
                                                   \space undefined\on@line .
-l.73 ...g of Section \ref{sec:Details of the MISC}
+l.73 ...g of Section \ref{sec:Details of the ASGQ}
                                                   , is crucial for the optim...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -5462,7 +5462,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-LaTeX Warning: Reference `sec:Details of the MISC' on page  undefined on input 
+LaTeX Warning: Reference `sec:Details of the ASGQ' on page  undefined on input 
 line 73.
 
 Missing character: There is no , in font nullfont!
@@ -7345,15 +7345,15 @@ Missing character: There is no t in font nullfont!
 Missing character: There is no h in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no r in font nullfont!
-Missing character: There is no t in font nullfont!
 Missing character: There is no r in font nullfont!
-Missing character: There is no a in font nullfont!
-Missing character: There is no n in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no p in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no e in font nullfont!
 Missing character: There is no s in font nullfont!
-Missing character: There is no f in font nullfont!
-Missing character: There is no o in font nullfont!
-Missing character: There is no r in font nullfont!
-Missing character: There is no m in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no t in font nullfont!
 Missing character: There is no a in font nullfont!
 Missing character: There is no t in font nullfont!
 Missing character: There is no i in font nullfont!
@@ -7375,10 +7375,26 @@ Missing character: There is no w in font nullfont!
 Missing character: There is no i in font nullfont!
 Missing character: There is no t in font nullfont!
 Missing character: There is no h in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no e in font nullfont!
 Missing character: There is no A in font nullfont!
 Missing character: There is no S in font nullfont!
 Missing character: There is no G in font nullfont!
 Missing character: There is no Q in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no d in font nullfont!
+Missing character: There is no Q in font nullfont!
+Missing character: There is no M in font nullfont!
+Missing character: There is no C in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no d in font nullfont!
+Missing character: There is no s in font nullfont!
 Missing character: There is no i in font nullfont!
 Missing character: There is no s in font nullfont!
 Missing character: There is no R in font nullfont!
@@ -8352,7 +8368,7 @@ Missing character: There is no f in font nullfont!
 <recently read> \expt 
                       
 l.102 ...,K_\text{R})$ the approximation of $\expt
-                                                  {f((X_T)}$ by terms up to ...
+                                                  {f(X_T)}$ by terms up to l...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -8376,7 +8392,7 @@ Missing character: There is no v in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no l in font nullfont!
 ! Undefined control sequence.
-l.102 ...t{f((X_T)}$ by terms up to level $K_\text
+l.102 ...pt{f(X_T)}$ by terms up to level $K_\text
                                                   {R}$ (leading to a weak er...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -8475,13 +8491,13 @@ Missing character: There is no K in font nullfont!
 <inserted text> 
                 $
 l.104 I(J,K_
-            \text{R})=\frac{2^{K_\text{R}}\left[I(J,K_\text{R}-1)-I(J-1,K_\t...
+            \text{R})=\frac{2^{K_\text{R}}I(J,K_\text{R}-1)-I(J-1,K_\text{R}...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Undefined control sequence.
 l.104 I(J,K_\text
-                 {R})=\frac{2^{K_\text{R}}\left[I(J,K_\text{R}-1)-I(J-1,K_\t...
+                 {R})=\frac{2^{K_\text{R}}I(J,K_\text{R}-1)-I(J-1,K_\text{R}...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -8490,8 +8506,8 @@ and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
 <argument> 2^{K_\text 
-                      {R}}\left [I(J,K_\text {R}-1)-I(J-1,K_\text {R}-1)\rig...
-l.104 ...1,K_\text{R}-1)\right]}{2^{K_\text{R}}-1}
+                      {R}}I(J,K_\text {R}-1)-I(J-1,K_\text {R}-1)
+l.104 ...1)-I(J-1,K_\text{R}-1)}{2^{K_\text{R}}-1}
                                                   ,\quad J=1,2,\dots, K_\tex...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -8500,9 +8516,9 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-<argument> 2^{K_\text {R}}\left [I(J,K_\text 
-                                             {R}-1)-I(J-1,K_\text {R}-1)\rig...
-l.104 ...1,K_\text{R}-1)\right]}{2^{K_\text{R}}-1}
+<argument> 2^{K_\text {R}}I(J,K_\text 
+                                      {R}-1)-I(J-1,K_\text {R}-1)
+l.104 ...1)-I(J-1,K_\text{R}-1)}{2^{K_\text{R}}-1}
                                                   ,\quad J=1,2,\dots, K_\tex...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -8511,9 +8527,9 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-<argument> ...t [I(J,K_\text {R}-1)-I(J-1,K_\text 
-                                                  {R}-1)\right ]
-l.104 ...1,K_\text{R}-1)\right]}{2^{K_\text{R}}-1}
+<argument> ...R}}I(J,K_\text {R}-1)-I(J-1,K_\text 
+                                                  {R}-1)
+l.104 ...1)-I(J-1,K_\text{R}-1)}{2^{K_\text{R}}-1}
                                                   ,\quad J=1,2,\dots, K_\tex...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -8524,7 +8540,7 @@ and I'll forget about whatever was undefined.
 ! Undefined control sequence.
 <argument> 2^{K_\text 
                       {R}}-1
-l.104 ...1,K_\text{R}-1)\right]}{2^{K_\text{R}}-1}
+l.104 ...1)-I(J-1,K_\text{R}-1)}{2^{K_\text{R}}-1}
                                                   ,\quad J=1,2,\dots, K_\tex...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -8678,7 +8694,7 @@ Overfull \hbox (37.85172pt too wide) in paragraph at lines 90--106
  []
 
 
-Overfull \hbox (32.22334pt too wide) in paragraph at lines 90--106
+Overfull \hbox (28.33444pt too wide) in paragraph at lines 90--106
 []$
  []
 
@@ -8698,7 +8714,7 @@ Overfull \hbox (21.0045pt too wide) in paragraph at lines 90--106
  []
 
 
-Overfull \hbox (140.72171pt too wide) in paragraph at lines 90--106
+Overfull \hbox (136.19391pt too wide) in paragraph at lines 90--106
 []\OML/cmm/m/it/10 ;  J \OT1/cmr/m/n/10 =
  []
 
@@ -11117,10 +11133,10 @@ Overfull \hbox (9.38895pt too wide) in paragraph at lines 129--130
 
  
 Here is how much of TeX's memory you used:
- 51 strings out of 493014
- 878 string characters out of 6133351
+ 50 strings out of 493014
+ 853 string characters out of 6133351
  64601 words of memory out of 5000000
- 3688 multiletter control sequences out of 15000+600000
+ 3687 multiletter control sequences out of 15000+600000
  4913 words of font info for 18 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  19i,5n,25p,882b,170s stack positions out of 5000i,500n,10000p,200000b,80000s

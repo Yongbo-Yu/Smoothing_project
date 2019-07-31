@@ -16,7 +16,7 @@ class Problem_general_n_int(object):
     d=None
     dt=None
 
-    exact=6.773125 #  set1 S_0=K=100, T=1, r=0,rho=-0.9, v_0=0.04, theta=   0.0125, xi=0.1,\kapp=1 
+    exact=6.445535 #  S_0=K=100, T=1, r=0,rho=-0.9, v_0=0.04, theta=0.005, xi=0.1,\kapp=1  (n=2)
 
     yknots_right=[]
     yknots_left=[]

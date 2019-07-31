@@ -85,7 +85,7 @@ B_{t_j}=(1-\rho) B_{t_i}+\rho B_{t_k}+ \sqrt{\rho (1-\rho)(k-i) \Delta t} z, \: 
 where $\rho=\frac{j-i}{k-i}$.  
 
 \subsection{Richardson extrapolation}\label{sec:Richardson extrapolation}
-Another transformation that we couple with ASGQ is Richardson extrapolation \cite{talay1990expansion}. In fact, applying level $K_\text{R}$ (level of extrapolation) of Richardson extrapolation  dramatically reduces the bias, and as a consequence reduces the  number of time steps $N$ needed in the coarsest level to achieve a certain error tolerance. As a consequence, Richardson extrapolation directly reduces  the total dimension of the integration problem for achieving some error tolerance.
+Another representation that we couple with the ASGQ and QMC methods is Richardson extrapolation \cite{talay1990expansion}. In fact, applying level $K_\text{R}$ (level of extrapolation) of Richardson extrapolation  dramatically reduces the bias, and as a consequence reduces the  number of time steps $N$ needed in the coarsest level to achieve a certain error tolerance. As a consequence, Richardson extrapolation directly reduces  the total dimension of the integration problem for achieving some error tolerance.
 
 Let us denote by $(X_t)_{0 \le t \le T}$ a certain stochastic process and by $(\hat{X}_{t_i}^h)_{0 \le  t_i \le T}$ its approximation using a suitable  scheme with a time step $h$.  Then, for sufficiently small $h$, and a suitable smooth function $f$, we assume that
 \begin{align}\label{Euler_weak_error_strenghten}
@@ -99,9 +99,9 @@ implying
 \begin{align*}
 	2 \expt{f(\hat{X}_T^{2h})}- \expt{f(\hat{X}_T^{h})} =\expt{f(X_T)} + \Ordo{h^2} \PERIOD
 \end{align*}
-For higher levels of extrapolations, we use the following: Let us denote by $h_J=h_0 2^{-J}$ the grid sizes (where $h_0$ is the coarsest grid size), by $K_\text{R}$ the level of the Richardson extrapolation, and by $I(J,K_\text{R})$ the approximation of $\expt{f((X_T)}$ by terms up to level $K_\text{R}$ (leading to a weak error of order $K_\text{R}$), then we have the following recursion 
+For higher levels of extrapolations, we use the following: Let us denote by $h_J=h_0 2^{-J}$ the grid sizes (where $h_0$ is the coarsest grid size), by $K_\text{R}$ the level of the Richardson extrapolation, and by $I(J,K_\text{R})$ the approximation of $\expt{f(X_T)}$ by terms up to level $K_\text{R}$ (leading to a weak error of order $K_\text{R}$), then we have the following recursion 
 \begin{align*}
-I(J,K_\text{R})=\frac{2^{K_\text{R}}\left[I(J,K_\text{R}-1)-I(J-1,K_\text{R}-1)\right]}{2^{K_\text{R}}-1},\quad J=1,2,\dots, K_\text{R}=1,2,\dots
+I(J,K_\text{R})=\frac{2^{K_\text{R}}I(J,K_\text{R}-1)-I(J-1,K_\text{R}-1)}{2^{K_\text{R}}-1},\quad J=1,2,\dots, K_\text{R}=1,2,\dots
 \end{align*}
 
 \subsection{Root Finding}\label{sec: Root Finding}

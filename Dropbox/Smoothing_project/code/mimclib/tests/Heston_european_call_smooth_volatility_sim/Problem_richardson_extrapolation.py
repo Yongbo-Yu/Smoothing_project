@@ -52,27 +52,27 @@ class Problem_richardson_extrapolation(object):
         
      
 
-        # # For less than 185 points
-        # beta=64
-        # self.yknots_right=np.polynomial.laguerre.laggauss(beta)
+        # # # For less than 185 points
+        beta=16
+        self.yknots_right=np.polynomial.laguerre.laggauss(beta)
       
         # For more than 185 points
-        #beta=512
-        from Parser import Parser
-        fx = open('lag_512_x.txt', 'r')
-        Element_properties_x = Parser('./lag_512_x.txt')
-        Element_properties_x.parse_file(fx.read(),'\n')
-        x=np.array([float(i) for i in Element_properties_x.element_list])
+        # #beta=512
+        # from Parser import Parser
+        # fx = open('lag_512_x.txt', 'r')
+        # Element_properties_x = Parser('./lag_512_x.txt')
+        # Element_properties_x.parse_file(fx.read(),'\n')
+        # x=np.array([float(i) for i in Element_properties_x.element_list])
        
-        Element_properties_x.close_file()   
-        fw = open('lag_512_w.txt', 'r')
-        Element_properties_w = Parser('./lag_512_w.txt')
-        Element_properties_w.parse_file(fw.read(),'\n')
-        w=np.array([float(i) for i in Element_properties_w.element_list])
+        # Element_properties_x.close_file()   
+        # fw = open('lag_512_w.txt', 'r')
+        # Element_properties_w = Parser('./lag_512_w.txt')
+        # Element_properties_w.parse_file(fw.read(),'\n')
+        # w=np.array([float(i) for i in Element_properties_w.element_list])
    
-        Element_properties_x.close_file()   
-        self.yknots_right.append(x[:360])
-        self.yknots_right.append(w[:360])
+        # Element_properties_x.close_file()   
+        # self.yknots_right.append(x[:360])
+        # self.yknots_right.append(w[:360])
 
        
         self.yknots_left=self.yknots_right

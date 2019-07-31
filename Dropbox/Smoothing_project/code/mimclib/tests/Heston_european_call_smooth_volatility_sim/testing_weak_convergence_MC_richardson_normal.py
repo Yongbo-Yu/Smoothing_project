@@ -187,7 +187,7 @@ def weak_convergence_differences():
         marker=['>', 'v', '^', 'o', '*','+','-',':']
         
         # # feed parameters to the problem
-        Nsteps_arr=np.array([1])
+        Nsteps_arr=np.array([4])
         dt_arr=1.0/(Nsteps_arr)
     
         elapsed_time_qoi=np.zeros(1)
@@ -197,25 +197,25 @@ def weak_convergence_differences():
         Lb=np.zeros(1)
         num_cores = mp.cpu_count()
    
-        values=np.zeros((1*(10**7),1)) 
+        values=np.zeros((4*(10**6),1)) 
         for i in range(0,1):
             print i
             start_time=time.time()
             prb = Problem(1,Nsteps_arr[i]) 
-            # for j in range(3*(10**5)):
+            for j in range(4*(10**6)):
               
-            #     values[j,i]=prb.objfun(Nsteps_arr[i])/float(exact)
+                values[j,i]=prb.objfun(Nsteps_arr[i])/float(exact)
 
 
             
 
-            def processInput(j):
-                return prb.objfun(Nsteps_arr[i])/float(exact)
+            # def processInput(j):
+            #     return prb.objfun(Nsteps_arr[i])/float(exact)
  
             
-            p =  pp.ProcessPool(num_cores)  # Processing Pool with four processors
+            # p =  pp.ProcessPool(num_cores)  # Processing Pool with four processors
             
-            values[:,i]= p.map(processInput, range(((1*(10**7))))  )    
+            # values[:,i]= p.map(processInput, range(((1*(10**8))))  )    
 
             elapsed_time_qoi[i]=time.time()-start_time
           
@@ -225,7 +225,7 @@ def weak_convergence_differences():
         print elapsed_time_qoi
 
         error=np.abs(np.mean(values,axis=0) - 1) 
-        stand=np.std(values, axis = 0)/  float(np.sqrt(1*(10**7)))
+        stand=np.std(values, axis = 0)/  float(np.sqrt(4*(10**6)))
         Ub=np.abs(np.mean(values,axis=0) - 1)+1.96*stand
         Lb=np.abs(np.mean(values,axis=0) - 1)-1.96*stand
         print(error)   

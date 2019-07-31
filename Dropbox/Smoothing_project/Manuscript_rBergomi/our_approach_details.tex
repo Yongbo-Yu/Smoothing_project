@@ -17,7 +17,7 @@ where $G$  maps  $2N$ independent standard Gaussian random inputs to the paramet
 \end{equation*} 
 Therefore, the initial integration problem that we are solving lives in $2N$-dimensional space, which becomes very large as the number of time steps $N$, used in the hybrid scheme, increases.
 
-Our approach of approximating the expectation in \eqref{BS_formula_rbergomi_2} is based on hierarchical deterministic quadratures, namely  i) ASGQ using the same construction in \cite{haji2016multi} and ii) randomized QMC based on lattice rules. We describe the ASGQ  method in our context in Section \ref{sec:Details of the MISC} and in Section \ref{sec:Quasi Monte Carlo (QMC)}, we provide details on the implented QMC method.  To make an effective use of either ASGQ or QMC methods, we   apply two transformations to overcome the issue of facing a high dimensional integrand due to the discretization scheme used for simulating the rBergomi dynamics. The first transformation consists of applying a hierarchical  path generation method, based on Brownian bridge (Bb) construction, with the aim of reducing the effective dimension as  described  in Section \ref{sec:Brwonian bridge construction}. The second transformation consists of applying Richardson extrapolation to reduce the bias, resulting in reducing  the maximum number of dimensions needed for the integration problem. Details about  Richardson extrapolation  are provided in Section \ref{sec:Richardson extrapolation}.
+Our approach of approximating the expectation in \eqref{BS_formula_rbergomi_2} is based on hierarchical deterministic quadratures, namely  i) ASGQ using the same construction in \cite{haji2016multi} and ii) randomized QMC based on lattice rules. We describe the ASGQ  method in our context in Section \ref{sec:Details of the MISC} and in Section \ref{sec:Quasi Monte Carlo (QMC)}, we provide details on the implented QMC method.  To make an effective use of either ASGQ or QMC methods, we  apply two techniques to overcome the issue of facing a high dimensional integrand due to the discretization scheme used for simulating the rBergomi dynamics. The first  consists of applying a hierarchical  path generation method, based on Brownian bridge (Bb) construction, with the aim of reducing the effective dimension as  described  in Section \ref{sec:Brwonian bridge construction}. The second technique consists of applying Richardson extrapolation to reduce the bias, resulting in reducing  the maximum number of dimensions needed for the integration problem. Details about  Richardson extrapolation  are provided in Section \ref{sec:Richardson extrapolation}.
 
 If we denote by $\mathcal{E}_{\text{tot}}$ the total error of approximating the  expectation in \eqref{BS_formula_rbergomi} using the ASGQ estimator, $Q_N$, then we have a natural error decomposition
 \begin{align}\label{eq:total_error_ASGQ}
@@ -90,8 +90,8 @@ The quadrature error in this  case  is given by
 \end{equation}
 We define the work contribution, $\Delta \mathcal{W}_{\boldsymbol{\beta}}$, to be the computational cost  required to add  $\Delta Q_N^{\boldsymbol{\beta}}$ to $Q^{\mathcal{I}}_N$, and the error contribution, $\Delta E_{\boldsymbol{\beta}}$, to be  a measure of how much the quadrature error, defined in \eqref{eq:quadrature error}, would decrease once $\Delta Q_N^{\boldsymbol{\beta}}$  has been added to  $Q^{\mathcal{I}}_N$, that is 
 \begin{align}\label{eq:Work_error_contributions}
-\Delta \mathcal{W}_{\boldsymbol{\beta}} &= \text{Work}[Q^{\mathcal{I} \cup \{\boldsymbol{\beta}\}}_N]-\text{Work}[Q^{\mathcal{I}}_N]\\
-\Delta E_{\boldsymbol{\beta}} &= \abs{Q^{\mathcal{I} \cup \{\boldsymbol{\beta}\}}_N-Q^{\mathcal{I}}_N}.
+\Delta E_{\boldsymbol{\beta}} &= \abs{Q^{\mathcal{I} \cup \{\boldsymbol{\beta}\}}_N-Q^{\mathcal{I}}_N}\\
+\Delta \mathcal{W}_{\boldsymbol{\beta}} &= \text{Work}[Q^{\mathcal{I} \cup \{\boldsymbol{\beta}\}}_N]-\text{Work}[Q^{\mathcal{I}}_N].
 \end{align}
  The  construction of the optimal  $\mathcal{I}$ is done by profit thresholding (see Figure \ref{fig:Construction of the index set for ASGQ method} for illustration), that is, for a certain threshold value $\bar{T}$, and a profit of a hierarchical surplus defined by
  \begin{equation*}
@@ -203,10 +203,10 @@ The analiticity assumption, stated in the beginning of Section \ref{sec:Details 
 
 \subsection{Quasi Monte Carlo (QMC)}\label{sec:Quasi Monte Carlo (QMC)}
 \input{QMC.tex}
-\subsection{Brownian bridge construction}\label{sec:Brwonian bridge construction}
-In the literature of ASGQ and  QMC, several hierarchical path generation methods (PGMs) or transformation methods have been proposed to reduce the effective dimension. Among these transformations, we cite  the Brownian bridge (Bb)  construction \cite{morokoff1994quasi,moskowitz1996smoothness,caflisch1997valuation}, the principal component analysis (PCA)  \cite{acworth1998comparison} and the linear transformation (LT) \cite{imai2004minimizing}.
+\subsection{Brownian bridge (Bb) construction}\label{sec:Brwonian bridge construction}
+In the literature of ASGQ and  QMC, several hierarchical path generation methods (PGMs) have been proposed to reduce the effective dimension. Among these techniques, we mention  the Bb  construction \cite{morokoff1994quasi,moskowitz1996smoothness,caflisch1997valuation}, the principal component analysis (PCA)  \cite{acworth1998comparison} and the linear transformation (LT) \cite{imai2004minimizing}.
 
-In our context, the Brownian motion on a time discretization  can be constructed either sequentially using a standard random walk construction, or hierarchically using   other PGMs as listed above. For our purposes, to make an effective use of ASGQ or QMC methods, which benefit from anisotropy, we use the Bb construction since it produces  dimensions with different importance, contrary to a random walk procedure for which all the dimensions of the stochastic space have equal importance. In fact, Bb uses the first several coordinates of the low-discrepancy points to determine the general shape of the Brownian path, and the last few coordinates influence only the fine detail of the path. Consequently, this transformation  reduces the effective dimension  of the problem, which results in accelerating the ASGQ and QMC methods by reducing the computational cost.
+In our context, the Brownian motion on a time discretization  can be constructed either sequentially using a standard random walk construction, or hierarchically using   other PGMs as listed above. For our purposes, to make an effective use of ASGQ or QMC methods, which benefit from anisotropy, we use the Bb construction since it produces  dimensions with different importance, contrary to a random walk procedure for which all the dimensions of the stochastic space have equal importance. In fact, Bb uses the first several coordinates of the low-discrepancy points to determine the general shape of the Brownian path, and the last few coordinates influence only the fine detail of the path. Consequently, this representation  reduces the effective dimension  of the problem, which results in accelerating the ASGQ and QMC methods by reducing the computational cost.
 
 Let us denote $\{t_i\}_{i=0}^{N}$ the grid of time steps. Then the Bb construction \cite{glasserman2004monte} consists of the following: given a past value $B_{t_i}$ and a future value $B_{t_k}$, the value $B_{t_j}$ (with $t_i < t_j < t_k$) can be generated according to 
 \begin{equation*}
@@ -214,26 +214,8 @@ B_{t_j}=(1-\rho) B_{t_i}+\rho B_{t_k}+ \sqrt{\rho (1-\rho)(k-i) \Delta t} z, \: 
 \end{equation*}
 where $\rho=\frac{j-i}{k-i}$.  
 
-
-%In particular, if $N$ is a power of $2$, then given $B_0=0$, Bb generates the Brownian motion at times $T, T/2,T/4,3T/4,\dots$ according
-%\begin{align}\label{eq:BB construction}
-%	B_T&=\sqrt{T}z_1\nonumber\\
-%	B_{T/2}&= \frac{1}{2}(B_{0}+B_{T})+\sqrt{T/4}z_2= \frac{\sqrt{T}}{2} z_1+\frac{\sqrt{T}}{2} z_2\nonumber\\
-%	B_{T/4}&=\frac{1}{2} (B_{0}+B_{T/2})+\sqrt{T/8}z_3= \frac{\sqrt{T}}{4} z_1+\frac{\sqrt{T}}{4} z_2+\sqrt{T/8}z_3\nonumber\\
-%	\vdots \nonumber\\
-%\end{align}
-%where $\{z_j\}_{j=1}^{N}$ are independent standard normal variables.  In Bb construction scheme given by \eqref{eq:BB construction}, the most important values that determine the large scale structure of Brownian motion are the first components of $\mathbf{z} = (z_1,\dots,z_N)$.
-
-
-
-%\begin{remark}
-%In this paper, we chose to couple Brownian bridge construction with the MISC solver to reduce the effective dimension, since it is the less costly option in terms of computational work and the easiest to implement. We did not investigate the performance of MISC when coupling it with other hierarchical path generations method such as PCA or LT, which could be left as a future work that looks for the optimal PGM to couple with MISC in this context.
-%\end{remark}
-%
-
-
 \subsection{Richardson extrapolation}\label{sec:Richardson extrapolation}
-Another transformation that we couple with the ASGQ and QMC methods is Richardson extrapolation \cite{talay1990expansion}. In fact, applying level $K_\text{R}$ (level of extrapolation) of Richardson extrapolation  dramatically reduces the bias, and as a consequence reduces the  number of time steps $N$ needed in the coarsest level to achieve a certain error tolerance. As a consequence, Richardson extrapolation directly reduces  the total dimension of the integration problem for achieving some error tolerance.
+Another representation that we couple with the ASGQ and QMC methods is Richardson extrapolation \cite{talay1990expansion}. In fact, applying level $K_\text{R}$ (level of extrapolation) of Richardson extrapolation  dramatically reduces the bias, and as a consequence reduces the  number of time steps $N$ needed in the coarsest level to achieve a certain error tolerance. As a consequence, Richardson extrapolation directly reduces  the total dimension of the integration problem for achieving some error tolerance.
 
 Let us denote by $(X_t)_{0 \le t \le T}$ a certain stochastic process and by $(\hat{X}_{t_i}^h)_{0 \le  t_i \le T}$ its approximation using a suitable  scheme with a time step $h$.  Then, for sufficiently small $h$, and a suitable smooth function $f$, we assume that
 \begin{align}\label{Euler_weak_error_strenghten}
@@ -252,7 +234,7 @@ For higher levels of extrapolations, we use the following: Let us denote by $h_J
 I(J,K_\text{R})=\frac{2^{K_\text{R}}I(J,K_\text{R}-1)-I(J-1,K_\text{R}-1)}{2^{K_\text{R}}-1},\quad J=1,2,\dots, K_\text{R}=1,2,\dots
 \end{align*}
 \begin{remark}
-We emphasize that throughout our work, we are interested in the pre-asymptotic regime (a small number of time steps), and the use of Richardson extrapolation is justified by our observed experimental results in that regime (see Section \ref{sec:Weak error plots_no_change}),  which suggest  a convergence of order one for the weak error. 
+We emphasize that throughout our work, we are interested in the pre-asymptotic regime (a small number of time steps), and the use of Richardson extrapolation \red{is justified by conjecture \ref{conj: Weak error structure} and our observed experimental results in that regime (see Section \ref{sec:Weak error plots_no_change}),  which suggest  a convergence of order one for the weak error}. 
 \end{remark}
 
 %

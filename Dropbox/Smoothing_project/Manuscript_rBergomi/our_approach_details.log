@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  9 JUL 2019 19:13
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  31 JUL 2019 21:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1024,7 +1024,7 @@ put line 20.
 <write> ... bridge construction' on page \thepage 
                                                   \space undefined\on@line .
 l.20 ...ion \ref{sec:Brwonian bridge construction}
-                                                  . The second transformatio...
+                                                  . The second technique con...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -1064,20 +1064,20 @@ Overfull \hbox (20.0pt too wide) in paragraph at lines 20--21
  []
 
 
-Overfull \hbox (4113.6461pt too wide) in paragraph at lines 20--21
+Overfull \hbox (3983.79083pt too wide) in paragraph at lines 20--21
 []\OML/cmm/m/it/10 ormula[]bergomi[]isbasedonhierarchicaldeterministicquadratur
 es; namelyi\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 ASGQusingthesameconstructionin\OT1
 /cmr/m/n/10 [[]]\OML/cmm/m/it/10 andii\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 randomi
 zedQMCbasedonlatticerules:WedescribetheASGQmethodinourcontextinSection[]andinSe
 ction[]; weprovidedetailsontheimplentedQMCmethod:TomakeaneffectiveuseofeitherAS
-GQorQMCmethods; weapplytwotransformationstoovercometheissueoffacingahighdimensi
-onalintegrandduetothediscretizationschemeusedforsimulatingtherBergomidynamics:T
-hefirsttransformationconsistsofapplyingahierarchicalpathgenerationmethod; based
-onBrownianbridge\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 Bb\OT1/cmr/m/n/10 )\OML/cmm/m
-/it/10 construction; withtheaimofreducingtheeffectivedimensionasdescribedinSect
-ion[]:ThesecondtransformationconsistsofapplyingRichardsonextrapolationtoreducet
-hebias; resultinginreducingthemaximumnumberofdimensionsneededfortheintegrationp
-roblem:DetailsaboutRichardsonextrapolationareprovidedinSection[]:$ 
+GQorQMCmethods; weapplytwotechniquestoovercometheissueoffacingahighdimensionali
+ntegrandduetothediscretizationschemeusedforsimulatingtherBergomidynamics:Thefir
+stconsistsofapplyingahierarchicalpathgenerationmethod; basedonBrownianbridge\OT
+1/cmr/m/n/10 (\OML/cmm/m/it/10 Bb\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 construction
+; withtheaimofreducingtheeffectivedimensionasdescribedinSection[]:Thesecondtech
+niqueconsistsofapplyingRichardsonextrapolationtoreducethebias; resultinginreduc
+ingthemaximumnumberofdimensionsneededfortheintegrationproblem:DetailsaboutRicha
+rdsonextrapolationareprovidedinSection[]:$ 
  []
 
 Missing character: There is no I in font nullfont!
@@ -5789,58 +5789,12 @@ or  <return>  to continue without it.
 <inserted text> 
                 $
 l.93 \Delta
-            \mathcal{W}_{\boldsymbol{\beta}} &= \text{Work}[Q^{\mathcal{I} \...
+            E_{\boldsymbol{\beta}} &= \abs{Q^{\mathcal{I} \cup \{\boldsymbol...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Undefined control sequence.
-l.93 \Delta \mathcal{W}_{\boldsymbol
-                                    {\beta}} &= \text{Work}[Q^{\mathcal{I} \...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Misplaced alignment tab character &.
-l.93 \Delta \mathcal{W}_{\boldsymbol{\beta}} &
-                                              = \text{Work}[Q^{\mathcal{I} \...
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Undefined control sequence.
-l.93 ... \mathcal{W}_{\boldsymbol{\beta}} &= \text
-                                                  {Work}[Q^{\mathcal{I} \cup...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.93 ...xt{Work}[Q^{\mathcal{I} \cup \{\boldsymbol
-                                                  {\beta}\}}_N]-\text{Work}[...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.93 ...l{I} \cup \{\boldsymbol{\beta}\}}_N]-\text
-                                                  {Work}[Q^{\mathcal{I}}_N]\\
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.94 \Delta E_{\boldsymbol
+l.93 \Delta E_{\boldsymbol
                           {\beta}} &= \abs{Q^{\mathcal{I} \cup \{\boldsymbol...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -5849,7 +5803,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Misplaced alignment tab character &.
-l.94 \Delta E_{\boldsymbol{\beta}} &
+l.93 \Delta E_{\boldsymbol{\beta}} &
                                     = \abs{Q^{\mathcal{I} \cup \{\boldsymbol...
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -5859,7 +5813,7 @@ you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
 ! Undefined control sequence.
-l.94 \Delta E_{\boldsymbol{\beta}} &= \abs
+l.93 \Delta E_{\boldsymbol{\beta}} &= \abs
                                           {Q^{\mathcal{I} \cup \{\boldsymbol...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -5868,8 +5822,54 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.94 ... &= \abs{Q^{\mathcal{I} \cup \{\boldsymbol
+l.93 ... &= \abs{Q^{\mathcal{I} \cup \{\boldsymbol
                                                   {\beta}\}}_N-Q^{\mathcal{I...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.94 \Delta \mathcal{W}_{\boldsymbol
+                                    {\beta}} &= \text{Work}[Q^{\mathcal{I} \...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Misplaced alignment tab character &.
+l.94 \Delta \mathcal{W}_{\boldsymbol{\beta}} &
+                                              = \text{Work}[Q^{\mathcal{I} \...
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Undefined control sequence.
+l.94 ... \mathcal{W}_{\boldsymbol{\beta}} &= \text
+                                                  {Work}[Q^{\mathcal{I} \cup...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.94 ...xt{Work}[Q^{\mathcal{I} \cup \{\boldsymbol
+                                                  {\beta}\}}_N]-\text{Work}[...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.94 ...l{I} \cup \{\boldsymbol{\beta}\}}_N]-\text
+                                                  {Work}[Q^{\mathcal{I}}_N].
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -6365,6 +6365,6 @@ Here is how much of TeX's memory you used:
  3678 multiletter control sequences out of 15000+600000
  4567 words of font info for 17 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 18i,5n,21p,1245b,162s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 18i,5n,21p,1220b,162s stack positions out of 5000i,500n,10000p,200000b,80000s
 
 !  ==> Fatal error occurred, no output PDF file produced!

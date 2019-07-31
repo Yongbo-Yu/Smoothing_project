@@ -116,7 +116,7 @@ where we use Gauss-Laguerre quadrature with $\beta$ points to approximate each p
 
 In this case, the integrand $h(\mathbf{z}_{-1})$ is given by
 \begin{align}\label{smoothed_integrand_binary_opt_2}
-	h(\mathbf{z}_{-1})&= \int_\rset \mathbf{1}_{\Psi \circ \Phi(T;z_1,\mathbf{z}_{-1})>K}\frac{1}{\sqrt{2 \pi}} \operatorname{exp} (-z_1^2/2) dy \nonumber\\
+	h(\mathbf{z}_{-1})&= \int_\rset \mathbf{1}_{\Psi \circ \Phi(T;z_1,\mathbf{z}_{-1})>K}\frac{1}{\sqrt{2 \pi}} \operatorname{exp} (-z_1^2/2) dz_1 \nonumber\\
 	&=  P(Y>y_{\ast}(K)),
 \end{align}
 where  $y_{\ast}(x)$, is an invertible function that satisfies 
@@ -124,7 +124,7 @@ where  $y_{\ast}(x)$, is an invertible function that satisfies
 	\Psi \circ \Phi (T;y_{\ast}(x),\mathbf{z}_{-1})=x	 \PERIOD
 \end{align}
 
-We get the kink point by running Newton iteration with a precision of $10^{-10}$. The paramters that we used in our numerical experiments are: $T=1$, $\sigma=0.4$ and $S_0=K=100$. The exact value of this case is $0.42074029$.
+We get the kink point by running Newton iteration with a precision of $10^{-10}$. The parameters that we used in our numerical experiments are: $T=1$, $\sigma=0.4$ and $S_0=K=100$. The exact value of this case is $0.42074029$.
 
 Figure \ref{fig:Weak_rate_binary} shows the estimated   weak error  for the case without Richardson extrapolation, and we report the results for comparing MC and ASGQ in Tables \ref{Total error of MISC and MC to compute Binary option price of the different tolerances for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.} and \ref{Comparsion of the computational time of  MC and MISC, used to compute Binary option price  for different number of time steps, without Richardson extrapolation}, and Figure \ref{fig:Complexity plot for MC and MISC , Binary, Non rich}. Our numerical experiments show that ASGQ  requires approximately $25\%$ of the work of MC  to achieve a total relative error of around $2\%$.
 
@@ -1551,25 +1551,62 @@ For instance, for set $1$ and $2$, we have $\beta=0.05$ and $\alpha=-0.5$ implyi
 \end{figure}
 \FloatBarrier
 
-\subsubsection{Comparison in terms of  the weak error behavior (under process)}
+\subsubsection{Comparison in terms of  the weak error behavior}
+\subsubsection*{Weak error behavior for the case of Set 1 parameters}
 
-\subsubsection{European call option  under the discretized  Heston model ($n=1$) }
-
-We consider now  the European call option  under the discretized  Heston model  with parameters:  $S_0=K=100$, $v_0=0.04$, $\mu=0$,  $\rho=-0.9$, $\kappa=1$, $\xi=0.1$, $\theta=\frac{\xi^2}{4 \kappa}=0.0025$, and $n=1$ (that is we just use one OU process to simulate the volatility). The reference value for those parameters  is  $6.3325$ (computed using Premia with cf\_call\_heston method as explained in \cite{heston1993closed}). Figure \ref{fig:Weak_rate_call_heston_smooth_vol} shows the estimated   weak error  for the case without Richardson extrapolation, and we report the results for comparing MC (we used the Full truncation scheme to simulate the volatility) and ASGQ (we used the smooth approach in Section \ref{sec:Discretization of Heston model with the volatility process Simulated using the sum of  Ornstein-Uhlenbeck (Bessel) processes} to simulate the volatility) in Tables \ref{Total error of MISC and MC to compute European call option price under discretized Heston model of the different tolerances for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.} and \ref{Comparsion of the computational time of  MC and MISC, used to compute European call option price under discretized Heston model for different number of time steps, without Richardson extrapolation} for the case without Richardson extrapolation, and  Tables \ref{Total relative  error of ASGQ  to compute European call option price under discretized Heston model for different number of time steps, with level $1$ of Richardson extrapolation. The values between parentheses correspond to the different errors contributing to the total relative error: for ASGQ we report the bias and quadrature errors.} and \ref{table:The computational time of  ASGQ, used to compute European call option price under discretized Heston model for different number of time steps, with level $1$ Richardson extrapolation.} for the case of level $1$ Richardson extrapolation. We also compare the performance of the two methods for different configurations in  Figure \ref{fig:Complexity plot for MC and MISC , European call option price under discretized Heston model}.  Our numerical experiments show that Richardson extrapolation improved the performance of both ASGQ and MC, and that for achieving a relative error around $1.4\%$, ASGQ  coupled with level $1$ of Richardson extrapolation is the optimal method, and  requires approximately $33\%$ of the work of MC  coupled with level $1$ of Richardson extrapolation. 
- 
 
 \FloatBarrier
-\begin{figure}[h!]
-		\centering
-		\includegraphics[width=0.5\linewidth]{./figures/Heston_single_call_smooth_vol/weak_convergence/weak_convergence_order_single_call_option_heston_relative_M_4_10_6_beta_512_smooth_scheme}
+\begin{figure}[htb]
+	\centering % <-- added
+	\begin{subfigure}{0.4\textwidth}
+		\includegraphics[width=\linewidth]{./figures/Heston_single_call_smooth_vol/weak_convergence/weak_convergence_order_single_call_option_heston_relative_M_4_10_6_beta_512_smooth_scheme_set1}
+		\caption{}
+		\label{fig:1}
+	\end{subfigure}\hfil %% <-- added
+	\begin{subfigure}{0.4\textwidth}
+		\includegraphics[width=\linewidth]{./figures/Heston_single_call_ABR_moment_matching/weak_convergence/weak_convergence_order_single_call_option_heston_relative_M_1_10_7_beta_128_ABR_set1}
+		\caption{}
+		\label{fig:2}
+	\end{subfigure}\hfil %% <-- added
+	\caption{The convergence of the relative weak error  $\mathcal{E}_B(N)$ defined in \ref{eq:total_error}, for the European call option  under the discretized  Heston model, for Set $1$ parameters in Table \ref{table:Reference solution, for different parameter constellations.}. The upper and lower bounds are $95\%$ confidence intervals. (a) using the smooth transformation as in Section \ref{sec:Discretization of Heston model with the volatility process Simulated using the sum of  Ornstein-Uhlenbeck (Bessel) processes}, (b) using the ABR scheme as in Section \ref{sec:The ABR method}.}
+	\label{fig:weak convergence comparison set 1}	
+\end{figure}
+\FloatBarrier
+\subsubsection*{Weak error behavior for the case of Set 2 parameters}
 
-	\caption{The convergence of the relative weak error  $\mathcal{E}_B(N)$ defined in \ref{eq:total_error}, for the European call option  under the discretized  Heston model, with  a number of Laguerre  quadrature points  $\beta=512$ and number of samples for MC $M=4 \times 10^6$. The upper and lower bounds are $95\%$ confidence intervals.}
-	\label{fig:Weak_rate_call_heston_smooth_vol}
+
+\FloatBarrier
+\begin{figure}[htb]
+	\centering % <-- added
+	\begin{subfigure}{0.4\textwidth}
+		\includegraphics[width=\linewidth]{./figures/Heston_single_call_smooth_vol/weak_convergence/paths_smooth_vol_scheme_set1_N4_X}
+		\caption{}
+		\label{fig:1}
+	\end{subfigure}\hfil %% <-- added
+	\begin{subfigure}{0.4\textwidth}
+		\includegraphics[width=\linewidth]{./figures/Heston_single_call_ABR_moment_matching/weak_convergence/weak_convergence_order_single_call_option_heston_relative_M_1_10_7_beta_128_ABR_set2}
+		\caption{}
+		\label{fig:2}
+	\end{subfigure}\hfil %% <-- added
+	\caption{The convergence of the relative weak error  $\mathcal{E}_B(N)$ defined in \ref{eq:total_error}, for the European call option  under the discretized  Heston model, for Set $2$ parameters in Table \ref{table:Reference solution, for different parameter constellations.}. The upper and lower bounds are $95\%$ confidence intervals. (a) using the smooth transformation as in Section \ref{sec:Discretization of Heston model with the volatility process Simulated using the sum of  Ornstein-Uhlenbeck (Bessel) processes}, (b) using the ABR scheme as in Section \ref{sec:The ABR method}.}
+	\label{fig:weak convergence comparison set 2}	
 \end{figure}
 \FloatBarrier
 
+\subsubsection*{Weak error behavior for the case of Set 3 parameters}
 
 
+\FloatBarrier
+\begin{figure}[htb]
+	\centering % <-- added
+		\includegraphics[width=0.5\linewidth]{./figures/Heston_single_call_ABR_moment_matching/weak_convergence/weak_convergence_order_single_call_option_heston_relative_M_1_10_7_beta_128_ABR_set3}
+	\caption{The convergence of the relative weak error  $\mathcal{E}_B(N)$ defined in \ref{eq:total_error},using the ABR scheme as in Section \ref{sec:The ABR method}, for the European call option  under the discretized  Heston model, for Set $3$ parameters in Table \ref{table:Reference solution, for different parameter constellations.}. The upper and lower bounds are $95\%$ confidence intervals.}
+	\label{fig:weak convergence comparison set 3}	
+\end{figure}
+\FloatBarrier
+\subsubsection{European call option  under the discretized  Heston model with parameters of Set $1$ in Table \ref{table:Reference solution, for different parameter constellations.}}\label{sec:European call option  under the discretized  Heston model with parameters of Set 1}
+We consider now  the European call option  under the discretized  Heston model  with parameters given by Set $1$ in Table \ref{table:Reference solution, for different parameter constellations.}. In this case, we use the smooth scheme described  in  Section \ref{sec:Discretization of Heston model with the volatility process Simulated using the sum of  Ornstein-Uhlenbeck (Bessel) processes} and with  $n=1$ (that is we just use one OU process to simulate the volatility). Figure \ref{fig:Weak_rate_call_heston_smooth_vol} shows the estimated weak error  for the case without Richardson extrapolation, and we report the results for comparing MC (we used the Full truncation scheme to simulate the volatility) and ASGQ (we used the smooth approach in Section \ref{sec:Discretization of Heston model with the volatility process Simulated using the sum of  Ornstein-Uhlenbeck (Bessel) processes} to simulate the volatility) in Tables \ref{Total error of MISC and MC to compute European call option price under discretized Heston model of the different tolerances for different number of time steps, without Richardson extrapolation. The numbers between parentheses are the corresponding absolute errors.} and \ref{Comparsion of the computational time of  MC and MISC, used to compute European call option price under discretized Heston model for different number of time steps, without Richardson extrapolation} for the case without Richardson extrapolation, and  Tables \ref{Total relative  error of ASGQ  to compute European call option price under discretized Heston model for different number of time steps, with level $1$ of Richardson extrapolation. The values between parentheses correspond to the different errors contributing to the total relative error: for ASGQ we report the bias and quadrature errors.} and \ref{table:The computational time of  ASGQ, used to compute European call option price under discretized Heston model for different number of time steps, with level $1$ Richardson extrapolation.} for the case of level $1$ Richardson extrapolation. We also compare the performance of the two methods for different configurations in  Figure \ref{fig:Complexity plot for MC and MISC , European call option price under discretized Heston model}.  Our numerical experiments show that Richardson extrapolation improved the performance of both ASGQ and MC, and that for achieving a relative error around $1.4\%$, ASGQ  coupled with level $1$ of Richardson extrapolation is the optimal method, and  requires approximately $33\%$ of the work of MC  coupled with level $1$ of Richardson extrapolation. 
+ 
 
 \FloatBarrier
 \begin{table}[h!]
@@ -1620,14 +1657,14 @@ We consider now  the European call option  under the discretized  Heston model  
 	\centering
 	\begin{tabular}{l*{6}{c}r}
 		\toprule[1.5pt]
-	Method & & Steps  & &  &    \\
+	Method & &   &Steps &  &   &    \\
 	\hline
-           & $1-2$ & $2-4$   \\
+           & $1-2$ & $2-4$  & $4-8$   \\
 		\hline
-		ASGQ   &  $\underset{(0.037,0.01)}{\mathbf{0.038}}$ & $\underset{(0.0077,0.0065)}{\mathbf{0.0142}}$  \\
+		ASGQ   &  $\underset{(0.037,0.01)}{\mathbf{0.038}}$ & $\underset{(0.0077,0.0065)}{\mathbf{0.0142}}$  & $\underset{(0.0015,0.0017)}{\mathbf{0.0032}}$ \\
 		\hline
-						MC   &  $\underset{(0.067,0.064)}{\mathbf{0.131}}$ & $\underset{(0.0061,0.0062)}{\mathbf{0.0123}}$  \\ 
-				M(\# MC samples)   &$2 \times 10^3$  &$3 \times 10^5$   \\	
+						MC   &  $\underset{(0.067,0.064)}{\mathbf{0.131}}$ & $\underset{(0.0061,0.0062)}{\mathbf{0.0123}}$ & $\underset{(0.0016,0.0015)}{\mathbf{0.0031}}$  \\ 
+				M(\# MC samples)   &$2 \times 10^3$  &$3 \times 10^5$  &$4 \times 10^6$   \\	
 			\bottomrule[1.25pt]
 	\end{tabular}
 	\caption{Total relative  error of ASGQ and MC to compute European call option price under discretized Heston model for different number of time steps, with level $1$ of Richardson extrapolation. The values between parentheses correspond to the different errors contributing to the total relative error: for ASGQ we report the bias and quadrature errors and for MC we report the bias and the statistical errors. The number of MC samples,$ M$, is chosen to satisfy \eqref{optimal_number_samples}.}
@@ -1642,10 +1679,10 @@ We consider now  the European call option  under the discretized  Heston model  
 		\toprule[1.5pt]
 	Method & & Steps  & &      &\\
 	\hline
-	         & $1-2$ & $2-4$ \\
+	         & $1-2$ & $2-4$  & $4-8$ \\
 	         	\hline
-		ASGQ & $4.5$  & $48.5$  \\
-				MC  &   $1$& $145$  \\
+		ASGQ & $4.5$  & $48.5$ & $864$  \\
+				MC  &   $1$& $145$& $2764$   \\
 		\bottomrule[1.25pt]
 	\end{tabular}
 	\caption{Comparison of the computational time of  MC and ASGQ, used to compute European call option price under discretized Heston model for different number of time steps, with level $1$ of Richardson extrapolation. The average computational time of MC is computed over $10$ runs.}
@@ -1656,8 +1693,11 @@ We consider now  the European call option  under the discretized  Heston model  
 \FloatBarrier
 	\begin{figure}[h!]
 \centering
-\includegraphics[width=0.5\linewidth]{./figures/Heston_single_call_smooth_vol/complexity_rates/error_vs_time}
+\includegraphics[width=0.5\linewidth]{./figures/Heston_single_call_smooth_vol/complexity_rates/set1/error_vs_time}
 
 \caption{Computational work comparison for ASGQ and MC methods, for the case of European call option price under discretized Heston model. This plot shows that to achieve a relative error around $1.4\%$, using level $1$ of Richardson extrapolation is the optimal configuration for both methods, and that ASGQ coupled with level $1$ of Richardson extrapolation  outperforms  MC coupled with level $1$ of Richardson extrapolation  method in terms of computational time.}
 \label{fig:Complexity plot for MC and MISC , European call option price under discretized Heston model}
 \end{figure}
+\FloatBarrier
+
+

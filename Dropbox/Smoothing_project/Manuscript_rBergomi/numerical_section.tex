@@ -23,9 +23,7 @@ In this section, we show the results obtained through the different numerical ex
 \FloatBarrier
 
 \subsection{Weak error} \label{sec:Weak error plots_no_change}
-We start our numerical experiments with accurately  estimating the weak error (bias)  for the different parameter sets  in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, with and without Richardson extrapolation.  
-
-For illustrative purposes, we only show the weak errors related to set $1$ in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.} (see Figure \ref{fig:Weak_rate_set1_set_2_without_rich}). We note that we observed similar behavior for the other parameter sets, with slightly worse rates for some cases. We emphasize that the reported weak rates correspond to the pre-asymptotic regime that we are interested in. We are not interested in estimating the rates specifically but rather obtaining  a sufficiently precise estimate of the weak error (bias), $\mathcal{E}_B(N)$, for different  numbers of time steps $N$.  For a fixed discretization, the corresponding estimated biased solution will be set as a reference solution to the  ASGQ method  in order to estimate the quadrature error $\mathcal{E}_Q(\text{TOL}_{\text{ASGQ}},N)$.	
+We start our numerical experiments with accurately  estimating the weak error (bias), discussed in Section \ref{sec:Weak error analysis}, for the different parameter sets  in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, with and without Richardson extrapolation.   For illustrative purposes, we only show the weak errors related to set $1$ in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.} (see Figure \ref{fig:Weak_rate_set1_set_2_without_rich}). We note that we observed similar behavior for the other parameter sets, with slightly worse rates for some cases. We emphasize that the reported weak rates correspond to the pre-asymptotic regime that we are interested in. We are not interested in estimating the rates specifically but rather obtaining  a sufficiently precise estimate of the weak error (bias), $\mathcal{E}_B(N)$, for different  numbers of time steps $N$.  For a fixed discretization, the corresponding estimated biased solution will be set as a reference solution to the  ASGQ method  in order to estimate the quadrature error $\mathcal{E}_Q(\text{TOL}_{\text{ASGQ}},N)$.	
 \FloatBarrier
 \begin{figure}[h!]
 	\centering
@@ -42,7 +40,7 @@ For illustrative purposes, we only show the weak errors related to set $1$ in Ta
 		\label{fig:sub4}
 	\end{subfigure}
 	
-	\caption{The  convergence of the weak error $\mathcal{E}_B(N)$, defined in \eqref{eq:total_error_ASGQ}, using MC, for set $1$ parameter in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. We refer to $C_{\text{RB}}$ as $\expt{g(X)}$, and to $C_{\text{RB}}^{N}$ as  $\expt{g(X_{\Delta t})}$. The upper and lower bounds are $95\%$ confidence intervals. a) without Richardson extrapolation.  b) with Richardson extrapolation (level $1$).}
+	\caption{The  convergence of the weak error $\mathcal{E}_B(N)$, defined in \eqref{eq: Weak_error_hyb_chol}, using MC, for set $1$ parameter in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. We refer to $C_{\text{RB}}$ as $\expt{g(X)}$, and to $C_{\text{RB}}^{N}$ as  $\expt{g(X_{\Delta t})}$. The upper and lower bounds are $95\%$ confidence intervals. a) without Richardson extrapolation.  b) with Richardson extrapolation (level $1$).}
 	\label{fig:Weak_rate_set1_set_2_without_rich}
 \end{figure}
 \FloatBarrier
@@ -121,7 +119,7 @@ For illustrative purposes, we only show the weak errors related to set $1$ in Ta
 %\end{figure}
 %\FloatBarrier
 
-\subsection{Comparing the different  errors and computational time for MC and ASGQ}\label{sec:Comparing different  errors and complexity for MC and MISC}
+\subsection{Comparing the errors and computational time for MC, QMC and ASGQ}\label{sec:Comparing different  errors and complexity for MC and MISC}
 In this section, we conduct a comparison between MC, QMC and ASGQ in terms of errors and computational time. We show tables and plots reporting  the different relative errors involved in the MC and QMC  methods (bias and statistical error  estimates), and in ASGQ (bias and quadrature error estimates).  While fixing  a  sufficiently small relative error tolerance in the price estimates,  we  compare the computational time needed for all methods to meet the desired error tolerance.  We note that  in all cases the actual work (runtime) is obtained using an Intel(R) Xeon(R) CPU E$5$-$268$ architecture. 
 
 Through our conducted numerical experiments for each parameter set, we follow these steps to achieve our reported results:
@@ -143,16 +141,16 @@ We show  the summary of our numerical findings in Table \ref{table:Summary of ou
 	\begin{small}
 	\begin{tabular}{l*{4}{c}r}
 	\toprule[1.5pt]
-		Parameter set              &  Total relative error  & CPU time ratio $\left(\text{MC}/ \text{ASGQ} \right)$ & CPU time ratio  $\left(\text{MC}/ \text{QMC} \right)$\\
+		Parameter set              &  Total relative error  & CPU time ratio $\left(\text{ASGQ}/\text{MC} \right)$ & CPU time ratio  $\left( \text{QMC}/\text{MC} \right)$\\
 		\hline
-			Set $1$  &  $1\%$&  $ 15$ &  $10$\\	
+			Set $1$  &  $1\%$&  $ 6.7\%$ &  $10\%$\\	
            	
               \hline
-            Set $2$     &  $0.2\%$&  $21.5$ &  $73.2$\\		
+            Set $2$     &  $0.2\%$&  $4.7\%$ &  $1.4\%$\\		
 				 \hline
-					Set $3$    &  $0.4\%$&  $26.7$ &  $21.3$\\	
+					Set $3$    &  $0.4\%$&  $3.8\%$ &  $4.7\%$\\	
 					\hline
-						Set $4$  &  $2\%$&  $5$ &  $10$\\	
+						Set $4$  &  $2\%$&  $20\%$ &  $10\%$\\	
 		\bottomrule[1.25pt]
 	\end{tabular}
 \end{small}
@@ -528,7 +526,7 @@ We show  the summary of our numerical findings in Table \ref{table:Summary of ou
 %
 
 
-\subsubsection{Case of parameters in Set 1, in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.} }
+\subsubsection{Case of parameters in Set 1 in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.} }
 \label{sec:Case of set $2$ parameters_linear}
 In this section, we conduct our numerical experiments for three different scenarios: i) without Richardson extrapolation, ii) with (level $1$) Richardson extrapolation, and iii) with (level $2$) Richardson extrapolation. Figure \ref{fig: Comparing the numerical complexity of the different  methods with the different configurations}  shows a comparison of the numerical complexity for each method under the three different scenarios. From this Figure, we conclude that to achieve a relative error of $1\%$, we have level $1$ of Richardson extrapolation is the optimal configuration for both MC and randomized QMC methods, and level $2$ of Richardson extrapolation is the optimal configuration for ASGQ  method.
 
@@ -556,11 +554,11 @@ In this section, we conduct our numerical experiments for three different scenar
 \FloatBarrier
 
 We compare these optimal configurations for each method  in Figure \ref{fig:Complexity plot for  MISC for Case set $2$ parameters, comparison}, and we obtain that both ASGQ and QMC outperfrom MC, in terms of numerical complexity. In particular, to achieve a total relative error $1\%$, ASGQ coupled with level $2$ of Richardson extrapolation requires
-approximately $7\%$ of the work of MC coupled with level $1$ of Richardson extrapolation, and  QMC coupled with level $1$ of Richardson extrapolation requires approximately $10\%$ of the work of MC coupled with level $1$ of Richardson extrapolation. We show more detailed outputs for the methods compared in Figure \ref{fig: Comparing the numerical complexity of the different  methods with the different configurations} in Appendix \ref{appendix:Case of set 1 parameters}.
+approximately $6.7\%$ of the work of MC coupled with level $1$ of Richardson extrapolation, and  QMC coupled with level $1$ of Richardson extrapolation requires approximately $10\%$ of the work of MC coupled with level $1$ of Richardson extrapolation. We show more detailed outputs for the methods compared in Figure \ref{fig:Complexity plot for  MISC for Case set $2$ parameters, comparison} in Appendix \ref{appendix:Case of set 1 parameters}.
 \FloatBarrier
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.5\linewidth]{./figures/rBergomi_Complexity_rates/set2/error_vs_time_set2_full_comparison}
+	\includegraphics[width=0.4\linewidth]{./figures/rBergomi_Complexity_rates/set2/error_vs_time_set2_full_comparison}
 	
 	\caption{Computational work comparison for the different methods with the best configurations concluded from Figure \ref{fig: Comparing the numerical complexity of the different  methods with the different configurations}, for the case of parameter set $1$ in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. This plot shows that to achieve a relative error below $1\%$, ASGQ coupled with level $2$ of Richardson extrapolation and QMC coupled with level $1$ of  Richardson extrapolation have the same performance. Furthermore, they outperform significantly MC method coupled with level $1$ of Richardson extrapolation.}
 	\label{fig:Complexity plot for  MISC for Case set $2$ parameters, comparison}
@@ -569,42 +567,41 @@ approximately $7\%$ of the work of MC coupled with level $1$ of Richardson extra
 
 
 
-\subsubsection{Case of parameters in Set 2, in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.} }\label{sec:Case of set 3 parameters}
+\subsubsection{Case of parameters in Set 2  in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.} }\label{sec:Case of set 3 parameters}
 
 In this section, we only conduct our numerical experiments for the case without Richardson extrapolation, since the results show that we meet a small enough relative error tolerance without the need to apply Richardson extrapolation. We compare the different methods  in Figure \ref{fig:Complexity plot for  MISC for case set $3$ parameters, comparison}, and we obtain that both ASGQ and QMC outperfrom MC, in terms of numerical complexity. In particular,  to achieve a total relative error of about $0.2\%$, ASGQ  requires
-	approximately $5\%$ of the work of MC, and  QMC requires approximately $1.4\%$ of the work of MC. We show more detailed outputs for the methods compared in Figure \ref{fig:Complexity plot for  MISC for case set $3$ parameters, comparison} in Appendix \ref{appendix:Case of set $2$ parameters}. 
+	approximately $4.7\%$ of the work of MC, and  QMC requires approximately $1.4\%$ of the work of MC. We show more detailed outputs for the methods compared in Figure \ref{fig:Complexity plot for  MISC for case set $3$ parameters, comparison} in Appendix \ref{appendix:Case of set $2$ parameters}. 
 \FloatBarrier
 	\begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.5\linewidth]{./figures/rBergomi_Complexity_rates/set5/error_vs_time_set5_full_comparison}
+	\includegraphics[width=0.4\linewidth]{./figures/rBergomi_Complexity_rates/set5/error_vs_time_set5_full_comparison}
 	
 	\caption{Computational work comparison for   the different  methods, for the case of parameter set $2$ in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. This plot shows that to achieve a relative error below $1\%$, ASGQ and QMC have similar performance and they outperform significantly  MC method in terms of computational time.}
 	\label{fig:Complexity plot for  MISC for case set $3$ parameters, comparison}
 \end{figure}
 \FloatBarrier
-\subsubsection{Case of parameters in Set 3, in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.} }\label{sec:Case of set 4 parameters}
+\subsubsection{Case of parameters in Set 3  in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.} }\label{sec:Case of set 4 parameters}
 In this section, we only conduct our numerical experiments for the case without Richardson extrapolation, since the results show that we meet a small enough relative error tolerance without the need to apply Richardson extrapolation. We compare the different methods  in Figure \ref{fig:Complexity plot for MC and MISC for case set $4$ parameters}, and we obtain that both ASGQ and QMC outperfrom MC, in terms of numerical complexity. In particular,  to achieve a total relative error of about $0.4\%$, ASGQ  requires
-	approximately $4\%$ of the work of MC, and  QMC requires approximately $5\%$ of the work of MC. We show more detailed outputs for the methods compared in Figure \ref{fig:Complexity plot for MC and MISC for case set $4$ parameters} in Appendix \ref{appendix:Case of set 3 parameters}.
+	approximately $3.8\%$ of the work of MC, and  QMC requires approximately $4.7\%$ of the work of MC. We show more detailed outputs for the methods compared in Figure \ref{fig:Complexity plot for MC and MISC for case set $4$ parameters} in Appendix \ref{appendix:Case of set 3 parameters}.
 
 \FloatBarrier
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.5\linewidth]{./figures/rBergomi_Complexity_rates/set6/error_vs_time_set6_full_comparison}
+	\includegraphics[width=0.4\linewidth]{./figures/rBergomi_Complexity_rates/set6/error_vs_time_set6_full_comparison}
 	
 	\caption{Comparison of computational work for the different  methods, for the case of parameter set $3$ in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}.}
 	\label{fig:Complexity plot for MC and MISC for case set $4$ parameters}
 \end{figure}
 \FloatBarrier
 
-\subsubsection{Case of parameters in Set 4, in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.} }\label{sec:Case of set 5 parameters}
+\subsubsection{Case of parameters in Set 4  in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.} }\label{sec:Case of set 5 parameters}
 
-In this section, we only conduct our numerical experiments for the case without Richardson extrapolation.  We compare the different methods  in Figure \ref{fig:Complexity plot for MC and MISC for Case set $5$ parameters}, and we obtain that both ASGQ and QMC outperfrom MC, in terms of numerical complexity. In particular,  to achieve a total relative error of about $2\%$, ASGQ  requires	approximately $20\%$ of the work of MC, and  QMC requires approximately $10\%$ of the work of MC. We show more detailed outputs for the methods compared in Figure \ref{fig:Complexity plot for MC and MISC for Case set $5$ parameters} in Appendix \ref{appendix:Case of set 4 parameters}.   Similar to the case of set $1$ parameters, illustrated in section \ref{sec:Case of set $2$ parameters_linear}, we believe that Richardson extrapolation will improve the performance of ASGQ and QMC methods.   
-
+In this section, we only conduct our numerical experiments for the case without Richardson extrapolation.  We compare the different methods  in Figure \ref{fig:Complexity plot for MC and MISC for Case set $5$ parameters}, and we obtain that both ASGQ and QMC outperfrom MC, in terms of numerical complexity. In particular,  to achieve a total relative error of about $2\%$, ASGQ  requires	approximately $20\%$ of the work of MC, and  QMC requires approximately $10\%$ of the work of MC. We show more detailed outputs for the methods compared in Figure \ref{fig:Complexity plot for MC and MISC for Case set $5$ parameters} in Appendix \ref{appendix:Case of set 4 parameters}.   Similar to the case of set $1$ parameters, illustrated in section \ref{sec:Case of set $2$ parameters_linear}, we believe that Richardson extrapolation will improve the performance of ASGQ and QMC methods.   We should also point out that, since we are in the out of the money regime in this case, a fairer comparison of the methods may be done after coupling them with an importance sampling method, so that more points are sampled in the right region of the payoff function.
 \FloatBarrier
 	\begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.5\linewidth]{./figures/rBergomi_Complexity_rates/set7/error_vs_time_set7_full_comparison}
+	\includegraphics[width=0.4\linewidth]{./figures/rBergomi_Complexity_rates/set7/error_vs_time_set7_full_comparison}
 	
 	\caption{Comparison of computational work for the different methods, for the case of parameter set $4$ in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}.}
 	\label{fig:Complexity plot for MC and MISC for Case set $5$ parameters}
