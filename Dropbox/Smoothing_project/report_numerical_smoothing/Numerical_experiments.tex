@@ -27,16 +27,18 @@ Along the numerical part below, we compare $3$ methods:
 	\begin{small}
 	\begin{tabular}{l*{4}{c}r}
 	\toprule[1.5pt]
-		Example          & Level of Richardson extrapolation    &  Total relative error  & CPU time  $\left(\text{MC}/ \text{ASGQ} \right)$ \\
+		Example          & Level of Richardson extrapolation    &  Total relative error  & CPU time  $\left( \text{ASGQ} / \text{MC}\right)$ \\
 		\hline
-			  Single binary option (GBM) & without  &  $2 \%$&  $ 4$ \\	
+			  Single binary option (GBM) & without  &  $2 \%$&  $ 25\%$ \\	
               \hline
-            Single call option (GBM)  & without    &  $0.9\%$&  $22$ \\
+            Single call option (GBM)  & without    &  $0.9\%$&  $4.6\%$ \\
 %            & level $1$ &  $$ &  $$ \\		
 				 \hline
-					$2d$-Basket call option (GBM)  & without    &  $$0.9\%$$&  $21$ \\	
+					$2d$-Basket call option (GBM)  & without    &  $$0.9\%$$&  $4.8\%$ \\	
 					\hline
-					$4d$-Basket call option (GBM)  & without    &  $$0.8\%$$&  $27$ \\	
+					$4d$-Basket call option (GBM)  & without    &  $$0.8\%$$&  $3.7\%$ \\	
+					\hline
+					$1d$ call option (Heston) &level $1$    &  $$0.3\%$$&  $30\%$ \\
 		\bottomrule[1.25pt]
 	\end{tabular}
 \end{small}
@@ -1579,7 +1581,7 @@ For instance, for set $1$ and $2$, we have $\beta=0.05$ and $\alpha=-0.5$ implyi
 \begin{figure}[htb]
 	\centering % <-- added
 	\begin{subfigure}{0.4\textwidth}
-		\includegraphics[width=\linewidth]{./figures/Heston_single_call_smooth_vol/weak_convergence/paths_smooth_vol_scheme_set1_N4_X}
+		\includegraphics[width=\linewidth]{./figures/Heston_single_call_smooth_vol/weak_convergence/weak_convergence_order_single_call_option_heston_relative_M_2_10_6_beta_512_smooth_scheme_set2}
 		\caption{}
 		\label{fig:1}
 	\end{subfigure}\hfil %% <-- added

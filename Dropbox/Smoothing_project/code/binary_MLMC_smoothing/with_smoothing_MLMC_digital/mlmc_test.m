@@ -183,6 +183,6 @@ xlabel('level l'); ylabel('N_l');
 set(0,'DefaultAxesLineStyleOrder','-*|--*')
 
 subplot(nvert,2,2*nvert)
-loglog(Eps,Eps.^2.*std_cost(:)', Eps,Eps.^2.*mlmc_cost(:)')
+loglog(Eps,Eps.^2.*mlmc_cost(:)')
 xlabel('accuracy \epsilon'); ylabel('\epsilon^2 Cost');
-legend('Std MC','MLMC','Location','northwest')
+legend('MLMC','Location','northwest')

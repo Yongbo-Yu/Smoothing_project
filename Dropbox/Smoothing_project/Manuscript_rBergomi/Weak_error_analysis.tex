@@ -8,8 +8,7 @@ In this work, we are interested in approximating $\expt{g(X_T)}$, where $g$ is s
 \begin{align*}
 \expt{g\left(X_T\left(W^{(1)}_{[0,T]},\widetilde{W}_{[0,T]}\right)\right)} \approx \expt{g\left(\overline{X}_N\left(W^{(1)}_1,\dots,W^{(1)}_N, \widetilde{W}_1, \dots,\widetilde{W}_N\right)\right)} \quad \textbf{(Exact  scheme)},
 \end{align*}
-where $\overline{W}$ is the approximation of $\widetilde{W}$  as given by \eqref{eq:Hybrid_scheme_pre} and $\overline{X}_N$ is the approximation of $X$ using $N$ time steps. \red{In the following, to simplify notation, let  $\overline{\mathbf{W}}=(\overline{W}_1,\dots,\overline{W}_N)$, $\mathbf{W}^{1}=(W^{(1)}_1,\dots,W^{(1)}_N)$ and $\widetilde{\mathbf{W}}=(\widetilde{W}_1,\dots,\widetilde{W}_N)$. Then, the use of Richardson extrapolation in our  methodology presented in Section \ref{sec:Details our approach and error bounds} is mainly justified  by the conjecture \ref{conj: Weak error structure}}. 
-\red{
+where $\overline{W}$ is the approximation of $\widetilde{W}$  as given by \eqref{eq:Hybrid_scheme_pre} and $\overline{X}_N$ is the approximation of $X$ using $N$ time steps. In the following, to simplify notation, let  $\overline{\mathbf{W}}=(\overline{W}_1,\dots,\overline{W}_N)$, $\mathbf{W}^{1}=(W^{(1)}_1,\dots,W^{(1)}_N)$ and $\widetilde{\mathbf{W}}=(\widetilde{W}_1,\dots,\widetilde{W}_N)$. Then, the use of Richardson extrapolation in our  methodology presented in Section \ref{sec:Details our approach and error bounds} is mainly justified  by the conjecture \ref{conj: Weak error structure}. 
 \begin{conjecture}\label{conj: Weak error structure}
 If we denote by $\mathcal{E}_{B}^{\text{Hyb}}$ and $\mathcal{E}_{B}^{\text{Chol}}$ the weak errors produced by the hybrid and Cholesky scheme respectively, then we have
 \begin{small}
@@ -25,5 +24,4 @@ From the construction of the Cholesky scheme, we expect that the weak error is p
 \end{align*}
 as it was observed by our numerical experiments (for illustration see Figure \ref{fig:set1_weak_rate_exact} for the case of Set $1$  in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}).  The second term in the right-hand side of  \eqref{eq: Weak_error_hyb_chol} is basically related to approximating the integral \eqref{eq:Volterra process}  by \eqref{eq:Hybrid_scheme}. From our numerical experiments it seems that this term is  at least  of order  $\Delta t$  and its rate of convergence is independent of $H$ (for illustration see Figure \ref{fig:set1_weak_rate_hybrid} for the case of Set $1$  in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}).
 \end{conjecture}
-}
 

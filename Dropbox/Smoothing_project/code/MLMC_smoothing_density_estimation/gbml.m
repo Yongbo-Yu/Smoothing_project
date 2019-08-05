@@ -32,10 +32,10 @@ nvert = 3;      % plotting option (1 for slides, 2 for papers, 3 for full set)
 M     = 2;      % refinement cost factor (2^gamma in general MLMC Thm)
 
 N     = 100000; % samples for convergence tests
-L     = 5;      % levels for convergence tests 
+L     = 8;      % levels for convergence tests 
 
 N0    = 1000;   % initial number of samples on first 3 MLMC levels
-Eps   = [ 0.005 0.01 0.02 0.05 0.1 ];  % desired accuracies for MLMC calcs
+Eps   = [ 0.001 0.005 0.01 0.02 0.05];  % desired accuracies for MLMC calcs
 %Eps   = [ 0.1 ];  % desired accuracies for MLMC calcs
 
 %------- Digital call option ------------
@@ -45,7 +45,7 @@ figs = mlmc_test(@gbm_l, M, N,L, N0,Eps, nvert);
 
 subplot(3,2,5)
 axis([0 8 1e3 1e8])
-legend('0.005','0.01','0.02','0.05','0.1')
+legend('0.001','0.005','0.01','0.02','0.05')
 
 subplot(3,2,6)
 axis([0.005 0.1 500 5e4])

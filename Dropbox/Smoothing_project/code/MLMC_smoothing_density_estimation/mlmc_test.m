@@ -110,7 +110,7 @@ plot(L,log2(var2),L(2:end),log2(var1(2:end)))
 %plot(L,log2(var2),L(2:end),log2(var1(2:end)), ...
 %                  L(2:end),polyval(pb,L(2:end)),'-r')
 xlabel('level l'); ylabel('log_2 variance');
-legend('P_l','P_l- P_{l-1}','Location','northeast')
+legend('P_l','P_l- P_{l-1}','Location','northwest')
 
 subplot(nvert,2,2)
 
@@ -186,5 +186,5 @@ subplot(nvert,2,2*nvert)
 loglog(Eps,Eps.^2.*mlmc_cost(:)')
 % loglog(Eps,Eps.^2.*std_cost(:)', Eps,Eps.^2.*mlmc_cost(:)')
 xlabel('accuracy \epsilon'); ylabel('\epsilon^2 Cost');
-legend('MLMC','Location','northwest')
+legends('MLMC','Location','northwest')
 % legend('Std MC','MLMC','Location','northwest')

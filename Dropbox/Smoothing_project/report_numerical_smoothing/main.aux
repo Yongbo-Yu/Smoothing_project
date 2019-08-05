@@ -201,7 +201,7 @@
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {6.5.1}Fixed Euler scheme}{30}{subsubsection.6.5.1}}
 \newlabel{sec:Discretization of Heston model with a non smooth transformations for the volatility process}{{6.5.1}{30}{Fixed Euler scheme}{subsubsection.6.5.1}{}}
 \newlabel{eq:FE_Heston_discrete}{{6.19}{30}{Fixed Euler scheme}{equation.6.19}{}}
-\newlabel{Numerical schemes for CIR process}{{\caption@xref {Numerical schemes for CIR process}{ on input line 1249}}{30}{Fixed Euler scheme}{table.caption.20}{}}
+\newlabel{Numerical schemes for CIR process}{{\caption@xref {Numerical schemes for CIR process}{ on input line 1251}}{30}{Fixed Euler scheme}{table.caption.20}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {6.5.2}Euler schemes with moment matching}{30}{subsubsection.6.5.2}}
 \newlabel{sec:Euler schemes with moment matching}{{6.5.2}{30}{Euler schemes with moment matching}{subsubsection.6.5.2}{}}
 \newlabel{sec:The ABR method}{{6.5.2}{30}{The ABR method}{section*.21}{}}
@@ -306,36 +306,52 @@
 \newlabel{table:The computational time of ASGQ, used to compute European call option price under discretized Heston model for different number of time steps, with level $1$ Richardson extrapolation.}{{6.14}{44}{Comparison of the computational time of MC and ASGQ, used to compute European call option price under discretized Heston model for different number of time steps, with level $1$ of Richardson extrapolation. The average computational time of MC is computed over $10$ runs.\relax }{table.caption.42}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {6.17}{\ignorespaces Computational work comparison for ASGQ and MC methods, for the case of European call option price under discretized Heston model. This plot shows that to achieve a relative error around $1.4\%$, using level $1$ of Richardson extrapolation is the optimal configuration for both methods, and that ASGQ coupled with level $1$ of Richardson extrapolation outperforms MC coupled with level $1$ of Richardson extrapolation method in terms of computational time.\relax }}{44}{figure.caption.43}}
 \newlabel{fig:Complexity plot for MC and MISC , European call option price under discretized Heston model}{{6.17}{44}{Computational work comparison for ASGQ and MC methods, for the case of European call option price under discretized Heston model. This plot shows that to achieve a relative error around $1.4\%$, using level $1$ of Richardson extrapolation is the optimal configuration for both methods, and that ASGQ coupled with level $1$ of Richardson extrapolation outperforms MC coupled with level $1$ of Richardson extrapolation method in terms of computational time.\relax }{figure.caption.43}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {7}Numerical experiments for Numerical smoothing with MLMC}{44}{section.7}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}MLMC for digital options}{45}{subsection.7.1}}
-\newlabel{sec: MLMC for digital options}{{7.1}{45}{MLMC for digital options}{subsection.7.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7.1}{\ignorespaces Numerical results for a digital call option using the MLMC method coupled with Euler-Maruyama discretisation of the GBM SDE, and without smoothing of the payoff.\relax }}{45}{figure.caption.44}}
-\newlabel{fig:euler_digital_without_smoothing}{{7.1}{45}{Numerical results for a digital call option using the MLMC method coupled with Euler-Maruyama discretisation of the GBM SDE, and without smoothing of the payoff.\relax }{figure.caption.44}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Numerical smoothing with MLMC}{44}{section.7}}
+\citation{avikainen2009irregular}
+\citation{giles2009analysing}
+\citation{giles2008improved}
+\citation{giles2013numerical}
+\citation{giles2015multilevel}
+\citation{giles2008improved}
+\citation{giles2013numerical}
+\citation{giles2015multilevel}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Our contributions to the literature}{45}{subsection.7.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}MLMC for digital options}{45}{subsection.7.2}}
+\newlabel{sec: MLMC for digital options}{{7.2}{45}{MLMC for digital options}{subsection.7.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7.1}{\ignorespaces Numerical results for a digital call option using the MLMC method coupled with Euler-Maruyama discretisation of the GBM SDE, and without smoothing of the payoff.\relax }}{47}{figure.caption.44}}
+\newlabel{fig:euler_digital_without_smoothing}{{7.1}{47}{Numerical results for a digital call option using the MLMC method coupled with Euler-Maruyama discretisation of the GBM SDE, and without smoothing of the payoff.\relax }{figure.caption.44}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7.2}{\ignorespaces Numerical results for a digital call option using the MLMC method coupled with Euler-Maruyama discretisation of the GBM SDE, after applying the numerical smoothing to the payoff. We mention that observing a decaying variance of $P_{\ell }$ here is expected since we used Brownian bridge for path construction, and the QoI depends only on the terminal value of the Brownian bridge which has a variance scaled of order $\Delta t$.\relax }}{48}{figure.caption.45}}
+\newlabel{fig:euler_digital_with_smoothing}{{7.2}{48}{Numerical results for a digital call option using the MLMC method coupled with Euler-Maruyama discretisation of the GBM SDE, after applying the numerical smoothing to the payoff. We mention that observing a decaying variance of $P_{\ell }$ here is expected since we used Brownian bridge for path construction, and the QoI depends only on the terminal value of the Brownian bridge which has a variance scaled of order $\Delta t$.\relax }{figure.caption.45}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}MLMC for approximating densities and Greeks}{49}{subsection.7.3}}
+\newlabel{sec: MLMC for approximating densities and greeks}{{7.3}{49}{MLMC for approximating densities and Greeks}{subsection.7.3}{}}
 \bibstyle{plain}
 \bibdata{smoothing}
 \bibcite{acworth1998comparison}{1}
 \bibcite{alfonsi2010high}{2}
-\@writefile{lof}{\contentsline {figure}{\numberline {7.2}{\ignorespaces Numerical results for a digital call option using the MLMC method coupled with Euler-Maruyama discretisation of the GBM SDE, after applying the numerical smoothing to the payoff.\relax }}{46}{figure.caption.45}}
-\newlabel{fig:euler_digital_with_smoothing}{{7.2}{46}{Numerical results for a digital call option using the MLMC method coupled with Euler-Maruyama discretisation of the GBM SDE, after applying the numerical smoothing to the payoff.\relax }{figure.caption.45}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}MLMC for approximating densities and Greeks}{46}{subsection.7.2}}
-\newlabel{sec: MLMC for approximating densities and greeks}{{7.2}{46}{MLMC for approximating densities and Greeks}{subsection.7.2}{}}
 \bibcite{andersen2007efficient}{3}
 \bibcite{andersen2005extended}{4}
-\bibcite{bayersmoothing}{5}
-\bibcite{broadie2006exact}{6}
-\bibcite{bungartz2004sparse}{7}
-\bibcite{caflisch1997valuation}{8}
-\bibcite{glasserman2004monte}{9}
-\bibcite{griebel2013smoothing}{10}
-\bibcite{griebel2017note}{11}
-\bibcite{griewank2017high}{12}
-\bibcite{haji2016multi}{13}
-\bibcite{heston1993closed}{14}
-\bibcite{imai2004minimizing}{15}
-\bibcite{jeanblanc2009mathematical}{16}
-\bibcite{kahl2006fast}{17}
-\bibcite{lord2010comparison}{18}
-\bibcite{morokoff1994quasi}{19}
-\bibcite{moskowitz1996smoothness}{20}
-\bibcite{talay1990expansion}{21}
-\bibcite{xiao2018conditional}{22}
+\bibcite{avikainen2009irregular}{5}
+\bibcite{bayersmoothing}{6}
+\bibcite{broadie2006exact}{7}
+\@writefile{lof}{\contentsline {figure}{\numberline {7.3}{\ignorespaces Numerical results for density estimation using the MLMC method coupled with Euler-Maruyama discretisation of the GBM SDE, after applying the numerical smoothing. We mention that observing a decaying variance of $P_{\ell }$ here is expected since we used Brownian bridge for path construction, and the QoI depends only on the terminal value of the Brownian bridge which has a variance scaled of order $\Delta t$.\relax }}{50}{figure.caption.46}}
+\newlabel{fig:euler_density_MLMC_with_smoothing}{{7.3}{50}{Numerical results for density estimation using the MLMC method coupled with Euler-Maruyama discretisation of the GBM SDE, after applying the numerical smoothing. We mention that observing a decaying variance of $P_{\ell }$ here is expected since we used Brownian bridge for path construction, and the QoI depends only on the terminal value of the Brownian bridge which has a variance scaled of order $\Delta t$.\relax }{figure.caption.46}{}}
+\bibcite{bungartz2004sparse}{8}
+\bibcite{caflisch1997valuation}{9}
+\bibcite{giles2013numerical}{10}
+\bibcite{giles2009analysing}{11}
+\bibcite{giles2015multilevel}{12}
+\bibcite{giles2008improved}{13}
+\bibcite{glasserman2004monte}{14}
+\bibcite{griebel2013smoothing}{15}
+\bibcite{griebel2017note}{16}
+\bibcite{griewank2017high}{17}
+\bibcite{haji2016multi}{18}
+\bibcite{heston1993closed}{19}
+\bibcite{imai2004minimizing}{20}
+\bibcite{jeanblanc2009mathematical}{21}
+\bibcite{kahl2006fast}{22}
+\bibcite{lord2010comparison}{23}
+\bibcite{morokoff1994quasi}{24}
+\bibcite{moskowitz1996smoothness}{25}
+\bibcite{talay1990expansion}{26}
+\bibcite{xiao2018conditional}{27}

@@ -370,7 +370,7 @@ def weak_convergence_differences():
         Ub=np.zeros(1)
         Lb=np.zeros(1)
     
-        values=np.zeros((8*(10**6),1)) 
+        values=np.zeros((8*(10**2),1)) 
          
       
         
@@ -394,7 +394,7 @@ def weak_convergence_differences():
             
             p =  pp.ProcessPool(num_cores)  # Processing Pool with four processors
             
-            values[:,i]= p.map(processInput, range(((8*(10**6))))  )
+            values[:,i]= p.map(processInput, range(((8*(10**2))))  )
 
             elapsed_time_qoi[i]=time.time()-start_time
             print np.mean(values[:,i]*float(exact))
@@ -407,7 +407,7 @@ def weak_convergence_differences():
         print elapsed_time_qoi
  
         error=np.abs(np.mean(values,axis=0) - 1) 
-        stand=np.std(values, axis = 0)/  float(np.sqrt(8*(10**6)))
+        stand=np.std(values, axis = 0)/  float(np.sqrt(8*(10**2)))
         Ub=np.abs(np.mean(values,axis=0) - 1)+1.96*stand
         Lb=np.abs(np.mean(values,axis=0) - 1)-1.96*stand
         print(error)  
