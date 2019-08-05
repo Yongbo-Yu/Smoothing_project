@@ -12,11 +12,12 @@ class Problem(object):
     K=None         # Strike price
     T=1.0                      # maturity
     sigma=None    # volatility
-    N=32  # number of time steps which will be equal to the number of brownian bridge components (we set is a power of 2)
+    N=2  # number of time steps which will be equal to the number of brownian bridge components (we set is a power of 2)
     d=None
     dt=None
 
     exact=6.332542 #  S_0=K=100, T=1, r=0,rho=-0.9, v_0=0.04, theta=0.0025, xi=0.1,\kapp=1 
+    exact=10.86117 #  S_0=K=100, T=1, r=0,rho=-0.3, v_0=0.09, theta=0.09, xi=1,\kapp=2.7778; n=1 ;   set 3
 
     yknots_right=[]
     yknots_left=[]
@@ -31,19 +32,20 @@ class Problem(object):
         self.S0=100
         self.K= coeff*self.S0        # Strike price and coeff determine if we have in/at/out the money option
         
-        self.rho=-0.9
+        
+        self.rho=-0.3
 
         
-        self.kappa= 1.0
+        self.kappa= 2.7778
         
 
-        self.xi=0.1
+        self.xi=1.0
         #self.xi=0.5
-        self.v0=0.04
+        self.v0=0.09
+        self.theta=0.09
 
 
-
-        self.theta=(self.xi**2)/(4*self.kappa)
+        # self.theta=(self.xi**2)/(4*self.kappa)
         
         # paramters for the bessel process
         self.beta=self.xi/float(2)
@@ -54,27 +56,27 @@ class Problem(object):
         self.dt=self.T/float(self.N) # time steps length
         self.d=int(np.log2(self.N)) #power 2 number steps
 
-        # # For less than 185 points
-        beta=32
-        self.yknots_right=np.polynomial.laguerre.laggauss(beta)
+        # # # For less than 185 points
+        # beta=128
+        # self.yknots_right=np.polynomial.laguerre.laggauss(beta)
       
-        # # # For more than 185 points
-        # beta=512
-        # from Parser import Parser
-        # fx = open('lag_512_x.txt', 'r')
-        # Element_properties_x = Parser('./lag_512_x.txt')
-        # Element_properties_x.parse_file(fx.read(),'\n')
-        # x=np.array([float(i) for i in Element_properties_x.element_list])
+        # # For more than 185 points
+        beta=512
+        from Parser import Parser
+        fx = open('lag_512_x.txt', 'r')
+        Element_properties_x = Parser('./lag_512_x.txt')
+        Element_properties_x.parse_file(fx.read(),'\n')
+        x=np.array([float(i) for i in Element_properties_x.element_list])
        
-        # Element_properties_x.close_file()   
-        # fw = open('lag_512_w.txt', 'r')
-        # Element_properties_w = Parser('./lag_512_w.txt')
-        # Element_properties_w.parse_file(fw.read(),'\n')
-        # w=np.array([float(i) for i in Element_properties_w.element_list])
+        Element_properties_x.close_file()   
+        fw = open('lag_512_w.txt', 'r')
+        Element_properties_w = Parser('./lag_512_w.txt')
+        Element_properties_w.parse_file(fw.read(),'\n')
+        w=np.array([float(i) for i in Element_properties_w.element_list])
    
-        # Element_properties_x.close_file()   
-        # self.yknots_right.append(x[:360])
-        # self.yknots_right.append(w[:360])
+        Element_properties_x.close_file()   
+        self.yknots_right.append(x[:360])
+        self.yknots_right.append(w[:360])
      
        
         self.yknots_left=self.yknots_right

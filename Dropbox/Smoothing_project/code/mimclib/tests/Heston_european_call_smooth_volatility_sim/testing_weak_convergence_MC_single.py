@@ -24,7 +24,9 @@ class Problem(object):
     dt=None
 
     #exact=6.332542 #  S_0=K=100, T=1, r=0,rho=-0.9, v_0=0.04, theta=0.0025, xi=0.1,\kapp=1  
-    exact=6.445535 #  S_0=K=100, T=1, r=0,rho=-0.9, v_0=0.04, theta=0.005, xi=0.1,\kapp=1  (n=2)
+    # exact=6.445535 #  S_0=K=100, T=1, r=0,rho=-0.9, v_0=0.04, theta=0.005, xi=0.1,\kapp=1  (n=2)
+    exact=10.86117 #  S_0=K=100, T=1, r=0,rho=-0.3, v_0=0.09, theta=0.09, xi=1,\kapp=2.7778; n=1 ;   set 3
+
     yknots_right=[]
     yknots_left=[]
 
@@ -37,11 +39,11 @@ class Problem(object):
         self.S0=100
         self.K= coeff*self.S0        # Strike price and coeff determine if we have in/at/out the money option
         
-        self.rho=-0.9 
-        self.kappa= 1.0
-        self.xi=0.1
-        self.v0=0.04
-        self.theta=(2*self.xi**2)/(4*self.kappa)
+        self.rho=-0.3 
+        self.kappa= 2.7778
+        self.xi=1.0
+        self.v0=0.09
+        self.theta=(self.xi**2)/(4*self.kappa)
         
         # paramters for the bessel process
         self.beta=self.xi/float(2)
@@ -308,8 +310,8 @@ def weak_convergence_differences():
         start_time=time.time()
    
         # exact=6.332542 #  S_0=K=100, T=1, r=0,rho=-0.9, v_0=0.04, theta=0.0025, xi=0.1,\kapp=1 
-        exact=6.445535 #  S_0=K=100, T=1, r=0,rho=-0.9, v_0=0.04, theta=0.005, xi=0.1,\kapp=1  (n=2)
-
+        #exact=6.445535 #  S_0=K=100, T=1, r=0,rho=-0.9, v_0=0.04, theta=0.005, xi=0.1,\kapp=1  (n=2)
+        exact=10.86117 #  S_0=K=100, T=1, r=0,rho=-0.3, v_0=0.09, theta=0.09, xi=1,\kapp=2.7778; n=1 ;   set 3
       
         # # feed parameters to the problem
         Nsteps_arr=np.array([2])
@@ -321,7 +323,7 @@ def weak_convergence_differences():
         Ub=np.zeros(1)
         Lb=np.zeros(1)
     
-        values=np.zeros((2*(10**6),1)) 
+        values=np.zeros((2*(10**2),1)) 
          
       
         
@@ -345,7 +347,7 @@ def weak_convergence_differences():
             
             p =  pp.ProcessPool(num_cores)  # Processing Pool with four processors
             
-            values[:,i]= p.map(processInput, range(((2*(10**6))))  )
+            values[:,i]= p.map(processInput, range(((2*(10**4))))  )
 
             elapsed_time_qoi[i]=time.time()-start_time
             print np.mean(values[:,i]*float(exact))
@@ -358,7 +360,7 @@ def weak_convergence_differences():
         print elapsed_time_qoi
  
         error=np.abs(np.mean(values,axis=0) - 1) 
-        stand=np.std(values, axis = 0)/  float(np.sqrt(2*(10**6)))
+        stand=np.std(values, axis = 0)/  float(np.sqrt(2*(10**4)))
         Ub=np.abs(np.mean(values,axis=0) - 1)+1.96*stand
         Lb=np.abs(np.mean(values,axis=0) - 1)-1.96*stand
         print(error)  
