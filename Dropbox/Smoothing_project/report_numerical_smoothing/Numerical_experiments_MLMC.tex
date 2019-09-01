@@ -25,7 +25,7 @@ where $K$ is the strike.
 Then, using similar idea introduced in Section \ref{sec:The discretized 1D Black-Scholes}, we can show that
 \begin{align}
 \expt{g(X)}&=\expt{\mathbf{1}_{X>K}}\nonumber\\
-&=\expt{1-\Phi(y^\ast{K})},
+&=\expt{1-\Phi(y^\ast(K))},
 \end{align}
 where $y^\ast(K)$ is the kink location obtained by solving numerically $X(T; y^\ast(x), \mathbf{z}_{-1})$, $\mathbf{z}$ is the Gaussian random  vector used for Brownian bridge construction, and $\Phi$ is the cumulative Gaussian distribution function.
 
@@ -33,7 +33,7 @@ As an illustration, we choose the digital option of GBM asset with parameters: $
 \begin{enumerate}
 \item The numerical smoothing has improved the rate of strong convergence from $1/2$ (without smoothing) to $1$ after doing the numerical smoothing (compare both top left plots in Figures \ref{fig:euler_digital_without_smoothing} and Figure \ref{fig:euler_digital_with_smoothing}.
 \item The numerical smoothing has also dropped significantly the kurtosis by a factor $100$, this is can be seen clearly by comparing the middle right plots in both Figures \ref{fig:euler_digital_without_smoothing} and Figure \ref{fig:euler_digital_with_smoothing}. We stress that this is an important improvement, since one needs $\Ordo{\kappa}$ samples  to obtain a reasonable estimate for the variance. For instance,  the standard deviation of the sample variance for a random variable $X$ with zero mean is approximately $\sqrt{(\kappa-1)/N} \expt{X^2}$ where the kurtosis $\kappa$ is defined as $\kappa = \frac{\expt{X^4}}{(\expt{X^2})^2}$.  
-\item Finally, improving the strong error rate after using the numerical smoothing, resulted in an improvement of the complexity rate going from $TOL^{-2.5}$ for the case without smoothing to  $TOL^{-2} \abs{\log TOL}^2$, where $TOL$ is a prescribed tolerance, for the case where MLMC is coupled with numerical smoothing (compare the bottom right plots in Figures \ref{fig:euler_digital_without_smoothing} and \ref{fig:euler_digital_with_smoothing}).
+\item Finally, improving the strong error rate after using the numerical smoothing, resulted in an improvement of the complexity rate going from $TOL^{-2.5}$ for the case without smoothing to  $TOL^{-2}2$, where $TOL$ is a prescribed tolerance, for the case where MLMC is coupled with numerical smoothing (compare the bottom right plots in Figures \ref{fig:euler_digital_without_smoothing} and \ref{fig:euler_digital_with_smoothing}).
 \end{enumerate}
 
 Although, for numerical illustration purpose, we just considered GBM dynamics, we emphasize that our approach can be extended in a straightforward manner to any kind of dynamics, since it is based on numerical smoothing based on solving a root finding problem. Furthermore, our approach can be easily extended to any low regular observable, $g$. For instance, this idea can be applied for approximating distribution functions involving the indicator function as the observable $g$. Finally, In all these possible extensions, we expect similar gains to be observed compared   to the case of using MLMC without smoothing.

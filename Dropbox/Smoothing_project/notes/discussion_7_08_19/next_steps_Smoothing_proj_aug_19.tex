@@ -1,0 +1,142 @@
+ \documentclass[11pt]{article}
+
+%\usepackage{setspace}
+%\documentclass[final,leqno]{siamltex}
+\usepackage{smoothing_paper}
+
+
+
+\usepackage[section]{placeins}
+\usepackage{tabularx,ragged2e,booktabs,caption}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%chiheb commands
+
+
+%%%%%%%%%%%%%%%%%
+\newcommand{\ie}{\emph{i.e.}}
+\newcommand{\eg}{\emph{e.g.}}
+\newcommand{\cf}{\emph{cf.}}
+\newcommand{\prob}[1]{\mathrm{P}\left(#1\right)}
+\newcommand{\expt}[1]{\mathrm{E}\left[#1\right]}
+\newcommand{\expth}[1]{\hat{\mathrm{E}}\left[#1\right]}
+
+
+
+\newcommand{\rset}{\mathbb{R}}
+\newcommand{\nset}{\mathbb{N}}
+\newcommand{\zset}{\mathbb{Z}}
+
+
+
+\newcommand{\PERIOD}{.}
+\newcommand{\COMMA}{,}
+\newcommand{\BIGSPACE}{\,\,\,\,\,\,\,}
+
+
+
+\newcommand{\Ordo}[1]{{\mathcal{O}}\left(#1\right)}
+\newcommand{\ordo}[1]{{o}\left(#1\right)}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% DO WE RELLY NEED THE FOLLOWING??
+
+%%  new margin
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagestyle{plain}                                                      %%
+%%%%%%%%%% EXACT 1in MARGINS %%%%%%%                                   %%
+\setlength{\textwidth}{6.5in}     %%                                   %%
+\setlength{\oddsidemargin}{0in}   %%   
+\setlength{\evensidemargin}{0in}  %%        
+\setlength{\textheight}{8.5in}    %%       
+\setlength{\topmargin}{-0.2in}    %%   
+\setlength{\headheight}{0in}      %%    
+\setlength{\headsep}{0in}         %%                   
+\setlength{\footskip}{.5in}       %%                       
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%                                   %%
+\newcommand{\required}[1]{\section*{\hfil #1\hfil}}                    %%
+\renewcommand{\refname}{\hfil References Cited\hfil}                   %%
+
+\def\SMALLSKIP{\smallskip}
+\def\MEDSKIP{\medskip}
+\def\BIGSKIP{\bigskip}
+
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\makeatletter
+\def\BState{\State\hskip-\ALG@thistlm}
+\makeatother
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{Next steps for the Numerical Smoothing project} 
+
+
+
+
+%\doublespacing
+\begin{document}
+\maketitle
+
+
+
+
+
+
+
+%\pagestyle{myheadings}
+\thispagestyle{plain}
+
+\setcounter{tocdepth}{1}
+\section{The venue of this work}\label{sec:The venue of this work}
+As discussed with Christian, we need to decide what is the target Journal of this work because this will impact the ideas that we want to convey and also the examples that we want to consider. For instance, if we consider submitting this work to Quantitative/Computational Finance Journal, then our examples, for instance in the MLMC part, would stem from financial applications. Otherwise, if we want to consider more general target Journal for Stochastic numerics, then we can emphasize the general applications of our idea, for instance in the MLMC setting, we emphasize more the advantage of our idea for approximating distribution functions and densities. 
+\section{ASGQ with Numerical Smoothing}\label{sec:ASGQ with Numerical Smoothing}
+So far, we have obtained very good results for different options (binary, call, basket) under the GBM model. Since the GBM dynamics was used only as a toy example, we needed another non trivial example, where discretization of the  asset price is needed, to make our proposed methodology more sound and justified. Therefore, we considered the Heston dynamics. We realized after performing some numerical experiments, that to use our numerical smoothing idea, we needed to restrict ourselves with the scheme where volatility process is simulated using a sum of OU process for the case of integer $n$, and generalized to any value of $n$ by either i) using some interpolation idea or  ii) using  a time-change of a squared Bessel processes.
+
+As per Christian, we have three options to consider:
+\begin{enumerate}
+\item Consider simulating the log of the volatility and then taking the exponential. Although this way guarantees having positive volatility,  we may encounter issues with the weak error because of discretizing the logarithm of the volatility process.
+\item If we want to use the scheme where volatility process is simulated using a sum of OU process, then we need 
+\begin{enumerate}
+\item To provide a clear numerical analysis for the used scheme, since in this case, we do not only have the numerical errors involved but somehow a model error by using different dynamics to approximate the volatility process via sum of OU processes. For instance, we may do some review of literature to check if such analysis has already been done.
+\item In case we want to  use interpolation to generalize this scheme for non integer values of $n$, then we need to provide a clear numerical example, so we make sure that this interpolation actually works.
+\item In case we want to use a time-change of a squared Bessel processes for general case of non integer $n$, then we need also to provide some analysis for such a way, and some literature review may help here too.
+\end{enumerate} 
+\item A third option would be to consider another example of dynamics maybe where we do not have this kind of issues!
+\end{enumerate}
+
+For me I think there is a fourth option which is 
+\begin{itemize}
+\item We can also  solve this issue by considering a moment matching (for instance the ABR method) scheme since our aim is not the scheme simulating the volatility itself but to convey the idea of the numerical smoothing. Therefore, we can just consider examples ($1$ or $2$) where the weak error has a good behavior, and then run our numerical experiments. In fact as we checked numerically, these moment matching scheme is good enough for certain parameters of the Heston model. Then maybe the only worry is that we do not propose a method that works for any set of parameters, however, as far as I checked in the literature and numerically: for any chosen scheme for Heston model, you usually  have some region of the parameter space, where the scheme does not perform well, either because of the positivity issue, or weak error behavior or the mixed differences convergence behavior. 
+\end{itemize}
+ \section{MLMC with Numerical Smoothing}\label{sec:MLMC with Numerical Smoothing}
+
+For this part, the results are so good and a minor thing to add maybe is another example of density estimation that is more general.
+
+
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%References
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\bibliographystyle{plain}
+%\bibliography{smoothing_rBergomi.bib} 
+
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+ 
+ 
+
+
+\end{document}

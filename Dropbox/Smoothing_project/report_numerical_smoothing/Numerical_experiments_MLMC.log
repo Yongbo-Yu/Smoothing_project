@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  5 AUG 2019 04:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  27 AUG 2019 11:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -3347,7 +3347,7 @@ deleted material, e.g., by typing `I$}'.
 <recently read> &
                  
 l.28 &
-      =\expt{1-\Phi(y^\ast{K})},
+      =\expt{1-\Phi(y^\ast(K))},
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
 simple: Just type `I\&' now. But if some right brace
@@ -3357,7 +3357,7 @@ might try typing `S' now just to see what is salvageable.
 
 ! Undefined control sequence.
 l.28 &=\expt
-            {1-\Phi(y^\ast{K})},
+            {1-\Phi(y^\ast(K))},
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -3577,7 +3577,7 @@ Overfull \hbox (7.7778pt too wide) in paragraph at lines 25--31
  []
 
 
-Overfull \hbox (54.06712pt too wide) in paragraph at lines 25--31
+Overfull \hbox (61.84492pt too wide) in paragraph at lines 25--31
 []\OML/cmm/m/it/10 ;$
  []
 
@@ -4816,15 +4816,6 @@ Missing character: There is no n in font nullfont!
 Missing character: There is no g in font nullfont!
 Missing character: There is no t in font nullfont!
 Missing character: There is no o in font nullfont!
-! Undefined control sequence.
-l.36 ... case without smoothing to  $TOL^{-2} \abs
-                                                  {\log TOL}^2$, where $TOL$...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
 Missing character: There is no , in font nullfont!
 Missing character: There is no w in font nullfont!
 Missing character: There is no h in font nullfont!
@@ -4981,8 +4972,8 @@ Overfull \hbox (39.04105pt too wide) in paragraph at lines 36--37
  []
 
 
-Overfull \hbox (73.69313pt too wide) in paragraph at lines 36--37
-\OML/cmm/m/it/10 TOL[][][]$
+Overfull \hbox (37.67993pt too wide) in paragraph at lines 36--37
+\OML/cmm/m/it/10 TOL[]\OT1/cmr/m/n/10 2$
  []
 
 

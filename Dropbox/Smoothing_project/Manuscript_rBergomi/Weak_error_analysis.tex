@@ -1,7 +1,7 @@
 To the best of our knowledge, no proper weak error
 analysis has been done in the rough volatility context. However, we try in this Section  to shortly discuss it in the context of the rBergomi model.
 
-In this work, we are interested in approximating $\expt{g(X_T)}$, where $g$ is some smooth function and $X$ is the asset price under the rBergomi dynamics such that $X_t=X_t(W^{(1)}_{[0,t]},\widetilde{W}_{[0,t]})$ where $W^{(1)}$ is standard Brownian motion and  $\widetilde{W}$ is the fractional Brownian motion as given by \eqref{eq:Volterra process}.  Then we can express the approximation of $\expt{g(X_T)}$  using the  hybrid and exact schemes as the following 
+In this work, we are interested in approximating $\expt{g(X_T)}$, where $g$ is some smooth function and $X$ is the asset price under the rBergomi dynamics such that $X_t=X_t(W^{(1)}_{[0,t]},\widetilde{W}_{[0,t]})$\red{,} where $W^{(1)}$ is standard Brownian motion and  $\widetilde{W}$ is the fractional Brownian motion as given by \eqref{eq:Volterra process}.  Then we can express the approximation of $\expt{g(X_T)}$  using the  hybrid and exact schemes as the following 
 \begin{align*}
 \expt{g\left(X_T\left(W^{(1)}_{[0,T]},\widetilde{W}_{[0,T]}\right)\right)} \approx \expt{g\left(\overline{X}_N\left(W^{(1)}_1,\dots,W^{(1)}_N, \overline{W}_1, \dots,\overline{W}_N\right)\right)} \quad \textbf{(Hybrid  scheme)},
 \end{align*}
