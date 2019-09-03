@@ -17,20 +17,20 @@ where $G$  maps  $2N$ independent standard Gaussian random inputs to the paramet
 \end{equation*} 
 Therefore, the initial integration problem that we are solving lives in $2N$-dimensional space, which becomes very large as the number of time steps $N$, used in the hybrid scheme, increases.
 
-Our approach of approximating the expectation in \eqref{BS_formula_rbergomi_2} is based on hierarchical deterministic quadratures, namely  i) ASGQ using the same construction in \cite{haji2016multi} and ii) randomized QMC based on lattice rules. We describe the ASGQ  method in our context in Section \ref{sec:Details of the MISC}\red{,} and in Section \ref{sec:Quasi Monte Carlo (QMC)} we provide details on the implented QMC method.  To make an effective use of either \red{the} ASGQ or \red{the} QMC method, we  apply two techniques to overcome the issue of facing a high dimensional integrand due to the discretization scheme used for simulating the rBergomi dynamics. The first  consists of applying a hierarchical  path generation method, based on Brownian bridge (Bb) construction, with the aim of reducing the effective dimension\red{,} as  described  in Section \ref{sec:Brwonian bridge construction}. The second technique consists of applying Richardson extrapolation to reduce the bias, resulting in reducing  the maximum number of dimensions needed for the integration problem. Details about  Richardson extrapolation  are provided in Section \ref{sec:Richardson extrapolation}.
+Our approach of approximating the expectation in \eqref{BS_formula_rbergomi_2} is based on hierarchical deterministic quadratures, namely  i) ASGQ using the same construction in \cite{haji2016multi} and ii) randomized QMC based on lattice rules. We describe the ASGQ  method in our context in Section \ref{sec:Details of the MISC}, and in Section \ref{sec:Quasi Monte Carlo (QMC)} we provide details on the implented QMC method.  To make an effective use of either the ASGQ or the QMC method, we  apply two techniques to overcome the issue of facing a high dimensional integrand due to the discretization scheme used for simulating the rBergomi dynamics. The first  consists of applying a hierarchical  path generation method, based on Brownian bridge (Bb) construction, with the aim of reducing the effective dimension, as  described  in Section \ref{sec:Brwonian bridge construction}. The second technique consists of applying Richardson extrapolation to reduce the bias, resulting in reducing  the maximum number of dimensions needed for the integration problem. Details about  Richardson extrapolation  are provided in Section \ref{sec:Richardson extrapolation}.
 
 If we denote by $\mathcal{E}_{\text{tot}}$ the total error of approximating the  expectation in \eqref{BS_formula_rbergomi} using the ASGQ estimator, $Q_N$, then we have a natural error decomposition
 \begin{align}\label{eq:total_error_ASGQ}
 \mathcal{E}_{\text{tot}} & \le \abs{C_{\text{RB}}-C_{\text{RB}}^N}+\abs{C_{\text{RB}}^N-Q_{N}} \le \mathcal{E}_B(N)+ \mathcal{E}_Q(\text{TOL}_{\text{ASGQ}},N),
 \end{align}
-where  $\mathcal{E}_Q$ is the quadrature error, $\mathcal{E}_B$  is the bias, $\text{TOL}_{\text{ASGQ}}$ is a user selected tolerance for \red{the} ASGQ method, and $C_{\text{RB}}^N$ is the biased price computed with $N$ time steps as given by \eqref{BS_formula_rbergomi_2}.
+where  $\mathcal{E}_Q$ is the quadrature error, $\mathcal{E}_B$  is the bias, $\text{TOL}_{\text{ASGQ}}$ is a user selected tolerance for the ASGQ method, and $C_{\text{RB}}^N$ is the biased price computed with $N$ time steps as given by \eqref{BS_formula_rbergomi_2}.
 
 On the other hand, the total error of approximating the  expectation in \eqref{BS_formula_rbergomi} using the randomized QMC or MC estimator, $Q^{\text{MC(QMC)}}_N$ can be bounded by
 
 \begin{align}\label{eq:total_error_MC}
 	\mathcal{E}_{\text{tot}} & \le \abs{C_{\text{RB}}-C_{\text{RB}}^N}+\abs{C_{\text{RB}}^N-Q^{\text{MC (QMC)}}_N} \le \mathcal{E}_B(N)+ \mathcal{E}_{S}(M,N),
 \end{align}
-where  $\mathcal{E}_S$ is the statistical error\footnote{The statistical error estimate of MC or randomized QMC is  $C_{\alpha} \frac{\sigma_M}{\sqrt{M}}$, where $M$ is the number of samples and $C_{\alpha}=1.96$ for $95\%$ confidence interval.}, $M$ is the number of samples used for \red{the} MC or \red{the} randomized QMC method.
+where  $\mathcal{E}_S$ is the statistical error\footnote{The statistical error estimate of MC or randomized QMC is  $C_{\alpha} \frac{\sigma_M}{\sqrt{M}}$, where $M$ is the number of samples and $C_{\alpha}=1.96$ for $95\%$ confidence interval.}, $M$ is the number of samples used for the MC or the randomized QMC method.
 \subsection{Adaptive sparse grids quadrature (ASGQ)}\label{sec:Details of the MISC}
 
 We assume that we want to approximate the expected value $\text{E}[f(Y)]$ of an analytic function $f\colon \Gamma \to \rset$ using a tensorization of quadrature formulas over $\Gamma$.
@@ -142,7 +142,7 @@ the optimal index set  $\mathcal{I}$  for our ASGQ is given by
 	The choice of the hierarchy of quadrature points, $m(\boldsymbol{\beta})$, is flexible in the ASGQ algorithm and can be fixed by the user, depending on the convergence properties of the problem at hand. For instance, for the sake of reproducibility, in our numerical experiments we used a linear hierarchy: $m(\beta)=4 (\beta-1)+1,\: 1 \le \beta $, for results of parameter set $1$ in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}. For the remaining parameter sets in Table  \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}, we used a geometric hierarchy: $m(\beta)=2^{\beta-1}+1, \:1 \le \beta $.
 \end{remark} 
 \begin{remark}
-As emphasized in \cite{haji2016multi}, one important requirement to \red{achieve} the optimal performance of the ASGQ is to check  the error convergence, defined by \eqref{eq:Work_error_contributions},  of first and mixed difference operators. We checked this requirement in all our numerical experiments, and for illustration we show in Figures  \ref{fig:first_diff_comp_K_1_H_002} and \ref{fig:second_diff_comp_K_1_H_002} the error convergence of first and second order differences for the case of parameter set $2$ in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}.  These plots show that: i) $\Delta \text{E}_{\boldsymbol{\beta}}$ decreases exponentially fast with respect to $\beta_i$, and ii) $\Delta \text{E}_{\boldsymbol{\beta}}$ has a  product structure since  we  observe  a faster error decay for second differences compared to corresponding first difference operators.
+As emphasized in \cite{haji2016multi}, one important requirement to achieve the optimal performance of the ASGQ is to check  the error convergence, defined by \eqref{eq:Work_error_contributions},  of first and mixed difference operators. We checked this requirement in all our numerical experiments, and for illustration we show in Figures  \ref{fig:first_diff_comp_K_1_H_002} and \ref{fig:second_diff_comp_K_1_H_002} the error convergence of first and second order differences for the case of parameter set $2$ in Table \ref{table:Reference solution, using MC with $500$ time steps, of Call option price under rBergomi model, for different parameter constellation.}.  These plots show that: i) $\Delta \text{E}_{\boldsymbol{\beta}}$ decreases exponentially fast with respect to $\beta_i$, and ii) $\Delta \text{E}_{\boldsymbol{\beta}}$ has a  product structure since  we  observe  a faster error decay for second differences compared to corresponding first difference operators.
 \end{remark} 
 
 \begin{figure}[h!]
@@ -191,24 +191,14 @@ As emphasized in \cite{haji2016multi}, one important requirement to \red{achieve
 \begin{remark}
 The analiticity assumption, stated in the beginning of Section \ref{sec:Details of the MISC}, is crucial for the optimal performance of our proposed method. In fact, although we face the issue of the  ``curse of dimensionality" when increasing $N$, the analiticity of $f$ implies a spectral convergence for sparse grids quadrature.
 \end{remark} 
-%
-%\begin{remark}
-%	In this paper, we limited ourselves to designing a novel alternative method  based on hierarchical adaptive sparse grids quadrature for computing option prices under the rBergomi model. Giving the significant performance gains of our novel designed algorithm, we expect that designing a method based on QMC can bring similar or more gains as  our approach.
-%\end{remark}
-
-
-%\red{\subsubsection{ASGQ error estimate}
-%\input{MISC_error_estimate}
-%}
-
 \subsection{Quasi Monte Carlo (QMC)}\label{sec:Quasi Monte Carlo (QMC)}
 \input{QMC.tex}
 \subsection{Brownian bridge (Bb) construction}\label{sec:Brwonian bridge construction}
 In the literature of ASGQ and  QMC, several hierarchical path generation methods (PGMs) have been proposed to reduce the effective dimension. Among these techniques, we mention Bb  construction \cite{morokoff1994quasi,moskowitz1996smoothness,caflisch1997valuation}, principal component analysis (PCA)  \cite{acworth1998comparison} and  linear transformation (LT) \cite{imai2004minimizing}.
 
-In our context, the Brownian motion on a time discretization  can be constructed either sequentially using a standard random walk construction, or hierarchically using   other PGMs\red{,} as listed above. For our purposes, to make an effective use of ASGQ or QMC methods, which benefit from anisotropy, we use the Bb construction since it produces  dimensions with different importance, contrary to a random walk procedure for which all the dimensions of the stochastic space have equal importance. In fact, Bb uses the first several coordinates of the low-discrepancy points to determine the general shape of the Brownian path, and the last few coordinates influence only the fine detail of the path. Consequently, this representation  reduces the effective dimension  of the problem, which results in accelerating the ASGQ and QMC methods by reducing the computational cost.
+In our context, the Brownian motion on a time discretization  can be constructed either sequentially using a standard random walk construction, or hierarchically using   other PGMs, as listed above. For our purposes, to make an effective use of ASGQ or QMC methods, which benefit from anisotropy, we use the Bb construction since it produces  dimensions with different importance, contrary to a random walk procedure for which all the dimensions of the stochastic space have equal importance. In fact, Bb uses the first several coordinates of the low-discrepancy points to determine the general shape of the Brownian path, and the last few coordinates influence only the fine detail of the path. Consequently, this representation  reduces the effective dimension  of the problem, which results in accelerating the ASGQ and QMC methods by reducing the computational cost.
 
-Let us denote $\{t_i\}_{i=0}^{N}$ \red{as} the grid of time steps. Then the Bb construction \cite{glasserman2004monte} consists of the following: given a past value $B_{t_i}$ and a future value $B_{t_k}$, the value $B_{t_j}$ (with $t_i < t_j < t_k$) can be generated according to 
+Let us denote $\{t_i\}_{i=0}^{N}$ as the grid of time steps. Then the Bb construction \cite{glasserman2004monte} consists of the following: given a past value $B_{t_i}$ and a future value $B_{t_k}$, the value $B_{t_j}$ (with $t_i < t_j < t_k$) can be generated according to 
 \begin{equation*}
 B_{t_j}=(1-\rho) B_{t_i}+\rho B_{t_k}+ \sqrt{\rho (1-\rho)(k-i) \Delta t} z, \: z \sim \mathcal{N}(0,1) \COMMA
 \end{equation*}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  1 SEP 2019 14:02
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  3 SEP 2019 09:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -114,15 +114,6 @@ Missing character: There is no a in font nullfont!
 Missing character: There is no i in font nullfont!
 Missing character: There is no l in font nullfont!
 Missing character: There is no s in font nullfont!
-! Undefined control sequence.
-l.1 ...work. We start  by giving some details \red
-                                                  {on} the rBergomi model pr...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
 Missing character: There is no o in font nullfont!
 Missing character: There is no n in font nullfont!
 Missing character: There is no t in font nullfont!
@@ -1277,7 +1268,7 @@ my insertion and my current dilemma will both disappear.
 Missing character: There is no I in font nullfont!
 Missing character: There is no n in font nullfont!
 ! Undefined control sequence.
-l.42 In \eqref
+l.28 In \eqref
               {eq:rBergomi_model1} and \eqref{eq:Volterra process}, $W^1, Z$...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1299,13 +1290,13 @@ Missing character: There is no i in font nullfont!
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.42 In \eqref{eq:rBergomi_
+l.28 In \eqref{eq:rBergomi_
                            model1} and \eqref{eq:Volterra process}, $W^1, Z$...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Extra }, or forgotten $.
-l.42 In \eqref{eq:rBergomi_model1}
+l.28 In \eqref{eq:rBergomi_model1}
                                    and \eqref{eq:Volterra process}, $W^1, Z$...
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -1314,7 +1305,7 @@ the way to recover is to insert both the forgotten and the
 deleted material, e.g., by typing `I$}'.
 
 ! Undefined control sequence.
-l.42 In \eqref{eq:rBergomi_model1} and \eqref
+l.28 In \eqref{eq:rBergomi_model1} and \eqref
                                              {eq:Volterra process}, $W^1, Z$...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1326,7 +1317,7 @@ Missing character: There is no W in font nullfont!
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.42 ...del1} and \eqref{eq:Volterra process}, $W^
+l.28 ...del1} and \eqref{eq:Volterra process}, $W^
                                                   1, Z$ denote two \emph{cor...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -1417,7 +1408,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.43 \begin{align*}
+l.29 \begin{align*}
                    
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -1428,7 +1419,7 @@ Missing character: There is no = in font nullfont!
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.44 	Z=\rho
+l.30 	Z=\rho
             	W^1+ \bar{\rho}W^\perp = \rho W^1+\sqrt{1-\rho^2} W^\perp,
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -1440,7 +1431,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.45 \end{align*}
+l.31 \end{align*}
                  
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -1449,7 +1440,7 @@ or  <return>  to continue without it.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.45 \end{align*}
+l.31 \end{align*}
                  
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -1527,7 +1518,7 @@ Missing character: There is no n in font nullfont!
 Missing character: There is no t in font nullfont!
 Missing character: There is no o in font nullfont!
 ! Undefined control sequence.
-l.47 Therefore, the solution to \eqref
+l.33 Therefore, the solution to \eqref
                                       {eq:rBergomi_model1}, with $S(0)=S_0$,...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1549,13 +1540,13 @@ Missing character: There is no i in font nullfont!
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.47 ...efore, the solution to \eqref{eq:rBergomi_
+l.33 ...efore, the solution to \eqref{eq:rBergomi_
                                                   model1}, with $S(0)=S_0$, ...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Extra }, or forgotten $.
-l.47 ...the solution to \eqref{eq:rBergomi_model1}
+l.33 ...the solution to \eqref{eq:rBergomi_model1}
                                                   , with $S(0)=S_0$, can be ...
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -1572,7 +1563,7 @@ Missing character: There is no S in font nullfont!
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.47 ... \eqref{eq:rBergomi_model1}, with $S(0)=S_
+l.33 ... \eqref{eq:rBergomi_model1}, with $S(0)=S_
                                                   0$, can be written as
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -1593,284 +1584,284 @@ Missing character: There is no n in font nullfont!
 Missing character: There is no a in font nullfont!
 Missing character: There is no s in font nullfont!
 
-Overfull \hbox (34.07635pt too wide) in paragraph at lines 8--48
+Overfull \hbox (34.07635pt too wide) in paragraph at lines 8--34
 []$[] \/cmr/m/n/10 =
  []
 
 
-Overfull \hbox (45.79518pt too wide) in paragraph at lines 8--48
+Overfull \hbox (45.79518pt too wide) in paragraph at lines 8--34
 []\OML/cmm/m/it/10 S[]dZ[]; [] 
  []
 
 
-Overfull \hbox (18.92358pt too wide) in paragraph at lines 8--48
+Overfull \hbox (18.92358pt too wide) in paragraph at lines 8--34
 \OML/cmm/m/it/10 v[] \/cmr/m/n/10 =
  []
 
 
-Overfull \hbox (122.5926pt too wide) in paragraph at lines 8--48
+Overfull \hbox (122.5926pt too wide) in paragraph at lines 8--34
 \OML/cmm/m/it/10 ^^X[]\/cmr/m/n/10 (\OML/cmm/m/it/10 t\/cmr/m/n/10 ) [] [] \OML
 /cmm/m/it/10 ;$
  []
 
 
-Overfull \hbox (15.55553pt too wide) in paragraph at lines 8--48
+Overfull \hbox (15.55553pt too wide) in paragraph at lines 8--34
 \/cmr/m/n/10 0 \OML/cmm/m/it/10 <
  []
 
 
-Overfull \hbox (19.68048pt too wide) in paragraph at lines 8--48
+Overfull \hbox (19.68048pt too wide) in paragraph at lines 8--34
 \OML/cmm/m/it/10 H <
  []
 
 
-Overfull \hbox (15.00005pt too wide) in paragraph at lines 8--48
+Overfull \hbox (15.00005pt too wide) in paragraph at lines 8--34
 \/cmr/m/n/10 1\OML/cmm/m/it/10 =\/cmr/m/n/10 2$
  []
 
 
-Overfull \hbox (15.8796pt too wide) in paragraph at lines 8--48
+Overfull \hbox (15.8796pt too wide) in paragraph at lines 8--34
 \OML/cmm/m/it/10 ^^Q >
  []
 
 
-Overfull \hbox (5.00002pt too wide) in paragraph at lines 8--48
+Overfull \hbox (5.00002pt too wide) in paragraph at lines 8--34
 \/cmr/m/n/10 0$
  []
 
 
-Overfull \hbox (8.36807pt too wide) in paragraph at lines 8--48
+Overfull \hbox (8.36807pt too wide) in paragraph at lines 8--34
 \OML/cmm/m/it/10 v[]$
  []
 
 
-Overfull \hbox (30.80557pt too wide) in paragraph at lines 8--48
+Overfull \hbox (30.80557pt too wide) in paragraph at lines 8--34
 \OML/cmm/m/it/10 ^^X[]\/cmr/m/n/10 (\OML/cmm/m/it/10 t\/cmr/m/n/10 ) =
  []
 
 
-Overfull \hbox (8.36807pt too wide) in paragraph at lines 8--48
+Overfull \hbox (8.36807pt too wide) in paragraph at lines 8--34
 []$
  []
 
 
-Overfull \hbox (18.41808pt too wide) in paragraph at lines 8--48
+Overfull \hbox (18.41808pt too wide) in paragraph at lines 8--34
 []$
  []
 
 
-Overfull \hbox (5.43053pt too wide) in paragraph at lines 8--48
+Overfull \hbox (5.43053pt too wide) in paragraph at lines 8--34
 []
  []
 
 
-Overfull \hbox (5.43053pt too wide) in paragraph at lines 8--48
+Overfull \hbox (5.43053pt too wide) in paragraph at lines 8--34
 []
  []
 
 
-Overfull \hbox (28.97359pt too wide) in paragraph at lines 8--48
+Overfull \hbox (28.97359pt too wide) in paragraph at lines 8--34
 [] \/cmr/m/n/10 =
  []
 
 
-Overfull \hbox (43.92502pt too wide) in paragraph at lines 8--48
+Overfull \hbox (43.92502pt too wide) in paragraph at lines 8--34
 [][] \OML/cmm/m/it/10 K[]\/cmr/m/n/10 (\OML/cmm/m/it/10 t \OMS/cmsy/m/n/10 ^^@
  []
 
 
-Overfull \hbox (47.71178pt too wide) in paragraph at lines 8--48
+Overfull \hbox (47.71178pt too wide) in paragraph at lines 8--34
 \OML/cmm/m/it/10 s\/cmr/m/n/10 )\OML/cmm/m/it/10 dW[];  t \OMS/cmsy/m/n/10 ^^U
  []
 
 
-Overfull \hbox (5.00002pt too wide) in paragraph at lines 8--48
+Overfull \hbox (5.00002pt too wide) in paragraph at lines 8--34
 \/cmr/m/n/10 0$
  []
 
 
-Overfull \hbox (45.6264pt too wide) in paragraph at lines 8--48
+Overfull \hbox (45.6264pt too wide) in paragraph at lines 8--34
 \OML/cmm/m/it/10 K[] \/cmr/m/n/10 :[]\OMS/cmsy/m/n/10 ![]$
  []
 
 
-Overfull \hbox (22.86255pt too wide) in paragraph at lines 8--48
+Overfull \hbox (22.86255pt too wide) in paragraph at lines 8--34
 []\/cmr/m/n/10 (\OML/cmm/m/it/10 t \OMS/cmsy/m/n/10 ^^@
  []
 
 
-Overfull \hbox (19.13191pt too wide) in paragraph at lines 8--48
+Overfull \hbox (19.13191pt too wide) in paragraph at lines 8--34
 \OML/cmm/m/it/10 s\/cmr/m/n/10 ) =
  []
 
 
-Overfull \hbox (37.73616pt too wide) in paragraph at lines 8--48
+Overfull \hbox (37.73616pt too wide) in paragraph at lines 8--34
 []\/cmr/m/n/10 (\OML/cmm/m/it/10 t \OMS/cmsy/m/n/10 ^^@
  []
 
 
-Overfull \hbox (60.03615pt too wide) in paragraph at lines 8--48
+Overfull \hbox (60.03615pt too wide) in paragraph at lines 8--34
 \OML/cmm/m/it/10 s\/cmr/m/n/10 )[]\OML/cmm/m/it/10 ;  \OMS/cmsy/m/n/10 8 \/cmr/
 m/n/10 0 \OMS/cmsy/m/n/10 ^^T
  []
 
 
-Overfull \hbox (15.24301pt too wide) in paragraph at lines 8--48
+Overfull \hbox (15.24301pt too wide) in paragraph at lines 8--34
 \OML/cmm/m/it/10 s \OMS/cmsy/m/n/10 ^^T
  []
 
 
-Overfull \hbox (6.3889pt too wide) in paragraph at lines 8--48
+Overfull \hbox (6.3889pt too wide) in paragraph at lines 8--34
 \OML/cmm/m/it/10 t:$
  []
 
 
-Overfull \hbox (18.41808pt too wide) in paragraph at lines 8--48
+Overfull \hbox (18.41808pt too wide) in paragraph at lines 8--34
 []$
  []
 
 
-Overfull \hbox (20.79167pt too wide) in paragraph at lines 8--48
+Overfull \hbox (20.79167pt too wide) in paragraph at lines 8--34
 \/cmr/m/n/10 (\OML/cmm/m/it/10 H \OMS/cmsy/m/n/10 ^^@
  []
 
 
-Overfull \hbox (7.94794pt too wide) in paragraph at lines 8--48
+Overfull \hbox (7.94794pt too wide) in paragraph at lines 8--34
 \OML/cmm/m/it/10 ^^O\/cmr/m/n/10 )$
  []
 
 
-Overfull \hbox (10.00003pt too wide) in paragraph at lines 8--48
+Overfull \hbox (10.00003pt too wide) in paragraph at lines 8--34
 \/cmr/m/n/10 ^^?o
  []
 
 
-Overfull \hbox (58.21548pt too wide) in paragraph at lines 8--48
+Overfull \hbox (58.21548pt too wide) in paragraph at lines 8--34
 [] [] \/cmr/m/n/10 =
  []
 
 
-Overfull \hbox (15.18198pt too wide) in paragraph at lines 8--48
+Overfull \hbox (15.18198pt too wide) in paragraph at lines 8--34
 \OML/cmm/m/it/10 t[]$
  []
 
 
-Overfull \hbox (47.39166pt too wide) in paragraph at lines 8--48
+Overfull \hbox (47.39166pt too wide) in paragraph at lines 8--34
 [][] \/cmr/m/n/10 =
  []
 
 
-Overfull \hbox (64.99188pt too wide) in paragraph at lines 8--48
+Overfull \hbox (64.99188pt too wide) in paragraph at lines 8--34
 \OML/cmm/m/it/10 u[]G [] ;  v >
  []
 
 
-Overfull \hbox (5.72458pt too wide) in paragraph at lines 8--48
+Overfull \hbox (5.72458pt too wide) in paragraph at lines 8--34
 \OML/cmm/m/it/10 u$
  []
 
 
-Overfull \hbox (16.27078pt too wide) in paragraph at lines 8--48
+Overfull \hbox (16.27078pt too wide) in paragraph at lines 8--34
 \OML/cmm/m/it/10 x \OMS/cmsy/m/n/10 ^^U
  []
 
 
-Overfull \hbox (5.00002pt too wide) in paragraph at lines 8--48
+Overfull \hbox (5.00002pt too wide) in paragraph at lines 8--34
 \/cmr/m/n/10 1$
  []
 
 
-Overfull \hbox (16.28836pt too wide) in paragraph at lines 8--48
+Overfull \hbox (16.28836pt too wide) in paragraph at lines 8--34
 \OML/cmm/m/it/10 ^^M \/cmr/m/n/10 =
  []
 
 
-Overfull \hbox (14.16393pt too wide) in paragraph at lines 8--48
+Overfull \hbox (14.16393pt too wide) in paragraph at lines 8--34
 [] \OMS/cmsy/m/n/10 ^^@
  []
 
 
-Overfull \hbox (9.12497pt too wide) in paragraph at lines 8--48
+Overfull \hbox (9.12497pt too wide) in paragraph at lines 8--34
 \OML/cmm/m/it/10 H$
  []
 
 
-Overfull \hbox (68.23026pt too wide) in paragraph at lines 8--48
+Overfull \hbox (68.23026pt too wide) in paragraph at lines 8--34
 [][] []\OML/cmm/m/it/10 :$
  []
 
 
-Overfull \hbox (156.28258pt too wide) in paragraph at lines 8--48
+Overfull \hbox (156.28258pt too wide) in paragraph at lines 8--34
 []\OML/cmm/m/it/10 odel\/cmr/m/n/10 1\OML/cmm/m/it/10 and[];$$[]; Z$
  []
 
 
-Overfull \hbox (16.9943pt too wide) in paragraph at lines 8--48
+Overfull \hbox (16.9943pt too wide) in paragraph at lines 8--34
 \OT1/cmr/m/it/10 cor-
  []
 
 
-Overfull \hbox (11.88321pt too wide) in paragraph at lines 8--48
+Overfull \hbox (11.88321pt too wide) in paragraph at lines 8--34
 \OT1/cmr/m/it/10 re-
  []
 
 
-Overfull \hbox (20.18874pt too wide) in paragraph at lines 8--48
+Overfull \hbox (20.18874pt too wide) in paragraph at lines 8--34
 \OT1/cmr/m/it/10 lated
  []
 
 
-Overfull \hbox (14.61455pt too wide) in paragraph at lines 8--48
+Overfull \hbox (14.61455pt too wide) in paragraph at lines 8--34
 \OML/cmm/m/it/10 ^^Z \OMS/cmsy/m/n/10 2
  []
 
 
-Overfull \hbox (10.55559pt too wide) in paragraph at lines 8--48
+Overfull \hbox (10.55559pt too wide) in paragraph at lines 8--34
 \/cmr/m/n/10 ] \OMS/cmsy/m/n/10 ^^@
  []
 
 
-Overfull \hbox (17.22223pt too wide) in paragraph at lines 8--48
+Overfull \hbox (17.22223pt too wide) in paragraph at lines 8--34
 \/cmr/m/n/10 1\OML/cmm/m/it/10 ; \/cmr/m/n/10 0]$
  []
 
 
-Overfull \hbox (7.54167pt too wide) in paragraph at lines 8--48
+Overfull \hbox (7.54167pt too wide) in paragraph at lines 8--34
 \OML/cmm/m/it/10 Z$
  []
 
 
-Overfull \hbox (15.31947pt too wide) in paragraph at lines 8--48
+Overfull \hbox (15.31947pt too wide) in paragraph at lines 8--34
 \OML/cmm/m/it/10 W[]$
  []
 
 
-Overfull \hbox (28.26743pt too wide) in paragraph at lines 8--48
+Overfull \hbox (28.26743pt too wide) in paragraph at lines 8--34
 \OML/cmm/m/it/10 ^^ZW[] \/cmr/m/n/10 +
  []
 
 
-Overfull \hbox (33.30902pt too wide) in paragraph at lines 8--48
+Overfull \hbox (33.30902pt too wide) in paragraph at lines 8--34
 []\OML/cmm/m/it/10 W[] \/cmr/m/n/10 =
  []
 
 
-Overfull \hbox (28.26743pt too wide) in paragraph at lines 8--48
+Overfull \hbox (28.26743pt too wide) in paragraph at lines 8--34
 \OML/cmm/m/it/10 ^^ZW[] \/cmr/m/n/10 +
  []
 
 
-Overfull \hbox (57.2396pt too wide) in paragraph at lines 8--48
+Overfull \hbox (57.2396pt too wide) in paragraph at lines 8--34
 []\OML/cmm/m/it/10 W[];$
  []
 
 
-Overfull \hbox (45.12505pt too wide) in paragraph at lines 8--48
+Overfull \hbox (45.12505pt too wide) in paragraph at lines 8--34
 \/cmr/m/n/10 (\OML/cmm/m/it/10 W[]; W[]\/cmr/m/n/10 )$
  []
 
 
-Overfull \hbox (59.66168pt too wide) in paragraph at lines 8--48
+Overfull \hbox (59.66168pt too wide) in paragraph at lines 8--34
 []\OML/cmm/m/it/10 odel\/cmr/m/n/10 1\OML/cmm/m/it/10 ; with$$[]$
  []
 
@@ -1881,7 +1872,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.49 \begin{align}
+l.35 \begin{align}
                   \label{eq:rBergomi_model}
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -1894,7 +1885,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.50 	S
+l.36 	S
        _t&= S_0  \operatorname{exp}\left( \int_{0}^{t} \sqrt{v(s)} dZ(s)- \f...
 
 You're in trouble here.  Try typing  <return>  to proceed.
@@ -1904,13 +1895,13 @@ Missing character: There is no S in font nullfont!
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.50 	S_
+l.36 	S_
         t&= S_0  \operatorname{exp}\left( \int_{0}^{t} \sqrt{v(s)} dZ(s)- \f...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Misplaced alignment tab character &.
-l.50 	S_t&
+l.36 	S_t&
           = S_0  \operatorname{exp}\left( \int_{0}^{t} \sqrt{v(s)} dZ(s)- \f...
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -1920,7 +1911,7 @@ you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
 ! Undefined control sequence.
-l.50 	S_t&= S_0  \operatorname
+l.36 	S_t&= S_0  \operatorname
                               {exp}\left( \int_{0}^{t} \sqrt{v(s)} dZ(s)- \f...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1929,7 +1920,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Misplaced alignment tab character &.
-l.51 	v_u&
+l.37 	v_u&
           =\xi_0(u) \operatorname{exp}\left( \eta \widetilde{W}_u^H- \frac{\...
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -1939,7 +1930,7 @@ you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
 ! Undefined control sequence.
-l.51 	v_u&=\xi_0(u) \operatorname
+l.37 	v_u&=\xi_0(u) \operatorname
                                  {exp}\left( \eta \widetilde{W}_u^H- \frac{\...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1948,7 +1939,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.51 ...}{2} u^{2H} \right), \quad \xi_0>0 \PERIOD
+l.37 ...}{2} u^{2H} \right), \quad \xi_0>0 \PERIOD
                                                   
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1963,7 +1954,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.52 \end{align}
+l.38 \end{align}
                 
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -1972,7 +1963,7 @@ or  <return>  to continue without it.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.52 \end{align}
+l.38 \end{align}
                 
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -1987,7 +1978,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.53 \begin{remark}
+l.39 \begin{remark}
                    
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -2122,70 +2113,70 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.55 \end{remark}
+l.41 \end{remark}
                  
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
 
-Overfull \hbox (34.07635pt too wide) in paragraph at lines 50--58
+Overfull \hbox (34.07635pt too wide) in paragraph at lines 36--44
 []$[] \/cmr/m/n/10 =
  []
 
 
-Overfull \hbox (190.79102pt too wide) in paragraph at lines 50--58
+Overfull \hbox (190.79102pt too wide) in paragraph at lines 36--44
 \OML/cmm/m/it/10 S[][] [] ;  S[] >
  []
 
 
-Overfull \hbox (5.00002pt too wide) in paragraph at lines 50--58
+Overfull \hbox (5.00002pt too wide) in paragraph at lines 36--44
 \/cmr/m/n/10 0[] 
  []
 
 
-Overfull \hbox (20.6308pt too wide) in paragraph at lines 50--58
+Overfull \hbox (20.6308pt too wide) in paragraph at lines 36--44
 \OML/cmm/m/it/10 v[] \/cmr/m/n/10 =
  []
 
 
-Overfull \hbox (140.83899pt too wide) in paragraph at lines 50--58
+Overfull \hbox (140.83899pt too wide) in paragraph at lines 36--44
 \OML/cmm/m/it/10 ^^X[]\/cmr/m/n/10 (\OML/cmm/m/it/10 u\/cmr/m/n/10 )[] [] \OML/
 cmm/m/it/10 ;  ^^X[] >
  []
 
 
-Overfull \hbox (5.00002pt too wide) in paragraph at lines 50--58
+Overfull \hbox (5.00002pt too wide) in paragraph at lines 36--44
 \/cmr/m/n/10 0$
  []
 
 
-Overfull \hbox (8.36807pt too wide) in paragraph at lines 50--58
+Overfull \hbox (8.36807pt too wide) in paragraph at lines 36--44
 \OML/cmm/m/it/10 v[]$
  []
 
 
-Overfull \hbox (54.85283pt too wide) in paragraph at lines 50--58
+Overfull \hbox (54.85283pt too wide) in paragraph at lines 36--44
 \OML/cmm/m/it/10 E [] \OMS/cmsy/m/n/10 6\/cmr/m/n/10 =
  []
 
 
-Overfull \hbox (41.95708pt too wide) in paragraph at lines 50--58
+Overfull \hbox (41.95708pt too wide) in paragraph at lines 36--44
 \OML/cmm/m/it/10 E []$
  []
 
 
-Overfull \hbox (54.85283pt too wide) in paragraph at lines 50--58
+Overfull \hbox (54.85283pt too wide) in paragraph at lines 36--44
 \OML/cmm/m/it/10 E [] \/cmr/m/n/10 =
  []
 
 
-Overfull \hbox (21.39824pt too wide) in paragraph at lines 50--58
+Overfull \hbox (21.39824pt too wide) in paragraph at lines 36--44
 \OML/cmm/m/it/10 ^^X[]\/cmr/m/n/10 (\OML/cmm/m/it/10 u\/cmr/m/n/10 )$
  []
 
 ! Undefined control sequence.
-l.60 \subsection
+l.46 \subsection
                 {Option pricing under the rBergomi model}\label{sec:Option p...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -2200,7 +2191,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.60 \subsection{O
+l.46 \subsection{O
                   ption pricing under the rBergomi model}\label{sec:Option p...
 
 You're in trouble here.  Try typing  <return>  to proceed.
@@ -2241,7 +2232,7 @@ Missing character: There is no d in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no l in font nullfont!
 
-Overfull \hbox (20.0pt too wide) in paragraph at lines 60--61
+Overfull \hbox (20.0pt too wide) in paragraph at lines 46--47
 []
  []
 
@@ -2252,7 +2243,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.62 W
+l.48 W
       e are interested in pricing European call options under the rBergomi m...
 
 You're in trouble here.  Try typing  <return>  to proceed.
@@ -2414,7 +2405,7 @@ Missing character: There is no [ in font nullfont!
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
                                                   \space undefined\on@line .
-l.62 ... first used by \cite{romano1997contingent}
+l.48 ... first used by \cite{romano1997contingent}
                                                    in the context of Markovi...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -2424,7 +2415,7 @@ and I'll forget about whatever was undefined.
 
 
 LaTeX Warning: Citation `romano1997contingent' on page  undefined on input line
- 62.
+ 48.
 
 Missing character: There is no ] in font nullfont!
 Missing character: There is no i in font nullfont!
@@ -2513,32 +2504,32 @@ Missing character: There is no n in font nullfont!
 Missing character: There is no b in font nullfont!
 Missing character: There is no y in font nullfont!
 
-Overfull \hbox (20.0pt too wide) in paragraph at lines 62--63
+Overfull \hbox (20.0pt too wide) in paragraph at lines 48--49
 []
  []
 
 
-Overfull \hbox (21.17358pt too wide) in paragraph at lines 62--63
+Overfull \hbox (21.17358pt too wide) in paragraph at lines 48--49
 \OML/cmm/m/it/10 S[] \/cmr/m/n/10 =
  []
 
 
-Overfull \hbox (5.00002pt too wide) in paragraph at lines 62--63
+Overfull \hbox (5.00002pt too wide) in paragraph at lines 48--49
 \/cmr/m/n/10 1$
  []
 
 
-Overfull \hbox (6.0729pt too wide) in paragraph at lines 62--63
+Overfull \hbox (6.0729pt too wide) in paragraph at lines 48--49
 \OML/cmm/m/it/10 ^^[$
  []
 
 
-Overfull \hbox (15.31947pt too wide) in paragraph at lines 62--63
+Overfull \hbox (15.31947pt too wide) in paragraph at lines 48--49
 \OML/cmm/m/it/10 W[]$
  []
 
 
-Overfull \hbox (5.43053pt too wide) in paragraph at lines 62--63
+Overfull \hbox (5.43053pt too wide) in paragraph at lines 48--49
 []
  []
 
@@ -2549,7 +2540,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.64 \begin{align}
+l.50 \begin{align}
                   \label{BS_formula_rbergomi}
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -2562,7 +2553,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.65 	C
+l.51 	C
        _{\text{RB}}\left( T, K \right) &= \text{E}\left[ \left(S_T - K \righ...
 
 You're in trouble here.  Try typing  <return>  to proceed.
@@ -2572,13 +2563,13 @@ Missing character: There is no C in font nullfont!
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.65 	C_
+l.51 	C_
         {\text{RB}}\left( T, K \right) &= \text{E}\left[ \left(S_T - K \righ...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Undefined control sequence.
-l.65 	C_{\text
+l.51 	C_{\text
               {RB}}\left( T, K \right) &= \text{E}\left[ \left(S_T - K \righ...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -2587,7 +2578,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Misplaced alignment tab character &.
-l.65 	C_{\text{RB}}\left( T, K \right) &
+l.51 	C_{\text{RB}}\left( T, K \right) &
                                         = \text{E}\left[ \left(S_T - K \righ...
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -2597,7 +2588,7 @@ you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
 ! Undefined control sequence.
-l.65 	C_{\text{RB}}\left( T, K \right) &= \text
+l.51 	C_{\text{RB}}\left( T, K \right) &= \text
                                                {E}\left[ \left(S_T - K \righ...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -2608,7 +2599,7 @@ and I'll forget about whatever was undefined.
 ! Misplaced alignment tab character &.
 <recently read> &
                  
-l.66 	&
+l.52 	&
        =\expt{\expt{(S_T-K)^+ \mid \sigma(W^1(t) ,t \le T)}}\nonumber \\
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -2618,7 +2609,7 @@ you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
 ! Undefined control sequence.
-l.66 	&=\expt
+l.52 	&=\expt
              {\expt{(S_T-K)^+ \mid \sigma(W^1(t) ,t \le T)}}\nonumber \\
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -2627,7 +2618,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.66 	&=\expt{\expt
+l.52 	&=\expt{\expt
                    {(S_T-K)^+ \mid \sigma(W^1(t) ,t \le T)}}\nonumber \\
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -2638,7 +2629,7 @@ and I'll forget about whatever was undefined.
 ! Misplaced alignment tab character &.
 <recently read> &
                  
-l.67 	&
+l.53 	&
        =\text{E}\left[C_{\text{BS}}\left( S_0 = \operatorname{exp}\left(\rho...
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -2648,7 +2639,7 @@ you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
 ! Undefined control sequence.
-l.67 	&=\text
+l.53 	&=\text
              {E}\left[C_{\text{BS}}\left( S_0 = \operatorname{exp}\left(\rho...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -2657,7 +2648,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.67 	&=\text{E}\left[C_{\text
+l.53 	&=\text{E}\left[C_{\text
                               {BS}}\left( S_0 = \operatorname{exp}\left(\rho...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -2666,7 +2657,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.67 ...ft[C_{\text{BS}}\left( S_0 = \operatorname
+l.53 ...ft[C_{\text{BS}}\left( S_0 = \operatorname
                                                   {exp}\left(\rho \int_0^T \...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -2681,7 +2672,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.70 \end{align}
+l.56 \end{align}
                 
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -2690,7 +2681,7 @@ or  <return>  to continue without it.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.70 \end{align}
+l.56 \end{align}
                 
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -2704,7 +2695,7 @@ Missing character: There is no e in font nullfont!
 Missing character: There is no r in font nullfont!
 Missing character: There is no e in font nullfont!
 ! Undefined control sequence.
-l.71 where $C_{\text
+l.57 where $C_{\text
                     {BS}}(S_0,k,\sigma^2)$ denotes the Black-Scholes call pr...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -2791,53 +2782,53 @@ Missing character: There is no t in font nullfont!
 Missing character: There is no y in font nullfont!
 Missing character: There is no . in font nullfont!
 
-Overfull \hbox (73.27286pt too wide) in paragraph at lines 65--72
+Overfull \hbox (73.27286pt too wide) in paragraph at lines 51--58
 []$[] [] \/cmr/m/n/10 =
  []
 
 
-Overfull \hbox (69.0148pt too wide) in paragraph at lines 65--72
+Overfull \hbox (69.0148pt too wide) in paragraph at lines 51--58
 \OML/cmm/m/it/10 E [] [] 
  []
 
 
-Overfull \hbox (7.7778pt too wide) in paragraph at lines 65--72
+Overfull \hbox (7.7778pt too wide) in paragraph at lines 51--58
 \/cmr/m/n/10 =
  []
 
 
-Overfull \hbox (125.79248pt too wide) in paragraph at lines 65--72
+Overfull \hbox (125.79248pt too wide) in paragraph at lines 51--58
 [][] 
  []
 
 
-Overfull \hbox (7.7778pt too wide) in paragraph at lines 65--72
+Overfull \hbox (7.7778pt too wide) in paragraph at lines 51--58
 \/cmr/m/n/10 =
  []
 
 
-Overfull \hbox (359.95142pt too wide) in paragraph at lines 65--72
+Overfull \hbox (359.95142pt too wide) in paragraph at lines 51--58
 \OML/cmm/m/it/10 E [] ;$
  []
 
 
-Overfull \hbox (62.68787pt too wide) in paragraph at lines 65--72
+Overfull \hbox (62.68787pt too wide) in paragraph at lines 51--58
 \OML/cmm/m/it/10 C[]\/cmr/m/n/10 (\OML/cmm/m/it/10 S[]; k; ^^[[]\/cmr/m/n/10 )$
 
  []
 
 
-Overfull \hbox (10.61807pt too wide) in paragraph at lines 65--72
+Overfull \hbox (10.61807pt too wide) in paragraph at lines 51--58
 \OML/cmm/m/it/10 S[]$
  []
 
 
-Overfull \hbox (5.52084pt too wide) in paragraph at lines 65--72
+Overfull \hbox (5.52084pt too wide) in paragraph at lines 51--58
 \OML/cmm/m/it/10 k$
  []
 
 
-Overfull \hbox (10.55904pt too wide) in paragraph at lines 65--72
+Overfull \hbox (10.55904pt too wide) in paragraph at lines 51--58
 \OML/cmm/m/it/10 ^^[[]$ 
  []
 
@@ -2848,7 +2839,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.83 W
+l.69 W
       e point out that the analytical smoothing, based on conditioning, perf...
 
 You're in trouble here.  Try typing  <return>  to proceed.
@@ -2923,7 +2914,7 @@ Missing character: There is no d in font nullfont!
 Missing character: There is no i in font nullfont!
 Missing character: There is no n in font nullfont!
 ! Undefined control sequence.
-l.83 ...based on conditioning, performed in \eqref
+l.69 ...based on conditioning, performed in \eqref
                                                   {BS_formula_rbergomi} enab...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -2936,13 +2927,13 @@ Missing character: There is no S in font nullfont!
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.83 ...d on conditioning, performed in \eqref{BS_
+l.69 ...d on conditioning, performed in \eqref{BS_
                                                   formula_rbergomi} enables ...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Extra }, or forgotten $.
-l.83 ..., performed in \eqref{BS_formula_rbergomi}
+l.69 ..., performed in \eqref{BS_formula_rbergomi}
                                                    enables us to uncover the...
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -2950,20 +2941,11 @@ you forgot something else, as in `\hbox{$x}'. In such cases
 the way to recover is to insert both the forgotten and the
 deleted material, e.g., by typing `I$}'.
 
-! Undefined control sequence.
-l.83 ...te option for computing the call price\red
-                                                  {,} as we will investigate...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
 \citation{mccrickerd2018turbocharging}
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
                                                   \space undefined\on@line .
-l.83 ...used in \cite{mccrickerd2018turbocharging}
+l.69 ...used in \cite{mccrickerd2018turbocharging}
                                                    but for variance reductio...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -2973,32 +2955,32 @@ and I'll forget about whatever was undefined.
 
 
 LaTeX Warning: Citation `mccrickerd2018turbocharging' on page  undefined on inp
-ut line 83.
+ut line 69.
 
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.84 
+l.70 
      
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 
-Overfull \hbox (20.0pt too wide) in paragraph at lines 83--84
+Overfull \hbox (20.0pt too wide) in paragraph at lines 69--70
 []
  []
 
 
-Overfull \hbox (1561.4737pt too wide) in paragraph at lines 83--84
+Overfull \hbox (1563.14032pt too wide) in paragraph at lines 69--70
 []\OML/cmm/m/it/10 ormula[]bergomienablesustouncovertheavailableregularity; and
 hencegetasmooth; analyticintegrandinsidetheexpectation:Therefore; applyingadete
 rministicquadraturetechniquesuchasASGQorQMCbecomesanadequateoptionforcomputingt
-hecallprice[]aswewillinvestigatelater:Asimilarconditioningwasusedin\/cmr/m/n/10
+hecallprice; aswewillinvestigatelater:Asimilarconditioningwasusedin\/cmr/m/n/10
  [[]]\OML/cmm/m/it/10 butforvariancereductionpurposesonly:$ 
  []
 
 ! Undefined control sequence.
-l.85 \subsection
+l.71 \subsection
                 {Simulation of the rBergomi model}\label{sec:Simulation of t...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -3013,7 +2995,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.85 \subsection{S
+l.71 \subsection{S
                   imulation of the rBergomi model}\label{sec:Simulation of t...
 
 You're in trouble here.  Try typing  <return>  to proceed.
@@ -3048,7 +3030,7 @@ Missing character: There is no d in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no l in font nullfont!
 
-Overfull \hbox (20.0pt too wide) in paragraph at lines 85--86
+Overfull \hbox (20.0pt too wide) in paragraph at lines 71--72
 []
  []
 
@@ -3059,7 +3041,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.87 O
+l.73 O
       ne of the numerical challenges encountered in the simulation of  rBerg...
 
 You're in trouble here.  Try typing  <return>  to proceed.
@@ -3160,7 +3142,7 @@ Missing character: There is no d in font nullfont!
 Missing character: There is no i in font nullfont!
 Missing character: There is no n in font nullfont!
 ! Undefined control sequence.
-l.87 ...t^1$ and $V=\int_{0}^{T} v_t dt$ in \eqref
+l.73 ...t^1$ and $V=\int_{0}^{T} v_t dt$ in \eqref
                                                   {BS_formula_rbergomi}, mai...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -3173,13 +3155,13 @@ Missing character: There is no S in font nullfont!
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.87 ... and $V=\int_{0}^{T} v_t dt$ in \eqref{BS_
+l.73 ... and $V=\int_{0}^{T} v_t dt$ in \eqref{BS_
                                                   formula_rbergomi}, mainly ...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Extra }, or forgotten $.
-l.87 ...{T} v_t dt$ in \eqref{BS_formula_rbergomi}
+l.73 ...{T} v_t dt$ in \eqref{BS_formula_rbergomi}
                                                   , mainly because of the si...
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -3191,7 +3173,7 @@ Missing character: There is no K in font nullfont!
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.87 ...the singularity of the Volterra kernel $K^
+l.73 ...the singularity of the Volterra kernel $K^
                                                   H(s-t)$ at the diagonal $s...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -3363,88 +3345,88 @@ Missing character: There is no i in font nullfont!
 Missing character: There is no s in font nullfont!
 Missing character: There is no : in font nullfont!
 
-Overfull \hbox (20.0pt too wide) in paragraph at lines 87--88
+Overfull \hbox (20.0pt too wide) in paragraph at lines 73--74
 []
  []
 
 
-Overfull \hbox (51.85872pt too wide) in paragraph at lines 87--88
+Overfull \hbox (51.85872pt too wide) in paragraph at lines 73--74
 [][] []\OML/cmm/m/it/10 dW[]$
  []
 
 
-Overfull \hbox (18.61107pt too wide) in paragraph at lines 87--88
+Overfull \hbox (18.61107pt too wide) in paragraph at lines 73--74
 \OML/cmm/m/it/10 V \/cmr/m/n/10 =
  []
 
 
-Overfull \hbox (31.817pt too wide) in paragraph at lines 87--88
+Overfull \hbox (31.817pt too wide) in paragraph at lines 73--74
 [][] \OML/cmm/m/it/10 v[]dt$
  []
 
 
-Overfull \hbox (340.40671pt too wide) in paragraph at lines 87--88
+Overfull \hbox (340.40671pt too wide) in paragraph at lines 73--74
 []\OML/cmm/m/it/10 ormula[]bergomi; mainlybecauseofthesingularityoftheVolterrak
 ernel$$[]\/cmr/m/n/10 (\OML/cmm/m/it/10 s \OMS/cmsy/m/n/10 ^^@
  []
 
 
-Overfull \hbox (7.50002pt too wide) in paragraph at lines 87--88
+Overfull \hbox (7.50002pt too wide) in paragraph at lines 73--74
 \OML/cmm/m/it/10 t\/cmr/m/n/10 )$
  []
 
 
-Overfull \hbox (15.24301pt too wide) in paragraph at lines 87--88
+Overfull \hbox (15.24301pt too wide) in paragraph at lines 73--74
 \OML/cmm/m/it/10 s \/cmr/m/n/10 =
  []
 
 
-Overfull \hbox (3.61111pt too wide) in paragraph at lines 87--88
+Overfull \hbox (3.61111pt too wide) in paragraph at lines 73--74
 \OML/cmm/m/it/10 t$
  []
 
 
-Overfull \hbox (47.62636pt too wide) in paragraph at lines 87--88
+Overfull \hbox (47.62636pt too wide) in paragraph at lines 73--74
 \/cmr/m/n/10 (\OML/cmm/m/it/10 W[]; [] \/cmr/m/n/10 :
  []
 
 
-Overfull \hbox (15.55553pt too wide) in paragraph at lines 87--88
+Overfull \hbox (15.55553pt too wide) in paragraph at lines 73--74
 \/cmr/m/n/10 0 \OMS/cmsy/m/n/10 ^^T
  []
 
 
-Overfull \hbox (14.16663pt too wide) in paragraph at lines 87--88
+Overfull \hbox (14.16663pt too wide) in paragraph at lines 73--74
 \OML/cmm/m/it/10 t \OMS/cmsy/m/n/10 ^^T
  []
 
 
-Overfull \hbox (11.12155pt too wide) in paragraph at lines 87--88
+Overfull \hbox (11.12155pt too wide) in paragraph at lines 73--74
 \OML/cmm/m/it/10 T\/cmr/m/n/10 )$
  []
 
 
-Overfull \hbox (58.47913pt too wide) in paragraph at lines 87--88
+Overfull \hbox (58.47913pt too wide) in paragraph at lines 73--74
 \OML/cmm/m/it/10 W[]; [] ; W[]$
  []
 
 
-Overfull \hbox (60.02908pt too wide) in paragraph at lines 87--88
+Overfull \hbox (60.02908pt too wide) in paragraph at lines 73--74
 []\OML/cmm/m/it/10 ; [] ; []$
  []
 
 
-Overfull \hbox (18.65276pt too wide) in paragraph at lines 87--88
+Overfull \hbox (18.65276pt too wide) in paragraph at lines 73--74
 \OML/cmm/m/it/10 t[] <
  []
 
 
-Overfull \hbox (22.22212pt too wide) in paragraph at lines 87--88
+Overfull \hbox (22.22212pt too wide) in paragraph at lines 73--74
 [] \OML/cmm/m/it/10 <
  []
 
 
-Overfull \hbox (11.19585pt too wide) in paragraph at lines 87--88
+Overfull \hbox (11.19585pt too wide) in paragraph at lines 73--74
 \OML/cmm/m/it/10 t[]$
  []
 
@@ -3454,7 +3436,7 @@ Missing character: There is no ) in font nullfont!
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
                                                   \space undefined\on@line .
-l.91 ...n) \cite{bayer2016pricing,bayer2018short}}
+l.77 ...n) \cite{bayer2016pricing,bayer2018short}}
                                                   : $W^1_{t_1},\dots, W^1_{t...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -3463,14 +3445,14 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-LaTeX Warning: Citation `bayer2016pricing' on page  undefined on input line 91.
+LaTeX Warning: Citation `bayer2016pricing' on page  undefined on input line 77.
 
 
 \citation{bayer2018short}
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
                                                   \space undefined\on@line .
-l.91 ...n) \cite{bayer2016pricing,bayer2018short}}
+l.77 ...n) \cite{bayer2016pricing,bayer2018short}}
                                                   : $W^1_{t_1},\dots, W^1_{t...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -3479,7 +3461,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-LaTeX Warning: Citation `bayer2018short' on page  undefined on input line 91.
+LaTeX Warning: Citation `bayer2018short' on page  undefined on input line 77.
 
 Missing character: There is no : in font nullfont!
 Missing character: There is no t in font nullfont!
@@ -3533,15 +3515,6 @@ Missing character: There is no w in font nullfont!
 Missing character: There is no i in font nullfont!
 Missing character: There is no t in font nullfont!
 Missing character: There is no h in font nullfont!
-! Undefined control sequence.
-l.91 ...mensional Gaussian random vector with \red
-                                                  {a} computable covariance ...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
 Missing character: There is no a in font nullfont!
 Missing character: There is no c in font nullfont!
 Missing character: There is no o in font nullfont!
@@ -3749,7 +3722,7 @@ Missing character: There is no s in font nullfont!
 ! Undefined control sequence.
 <recently read> \Ordo 
                       
-l.91 ... but slow. The simulation  requires $\Ordo
+l.77 ... but slow. The simulation  requires $\Ordo
                                                   {N^2}$ flops. Note that th...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -3790,7 +3763,7 @@ Missing character: There is no s in font nullfont!
 ! Undefined control sequence.
 <recently read> \Ordo 
                       
-l.91 ...lops. Note that the offline cost is $\Ordo
+l.77 ...lops. Note that the offline cost is $\Ordo
                                                   {N^3}$ flops.
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -3805,92 +3778,92 @@ Missing character: There is no p in font nullfont!
 Missing character: There is no s in font nullfont!
 Missing character: There is no . in font nullfont!
 
-Overfull \hbox (55.0483pt too wide) in paragraph at lines 91--92
+Overfull \hbox (55.0483pt too wide) in paragraph at lines 77--78
 \OT1/cmr/bx/n/10 Covariance
  []
 
 
-Overfull \hbox (28.17482pt too wide) in paragraph at lines 91--92
+Overfull \hbox (28.17482pt too wide) in paragraph at lines 77--78
 \OT1/cmr/bx/n/10 based
  []
 
 
-Overfull \hbox (15.8124pt too wide) in paragraph at lines 91--92
+Overfull \hbox (15.8124pt too wide) in paragraph at lines 77--78
 \OT1/cmr/bx/n/10 ap-
  []
 
 
-Overfull \hbox (33.64565pt too wide) in paragraph at lines 91--92
+Overfull \hbox (33.64565pt too wide) in paragraph at lines 77--78
 \OT1/cmr/bx/n/10 proach
  []
 
 
-Overfull \hbox (19.64574pt too wide) in paragraph at lines 91--92
+Overfull \hbox (19.64574pt too wide) in paragraph at lines 77--78
 \OT1/cmr/bx/n/10 (ex-
  []
 
 
-Overfull \hbox (15.17351pt too wide) in paragraph at lines 91--92
+Overfull \hbox (15.17351pt too wide) in paragraph at lines 77--78
 \OT1/cmr/bx/n/10 act
  []
 
 
-Overfull \hbox (21.1471pt too wide) in paragraph at lines 91--92
+Overfull \hbox (21.1471pt too wide) in paragraph at lines 77--78
 \OT1/cmr/bx/n/10 sim-
  []
 
 
-Overfull \hbox (10.22217pt too wide) in paragraph at lines 91--92
+Overfull \hbox (10.22217pt too wide) in paragraph at lines 77--78
 \OT1/cmr/bx/n/10 u-
  []
 
 
-Overfull \hbox (12.61797pt too wide) in paragraph at lines 91--92
+Overfull \hbox (12.61797pt too wide) in paragraph at lines 77--78
 \OT1/cmr/bx/n/10 la-
  []
 
 
-Overfull \hbox (24.27765pt too wide) in paragraph at lines 91--92
+Overfull \hbox (24.27765pt too wide) in paragraph at lines 77--78
 \OT1/cmr/bx/n/10 tion)
  []
 
 
-Overfull \hbox (11.81938pt too wide) in paragraph at lines 91--92
+Overfull \hbox (11.81938pt too wide) in paragraph at lines 77--78
 \OT1/cmr/bx/n/10 [[],
  []
 
 
-Overfull \hbox (8.62495pt too wide) in paragraph at lines 91--92
+Overfull \hbox (8.62495pt too wide) in paragraph at lines 77--78
 []\OT1/cmr/bx/n/10 ]
  []
 
 
-Overfull \hbox (122.95262pt too wide) in paragraph at lines 91--92
+Overfull \hbox (122.95262pt too wide) in paragraph at lines 77--78
 \OML/cmm/m/it/10 W[]; [] ; W[]; []; [] ; []$
  []
 
 
-Overfull \hbox (14.12498pt too wide) in paragraph at lines 91--92
+Overfull \hbox (14.12498pt too wide) in paragraph at lines 77--78
 \/cmr/m/n/10 2\OML/cmm/m/it/10 N$
  []
 
 
-Overfull \hbox (122.95262pt too wide) in paragraph at lines 91--92
+Overfull \hbox (122.95262pt too wide) in paragraph at lines 77--78
 \OML/cmm/m/it/10 W[]; [] ; W[]; []; [] ; []$
  []
 
 
-Overfull \hbox (14.12498pt too wide) in paragraph at lines 91--92
+Overfull \hbox (14.12498pt too wide) in paragraph at lines 77--78
 \/cmr/m/n/10 2\OML/cmm/m/it/10 N$
  []
 
 
-Overfull \hbox (13.6111pt too wide) in paragraph at lines 91--92
+Overfull \hbox (13.6111pt too wide) in paragraph at lines 77--78
 []$
  []
 
 
-Overfull \hbox (13.6111pt too wide) in paragraph at lines 91--92
+Overfull \hbox (13.6111pt too wide) in paragraph at lines 77--78
 []$
  []
 
@@ -3902,7 +3875,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.92 
+l.78 
      
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -3912,7 +3885,7 @@ or  <return>  to continue without it.
 ! Undefined control sequence.
 <write> ...el{sec:The rBergomi model}{{}{\thepage 
                                                   }}
-l.92 
+l.78 
      
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -3924,7 +3897,7 @@ and I'll forget about whatever was undefined.
 ! Undefined control sequence.
 <write> \newlabel{eq:rBergomi_model1}{{}{\thepage 
                                                   }}
-l.92 
+l.78 
      
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -3936,7 +3909,7 @@ and I'll forget about whatever was undefined.
 ! Undefined control sequence.
 <write> ...label{eq:Volterra process}{{}{\thepage 
                                                   }}
-l.92 
+l.78 
      
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -3948,7 +3921,7 @@ and I'll forget about whatever was undefined.
 ! Undefined control sequence.
 <write> \newlabel{eq:rBergomi_model}{{}{\thepage 
                                                  }}
-l.92 
+l.78 
      
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -3960,7 +3933,7 @@ and I'll forget about whatever was undefined.
 ! Undefined control sequence.
 <write> ...cing under rBergomi model}{{}{\thepage 
                                                   }}
-l.92 
+l.78 
      
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -3972,7 +3945,7 @@ and I'll forget about whatever was undefined.
 ! Undefined control sequence.
 <write> ...label{BS_formula_rbergomi}{{}{\thepage 
                                                   }}
-l.92 
+l.78 
      
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -3984,7 +3957,7 @@ and I'll forget about whatever was undefined.
 ! Undefined control sequence.
 <write> ...ion of the rBergomi model}{{}{\thepage 
                                                   }}
-l.92 
+l.78 
      
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -4002,7 +3975,7 @@ Missing character: There is no ) in font nullfont!
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
                                                   \space undefined\on@line .
-l.93 ...brid scheme of \cite{bennedsen2017hybrid}}
+l.79 ...brid scheme of \cite{bennedsen2017hybrid}}
                                                   : This scheme uses a diffe...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -4012,7 +3985,7 @@ and I'll forget about whatever was undefined.
 
 
 LaTeX Warning: Citation `bennedsen2017hybrid' on page  undefined on input line 
-93.
+79.
 
 Missing character: There is no : in font nullfont!
 Missing character: There is no T in font nullfont!
@@ -4095,15 +4068,6 @@ Missing character: There is no n in font nullfont!
 Missing character: There is no b in font nullfont!
 Missing character: There is no u in font nullfont!
 Missing character: There is no t in font nullfont!
-! Undefined control sequence.
-l.93 ...y based on  Euler discretization  but \red
-                                                  {is} crucially improved by...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
 Missing character: There is no i in font nullfont!
 Missing character: There is no s in font nullfont!
 Missing character: There is no c in font nullfont!
@@ -4257,15 +4221,6 @@ Missing character: There is no o in font nullfont!
 Missing character: There is no n in font nullfont!
 Missing character: There is no o in font nullfont!
 Missing character: There is no f in font nullfont!
-! Undefined control sequence.
-l.95 ...W}^H_{t_1},\dots, \widetilde{W}_{t_N}$\red
-                                                  {.  However} they are much...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
 Missing character: There is no . in font nullfont!
 Missing character: There is no H in font nullfont!
 Missing character: There is no o in font nullfont!
@@ -4301,15 +4256,6 @@ Missing character: There is no t in font nullfont!
 Missing character: There is no h in font nullfont!
 Missing character: There is no a in font nullfont!
 Missing character: There is no n in font nullfont!
-! Undefined control sequence.
-l.95 ...ver} they are much more accurate than \red
-                                                  {the} samples produced fro...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
 Missing character: There is no t in font nullfont!
 Missing character: There is no h in font nullfont!
 Missing character: There is no e in font nullfont!
@@ -4470,62 +4416,62 @@ Missing character: There is no o in font nullfont!
 Missing character: There is no f in font nullfont!
 Missing character: There is no . in font nullfont!
 
-Overfull \hbox (19.65962pt too wide) in paragraph at lines 93--96
+Overfull \hbox (19.65962pt too wide) in paragraph at lines 79--82
 \OT1/cmr/bx/n/10 The
  []
 
 
-Overfull \hbox (15.97214pt too wide) in paragraph at lines 93--96
+Overfull \hbox (15.97214pt too wide) in paragraph at lines 79--82
 \OT1/cmr/bx/n/10 hy-
  []
 
 
-Overfull \hbox (20.70824pt too wide) in paragraph at lines 93--96
+Overfull \hbox (20.70824pt too wide) in paragraph at lines 79--82
 \OT1/cmr/bx/n/10 brid
  []
 
 
-Overfull \hbox (35.84148pt too wide) in paragraph at lines 93--96
+Overfull \hbox (35.84148pt too wide) in paragraph at lines 79--82
 \OT1/cmr/bx/n/10 scheme
  []
 
 
-Overfull \hbox (9.26384pt too wide) in paragraph at lines 93--96
+Overfull \hbox (9.26384pt too wide) in paragraph at lines 79--82
 \OT1/cmr/bx/n/10 of
  []
 
 
-Overfull \hbox (11.81938pt too wide) in paragraph at lines 93--96
+Overfull \hbox (11.81938pt too wide) in paragraph at lines 79--82
 \OT1/cmr/bx/n/10 [[]]
  []
 
 
-Overfull \hbox (122.95262pt too wide) in paragraph at lines 93--96
+Overfull \hbox (122.95262pt too wide) in paragraph at lines 79--82
 \OML/cmm/m/it/10 W[]; [] ; W[]; []; [] ; []$
  []
 
 
-Overfull \hbox (11.22293pt too wide) in paragraph at lines 93--96
+Overfull \hbox (11.22293pt too wide) in paragraph at lines 79--82
 \/cmr/m/n/10 (\OML/cmm/m/it/10 i\/cmr/m/n/10 )$
  []
 
 
-Overfull \hbox (11.22293pt too wide) in paragraph at lines 93--96
+Overfull \hbox (11.22293pt too wide) in paragraph at lines 79--82
 \/cmr/m/n/10 (\OML/cmm/m/it/10 i\/cmr/m/n/10 )$
  []
 
 
-Overfull \hbox (14.12498pt too wide) in paragraph at lines 93--96
+Overfull \hbox (14.12498pt too wide) in paragraph at lines 79--82
 \/cmr/m/n/10 2\OML/cmm/m/it/10 N$
  []
 
 
-Overfull \hbox (122.95262pt too wide) in paragraph at lines 93--96
+Overfull \hbox (122.95262pt too wide) in paragraph at lines 79--82
 \OML/cmm/m/it/10 W[]; [] ; W[]; []; [] ; []$ 
  []
 
 ! Undefined control sequence.
-l.98 \subsubsection
+l.84 \subsubsection
                    {On the choice of the simulation scheme in our approach}\...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -4707,7 +4653,7 @@ Missing character: There is no e in font nullfont!
 ! Undefined control sequence.
 <write> ...meter constellation.' on page \thepage 
                                                   \space undefined\on@line .
-l.99 ...l, for different parameter constellation.}
+l.85 ...l, for different parameter constellation.}
                                                    for the tested examples),...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -4718,7 +4664,7 @@ and I'll forget about whatever was undefined.
 
 LaTeX Warning: Reference `table:Reference solution, using MC with $500$ time st
 eps, of Call option price under rBergomi model, for different parameter constel
-lation.' on page  undefined on input line 99.
+lation.' on page  undefined on input line 85.
 
 Missing character: There is no f in font nullfont!
 Missing character: There is no o in font nullfont!
@@ -4838,7 +4784,7 @@ Missing character: There is no r in font nullfont!
 ! Undefined control sequence.
 <recently read> \Ordo 
                       
-l.99 ...ptotically with weak error of order $\Ordo
+l.85 ...ptotically with weak error of order $\Ordo
                                                   {\Delta t}$, the pre-asymp...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -4911,15 +4857,6 @@ Missing character: There is no m in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no s in font nullfont!
 Missing character: There is no ( in font nullfont!
-! Undefined control sequence.
-l.99 ...k rate is different for both schemes (\red
-                                                  {we} provide a short discu...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
 Missing character: There is no w in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no p in font nullfont!
@@ -4971,7 +4908,7 @@ Missing character: There is no n in font nullfont!
 ! Undefined control sequence.
 <write> ...:Weak error analysis' on page \thepage 
                                                   \space undefined\on@line .
-l.99 ...r in Section \ref{sec:Weak error analysis}
+l.85 ...r in Section \ref{sec:Weak error analysis}
                                                   ). As an illustration, fro...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -4981,7 +4918,7 @@ and I'll forget about whatever was undefined.
 
 
 LaTeX Warning: Reference `sec:Weak error analysis' on page  undefined on input 
-line 99.
+line 85.
 
 Missing character: There is no ) in font nullfont!
 Missing character: There is no . in font nullfont!
@@ -5015,7 +4952,7 @@ Missing character: There is no e in font nullfont!
 ! Undefined control sequence.
 <write> ...ithout_rich_hyb+chol' on page \thepage 
                                                   \space undefined\on@line .
-l.99 ...eak_rate_set1_set_2_without_rich_hyb+chol}
+l.85 ...eak_rate_set1_set_2_without_rich_hyb+chol}
                                                    for Set $1$ parameter in ...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -5025,7 +4962,7 @@ and I'll forget about whatever was undefined.
 
 
 LaTeX Warning: Reference `fig:Weak_rate_set1_set_2_without_rich_hyb+chol' on pa
-ge  undefined on input line 99.
+ge  undefined on input line 85.
 
 Missing character: There is no f in font nullfont!
 Missing character: There is no o in font nullfont!
@@ -5052,7 +4989,7 @@ Missing character: There is no e in font nullfont!
 ! Undefined control sequence.
 <write> ...meter constellation.' on page \thepage 
                                                   \space undefined\on@line .
-l.99 ...l, for different parameter constellation.}
+l.85 ...l, for different parameter constellation.}
                                                   , the hybrid scheme  has a...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -5063,7 +5000,7 @@ and I'll forget about whatever was undefined.
 
 LaTeX Warning: Reference `table:Reference solution, using MC with $500$ time st
 eps, of Call option price under rBergomi model, for different parameter constel
-lation.' on page  undefined on input line 99.
+lation.' on page  undefined on input line 85.
 
 Missing character: There is no , in font nullfont!
 Missing character: There is no t in font nullfont!
@@ -5139,15 +5076,6 @@ Missing character: There is no e in font nullfont!
 Missing character: There is no s in font nullfont!
 Missing character: There is no i in font nullfont!
 Missing character: There is no n in font nullfont!
-! Undefined control sequence.
-l.99 ...avior in the sense that it behaves in \red
-                                                  {an} asymptotic \red{manne...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
 Missing character: There is no a in font nullfont!
 Missing character: There is no n in font nullfont!
 Missing character: There is no a in font nullfont!
@@ -5160,15 +5088,6 @@ Missing character: There is no o in font nullfont!
 Missing character: There is no t in font nullfont!
 Missing character: There is no i in font nullfont!
 Missing character: There is no c in font nullfont!
-! Undefined control sequence.
-l.99 ...hat it behaves in \red{an} asymptotic \red
-                                                  {manner} basically right f...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
 Missing character: There is no m in font nullfont!
 Missing character: There is no a in font nullfont!
 Missing character: There is no n in font nullfont!
@@ -5485,7 +5404,7 @@ Missing character: There is no n in font nullfont!
 ! Undefined control sequence.
 <write> ...ardson extrapolation' on page \thepage 
                                                   \space undefined\on@line .
-l.99 ...Section \ref{sec:Richardson extrapolation}
+l.85 ...Section \ref{sec:Richardson extrapolation}
                                                   ).
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -5495,13 +5414,13 @@ and I'll forget about whatever was undefined.
 
 
 LaTeX Warning: Reference `sec:Richardson extrapolation' on page  undefined on i
-nput line 99.
+nput line 85.
 
 Missing character: There is no ) in font nullfont!
 Missing character: There is no . in font nullfont!
 ! Undefined control sequence.
-l.100 \FloatBarrier
-                   
+l.86 \FloatBarrier
+                  
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -5515,8 +5434,8 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.101 \begin{figure}
-                    [h!]
+l.87 \begin{figure}
+                   [h!]
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
@@ -5532,8 +5451,8 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.103 	\begin{subfigure}
-                        {.4\textwidth}
+l.89 	\begin{subfigure}
+                       {.4\textwidth}
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
@@ -5543,8 +5462,8 @@ Missing character: There is no 4 in font nullfont!
 ! Missing number, treated as zero.
 <to be read again> 
                    }
-l.103 	\begin{subfigure}{.4\textwidth}
-                                      
+l.89 	\begin{subfigure}{.4\textwidth}
+                                     
 A number should have been here; I inserted `0'.
 (If you can't figure out why I needed to see a number,
 look up `weird error' in the index to The TeXbook.)
@@ -5552,8 +5471,8 @@ look up `weird error' in the index to The TeXbook.)
 ! Illegal unit of measure (pt inserted).
 <to be read again> 
                    }
-l.103 	\begin{subfigure}{.4\textwidth}
-                                      
+l.89 	\begin{subfigure}{.4\textwidth}
+                                     
 Dimensions can be in units of em, ex, in, pt, pc,
 cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
 I'll assume that you meant to say pt, for printer's points.
@@ -5562,8 +5481,8 @@ delete the erroneous units; e.g., type `2' to delete
 two letters. (See Chapter 27 of The TeXbook.)
 
 ! Undefined control sequence.
-l.105 		\includegraphics
-                        [width=1\linewidth]{./figures/rBergomi_weak_error_ra...
+l.91 		\includegraphics
+                       [width=1\linewidth]{./figures/rBergomi_weak_error_rat...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -5581,8 +5500,8 @@ Missing character: There is no 1 in font nullfont!
 ! Missing number, treated as zero.
 <to be read again> 
                    ]
-l.105 		\includegraphics[width=1\linewidth]
-                                           {./figures/rBergomi_weak_error_ra...
+l.91 		\includegraphics[width=1\linewidth]
+                                          {./figures/rBergomi_weak_error_rat...
 A number should have been here; I inserted `0'.
 (If you can't figure out why I needed to see a number,
 look up `weird error' in the index to The TeXbook.)
@@ -5590,8 +5509,8 @@ look up `weird error' in the index to The TeXbook.)
 ! Illegal unit of measure (pt inserted).
 <to be read again> 
                    ]
-l.105 		\includegraphics[width=1\linewidth]
-                                           {./figures/rBergomi_weak_error_ra...
+l.91 		\includegraphics[width=1\linewidth]
+                                          {./figures/rBergomi_weak_error_rat...
 Dimensions can be in units of em, ex, in, pt, pc,
 cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
 I'll assume that you meant to say pt, for printer's points.
@@ -5621,43 +5540,43 @@ Missing character: There is no i in font nullfont!
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.105 ...cs[width=1\linewidth]{./figures/rBergomi_
+l.91 ...ics[width=1\linewidth]{./figures/rBergomi_
                                                   weak_error_rates/without_r...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Double subscript.
-l.105 ...n/H_007/weak_convergence_order_Bergomi_H_
+l.91 ...on/H_007/weak_convergence_order_Bergomi_H_
                                                   007_K_1_M_4_10_6_CI_relati...
 I treat `x_1_2' essentially like `x_1{}_2'.
 
 ! Double subscript.
-l.105 ...7/weak_convergence_order_Bergomi_H_007_K_
+l.91 ...07/weak_convergence_order_Bergomi_H_007_K_
                                                   1_M_4_10_6_CI_relative_hyb...
 I treat `x_1_2' essentially like `x_1{}_2'.
 
 ! Double subscript.
-l.105 ...weak_convergence_order_Bergomi_H_007_K_1_
+l.91 .../weak_convergence_order_Bergomi_H_007_K_1_
                                                   M_4_10_6_CI_relative_hybri...
 I treat `x_1_2' essentially like `x_1{}_2'.
 
 ! Double subscript.
-l.105 ...ak_convergence_order_Bergomi_H_007_K_1_M_
+l.91 ...eak_convergence_order_Bergomi_H_007_K_1_M_
                                                   4_10_6_CI_relative_hybrid_...
 I treat `x_1_2' essentially like `x_1{}_2'.
 
 ! Double subscript.
-l.105 ..._convergence_order_Bergomi_H_007_K_1_M_4_
+l.91 ...k_convergence_order_Bergomi_H_007_K_1_M_4_
                                                   10_6_CI_relative_hybrid_no...
 I treat `x_1_2' essentially like `x_1{}_2'.
 
 ! Double subscript.
-l.105 ...ergence_order_Bergomi_H_007_K_1_M_4_10_6_
+l.91 ...vergence_order_Bergomi_H_007_K_1_M_4_10_6_
                                                   CI_relative_hybrid_non_hie...
 I treat `x_1_2' essentially like `x_1{}_2'.
 
 ! Extra }, or forgotten $.
-l.105 ...non_hierarchical_non_parallel_asymptotic}
+l.91 ..._non_hierarchical_non_parallel_asymptotic}
                                                   
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -5672,8 +5591,8 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.106 		\caption
-                {}
+l.92 		\caption
+               {}
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
@@ -5684,8 +5603,8 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.108 	\end{subfigure}
-                      %
+l.94 	\end{subfigure}
+                     %
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
@@ -5693,8 +5612,8 @@ or  <return>  to continue without it.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.108 	\end{subfigure}
-                      %
+l.94 	\end{subfigure}
+                     %
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
 With luck, this will get me unwedged. But if you
@@ -5704,8 +5623,8 @@ my insertion and my current dilemma will both disappear.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.108 	\end{subfigure}
-                      %
+l.94 	\end{subfigure}
+                     %
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
 With luck, this will get me unwedged. But if you
@@ -5719,8 +5638,8 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.109 	\begin{subfigure}
-                        {.4\textwidth}
+l.95 	\begin{subfigure}
+                       {.4\textwidth}
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
@@ -5730,8 +5649,8 @@ Missing character: There is no 4 in font nullfont!
 ! Missing number, treated as zero.
 <to be read again> 
                    }
-l.109 	\begin{subfigure}{.4\textwidth}
-                                      
+l.95 	\begin{subfigure}{.4\textwidth}
+                                     
 A number should have been here; I inserted `0'.
 (If you can't figure out why I needed to see a number,
 look up `weird error' in the index to The TeXbook.)
@@ -5739,8 +5658,8 @@ look up `weird error' in the index to The TeXbook.)
 ! Illegal unit of measure (pt inserted).
 <to be read again> 
                    }
-l.109 	\begin{subfigure}{.4\textwidth}
-                                      
+l.95 	\begin{subfigure}{.4\textwidth}
+                                     
 Dimensions can be in units of em, ex, in, pt, pc,
 cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
 I'll assume that you meant to say pt, for printer's points.
@@ -5749,8 +5668,8 @@ delete the erroneous units; e.g., type `2' to delete
 two letters. (See Chapter 27 of The TeXbook.)
 
 ! Undefined control sequence.
-l.111 		\includegraphics
-                        [width=1\linewidth]{./figures/rBergomi_weak_error_ch...
+l.97 		\includegraphics
+                       [width=1\linewidth]{./figures/rBergomi_weak_error_cho...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -5768,8 +5687,8 @@ Missing character: There is no 1 in font nullfont!
 ! Missing number, treated as zero.
 <to be read again> 
                    ]
-l.111 		\includegraphics[width=1\linewidth]
-                                           {./figures/rBergomi_weak_error_ch...
+l.97 		\includegraphics[width=1\linewidth]
+                                          {./figures/rBergomi_weak_error_cho...
 A number should have been here; I inserted `0'.
 (If you can't figure out why I needed to see a number,
 look up `weird error' in the index to The TeXbook.)
@@ -5777,8 +5696,8 @@ look up `weird error' in the index to The TeXbook.)
 ! Illegal unit of measure (pt inserted).
 <to be read again> 
                    ]
-l.111 		\includegraphics[width=1\linewidth]
-                                           {./figures/rBergomi_weak_error_ch...
+l.97 		\includegraphics[width=1\linewidth]
+                                          {./figures/rBergomi_weak_error_cho...
 Dimensions can be in units of em, ex, in, pt, pc,
 cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
 I'll assume that you meant to say pt, for printer's points.
@@ -5808,43 +5727,43 @@ Missing character: There is no i in font nullfont!
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.111 ...cs[width=1\linewidth]{./figures/rBergomi_
+l.97 ...ics[width=1\linewidth]{./figures/rBergomi_
                                                   weak_error_cholesky/weak_c...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Double subscript.
-l.111 ...holesky/weak_convergence_order_Bergomi_H_
+l.97 ...cholesky/weak_convergence_order_Bergomi_H_
                                                   007_K_1_M_4_10_6_CI_relati...
 I treat `x_1_2' essentially like `x_1{}_2'.
 
 ! Double subscript.
-l.111 ...y/weak_convergence_order_Bergomi_H_007_K_
+l.97 ...ky/weak_convergence_order_Bergomi_H_007_K_
                                                   1_M_4_10_6_CI_relative_cho...
 I treat `x_1_2' essentially like `x_1{}_2'.
 
 ! Double subscript.
-l.111 ...weak_convergence_order_Bergomi_H_007_K_1_
+l.97 .../weak_convergence_order_Bergomi_H_007_K_1_
                                                   M_4_10_6_CI_relative_chole...
 I treat `x_1_2' essentially like `x_1{}_2'.
 
 ! Double subscript.
-l.111 ...ak_convergence_order_Bergomi_H_007_K_1_M_
+l.97 ...eak_convergence_order_Bergomi_H_007_K_1_M_
                                                   4_10_6_CI_relative_cholesk...
 I treat `x_1_2' essentially like `x_1{}_2'.
 
 ! Double subscript.
-l.111 ..._convergence_order_Bergomi_H_007_K_1_M_4_
+l.97 ...k_convergence_order_Bergomi_H_007_K_1_M_4_
                                                   10_6_CI_relative_cholesky_...
 I treat `x_1_2' essentially like `x_1{}_2'.
 
 ! Double subscript.
-l.111 ...ergence_order_Bergomi_H_007_K_1_M_4_10_6_
+l.97 ...vergence_order_Bergomi_H_007_K_1_M_4_10_6_
                                                   CI_relative_cholesky_non_h...
 I treat `x_1_2' essentially like `x_1{}_2'.
 
 ! Extra }, or forgotten $.
-l.111 ...non_hierarchical_non_parallel_asymptotic}
+l.97 ..._non_hierarchical_non_parallel_asymptotic}
                                                   
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -5859,8 +5778,8 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.112 		\caption
-                {}
+l.98 		\caption
+               {}
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
@@ -5871,7 +5790,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.114 	\end{subfigure}
+l.100 	\end{subfigure}
                       
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -5880,7 +5799,7 @@ or  <return>  to continue without it.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.114 	\end{subfigure}
+l.100 	\end{subfigure}
                       
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -5891,7 +5810,7 @@ my insertion and my current dilemma will both disappear.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.114 	\end{subfigure}
+l.100 	\end{subfigure}
                       
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -5906,7 +5825,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.115 	\caption
+l.101 	\caption
                {The convergence of the weak error $\mathcal{E}_B$,  defined ...
 
 You're in trouble here.  Try typing  <return>  to proceed.
@@ -5951,7 +5870,7 @@ Missing character: There is no d in font nullfont!
 Missing character: There is no i in font nullfont!
 Missing character: There is no n in font nullfont!
 ! Undefined control sequence.
-l.115 ...error $\mathcal{E}_B$,  defined in \eqref
+l.101 ...error $\mathcal{E}_B$,  defined in \eqref
                                                   {eq: Weak_error_hyb_chol},...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -5969,13 +5888,13 @@ Missing character: There is no k in font nullfont!
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.115 ...thcal{E}_B$,  defined in \eqref{eq: Weak_
+l.101 ...thcal{E}_B$,  defined in \eqref{eq: Weak_
                                                   error_hyb_chol}, using MC ...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Extra }, or forgotten $.
-l.115 ...efined in \eqref{eq: Weak_error_hyb_chol}
+l.101 ...efined in \eqref{eq: Weak_error_hyb_chol}
                                                   , using MC with $6 \times ...
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -5987,7 +5906,7 @@ Missing character: There is no 6 in font nullfont!
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.115 ..._error_hyb_chol}, using MC with $6 \times
+l.101 ..._error_hyb_chol}, using MC with $6 \times
                                                    10^6$ samples, for Set $1...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -6025,7 +5944,7 @@ Missing character: There is no e in font nullfont!
 ! Undefined control sequence.
 <write> ...meter constellation.' on page \thepage 
                                                   \space undefined\on@line .
-l.115 ..., for different parameter constellation.}
+l.101 ..., for different parameter constellation.}
                                                   . We refer to $C_{\text{RB...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -6036,7 +5955,7 @@ and I'll forget about whatever was undefined.
 
 LaTeX Warning: Reference `table:Reference solution, using MC with $500$ time st
 eps, of Call option price under rBergomi model, for different parameter constel
-lation.' on page  undefined on input line 115.
+lation.' on page  undefined on input line 101.
 
 Missing character: There is no . in font nullfont!
 Missing character: There is no W in font nullfont!
@@ -6049,7 +5968,7 @@ Missing character: There is no r in font nullfont!
 Missing character: There is no t in font nullfont!
 Missing character: There is no o in font nullfont!
 ! Undefined control sequence.
-l.115 ...er constellation.}. We refer to $C_{\text
+l.101 ...er constellation.}. We refer to $C_{\text
                                                   {RB}}$ (as in \eqref{BS_fo...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -6063,7 +5982,7 @@ Missing character: There is no s in font nullfont!
 Missing character: There is no i in font nullfont!
 Missing character: There is no n in font nullfont!
 ! Undefined control sequence.
-l.115 ...We refer to $C_{\text{RB}}$ (as in \eqref
+l.101 ...We refer to $C_{\text{RB}}$ (as in \eqref
                                                   {BS_formula_rbergomi}) for...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -6076,13 +5995,13 @@ Missing character: There is no S in font nullfont!
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.115 ...efer to $C_{\text{RB}}$ (as in \eqref{BS_
+l.101 ...efer to $C_{\text{RB}}$ (as in \eqref{BS_
                                                   formula_rbergomi}) for $\e...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Extra }, or forgotten $.
-l.115 ...{RB}}$ (as in \eqref{BS_formula_rbergomi}
+l.101 ...{RB}}$ (as in \eqref{BS_formula_rbergomi}
                                                   ) for $\expt{g(X)}$, and t...
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -6091,7 +6010,7 @@ the way to recover is to insert both the forgotten and the
 deleted material, e.g., by typing `I$}'.
 
 ! Undefined control sequence.
-l.115 ...n \eqref{BS_formula_rbergomi}) for $\expt
+l.101 ...n \eqref{BS_formula_rbergomi}) for $\expt
                                                   {g(X)}$, and to $C_{\text{...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -6107,13 +6026,13 @@ Missing character: There is no C in font nullfont!
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.115 ..._rbergomi}) for $\expt{g(X)}$, and to $C_
+l.101 ..._rbergomi}) for $\expt{g(X)}$, and to $C_
                                                   {\text{RB}}^{N}$ (as in \e...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Undefined control sequence.
-l.115 ...omi}) for $\expt{g(X)}$, and to $C_{\text
+l.101 ...omi}) for $\expt{g(X)}$, and to $C_{\text
                                                   {RB}}^{N}$ (as in \eqref{B...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -6127,7 +6046,7 @@ Missing character: There is no s in font nullfont!
 Missing character: There is no i in font nullfont!
 Missing character: There is no n in font nullfont!
 ! Undefined control sequence.
-l.115 ... and to $C_{\text{RB}}^{N}$ (as in \eqref
+l.101 ... and to $C_{\text{RB}}^{N}$ (as in \eqref
                                                   {BS_formula_rbergomi_2}) f...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -6140,13 +6059,13 @@ Missing character: There is no S in font nullfont!
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.115 ... to $C_{\text{RB}}^{N}$ (as in \eqref{BS_
+l.101 ... to $C_{\text{RB}}^{N}$ (as in \eqref{BS_
                                                   formula_rbergomi_2}) for $...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Extra }, or forgotten $.
-l.115 ...{N}$ (as in \eqref{BS_formula_rbergomi_2}
+l.101 ...{N}$ (as in \eqref{BS_formula_rbergomi_2}
                                                   ) for $\expt{g(X_{\Delta t...
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -6155,7 +6074,7 @@ the way to recover is to insert both the forgotten and the
 deleted material, e.g., by typing `I$}'.
 
 ! Undefined control sequence.
-l.115 ...\eqref{BS_formula_rbergomi_2}) for $\expt
+l.101 ...\eqref{BS_formula_rbergomi_2}) for $\expt
                                                   {g(X_{\Delta t})}$. The up...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -6169,13 +6088,13 @@ Missing character: There is no X in font nullfont!
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.115 ...f{BS_formula_rbergomi_2}) for $\expt{g(X_
+l.101 ...f{BS_formula_rbergomi_2}) for $\expt{g(X_
                                                   {\Delta t})}$. The upper a...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Extra }, or forgotten $.
-l.115 ..._rbergomi_2}) for $\expt{g(X_{\Delta t})}
+l.101 ..._rbergomi_2}) for $\expt{g(X_{\Delta t})}
                                                   $. The upper and lower bou...
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -6278,7 +6197,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.117 \end{figure}
+l.103 \end{figure}
                   
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -6287,7 +6206,7 @@ or  <return>  to continue without it.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.117 \end{figure}
+l.103 \end{figure}
                   
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -6298,7 +6217,7 @@ my insertion and my current dilemma will both disappear.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.117 \end{figure}
+l.103 \end{figure}
                   
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -6309,7 +6228,7 @@ my insertion and my current dilemma will both disappear.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.117 \end{figure}
+l.103 \end{figure}
                   
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -6320,7 +6239,7 @@ my insertion and my current dilemma will both disappear.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.117 \end{figure}
+l.103 \end{figure}
                   
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -6329,7 +6248,7 @@ really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
 ! Undefined control sequence.
-l.118 \FloatBarrier
+l.104 \FloatBarrier
                    
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -6338,108 +6257,108 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-Overfull \hbox (20.0pt too wide) in paragraph at lines 98--119
+Overfull \hbox (20.0pt too wide) in paragraph at lines 84--105
 []
  []
 
 
-Overfull \hbox (10.86105pt too wide) in paragraph at lines 98--119
+Overfull \hbox (10.86105pt too wide) in paragraph at lines 84--105
 []
  []
 
 
-Overfull \hbox (11.94447pt too wide) in paragraph at lines 98--119
+Overfull \hbox (11.94447pt too wide) in paragraph at lines 84--105
 []$
  []
 
 
-Overfull \hbox (10.86105pt too wide) in paragraph at lines 98--119
+Overfull \hbox (10.86105pt too wide) in paragraph at lines 84--105
 []
  []
 
 
-Overfull \hbox (10.86105pt too wide) in paragraph at lines 98--119
+Overfull \hbox (10.86105pt too wide) in paragraph at lines 84--105
 []
  []
 
 
-Overfull \hbox (5.00002pt too wide) in paragraph at lines 98--119
+Overfull \hbox (5.00002pt too wide) in paragraph at lines 84--105
 \/cmr/m/n/10 1$
  []
 
 
-Overfull \hbox (10.86105pt too wide) in paragraph at lines 98--119
+Overfull \hbox (10.86105pt too wide) in paragraph at lines 84--105
 []
  []
 
 
-Overfull \hbox (10.86105pt too wide) in paragraph at lines 98--119
+Overfull \hbox (10.86105pt too wide) in paragraph at lines 84--105
 []
  []
 
 
-Overfull \hbox (632.24826pt too wide) in paragraph at lines 98--119
+Overfull \hbox (632.24826pt too wide) in paragraph at lines 84--105
 []\OML/cmm/m/it/10 eak[]rror[]ates=without[]ichardson=H[]\/cmr/m/n/10 07\OML/cm
 m/m/it/10 =weak[]onvergence[]rder[]ergomi[][]\/cmr/m/n/10 07[][][][][]0[][]\OML
 /cmm/m/it/10 I[]elative[]ybrid[]on[]ierarchical[]on[]arallel[]symptotic[][]$
  []
 
 
-Overfull \hbox (541.01735pt too wide) in paragraph at lines 98--119
+Overfull \hbox (541.01735pt too wide) in paragraph at lines 84--105
 []\OML/cmm/m/it/10 eak[]rror[]holesky=weak[]onvergence[]rder[]ergomi[][]\/cmr/m
 /n/10 07[][][][][]0[][]\OML/cmm/m/it/10 I[]elative[]holesky[]on[]ierarchical[]o
 n[]arallel[]symptotic[][]$
  []
 
 
-Overfull \hbox (12.1608pt too wide) in paragraph at lines 98--119
+Overfull \hbox (12.1608pt too wide) in paragraph at lines 84--105
 \OMS/cmsy/m/n/10 E[]$
  []
 
 
-Overfull \hbox (124.16245pt too wide) in paragraph at lines 98--119
+Overfull \hbox (124.16245pt too wide) in paragraph at lines 84--105
 []\OML/cmm/m/it/10 rror[]yb[]hol; usingMCwith$
  []
 
 
-Overfull \hbox (22.26396pt too wide) in paragraph at lines 98--119
+Overfull \hbox (22.26396pt too wide) in paragraph at lines 84--105
 \OMS/cmsy/m/n/10 ^^B\/cmr/m/n/10 10[]$
  []
 
 
-Overfull \hbox (5.00002pt too wide) in paragraph at lines 98--119
+Overfull \hbox (5.00002pt too wide) in paragraph at lines 84--105
 \/cmr/m/n/10 1$
  []
 
 
-Overfull \hbox (10.86105pt too wide) in paragraph at lines 98--119
+Overfull \hbox (10.86105pt too wide) in paragraph at lines 84--105
 []
  []
 
 
-Overfull \hbox (20.0903pt too wide) in paragraph at lines 98--119
+Overfull \hbox (20.0903pt too wide) in paragraph at lines 84--105
 \OML/cmm/m/it/10 C[]$
  []
 
 
-Overfull \hbox (139.99506pt too wide) in paragraph at lines 98--119
+Overfull \hbox (139.99506pt too wide) in paragraph at lines 84--105
 []\OML/cmm/m/it/10 ormula[]bergomi\/cmr/m/n/10 )\OML/cmm/m/it/10 for$$; andto$$
 []$
  []
 
 
-Overfull \hbox (116.12146pt too wide) in paragraph at lines 98--119
+Overfull \hbox (116.12146pt too wide) in paragraph at lines 84--105
 []\OML/cmm/m/it/10 ormula[]bergomi[]\/cmr/m/n/10 )\OML/cmm/m/it/10 for$$[]\/cmr
 /m/n/10 )$
  []
 
 
-Overfull \hbox (18.33339pt too wide) in paragraph at lines 98--119
+Overfull \hbox (18.33339pt too wide) in paragraph at lines 84--105
 \/cmr/m/n/10 95%$
  []
 
 ! Undefined control sequence.
-l.120 \subsubsection
+l.106 \subsubsection
                     {The hybrid scheme}\label{sec: The hybrid scheme}
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -6485,7 +6404,7 @@ Missing character: There is no n in font nullfont!
 ! Undefined control sequence.
 <write> ...of simulation scheme' on page \thepage 
                                                   \space undefined\on@line .
-l.121 ...n  \ref{sec: choice of simulation scheme}
+l.107 ...n  \ref{sec: choice of simulation scheme}
                                                   , in this work we use the ...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -6495,7 +6414,7 @@ and I'll forget about whatever was undefined.
 
 
 LaTeX Warning: Reference `sec: choice of simulation scheme' on page  undefined 
-on input line 121.
+on input line 107.
 
 Missing character: There is no , in font nullfont!
 Missing character: There is no i in font nullfont!
@@ -6528,15 +6447,6 @@ Missing character: There is no h in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no m in font nullfont!
 Missing character: There is no e in font nullfont!
-! Undefined control sequence.
-l.121 ...in this work we use the hybrid scheme\red
-                                                  {,} which,  on \red{an} eq...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
 Missing character: There is no , in font nullfont!
 Missing character: There is no w in font nullfont!
 Missing character: There is no h in font nullfont!
@@ -6546,15 +6456,6 @@ Missing character: There is no h in font nullfont!
 Missing character: There is no , in font nullfont!
 Missing character: There is no o in font nullfont!
 Missing character: There is no n in font nullfont!
-! Undefined control sequence.
-l.121 ... the hybrid scheme\red{,} which,  on \red
-                                                  {an} equidistant grid $\{0...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
 Missing character: There is no a in font nullfont!
 Missing character: There is no n in font nullfont!
 Missing character: There is no e in font nullfont!
@@ -6602,7 +6503,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.123 \begin{align}
+l.109 \begin{align}
                    \label{eq:Hybrid_scheme_pre}
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -6611,13 +6512,13 @@ or  <return>  to continue without it.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.124 \widetilde
+l.110 \widetilde
                 {W}^H_{\frac{i}{N}} \approx \bar{W}^H_{\frac{i}{N}}&= \sqrt{...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Misplaced alignment tab character &.
-l.124 ...c{i}{N}} \approx \bar{W}^H_{\frac{i}{N}}&
+l.110 ...c{i}{N}} \approx \bar{W}^H_{\frac{i}{N}}&
                                                   = \sqrt{2H} \left(  \sum_{...
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -6627,7 +6528,7 @@ you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
 ! Undefined control sequence.
-l.124 ...{k}{N}+\frac{1}{N}} dW^1_s \right) \COMMA
+l.110 ...{k}{N}+\frac{1}{N}} dW^1_s \right) \COMMA
                                                   
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -6642,7 +6543,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.125 \end{align}
+l.111 \end{align}
                  
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -6651,7 +6552,7 @@ or  <return>  to continue without it.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.125 \end{align}
+l.111 \end{align}
                  
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -6677,7 +6578,7 @@ Missing character: There is no r in font nullfont!
 Missing character: There is no i in font nullfont!
 Missing character: There is no n in font nullfont!
 ! Undefined control sequence.
-l.126 which results for $\kappa=1$  in \eqref
+l.112 which results for $\kappa=1$  in \eqref
                                              {eq:Hybrid_scheme}.
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -6697,13 +6598,13 @@ Missing character: There is no d in font nullfont!
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.126 ...ults for $\kappa=1$  in \eqref{eq:Hybrid_
+l.112 ...ults for $\kappa=1$  in \eqref{eq:Hybrid_
                                                   scheme}.
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Extra }, or forgotten $.
-l.126 ...r $\kappa=1$  in \eqref{eq:Hybrid_scheme}
+l.112 ...r $\kappa=1$  in \eqref{eq:Hybrid_scheme}
                                                   .
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -6718,14 +6619,14 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.127 \begin{align}
+l.113 \begin{align}
                    \label{eq:Hybrid_scheme}
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
 ! Misplaced alignment tab character &.
-l.128 ...c{i}{N}} \approx \bar{W}^H_{\frac{i}{N}}&
+l.114 ...c{i}{N}} \approx \bar{W}^H_{\frac{i}{N}}&
                                                   = \sqrt{2H} \left(  W^2_i+...
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -6735,7 +6636,7 @@ you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
 ! Undefined control sequence.
-l.128 ...1-W_{\frac{i-k}{N}}^1\right)\right)\COMMA
+l.114 ...1-W_{\frac{i-k}{N}}^1\right)\right)\COMMA
                                                   
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -6750,7 +6651,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.129 \end{align}
+l.115 \end{align}
                  
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -6758,7 +6659,7 @@ or  <return>  to continue without it.
 
 Missing character: There is no N in font nullfont!
 ! Undefined control sequence.
-l.131 ...\right)^{\frac{1}{H-\frac{1}{2}}} \PERIOD
+l.117 ...\right)^{\frac{1}{H-\frac{1}{2}}} \PERIOD
                                                   $$
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -6767,7 +6668,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.132 The sum in \eqref
+l.118 The sum in \eqref
                        {eq:Hybrid_scheme} requires the most computational ef...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -6776,7 +6677,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.132 ...fort in the simulation. Given that \eqref
+l.118 ...fort in the simulation. Given that \eqref
                                                   {eq:Hybrid_scheme} can be ...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -6788,7 +6689,7 @@ and I'll forget about whatever was undefined.
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
                                                   \space undefined\on@line .
-l.132 ...volution  (see \cite{bennedsen2017hybrid}
+l.118 ...volution  (see \cite{bennedsen2017hybrid}
                                                   ), we employ the fast Four...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -6798,10 +6699,10 @@ and I'll forget about whatever was undefined.
 
 
 LaTeX Warning: Citation `bennedsen2017hybrid' on page  undefined on input line 
-132.
+118.
 
 ! Undefined control sequence.
-l.132 ... to evaluate it, which results in  $\Ordo
+l.118 ... to evaluate it, which results in  $\Ordo
                                                   {N \log N}$ floating point...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -6813,13 +6714,13 @@ Missing character: There is no N in font nullfont!
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.132 ...luate it, which results in  $\Ordo{N \log
+l.118 ...luate it, which results in  $\Ordo{N \log
                                                    N}$ floating point operat...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Extra }, or forgotten $.
-l.132 ...te it, which results in  $\Ordo{N \log N}
+l.118 ...te it, which results in  $\Ordo{N \log N}
                                                   $ floating point operations.
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -6852,63 +6753,63 @@ Missing character: There is no n in font nullfont!
 Missing character: There is no s in font nullfont!
 Missing character: There is no . in font nullfont!
 
-Overfull \hbox (20.0pt too wide) in paragraph at lines 120--133
+Overfull \hbox (20.0pt too wide) in paragraph at lines 106--119
 []
  []
 
 
-Overfull \hbox (10.86105pt too wide) in paragraph at lines 120--133
+Overfull \hbox (10.86105pt too wide) in paragraph at lines 106--119
 []
  []
 
 
-Overfull \hbox (80.36476pt too wide) in paragraph at lines 120--133
+Overfull \hbox (80.36476pt too wide) in paragraph at lines 106--119
 \OMS/cmsy/m/n/10 f\/cmr/m/n/10 0\OML/cmm/m/it/10 ; []; []; [] ; []\OMS/cmsy/m/n
 /10 g$
  []
 
 
-Overfull \hbox (28.97359pt too wide) in paragraph at lines 120--133
+Overfull \hbox (28.97359pt too wide) in paragraph at lines 106--119
 [] \OMS/cmsy/m/n/10 ^^Y
  []
 
 
-Overfull \hbox (28.97359pt too wide) in paragraph at lines 120--133
+Overfull \hbox (28.97359pt too wide) in paragraph at lines 106--119
 [] \/cmr/m/n/10 =
  []
 
 
-Overfull \hbox (372.0808pt too wide) in paragraph at lines 120--133
+Overfull \hbox (372.0808pt too wide) in paragraph at lines 106--119
 [] []$
  []
 
 
-Overfull \hbox (16.3171pt too wide) in paragraph at lines 120--133
+Overfull \hbox (16.3171pt too wide) in paragraph at lines 106--119
 \OML/cmm/m/it/10 ^^T \/cmr/m/n/10 =
  []
 
 
-Overfull \hbox (5.00002pt too wide) in paragraph at lines 120--133
+Overfull \hbox (5.00002pt too wide) in paragraph at lines 106--119
 \/cmr/m/n/10 1$
  []
 
 
-Overfull \hbox (64.2075pt too wide) in paragraph at lines 120--133
+Overfull \hbox (64.2075pt too wide) in paragraph at lines 106--119
 []\OML/cmm/m/it/10 cheme:[][] \OMS/cmsy/m/n/10 ^^Y
  []
 
 
-Overfull \hbox (28.97359pt too wide) in paragraph at lines 120--133
+Overfull \hbox (28.97359pt too wide) in paragraph at lines 106--119
 [] \/cmr/m/n/10 =
  []
 
 
-Overfull \hbox (399.80782pt too wide) in paragraph at lines 120--133
+Overfull \hbox (399.80782pt too wide) in paragraph at lines 106--119
 [] [] \OML/cmm/m/it/10 where$$isthenumberoftimestepsand$$b[] \/cmr/m/n/10 =
  []
 
 
-Overfull \hbox (1069.1012pt too wide) in paragraph at lines 120--133
+Overfull \hbox (1069.1012pt too wide) in paragraph at lines 106--119
 [][]$$\OML/cmm/m/it/10 Thesumin[]requiresthemostcomputationaleffortinthesimulat
 ion:Giventhat[]canbeseenasdiscreteconvolution\/cmr/m/n/10 (\OML/cmm/m/it/10 see
 \/cmr/m/n/10 [[]])\OML/cmm/m/it/10 ; weemploythefastFouriertransformtoevaluatei
@@ -6916,7 +6817,7 @@ t; whichresultsin$
  []
 
 
-Overfull \hbox (23.70828pt too wide) in paragraph at lines 120--133
+Overfull \hbox (23.70828pt too wide) in paragraph at lines 106--119
 [] \OML/cmm/m/it/10 N$
  []
 
@@ -7098,37 +6999,6 @@ Missing character: There is no n in font nullfont!
 Missing character: There is no b in font nullfont!
 Missing character: There is no y in font nullfont!
 Missing character: There is no . in font nullfont!
-
-Overfull \hbox (20.0pt too wide) in paragraph at lines 134--196
-[]
- []
-
-
-Overfull \hbox (88.61687pt too wide) in paragraph at lines 134--196
-[]\OML/cmm/m/it/10 ; []; [] ; []$
- []
-
-
-Overfull \hbox (18.29166pt too wide) in paragraph at lines 134--196
-\/cmr/m/n/10 [\OML/cmm/m/it/10 Nt\/cmr/m/n/10 ]$
- []
-
-
-Overfull \hbox (17.42828pt too wide) in paragraph at lines 134--196
-\/cmr/m/n/10 (\OML/cmm/m/it/10 ^^T \/cmr/m/n/10 +
- []
-
-
-Overfull \hbox (8.88892pt too wide) in paragraph at lines 134--196
-\/cmr/m/n/10 1)$
- []
-
-
-Overfull \hbox (57.79164pt too wide) in paragraph at lines 134--196
-\/cmr/m/n/10 (\OT1/cmr/bx/n/10 W[]\OML/cmm/m/it/10 ; \OT1/cmr/bx/n/10 W[]\/cmr/
-m/n/10 )$ 
- []
-
 )
 ! Emergency stop.
 <*> problem_setting.tex
@@ -7143,5 +7013,5 @@ Here is how much of TeX's memory you used:
  3691 multiletter control sequences out of 15000+600000
  4913 words of font info for 18 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 20i,5n,26p,1581b,190s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 20i,5n,26p,1563b,190s stack positions out of 5000i,500n,10000p,200000b,80000s
 !  ==> Fatal error occurred, no output PDF file produced!
