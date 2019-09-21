@@ -31,7 +31,7 @@ sig = 0.2;   % volatility
 nvert = 3;      % plotting option (1 for slides, 2 for papers, 3 for full set)
 M     = 2;      % refinement cost factor (2^gamma in general MLMC Thm)
 
-N     = 100000; % samples for convergence tests
+N     = 10009000; % samples for convergence tests
 L     = 9;      % levels for convergence tests 
 
 N0    = 1000;   % initial number of samples on first 3 MLMC levels
@@ -86,8 +86,8 @@ hc = T/nc;
 sum1(1:4) = 0;
 sum2(1:2) = 0;
 
-for N1 = 1:10000:N
-  N2 = min(10000,N-N1+1);
+for N1 = 1:1000000:N
+  N2 = min(1000000,N-N1+1);
 
   Sf = S0*ones(1,N2);
   Sc = Sf;

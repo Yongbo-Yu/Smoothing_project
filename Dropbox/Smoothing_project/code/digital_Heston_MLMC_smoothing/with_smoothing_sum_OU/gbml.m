@@ -32,13 +32,10 @@ nvert = 3;      % plotting option (1 for slides, 2 for papers, 3 for full set)
 M     = 2;      % refinement cost factor (2^gamma in general MLMC Thm)
 
 N     = 100000; % samples for convergence tests
-L     = 4
-
-
-;      % levels for convergence tests 
+L     =5;      % levels for convergence tests 
 
 N0    = 1000;   % initial number of samples on first 3 MLMC levels
-Eps   = [ 0.001 0.002 0.005 0.01 0.02];  % desired accuracies for MLMC calcs
+Eps   = [ 0.001 0.002 0.005 0.01 ];  % desired accuracies for MLMC calcs
 %Eps   = [ 0.1 ];  % desired accuracies for MLMC calcs
 
 %------- Digital call option ------------
@@ -66,7 +63,7 @@ global S0 K T r sig option
 
 M  = 2;
 
-nf = M^(l+2);
+nf = M^(l+1);
 nc = nf/M;
 
 hf = T/nf;
@@ -89,12 +86,11 @@ for N1 = 1:10000:N
     end
   elseif (option==2)
     if (l>0)
-      [Pf,Pc] = smooth_digital_price_coupled_path(nc,N2);  
-       Pc = Pc;
-       Pf = Pf;
+      [Pf,Pc] = smooth_digital_price_coupled_path_digital(nc,N2);  
+    
     else
-        Pf=smooth_digital_price_single_path(nf,N2);
-        Pf = Pf;
+        Pf=smooth_digital_price_single_path_digital(nf,N2);
+       
     end
   end
 

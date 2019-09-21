@@ -63,7 +63,7 @@ global S0 K T r sig option
 
 M  = 2;
 
-nf = M^(l+3);
+nf = M^(l+1);
 nc = nf/M;
 
 hf = T/nf;
@@ -86,10 +86,10 @@ for N1 = 1:10000:N
     end
   elseif (option==2)
     if (l>0)
-      [Pf,Pc] = smooth_digital_price_coupled_path(nc,N2);  
-     
+      [Pf,Pc] = smooth_digital_price_coupled_path_density(nc,N2);  
+    
     else
-        Pf=smooth_digital_price_single_path(nf,N2);
+        Pf=smooth_digital_price_single_path_density(nf,N2);
        
     end
   end

@@ -15,7 +15,6 @@ function [Py,dPy] = f(y1,y,yv1,yv,Nsteps,Ms)
     s=sqrt(V(1:Nsteps,:))./fi;
     summation=sum(s);
     Py=product-(K/S0);
-   
     dPy=(1/sqrt(T))*(dt).*product.*summation;
      
 end

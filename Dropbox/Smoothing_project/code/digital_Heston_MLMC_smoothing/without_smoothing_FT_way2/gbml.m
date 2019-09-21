@@ -35,7 +35,7 @@ N     = 100000; % samples for convergence tests
 L     = 6;      % levels for convergence tests 
 
 N0    = 1000;   % initial number of samples on first 3 MLMC levels
-Eps   = [ 0.001 0.002 0.005 0.01 ];  % desired accuracies for MLMC calcs
+Eps   = [ 0.0002 0.0005 0.001 0.002 0.005  ];  % desired accuracies for MLMC calcs
 %Eps   = [ 0.1 ];  % desired accuracies for MLMC calcs
 
 %------- Digital call option ------------

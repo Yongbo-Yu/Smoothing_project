@@ -74,7 +74,7 @@ end
 % use linear regression to estimate alpha, beta and gamma
 %
 
-range = max(2,floor(0.4*length(L))):length(L);
+range = max(4,floor(0.4*length(L))):length(L);
 fprintf('\nestimates of key MLMC Theorem parameters based on linear regression: \n')
 pa = polyfit(L(range),log2(abs(del1(range))),1);  alpha = -pa(1);
 fprintf('alpha = %f  (exponent for MLMC weak convergence)\n',alpha)
@@ -99,47 +99,57 @@ end
 % plot figures
 %
 
+
+% figs(2) = figure; 
+% plot(L(2:end)-1e-9,kur1(2:end),'--*')
+% xlabel('level l'); ylabel('kurtosis');
+
 figs(1) = figure; 
 pos=get(gcf,'pos'); pos(3:4)=pos(3:4).*[1.0 0.75*nvert]; set(gcf,'pos',pos);
 
 set(0,'DefaultAxesColorOrder',[0 0 0]);
 set(0,'DefaultAxesLineStyleOrder','-*|--*|--o|--x|--d|--s');
-subplot(nvert,2,1)
-plot(L,log2(var2),L(2:end),log2(var1(2:end)),L,-2+log2(2.^(-L/2)))
-%plot(L,log2(var2),L(2:end),log2(var1(2:end)), ...
-%                  L(2:end),polyval(pb,L(2:end)),'-r')
+% subplot(nvert,2,1)
+plot(L,log2(var2),L(2:end),log2(var1(2:end)),L,-4+log2(2.^(-L/2)), L(4:end),polyval(pb,L(4:end)),'-r')
+% hold on
+% plot(L,log2(var2),L(2:end),log2(var1(2:end)), ...
+%                 )
 xlabel('level l'); ylabel('log_2 variance');
-legend('P_l','P_l- P_{l-1}','2^{-l/2}','Location','northeast')
+legend('P_l','P_l- P_{l-1}','2^{-l/2}', strcat('\beta=',num2str(round(-pb(1),1))),'Location','northeast')
 log2(abs(del2))
 set(0,'DefaultAxesLineStyleOrder','-*|--*|--o|--x|--d|--s');
-subplot(nvert,2,2)
+% subplot(nvert,2,2)
+
+figs(2) = figure; 
 abs(del2)
 abs(del1(2:end))
-plot(L,log2(abs(del2)),L(2:end),log2(abs(del1(2:end))),L,-6+log2(2.^(-L/2)),L,-6+log2(2.^(-L)))
-%plot(L,log2(abs(del2)),L(2:end),log2(abs(del1(2:end))), ...
+plot(L,log2(abs(del2)),L(2:end),log2(abs(del1(2:end))),L,-6+log2(2.^(-L)),L(4:end),polyval(pa,L(4:end)),'-r')
+% plot(L,log2(abs(del2)),L(2:end),log2(abs(del1(2:end))), ...
 %                       L(2:end),polyval(pa,L(2:end)),'-r')
 xlabel('level l'); ylabel('log_2 |mean|');
-legend('P_l','P_l- P_{l-1}','2^{-l/2}','2^{-l}','Location','northeast')
+legend('P_l','P_l- P_{l-1}','2^{-l}', strcat('\alpha=',num2str(round(-pa(1),1))),'Location','northeast')
 
 if nvert==3
-  subplot(3,2,3)
+    figs(7) = figure; 
+%   subplot(3,2,3)
   plot(L(2:end)-1e-9,chk1(2:end),'--*')
   xlabel('level l'); ylabel('consistency check');
 
-  subplot(3,2,4)
+%   subplot(3,2,4)
+figs(3) = figure; 
   plot(L(2:end)-1e-9,kur1(2:end),'--*')
   xlabel('level l'); ylabel('kurtosis');
 end
 
-if nvert==1
-  figs(2) = figure;
-  pos=get(gcf,'pos'); pos(3:4)=pos(3:4).*[1.0 0.75]; set(gcf,'pos',pos);
-end
+% if nvert==1
+%   figs(2) = figure;
+%   pos=get(gcf,'pos'); pos(3:4)=pos(3:4).*[1.0 0.75]; set(gcf,'pos',pos);
+% end
 
-%
+
 % second, mlmc complexity tests
-%
 
+figs(4) = figure; 
 rng('default');    % reset random number generator
 
 Nls = [];
@@ -156,11 +166,13 @@ for i = 1:length(Eps)
   mlmc_cost(i) = (1+1/M)*sum(Nl.*M.^(0:l));
   std_cost(i)  = sum((2*var2(end)/eps^2).*M.^(0:l));
 
-%  fprintf(' mlmc_cost = %d, std_cost = %d, savings = %f \n',...
-%            mlmc_cost(i), std_cost(i), std_cost(i)/mlmc_cost(i))
+ fprintf(' mlmc_cost = %d, std_cost = %d, savings = %f \n',...
+           mlmc_cost(i), std_cost(i), std_cost(i)/mlmc_cost(i))
   Nls(1:l+1,i) = Nl;
   ls(1:l+1,i)  = 0:l;
 end
+
+
 
 disp(' ');
 
@@ -169,19 +181,23 @@ for i = 1:length(Eps)
   ls(end:maxl,i)  = ls(end,i);
 end
 
-%
+
 % plot figures
-%
 
+figs(5) = figure; 
 set(0,'DefaultAxesLineStyleOrder','--o|--x|--d|--*|--s');
-
-subplot(nvert,2,2*nvert-1)
+% 
+% subplot(nvert,2,2*nvert-1)
 semilogy(ls, Nls)
 xlabel('level l'); ylabel('N_l');
 
-set(0,'DefaultAxesLineStyleOrder','-*|--*')
 
-subplot(nvert,2,2*nvert)
-loglog(Eps,Eps.^2.*std_cost(:)', Eps,Eps.^2.*mlmc_cost(:)')
-xlabel('accuracy \epsilon'); ylabel('\epsilon^2 Cost');
+
+% subplot(nvert,2,2*nvert)
+figs(6) = figure; 
+set(0,'DefaultAxesLineStyleOrder','-*|--*')
+loglog(Eps,Eps.^2.*std_cost(:)', Eps,Eps.^(2.4).*mlmc_cost(:)')
+xlabel('accuracy \epsilon'); ylabel('\epsilon^{2.4} Cost');
 legend('Std MC','MLMC','Location','southwest')
+
+

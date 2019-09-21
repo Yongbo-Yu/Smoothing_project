@@ -2,7 +2,7 @@ function [X_1,dbb_s,V]=stock_price_trajectory_1D_heston(y1,y,yv1,yv,Nsteps,Ms)
         T=1;
         dt=T/Nsteps;
         S0=1;
-       
+       %set1
         rho=-0.9;
         V0=0.04;
         kappa= 1.0;
@@ -10,6 +10,7 @@ function [X_1,dbb_s,V]=stock_price_trajectory_1D_heston(y1,y,yv1,yv,Nsteps,Ms)
         theta=0.0025;
         beta=xi/2;
         alpha=-kappa/2;
+       
  
         bb=brownian_increments(y1,y,Nsteps,Ms);
         bb_v=brownian_increments(yv1,yv,Nsteps,Ms);
@@ -38,7 +39,7 @@ function [X_1,dbb_s,V]=stock_price_trajectory_1D_heston(y1,y,yv1,yv,Nsteps,Ms)
         Xv=zeros(Nsteps+1,Ms);
         Xv(1,:)=sqrt(V0);
         for n =2:1:Nsteps+1
-            X(n,:)=X(n-1,:).*(1+sqrt(V(n-1,:)).*dW_s(n-1,:));
+            X(n,:)=X(n-1,:).*(1+Xv(n-1,:).*dW_s(n-1,:));
             Xv(n,:)=Xv(n-1,:)*(1+alpha*dt)+beta*dW_v(n-1,:); 
             V(n,:)=Xv(n,:).^2;
         end
