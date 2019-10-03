@@ -110,7 +110,7 @@ pos=get(gcf,'pos'); pos(3:4)=pos(3:4).*[1.0 0.75*nvert]; set(gcf,'pos',pos);
 set(0,'DefaultAxesColorOrder',[0 0 0]);
 set(0,'DefaultAxesLineStyleOrder','-*|--*|--o|--x|--d|--s');
 % subplot(nvert,2,1)
-plot(L,log2(var2),L(2:end),log2(var1(2:end)),L,-9+log2(2.^(-L)), L(2:end),polyval(pb,L(2:end)),'-r')
+plot(L,log2(var2),L(2:end),log2(var1(2:end)),L,-3+log2(2.^(-L)), L(2:end),polyval(pb,L(2:end)),'-r')
 % hold on
 % plot(L,log2(var2),L(2:end),log2(var1(2:end)), ...
 %                 )
@@ -123,7 +123,7 @@ set(0,'DefaultAxesLineStyleOrder','-*|--*|--o|--x|--d|--s');
 figs(2) = figure; 
 abs(del2)
 abs(del1(2:end))
-plot(L,log2(abs(del2)),L(2:end),log2(abs(del1(2:end))),L,-9+log2(2.^(-L)),L(2:end),polyval(pa,L(2:end)),'-r')
+plot(L,log2(abs(del2)),L(2:end),log2(abs(del1(2:end))),L,-3+log2(2.^(-L)),L(2:end),polyval(pa,L(2:end)),'-r')
 % plot(L,log2(abs(del2)),L(2:end),log2(abs(del1(2:end))), ...
 %                       L(2:end),polyval(pa,L(2:end)),'-r')
 xlabel('level l'); ylabel('log_2 |mean|');

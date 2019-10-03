@@ -2,10 +2,11 @@ function [Py,dPy] = f(y1,y,yv1,yv,Nsteps,Ms)
 
     T=1;
     dt=T/Nsteps;
-    K=1;
-    S0=1;
+    K= 1;
+    S0= 1;
     rho=-0.9;
-        
+%         set2
+%             rho=-0.3;
     [X_1,dbb,V]=stock_price_trajectory_1D_heston(y1,y,yv1,yv,Nsteps,Ms);
     
     y1s= rho *yv1' + sqrt(1-rho^2)*y1;

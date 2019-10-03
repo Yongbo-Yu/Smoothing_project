@@ -1,5 +1,5 @@
 function [Pf,Pc] = smooth_digital_price_coupled_path_density(Nsteps,Ms)
-[x, w] = GaussLaguerre(128,0);
+[x, w] = GaussLaguerre(32,0);
 mean = zeros(4*Nsteps-1,1);
 covariance= eye(4*Nsteps-1);
 y =mvnrnd(mean, covariance,Ms);
@@ -21,14 +21,14 @@ bar_z_f=newtons_method(y2f(:,1)',y2sf,y1f(:,1),y1f(:,2:2*Nsteps),2*Nsteps,eps,Ms
 
 
 X_1l_f=zeros(length(x),Ms);
-for i=1:128
+for i=1:32
 X_1l_f(i,:)=stock_price_trajectory_1D_heston(bar_z_f-x(i),y2sf,y1f(:,1),y1f(:,2:2*Nsteps),2*Nsteps,Ms);
 end
 X_1l_f =round( X_1l_f,2);
 QoI_left_f=w'*(payoff_den(X_1l_f).*1/(sqrt(2 *pi)).*exp(-(bar_z_f-x).^2/2).*exp(x));
 
 X_1r_f=zeros(length(x),Ms);
-for i=1:128
+for i=1:32
 X_1r_f(i,:)=stock_price_trajectory_1D_heston(bar_z_f+x(i),y2sf,y1f(:,1),y1f(:,2:2*Nsteps),2*Nsteps,Ms);
 end
 X_1r_f =round( X_1r_f,2);
@@ -44,14 +44,14 @@ bar_z_c=newtons_method(y2c(:,1)',y2sc,y1c(:,1),y1c(:,2:Nsteps),Nsteps,eps,Ms);
 
 
 X_1l_c=zeros(length(x),Ms);
-for i=1:128
+for i=1:32
 X_1l_c(i,:)=stock_price_trajectory_1D_heston(bar_z_c-x(i),y2sc,y1c(:,1),y1c(:,2:Nsteps),Nsteps,Ms);
 end
 X_1l_c =round( X_1l_c,2);
 QoI_left_c=w'*(payoff_den(X_1l_c).*1/(sqrt(2 *pi)).*exp(-(bar_z_c-x).^2/2).*exp(x));
 
 X_1r_c=zeros(length(x),Ms);
-for i=1:128
+for i=1:32
 X_1r_c(i,:)=stock_price_trajectory_1D_heston(bar_z_c+x(i),y2sc,y1c(:,1),y1c(:,2:Nsteps),Nsteps,Ms);
 end
 X_1r_c =round( X_1r_c,2);

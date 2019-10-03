@@ -31,7 +31,7 @@ sig = 0.2;   % volatility
 nvert = 3;      % plotting option (1 for slides, 2 for papers, 3 for full set)
 M     = 2;      % refinement cost factor (2^gamma in general MLMC Thm)
 
-N     = 10009000; % samples for convergence tests
+N     = 10000000; % samples for convergence tests
 L     = 9;      % levels for convergence tests 
 
 N0    = 1000;   % initial number of samples on first 3 MLMC levels

@@ -1,0 +1,8 @@
+function [x0f,x0c] = newtons_method_coupled(x0,y,Nsteps,eps,Ms)
+        [deltaf,delta_c] = dx(x0,y,Nsteps,Ms);
+        while deltaf > eps
+            [P_value_f,dP_f,P_value_c,dP_c]=f_coupled(x0,y,Nsteps,Ms);
+            x0f = x0f - 0.1*P_value_f./dP_f;
+            [deltaf,delta_c]= dx(x0f,y,Nsteps,Ms);
+        end
+end

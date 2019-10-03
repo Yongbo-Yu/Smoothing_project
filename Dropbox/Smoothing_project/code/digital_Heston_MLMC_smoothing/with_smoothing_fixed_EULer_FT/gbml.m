@@ -31,8 +31,8 @@ r   = 0.00;  % risk-free interest rate
 nvert = 3;      % plotting option (1 for slides, 2 for papers, 3 for full set)
 M     = 2;      % refinement cost factor (2^gamma in general MLMC Thm)
 
-N     = 100000000; % samples for convergence tests
-L     =4;      % levels for convergence tests 
+N     = 100000; % samples for convergence tests
+L     =3;      % levels for convergence tests 
 
 N0    = 1000;   % initial number of samples on first 3 MLMC levels
 Eps   = [ 0.001 0.002 0.005 0.01 ];  % desired accuracies for MLMC calcs
@@ -63,7 +63,7 @@ global S0 K T r sig option
 
 M  = 2;
 
-nf = M^(l+1);
+nf = M^(l+2);
 nc = nf/M;
 
 hf = T/nf;
@@ -72,8 +72,8 @@ hc = T/nc;
 sum1(1:4) = 0;
 sum2(1:2) = 0;
 
-for N1 = 1:10000000:N
-  N2 = min(10000000,N-N1+1);
+for N1 = 1:10000:N
+  N2 = min(10000,N-N1+1);
 
   Pc = zeros(1,N2);
 

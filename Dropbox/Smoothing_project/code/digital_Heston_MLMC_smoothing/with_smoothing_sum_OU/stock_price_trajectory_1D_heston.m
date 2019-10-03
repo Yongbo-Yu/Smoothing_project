@@ -16,11 +16,11 @@ function [X_1,dbb_s,V]=stock_price_trajectory_1D_heston(y1,y,yv1,yv,Nsteps,Ms)
         dW=zeros(Nsteps,Ms);
         dW_v=zeros(Nsteps,Ms);
      
-        for i=1:1:size(bb,2)-2
+        for i=1:1:size(bb,2)-1
             dW(i,:)= bb(:,i+1)-bb(:,i) ;
         end
         
-        for i=1:1:size(bb_v,2)-2
+        for i=1:1:size(bb_v,2)-1
             dW_v(i,:)= bb_v(:,i+1)-bb_v(:,i) ;
         end
         

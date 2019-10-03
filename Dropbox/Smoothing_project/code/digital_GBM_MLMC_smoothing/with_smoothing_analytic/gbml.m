@@ -22,8 +22,7 @@ K   = 100;   % strike
 T   = 1;     % maturity
 % r   = 0.05;  % risk-free interest rate
 r   = 0.00;  % risk-free interest rate
-sig = 0.2;   % volatility
-
+sig = 0.2;   % volatilit
 %
 % call mlmc_test to perform MLMC tests
 %
@@ -32,7 +31,7 @@ nvert = 3;      % plotting option (1 for slides, 2 for papers, 3 for full set)
 M     = 2;      % refinement cost factor (2^gamma in general MLMC Thm)
 
 N     = 100000; % samples for convergence tests
-L     = 9;      % levels for convergence tests 
+L     = 8;      % levels for convergence tests 
 
 N0    = 1000;   % initial number of samples on first 3 MLMC levels
 Eps   = [ 0.005 0.01 0.02 0.05 0.1 ];  % desired accuracies for MLMC calcs
@@ -63,7 +62,7 @@ global S0 K T r sig option
 
 M  = 2;
 
-nf = M^(l+1);
+nf = M^(l+2);
 nc = nf/M;
 
 hf = T/nf;
